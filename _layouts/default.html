@@ -254,6 +254,16 @@
     var sampleRoot = "https://raw.githubusercontent.com/richard-scryber/PaperworkDayDocs/main/"
 
     $().ready( () => {
+
+        var existing = jtd.getTheme();
+        if(!existing){
+            existing = "default";
+        }
+        var body = $("body");
+        if(body && !body.hasClass(existing)){
+            body.addClass(existing);
+        }
+
         $(".document-container").each((index, ele) => {
             var template = $(ele).data("pw-template");
             var data = $(ele).data("pw-json");
@@ -305,8 +315,11 @@
         var existing = jtd.getTheme();
         if(currTheme && currTheme != existing){
             jtd.setTheme(currTheme);
-            $("body").addClass(currTheme);
         }
+        else 
+          currTheme = "default";
+        var body = $("body");
+        body.addClass(currTheme);
 
         $(".js-toggle-dark-mode").on("click", function() {
           var currTheme = $.cookie("theme");

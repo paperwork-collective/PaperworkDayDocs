@@ -5,7 +5,7 @@ parent: Configuration & Extension
 parent_url: /configuration/
 has_children: false
 has_toc: false
-nav_order: 3
+nav_order: 4
 ---
 
 # Document Controllers
@@ -91,7 +91,10 @@ public class InvoiceController
 ```xml
 <html xmlns='http://www.w3.org/1999/xhtml'>
     <body>
+        <!-- Binds to HeaderPanel field -->
+        <header id='HeaderPanel' />
         <main>
+
             <!-- Binds to CustomerLabel property -->
             <span id='CustomerLabel' />
             
@@ -101,8 +104,6 @@ public class InvoiceController
             <!-- Binds to InvoiceItems property (required) -->
             <table id='InvoiceItems' />
             
-            <!-- Binds to HeaderPanel field -->
-            <section id='HeaderPanel' />
         </main>
     </body>
 </html>
@@ -113,21 +114,21 @@ public class InvoiceController
 **Actions** are methods invoked during document lifecycle events. Action methods must:
 - Be public instance methods
 - Be marked with `[PDFAction]`
-- Match the event handler signature: `(object sender, <ContextType> args)`
+- Match the event handler signature: `(object sender, <ContextType>EventArgs args)`
 - Return `void`
 
 ### Supported Lifecycle Events
 
 | Event | Context Type | When Invoked | Use Case |
 |-------|--------------|--------------|----------|
-| `Init` | `InitContext` | After parsing, before data binding | Initialize state, set default values |
-| `Load` | `LoadContext` | After Init, before data binding | Load data, prepare data sources |
-| `DataBinding` | `DataBindContext` | Before databinding expressions evaluated | Modify data context |
-| `DataBound` | `DataBindContext` | After databinding complete | Post-process bound data |
-| `PreLayout` | `LayoutContext` | Before layout calculations | Modify structure before layout |
-| `PostLayout` | `LayoutContext` | After layout complete | Access calculated positions/sizes |
-| `PreRender` | `RenderContext` | Before PDF rendering | Final modifications |
-| `PostRender` | `RenderContext` | After PDF rendering | Cleanup, logging |
+| `Init` | `InitEventArgs` | After parsing, before data binding | Initialize state, set default values |
+| `Load` | `LoadEventArgs` | After Init, before data binding | Load data, prepare data sources |
+| `DataBinding` | `DataBindEventArgs` | Before databinding expressions evaluated | Modify data context |
+| `DataBound` | `DataBindEventArgs` | After databinding complete | Post-process bound data |
+| `PreLayout` | `LayoutEventArgs` | Before layout calculations | Modify structure before layout |
+| `PostLayout` | `LayoutEventArgs` | After layout complete | Access calculated positions/sizes |
+| `PreRender` | `RenderEventArgs` | Before PDF rendering | Final modifications |
+| `PostRender` | `RenderEventArgs` | After PDF rendering | Cleanup, logging |
 
 ### Action Declaration
 
@@ -142,38 +143,38 @@ public class ReportController
 
     // Init: Set up initial state
     [PDFAction]
-    public void Init(object sender, InitContext args)
+    public void Init(object sender, InitEventArgs args)
     {
-        args.TraceLog.Add(TraceLevel.Message, "Report Controller", "Initializing report");
+        args.Context.TraceLog.Add(TraceLevel.Message, "Report Controller", "Initializing report");
         ReportDateLabel.Text = DateTime.Now.ToString("MMMM dd, yyyy");
     }
 
     // Load: Prepare data sources
     [PDFAction]
-    public void Load(object sender, LoadContext args)
+    public void Load(object sender, LoadEventArgs args)
     {
         var data = LoadReportData();
         DataRepeater.DataSource = data;
         
-        args.Document.Params["RecordCount"] = data.Count;
+        args.Context.Document.Params["RecordCount"] = data.Count;
     }
 
     // DataBinding: Modify binding context
     [PDFAction]
-    public void HandleDataBinding(object sender, DataBindContext args)
+    public void HandleDataBinding(object sender, DataBindEventArgs args)
     {
-        if (args.DataStack.HasData)
+        if (args.Context.DataStack.HasData)
         {
-            var current = args.DataStack.Current;
+            var current = args.Context.DataStack.Current;
             // Augment data object
         }
     }
 
     // DataBound: Post-process after binding
     [PDFAction]
-    public void HandleDataBound(object sender, DataBindContext args)
+    public void HandleDataBound(object sender, DataBindEventArgs args)
     {
-        args.TraceLog.Add(TraceLevel.Verbose, "Report Controller", 
+        args.Context.TraceLog.Add(TraceLevel.Verbose, "Report Controller", 
             $"Data binding complete for {DataRepeater.ChildCount} items");
     }
 
@@ -181,7 +182,7 @@ public class ReportController
     [PDFAction]
     public void HandlePreLayout(object sender, LayoutContext args)
     {
-        if (DataRepeater.ChildCount == 0)
+        if (DataRepeater.Contents.Count == 0)
         {
             // Show "no data" message
         }
@@ -205,7 +206,7 @@ public class ReportController
 
 ### Action Binding in Templates
 
-Actions are bound via **event handler attributes** on components:
+Actions are bound via **event handler attributes** on any components:
 
 ```xml
 <body on-init='Init' 
@@ -225,7 +226,68 @@ Actions are bound via **event handler attributes** on components:
 </body>
 ```
 
+
 ## Complete Controller Example
+
+**Template XML:**
+
+```xml
+<?xml version='1.0' encoding='utf-8' ?>
+<?scryber controller='MyCompany.Reports.SalesReportController, MyCompany.Reports' ?>
+
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<body on-init='InitReport'
+      on-loaded='LoadReportData'
+      on-prelayout='BeforeLayout'
+      on-postlayout='AfterLayout'>
+
+    <header>
+        <!-- header is a template that repeats each page, so use an Action event for each one, (not an Outlet) -->
+        <label on-loaded="HandleNameLoaded" /><br/>
+        <label on-loaded="HandleTitleLoaded" />
+    </header>
+
+    <main>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Product</th>
+                <th>Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- The HandleSalesItemDataBound, will be called for each row after it has been generated -->
+            <template id='SalesDataRepeater'
+                    on-item-databound='HandleSalesItemDataBound'>
+                <tr id="SalesRow">
+                    <td>
+                        <label text='{{this.Product}}' />
+                    </td>
+                    <td>
+                        <!-- using a number for this, so we can add custom formatting (maybe based on client currency) -->
+                        <num id="ProductValue" data-value='{{this.Amount}}' />
+                    </td>
+                </tr>
+            </template>
+            </tbody>
+        </table>
+
+        <div>
+            <span>Total Sales: </span>
+            <label id='TotalSalesLabel' />
+        </div>
+
+        <div id='NoDataPanel' hidden="hidden" on-prelayout="ShowHideNoData">
+            <span>No sales data available for this period.</span>
+        </div>
+
+    </main>
+
+</body>
+</html>
+```
+
 
 **Controller class:**
 
@@ -239,85 +301,111 @@ namespace MyCompany.Reports
     public class SalesReportController
     {
         // Outlets - assigned during parsing
-        [PDFOutlet(Required = true)]
-        public Label CompanyNameLabel { get; set; }
-        
-        [PDFOutlet(ComponentID = "report-title")]
-        public Label TitleLabel { get; set; }
-        
-        [PDFOutlet(Required = true)]
+        [PDFOutlet(Required = true)] 
         public ForEach SalesDataRepeater { get; set; }
-        
-        [PDFOutlet]
+
+        [PDFOutlet] 
         public Label TotalSalesLabel { get; set; }
-        
-        [PDFOutlet]
+
+        [PDFOutlet] 
         public Panel NoDataPanel { get; set; }
-        
+
         // Controller state
         private List<SalesRecord> _salesData;
         private decimal _totalSales;
 
         // Action: Initialize report
         [PDFAction]
-        public void InitReport(object sender, InitContext args)
+        public void InitReport(object sender, InitEventArgs args)
         {
-            args.TraceLog.Add(TraceLevel.Message, "SalesReport", "Initializing sales report");
-            
-            CompanyNameLabel.Text = "Acme Corporation";
-            TitleLabel.Text = "Monthly Sales Report";
-            TitleLabel.StyleClass = "report-header";
+            args.Context.TraceLog.Add(TraceLevel.Message, "SalesReport", "Initializing sales report");
         }
 
         // Action: Load data
         [PDFAction]
-        public void LoadReportData(object sender, LoadContext args)
+        public void LoadReportData(object sender, LoadEventArgs args)
         {
-            args.TraceLog.Add(TraceLevel.Message, "SalesReport", "Loading sales data");
-            
+            args.Context.TraceLog.Add(TraceLevel.Message, "SalesReport", "Loading sales data");
+
             // Load data from database/API
             _salesData = FetchSalesData();
             _totalSales = _salesData.Sum(s => s.Amount);
-            
+
             // Bind to repeater
-            SalesDataRepeater.DataSource = _salesData;
             SalesDataRepeater.Value = _salesData;
-            
+
             // Set total
             TotalSalesLabel.Text = _totalSales.ToString("C");
-            
+
             // Show/hide no-data message
             NoDataPanel.Visible = (_salesData.Count == 0);
+        }
+
+        // Action: for each header name on all pages
+        [PDFAction]
+        public void HandleNameLoaded(object sender, LoadEventArgs args)
+        {
+            var label = (Label)sender;
+            label.Text = "Acme Corporation";
+        }
+        
+        // Action: for each header title on all pages
+        [PDFAction]
+        public void HandleTitleLoaded(object sender, LoadEventArgs args)
+        {
+            var label = (Label)sender;
+            label.Text = "Monthly Sales Report";
+            label.StyleClass = "report-header";
         }
 
         // Action: Invoked for each generated row/item in the foreach template
         [PDFAction]
         public void HandleSalesItemDataBound(object sender, TemplateItemDataBoundArgs args)
         {
-            if (args.Item is TableRow row && args.Context.CurrentIndex % 2 == 1)
+            var instance = (TemplateInstance)args.Item;
+            var found = instance.Content.First<Component>(i => (i.ID == "SalesRow") ? true : false );
+            
+            if (null != found && found is TableRow row)
             {
-                row.StyleClass = "alternate-row";
+                if (args.Context.CurrentIndex % 2 == 1)
+                    row.StyleClass = "alternate-row";
+                
+                // FindAComponentById is more flexible, as it does not tie our 
+                // 'ProductValue' to be a direct descendant of the row.
+                var amountComponent = row.FindAComponentById("ProductValue") as Number;
+                amountComponent.NumberFormat = "£###,##0.00";
             }
+
+            
         }
 
         // Action: Pre-layout modifications
         [PDFAction]
-        public void BeforeLayout(object sender, LayoutContext args)
+        public void BeforeLayout(object sender, LayoutEventArgs args)
         {
-            if (_salesData.Count > 100)
+            if (_salesData.Count > 10000)
             {
-                args.TraceLog.Add(TraceLevel.Warning, "SalesReport", 
+                args.Context.TraceLog.Add(TraceLevel.Warning, "SalesReport",
                     "Large dataset may cause performance issues");
             }
         }
 
         // Action: Post-layout inspection
         [PDFAction]
-        public void AfterLayout(object sender, LayoutContext args)
+        public void AfterLayout(object sender, LayoutEventArgs args)
         {
-            var pageCount = args.DocumentLayout.AllPages.Count;
-            args.TraceLog.Add(TraceLevel.Message, "SalesReport", 
+            var doc = args.Context.GetLayout<PDFLayoutDocument>();
+            var pageCount = doc.AllPages.Count;
+            args.Context.TraceLog.Add(TraceLevel.Message, "SalesReport",
                 $"Report generated: {pageCount} pages, {_salesData.Count} records, total ${_totalSales:N2}");
+        }
+
+        public void ShowHideNoData(object sender, LayoutEventArgs args)
+        {
+            if(_salesData.Count > 0)
+            {
+                ((Component)sender).Visible = false;
+            }
         }
 
         private List<SalesRecord> FetchSalesData()
@@ -340,101 +428,13 @@ namespace MyCompany.Reports
 }
 ```
 
-**Template XML:**
-
-```xml
-<?xml version='1.0' encoding='utf-8' ?>
-<?scryber controller='MyCompany.Reports.SalesReportController, MyCompany.Reports' ?>
-
-<html xmlns='http://www.w3.org/1999/xhtml'>
-    <body on-init='InitReport' 
-          on-load='LoadReportData'
-          on-prelayout='BeforeLayout'
-          on-postlayout='AfterLayout'>
-        
-        <header>
-            <span id='CompanyNameLabel' />
-            <span id='report-title' />
-        </header>
-        
-        <main>
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <template id='SalesDataRepeater'
-                              data-bind='foreach'
-                              on-item-databound='HandleSalesItemDataBound'>
-                        <tr>
-                            <td>
-                                <span text='{@:Product}' />
-                            </td>
-                            <td>
-                                <span text='{@:Amount}' />
-                            </td>
-                        </tr>
-                    </template>
-                </tbody>
-            </table>
-            
-            <div>
-                <span>Total Sales: </span>
-                <span id='TotalSalesLabel' />
-            </div>
-            
-            <section id='NoDataPanel' style='display:none'>
-                <span>No sales data available for this period.</span>
-            </section>
-            
-        </main>
-        
-    </body>
-</html>
-```
-
 **Usage:**
 
 ```csharp
-using (var reader = new StreamReader("SalesReport.pdfx"))
+using (var stream = new System.IO.FileStream("../../../Output/Invoice.pdf", FileMode.Create))
 {
-    var doc = Document.ParseDocument(reader, ParseSourceType.DynamicContent);
-    doc.ProcessDocument("SalesReport.pdf");
-}
-```
-
-## Controller Specification
-
-Controllers are specified in three ways:
-
-### 1. Processing Instruction (Document-level)
-
-```xml
-<?scryber controller='MyNamespace.MyController, MyAssembly' ?>
-```
-
-### 2. Programmatic (Code-level)
-
-```csharp
-var settings = new ParserSettings(/* ... */);
-settings.ControllerType = typeof(MyController);
-// OR
-settings.Controller = new MyController();
-
-var doc = Document.ParseDocument(stream, ParseSourceType.DynamicContent, settings);
-```
-
-### 3. Attribute (Component-level)
-
-```csharp
-[PDFController(typeof(MyController))]
-public class CustomDocument : Document
-{
-    // ...
+    var doc = Document.ParseDocument("SalesReport.html");
+    doc.SaveAsPDF("SalesReport.pdf");
 }
 ```
 

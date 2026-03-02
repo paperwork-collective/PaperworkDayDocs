@@ -86,7 +86,7 @@ Scryber.Core works with various .NET project types:
 | **WPF** | ✅ | Desktop applications |
 | **Azure Functions** | ✅ | Serverless PDF generation |
 | **Blazor Server** | ✅ | Interactive web apps |
-| **Blazor WebAssembly** | ⚠️ | Limited (requires server-side generation) |
+| **Blazor WebAssembly** | ✅ | Full suport for client side |
 | **.NET Framework 4.6.2+** | ✅ | Legacy applications |
 
 ---
@@ -237,20 +237,6 @@ Output/*.pdf
 ---
 
 ## Configuration Options
-
-### appsettings.json (ASP.NET Core)
-
-```json
-{
-  "Scryber": {
-    "TemplateDirectory": "./Templates",
-    "ImageDirectory": "./Images",
-    "OutputDirectory": "./Output",
-    "DefaultFontFamily": "Arial",
-    "CacheTemplates": true
-  }
-}
-```
 
 ### Dependency Injection Setup (ASP.NET Core)
 

@@ -9,10 +9,14 @@
             if(currTheme != existing && currTheme != "default"){
 
                 jtd.setTheme(currTheme);
-                $("body").addClass(currTheme);
             }
             $.cookie("theme", currTheme, { expires: 365, path: '/' });
+            
         }
+        else{
+            currTheme = "default";
+        }
+        $("body").addClass(currTheme);
 
       </script>
 <script src="https://www.paperworkday.net/paper.generate.js" crossorigin="anonymous"  ></script>
@@ -80,7 +84,7 @@ body.light blockquote.note::before {
 }
 
 a, .nav-list .nav-list-item .nav-list-link:hover, .nav-list .nav-list-item .nav-list-link.active, .nav-list .nav-list-item .nav-list-expander{
-    color: rgb(0,168,161);
+    color: #4CA1A7;
 }
 
 code{
@@ -89,6 +93,16 @@ code{
 
 li {
     margin: 0.5em 0;
+}
+
+/* code blocks */
+div.highlighter-rouge, div.listingblock > div.content, figure, .highlight, 
+.highlight pre{
+    background-color: #2C3E50;
+}
+
+.light div.highlighter-rouge, .light div.listingblock > div.content,.light figure,.light .highlight, .light .highlight pre{
+    background-color: #e2f2ed;
 }
 
 
@@ -220,7 +234,7 @@ li {
     }
 
     .main-header .icon{
-        color: rgb(0,168,161)
+        color: #4CA1A7
     }
 
 }

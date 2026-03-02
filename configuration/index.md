@@ -18,8 +18,8 @@ Applies to individual document templates
 
 - **[Processing Instructions](processing-instructions)** - Document-level parser configuration via XML processing instructions
 - **[DOM and Event Handling](document-events-and-access)** - Directly accessing content and responding to document remote file request events
-- **[Document Controllers](document-controllers)** - Code-behind functionality with outlets and actions
 - **[Working in Code](working-in-code)** - Building and modifying component trees directly with the object model and typed style values.
+- **[Document Controllers](document-controllers)** - Code-behind functionality with outlets and actions
 
 ## Core Engine Configuration
 Applies to all documents within the application or process.
@@ -34,15 +34,13 @@ Applies to any number of applications or processes
 
 - **[Custom Components](custom-components)** - Creating reusable PDF components with custom namespaces
 
+## Putting it all together
 
-## In the Code
-How the library works, a documents' lifecycle and creating and setting standard values.
+- **[Complete Integration Example](integration-example)** - All extension mechanisms working together
+
+## Further Reading
 
 - **[Library Architecture](ARCHITECTURE)** - An overview of the libraries, important namespaces and class hierarchies, and the strategies used for parsing; layout; and rendering.
-- **[Working in Code](working-in-code)** - Details many of the standard classes used and ways to create component trees, set typed style values, and safely parse CSS-like values from configuration.
-
-## Integration
-- **[Complete Integration Example](integration-example)** - All extension mechanisms working together
 - **[Best Practices](best-practices)** - Guidelines, troubleshooting, and performance considerations
 
 ---

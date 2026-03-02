@@ -17,9 +17,8 @@ This comprehensive guide covers Scryber's configuration system. This documentati
 
 1. [Configuration Structure](#configuration-architecture)
 6. [Image Factory System](#image-factory-configuration)
-7. [Font Configuration](#font-configuration)
+7. [Font Configuration](#fonts-configuration)
 5. [Namespace Registration](#namespace-registration)
-8. [Function Configuration](#function-configuration)
 8. [Advanced Topics](#advanced-topics)
 
 ---
@@ -27,6 +26,8 @@ This comprehensive guide covers Scryber's configuration system. This documentati
 ## Configuration Architecture
 
 Scryber uses the .NET Core configuration system (`Microsoft.Extensions.Configuration`) with a hierarchical options pattern. Configuration is loaded from `scrybersettings.json` or `appsettings.json` and accessed through the `IScryberConfigurationService` available via dependency injection.
+
+---
 
 ### Initializing the Configuration Service
 
@@ -58,6 +59,7 @@ var app = builder.Build();
 Scryber.ServiceProvider.Init(app.Configuration);
 ```
 
+---
 
 ### Accessing Configuration Service Bootstrap
 
@@ -73,6 +75,8 @@ The configuration service exposes five primary option sections:
 - `ImagingOptions` - Image factory registration
 - `TracingOptions` - Logging configuration
 
+---
+
 ### Configuration File Structure
 
 ```json
@@ -84,7 +88,7 @@ The configuration service exposes five primary option sections:
     */
 
   "Scryber": {
-    "Output": { /* PDF Output optins */    },
+    "Output": { /* PDF Output options */    },
     "Parsing": { 
       "Namespaces": [ /* Custom namespace registrations */ ],
       "Bindings": [ /* Expression binding factories */ ]
@@ -113,7 +117,7 @@ All properties are optional, and the default values are shown above.
 Image factories load image data from various sources (files, URLs, data URLs, streams) andl convert raw image data (png, jpeg, tiff, svg) into a format that can be written to a PDF file in the standard format. 
 
 
-### Configuration Structure
+### Image Configuration Structure
 
 ```json
 {
@@ -135,7 +139,7 @@ Image factories load image data from various sources (files, URLs, data URLs, st
 }
 ```
 
-### Configuration Properties
+### Image Configuration Properties
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -144,7 +148,7 @@ Image factories load image data from various sources (files, URLs, data URLs, st
 | `MinimumScaleReduction` | double | Minimum scale factor before forcing a new layout container, e.g. a column, or a page. Default is 0.249 |
 | `Factories[]` | array | Custom image factory registrations |
 
-### Factory Registration Properties
+### Image Factory Registration Properties
 
 | Property | Type | Required | Description |
 |----------|------|----------|-------------|
@@ -153,7 +157,7 @@ Image factories load image data from various sources (files, URLs, data URLs, st
 | `FactoryType` | string | Yes | Fully qualified type name (namespace + class) |
 | `FactoryAssembly` | string | Yes | Full assembly name with version and public key token |
 
-### Factory Loading Mechanics
+### Image Factory Loading Mechanics
 
 **Configuration loading** in `ImageOptionExtensions.GetConfiguredFactories()`:
 
@@ -196,7 +200,7 @@ public static ImageFactoryList GetConfiguredFactories(this ImagingOptions option
 }
 ```
 
-**Standard factories** (always loaded):
+**Standard Image factories** (always loaded):
 
 ```csharp
 private static readonly ImageFactoryBase[] Standards = new ImageFactoryBase[]
@@ -207,7 +211,9 @@ private static readonly ImageFactoryBase[] Standards = new ImageFactoryBase[]
     new ImageFactoryJpeg(),       // .*\.(jpe?g|jpg)$
     new ImageFactoryPngDataUrl(), // data:image/png
     new ImageFactoryJpegDataUrl(),// data:image/jpeg
-    new ImageFactoryGifDataUrl()  // data:image/gif
+    new ImageFactoryGifDataUrl(),  // data:image/gif
+    new ImageFactorySvg(),        // .*\.svg$
+    new ImageFactorySvgDataUrl(). // data:image/svg
 };
 ```
 
@@ -221,153 +227,15 @@ doc.ImageFactories.Insert(0, new MyCustomImageType()); //always checked in order
 
 Or to evey document via the Imaging.Factories options.
 
-### Implementing Custom Image Factories
-
-{: .note }
-> Needs to more to the separate file.
-
-**Base class implementation pattern:**
-
-```csharp
-// Scryber.Imaging/Imaging/ImageFactoryBase.cs
-public abstract class ImageFactoryBase : IPDFImageDataFactory
-{
-    public bool ShouldCache { get; }
-    public Regex Match { get; }
-    public MimeType ImageType { get; }
-    public string Name { get; }
-    
-    public ImageFactoryBase(Regex match, MimeType type, string name, bool shouldCache)
-    {
-        this.Match = match ?? throw new ArgumentNullException(nameof(match));
-        this.ImageType = type ?? MimeType.Empty;
-        this.Name = name;
-        this.ShouldCache = shouldCache;
-    }
-
-    public virtual bool IsMatch(string forPath)
-    {
-        return this.Match.IsMatch(forPath);
-    }
-    
-    public virtual ImageData LoadImageData(IDocument document, IComponent owner, string path)
-    {
-        //override to add your own loading logic
-    }
-
-    public override async Task<ImageData> LoadImageDataAsync(IDocument document, IComponent owner, string path)
-    {
-        //Override to add your own async loading logic
-    }
-    
-    protected virtual ImageData DoLoadRawImageData(IDocument document, IComponent owner, byte[] rawData, MimeType type)
-    {
-        //override to add your own image data conversion.
-    }
-
-    protected virtual Task<ImageData> DoLoadImageDataAsync(IDocument document, IComponent owner, string path)
-    {
-        //override to add your own async image data conversion.
-    }
-}
-```
-
-**Example custom factory:**
-
-In this example we want to provide our own factory that will load some images that are stored in a database, rather than accessed from the file system.
-
-We could implement a separate web handler to accept and return images from the DB over a http(s) request, to the template, but it is more performant to directly access via a connection so we can write a custom DatabaseImageFactory.
-
-We can intercept requests for any 'db://' image path and handle independently. We can then call back to the document to actually convert the stored binary data to a known image data instance.
-
-
-
-```csharp
-public class DatabaseImageFactory : ImageFactoryBase
-{
-    public DatabaseImageFactory() 
-        : base(new Regex(@"^db://"), MimeType.Empty, "DatabaseImages", shouldCache: true)
-    {
-    }
-    
-    protected override async Task<ImageData> DoLoadImageDataAsync(IDocument document, IComponent owner, string path)
-    {
-        // Extract ID from path: db://images/12345
-        var id = path.Substring(path.LastIndexOf('/') + 1);
-        
-        // Load from database
-        byte[] imageBytes = await LoadImageFromDatabase(id);
-        MimeType type = DetectImageType(imageBytes);
-        
-        return DoLoadRawImageData(document, owner, imageBytes, type);
-    }
-    
-    protected override ImageData DoLoadRawImageData(IDocument document, IComponent owner, byte[] rawData, MimeType type)
-    {
-        using (var stream = new MemoryStream(rawData))
-        {
-            return DoDecodeImageData(stream, document, owner, "db-image");
-        }
-    }
-}
-```
-
-### Image Factory Selection Algorithm
-
-**Path matching in `ImageFactoryList.TryGetMatch()`:**
-
-```csharp
-// Scryber.Imaging/Imaging/ImageFactoryList.cs
-public bool TryGetMatch(string path, out ImageFactoryBase factory)
-{
-    // Skip data URLs - they're handled specially
-    if (path.StartsWith("data:"))
-    {
-        // Continue to factory checks
-    }
-    else if (Uri.IsWellFormedUriString(path, UriKind.RelativeOrAbsolute))
-    {
-        // Extract local path from URI for matching
-        path = new Uri(path).LocalPath;
-    }
-
-    // Iterate factories in registration order
-    // Custom factories are checked BEFORE standard factories
-    foreach (var match in this)
-    {
-        if (match.IsMatch(path))
-        {
-            factory = match;
-            return true;
-        }
-    }
-
-    factory = null;
-    return false;
-}
-```
-
-### Adding to a template
-
-With the new image factory configured, any images with a source that starts with 'db://' will use the custom image factory to load the data.
-
-```html
-<img src='db://mypictureid' />
-```
-
-This can also be bound to model data
-
-```html
-{% raw %}<img id='{{concat("img_", model.recordid)}}' src='{{concat("db://", model.recordid)}}' />{% endraw %}
-```
+The image configuration section is covered in more detail in [Image Factories](image-factories)
 
 ---
 
-## Font Configuration System
+## Fonts Configuration
 
 Font configuration controls font loading from system fonts, custom directories, and explicit file registrations.
 
-### Configuration Structure
+### Fonts Configuration Structure
 
 ```json
 {
@@ -396,7 +264,7 @@ Font configuration controls font loading from system fonts, custom directories, 
 }
 ```
 
-### Configuration Properties
+### Fonts Configuration Properties
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
@@ -476,145 +344,9 @@ public static FontDefinition GetFontDefinition(String family, FontStyle style, i
 }
 ```
 
-### Custom Font Registration Implementation
-
-**Font loading from configuration:**
-
-```csharp
-// Scryber.Drawing/Drawing/FontFactory.cs
-private static FamilyReferenceBag UnsafeLoadCustomFonts(FontOptions options)
-{
-    FamilyReferenceBag custom = new FamilyReferenceBag();
-
-    if (options.Register == null || options.Register.Length == 0) 
-        return custom;
-
-    using (var reader = new TypefaceReader())
-    {
-        foreach (var known in options.Register)
-        {
-            if (string.IsNullOrEmpty(known.File)) 
-                continue;
-            
-            // Resolve file path (relative to application base)
-            var file = new FileInfo(GetFullPath(known.File));
-                
-            if (!file.Exists) 
-                continue;
-
-            // Read OpenType/TrueType font file
-            var info = reader.ReadTypeface(file);
-
-            if (null != info && string.IsNullOrEmpty(info.ErrorMessage) && info.FontCount > 0)
-            {
-                foreach (var font in info.Fonts)
-                {
-                    // Use configured family name OR font's internal family name
-                    var family = known.Family ?? font.FamilyName;
-                    
-                    // Register font with family, style, and weight
-                    custom.AddFont(info, font, family);
-                }
-            }
-        }
-
-        // Scan default directory for additional fonts
-        var defaultDir = options.DefaultDirectory;
-        if (!string.IsNullOrEmpty(defaultDir))
-        {
-            UnsafeReadFontsFromDirectory(reader, defaultDir, custom);
-        }
-    }
-
-    return custom;
-}
-```
-
-**Font family structure:**
-
-```csharp
-// Internal font registry structure
-private class FamilyReferenceBag : Dictionary<string, FamilyReference>
-{
-    public FontReference AddFont(ITypefaceInfo info, IFontInfo font, string familyName = null)
-    {
-        FamilyReference family;
-
-        if (!_families.TryGetValue(familyName ?? font.FamilyName, out family))
-        {
-            family = new FamilyReference(familyName ?? font.FamilyName);
-            _families.Add(familyName ?? family.FamilyName, family);
-        }
-        
-        var reference = family.Add(font, info);
-        return reference;
-    }
-}
-
-private class FamilyReference
-{
-    public string FamilyName { get; }
-    private Dictionary<FontStyleKey, FontReference> _fonts;
-    
-    public FontReference Add(IFontInfo font, ITypefaceInfo typeface)
-    {
-        var key = new FontStyleKey(font.FontStyle, font.Weight);
-        var reference = new FontReference(font, typeface);
-        _fonts[key] = reference;
-        return reference;
-    }
-    
-    public FontReference GetFont(FontStyle style, int weight)
-    {
-        var key = new FontStyleKey(style, weight);
-        FontReference exact;
-        
-        // Try exact match
-        if (_fonts.TryGetValue(key, out exact))
-            return exact;
-        
-        // Try font substitution based on style and weight
-        return FindClosestFont(style, weight);
-    }
-}
-```
-
-### Standard Type 1 Font Embedding
-
-Scryber embeds **14 standard PDF Type 1 fonts** as assembly resources:
-
-```csharp
-private static FamilyReferenceBag UnsafeLoadStaticFamilies(FontOptions options)
-{
-    var bag = new FamilyReferenceBag();
-    var assm = typeof(FontFactory).Assembly;
-    
-    using (var reader = new TypefaceReader())
-    {
-        // Courier family (4 variants)
-        TryReadFontBinary(reader, assm, "Scryber.Text._FontResources.Courier.CourierNew.ttf", out var found);
-        bag.AddFont(found, found.Fonts[0], "Courier").Definition = 
-            PDFOpenTypeFontDefinition.InitStdType1WinAnsi("Fcour", "Courier", "Courier", "Courier New", 
-                false, false, 1228, found.Fonts[0] as IOpenTypeFont);
-        
-        TryReadFontBinary(reader, assm, "Scryber.Text._FontResources.Courier.CourierNewBold.ttf", out found);
-        bag.AddFont(found, found.Fonts[0], "Courier").Definition = 
-            PDFOpenTypeFontDefinition.InitStdType1WinAnsi("FcourBo", "Courier-Bold", "Courier", "Courier New", 
-                true, false, 1228, found.Fonts[0] as IOpenTypeFont);
-        
-        // ... Courier-Italic, Courier-BoldItalic
-        
-        // Helvetica family (4 variants)
-        // Times family (4 variants)  
-        // Symbol (1 font)
-        // ZapfDingbats (1 font)
-    }
-    
-    return bag;
-}
-```
-
 Standard fonts are **always available** even if system fonts are disabled, ensuring baseline compatibility.
+
+The font configuration section is covered in more detail in [Font Configuration](font-configuration)
 
 ---
 
@@ -622,7 +354,7 @@ Standard fonts are **always available** even if system fonts are disabled, ensur
 
 Namespace registration maps **XML namespace URIs** to **.NET assembly namespaces**, enabling the parser to locate component types.
 
-### Configuration Structure
+### Namespace Configuration Structure
 
 ```json
 {
@@ -652,28 +384,28 @@ Namespace registration maps **XML namespace URIs** to **.NET assembly namespaces
 
 ```csharp
 // Default registrations in ParsingOptions constructor
-Namespaces.Add(new NamespaceMappingOption() 
+Namespaces.Add(new NamespaceMappingOption()  //legacy mapping to Scryber.Components
 { 
     Source = "http://www.scryber.co.uk/schemas/core/release/v1/Scryber.Components.xsd",
     Namespace = "Scryber.Components",
     Assembly = "Scryber.Components, Version=1.0.0.0, Culture=neutral, PublicKeyToken=872cbeb81db952fe"
 });
 
-Namespaces.Add(new NamespaceMappingOption() 
+Namespaces.Add(new NamespaceMappingOption() //legacy mapping to Scryber.Data
 { 
     Source = "http://www.scryber.co.uk/schemas/core/release/v1/Scryber.Data.xsd",
     Namespace = "Scryber.Data",
     Assembly = "Scryber.Components, Version=1.0.0.0, Culture=neutral, PublicKeyToken=872cbeb81db952fe"
 });
 
-Namespaces.Add(new NamespaceMappingOption() 
+Namespaces.Add(new NamespaceMappingOption() //html namespace => Scryber.Html.Components
 { 
     Source = "http://www.w3.org/1999/xhtml",
     Namespace = "Scryber.Html.Components",
     Assembly = "Scryber.Components, Version=1.0.0.0, Culture=neutral, PublicKeyToken=872cbeb81db952fe"
 });
 
-Namespaces.Add(new NamespaceMappingOption() 
+Namespaces.Add(new NamespaceMappingOption() //svg namespace => Scryber.Svg.Components
 { 
     Source = "http://www.w3.org/2000/svg",
     Namespace = "Scryber.Svg.Components",
@@ -754,125 +486,7 @@ public static ParserClassDefinition GetClassDefinition(string elementname, strin
 }
 ```
 
-**Assembly and namespace extraction:**
-
-```csharp
-private static Type UnsafeGetType(string elementname, string assemblyQualifiedNamespace, 
-    bool throwOnNotFound, out bool isremote)
-{
-    AssemblyDefn assmdefn;
-    NamespaceDefn nsdefn;
-    Type t;
-
-    // Parse "Namespace, Assembly" format
-    string assm;
-    string ns;
-    ExtractAssemblyAndNamespace(assemblyQualifiedNamespace, out assm, out ns);
-    
-    if (string.IsNullOrEmpty(assm))
-    {
-        if (throwOnNotFound)
-            throw new PDFParserException($"Parser does not have assembly registered for namespace {assemblyQualifiedNamespace}");
-        else
-            return null;
-    }
-
-    // Get or load assembly definition
-    if (!_application.TryGetValue(assm, out assmdefn))
-    {
-        assmdefn = new AssemblyDefn();
-        Assembly found = GetAssemblyByName(assm);
-        
-        if (null == found)
-        {
-            if (throwOnNotFound)
-                throw new PDFParserException($"Parser cannot find assembly with name {assm}");
-            else
-                return null;
-        }
-        
-        assmdefn.InnerAssembly = found;
-        _application[assm] = assmdefn;
-    }
-
-    // Get or populate namespace definition
-    if (!assmdefn.TryGetValue(ns, out nsdefn))
-    {
-        nsdefn = new NamespaceDefn();
-        PopulateNamespaceFromAssembly(ns, assmdefn, nsdefn);
-        assmdefn[ns] = nsdefn;
-    }
-
-    // Look up type in namespace
-    if (!nsdefn.TryGetValue(elementname, out t))
-    {
-        // Check remote types (components loaded from external sources)
-        string actual;
-        if (!nsdefn.RemoteTypes.TryGetValue(elementname, out actual) || 
-            !nsdefn.TryGetValue(actual, out t))
-        {
-            if (throwOnNotFound)
-                throw new PDFParserException($"No PDF component declared with name {elementname} in namespace {assemblyQualifiedNamespace}");
-            else
-                return null;
-        }
-        else
-        {
-            isremote = true;
-        }
-    }
-    else
-    {
-        isremote = false;
-    }
-
-    return t;
-}
-```
-
-**Namespace reflection and caching:**
-
-```csharp
-private static void PopulateNamespaceFromAssembly(string ns, AssemblyDefn assmdefn, NamespaceDefn nsdefn)
-{
-    Type[] all = assmdefn.InnerAssembly.GetTypes();
-    
-    foreach (Type t in all)
-    {
-        if (string.Equals(t.Namespace, ns))
-        {
-            // Check for PDFParsableComponent attribute
-            object[] attrs = t.GetCustomAttributes(typeof(PDFParsableComponentAttribute), false);
-            
-            if (null != attrs && attrs.Length > 0)
-            {
-                PDFParsableComponentAttribute compattr = (PDFParsableComponentAttribute)attrs[0];
-                string name = compattr.ElementName;
-                
-                if (string.IsNullOrEmpty(name))
-                    name = t.Name;
-
-                // Register concrete element
-                nsdefn.Add(name, t);
-
-                // Check for remote element variant
-                attrs = t.GetCustomAttributes(typeof(PDFRemoteParsableComponentAttribute), false);
-                if (null != attrs && attrs.Length > 0)
-                {
-                    PDFRemoteParsableComponentAttribute remattr = (PDFRemoteParsableComponentAttribute)attrs[0];
-                    string remotename = remattr.ElementName;
-                    
-                    if (string.IsNullOrEmpty(remotename))
-                        remotename = t.Name + "-Ref";
-                    
-                    // Map remote element name to concrete element name
-                    nsdefn.RemoteTypes.Add(remotename, name);
-                }
-            }
-        }
-    }
-}
-```
+---
 
 ### Creating Custom Components
 
@@ -885,7 +499,6 @@ using Scryber.Components;
 namespace MyCompany.CustomComponents
 {
     [PDFParsableComponent("CustomPanel")]
-    [PDFJSConvertor("mycompany.convertors.custom_panel")]
     public class CustomPanel : Panel
     {
         [PDFAttribute("background-pattern")]
@@ -937,17 +550,7 @@ namespace MyCompany.CustomComponents
 </pdf:Document>
 ```
 
----
-
-## Configuration File Location
-
-Scryber searches for configuration in this order:
-
-1. `scrybersettings.json` (Scryber-specific)
-2. `appsettings.json` (standard .NET Core)
-3. `appsettings.{Environment}.json` (environment-specific)
-
-Configuration is loaded using `Microsoft.Extensions.Configuration.IConfiguration` and bound to strongly-typed options classes.
+Custom components are covered in full details in [Custom Components article](custom-components).
 
 ---
 
@@ -1015,157 +618,7 @@ Scryber's configuration and extension system provides a comprehensive framework 
 6. **Separation of Concerns**: Controllers separate logic from markup
 7. **Type Safety**: Strongly-typed configuration options
 
-### Complete Integration Example
-
-This example demonstrates **all extension mechanisms working together**:
-
-**1. Custom Components** (`MyCompany.PDFComponents.dll`):
-```csharp
-[PDFParsableComponent("DataTable")]
-public class DataTable : Panel { /* ... */ }
-
-[PDFParsableComponent("StatCard")]
-public class StatCard : Panel { /* ... */ }
-```
-
-**2. Custom Image Factory** (`MyCompany.PDFExtensions.dll`):
-```csharp
-public class DatabaseImageFactory : ImageFactoryBase
-{
-    protected override async Task<ImageData> DoLoadImageDataAsync(...)
-    {
-        // Load from database
-    }
-}
-```
-
-**3. Configuration** (`scrybersettings.json`):
-```json
-{
-  "Scryber": {
-    "Parsing": {
-      "Namespaces": [
-        {
-          "Source": "http://www.mycompany.com/schemas/components",
-          "Namespace": "MyCompany.PDFComponents",
-          "Assembly": "MyCompany.PDFComponents"
-        }
-      ]
-    },
-    "Imaging": {
-      "Factories": [
-        {
-          "Name": "DatabaseImages",
-          "Match": "^db://",
-          "FactoryType": "MyCompany.PDFExtensions.DatabaseImageFactory",
-          "FactoryAssembly": "MyCompany.PDFExtensions"
-        }
-      ]
-    },
-    "Fonts": {
-      "Register": [
-        {
-          "Family": "Company Brand",
-          "File": "Fonts/CompanyBrand-Regular.ttf"
-        }
-      ]
-    }
-  }
-}
-```
-
-**4. Controller** (`MyCompany.Reports.dll`):
-```csharp
-namespace MyCompany.Reports
-{
-    public class MonthlyReportController
-    {
-        [PDFOutlet(Required = true)]
-        public StatCard SalesCard { get; set; }
-        
-        [PDFOutlet]
-        public DataTable DataTable { get; set; }
-        
-        [PDFOutlet]
-        public Image CompanyLogo { get; set; }
-
-        public void Init(InitContext context)
-        {
-            CompanyLogo.Source = "db://logos/company-logo";
-        }
-
-        public void LoadData(LoadContext context)
-        {
-            var data = FetchMonthlyData();
-            DataTable.DataSource = data;
-            SalesCard.Value = data.Sum(d => d.Amount).ToString("C");
-        }
-
-        private List<SalesData> FetchMonthlyData()
-        {
-            // Database query
-            return new List<SalesData>();
-        }
-    }
-}
-```
-
-**5. Template** (`MonthlyReport.pdfx`):
-```xml
-<?xml version='1.0' encoding='utf-8' ?>
-<?scryber parser-mode='Strict' 
-          log-level='Warnings'
-          controller='MyCompany.Reports.MonthlyReportController, MyCompany.Reports' ?>
-
-<pdf:Document xmlns:pdf='http://www.scryber.co.uk/schemas/core/release/v1/Scryber.Components.xsd'
-              xmlns:mc='http://www.mycompany.com/schemas/components'
-              font-family='Company Brand'>
-    
-    <Pages>
-        <pdf:Page on-init='Init' on-load='LoadData'>
-            
-            <Header>
-                <!-- Image loaded from database via custom factory -->
-                <pdf:Image id='CompanyLogo' />
-                <pdf:H1>Monthly Sales Report</pdf:H1>
-            </Header>
-            
-            <Content>
-                
-                <!-- Custom StatCard component -->
-                <mc:StatCard id='SalesCard' 
-                             icon='💰'
-                             label='Total Sales' />
-                
-                <!-- Custom DataTable component -->
-                <mc:DataTable id='DataTable'
-                              show-header='true'
-                              stripe-rows='true' />
-                
-            </Content>
-            
-        </pdf:Page>
-    </Pages>
-    
-</pdf:Document>
-```
-
-**6. Usage**:
-```csharp
-using (var stream = File.OpenRead("MonthlyReport.pdfx"))
-{
-    var doc = Document.ParseDocument(stream, ParseSourceType.DynamicContent);
-    doc.ProcessDocument("MonthlyReport.pdf");
-}
-```
-
-This example demonstrates:
-- ✅ Custom components in their own namespace
-- ✅ Custom image factory for database images
-- ✅ Custom font registration
-- ✅ Controller with outlets and actions
-- ✅ Processing instructions for document settings
-- ✅ Full integration of all extension mechanisms
+---
 
 ### Best Practices
 
@@ -1210,6 +663,8 @@ This example demonstrates:
 - Version namespaces for breaking changes
 - Document namespace registrations in component library README
 - Test namespace resolution in integration tests
+
+---
 
 ### Troubleshooting
 
@@ -1332,12 +787,11 @@ This example demonstrates:
 }
 ```
 
----
+## Further Reading
 
-**Document Version**: 1.0  
-**Last Updated**: February 2026  
-**Target**: Scryber.Core 6.x / 7.x
-
-For questions or issues with configuration and extension, please refer to:
-- GitHub Issues: https://github.com/richard-scryber/scryber.core/issues
-- Documentation: https://scrybercore.readthedocs.io
+- [Logging Extensions](logging-extension)
+- [Font Configuration](font-configuration)
+- [Image Factories](image-factories)
+- [Namespace Registration](namespace-registration)
+- [Custom Components](custom-components)
+- [Complete Example](integration-example)

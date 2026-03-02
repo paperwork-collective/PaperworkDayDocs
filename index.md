@@ -30,11 +30,19 @@ Check out the [Quick Start](/quickstart/quickstart_core) to jump straight in and
 
 ---
 
+## Benefits
+
+- **Clear separation of content and presentation**: A fundamental principle of good design and development.
+- **Rapid learning curve**: Using standard and commonly known languages to define structure and style, with (x)html, css, svg and handlebars.
+- **Beautiful documents and reports**: With ease of creation, comes the ability to invest effort in the output design, and quickly prototype new options.
+- **Low/no code solutions**: Utilise existing interfaces with dynamic templates to rapidly create content.
+- **Repeatability and adaptability**: Adding flexible layouts so templates can be reused and automated, and add re-usable parts for multiple templates.
+- **Easy maintenance**: Quickly update content, adjust styles, modify embeded content without re-building or re-release.
 
 ## Key Features
 
 - **HTML/CSS-Based Templating**: Define your document structure using familiar HTML and CSS, making it easy to design and maintain templates
-- **Data Binding**: Bind data from your application directly into your documents with powerful expression support
+- **Data Binding**: Bind data from your application directly into your documents with powerful expression and function support
 - **Dynamic Styling**: Use calc, relative units and bound data to dynamically alter reports and documents
 - **Multi-page Support**: Create complex, multi-page documents with headers, footers, and page breaks
 - **Rich Content**: Include images, SVG graphics, tables, lists, and charts
@@ -42,7 +50,9 @@ Check out the [Quick Start](/quickstart/quickstart_core) to jump straight in and
 - **Content Embedding**: Inject dynamic SVG graphics, complex rich content and document attachments at runtime
 - **Flexible Output**: Generate PDFs in-memory, save to disk, or stream to HTTP responses
 - **Cross-platform**: Run on Windows, macOS, iOS, and Linux with .NET
-- **WASM Support**: Full support for asyncronous operation including pure client side execution
+- **WASM Support**: Full support for asyncronous operation including pure client side execution.
+- **Update or modify PDF's**: Add or remove pages, or overlay new content onto existing PDF files. 
+- **Secure or protect**: A output documents can be 'secured' with an owner password and also protected with a required user password.
 
 ---
 
@@ -64,7 +74,7 @@ Finally if you know what you are looking for, then the search is available at th
 ---
 
 
-## Learning the Scryber.Core library
+## Learning the Scryber.Core library [->](/learning/)
 
 The first section is for the Learing guides which covers the capabilities the library in general terms.
 
@@ -81,7 +91,7 @@ There are 8 individual modules
 
 ---
 
-## Reference section
+## Reference section [->](/reference/)
 
 The reference section is split into 7 sections covering each of the major components with examples of usage, and samples.
 
@@ -92,4 +102,10 @@ The reference section is split into 7 sections covering each of the major compon
 5. [Binding Operators and Functions](reference/binding) - Covers all data binding structures available in Scryber templates, including Handlebars [helpers](reference/binding/helpers/), [operators](reference/binding/operators) like (`+`, `%` and `??`), and expression [functions](reference/binding/functions/) like `substring` and `count`.
 6. [SVG Elements](reference/svgelements) - This section details all the SVG Drawing elements that the core library supports such as `path`, `marker` and `image`, along with the available (and unavailable attributes) that the tag supports.
 7. [SVG Attributes](reference/svgattributes) - This section details all the attributes that the core library supports (`viewport`, `cx`, `cy` etc.), along with the supported values for the attribute, and also elements they can be used on.
+
+## Configuration and Extension section [->](/configuration/)
+
+This covers advanced library topics that allow developers to enhance the current capabilites.
+
+1. [Processing Instructions](processing-instructions) - The document level configuration for logging, parsing and controllers.
 

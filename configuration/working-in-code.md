@@ -5,7 +5,7 @@ parent: Configuration & Extension
 parent_url: /configuration/
 has_children: false
 has_toc: false
-nav_order: 4
+nav_order: 3
 ---
 
 # Working in Code
@@ -42,7 +42,7 @@ using Scryber.Drawing;
 
 var doc = new Document();
 var page = new Page();
-var section = new Section();
+var div = new Div();
 
 var title = new Label();
 title.Text = "Runtime Report";
@@ -56,14 +56,13 @@ body.Style.Border.Width = 1;
 body.Style.Border.Color = StandardColors.Gray;
 body.Contents.Add(new TextLiteral("Generated entirely in code."));
 
-section.Contents.Add(title);
-section.Contents.Add(body);
-page.Contents.Add(section);
+div.Contents.Add(title);
+div.Contents.Add(body);
+page.Contents.Add(div);
 doc.Pages.Add(page);
 
 doc.SaveAsPDF("working-in-code.pdf");
 ```
-
 ---
 
 ## Build XHTML in Code and Parse a Component
@@ -160,6 +159,7 @@ Unit w1 = 120;                              // points
 Unit w2 = new Unit(25, PageUnits.Millimeters);
 Unit w3 = Unit.Parse("75%");
 Unit w4 = Unit.Parse("12pt");
+Unit w5 = Unit.Percent(75);
 
 component.Style.Size.Width = w2;
 component.Style.Size.MaxWidth = w3;
@@ -191,6 +191,10 @@ component.Style.Outline.Color = Color.Parse("cmyk(0,100,100,0)");
 ```
 
 ---
+
+{: .note }
+> The value types, or values for any other properties cannot be set to binding expressions (`{% raw %}{{model.value}}{% endraw %}`), or css functions 
+> (`calc(...)`). These are handled independently by the document parser when building an instance from a template. 
 
 ## Parsing CSS-Like Values from Strings
 
@@ -228,6 +232,27 @@ if (doc.TryFindComponentById("StatusBadge", out IComponent found) && found is La
     badge.Style.Background.Color = StandardColors.Green;
     badge.Style.Fill.Color = StandardColors.White;
     badge.Style.Padding = new Thickness(4, 8, 4, 8);
+}
+
+doc.SaveAsPDF("invoice.pdf");
+```
+
+Of adding an overlay when the document is generated from a development machine - so it is not confused.
+
+```csharp
+var doc = Document.ParseDocument("invoice.html");
+
+if (this.IsNonProduction())
+{
+    var styleDef = new StyleDefn("body");
+    styleDef.Background.ImageSource = "./Asssets/DraftUnderlay.png";
+    styleDef.Background.Opacity = 0.5f;
+    styleDef.Background.PatternRepeat = PatternRepeat.None;
+    styleDef.Background.PatternXSize = (Unit)200;
+    styleDef.Background.PatternYSize = (Unit)200;
+    styleDef.Background.PatternXPosition = (Unit)100;
+    styleDef.Background.PatternYPosition = (Unit)150;
+    doc.Styles.Add(styleDef);
 }
 
 doc.SaveAsPDF("invoice.pdf");
