@@ -24,6 +24,7 @@ Master page-based layout, positioning, and document structure to create professi
 6. [Table Layouts](06_tables.html) - Data tables, table sizing, borders, page breaks
 7. [Headers & Footers](07_headers_footers.html) - Running headers/footers, page numbers
 8. [Layout Best Practices](08_layout_best_practices.html) - Professional patterns, optimization, troubleshooting
+9. [Grid Layouts](09_grid_layout.html) - display:grid, fr units, repeat(), column-gap, card grids <span class="label label-yellow">Beta</span>
 
 ---
 
@@ -141,7 +142,7 @@ This series covers everything you need for professional document layout:
 - Adding gutters (spacing)
 - Rule styling with `column-rule` and `column-rule-*`
 - Fill behavior with `column-fill`
-- Why flexbox/grid don't work in PDF
+- When to use columns vs grid vs table-cell
 
 ### 5. [Positioning](05_positioning.html)
 - Position property (static, relative, absolute)
@@ -173,6 +174,14 @@ This series covers everything you need for professional document layout:
 - Common pitfalls and solutions
 - Responsive layout strategies
 - Production checklist
+
+### 9. [Grid Layouts](09_grid_layout.html) <span class="label label-yellow">Beta</span>
+- `display: grid` and `grid-template-columns`
+- fr units, fixed widths, auto, and repeat()
+- Column gap and container padding
+- Card grids, dashboards, invoice lines, sidebar layouts
+- Data binding with grid containers
+- Grid vs columns vs table-cell — choosing the right tool
 
 ## Prerequisites
 

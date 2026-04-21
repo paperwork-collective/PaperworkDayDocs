@@ -53,6 +53,19 @@ The element generates a block box that flows inline. Combines characteristics of
 ### none
 The element is completely removed from the document flow and is not rendered. The element takes up no space in the layout.
 
+### grid <span class="label label-yellow">Beta</span>
+The element becomes a **grid container**, and its direct children are laid out in a column-row grid. Column structure is defined by `grid-template-columns` using fr units, fixed lengths, `auto`, and `repeat()`. Items are placed in row-major order (left to right, then next row).
+
+```css
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;   /* two columns: 1/3 and 2/3 of available width */
+    column-gap: 10pt;                 /* space between columns */
+}
+```
+
+See [`grid-template-columns`](/reference/cssproperties/properties/css_prop_grid-template-columns) for full column definition syntax.
+
 ### table
 The element behaves like a `<table>` element. Creates a block-level table box.
 
@@ -87,6 +100,8 @@ The `display` property can be applied to:
 - Block elements start on a new line and stretch to fill their container's width by default
 - Inline elements flow within text and cannot have explicit width or height
 - `inline-block` is ideal for creating horizontal layouts while maintaining box model properties
+- `display: grid` requires `grid-template-columns` to be set; without it the grid renders as a plain block
+- `display: grid` places children in row-major order automatically — no explicit row/column placement needed
 - Table display values allow table-like layouts without semantic table markup
 - Table-cell elements align vertically and create equal-height columns automatically
 - `list-item` display creates list markers (bullets/numbers) without using `<li>` elements
@@ -1050,10 +1065,76 @@ The display property works seamlessly with data binding to create dynamic, condi
 </body>
 ```
 
+### Example 16: Grid layout with equal columns
+
+```html
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 15pt;
+        padding: 10pt;
+        border: 1pt solid #e5e7eb;
+    }
+    .grid-item {
+        padding: 15pt;
+        background-color: #dbeafe;
+        border: 1pt solid #2563eb;
+        text-align: center;
+    }
+</style>
+<body>
+    <div class="grid-container">
+        <div class="grid-item">Column 1</div>
+        <div class="grid-item">Column 2</div>
+        <div class="grid-item">Column 3</div>
+        <!-- Fourth item auto-wraps to next row -->
+        <div class="grid-item">Column 4</div>
+        <div class="grid-item">Column 5</div>
+        <div class="grid-item">Column 6</div>
+    </div>
+</body>
+```
+
+### Example 17: Grid layout with mixed column widths
+
+```html
+<style>
+    .sidebar-layout {
+        display: grid;
+        grid-template-columns: 150pt 1fr;
+        column-gap: 20pt;
+    }
+    .sidebar {
+        background-color: #f3f4f6;
+        padding: 15pt;
+        border: 1pt solid #d1d5db;
+    }
+    .main-content {
+        padding: 15pt;
+        border: 1pt solid #e5e7eb;
+    }
+</style>
+<body>
+    <div class="sidebar-layout">
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <p>Section 1</p>
+            <p>Section 2</p>
+        </div>
+        <div class="main-content">
+            <h2>Main Content</h2>
+            <p>The sidebar is a fixed 150pt; this area takes the rest.</p>
+        </div>
+    </div>
+</body>
+```
+
 ---
 
 ## See Also
 
+- [grid-template-columns](/reference/cssproperties/properties/css_prop_grid-template-columns) - Define grid column tracks
 - [float](/reference/cssproperties/properties/css_prop_float) - Float elements left or right
 - [position](/reference/cssproperties/properties/css_prop_position) - Set positioning method
 - [width](/reference/cssproperties/properties/css_prop_width) - Set element width

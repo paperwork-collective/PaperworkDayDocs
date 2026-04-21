@@ -29,18 +29,46 @@ has_toc: false
 
 *Breaking change from anything on V6.0 or below.*
 
+#### 9.3.0.0 - 21 April 2026
+- CSS *initial* support on generic tags for 
+    - display: flex, 
+    - display: grid,
+    - display: table-xxx.
+- CSS support for table cell rowspan across multiple rows with overflow and stepping calculation.
+- CSS support for border radius on individual columns ()
+- CSS support for setting individual variable values from the document.Params item collections
+- CSS Support for column rule styles on multi-column layouts.
+- CSS support for contain sizing on background images.
+
+- Code fix pre-pended whitespace on soft return lines with bindings.
+- Code fixes for labeled page sizes and falling back to previous sizes afterwards.
+- Code fixes for sizing and positioning of referenced (rather than inline) SVG images, via the img tag (including %age widths)
+- Code throws an exception when a font is not matched, when running in strict mode.
+
+- Configuration loading improved for console and forms applications.
+- Configuration section added for Expressions, that supports custom functions.
+- Configuration of custom image factories improved to support async remote loading.
+
+
+
 #### 9.2.0.3 - 22 Jan 2026
 - Fixed styling issue when components are hidden using css.
+
+
 
 #### 9.2.0.2 - 13 Nov 2025
 - Fixed repeating raster background images with cover size.
 - Added support for repeating SVG background images from Data urls
 
 
+
+
 #### 9.2.0.0 - 6 Nov 2025
 - Public release with all added features from the betas. Too many to list.
 - The documentation is here [learning](https://www.paperworkday.info/learning/) 
 - And the refererence section here [refererence](https://www.paperworkday.info/reference/)
+
+
         
 ---
 

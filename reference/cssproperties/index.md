@@ -135,7 +135,8 @@ The following properties are supported to alter the position and size appearance
 | Property  | Description |
 |---|---|
 | <a href='/reference/cssproperties/properties/css_prop_position.html' >position</a> | Defines the way the element is positioned within the current page at the time of layout.  |
-| <a href='/reference/cssproperties/properties/css_prop_display.html' >display</a> | Defines how the elements contents should be laid-out - in a block, inline with the flow, or just ignored. |
+| <a href='/reference/cssproperties/properties/css_prop_display.html' >display</a> | Defines how the elements contents should be laid-out - in a block, inline with the flow, grid, table, or just ignored. |
+| <a href='/reference/cssproperties/properties/css_prop_grid-template-columns.html' >grid-template-columns</a> <span class="label label-yellow">Beta</span> | Defines the column tracks for a `display: grid` container — fr units, fixed widths, auto, and repeat(). |
 | <a href='/reference/cssproperties/properties/css_prop_float.html' >float</a> | Defines the positioning of the element on the current line. And how content will move around it. |
 | <a href='/reference/cssproperties/properties/css_prop_top.html' >top</a> | Specifies the top postion for an element that can be explictly moved. |
 | <a href='/reference/cssproperties/properties/css_prop_left.html' >left</a> | Specifies the left postion for an element that can be explictly moved. |

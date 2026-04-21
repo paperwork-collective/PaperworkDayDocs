@@ -28,23 +28,24 @@ By the end of this article, you'll be able to:
 
 ---
 
-## Why Not Flexbox or Grid?
+## Layout Options in Scryber
 
-Unlike modern web browsers, PDF rendering engines don't support:
-- ❌ `display: flex` (flexbox)
-- ❌ `display: grid` (CSS grid)
-- ❌ Advanced layout features
+Scryber supports several complementary approaches to multi-column and grid layouts:
 
-**Instead, use:**
-- ✅ `columns`, `column-count`, and `column-width`
-- ✅ `column-gap` and `column-rule`
-- ✅ `column-rule-width`, `column-rule-style`, and `column-rule-color`
-- ✅ `column-fill` for balancing behavior
-- ✅ `column-span` and `break-inside`
-- ✅ `display: table` and `display: table-cell` (for fixed side-by-side blocks)
-- ✅ `float: left` / `float: right`
-- ✅ Percentage widths
-- ✅ `calc()` for dynamic calculations
+| Approach | Best for |
+|---|---|
+| ✅ `columns` / `column-count` | Flowing text across balanced columns — newsletters, reports |
+| ✅ `display: grid` + `grid-template-columns` | Fixed card grids, dashboards, invoice lines, structured item lists |
+| ✅ `display: table` / `table-cell` | Equal-height side-by-side blocks, simple two-panel layouts |
+| ✅ `float: left` / `float: right` | Text wrapping around images or pull-quotes |
+| ❌ `display: flex` (flexbox) | Not supported |
+
+**Choose based on your content:**
+- **Text that flows continuously across columns** → use `columns`
+- **Items laid out in a defined column grid** → use `display: grid` with `grid-template-columns`
+- **Side-by-side blocks with equal height** → use `display: table-cell`
+
+See the [Grid Layout guide](09_grid_layout.html) for full `display: grid` documentation.
 
 ---
 
@@ -1111,7 +1112,7 @@ Create a comparison layout:
 4. **Span section headers** - Use `column-span: all` for major headings
 5. **Pick fill behavior early** - Use `column-fill: balance` for even columns, `auto` for sequential fill
 6. **Use table-cell selectively** - Best for fixed side-by-side panel designs
-7. **Avoid flex/grid assumptions** - Continue using PDF-supported layout features
+7. **Avoid flexbox** - `display: flex` is not supported; use `display: grid` for structured column layouts or native `columns` for flowing text
 8. **Keep structures simple** - Prefer shallow, predictable container hierarchies
 
 ---
