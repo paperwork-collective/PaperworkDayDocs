@@ -103,6 +103,17 @@ The reference section is split into 7 sections covering each of the major compon
 6. [SVG Elements](reference/svgelements) - This section details all the SVG Drawing elements that the core library supports such as `path`, `marker` and `image`, along with the available (and unavailable attributes) that the tag supports.
 7. [SVG Attributes](reference/svgattributes) - This section details all the attributes that the core library supports (`viewport`, `cx`, `cy` etc.), along with the supported values for the attribute, and also elements they can be used on.
 
+## Feature Support Charts [->](/quickstart/quickstart_core)
+
+Quick-reference charts showing what is supported compared to standard HTML, CSS, and SVG — including what is new or Scryber-specific. Useful when you want to know at a glance whether a tag, property, or expression feature is available.
+
+1. [HTML Tags](/quickstart/feature_html_tags) - All supported HTML elements, including Scryber-specific extensions (`<continuation-header>`, `<page>`, `<if>`, etc.) and elements that are not supported.
+2. [CSS Styles](/quickstart/feature_css_styles) - Selectors, at-rules, and all style properties — including what is partial or PDF-specific, and what is new in recent versions (flex, grid, column-rule, contain).
+3. [SVG Drawing](/quickstart/feature_svg) - Supported SVG elements and attributes, inclusion methods, and what is not supported (filters, animations).
+4. [Binding Expressions](/quickstart/feature_binding) - All handlebars helpers, operators, special variables, and the full function library (90+ functions across conversion, string, math, date, collection, and statistical categories).
+
+---
+
 ## Configuration and Extension section [->](/configuration/)
 
 This covers advanced library topics that allow developers to enhance the current capabilites.
