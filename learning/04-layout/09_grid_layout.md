@@ -353,7 +353,7 @@ Fixed columns for a structured data layout — ideal for invoice tables without 
 
 ## Data Binding with Grid
 
-Grid layout works naturally with `{{#each}}` loops. The grid wraps items automatically — you only define the column structure once.
+Grid layout works naturally with `{% raw %}{{#each}}{% endraw %}` loops. The grid wraps items automatically — you only define the column structure once.
 
 ### Product catalogue
 

@@ -242,7 +242,7 @@ Where a property or value was added or significantly improved in a specific vers
 |---------|---------|-------|
 | [`--custom-property`](/reference/cssselectors/selectors/css_root_selector) + `:root` | **Supported** | Define and use CSS custom properties |
 | [`var(--name)`](/reference/binding/functions/var) | **Supported** | Reference CSS variables |
-| [`calc()`](/reference/binding/functions/calc) | **Partial** | Single-unit expressions work; mixed-unit expressions (e.g. `calc(50% - 5px)`) are not supported |
+| [`calc()`](/reference/binding/functions/calc) | **Supported** | Expressions support within css; mixed-unit expressions (e.g. `calc(50% - 5px)`) and all [expression functions](feature_binding) |
 
 ### List Marker Customisation (Scryber Extensions)
 
