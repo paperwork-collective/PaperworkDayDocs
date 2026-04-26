@@ -11,6 +11,11 @@ nav_order: 1
 # HTML Tags Support
 {: .no_toc }
 
+<style>
+.main-content table td:first-child,
+.main-content table th:first-child { min-width: 200px; }
+</style>
+
 A quick-reference chart showing which HTML elements are supported in Scryber templates, how they compare to standard HTML, and any PDF-specific differences.
 
 **Support levels used in this chart:**

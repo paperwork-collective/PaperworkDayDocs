@@ -11,6 +11,11 @@ nav_order: 4
 # Binding Expressions Support
 {: .no_toc }
 
+<style>
+.main-content table td:first-child,
+.main-content table th:first-child { min-width: 200px; }
+</style>
+
 Scryber uses a Handlebars-style expression syntax (`{% raw %}{{...}}{% endraw %}`) to bind data and execute functions within templates. This chart covers all supported helpers, operators, functions, and special variables.
 
 All binding features are Scryber-specific — standard HTML has no equivalent built-in template engine.

@@ -11,6 +11,11 @@ nav_order: 3
 # SVG Drawing Support
 {: .no_toc }
 
+<style>
+.main-content table td:first-child,
+.main-content table th:first-child { min-width: 200px; }
+</style>
+
 A quick-reference chart showing which SVG elements and capabilities are supported in Scryber. Scryber supports a substantial portion of the static SVG specification — most SVG images that do not rely on filters or animations should work without modification.
 
 **Support levels used in this chart:**

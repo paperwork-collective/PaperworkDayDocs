@@ -11,6 +11,11 @@ nav_order: 2
 # CSS Styles Support
 {: .no_toc }
 
+<style>
+.main-content table td:first-child,
+.main-content table th:first-child { min-width: 200px; }
+</style>
+
 A quick-reference chart showing which CSS selectors, at-rules, and style properties are supported in Scryber templates, with any PDF-specific differences noted.
 
 **Support levels used in this chart:**
@@ -172,7 +177,7 @@ Where a property or value was added or significantly improved in a specific vers
 
 | Property | Support | Notes |
 |----------|---------|-------|
-| `display: flex` | **Partial** | Initial support added in v9.3 |
+| [`display: flex`](/reference/cssproperties/properties/css_prop_display) | **Partial** | Initial support added in v9.3 |
 | `display: inline-flex` | **No** | |
 | `flex-direction` | **Partial** | Basic row/column supported |
 | `justify-content` | **Partial** | |
@@ -235,9 +240,9 @@ Where a property or value was added or significantly improved in a specific vers
 
 | Feature | Support | Notes |
 |---------|---------|-------|
-| `--custom-property` + `:root` | **Supported** | Define and use CSS custom properties |
-| `var(--name)` | **Supported** | Reference CSS variables |
-| `calc()` | **Partial** | Single-unit expressions work; mixed-unit expressions (e.g. `calc(50% - 5px)`) are not supported |
+| [`--custom-property`](/reference/cssselectors/selectors/css_root_selector) + `:root` | **Supported** | Define and use CSS custom properties |
+| [`var(--name)`](/reference/binding/functions/var) | **Supported** | Reference CSS variables |
+| [`calc()`](/reference/binding/functions/calc) | **Partial** | Single-unit expressions work; mixed-unit expressions (e.g. `calc(50% - 5px)`) are not supported |
 
 ### List Marker Customisation (Scryber Extensions)
 
