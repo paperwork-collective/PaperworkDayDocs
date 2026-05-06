@@ -25,6 +25,16 @@ has_toc: false
 
 ## Version History
 
+### Version 9.5
+
+*Breaking change - removed support for .NET Standard.*
+
+As an upgrade to SixLabors.Imaging library 3+ we have now dropped support for dotnet standard.
+This will hopefully not cause issues, but reach out if so.
+
+- Added support for webp image formats, both lossy and lossless including alpha
+
+
 ### Version 9
 
 *Breaking change from anything on V6.0 or below.*
