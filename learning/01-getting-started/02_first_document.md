@@ -156,59 +156,13 @@ var doc = Document.ParseHTML("template.html");
 
 Let's create a more complete document with styling:
 
-
+#### first-document.html
 ```html
 <!DOCTYPE html>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
     <title>My First PDF Document</title>
-    <style>
-        body {
-            font-family: 'Helvetica', sans-serif;
-            font-size: 11pt;
-            margin: 40pt;
-            color: #333;
-        }
-
-        h1 {
-            color: #2563eb;
-            font-size: 24pt;
-            border-bottom: 2pt solid #2563eb;
-            padding-bottom: 10pt;
-            margin-bottom: 20pt;
-        }
-
-        h2 {
-            color: #1e40af;
-            font-size: 18pt;
-            margin-top: 20pt;
-            margin-bottom: 10pt;
-        }
-
-        p {
-            line-height: 1.6;
-            margin-bottom: 10pt;
-        }
-
-        .highlight {
-            background-color: #fef3c7;
-            padding: 10pt;
-            border-left: 4pt solid #f59e0b;
-            margin: 15pt 0;
-        }
-
-        .footer {
-            position: fixed;
-            bottom: 20pt;
-            left: 40pt;
-            right: 40pt;
-            text-align: center;
-            font-size: 9pt;
-            color: #666;
-            border-top: 1pt solid #ccc;
-            padding-top: 10pt;
-        }
-    </style>
+    <link rel='stylesheet' href='./first-styles.css' />
 </head>
 <body>
     <h1>Welcome to Scryber.Core</h1>
@@ -244,6 +198,55 @@ Let's create a more complete document with styling:
     </div>
 </body>
 </html>
+```
+
+#### first-styles.css
+```css
+body {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 11pt;
+    margin: 40pt;
+    color: #333;
+}
+
+h1 {
+    color: #2563eb;
+    font-size: 24pt;
+    border-bottom: 2pt solid #2563eb;
+    padding-bottom: 10pt;
+    margin-bottom: 20pt;
+}
+
+h2 {
+    color: #1e40af;
+    font-size: 18pt;
+    margin-top: 20pt;
+    margin-bottom: 10pt;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 10pt;
+}
+
+.highlight {
+    background-color: #fef3c7;
+    padding: 10pt;
+    border-left: 4pt solid #f59e0b;
+    margin: 15pt 0;
+}
+
+.footer {
+    position: fixed;
+    bottom: 20pt;
+    left: 40pt;
+    right: 40pt;
+    text-align: center;
+    font-size: 9pt;
+    color: #666;
+    border-top: 1pt solid #ccc;
+    padding-top: 10pt;
+}
 ```
 
 
@@ -295,7 +298,7 @@ class Program
 var doc = Document.ParseDocument("template.html");
 
 // HTML5 format
-var doc = Document.ParseHTML("template.html");
+var doc = Document.ParseHTMLDocument("template.html");
 ```
 
 ### From String

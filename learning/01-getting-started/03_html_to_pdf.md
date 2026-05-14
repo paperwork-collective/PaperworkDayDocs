@@ -167,12 +167,12 @@ These elements don't make sense in PDF context:
 <style>
     /* Force page break before element */
     .new-section {
-        page-break-before: always;
+        break-before: page;
     }
 
     /* Avoid breaking inside element */
     .keep-together {
-        page-break-inside: avoid;
+        break-inside: avoid;
     }
 </style>
 
@@ -194,7 +194,7 @@ body {
     margin: 40pt;     /* ✓ Recommended */
 }
 
-/* Pixels work but convert to points */
+/* Pixels work but converted to points at 96ppi = 72pts/in */
 body {
     font-size: 14px;  /* Converts to ~10.5pt */
 }
@@ -204,9 +204,6 @@ body {
 
 **Browser:** Interactive JavaScript
 **PDF:** Static output
-
-
-
 
 
 {% raw %}
@@ -225,8 +222,11 @@ body {
 
 ### 4. Font Handling
 
-**Browser:** Uses system fonts
-**PDF:** Fonts must be embedded or use standard PDF fonts
+Both scryber and browsers can support the @font-face for font definition.
+If running server side then the engine can use system fonts and any explicit inclusions from the [configuration](../07-configuration/index)
+
+Font types are limited to TrueType/OpenType (inc. collections) and WOFF (v1). WOFF2 is not supported, and should be converted before referencing.
+
 
 ```css
 /* Standard PDF fonts (always available) */
@@ -239,11 +239,14 @@ body {
     font-family: 'CustomFont';
     src: url('./fonts/CustomFont.ttf');
 }
+
+h1{ font: 'CustomFont' 24pt bold; }
 ```
 
 ### 5. Image Loading
 
 **Browser:** Lazy loading, async
+
 **PDF:** All images loaded before generation
 
 ```html
@@ -251,6 +254,8 @@ body {
 <img src="./images/logo.png" />
 <img src="https://example.com/image.jpg" />
 ```
+
+*Images can also be used as backgrounds in css and patterns in SVG*
 
 ### 6. Fixed Page Dimensions
 
@@ -327,12 +332,11 @@ body {
 
     <!-- Main content -->
     <main>
-        <section>
-            <h2>Section 1</h2>
-            <p>Content here.</p>
-        </section>
+        <h2>Section 1</h2>
+        <p>Content here.</p>
 
         <section>
+            <!-- defaults to new page -->
             <h2>Section 2</h2>
             <p>More content.</p>
         </section>
@@ -355,13 +359,8 @@ body {
 ```html
 <style>
     .two-column {
-        display: table;
-        width: 100%;
-    }
-    .column {
-        display: table-cell;
-        width: 50%;
-        padding: 10pt;
+        column-count: 2;
+        column-rule: solid 1pt sliver;
     }
 </style>
 

@@ -253,6 +253,19 @@ public class Startup
 }
 ```
 
+### Configuration Loading on Command Line
+
+```csharp
+using Microsoft.Extensions.Configuration;
+
+IConfigurationRoot config = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build();
+
+Scryber.ServiceProvider.Init(config);    
+```
+
+
 ---
 
 ## Common Installation Issues
@@ -303,46 +316,6 @@ string outputPath = Path.Combine(
     Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
     "test.pdf"
 );
-```
-
----
-
-## Performance Considerations
-
-### For High-Volume Scenarios
-
-```csharp
-// Use object pooling for better performance
-public class PdfService
-{
-    private readonly ObjectPool<Document> _docPool;
-
-    public PdfService()
-    {
-        _docPool = new DefaultObjectPool<Document>(
-            new DocumentPooledObjectPolicy(),
-            maxRetained: 10
-        );
-    }
-
-    public byte[] GeneratePdf(string template, object data)
-    {
-        var doc = _docPool.Get();
-        try
-        {
-            // Generate PDF
-            using (var ms = new MemoryStream())
-            {
-                doc.SaveAsPDF(ms);
-                return ms.ToArray();
-            }
-        }
-        finally
-        {
-            _docPool.Return(doc);
-        }
-    }
-}
 ```
 
 ---

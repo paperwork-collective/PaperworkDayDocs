@@ -31,7 +31,7 @@ The `column-fill` property controls how content is distributed across columns in
 
 ```css
 selector {
-    column-fill: balance | auto;
+    column-fill: balance | balance-all | auto;
 }
 ```
 
@@ -39,32 +39,33 @@ selector {
 
 ## Supported Values
 
-- `balance` - Distributes content to keep column heights as even as possible (default)
-- `auto` - Fills columns sequentially, producing fuller earlier columns before continuing
+| Value | Description |
+|-------|-------------|
+| `balance` | Distributes content equally across all columns, shrinking the container to the minimum height needed. |
+| `balance-all` | Alias for `balance` — both are treated identically. |
+| `auto` | Fills columns sequentially; earlier columns are fuller and later columns may be shorter or empty. |
 
 ---
 
 ## Supported Elements
 
-The `column-fill` property can be applied to:
-- Block containers with active multi-column layout
-- Page/body content regions using `columns`, `column-count`, or `column-width`
-- Nested content sections where fill behavior needs tuning
+The `column-fill` property can be applied to any block container with an active multi-column layout set via `columns`, `column-count`, or `column-width`.
 
 ---
 
 ## Notes
 
-- Has effect only when multi-column layout is enabled
-- Use `balance` for magazine/newsletter appearance
-- Use `auto` when preserving source-order fill behavior is preferred
-- Pair with `column-gap` and `column-rule` for production-ready columns
+- Has effect only when multi-column layout is enabled on the element.
+- `balance` and `balance-all` are equivalent — use whichever reads more clearly.
+- Balanced layout supports inline text, block images, and floated elements within columns.
+- Use `auto` when preserving source-order column fill is preferred (e.g. a sidebar layout where the first column must be full).
+- Pair with `column-gap` and `column-rule` for production-ready columns.
 
 ---
 
 ## Examples
 
-### Example 1: Balanced columns
+### Example 1: Balanced two-column article
 
 ```css
 .article {
@@ -84,7 +85,17 @@ The `column-fill` property can be applied to:
 }
 ```
 
-### Example 3: Data-bound fill mode
+### Example 3: Balanced columns with a float
+
+```html
+<div style="column-count: 2; column-gap: 10pt; column-fill: balance;">
+    <p>Introductory text that flows into the first column...</p>
+    <div style="float: left; width: 60pt; height: 40pt; background: #336699;"></div>
+    <p>Text that wraps around the float, then continues in the second balanced column.</p>
+</div>
+```
+
+### Example 4: Data-bound fill mode
 
 {% raw %}
 ```html

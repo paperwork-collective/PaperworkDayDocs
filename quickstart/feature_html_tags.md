@@ -160,7 +160,7 @@ A quick-reference chart showing which HTML elements are supported in Scryber tem
 
 | Element | Tag | Support | Notes |
 |---------|-----|---------|-------|
-| [Image](/reference/htmltags/elements/html_img_element) | `<img>` | **Supported** | JPEG, PNG, GIF, BMP, SVG; `srcset` supported |
+| [Image](/reference/htmltags/elements/html_img_element) | `<img>` | **Supported** | JPEG, PNG, GIF, BMP, SVG, WEBP; `srcset` supported |
 | [Picture](/reference/htmltags/elements/html_picture_element) | `<picture>` | **Supported** | |
 | [Source](/reference/htmltags/elements/html_picture_element) | `<source>` | **Supported** | Media-query-based image source selection |
 | [Figure](/reference/htmltags/elements/html_figure_element) | `<figure>` | **Supported** | |
@@ -191,14 +191,14 @@ Standard HTML elements that are not currently supported. Any unknown element is 
 
 | Element | Tag | Notes |
 |---------|-----|-------|
-| Form | `<form>` | No interactive form support in PDF output |
-| Input | `<input>` | — |
-| Select | `<select>` | — |
-| Button | `<button>` | — |
-| Textarea | `<textarea>` | — |
+| Form | `<form>` | Expected v10.0 |
+| Input | `<input>` | Expected v10.0 |
+| Select | `<select>` | Expected v10.0 |
+| Button | `<button>` | Expected v10.0 |
+| Textarea | `<textarea>` | Expected v10.0 |
 | Canvas | `<canvas>` | PDF has no raster drawing surface |
-| Video | `<video>` | PDF is a static format |
-| Audio | `<audio>` | PDF is a static format |
+| Video | `<video>` | Expected v10.5 |
+| Audio | `<audio>` | Expected v10.5 |
 | Dialog | `<dialog>` | — |
 | Map / Area | `<map>` / `<area>` | — |
 

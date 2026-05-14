@@ -200,7 +200,7 @@ Where a property or value was added or significantly improved in a specific vers
 | [column-count](/reference/cssproperties/properties/css_prop_column-count) | **Supported** | |
 | [column-width](/reference/cssproperties/properties/css_prop_column-width) | **Supported** | |
 | [column-gap](/reference/cssproperties/properties/css_prop_column-gap) | **Supported** | |
-| [column-fill](/reference/cssproperties/properties/css_prop_column-fill) | **Supported** | |
+| [column-fill](/reference/cssproperties/properties/css_prop_column-fill) | **Supported** | `balance` and `balance-all` are equivalent |
 | [column-span](/reference/cssproperties/properties/css_prop_column-span) | **Supported** | |
 | [column-rule](/reference/cssproperties/properties/css_prop_column-rule) | **Supported** | Shorthand; v9.3 |
 | [column-rule-color](/reference/cssproperties/properties/css_prop_column-rule-color) | **Supported** | v9.3 |
@@ -245,6 +245,8 @@ Where a property or value was added or significantly improved in a specific vers
 | [`calc()`](/reference/binding/functions/calc) | **Supported** | Expressions support within css; mixed-unit expressions (e.g. `calc(50% - 5px)`) and all [expression functions](feature_binding) |
 
 ### List Marker Customisation (Scryber Extensions)
+
+To be converted to css3 list marker properties.
 
 | Property | Support | Notes |
 |----------|---------|-------|
