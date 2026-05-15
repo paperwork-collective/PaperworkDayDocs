@@ -8,9 +8,8 @@ url: https://www.paperworkday.info
 
 aux_links:
   .git: https://github.com/richard-scryber/scryber.core
-  .com: https://www.paperworkday.com
-  .studio: https://paperworkday.studio
-  aux_links_new_tab: true
+  .com: https://www.paperwork-collective.com
+  .studio: https://paperwork.design
 
 heading_anchors: false
 

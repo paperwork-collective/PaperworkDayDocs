@@ -23,9 +23,19 @@ has_toc: false
 
 ---
 
-## Version History
 
-### Version 9.5
+## Version 9
+
+### 9.6-beta - 15 May 2026
+
+- NEW: Added support for display flex layout.
+- NEW: Added support for display grid layout
+- NEW: Added support for table-x layout
+- NEW: Added support for z-index rendering
+- NEW: Added support for column balancing
+- Fixed an issue with with multiple returns
+
+### 9.5 - 6 May 2026
 
 *Breaking change - removed support for .NET Standard.*
 
@@ -35,11 +45,7 @@ This will hopefully not cause issues, but reach out if so.
 - Added support for webp image formats, both lossy and lossless including alpha
 
 
-### Version 9
-
-*Breaking change from anything on V6.0 or below.*
-
-#### 9.3.0.0 - 21 April 2026
+### 9.3 - 21 April 2026
 - CSS *initial* support on generic tags for 
     - display: flex, 
     - display: grid,
@@ -61,19 +67,19 @@ This will hopefully not cause issues, but reach out if so.
 
 
 
-#### 9.2.0.3 - 22 Jan 2026
+### 9.2.0.3 - 22 Jan 2026
 - Fixed styling issue when components are hidden using css.
 
 
 
-#### 9.2.0.2 - 13 Nov 2025
+### 9.2.0.2 - 13 Nov 2025
 - Fixed repeating raster background images with cover size.
 - Added support for repeating SVG background images from Data urls
 
 
 
 
-#### 9.2.0.0 - 6 Nov 2025
+### 9.2.0.0 - 6 Nov 2025
 - Public release with all added features from the betas. Too many to list.
 - The documentation is here [learning](https://www.paperworkday.info/learning/) 
 - And the refererence section here [refererence](https://www.paperworkday.info/reference/)

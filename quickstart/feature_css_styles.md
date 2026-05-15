@@ -171,26 +171,41 @@ Where a property or value was added or significantly improved in a specific vers
 | [overflow-y](/reference/cssproperties/properties/css_prop_overflow-y) | **Supported** | |
 | [transform](/reference/cssproperties/properties/css_prop_transform) | **Supported** | `translate`, `rotate`, `scale`, `matrix` |
 | `animation` / `transition` | **No** | PDF is a static format |
-| `z-index` | **No** | |
+| [`z-index`](/reference/cssproperties/properties/css_prop_z-index) | **Supported** | Integer or `auto`; controls stacking order of positioned elements |
 
 ### Flexbox
 
+See the [Flexbox Layout](/reference/cssproperties/properties/css_prop_flexbox) reference for full details and examples.
+
 | Property | Support | Notes |
 |----------|---------|-------|
-| [`display: flex`](/reference/cssproperties/properties/css_prop_display) | **Partial** | Initial support added in v9.3 |
+| [`display: flex`](/reference/cssproperties/properties/css_prop_flexbox) | **Partial** | Initial support added in v9.3 |
 | `display: inline-flex` | **No** | |
-| `flex-direction` | **Partial** | Basic row/column supported |
-| `justify-content` | **Partial** | |
-| `align-items` | **Partial** | |
-| Other flex properties | **No** | Full flex spec not yet complete |
+| `flex-direction` | **Supported** | `row`, `row-reverse`, `column`, `column-reverse` |
+| `flex-wrap` | **Supported** | `nowrap`, `wrap`, `wrap-reverse` |
+| `flex` | **Supported** | Shorthand for flex-grow, flex-shrink, flex-basis |
+| `flex-grow` | **Supported** | |
+| `flex-shrink` | **Supported** | |
+| `flex-basis` | **Supported** | Lengths, percentages, `auto` |
+| `justify-content` | **Supported** | `flex-start`, `flex-end`, `center`, `space-between`, `space-around`, `space-evenly` |
+| `align-items` | **Supported** | `flex-start`, `flex-end`, `center`, `stretch`, `baseline` |
+| `align-content` | **Supported** | `flex-start`, `flex-end`, `center`, `space-between`, `space-around`, `stretch` |
+| `align-self` | **Supported** | Overrides `align-items` for an individual item |
+| `order` | **Supported** | Integer; controls display order of flex items |
 
 ### Grid
 
+See the [CSS Grid Layout](/reference/cssproperties/properties/css_prop_grid) reference for full details and examples.
+
 | Property | Support | Notes |
 |----------|---------|-------|
-| `display: grid` | **Partial** | Initial support added in v9.3 |
-| [grid-template-columns](/reference/cssproperties/properties/css_prop_grid-template-columns) | **Partial** | Column track definitions; v9.3 |
-| Other grid properties | **No** | Full grid spec not yet complete |
+| [`display: grid`](/reference/cssproperties/properties/css_prop_grid) | **Partial** | Initial support added in v9.3 |
+| [grid-template-columns](/reference/cssproperties/properties/css_prop_grid-template-columns) | **Supported** | Lengths, fr units, percentages, `auto`, `repeat()` |
+| [grid-template-rows](/reference/cssproperties/properties/css_prop_grid) | **Supported** | Same values as `grid-template-columns` |
+| [grid-auto-flow](/reference/cssproperties/properties/css_prop_grid) | **Supported** | `row`, `column`, `dense` |
+| [grid-column](/reference/cssproperties/properties/css_prop_grid) | **Supported** | Shorthand for placement and spanning |
+| [grid-row](/reference/cssproperties/properties/css_prop_grid) | **Supported** | Shorthand for row placement and spanning |
+| Other grid properties | **No** | `grid-template-areas`, `grid-area`, named lines not yet supported |
 
 ### Multi-Column Layout
 

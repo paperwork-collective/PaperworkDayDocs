@@ -136,12 +136,12 @@ The following properties are supported to alter the position and size appearance
 |---|---|
 | <a href='/reference/cssproperties/properties/css_prop_position.html' >position</a> | Defines the way the element is positioned within the current page at the time of layout.  |
 | <a href='/reference/cssproperties/properties/css_prop_display.html' >display</a> | Defines how the elements contents should be laid-out - in a block, inline with the flow, grid, table, or just ignored. |
-| <a href='/reference/cssproperties/properties/css_prop_grid-template-columns.html' >grid-template-columns</a> <span class="label label-yellow">Beta</span> | Defines the column tracks for a `display: grid` container — fr units, fixed widths, auto, and repeat(). |
 | <a href='/reference/cssproperties/properties/css_prop_float.html' >float</a> | Defines the positioning of the element on the current line. And how content will move around it. |
 | <a href='/reference/cssproperties/properties/css_prop_top.html' >top</a> | Specifies the top postion for an element that can be explictly moved. |
 | <a href='/reference/cssproperties/properties/css_prop_left.html' >left</a> | Specifies the left postion for an element that can be explictly moved. |
 | <a href='/reference/cssproperties/properties/css_prop_bottom.html' >bottom</a> | Specifies the bottom postion for an element that can be explictly moved, as long as top is not set. |
 | <a href='/reference/cssproperties/properties/css_prop_right.html' >right</a> | Specifies the top postion for an element that can be explictly moved, as long as left is not set. |
+| <a href='/reference/cssproperties/properties/css_prop_z-index.html' >z-index</a>   | Sets the stacking order of a positioned element — higher values appear in front of lower ones. |
 | <a href='/reference/cssproperties/properties/css_prop_width.html' >width</a>  | Specifies the width taken up for the 'boxed' element. |
 | <a href='/reference/cssproperties/properties/css_prop_height.html' >height</a> |  Specifies the height taken up for the 'boxed' element.  |
 | <a href='/reference/cssproperties/properties/css_prop_min-width.html' >min-width</a>   | Specifies the minimim width for the 'boxed' element.   |
@@ -200,6 +200,42 @@ The following properties control the page sizes, columns and breaks within. The 
 | <a href='properties/page-break-after.html' >page-break-after</a>   | Setting to always, will ensure that any following content begins on a new page where possible. |
 | <a href='properties/page-break-before.html' >page-break-before</a>   | Setting to always, will ensure that the content begins on a new page where possible. |
 | <a href='properties/page.html' >page</a>   | Specifies the name of the page group style from an at-rule, that should be used to define the size and layout af any pages within this section. |
+
+---
+
+### Flexbox Layout
+
+Flexbox arranges children along a single axis with control over direction, alignment, wrapping, and sizing. See the [Flexbox Layout](/reference/cssproperties/properties/css_prop_flexbox) reference for full details and examples.
+
+| Property | Description |
+|---|---|
+| <a href='/reference/cssproperties/properties/css_prop_flexbox.html' >display: flex</a> <span class="label label-yellow">Beta</span> | Enables flex layout on a container element. |
+| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#flex-direction' >flex-direction</a> | Sets the main axis: `row`, `row-reverse`, `column`, `column-reverse`. |
+| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#flex-wrap' >flex-wrap</a> | Whether items wrap to new lines: `nowrap`, `wrap`, `wrap-reverse`. |
+| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#flex' >flex</a> | Shorthand for flex-grow, flex-shrink, and flex-basis. |
+| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#flex-grow' >flex-grow</a> | How much a flex item grows relative to siblings when there is extra space. |
+| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#flex-shrink' >flex-shrink</a> | How much a flex item shrinks relative to siblings when space is limited. |
+| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#flex-basis' >flex-basis</a> | The initial main size of a flex item before free space is distributed. |
+| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#justify-content' >justify-content</a> | Aligns children along the main axis. |
+| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#align-items' >align-items</a> | Aligns children along the cross axis. |
+| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#align-content' >align-content</a> | Aligns wrapped lines along the cross axis (requires `flex-wrap`). |
+| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#align-self' >align-self</a> | Overrides `align-items` for an individual flex item. |
+| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#order' >order</a> | Controls display order of flex items; lower values appear first. |
+
+---
+
+### CSS Grid Layout
+
+CSS Grid places children into a two-dimensional row-and-column structure. See the [CSS Grid Layout](/reference/cssproperties/properties/css_prop_grid) reference for full details and examples.
+
+| Property | Description |
+|---|---|
+| <a href='/reference/cssproperties/properties/css_prop_grid.html' >display: grid</a> <span class="label label-yellow">Beta</span> | Enables grid layout on a container element. |
+| <a href='/reference/cssproperties/properties/css_prop_grid-template-columns.html' >grid-template-columns</a> | Defines column track sizes — fr units, fixed widths, auto, and repeat(). |
+| <a href='/reference/cssproperties/properties/css_prop_grid.html#grid-template-rows' >grid-template-rows</a> | Defines row track sizes. |
+| <a href='/reference/cssproperties/properties/css_prop_grid.html#grid-auto-flow' >grid-auto-flow</a> | Controls how auto-placed items fill the grid: `row`, `column`, `dense`. |
+| <a href='/reference/cssproperties/properties/css_prop_grid.html#grid-column' >grid-column</a> | Shorthand for grid-column-start / end — controls column placement and spanning. |
+| <a href='/reference/cssproperties/properties/css_prop_grid.html#grid-row' >grid-row</a> | Shorthand for grid-row-start / end — controls row placement and spanning. |
 
 ---
 

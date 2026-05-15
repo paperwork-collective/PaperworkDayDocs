@@ -41,6 +41,24 @@ The display property determines the element's box model and how it interacts wit
 
 ## Supported Values
 
+| Value | Support | Notes |
+|-------|---------|-------|
+| `block` | **Supported** | Block-level box; starts on a new line and fills available width |
+| `inline` | **Supported** | Inline box; flows with surrounding text; width and height ignored |
+| `inline-block` | **Supported** | Block box that flows inline; accepts width, height, and vertical margins |
+| `none` | **Supported** | Element is removed from layout entirely and takes up no space |
+| `flex` | **Partial** | See [Flexbox Layout](/reference/cssproperties/properties/css_prop_flexbox); does not add anonymous parent wrappers |
+| `grid` | **Partial** | See [CSS Grid Layout](/reference/cssproperties/properties/css_prop_grid); does not add anonymous parent wrappers |
+| `table` | **Partial** | Block-level table box; does not add anonymous parent wrappers |
+| `table-row` | **Partial** | Table row box; does not add anonymous parent wrappers |
+| `table-cell` | **Partial** | Table cell box; enables vertical alignment; does not add anonymous parent wrappers |
+| `list-item` | **Supported** | Block box with an associated list marker (bullet or number) |
+| `inline-flex` | **No** | |
+
+> **Anonymous parent wrappers**: Standard browsers automatically insert anonymous `table`, `table-row`, or flex-container boxes when required parent elements are missing. Scryber does not. Elements using `table-cell`, `table-row`, `grid`, or `flex` values must have their required parent elements explicitly present in the markup.
+
+---
+
 ### block
 The element generates a block-level box. Block elements start on a new line and take up the full width available. Default for elements like `<div>`, `<p>`, `<h1>`-`<h6>`, `<section>`, `<article>`.
 
@@ -53,6 +71,21 @@ The element generates a block box that flows inline. Combines characteristics of
 ### none
 The element is completely removed from the document flow and is not rendered. The element takes up no space in the layout.
 
+### flex <span class="label label-yellow">Beta</span>
+The element becomes a **flex container**, and its direct children are arranged along a main axis (row or column). Direction, alignment, wrapping, and sizing are controlled by flex properties.
+
+```css
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10pt;
+}
+```
+
+See [Flexbox Layout](/reference/cssproperties/properties/css_prop_flexbox) for full property reference and examples.
+
 ### grid <span class="label label-yellow">Beta</span>
 The element becomes a **grid container**, and its direct children are laid out in a column-row grid. Column structure is defined by `grid-template-columns` using fr units, fixed lengths, `auto`, and `repeat()`. Items are placed in row-major order (left to right, then next row).
 
@@ -64,7 +97,7 @@ The element becomes a **grid container**, and its direct children are laid out i
 }
 ```
 
-See [`grid-template-columns`](/reference/cssproperties/properties/css_prop_grid-template-columns) for full column definition syntax.
+See [CSS Grid Layout](/reference/cssproperties/properties/css_prop_grid) for full property reference and examples.
 
 ### table
 The element behaves like a `<table>` element. Creates a block-level table box.
@@ -100,6 +133,7 @@ The `display` property can be applied to:
 - Block elements start on a new line and stretch to fill their container's width by default
 - Inline elements flow within text and cannot have explicit width or height
 - `inline-block` is ideal for creating horizontal layouts while maintaining box model properties
+- `display: flex` and `display: grid` are in beta — core layout is supported but some edge cases may differ from browser behaviour
 - `display: grid` requires `grid-template-columns` to be set; without it the grid renders as a plain block
 - `display: grid` places children in row-major order automatically — no explicit row/column placement needed
 - Table display values allow table-like layouts without semantic table markup
@@ -1134,6 +1168,8 @@ The display property works seamlessly with data binding to create dynamic, condi
 
 ## See Also
 
+- [Flexbox Layout](/reference/cssproperties/properties/css_prop_flexbox) - Full flex container and item property reference
+- [CSS Grid Layout](/reference/cssproperties/properties/css_prop_grid) - Full grid container and item property reference
 - [grid-template-columns](/reference/cssproperties/properties/css_prop_grid-template-columns) - Define grid column tracks
 - [float](/reference/cssproperties/properties/css_prop_float) - Float elements left or right
 - [position](/reference/cssproperties/properties/css_prop_position) - Set positioning method
