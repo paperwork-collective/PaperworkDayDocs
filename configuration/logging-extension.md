@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Logging Extension
+title: Logging and Tracing
 parent: Configuration & Extension
 parent_url: /configuration/
 has_children: false
@@ -8,235 +8,137 @@ has_toc: false
 nav_order: 6
 ---
 
-# Logging Extension & Configuration
+# Logging and Tracing
 
-Custom logging components can easily be written to integrate with other tracing and logging systems, and applied either to specific documents, or globally to all document generation activities.
+Scryber has a built-in trace log that runs throughout the full document generation pipeline — parse, init, load, data bind, layout, and render. Every stage records timing, component activity, warnings, and errors into the log. You can surface this output in several ways: appended directly to the generated PDF for quick debugging, forwarded to `System.Diagnostics.Trace`, collected in memory for inspection, or forwarded to any sink you choose including `Microsoft.Extensions.Logging.ILogger`.
 
-{: .note }
-> TODO: This needs to be updated from the configuration and logging processor
+## Trace Levels
 
-## How It Works
+There are two related enumerations. **`TraceRecordLevel`** is the threshold set on a log — entries below the threshold are silently dropped. **`TraceLevel`** is the severity assigned to each individual message.
 
-```
-┌──────────────────────────────────────────────────────┐
-│ Template XML                                          │
-│  <custom:StatCard ... />                             │
-└──────────────────────────────────────────────────────┘
-              ↓
-┌──────────────────────────────────────────────────────┐
-│ XML Namespace                                         │
-│  xmlns:custom='http://mycompany.com/components'      │
-└──────────────────────────────────────────────────────┘
-              ↓
-┌──────────────────────────────────────────────────────┐
-│ Namespace Registration (scrybersettings.json)        │
-│  XMLNamespace: http://mycompany.com/components       │
-│  AssemblyPrefix: MyCompany.Components, MyAssembly    │
-└──────────────────────────────────────────────────────┘
-              ↓
-┌──────────────────────────────────────────────────────┐
-│ Type Resolution                                       │
-│  Load assembly → Reflect types → Match "StatCard"   │
-│  Found: MyCompany.Components.StatCard               │
-└──────────────────────────────────────────────────────┘
-              ↓
-┌──────────────────────────────────────────────────────┐
-│ Component Instantiation                               │
-│  Activator.CreateInstance(typeof(StatCard))          │
-└──────────────────────────────────────────────────────┘
-```
+### TraceRecordLevel — set on the log
 
-## Configuration
+| Value | Notes |
+|-------|-------|
+| `Diagnostic` | Everything, including internal low-level diagnostics |
+| `Verbose` | Detailed progress for every component and stage |
+| `Messages` | Normal operation messages *(default)* |
+| `Warnings` | Warnings and above only |
+| `Errors` | Errors and failures only |
+| `Off` | Nothing recorded |
 
-### JSON Configuration
+### TraceLevel — assigned to each message
 
-**scrybersettings.json:**
+| Value | Meaning |
+|-------|---------|
+| `Debug` | Low-level diagnostic detail |
+| `Verbose` | Detailed progress entry |
+| `Message` | Normal informational entry |
+| `Warning` | Non-fatal unexpected condition |
+| `Error` | Recoverable error |
+| `Failure` | Unrecoverable failure |
 
-```json
-{
-  "Scryber": {
-    "Parsing": {
-      "Namespaces": [
-        {
-          "XMLNamespace": "http://mycompany.com/schemas/components",
-          "AssemblyPrefix": "MyCompany.Components, MyCompany.Components"
-        },
-        {
-          "XMLNamespace": "http://mycompany.com/schemas/charts",
-          "AssemblyPrefix": "MyCompany.Charts, MyCompany.Charts"
-        }
-      ]
-    }
-  }
-}
-```
+A message is recorded when `(int)TraceLevel >= (int)TraceRecordLevel`. So a log at `Messages` records `Message`, `Warning`, `Error`, and `Failure` entries but drops `Verbose` and `Debug`.
 
-### Configuration Properties
+---
 
-| Property | Description | Example |
-|----------|-------------|---------|
-| `XMLNamespace` | XML namespace URI (must match `xmlns:prefix` declaration) | `http://mycompany.com/components` |
-| `AssemblyPrefix` | Assembly-qualified namespace: `Namespace, AssemblyName` | `MyCompany.Components, MyCompany.Components` |
+## Appending the Trace Log to the PDF
 
-## Template Declaration
+The quickest way to see what Scryber is doing is to append the trace log as extra pages at the end of the generated PDF. This is a development tool — remove it before going to production.
 
-Once registered, use the namespace in templates:
+### Via processing instruction
 
-```xml
-<?xml version='1.0' encoding='utf-8' ?>
-<html xmlns='http://www.w3.org/1999/xhtml'
-      xmlns:custom='http://mycompany.com/schemas/components'
-      xmlns:charts='http://mycompany.com/schemas/charts'>
-    <body>
-        <main>
-            
-            <!-- Resolves to MyCompany.Components.StatCard -->
-            <custom:StatCard value='100' label='Sales' />
-            
-            <!-- Resolves to MyCompany.Charts.BarChart -->
-            <charts:BarChart data='{@:ChartData}' />
-            
-        </main>
-    </body>
+Add the `scryber` processing instruction near the top of the template, before the root element:
+
+```html
+<!DOCTYPE html>
+<?scryber append-log='true' ?>
+<html>
+  <head>...</head>
+  <body>...</body>
 </html>
 ```
 
-## Type Resolution Process
+### Via code
 
-### 1. Assembly Loading
-
-When the parser encounters an unknown element (e.g., `<custom:StatCard>`), it:
-
-1. Extracts the **namespace prefix** (`custom`)
-2. Looks up the **XML namespace URI** (`http://mycompany.com/schemas/components`)
-3. Finds the **AssemblyPrefix** (`MyCompany.Components, MyCompany.Components`)
-4. Loads or locates the **assembly** (`MyCompany.Components.dll`)
-
-### 2. Type Reflection
-
-**Implementation in `ParserDefintionFactory.UnsafeGetType()`:**
+Set `AppendTraceLog` on the document before calling `SaveAsPDF`:
 
 ```csharp
-private static Type UnsafeGetType(string xmlnamespace, string name, 
-    ParsingOptions options, bool throwNotFound, out NamespaceKey key)
+using (var doc = Document.ParseDocument("template.html"))
 {
-    // Check cache first
-    string fullkey = xmlnamespace + ":" + name;
-    if (_knownTypes.TryGetValue(fullkey, out Type found))
+    doc.AppendTraceLog = true;
+    doc.Params["model"] = data;
+
+    using (var stream = new FileStream("output.pdf", FileMode.Create))
     {
-        key = default;
-        return found;
-    }
-
-    // Look up assembly for XML namespace
-    string assemblyPrefixString = 
-        options.LookupAssemblyForXmlNamespace(xmlnamespace, throwNotFound);
-    
-    if (string.IsNullOrEmpty(assemblyPrefixString))
-        return null;
-
-    // Parse assembly-qualified name
-    string[] parts = assemblyPrefixString.Split(',');
-    string namespacePrefix = parts[0].Trim();
-    string assemblyName = parts.Length > 1 ? parts[1].Trim() : null;
-
-    // Load assembly
-    Assembly assembly = null;
-    if (!string.IsNullOrEmpty(assemblyName))
-    {
-        assembly = Assembly.Load(assemblyName);
-    }
-
-    // Build full type name
-    string fullTypeName = namespacePrefix + "." + name;
-    
-    // Try to get type
-    Type type = null;
-    if (assembly != null)
-    {
-        type = assembly.GetType(fullTypeName, false);
-    }
-    else
-    {
-        type = Type.GetType(fullTypeName, false);
-    }
-
-    // Cache result
-    if (type != null)
-    {
-        _knownTypes[fullkey] = type;
-    }
-
-    return type;
-}
-```
-
-### 3. Type Caching
-
-Resolved types are cached in `_knownTypes` dictionary to avoid repeated reflection:
-
-```csharp
-private static Dictionary<string, Type> _knownTypes = 
-    new Dictionary<string, Type>();
-```
-
-## Complete Example
-
-### 1. Component Assembly
-
-**MyCompany.Components/StatCard.cs:**
-
-```csharp
-using Scryber;
-using Scryber.Components;
-
-namespace MyCompany.Components
-{
-    [PDFParsableComponent("StatCard")]
-    public class StatCard : Panel
-    {
-        [PDFAttribute("value")]
-        public string Value { get; set; }
-        
-        [PDFAttribute("label")]
-        public string Label { get; set; }
-        
-        public StatCard() : base(ObjectTypes.Panel)
-        {
-        }
-        
-        protected override void OnInit(InitContext context)
-        {
-            base.OnInit(context);
-            BuildContent();
-        }
-        
-        private void BuildContent()
-        {
-            var valueLabel = new Label { Text = Value };
-            valueLabel.Style.Font.FontSize = 24;
-            this.Contents.Add(valueLabel);
-            
-            var labelText = new Label { Text = Label };
-            labelText.Style.Font.FontSize = 12;
-            this.Contents.Add(labelText);
-        }
+        doc.SaveAsPDF(stream);
     }
 }
 ```
 
-### 2. Configuration
+![Trace log appended to the generated PDF as extra pages](/assets/AppendedLog.png)
 
-**scrybersettings.json:**
+---
+
+## Changing the Trace Level
+
+The default record level is `Messages`. Lowering it to `Verbose` gives a per-component breakdown of every layout decision; raising it to `Warnings` or `Errors` reduces noise in production.
+
+### Via processing instruction
+
+```html
+<?scryber append-log='true' log-level='Verbose' ?>
+```
+
+Valid values match the `TraceRecordLevel` enum names (case-insensitive): `Diagnostic`, `Verbose`, `Messages`, `Warnings`, `Errors`, `Off`.
+
+### Via code
+
+```csharp
+using (var doc = Document.ParseDocument("template.html"))
+{
+    doc.AppendTraceLog = true;
+    doc.TraceLog.SetRecordLevel(TraceRecordLevel.Verbose);
+
+    using (var stream = new FileStream("output.pdf", FileMode.Create))
+    {
+        doc.SaveAsPDF(stream);
+    }
+}
+```
+
+### What each level shows
+
+| Level | Typical output |
+|-------|----------------|
+| `Diagnostic` | Internal parser state, every attribute assignment, every type lookup |
+| `Verbose` | Component init/load/bind/layout/render for each element, resource loading, expression evaluation |
+| `Messages` | Stage timings, data bind operations, image loads, font lookups, page breaks |
+| `Warnings` | Missing images (when `AllowMissingImages` is true), font substitutions, unresolved references |
+| `Errors` | Exceptions caught and recovered, invalid configuration |
+| `Off` | Silent — no output |
+
+![Verbose vs Messages level output comparison](/assets/SideBySide_small.png)
+
+---
+
+## Configuration Defaults
+
+The `Tracing` section in `scrybersettings.json` sets the default level and loggers used for every document in the application. If no configuration is provided, a `DoNothingTraceLog` is used and nothing is recorded.
+
+### JSON structure
 
 ```json
 {
   "Scryber": {
-    "Parsing": {
-      "Namespaces": [
+    "Tracing": {
+      "TraceLevel": "Messages",
+      "Loggers": [
         {
-          "XMLNamespace": "http://mycompany.com/schemas/components",
-          "AssemblyPrefix": "MyCompany.Components, MyCompany.Components"
+          "Name": "Diagnostics",
+          "FactoryType": "Scryber.Logging.DiagnoticsTraceLogFactory",
+          "FactoryAssembly": "Scryber.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=872cbeb81db952fe",
+          "Enabled": true
         }
       ]
     }
@@ -244,67 +146,168 @@ namespace MyCompany.Components
 }
 ```
 
-### 3. Template
+This example routes all `Message`-level and above output to `System.Diagnostics.Trace`, which appears in the Visual Studio Output window during debugging.
 
-**Dashboard.pdfx:**
+### Properties
 
-```xml
-<?xml version='1.0' encoding='utf-8' ?>
-<html xmlns='http://www.w3.org/1999/xhtml'
-      xmlns:custom='http://mycompany.com/schemas/components'>
-    <body>
-        <main>
-            <custom:StatCard value='$125,432' label='Total Sales' />
-            <custom:StatCard value='1,847' label='Active Users' />
-        </main>
-    </body>
-</html>
-```
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `TraceLevel` | string | `"Messages"` | Minimum level to record across all loggers |
+| `Loggers` | collection | empty | Custom log sink factories |
 
-### 4. Application
+### Logger registration properties
 
-**Program.cs:**
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| `Name` | string | Yes | Identifier for this logger instance |
+| `FactoryType` | string | Yes | Fully qualified type name of an `ITraceLogFactory` |
+| `FactoryAssembly` | string | Yes | Full assembly name with version and public key token |
+| `Enabled` | bool | No | Set `false` to disable without removing the entry. Default `true` |
+
+### Built-in factory types
+
+| Factory class | Behaviour |
+|---------------|-----------|
+| `Scryber.Logging.DiagnoticsTraceLogFactory` | Writes to `System.Diagnostics.Trace` |
+| `Scryber.Logging.CollectorTraceLogFactory` | Collects entries in memory for later inspection |
+
+### Adding a logger via configuration in code
 
 ```csharp
-using Microsoft.Extensions.DependencyInjection;
-using Scryber;
-using Scryber.Components;
+var config = Scryber.ServiceProvider.GetService<IScryberConfigurationService>();
 
-// Setup dependency injection
-var services = new ServiceCollection();
-services.AddScryber();  // Loads scrybersettings.json
-var provider = services.BuildServiceProvider();
+config.TracingOptions.Loggers ??= new List<TraceLogOption>();
+config.TracingOptions.Loggers.Add(new TraceLogOption(
+    name: "Diagnostics",
+    factoryType: "Scryber.Logging.DiagnoticsTraceLogFactory",
+    factoryAssembly: "Scryber.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=872cbeb81db952fe"
+));
+```
 
-// Parse document with custom components
-using (var reader = new StreamReader("Dashboard.pdfx"))
+When multiple loggers are registered, Scryber wraps them in a `CompositeTraceLog` that forwards each entry to all of them.
+
+### Adding a logger directly to a document
+
+If you need a logger on a single document rather than globally, use `AddTraceLog` after parsing:
+
+```csharp
+using (var doc = Document.ParseDocument("template.html"))
 {
-    var doc = Document.ParseDocument(reader, ParseSourceType.DynamicContent);
-    doc.ProcessDocument("Dashboard.pdf");
+    var collector = new Scryber.Logging.CollectorTraceLog(
+        TraceRecordLevel.Messages, "MyCollector", autostart: true);
+
+    doc.AddTraceLog(collector);
+    doc.Params["model"] = data;
+
+    using (var stream = new FileStream("output.pdf", FileMode.Create))
+    {
+        doc.SaveAsPDF(stream);
+    }
+
+    // Inspect entries after generation
+    foreach (var entry in collector)
+    {
+        Console.WriteLine($"[{entry.Level}] {entry.Category}: {entry.Message}");
+    }
 }
 ```
 
-## Advanced Configuration
+---
 
-### Multiple Namespaces
+## Integrating with Microsoft.Extensions.Logging
 
-Register multiple component libraries:
+Scryber's trace log system is independent of `Microsoft.Extensions.Logging`, but bridging the two takes only two classes: a `TraceLog` subclass that forwards to `ILogger`, and a factory that creates instances of it.
+
+### 1. The bridge TraceLog
+
+```csharp
+using Microsoft.Extensions.Logging;
+using Scryber.Logging;
+
+namespace MyApp.Logging
+{
+    public class MicrosoftExtensionsTraceLog : TraceLog
+    {
+        private readonly ILogger _logger;
+
+        public MicrosoftExtensionsTraceLog(ILogger logger, TraceRecordLevel level, string name)
+            : base(level, name)
+        {
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
+
+        protected internal override void Record(
+            string inset, TraceLevel level, TimeSpan timestamp,
+            string category, string message, Exception ex)
+        {
+            var logLevel = level switch
+            {
+                TraceLevel.Failure => LogLevel.Critical,
+                TraceLevel.Error   => LogLevel.Error,
+                TraceLevel.Warning => LogLevel.Warning,
+                TraceLevel.Message => LogLevel.Information,
+                TraceLevel.Verbose => LogLevel.Debug,
+                TraceLevel.Debug   => LogLevel.Trace,
+                _                  => LogLevel.None
+            };
+
+            _logger.Log(logLevel, ex, "[{Timestamp}] {Category} {Message}",
+                timestamp, category, message);
+        }
+    }
+}
+```
+
+### 2. The factory
+
+The factory is what Scryber instantiates from configuration. Inject `ILoggerFactory` into it at startup, then pass it a logger when creating each log instance:
+
+```csharp
+using Microsoft.Extensions.Logging;
+using Scryber.Logging;
+
+namespace MyApp.Logging
+{
+    public class MicrosoftExtensionsTraceLogFactory : ITraceLogFactory
+    {
+        private readonly ILoggerFactory _loggerFactory;
+
+        // Parameterless constructor required for configuration-based instantiation
+        public MicrosoftExtensionsTraceLogFactory()
+        {
+            // Falls back to a no-op logger if no factory is injected
+            _loggerFactory = LoggerFactory.Create(b => b.AddConsole());
+        }
+
+        // Constructor for programmatic registration with full DI
+        public MicrosoftExtensionsTraceLogFactory(ILoggerFactory loggerFactory)
+        {
+            _loggerFactory = loggerFactory;
+        }
+
+        public TraceLog CreateLog(TraceRecordLevel level, string name)
+        {
+            var logger = _loggerFactory.CreateLogger("Scryber." + name);
+            return new MicrosoftExtensionsTraceLog(logger, level, name);
+        }
+    }
+}
+```
+
+### 3. Register at startup
+
+**Via configuration** (`scrybersettings.json`) — uses the parameterless constructor:
 
 ```json
 {
   "Scryber": {
-    "Parsing": {
-      "Namespaces": [
+    "Tracing": {
+      "TraceLevel": "Messages",
+      "Loggers": [
         {
-          "XMLNamespace": "http://mycompany.com/components",
-          "AssemblyPrefix": "MyCompany.Components, MyCompany.Components"
-        },
-        {
-          "XMLNamespace": "http://mycompany.com/charts",
-          "AssemblyPrefix": "MyCompany.Charting, MyCompany.Charting"
-        },
-        {
-          "XMLNamespace": "http://thirdparty.com/widgets",
-          "AssemblyPrefix": "ThirdParty.Widgets, ThirdParty.Widgets"
+          "Name": "AppLogger",
+          "FactoryType": "MyApp.Logging.MicrosoftExtensionsTraceLogFactory",
+          "FactoryAssembly": "MyApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
         }
       ]
     }
@@ -312,180 +315,26 @@ Register multiple component libraries:
 }
 ```
 
-### Nested Namespaces
-
-Components can exist in nested namespaces:
-
-**Code structure:**
-```
-MyCompany.Components
-├── StatCard.cs
-├── Cards
-│   └── ProductCard.cs
-└── Charts
-    └── BarChart.cs
-```
-
-**Configuration:**
-```json
-{
-  "Scryber": {
-    "Parsing": {
-      "Namespaces": [
-        {
-          "XMLNamespace": "http://mycompany.com/components",
-          "AssemblyPrefix": "MyCompany.Components, MyCompany.Components"
-        },
-        {
-          "XMLNamespace": "http://mycompany.com/components/cards",
-          "AssemblyPrefix": "MyCompany.Components.Cards, MyCompany.Components"
-        },
-        {
-          "XMLNamespace": "http://mycompany.com/components/charts",
-          "AssemblyPrefix": "MyCompany.Components.Charts, MyCompany.Components"
-        }
-      ]
-    }
-  }
-}
-```
-
-**Template:**
-```xml
-<html xmlns='http://www.w3.org/1999/xhtml'
-      xmlns:custom='http://mycompany.com/components'
-      xmlns:cards='http://mycompany.com/components/cards'
-      xmlns:charts='http://mycompany.com/components/charts'>
-    
-    <custom:StatCard ... />       <!-- MyCompany.Components.StatCard -->
-    <cards:ProductCard ... />     <!-- MyCompany.Components.Cards.ProductCard -->
-    <charts:BarChart ... />       <!-- MyCompany.Components.Charts.BarChart -->
-    
-</html>
-```
-
-## Implementation Details
-
-### Namespace Lookup
-
-**`ParsingOptions.LookupAssemblyForXmlNamespace()`:**
+**Via code** — pass the real `ILoggerFactory` from DI so you get the full logging pipeline:
 
 ```csharp
-public string LookupAssemblyForXmlNamespace(string xmlnamespace, bool throwNotFound)
-{
-    NamespaceDefn found = null;
-    
-    // Search registered namespaces
-    foreach (NamespaceDefn defn in this.Namespaces)
-    {
-        if (string.Equals(defn.XmlNamespace, xmlnamespace, 
-            StringComparison.OrdinalIgnoreCase))
-        {
-            found = defn;
-            break;
-        }
-    }
-    
-    if (found == null)
-    {
-        if (throwNotFound)
-            throw new PDFParserException(
-                $"No assembly registered for XML namespace: {xmlnamespace}");
-        return null;
-    }
-    
-    return found.AssemblyPrefix;
-}
+// In Program.cs / Startup.cs, after building the DI container
+var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
+
+var config = Scryber.ServiceProvider.GetService<IScryberConfigurationService>();
+config.TracingOptions.Loggers ??= new List<TraceLogOption>();
+config.TracingOptions.Loggers.Add(new TraceLogOption(
+    name: "AppLogger",
+    factory: new MyApp.Logging.MicrosoftExtensionsTraceLogFactory(loggerFactory)
+));
 ```
 
-### Namespace Discovery
+All Scryber trace output now flows through your normal `ILogger` pipeline — to the console, Application Insights, Serilog, or wherever your application routes logs.
 
-**`ParserDefintionFactory.PopulateNamespaceFromAssembly()`:**
-
-When an assembly is loaded, Scryber scans for types with `[PDFParsableComponent]`:
-
-```csharp
-private static void PopulateNamespaceFromAssembly(
-    string xmlnamespace, Assembly assembly, NamespaceDefn defn)
-{
-    Type[] alltypes = assembly.GetTypes();
-    
-    foreach (Type atype in alltypes)
-    {
-        // Check for PDFParsableComponent attribute
-        Attribute found = System.Attribute.GetCustomAttribute(
-            atype, typeof(PDFParsableComponentAttribute), false);
-        
-        if (found != null)
-        {
-            PDFParsableComponentAttribute parseable = 
-                (PDFParsableComponentAttribute)found;
-            
-            string name = string.IsNullOrEmpty(parseable.Name) 
-                ? atype.Name 
-                : parseable.Name;
-            
-            // Cache type definition
-            defn.Components[name] = new ComponentTypeDefinition(atype, name);
-        }
-    }
-}
-```
-
-## Best Practices
-
-### Namespace URI Design
-- Use your company domain: `http://mycompany.com/schemas/...`
-- Include version for breaking changes: `http://mycompany.com/schemas/v2/components`
-- Group related components: `http://mycompany.com/components/charts`
-- Document namespace URIs
-
-### Assembly Organization
-- Group related components in same assembly
-- Use consistent naming: `Company.Product.Components`
-- Version assemblies appropriately
-- Document component libraries
-
-### Component Discovery
-- Mark all components with `[PDFParsableComponent]`
-- Use descriptive element names
-- Avoid name collisions across namespaces
-- Document component APIs
-
-### Performance
-- Namespace resolution is cached - registration order doesn't impact performance
-- Assembly loading happens once per namespace
-- Type reflection is cached - repeated use is fast
-
-## Troubleshooting
-
-### "No assembly registered for XML namespace"
-- Verify namespace URI matches exactly (including http/https, case)
-- Check scrybersettings.json is loaded
-- Ensure JSON syntax is valid
-- Verify namespace is in `Parsing:Namespaces[]` array
-
-### "Could not load type 'MyCompany.Components.StatCard'"
-- Check assembly name matches AssemblyPrefix
-- Verify assembly is referenced by application
-- Ensure namespace matches AssemblyPrefix
-- Check component class is public
-- Verify [PDFParsableComponent] attribute is present
-
-### Type not found in assembly
-- Check class is public
-- Verify namespace matches configuration
-- Ensure class name matches element name (or [PDFParsableComponent("Name")])
-- Check assembly is compiled and up-to-date
-
-### Namespace prefix undeclared
-- Add `xmlns:prefix='...'` to Document root element
-- Verify URI matches registered namespace exactly
-- Check for typos in namespace URI
+---
 
 ## Related Documentation
 
-- [Custom Components](custom-components) - Creating parseable components
-- [Processing Instructions](processing-instructions) - Document-level configuration
-- [Integration Example](integration-example) - Complete namespace registration example
-- [Best Practices](best-practices) - Namespace design patterns
+- [Configuration Structure](configuration-structure) — `Tracing` section reference
+- [Processing Instructions](processing-instructions) — Full list of `<?scryber ... ?>` options
+- [Integration Example](integration-example) — Complete example including logging setup

@@ -180,7 +180,7 @@ The following properties manage the spacing in and around elements. The border r
 
 ### Pages and Columns
 
-The following properties control the page sizes, columns and breaks within. The <a href='/reference/cssselectors/rules/page.html'>'page'</a> at-rule allows definition of custom page sizes, overall and in-groups.
+The following properties control the page sizes, columns and breaks within. The <a href='/reference/cssselectors/selectors/css_page_rule.html'>'page'</a> at-rule allows definition of custom page sizes, overall and in-groups.
 
 | Property  | Description |
 |---|---|
@@ -209,18 +209,18 @@ Flexbox arranges children along a single axis with control over direction, align
 
 | Property | Description |
 |---|---|
-| <a href='/reference/cssproperties/properties/css_prop_flexbox.html' >display: flex</a> <span class="label label-yellow">Beta</span> | Enables flex layout on a container element. |
-| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#flex-direction' >flex-direction</a> | Sets the main axis: `row`, `row-reverse`, `column`, `column-reverse`. |
-| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#flex-wrap' >flex-wrap</a> | Whether items wrap to new lines: `nowrap`, `wrap`, `wrap-reverse`. |
-| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#flex' >flex</a> | Shorthand for flex-grow, flex-shrink, and flex-basis. |
-| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#flex-grow' >flex-grow</a> | How much a flex item grows relative to siblings when there is extra space. |
-| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#flex-shrink' >flex-shrink</a> | How much a flex item shrinks relative to siblings when space is limited. |
-| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#flex-basis' >flex-basis</a> | The initial main size of a flex item before free space is distributed. |
-| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#justify-content' >justify-content</a> | Aligns children along the main axis. |
-| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#align-items' >align-items</a> | Aligns children along the cross axis. |
-| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#align-content' >align-content</a> | Aligns wrapped lines along the cross axis (requires `flex-wrap`). |
-| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#align-self' >align-self</a> | Overrides `align-items` for an individual flex item. |
-| <a href='/reference/cssproperties/properties/css_prop_flexbox.html#order' >order</a> | Controls display order of flex items; lower values appear first. |
+| <a href='/reference/cssproperties/properties/css_prop_flexbox.html' >display: flex</a> | Enables flex layout on a container element. |
+| <a href='/reference/cssproperties/properties/css_prop_flex-direction.html' >flex-direction</a> | Sets the main axis: `row`, `row-reverse`, `column`, `column-reverse`. |
+| <a href='/reference/cssproperties/properties/css_prop_flex-wrap.html' >flex-wrap</a> | Whether items wrap to new lines: `nowrap`, `wrap`, `wrap-reverse`. |
+| <a href='/reference/cssproperties/properties/css_prop_flex-sizing.html' >flex</a> | Shorthand for flex-grow, flex-shrink, and flex-basis. |
+| <a href='/reference/cssproperties/properties/css_prop_flex-sizing.html' >flex-grow</a> | How much a flex item grows relative to siblings when there is extra space. |
+| <a href='/reference/cssproperties/properties/css_prop_flex-sizing.html' >flex-shrink</a> | How much a flex item shrinks relative to siblings when space is limited. |
+| <a href='/reference/cssproperties/properties/css_prop_flex-sizing.html' >flex-basis</a> | The initial main size of a flex item before free space is distributed. |
+| <a href='/reference/cssproperties/properties/css_prop_flex-justify-content.html' >justify-content</a> | Aligns children along the main axis. |
+| <a href='/reference/cssproperties/properties/css_prop_flex-align.html' >align-items</a> | Aligns children along the cross axis. |
+| <a href='/reference/cssproperties/properties/css_prop_flex-align.html' >align-content</a> | Aligns wrapped lines along the cross axis (requires `flex-wrap`). |
+| <a href='/reference/cssproperties/properties/css_prop_flex-align.html' >align-self</a> | Overrides `align-items` for an individual flex item. |
+| <a href='/reference/cssproperties/properties/css_prop_flex-order.html' >order</a> | Controls display order of flex items; lower values appear first. |
 
 ---
 
@@ -230,18 +230,22 @@ CSS Grid places children into a two-dimensional row-and-column structure. See th
 
 | Property | Description |
 |---|---|
-| <a href='/reference/cssproperties/properties/css_prop_grid.html' >display: grid</a> <span class="label label-yellow">Beta</span> | Enables grid layout on a container element. |
+| <a href='/reference/cssproperties/properties/css_prop_grid.html' >display: grid</a> | Enables grid layout on a container element. |
 | <a href='/reference/cssproperties/properties/css_prop_grid-template-columns.html' >grid-template-columns</a> | Defines column track sizes — fr units, fixed widths, auto, and repeat(). |
-| <a href='/reference/cssproperties/properties/css_prop_grid.html#grid-template-rows' >grid-template-rows</a> | Defines row track sizes. |
-| <a href='/reference/cssproperties/properties/css_prop_grid.html#grid-auto-flow' >grid-auto-flow</a> | Controls how auto-placed items fill the grid: `row`, `column`, `dense`. |
-| <a href='/reference/cssproperties/properties/css_prop_grid.html#grid-column' >grid-column</a> | Shorthand for grid-column-start / end — controls column placement and spanning. |
-| <a href='/reference/cssproperties/properties/css_prop_grid.html#grid-row' >grid-row</a> | Shorthand for grid-row-start / end — controls row placement and spanning. |
+| <a href='/reference/cssproperties/properties/css_prop_grid-template-rows.html' >grid-template-rows</a> | Defines row track sizes. |
+| <a href='/reference/cssproperties/properties/css_prop_grid-template-areas.html' >grid-template-areas / grid-area</a> | Named layout map and item placement into named regions. |
+| <a href='/reference/cssproperties/properties/css_prop_grid-auto-flow.html' >grid-auto-flow</a> | Controls how auto-placed items fill the grid: `row`, `column`, `dense`. |
+| <a href='/reference/cssproperties/properties/css_prop_grid-auto-tracks.html' >grid-auto-columns / grid-auto-rows</a> | Size of implicitly created tracks. |
+| <a href='/reference/cssproperties/properties/css_prop_grid-placement.html' >grid-column / grid-row</a> | Column and row placement and spanning for grid items. |
+| <a href='/reference/cssproperties/properties/css_prop_grid-gap.html' >gap / row-gap / column-gap</a> | Gutters between grid rows and columns. |
+| <a href='/reference/cssproperties/properties/css_prop_grid-justify-content.html' >justify-content</a> <span class="label label-green">v9.7</span> | Aligns column tracks within the container horizontally. |
+| <a href='/reference/cssproperties/properties/css_prop_grid-align-content.html' >align-content</a> <span class="label label-green">v9.7</span> | Aligns row tracks within the container vertically. |
 
 ---
 
 ### Fonts and Type Faces
 
-The following properties control the font that any text will use, including families and styles, and remote font registration. The <a href='/reference/cssselectors/rules/font-face.html'>'font-face'</a> at-rule allows definition of custom fonts, that can be used here.
+The following properties control the font that any text will use, including families and styles, and remote font registration. The <a href='/reference/cssselectors/selectors/css_font_face_rule.html'>'font-face'</a> at-rule allows definition of custom fonts, that can be used here.
 
 | Property  | Description |
 |---|---|
@@ -280,7 +284,7 @@ The following properties control the way any text within the element will be out
 
 ### Lists, Counters and Content
 
-The following properties manage counter values, updating and displaying dynamic incrementing content. The <a href='/reference/cssselectors/rules/counter-style.html'>'counter-style'</a> at-rule allows definition of custom fonts, that can be used here.
+The following properties manage counter values, updating and displaying dynamic incrementing content.
 
 | Property  | Description |
 |---|---|

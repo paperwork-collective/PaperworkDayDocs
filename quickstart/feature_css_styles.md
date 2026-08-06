@@ -116,7 +116,7 @@ Where a property or value was added or significantly improved in a specific vers
 | [font-size](/reference/cssproperties/properties/css_prop_font-size) | **Supported** | pt, px, em, %, named sizes |
 | [font-style](/reference/cssproperties/properties/css_prop_font-style) | **Supported** | `normal`, `italic`, `oblique` |
 | [font-weight](/reference/cssproperties/properties/css_prop_font-weight) | **Supported** | Named and numeric weights |
-| [font-stretch](/reference/cssproperties/properties/css_prop_font-stretch) | **Supported** | |
+| [font-stretch](/reference/cssproperties/properties/css_prop_font-stretch) | **No** | Parsed without error but has no effect; reserved for future enhancement |
 | [text-align](/reference/cssproperties/properties/css_prop_text-align) | **Supported** | `left`, `right`, `center`, `justify` |
 | [text-decoration](/reference/cssproperties/properties/css_prop_text-decoration) | **Supported** | Shorthand |
 | [text-decoration-line](/reference/cssproperties/properties/css_prop_text-decoration-line) | **Supported** | `underline`, `line-through`, `overline` |
@@ -179,7 +179,7 @@ See the [Flexbox Layout](/reference/cssproperties/properties/css_prop_flexbox) r
 
 | Property | Support | Notes |
 |----------|---------|-------|
-| [`display: flex`](/reference/cssproperties/properties/css_prop_flexbox) | **Partial** | Initial support added in v9.3 |
+| [`display: flex`](/reference/cssproperties/properties/css_prop_flexbox) | **Partial** | Container and item properties supported; see [Flexbox Layout](/reference/cssproperties/properties/css_prop_flexbox) |
 | `display: inline-flex` | **No** | |
 | `flex-direction` | **Supported** | `row`, `row-reverse`, `column`, `column-reverse` |
 | `flex-wrap` | **Supported** | `nowrap`, `wrap`, `wrap-reverse` |
@@ -199,13 +199,17 @@ See the [CSS Grid Layout](/reference/cssproperties/properties/css_prop_grid) ref
 
 | Property | Support | Notes |
 |----------|---------|-------|
-| [`display: grid`](/reference/cssproperties/properties/css_prop_grid) | **Partial** | Initial support added in v9.3 |
-| [grid-template-columns](/reference/cssproperties/properties/css_prop_grid-template-columns) | **Supported** | Lengths, fr units, percentages, `auto`, `repeat()` |
-| [grid-template-rows](/reference/cssproperties/properties/css_prop_grid) | **Supported** | Same values as `grid-template-columns` |
-| [grid-auto-flow](/reference/cssproperties/properties/css_prop_grid) | **Supported** | `row`, `column`, `dense` |
-| [grid-column](/reference/cssproperties/properties/css_prop_grid) | **Supported** | Shorthand for placement and spanning |
-| [grid-row](/reference/cssproperties/properties/css_prop_grid) | **Supported** | Shorthand for row placement and spanning |
-| Other grid properties | **No** | `grid-template-areas`, `grid-area`, named lines not yet supported |
+| [`display: grid`](/reference/cssproperties/properties/css_prop_grid) | **Partial** | Container and item properties supported; see [CSS Grid Layout](/reference/cssproperties/properties/css_prop_grid) |
+| [grid-template-columns](/reference/cssproperties/properties/css_prop_grid-template-columns) | **Supported** | Lengths, fr units, percentages, `auto`, `repeat()`, `auto-fill`/`auto-fit` (v9.7) |
+| [grid-template-rows](/reference/cssproperties/properties/css_prop_grid-template-rows) | **Supported** | Same values as `grid-template-columns` |
+| [grid-template-areas / grid-area](/reference/cssproperties/properties/css_prop_grid-template-areas) | **Supported** | Named layout regions (v9.7) |
+| [grid-auto-flow](/reference/cssproperties/properties/css_prop_grid-auto-flow) | **Supported** | `row`, `column`, `dense` |
+| [grid-auto-columns / grid-auto-rows](/reference/cssproperties/properties/css_prop_grid-auto-tracks) | **Supported** | Size for implicitly created tracks |
+| [grid-column / grid-row](/reference/cssproperties/properties/css_prop_grid-placement) | **Supported** | Placement and spanning by line number |
+| [Named grid lines](/reference/cssproperties/properties/css_prop_grid-named-lines) | **Supported** | `[name]` bracket notation in track definitions (v9.7) |
+| [gap / row-gap / column-gap](/reference/cssproperties/properties/css_prop_grid-gap) | **Supported** | Gutters between tracks |
+| [justify-content](/reference/cssproperties/properties/css_prop_grid-justify-content) | **Supported** | Column track alignment (v9.7) |
+| [align-content](/reference/cssproperties/properties/css_prop_grid-align-content) | **Supported** | Row track alignment (v9.7) |
 
 ### Multi-Column Layout
 

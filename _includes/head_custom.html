@@ -1,25 +1,24 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="/assets/jquery.cookie.js" crossorigin="anonymous"></script>
 <script>
-        var currTheme = $.cookie("theme");
-        if(currTheme && currTheme != "undefined"){
+    var currTheme = $.cookie("theme");
+    if(currTheme && currTheme != "undefined"){
 
-            var existing = jtd.getTheme();
+        var existing = jtd.getTheme();
 
-            if(currTheme != existing && currTheme != "default"){
+        if(currTheme != existing && currTheme != "default"){
 
-                jtd.setTheme(currTheme);
-            }
-            $.cookie("theme", currTheme, { expires: 365, path: '/' });
-            
+            jtd.setTheme(currTheme);
         }
-        else{
-            currTheme = "default";
-        }
-        $("body").addClass(currTheme);
+        $.cookie("theme", currTheme, { expires: 365, path: '/' });
+        
+    }
+    else{
+        currTheme = "default";
+    }
+    $("body").addClass(currTheme);
 
-      </script>
-<script src="https://www.paperwork.vu/paper.generate.js" crossorigin="anonymous"  ></script>
+    </script>
 <style>
     .document-container iframe{
         height: 600px !important;
@@ -78,6 +77,10 @@ body.light blockquote.note::before {
     color: #381885;
 }
 
+.nav-list .nav-list-item{
+    white-space: nowrap;
+}
+
 .nav-list-item .nav-list-item .nav-list-item .nav-list-link{
     font-style: italic;
     /* border-left: solid 1px #aaa; */
@@ -103,6 +106,10 @@ div.highlighter-rouge, div.listingblock > div.content, figure, .highlight,
 
 .light div.highlighter-rouge, .light div.listingblock > div.content,.light figure,.light .highlight, .light .highlight pre{
     background-color: #e2f2ed;
+}
+
+.pdf-container{
+    height: 400px;
 }
 
 

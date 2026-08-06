@@ -83,6 +83,7 @@ The first thing we can do is add a simple html template file (the ubiquitous Hel
 
 Save the file in your project, and we can move on to generate our first PDF in code.
 
+
 ---
 
 
@@ -387,7 +388,7 @@ We can now make some changes to our template and use the provided data to create
 
 Hopefully you are able re-generate and see the following output.
 
-![Hello World 3 Preview](../assets/sampleImages/HelloWorld3.png)
+<div class='pdf-container' data-pw-container='quick-start-styled' data-pw-template='RaXBkrp7dQpSwiXIBjQm' data-pw-zoom='FullWidth' style='height:400pt' ></div>
 
 We have added a lot into the template - looping, images, links, styles, functions, positioning, remote fonts and stylesheets.
 But the static styles can be moved to a separate linked file, and the actual body is only about 20 lines long, and quite readable.

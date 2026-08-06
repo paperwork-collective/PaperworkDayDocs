@@ -514,8 +514,12 @@ Container padding also reduces column width — the columns are calculated withi
 - [Multi-Column Layouts](04_multi_column.html) — flowing text across balanced columns
 - [Table Layouts](06_tables.html) — data tables with `<table>` markup
 - [`display` property reference](/reference/cssproperties/properties/css_prop_display) — all display modes
-- [`grid-template-columns` reference](/reference/cssproperties/properties/css_prop_grid-template-columns) — full column syntax
-- [`column-gap` reference](/reference/cssproperties/properties/css_prop_column-gap) — gap sizing
+- [grid-* reference](/reference/cssproperties/properties/css_prop_grid) — all grid container and item properties
+- [`grid-template-columns`](/reference/cssproperties/properties/css_prop_grid-template-columns) — full column syntax including `fr`, `repeat()`, `auto-fill`
+- [`grid-template-rows`](/reference/cssproperties/properties/css_prop_grid-template-rows) — row track sizing
+- [`grid-template-areas / grid-area`](/reference/cssproperties/properties/css_prop_grid-template-areas) — named layout regions
+- [`grid-column / grid-row`](/reference/cssproperties/properties/css_prop_grid-placement) — explicit item placement
+- [`gap / row-gap / column-gap`](/reference/cssproperties/properties/css_prop_grid-gap) — gap sizing
 
 ---
 

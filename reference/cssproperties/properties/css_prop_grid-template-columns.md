@@ -1,15 +1,15 @@
 ---
 layout: default
 title: grid-template-columns
-parent: CSS Properties
-parent_url: /reference/cssproperties/
-grand_parent: Template reference
-grand_parent_url: /reference/
+parent: grid-*
+parent_url: /reference/cssproperties/properties/css_prop_grid.html
+grand_parent: CSS Properties
+grand_parent_url: /reference/cssproperties/
 has_children: false
 has_toc: false
 ---
 
-# grid-template-columns : Grid Template Columns Property <span class="label label-yellow">Beta</span>
+# grid-template-columns : Grid Template Columns Property
 {: .no_toc }
 
 The `grid-template-columns` property defines the column tracks for a grid container (`display: grid`). It specifies how many columns the grid has and what width each column takes. Children of the grid container are then placed into those columns automatically in row-major order.

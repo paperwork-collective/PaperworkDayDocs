@@ -10,39 +10,37 @@ nav_order: 5
 
 # Scryber Configuration File Structure
 
-
-This comprehensive guide covers Scryber's configuration system. This documentation is aimed at developers who need to understand the internal architecture or extend Scryber's capabilities.
+This guide covers the top-level structure of Scryber's JSON configuration system and how to initialise it at application startup. Each section links to a dedicated page with full details.
 
 ## Table of Contents
 
-1. [Configuration Structure](#configuration-architecture)
-6. [Image Factory System](#image-factory-configuration)
-7. [Font Configuration](#fonts-configuration)
-5. [Namespace Registration](#namespace-registration)
-8. [Advanced Topics](#advanced-topics)
+1. [Configuration Architecture](#configuration-architecture)
+2. [Image Configuration](#image-factory-configuration)
+3. [Font Configuration](#fonts-configuration)
+4. [Parsing Configuration](#parsing-configuration) — Namespaces, Bindings, Parsers
+5. [Output Options](#output-options)
+6. [Tracing Options](#tracing-options)
+7. [Expression Options](#expression-options)
 
 ---
 
 ## Configuration Architecture
 
-Scryber uses the .NET Core configuration system (`Microsoft.Extensions.Configuration`) with a hierarchical options pattern. Configuration is loaded from `scrybersettings.json` or `appsettings.json` and accessed through the `IScryberConfigurationService` available via dependency injection.
+Scryber uses the .NET `Microsoft.Extensions.Configuration` system with a hierarchical options pattern. Configuration is loaded from a JSON file (`scrybersettings.json` or `appsettings.json`) and accessed through `IScryberConfigurationService`.
 
 ---
 
 ### Initializing the Configuration Service
 
-To make sure that Scryber can access any custom configuration you must initialize it at application **start up**.
-
+Call `Scryber.ServiceProvider.Init()` at application **startup** before any documents are parsed.
 
 #### Console application
 
 ```csharp
-// set up the configuraion as needed.
 IConfigurationRoot config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .Build();
-    
-//pass the configuration to the service provider class.
+
 Scryber.ServiceProvider.Init(config);
 ```
 
@@ -65,12 +63,13 @@ Scryber.ServiceProvider.Init(app.Configuration);
 
 ```csharp
 // Internal bootstrap in ServiceProvider
-var config = ServiceProvider.GetService<IScryberConfigurationService>();
+var config = Scryber.ServiceProvider.GetService<IScryberConfigurationService>();
 ```
 
 The configuration service exposes five primary option sections:
 - `OutputOptions` - PDF output settings
 - `ParsingOptions` - XML/HTML parsing behavior
+- `ExpressionOptions` - Expression behaviour registration
 - `FontOptions` - Font loading and registration
 - `ImagingOptions` - Image factory registration
 - `TracingOptions` - Logging configuration
@@ -91,7 +90,11 @@ The configuration service exposes five primary option sections:
     "Output": { /* PDF Output options */    },
     "Parsing": { 
       "Namespaces": [ /* Custom namespace registrations */ ],
-      "Bindings": [ /* Expression binding factories */ ]
+      "Bindings": [ /* Expression binding factories */ ],
+      "Parsers": [ /* content type parser definitions */ ]
+    },
+    "Expressions": {
+      "Register":[ /* Custom function or operator registration */]
     },
     "Fonts": {
       "Register": [ /* Custom font registrations */ ]
@@ -104,17 +107,27 @@ The configuration service exposes five primary option sections:
         /* Custom logging factories */
       ]
     }
+    
   }
 }
 ```
 
-All properties are optional, and the default values are shown above.
+All properties are optional, and the individual options within, and are detailed in each section below.
 
 ---
 
+## Changing at runtime
+
+As the configuration options are held in a single instance in the ServiceProvider. Any changes made to the options, will then be used by any future document parsing and processing requests.
+
+{:note}
+NOTE: Changes are **not** thread-safe. It is recommended that any changes made to the configuration be done at application start-up.
+
+#### Adding an image factory
+
 ## Image Factory Configuration
 
-Image factories load image data from various sources (files, URLs, data URLs, streams) andl convert raw image data (png, jpeg, tiff, svg) into a format that can be written to a PDF file in the standard format. 
+Image factories load image data from various sources (files, URLs, data URLs, streams) and convert raw image data (png, jpeg, tiff, svg) into a format that can be written to a PDF file in the standard format. If there is a format that needs to supported, then the factory can be added to the configuration below.
 
 
 ### Image Configuration Structure
@@ -780,7 +793,8 @@ Scryber's configuration and extension system provides a comprehensive framework 
         "Family": "Font family name",
         "Style": "Regular|Italic|Bold|BoldItalic",
         "Weight": 400,
-        "File": "path/to/font.ttf"
+        "File": "path/to/font.ttf",
+        "Resource": "FullTypeName.ttf, AssemblyName"
       }
     ]
   }

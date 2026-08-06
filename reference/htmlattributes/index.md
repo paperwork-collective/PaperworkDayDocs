@@ -93,7 +93,7 @@ The following attributes are supported on all visual elements - the elements tha
 | <a href='attributes/attr_style.html' >style</a>   | *All Visual Elements* | Any | Allows a full definition of the visual appearance of the element. Styles and classes are discussed in their own sections as part of <a href='/styling_content.html'>Styling Content</a> and a full reference section on <a href='/reference/cssproperties/'>CSS properties</a>    |
 | <a href='attributes/attr_class.html' >class</a>   | *All Visual Elements* | Any | Specifies a set of style class names as <a href='/reference/cssselectors/'>CSS selectors</a> to apply to the element.   |
 | <a href='attributes/attr_hidden.html' >hidden</a>   | *All Visual Elements* | Any | Indicates if this content should be displayed or not. As an xhtml template the value of the attribute should also be 'hidden' e.g. hidden='hidden'.  |
-| <a href='attributes/attr_name.html' >name</a>   | *All Visual Elements* | Any | Defines an explicit name for the element it is contained in, that can be used to refer to elsewhere in the template.   |
+| `name`   | *All Visual Elements* | Any | Defines an explicit name for the element it is contained in, that can be used to refer to elsewhere in the template.   |
 | <a href='attributes/attr_data_content.html' >data-content</a>   | *All Visual Elements*, except <code>if</code> and <code>template</code> | *Binding Only* | Allows the dynamic binding of more visual content into the template at generation time from the documents data. More infomation on data binding can be found in the <a href='/learning/' >Learning section</a>   |
 | <a href='attributes/attr_data_content.html' >data-content-action</a>   | *All Visual Elements* | Any | Defines an identifier for the element it is contained in, that can be used to refer to elsewhere in the template.   |
 | <a href='attributes/attr_data_content.html' >data-content-type</a>   | *All Visual Elements* | Any | Defines an identifier for the element it is contained in, that can be used to refer to elsewhere in the template.   |
@@ -108,14 +108,14 @@ The following event attributes are supported on all visual elements. For more in
 
 | Attribute  | Use | Bindable  | Description |
 |---|---|---|---|
-| <a href='events/init.html' >on-init</a>   | *All Visual Elements* | Static Only | An event that is raised to a declared method on the defined controller when the element is initialized.   |
-| <a href='events/loaded.html' >on-loaded</a>   | *All Visual Elements* | Static Only | An event that is raised to a declared method on the defined controller when the element is loaded.   |
-| <a href='events/binding.html' >on-databinding</a>   | *All Visual Elements* | Static Only | An event that is raised to a declared method on the defined controller before the element is data bound.   |
-| <a href='events/bound.html' >on-databound</a>   | *All Visual Elements* | Static Only | An event that is raised to a declared method on the defined controller after the element is databound.   |
-| <a href='events/prelayout.html' >on-prelayout</a>   | *All Visual Elements* | Static Only | An event that is raised to a declared method on the defined controller before the element is laid out.   |
-| <a href='events/postlayout.html' >on-postlayout</a>   | *All Visual Elements* | Static Only | An event that is raised to a declared method on the defined controller after the element is laid out.   |
-| <a href='events/prerender.html' >on-prerender</a>   | *All Visual Elements* | Static Only | An event that is raised to a declared method on the defined controller before the element is rendered.   |
-| <a href='event/postrender.html' >on-postrender</a>   | *All Visual Elements* | Static Only | An event that is raised to a declared method on the defined controller after the element is rendered.   |
+| `on-init`   | *All Visual Elements* | Static Only | An event that is raised to a declared method on the defined controller when the element is initialized.   |
+| `on-loaded`   | *All Visual Elements* | Static Only | An event that is raised to a declared method on the defined controller when the element is loaded.   |
+| `on-databinding`   | *All Visual Elements* | Static Only | An event that is raised to a declared method on the defined controller before the element is data bound.   |
+| `on-databound`   | *All Visual Elements* | Static Only | An event that is raised to a declared method on the defined controller after the element is databound.   |
+| `on-prelayout`   | *All Visual Elements* | Static Only | An event that is raised to a declared method on the defined controller before the element is laid out.   |
+| `on-postlayout`   | *All Visual Elements* | Static Only | An event that is raised to a declared method on the defined controller after the element is laid out.   |
+| `on-prerender`   | *All Visual Elements* | Static Only | An event that is raised to a declared method on the defined controller before the element is rendered.   |
+| `on-postrender`   | *All Visual Elements* | Static Only | An event that is raised to a declared method on the defined controller after the element is rendered.   |
 
 ---
 
@@ -134,7 +134,7 @@ The library supports the use of the following standard attributes that match exi
 | <a href='attributes/attr_content.html' >content</a>   | <code>&lt;meta&gt;</code> | Any | Set the actual content value of a named meta-data element so that it can be used in document processing.  |
 | <a href='attributes/attr_data_object.html' >data</a>   | <code>&lt;object&gt;</code> | Any | Sets the source file path to a specific location (using any document base path) so the attachment can be loaded and included.  |
 | <a href='attributes/attr_datetime.html' >datetime</a>   | <code>&lt;ins&gt;</code>, <code>&lt;del&gt;</code>, <code>&lt;time&gt;</code> | Any | In the case of ins and del, specifies the timestamp for the modification. For a time element, specifies the date and/or time that should be displayed by the element.  |
-| <a href='attributes/attr_for.html' >for</a>   | <code>&lt;label&gt;</code>, <code>&lt;output&gt;</code>, <code>&lt;page&gt;</code> | Any | Identifies the id of the referenced element this element is referring to. For a page element, this with then be the page number of that referenced element.  |
+| `for`   | <code>&lt;label&gt;</code>, <code>&lt;output&gt;</code>, <code>&lt;page&gt;</code> | Any | Identifies the id of the referenced element this element is referring to. For a page element, this with then be the page number of that referenced element.  |
 | <a href='attributes/attr_width_height.html' >height</a>   | <code>&lt;img&gt;</code> | Any | A legacy support attribute for the image element to explicitly set the pixel height for rendering. Use the CSS properties instead  |
 | <a href='attributes/attr_high_low.html' >high</a>   | <code>&lt;meter&gt;</code> | Any | Defines the recommended high value for a graphical meter bar.  |
 | <a href='attributes/attr_href.html' >href</a>   | <code>&lt;a&gt;</code>, <code>&lt;link&gt;</code> | Any | Sets the source file path to a specific location (using any document base path) so an image or external resource can be loaded and included.  |
@@ -149,12 +149,12 @@ The library supports the use of the following standard attributes that match exi
 | <a href='attributes/attr_property.html' >property</a>   | <code>&lt;page&gt;</code>  | Any | Specifies the type of page number that should be looked up and used, e.g. 'total', or 'section' page number or 'sectiontotal' number.  |
 | <a href='attributes/attr_rel.html' >rel</a>   | <code>&lt;link&gt;</code>  | Any | Specifies the relationship of the linked source to the current source. **NOTE** anything other than 'stylesheet' will currently be ignored.  |
 | <a href='attributes/attr_colspan_rowspan.html' >rowspan</a>   | <code>&lt;td&gt;</code>  | Any | Defines the number of rows down, a cell occupies including the current row.  |
-| <a href='attributes/attr_scope.html' >scope</a>   | <code>&lt;th&gt;</code>  | Any | Defines whether a header cell is a header for a column, row, or group of columns or rows. Has no effect on output.  |
+| `scope`   | <code>&lt;th&gt;</code>  | Any | Defines whether a header cell is a header for a column, row, or group of columns or rows. Has no effect on output.  |
 | <a href='attributes/attr_src.html' >src</a>   | <code>&lt;embed&gt;</code>, <code>&lt;frame&gt;</code>,<code>&lt;source&gt;</code>, <code>&lt;img&gt;</code>  | Any | Defines the external location of a resource (taking into account the document base path) that the element will use.  |
 | <a href='attributes/attr_srcset.html' >srcset</a>   | <code>&lt;source&gt;</code>  | Any | Defines the external location of a range of resource (taking into account the document base path) that the element *can* use.  |
 | <a href='attributes/attr_target.html' >target</a>   | <code>&lt;a&gt;</code>  | Any | Sets the location within the consuming application where the linked content should be shown. *Support is based on the reader applications implementation*  |
 | <a href='attributes/attr_type.html' >type</a>   | <code>&lt;frame&gt;</code>, <code>&lt;source&gt;</code>, <code>&lt;style&gt;</code> <code>&lt;object&gt;</code>  | Any | Identifies the content mime type of a resource at an external location (taking into account the document base path).  |
-| <a href='attributes/attr_val.html' >value</a>   | <code>&lt;progress&gt;</code>  | Any | Defines the actual value for a graphical progress bar - based on this value the offset of the bar will be calculated using max  |
+| `value`   | <code>&lt;progress&gt;</code>  | Any | Defines the actual value for a graphical progress bar - based on this value the offset of the bar will be calculated using max  |
 | <a href='attributes/attr_width_height.html' >width</a>   | <code>&lt;img&gt;</code> | Any | A legacy support attribute for the image element to explicitly set the pixel width for rendering. Use the CSS properties instead  |
 
 ---
@@ -188,7 +188,7 @@ The library uses the <code>data-*</code> attributes to extend the use of existin
 | <a href='attributes/attr_data_page.html' >data-page-start</a>   | <code>&lt;frame&gt;</code> | Any | Specifies the starting page index from the frames source document, where output into the final document will begin. Where 1 is the first page in the document.  |
 | <a href='attributes/attr_data_passthrough.html' >data-passthrough</a>   | <code>&lt;iframe&gt;</code> | Any | Flag, false by default, that can allow data from the parent document to flow through into a child template - allowing dynamic content within the child.  |
 | <a href='attributes/attr_data_test.html' >data-test</a>   | <code>&lt;if&gt;</code> | *Binding Only* | A binding expression that should return a non-null or non-false value and will then show the content within the inner elements of the if elements |
-| <a href='attributes/attr_data_id.html' >data-id</a>   | <code>&lt;var&gt;</code> | *Static Only* | A name of an existing or new document variable. THis variable will be set to the result of the <code>data-value</code> expression (each time the var is bound). This can then be used elsewhere in the document to show or calculate further values. |
+| <a href='attributes/attr_data_value.html' >data-id</a>   | <code>&lt;var&gt;</code> | *Static Only* | A name of an existing or new document variable. This variable will be set to the result of the <code>data-value</code> expression (each time the var is bound). This can then be used elsewhere in the document to show or calculate further values. |
 | <a href='attributes/attr_data_value.html' >data-value</a>   | <code>&lt;num&gt;</code>, <code>&lt;var&gt;</code>, <code>&lt;data&gt;</code> | *Binding Only* | A binding expression that will be used by parent element. Either outputting it as a value in a specific format of the document, or storing it in a document variable for use later on. |
 
 

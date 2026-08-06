@@ -178,6 +178,9 @@ Use `data-content-type` to specify the MIME type of the content:
 
 <!-- Plain text -->
 <div data-content="{{model.plainText}}" data-content-type="text/plain"></div>
+
+<!-- Markdown content -->
+<div data-content="{{model.markdownContent}}" data-content-type="text/markdown"></div>
 ```
 {% endraw %}
 
@@ -554,7 +557,37 @@ Show dynamic content or fallback:
 
 
 
-### 13. Frame with Dynamic Document Content
+### 13. Markdown Content Injection
+
+Inject dynamically bound markdown — useful when content comes from a CMS or external source stored as markdown:
+
+{% raw %}
+```html
+<!-- Model: { notes: "## Summary\n\nThis is the **summary** section.\n\n- Point one\n- Point two" } -->
+<div data-content="{{model.notes}}" data-content-type="text/markdown"></div>
+
+<!-- Notes are parsed as markdown and rendered as styled HTML in the PDF -->
+```
+{% endraw %}
+
+Both `text/markdown` and `text/x-markdown` MIME types are accepted. Content is converted to HTML before layout, so all standard Scryber HTML elements and CSS styles apply to the rendered output.
+
+Markdown bindings also work inside {% raw %}`{{#each}}`{% endraw %} loops:
+
+{% raw %}
+```html
+<!-- Model: { items: [{ title: "Alpha", body: "## Alpha\n\nContent for alpha." }, ...] } -->
+<ul>
+    {{#each model.items}}
+    <li data-content="{{this.body}}" data-content-type="text/markdown"></li>
+    {{/each}}
+</ul>
+```
+{% endraw %}
+
+---
+
+### 14. Frame with Dynamic Document Content
 
 Assemble documents dynamically:
 
@@ -579,7 +612,7 @@ Assemble documents dynamically:
 
 
 
-### 14. Localized Content Injection
+### 15. Localized Content Injection
 
 Insert locale-specific content:
 
@@ -602,7 +635,7 @@ Insert locale-specific content:
 
 
 
-### 15. Rich Text with Embedded Bindings
+### 16. Rich Text with Embedded Bindings
 
 Create complex formatted content with multiple bindings:
 
@@ -630,7 +663,7 @@ Create complex formatted content with multiple bindings:
 
 
 
-### 16. Template with Alternate Content Definition
+### 17. Template with Alternate Content Definition
 
 Define template behavior inline:
 

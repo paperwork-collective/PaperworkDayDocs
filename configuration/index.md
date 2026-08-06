@@ -28,6 +28,8 @@ Applies to all documents within the application or process.
   - **[Namespace Registration](namespace-registration)** - Mapping XML namespaces to .NET assemblies
   - **[Image Factories](image-factories)** - Custom image loading from databases, APIs, or other sources
   - **[Font Configuration](font-configuration)** - Registering custom fonts and managing font loading
+  - **[Expression Options](expression-options)** - Custom expression functions and operator registration
+  - **[Logging Extensions](logging-extension)** - Custom trace log sinks
 
 ## Extension Mechanisms
 Applies to any number of applications or processes

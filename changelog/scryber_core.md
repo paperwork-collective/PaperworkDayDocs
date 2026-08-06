@@ -26,6 +26,45 @@ has_toc: false
 
 ## Version 9
 
+### 9.7 - 6 August 2026
+
+Significant new version with more general support for CSS and HTML5 features including *major* improvements in **CSS flex, CSS grid, CSS table-xxx**. Along with support for **z-index**, **colgroup**, and **column-fill**.
+
+#### Breaking Changes
+
+- Image width and height attributes now **only** accept integer values, as intrinsic size hints. Providing a unit (`pt`, `px`, `%`, etc.) throws an exception. Move unit-based image sizing to `style`: `style="width: 400pt;"`.
+
+#### New Features
+
+- **CSS `aspect-ratio` property** sets a fixed width-to-height ratio on images and block elements. When only one CSS dimension is specified, the other is derived from the ratio.
+- **Added `<colgroup>` and `<col>` table column elements** to wire column widths, background colours, and CSS styling directly on column definitions. Also supports the `span` attribute to apply styling across multiple consecutive columns.
+- **Added `grid-template-areas` and `grid-area`** — define named layout regions and place items into them by name.
+- **Added named grid lines** in `grid-template-columns`/`grid-template-rows` along with reference names in `grid-column` and `grid-row`.
+- **Added grid `auto-fill` and `auto-fit` in `repeat()`** to fill a row with as many fixed-width tracks as will fit without specifying a count.
+- **Added grid `grid-auto-columns` and `grid-auto-rows`** to control the size of implicitly created tracks when items overflow the declared grid.
+- **Added grid `justify-content` and `align-content`** to distribute the grid along the inline and block axes when tracks are smaller than the container.
+- **Added full support for `flex-basis`, `flex-direction`, `flex-flow`, `flex-grow`, `flex-shrink`** so flex containers now output as expected.
+- **Added flex `align-items` in column direction** so flex containers now correctly support cross-axis alignment.
+- **CSS `var()` and `calc()` in flex/grid** now work inside all CSS property values.
+- **column-fill** support for reflowing content in a multi-column layout to match heights in each. Default is still `auto` to match existing behaviour on templates.
+- **`z-index`** support for positioned content, so order of rendering can be controlled.
+- **Added `FindMatch()`** to component that can execute a JQuery'esque search for any Components that match that query, returning a collection of results, and queries can be chained.
+
+#### Fixes
+
+- **SVG image min/max sizing** — `min-width`, `max-width`, `min-height`, `max-height` are now honoured for SVG images, with correct aspect-ratio preservation when only one axis is constrained.
+- **SVG images clipping** — unsized SVG images (no `viewBox`, no declared dimensions) no longer clipped to 300×150 regardless of the `<img>` box size.
+- **Page breaks** — a `page-break-after: always` followed immediately by `page-break-before: always` no longer inserts a redundant blank page between sections.
+- **Grid page overflow** — continuation row gaps are stripped and height corrections propagate correctly across page breaks.
+- **Grid row-span** cell height and row-gap border rendering fixed for multi-row spanning cells.
+- **Flex wrap** — various fixes for inter-row padding/margin/border.
+- **List overflow** — fixed infinite layout loop when an `<ol>`/`<ul>` overflows with zero visible contents.
+- **Anonymous table wrapping** — anonymous `<tr>`/`<td>` insertion no longer absorbs insignificant whitespace nodes, preventing empty cells.
+- **Font glyph table** — `PDFFontDefinition` now outputs the correct glyph offset count in the `bfrange` CMap table.
+- **Infinite pagination** — fixed a case where a header or footer that itself requested a page break caused the layout engine to loop indefinitely.
+
+---
+
 ### 9.6-beta - 15 May 2026
 
 - NEW: Added support for display flex layout.

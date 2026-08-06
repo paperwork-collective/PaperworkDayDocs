@@ -82,6 +82,8 @@ Loaded lazily on first font request.
 
 ### Basic Font Registration
 
+Each font variant (weight + style combination) is a **separate entry** in the `Register` array.
+
 **scrybersettings.json:**
 
 ```json
@@ -91,15 +93,39 @@ Loaded lazily on first font request.
       "Register": [
         {
           "Family": "Roboto",
-          "File": "/path/to/fonts/Roboto-Regular.ttf",
-          "Bold": "/path/to/fonts/Roboto-Bold.ttf",
-          "Italic": "/path/to/fonts/Roboto-Italic.ttf",
-          "BoldItalic": "/path/to/fonts/Roboto-BoldItalic.ttf"
+          "Style": "Regular",
+          "Weight": 400,
+          "File": "/path/to/fonts/Roboto-Regular.ttf"
+        },
+        {
+          "Family": "Roboto",
+          "Style": "Bold",
+          "Weight": 700,
+          "File": "/path/to/fonts/Roboto-Bold.ttf"
+        },
+        {
+          "Family": "Roboto",
+          "Style": "Italic",
+          "Weight": 400,
+          "File": "/path/to/fonts/Roboto-Italic.ttf"
+        },
+        {
+          "Family": "Roboto",
+          "Style": "BoldItalic",
+          "Weight": 700,
+          "File": "/path/to/fonts/Roboto-BoldItalic.ttf"
         },
         {
           "Family": "Open Sans",
-          "File": "/path/to/fonts/OpenSans-Regular.ttf",
-          "Bold": "/path/to/fonts/OpenSans-Bold.ttf"
+          "Style": "Regular",
+          "Weight": 400,
+          "File": "/path/to/fonts/OpenSans-Regular.ttf"
+        },
+        {
+          "Family": "Open Sans",
+          "Style": "Bold",
+          "Weight": 700,
+          "File": "/path/to/fonts/OpenSans-Bold.ttf"
         }
       ]
     }
@@ -111,11 +137,37 @@ Loaded lazily on first font request.
 
 | Property | Required | Description |
 |----------|----------|-------------|
-| `Family` | Yes | Font family name (used in CSS font-family) |
-| `File` | Yes | Path to regular weight font file (.ttf or .otf) |
-| `Bold` | No | Path to bold weight font file |
-| `Italic` | No | Path to italic style font file |
-| `BoldItalic` | No | Path to bold+italic font file |
+| `Family` | Yes | Font family name used in CSS `font-family` |
+| `Style` | Yes | `Regular`, `Bold`, `Italic`, or `BoldItalic` |
+| `Weight` | Yes | Numeric weight: 100–900 (400 = Regular, 700 = Bold) |
+| `File` | One of File/Resource | Absolute or relative path to a `.ttf` or `.otf` file |
+| `Resource` | One of File/Resource | Embedded resource name: `"FullTypeName.ttf, AssemblyName"` |
+
+### Registering Fonts in Code
+
+Use `FontRegistrationOption` directly before any documents are parsed:
+
+```csharp
+var config = Scryber.ServiceProvider.GetService<IScryberConfigurationService>();
+
+config.FontOptions.Register ??= new List<FontRegistrationOption>();
+
+config.FontOptions.Register.Add(new FontRegistrationOption(
+    family: "Roboto",
+    style: "Regular",
+    weight: 400,
+    file: "/path/to/fonts/Roboto-Regular.ttf",
+    resource: null
+));
+
+config.FontOptions.Register.Add(new FontRegistrationOption(
+    family: "Roboto",
+    style: "Bold",
+    weight: 700,
+    file: "/path/to/fonts/Roboto-Bold.ttf",
+    resource: null
+));
+```
 
 ### Path Resolution
 
@@ -154,171 +206,31 @@ Once registered, use fonts in templates:
 
 ## Implementation Details
 
-### Font Loading
-
-**Font registration in `FontFactory.UnsafeLoadCustomFonts()`:**
-
-```csharp
-// Scryber.Drawing/FontFactory.cs
-private static void UnsafeLoadCustomFonts(FontOptions options)
-{
-    if (options.Register != null && options.Register.Count > 0)
-    {
-        foreach (var reg in options.Register)
-        {
-            try
-            {
-                // Load regular weight
-                if (!string.IsNullOrEmpty(reg.File))
-                {
-                    var info = LoadFontFile(reg.File);
-                    _custom[info.FamilyName + "|" + info.Weight + "|" + info.Style] = info;
-                }
-                
-                // Load bold
-                if (!string.IsNullOrEmpty(reg.Bold))
-                {
-                    var info = LoadFontFile(reg.Bold);
-                    _custom[info.FamilyName + "|Bold|Regular"] = info;
-                }
-                
-                // Load italic
-                if (!string.IsNullOrEmpty(reg.Italic))
-                {
-                    var info = LoadFontFile(reg.Italic);
-                    _custom[info.FamilyName + "|Regular|Italic"] = info;
-                }
-                
-                // Load bold+italic
-                if (!string.IsNullOrEmpty(reg.BoldItalic))
-                {
-                    var info = LoadFontFile(reg.BoldItalic);
-                    _custom[info.FamilyName + "|Bold|Italic"] = info;
-                }
-            }
-            catch (Exception ex)
-            {
-                // Log error but continue loading other fonts
-                TraceLog.Add(TraceLevel.Error, "FontFactory", 
-                    $"Failed to load font '{reg.Family}': {ex.Message}");
-            }
-        }
-    }
-}
-```
-
-### Font Lookup Hierarchy
-
-**Font resolution in `FontFactory.GetFont()`:**
-
-```csharp
-public static PDFFont GetFont(string family, FontWeight weight, FontStyle style)
-{
-    string key = BuildFontKey(family, weight, style);
-    
-    // 1. Check custom registry
-    if (_custom.TryGetValue(key, out FontInfo customFont))
-    {
-        return CreateFontFromInfo(customFont);
-    }
-    
-    // 2. Check system registry
-    if (_system == null)
-        LoadSystemFonts();
-        
-    if (_system.TryGetValue(key, out FontInfo systemFont))
-    {
-        return CreateFontFromInfo(systemFont);
-    }
-    
-    // 3. Check static registry (Type 1 fonts)
-    if (_static.TryGetValue(key, out FontInfo staticFont))
-    {
-        return CreateFontFromInfo(staticFont);
-    }
-    
-    // 4. Check generic registry
-    string genericFamily = ResolveGenericFamily(family);
-    if (genericFamily != family)
-    {
-        return GetFont(genericFamily, weight, style);  // Recursive lookup
-    }
-    
-    // 5. Fallback to Helvetica
-    return GetFont("Helvetica", FontWeight.Regular, FontStyle.Regular);
-}
-```
-
-### Font Key Generation
-
-```csharp
-private static string BuildFontKey(string family, FontWeight weight, FontStyle style)
-{
-    string weightStr = weight == FontWeight.Bold ? "Bold" : "Regular";
-    string styleStr = style == FontStyle.Italic ? "Italic" : "Regular";
-    
-    return $"{family}|{weightStr}|{styleStr}";
-}
-```
+Each `FontRegistrationOption` entry is loaded lazily when the font is first requested during document processing. The font factory maintains four separate registries checked in priority order: custom (user-registered), system (OS fonts), static (embedded PDF Type 1 fonts), and generic (CSS family mappings such as `sans-serif` → Helvetica). Registrations in `Fonts:Register` always go into the custom registry and therefore take precedence over system and static fonts of the same name.
 
 ## Advanced Configuration
 
 ### Multiple Font Weights
 
-Register a complete font family with multiple weights:
+Register a complete font family with multiple weights — one entry per variant:
 
 ```json
 {
   "Scryber": {
     "Fonts": {
       "Register": [
-        {
-          "Family": "Roboto",
-          "File": "fonts/Roboto-Regular.ttf",
-          "Bold": "fonts/Roboto-Bold.ttf",
-          "Italic": "fonts/Roboto-Italic.ttf",
-          "BoldItalic": "fonts/Roboto-BoldItalic.ttf"
-        },
-        {
-          "Family": "Roboto",
-          "Weight": "Light",
-          "File": "fonts/Roboto-Light.ttf",
-          "Italic": "fonts/Roboto-LightItalic.ttf"
-        },
-        {
-          "Family": "Roboto",
-          "Weight": "Medium",
-          "File": "fonts/Roboto-Medium.ttf",
-          "Italic": "fonts/Roboto-MediumItalic.ttf"
-        }
+        { "Family": "Roboto", "Style": "Regular",    "Weight": 400, "File": "fonts/Roboto-Regular.ttf" },
+        { "Family": "Roboto", "Style": "Bold",       "Weight": 700, "File": "fonts/Roboto-Bold.ttf" },
+        { "Family": "Roboto", "Style": "Italic",     "Weight": 400, "File": "fonts/Roboto-Italic.ttf" },
+        { "Family": "Roboto", "Style": "BoldItalic", "Weight": 700, "File": "fonts/Roboto-BoldItalic.ttf" },
+        { "Family": "Roboto", "Style": "Regular",    "Weight": 300, "File": "fonts/Roboto-Light.ttf" },
+        { "Family": "Roboto", "Style": "Italic",     "Weight": 300, "File": "fonts/Roboto-LightItalic.ttf" },
+        { "Family": "Roboto", "Style": "Regular",    "Weight": 500, "File": "fonts/Roboto-Medium.ttf" },
+        { "Family": "Roboto", "Style": "Italic",     "Weight": 500, "File": "fonts/Roboto-MediumItalic.ttf" }
       ]
     }
   }
 }
-```
-
-### Programmatic Registration
-
-```csharp
-using Microsoft.Extensions.DependencyInjection;
-using Scryber;
-using Scryber.Drawing;
-
-var services = new ServiceCollection();
-
-services.AddScryber(config =>
-{
-    config.FontOptions.Register.Add(new FontRegistration
-    {
-        Family = "Roboto",
-        File = "/path/to/Roboto-Regular.ttf",
-        Bold = "/path/to/Roboto-Bold.ttf",
-        Italic = "/path/to/Roboto-Italic.ttf",
-        BoldItalic = "/path/to/Roboto-BoldItalic.ttf"
-    });
-});
-
-var provider = services.BuildServiceProvider();
 ```
 
 ### Font Fallback Chain
@@ -364,18 +276,12 @@ MyApp/
   "Scryber": {
     "Fonts": {
       "Register": [
-        {
-          "Family": "Roboto",
-          "File": "wwwroot/fonts/Roboto-Regular.ttf",
-          "Bold": "wwwroot/fonts/Roboto-Bold.ttf",
-          "Italic": "wwwroot/fonts/Roboto-Italic.ttf",
-          "BoldItalic": "wwwroot/fonts/Roboto-BoldItalic.ttf"
-        },
-        {
-          "Family": "Open Sans",
-          "File": "wwwroot/fonts/OpenSans-Regular.ttf",
-          "Bold": "wwwroot/fonts/OpenSans-Bold.ttf"
-        }
+        { "Family": "Roboto",    "Style": "Regular",    "Weight": 400, "File": "wwwroot/fonts/Roboto-Regular.ttf" },
+        { "Family": "Roboto",    "Style": "Bold",       "Weight": 700, "File": "wwwroot/fonts/Roboto-Bold.ttf" },
+        { "Family": "Roboto",    "Style": "Italic",     "Weight": 400, "File": "wwwroot/fonts/Roboto-Italic.ttf" },
+        { "Family": "Roboto",    "Style": "BoldItalic", "Weight": 700, "File": "wwwroot/fonts/Roboto-BoldItalic.ttf" },
+        { "Family": "Open Sans", "Style": "Regular",    "Weight": 400, "File": "wwwroot/fonts/OpenSans-Regular.ttf" },
+        { "Family": "Open Sans", "Style": "Bold",       "Weight": 700, "File": "wwwroot/fonts/OpenSans-Bold.ttf" }
       ]
     }
   }
@@ -448,20 +354,22 @@ MyApp/
 ### 4. Application
 
 ```csharp
-using Microsoft.Extensions.DependencyInjection;
 using Scryber;
 using Scryber.Components;
 
-// Setup dependency injection
-var services = new ServiceCollection();
-services.AddScryber();  // Loads scrybersettings.json
-var provider = services.BuildServiceProvider();
+IConfigurationRoot config = new ConfigurationBuilder()
+    .AddJsonFile("scrybersettings.json")
+    .Build();
 
-// Generate document
-using (var reader = new StreamReader("Report.pdfx"))
+Scryber.ServiceProvider.Init(config);
+
+using (var doc = Document.ParseDocument("Report.html"))
 {
-    var doc = Document.ParseDocument(reader, ParseSourceType.DynamicContent);
-    doc.ProcessDocument("Report.pdf");
+    doc.Params["model"] = reportData;
+    using (var stream = new FileStream("Report.pdf", FileMode.Create))
+    {
+        doc.SaveAsPDF(stream);
+    }
 }
 ```
 

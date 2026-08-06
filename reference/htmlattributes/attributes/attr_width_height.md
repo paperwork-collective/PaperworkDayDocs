@@ -12,7 +12,9 @@ has_toc: false
 # @width and @height : The Sizing Attributes
 {: .no_toc}
 
-The `width` and `height` attributes control the dimensions of elements in PDF documents. They are primarily used with images, iframes, tables, and table cells, supporting various units (points, pixels, percentages) and enabling precise layout control through both explicit values and data binding.
+The `width` and `height` attributes control the dimensions of elements in PDF documents. They are used with images, tables, and table cells.
+
+For **images**, the attributes accept integer pixel values as [intrinsic size hints](#intrinsic-size-hints-span-classlabel-label-greenv97span) — use `style="width:...; height:...;"` for unit-based or percentage sizing. For **tables and cells**, the attributes accept CSS units, percentages, and points as before.
 
 ---
 
@@ -27,33 +29,41 @@ The `width` and `height` attributes control the dimensions of elements in PDF do
 
 ---
 
+## Breaking Change — `<img>` Width and Height <span class="label label-red">Breaking</span> <span class="label label-green">v9.7</span>
+
+> **v9.7 change:** The `width` and `height` attributes on `<img>` elements now accept **integer pixel values only**. Providing a CSS unit (`pt`, `px`, `%`, `in`, etc.) throws a parse exception at document load time.
+>
+> Move all unit-based image sizing to the `style` attribute.
+
+**Quick migration:**
+
+| Before (❌ throws in v9.7) | After (✅ correct) |
+|---|---|
+| `<img src="photo.jpg" width="400pt" height="300pt" />` | `<img src="photo.jpg" style="width: 400pt; height: 300pt;" />` |
+| `<img src="logo.png" width="150pt" />` | `<img src="logo.png" style="width: 150pt;" />` |
+| `<img src="banner.jpg" width="100%" height="200pt" />` | `<img src="banner.jpg" style="width: 100%; height: 200pt;" />` |
+| `<img src="..." width="{{model.w}}pt" />` | `<img src="..." style="width: {{model.w}}pt;" />` |
+
+**Table elements are not affected.** `<table width="100%">`, `<td width="30%">`, `<tr height="50pt">`, and similar table sizing continues to work unchanged.
+
+---
 
 ## Usage
 
-The `width` and `height` attributes control element dimensions:
-- Set explicit sizes for images, iframes, tables, and cells
-- Support multiple units: points (pt), pixels (px), percentages (%)
-- Can be used independently (one dimension with auto aspect ratio)
-- Used together for explicit aspect control
-- Support data binding for dynamic sizing
-- Essential for consistent layout and spacing
-
-
-
-
+Images accept CSS units and percentages via the `style` attribute. Table and cell elements continue to use `width` and `height` attributes directly:
 
 {% raw %}
 ```html
-<!-- Image with explicit dimensions -->
-<img src="photo.jpg" width="400pt" height="300pt" />
+<!-- Image sized via style (required for CSS units) -->
+<img src="photo.jpg" style="width: 400pt; height: 300pt;" />
 
-<!-- Image with width only (maintains aspect ratio) -->
-<img src="logo.png" width="150pt" />
+<!-- Image width only — maintains aspect ratio from image source -->
+<img src="logo.png" style="width: 150pt;" />
 
 <!-- Percentage-based sizing -->
-<img src="banner.jpg" width="100%" height="200pt" />
+<img src="banner.jpg" style="width: 100%; height: 200pt;" />
 
-<!-- Table sizing -->
+<!-- Table sizing — unchanged, uses attributes directly -->
 <table width="100%">
     <tr>
         <td width="30%">Left Column</td>
@@ -61,66 +71,56 @@ The `width` and `height` attributes control element dimensions:
     </tr>
 </table>
 
-<!-- Dynamic sizing -->
-<img src="{{model.imagePath}}" width="{{model.imageWidth}}pt" height="{{model.imageHeight}}pt" />
+<!-- Dynamic sizing via style -->
+<img src="{{model.imagePath}}" style="width: {{model.imageWidth}}pt; height: {{model.imageHeight}}pt;" />
 ```
 {% endraw %}
-
-
-
-
 
 ---
 
 ## Supported Elements
 
-The `width` and `height` attributes are commonly used with:
+The `width` and `height` attributes are used with:
 
 ### Images
-- `<img>` - Image elements (primary use)
+- `<img>` — Integer pixel values only (intrinsic hint). Use `style=""` for CSS units and percentages.
 
 ### Tables
-- `<table>` - Table dimensions
-- `<td>`, `<th>` - Table cell dimensions
-- `<col>`, `<colgroup>` - Column sizing
+- `<table>` — Table dimensions (CSS units and percentages supported)
+- `<td>`, `<th>` — Table cell dimensions (CSS units and percentages supported)
+- `<col>`, `<colgroup>` — Column sizing (CSS units and percentages supported)
 
 ### Embedded Content
-- `<iframe>` - Iframe dimensions
-- `<canvas>` - Canvas dimensions
+- `<iframe>` — Iframe dimensions
 
-### Block Elements
-- `<div>` - Division container sizing (via style attribute typically)
-
-**Note:** For most block elements, dimensions are typically set using CSS `style` attribute rather than dedicated `width`/`height` attributes.
+**Note:** For most block elements, dimensions are set using the CSS `style` attribute.
 
 ---
 
 ## Binding Values
 
-The `width` and `height` attributes support data binding:
-
-
-
-
+Use `style` binding for unit-based image sizes. Integer attribute binding works for pixel-only intrinsic hints.
 
 {% raw %}
 ```html
-<!-- Dynamic image dimensions -->
+<!-- CSS style binding — recommended for unit-based sizing -->
 <img src="{{model.imagePath}}"
-     width="{{model.width}}pt"
-     height="{{model.height}}pt" />
+     style="width: {{model.width}}pt; height: {{model.height}}pt;" />
 
-<!-- Calculated dimensions -->
+<!-- Integer attribute binding — pixel intrinsic hints only -->
+<img src="{{model.imagePath}}"
+     width="{{model.widthPx}}"
+     height="{{model.heightPx}}" />
+
+<!-- Calculated style dimensions -->
 <img src="photo.jpg"
-     width="{{model.baseWidth * 2}}pt"
-     height="{{model.baseHeight * 2}}pt" />
+     style="width: {{model.baseWidth * 2}}pt; height: {{model.baseHeight * 2}}pt;" />
 
-<!-- Conditional sizing -->
+<!-- Conditional sizing via style -->
 <img src="{{model.imagePath}}"
-     width="{{model.isLarge ? '600pt' : '300pt'}}"
-     height="{{model.isLarge ? '400pt' : '200pt'}}" />
+     style="width: {{if(model.isLarge, '600pt', '300pt')}}; height: {{if(model.isLarge, '400pt', '200pt')}};" />
 
-<!-- Percentage from data -->
+<!-- Percentage from data — table elements (attribute still works) -->
 <table width="{{model.tableWidth}}%">
     <tr>
         <td width="{{model.leftColumnWidth}}%">Left</td>
@@ -129,18 +129,13 @@ The `width` and `height` attributes support data binding:
 </table>
 
 <!-- Repeating elements with varying sizes -->
-<template data-bind="{{model.images}}">
-    <img src="{{.url}}"
-         width="{{.width}}pt"
-         height="{{.height}}pt"
-         alt="{{.description}}" />
-</template>
+{{#each model.images}}
+    <img src="{{this.url}}"
+         style="width: {{this.widthPt}}pt; height: {{this.heightPt}}pt;"
+         alt="{{this.description}}" />
+{{/each}}
 ```
 {% endraw %}
-
-
-
-
 
 **Data Model Example:**
 ```json
@@ -148,6 +143,8 @@ The `width` and `height` attributes support data binding:
   "imagePath": "banner.jpg",
   "width": 800,
   "height": 400,
+  "widthPx": 800,
+  "heightPx": 400,
   "baseWidth": 150,
   "baseHeight": 100,
   "isLarge": true,
@@ -157,14 +154,14 @@ The `width` and `height` attributes support data binding:
   "images": [
     {
       "url": "photo1.jpg",
-      "width": 300,
-      "height": 200,
+      "widthPt": 300,
+      "heightPt": 200,
       "description": "First photo"
     },
     {
       "url": "photo2.jpg",
-      "width": 400,
-      "height": 300,
+      "widthPt": 400,
+      "heightPt": 300,
       "description": "Second photo"
     }
   ]
@@ -177,77 +174,105 @@ The `width` and `height` attributes support data binding:
 
 ### Units of Measurement
 
-Scryber supports multiple units for width and height:
+CSS units apply in the `style` attribute for images, and in `width`/`height` attributes for table elements.
 
-| Unit | Description | Example | Best For |
+| Unit | Description | Example (style) | Best For |
 |------|-------------|---------|----------|
-| `pt` | Points (1/72 inch) | `width="400pt"` | PDF documents (recommended) |
-| `px` | Pixels | `width="400px"` | Screen-based sizing |
-| `%` | Percentage of container | `width="50%"` | Responsive layouts |
-| `in` | Inches | `width="5.5in"` | Physical dimensions |
-| `cm` | Centimeters | `width="14cm"` | Metric measurements |
-| `mm` | Millimeters | `width="140mm"` | Precise metric sizing |
-| `rem`| Relative to the *root* font size | `margin: 1rem` |
-| `vw`, `vh` | Relative to the viewport width and height | `width: 90vw` |
-| `vmax`, `vmin` | Relative to the maximum or minimum viewport size | `x : 20vMin` |
+| `pt` | Points (1/72 inch) | `style="width: 400pt;"` | PDF documents (recommended) |
+| `px` | Pixels | `style="width: 400px;"` | Screen-based sizing |
+| `%` | Percentage of container | `style="width: 50%;"` | Responsive layouts |
+| `in` | Inches | `style="width: 5.5in;"` | Physical dimensions |
+| `cm` | Centimeters | `style="width: 14cm;"` | Metric measurements |
+| `mm` | Millimeters | `style="width: 140mm;"` | Precise metric sizing |
+| `rem`| Relative to the root font size | `style="margin: 1rem;"` | Relative sizing |
+| `vw`, `vh` | Relative to the viewport | `style="width: 90vw;"` | Viewport-relative |
+
+For `<img>`, all CSS units go in `style=""`. The `width`/`height` attributes accept integer pixel hints only:
 
 ```html
-<!-- Points (recommended for PDF) -->
-<img src="photo.jpg" width="400pt" height="300pt" />
+<!-- Points via style (recommended for PDF) -->
+<img src="photo.jpg" style="width: 400pt; height: 300pt;" />
 
-<!-- Percentage -->
+<!-- Percentage via style -->
+<img src="banner.jpg" style="width: 100%;" />
+
+<!-- Table width attribute (unchanged — still accepts units) -->
 <table width="100%">...</table>
 
-<!-- Inches -->
-<img src="print-image.jpg" width="8in" height="10in" />
-
-<!-- Centimeters -->
-<img src="metric-image.jpg" width="20cm" height="15cm" />
+<!-- Table cell with point attribute (unchanged) -->
+<td width="150pt">...</td>
 ```
+
+---
+
+### Intrinsic Size Hints <span class="label label-green">v9.7</span>
+
+The `width` and `height` attributes on `<img>` accept **integer pixel values** as hints about the image's natural dimensions. These are used for aspect-ratio derivation when CSS styling specifies only one dimension.
+
+```html
+<!-- Integer pixel hint — natural size declared as 800×600 pixels -->
+<img src="photo.jpg" width="800" height="600" />
+
+<!-- With CSS width — height derived from hint (300pt × 600/800 = 225pt) -->
+<img src="photo.jpg" width="800" height="600" style="width: 300pt;" />
+
+<!-- No hints — aspect ratio comes from the image file itself -->
+<img src="photo.jpg" style="width: 300pt;" />
+```
+
+If neither `style` width/height nor integer hints are provided, the image renders at its natural file dimensions or scales to the container width.
+
+---
 
 ### Aspect Ratio Preservation
 
-When only one dimension is specified, the aspect ratio is typically maintained:
+When only one CSS dimension is specified, the image preserves its aspect ratio from its source file (or from integer attribute hints if provided):
 
 ```html
-<!-- Width specified, height auto-calculated -->
-<img src="photo.jpg" width="400pt" />
+<!-- Width specified, height auto-calculated from image ratio -->
+<img src="photo.jpg" style="width: 400pt;" />
 
-<!-- Height specified, width auto-calculated -->
-<img src="photo.jpg" height="300pt" />
+<!-- Height specified, width auto-calculated from image ratio -->
+<img src="photo.jpg" style="height: 300pt;" />
 
-<!-- Both specified (may distort if ratio doesn't match) -->
-<img src="photo.jpg" width="400pt" height="200pt" />
+<!-- Both specified — may distort if ratio doesn't match -->
+<img src="photo.jpg" style="width: 400pt; height: 200pt;" />
 ```
+
+**Best practice:** Specify only one dimension and let the engine derive the other for distortion-free images.
+
+---
 
 ### Image Sizing Best Practices
 
 **Do:**
-- Specify at least width for consistent layout
-- Use points (pt) for PDF documents
-- Consider source image resolution
-- Maintain aspect ratios when possible
-- Use percentages for flexible layouts
+- Use the CSS `style` attribute for unit-based sizing: `style="width: 400pt;"`
+- Use `min-width`, `max-width` in `style` for flexible constraints
+- Specify at least one dimension for consistent layout
+- Use `pt` for PDF documents
+- Maintain aspect ratios by sizing only one dimension when possible
 
 **Don't:**
+- Put CSS units in `<img>` `width`/`height` attributes — this throws in v9.7
 - Excessively upscale low-resolution images
-- Specify dimensions that severely distort images
-- Omit dimensions (may cause layout issues)
+- Omit dimensions entirely (may cause layout issues)
 
 ```html
-<!-- Good: Maintains aspect ratio -->
-<img src="photo.jpg" width="400pt" />
+<!-- Good: CSS units via style -->
+<img src="photo.jpg" style="width: 400pt;" />
 
-<!-- Good: Explicit dimensions matching source ratio -->
-<img src="photo.jpg" width="400pt" height="300pt" />
+<!-- Good: both dimensions preserving original ratio -->
+<img src="photo.jpg" style="width: 400pt; height: 300pt;" />
 
-<!-- Caution: May distort if ratio is wrong -->
-<img src="photo.jpg" width="400pt" height="200pt" />
+<!-- Caution: may distort if ratio is wrong -->
+<img src="photo.jpg" style="width: 400pt; height: 200pt;" />
 ```
+
+---
 
 ### Table Sizing
 
-Tables and cells support width and height attributes:
+Tables and cells support `width` and `height` attributes with CSS units and percentages (unchanged):
 
 ```html
 <!-- Table with full width -->
@@ -280,18 +305,20 @@ Tables and cells support width and height attributes:
 </table>
 ```
 
+---
+
 ### Percentage-Based Layouts
 
-Percentages are relative to the parent container:
+Use `style` for percentage widths on images:
 
 ```html
 <!-- 50% of parent width -->
-<img src="photo.jpg" width="50%" />
+<img src="photo.jpg" style="width: 50%;" />
 
 <!-- Full width of container -->
-<img src="banner.jpg" width="100%" height="200pt" />
+<img src="banner.jpg" style="width: 100%; height: 200pt;" />
 
-<!-- Table with percentage columns -->
+<!-- Table with percentage columns (attribute — unchanged) -->
 <table width="100%">
     <tr>
         <td width="30%">Sidebar</td>
@@ -300,20 +327,24 @@ Percentages are relative to the parent container:
 </table>
 ```
 
+---
+
 ### Maximum and Minimum Dimensions
 
-While `width` and `height` set explicit dimensions, use CSS for constraints:
+Use CSS `style` for min/max constraints:
 
 ```html
 <!-- Using style for max-width -->
 <img src="large-image.jpg"
      style="max-width: 600pt; width: 100%; height: auto;" />
 
-<!-- Minimum dimensions -->
+<!-- Minimum dimensions on a block element -->
 <div style="min-width: 200pt; min-height: 100pt; border: 1pt solid #ccc;">
     Content with minimum dimensions
 </div>
 ```
+
+---
 
 ### Iframe Sizing
 
@@ -327,16 +358,16 @@ Iframes require explicit dimensions:
 <iframe src="content.html" width="100%" height="500pt"></iframe>
 ```
 
-### Responsive Image Patterns
+---
 
-Common responsive image patterns:
+### Responsive Image Patterns
 
 ```html
 <!-- Full width, auto height -->
-<img src="banner.jpg" width="100%" height="auto" />
+<img src="banner.jpg" style="width: 100%;" />
 
 <!-- Constrained maximum -->
-<img src="photo.jpg" style="max-width: 600pt; width: 100%; height: auto;" />
+<img src="photo.jpg" style="max-width: 600pt; width: 100%;" />
 
 <!-- Fixed aspect ratio container -->
 <div style="width: 100%; position: relative; padding-bottom: 56.25%;">
@@ -346,51 +377,19 @@ Common responsive image patterns:
 </div>
 ```
 
-### Common Sizing Patterns
-
-```html
-<!-- Thumbnail size -->
-<img src="thumb.jpg" width="100pt" height="75pt" />
-
-<!-- Standard photo -->
-<img src="photo.jpg" width="400pt" height="300pt" />
-
-<!-- Large banner -->
-<img src="banner.jpg" width="800pt" height="200pt" />
-
-<!-- Full-width header -->
-<img src="header.jpg" width="100%" height="150pt" />
-
-<!-- Square avatar -->
-<img src="avatar.jpg" width="120pt" height="120pt"
-     style="border-radius: 60pt;" />
-```
-
-### Size and File Size
-
-Image display size doesn't affect file size in PDF:
-
-```html
-<!-- Same source image, different display sizes -->
-<img src="high-res-photo.jpg" width="200pt" height="150pt" />
-<img src="high-res-photo.jpg" width="400pt" height="300pt" />
-
-<!-- Both embed the same image data, just displayed at different sizes -->
-```
+---
 
 ### Zero or Invalid Dimensions
 
-Avoid zero or missing dimensions:
-
 ```html
 <!-- Invalid: zero dimensions -->
-<img src="photo.jpg" width="0" height="0" />  <!-- Won't display -->
+<img src="photo.jpg" style="width: 0; height: 0;" />  <!-- Won't display -->
 
 <!-- Invalid: negative dimensions -->
-<img src="photo.jpg" width="-100pt" />  <!-- May cause errors -->
+<img src="photo.jpg" style="width: -100pt;" />  <!-- May cause errors -->
 
 <!-- Always specify positive, valid dimensions -->
-<img src="photo.jpg" width="100pt" height="75pt" />
+<img src="photo.jpg" style="width: 100pt; height: 75pt;" />
 ```
 
 ---
@@ -401,33 +400,37 @@ Avoid zero or missing dimensions:
 
 ```html
 <!-- Small thumbnail -->
-<img src="thumbnail.jpg" width="80pt" height="60pt" />
+<img src="thumbnail.jpg" style="width: 80pt; height: 60pt;" />
 
 <!-- Medium image -->
-<img src="photo.jpg" width="300pt" height="225pt" />
+<img src="photo.jpg" style="width: 300pt; height: 225pt;" />
 
 <!-- Large featured image -->
-<img src="featured.jpg" width="600pt" height="400pt" />
+<img src="featured.jpg" style="width: 600pt; height: 400pt;" />
 
 <!-- Banner image -->
-<img src="banner.jpg" width="100%" height="150pt" />
+<img src="banner.jpg" style="width: 100%; height: 150pt;" />
 ```
+
+---
 
 ### Maintaining Aspect Ratio
 
 ```html
-<!-- Original: 1600x1200 (4:3 ratio) -->
-<img src="photo.jpg" width="400pt" height="300pt" />
+<!-- Original: 1600x1200 (4:3 ratio) — sized via style -->
+<img src="photo.jpg" style="width: 400pt; height: 300pt;" />
 
-<!-- Same ratio, different size -->
-<img src="photo.jpg" width="200pt" height="150pt" />
+<!-- Same ratio, smaller -->
+<img src="photo.jpg" style="width: 200pt; height: 150pt;" />
 
-<!-- Width only, height auto-calculated -->
-<img src="photo.jpg" width="400pt" />
+<!-- Width only — height auto-calculated from image ratio -->
+<img src="photo.jpg" style="width: 400pt;" />
 
-<!-- Height only, width auto-calculated -->
-<img src="photo.jpg" height="300pt" />
+<!-- Height only — width auto-calculated from image ratio -->
+<img src="photo.jpg" style="height: 300pt;" />
 ```
+
+---
 
 ### Responsive Table Layout
 
@@ -450,6 +453,8 @@ Avoid zero or missing dimensions:
     </tr>
 </table>
 ```
+
+---
 
 ### Fixed and Flexible Columns
 
@@ -475,6 +480,8 @@ Avoid zero or missing dimensions:
 </table>
 ```
 
+---
+
 ### Image Gallery with Uniform Sizing
 
 ```html
@@ -482,76 +489,62 @@ Avoid zero or missing dimensions:
     <h2>Photo Gallery</h2>
 
     <!-- All images same size for uniform grid -->
-    <img src="photo1.jpg" width="200pt" height="150pt" style="margin: 5pt;" />
-    <img src="photo2.jpg" width="200pt" height="150pt" style="margin: 5pt;" />
-    <img src="photo3.jpg" width="200pt" height="150pt" style="margin: 5pt;" />
-    <img src="photo4.jpg" width="200pt" height="150pt" style="margin: 5pt;" />
-    <img src="photo5.jpg" width="200pt" height="150pt" style="margin: 5pt;" />
-    <img src="photo6.jpg" width="200pt" height="150pt" style="margin: 5pt;" />
+    <img src="photo1.jpg" style="width: 200pt; height: 150pt; margin: 5pt;" />
+    <img src="photo2.jpg" style="width: 200pt; height: 150pt; margin: 5pt;" />
+    <img src="photo3.jpg" style="width: 200pt; height: 150pt; margin: 5pt;" />
+    <img src="photo4.jpg" style="width: 200pt; height: 150pt; margin: 5pt;" />
+    <img src="photo5.jpg" style="width: 200pt; height: 150pt; margin: 5pt;" />
+    <img src="photo6.jpg" style="width: 200pt; height: 150pt; margin: 5pt;" />
 </div>
 ```
 
+---
+
 ### Dynamic Sizing with Data Binding
-
-
-
-
 
 {% raw %}
 ```html
 <!-- Model: {
-    thumbnail: { url: "thumb.jpg", width: 100, height: 75 },
-    featured: { url: "featured.jpg", width: 600, height: 400 }
+    thumbnail: { url: "thumb.jpg", widthPt: 100, heightPt: 75 },
+    featured: { url: "featured.jpg", widthPt: 600, heightPt: 400 }
 } -->
 
 <div>
     <h3>Thumbnail</h3>
     <img src="{{model.thumbnail.url}}"
-         width="{{model.thumbnail.width}}pt"
-         height="{{model.thumbnail.height}}pt" />
+         style="width: {{model.thumbnail.widthPt}}pt; height: {{model.thumbnail.heightPt}}pt;" />
 
     <h2>Featured Image</h2>
     <img src="{{model.featured.url}}"
-         width="{{model.featured.width}}pt"
-         height="{{model.featured.height}}pt" />
+         style="width: {{model.featured.widthPt}}pt; height: {{model.featured.heightPt}}pt;" />
 </div>
 ```
 {% endraw %}
 
-
-
-
+---
 
 ### Product Listing with Images
-
-
-
-
 
 {% raw %}
 ```html
 <!-- Model: { products: [
-    { name: "Widget A", image: "widget-a.jpg", width: 250, height: 250 },
-    { name: "Widget B", image: "widget-b.jpg", width: 250, height: 250 }
+    { name: "Widget A", image: "widget-a.jpg", widthPt: 250, heightPt: 250 },
+    { name: "Widget B", image: "widget-b.jpg", widthPt: 250, heightPt: 250 }
 ] } -->
 
-<template data-bind="{{model.products}}">
+{{#each model.products}}
     <div style="border: 1pt solid #ddd; padding: 15pt; margin-bottom: 20pt;
                 display: inline-block; width: 280pt;">
-        <img src="{{.image}}"
-             width="{{.width}}pt"
-             height="{{.height}}pt"
-             alt="{{.name}}"
-             style="display: block;" />
-        <h3 style="margin: 10pt 0 0 0; text-align: center;">{{.name}}</h3>
+        <img src="{{this.image}}"
+             style="width: {{this.widthPt}}pt; height: {{this.heightPt}}pt; display: block;"
+             alt="{{this.name}}" />
+        <h3 style="margin: 10pt 0 0 0; text-align: center;">{{this.name}}</h3>
     </div>
-</template>
+{{/each}}
 ```
 {% endraw %}
 
-
-
-
+---
 
 ### Logo Sizing Variations
 
@@ -594,6 +587,8 @@ Avoid zero or missing dimensions:
 </div>
 ```
 
+---
+
 ### Chart Sizing
 
 ```html
@@ -601,28 +596,26 @@ Avoid zero or missing dimensions:
     <h2>Sales Performance</h2>
 
     <!-- Standard chart size -->
-    <img src="sales-chart.png" width="600pt" height="400pt"
+    <img src="sales-chart.png" style="width: 600pt; height: 400pt;"
          alt="Sales performance chart" />
 
     <h2>Revenue Breakdown</h2>
 
     <!-- Smaller chart -->
-    <img src="revenue-pie.png" width="400pt" height="400pt"
+    <img src="revenue-pie.png" style="width: 400pt; height: 400pt;"
          alt="Revenue breakdown pie chart" />
 
     <h2>Growth Trend</h2>
 
     <!-- Wide chart -->
-    <img src="growth-line.png" width="700pt" height="300pt"
+    <img src="growth-line.png" style="width: 700pt; height: 300pt;"
          alt="Growth trend line chart" />
 </div>
 ```
 
+---
+
 ### Profile Photo Sizing
-
-
-
-
 
 {% raw %}
 ```html
@@ -631,9 +624,8 @@ Avoid zero or missing dimensions:
 <div style="text-align: center;">
     <!-- Large profile photo -->
     <img src="{{model.user.photo}}"
-         width="200pt" height="200pt"
-         alt="{{model.user.name}}"
-         style="border-radius: 100pt; border: 4pt solid #336699;" />
+         style="width: 200pt; height: 200pt; border-radius: 100pt; border: 4pt solid #336699;"
+         alt="{{model.user.name}}" />
 
     <h2>{{model.user.name}}</h2>
 </div>
@@ -641,17 +633,14 @@ Avoid zero or missing dimensions:
 <!-- Small profile photo in list -->
 <div style="display: flex; align-items: center; margin-bottom: 10pt;">
     <img src="{{model.user.photo}}"
-         width="50pt" height="50pt"
-         alt="{{model.user.name}}"
-         style="border-radius: 25pt; margin-right: 10pt;" />
+         style="width: 50pt; height: 50pt; border-radius: 25pt; margin-right: 10pt;"
+         alt="{{model.user.name}}" />
     <span>{{model.user.name}}</span>
 </div>
 ```
 {% endraw %}
 
-
-
-
+---
 
 ### Full-Width Banner
 
@@ -660,7 +649,7 @@ Avoid zero or missing dimensions:
 <html>
 <body style="margin: 0;">
     <!-- Full-width header banner -->
-    <img src="header-banner.jpg" width="100%" height="200pt"
+    <img src="header-banner.jpg" style="width: 100%; height: 200pt;"
          alt="Welcome banner" />
 
     <div style="padding: 20pt;">
@@ -669,82 +658,81 @@ Avoid zero or missing dimensions:
     </div>
 
     <!-- Full-width footer banner -->
-    <img src="footer-banner.jpg" width="100%" height="100pt"
+    <img src="footer-banner.jpg" style="width: 100%; height: 100pt;"
          alt="Footer banner" />
 </body>
 </html>
 ```
 
+---
+
 ### Icon Sizing
 
 ```html
 <p>
-    <img src="icons/info.png" width="16pt" height="16pt"
-         style="vertical-align: middle;" />
+    <img src="icons/info.png"
+         style="width: 16pt; height: 16pt; vertical-align: middle;" />
     Information message
 </p>
 
 <p>
-    <img src="icons/warning.png" width="20pt" height="20pt"
-         style="vertical-align: middle;" />
+    <img src="icons/warning.png"
+         style="width: 20pt; height: 20pt; vertical-align: middle;" />
     Warning message (larger icon)
 </p>
 
 <p>
-    <img src="icons/success.png" width="24pt" height="24pt"
-         style="vertical-align: middle;" />
+    <img src="icons/success.png"
+         style="width: 24pt; height: 24pt; vertical-align: middle;" />
     Success message (even larger icon)
 </p>
 
 <!-- Feature icons -->
 <div style="text-align: center; margin: 20pt;">
-    <img src="icons/feature1.png" width="64pt" height="64pt" />
-    <img src="icons/feature2.png" width="64pt" height="64pt" style="margin: 0 20pt;" />
-    <img src="icons/feature3.png" width="64pt" height="64pt" />
+    <img src="icons/feature1.png" style="width: 64pt; height: 64pt;" />
+    <img src="icons/feature2.png" style="width: 64pt; height: 64pt; margin: 0 20pt;" />
+    <img src="icons/feature3.png" style="width: 64pt; height: 64pt;" />
 </div>
 ```
 
+---
+
 ### Conditional Sizing
-
-
-
-
 
 {% raw %}
 ```html
 <!-- Model: { displayMode: "thumbnail" } -->
 
 <img src="product.jpg"
-     width="{{model.displayMode == 'thumbnail' ? '100pt' : '400pt'}}"
-     height="{{model.displayMode == 'thumbnail' ? '75pt' : '300pt'}}"
+     style="width: {{if(model.displayMode == 'thumbnail', '100pt', '400pt')}}; height: {{if(model.displayMode == 'thumbnail', '75pt', '300pt')}};"
      alt="Product photo" />
 ```
 {% endraw %}
 
-
-
-
+---
 
 ### Screenshot Sizing
 
 ```html
 <div>
     <h2>Desktop View</h2>
-    <img src="desktop-screenshot.png" width="800pt" height="600pt"
-         alt="Desktop application screenshot"
-         style="border: 1pt solid #ccc;" />
+    <img src="desktop-screenshot.png"
+         style="width: 800pt; height: 600pt; border: 1pt solid #ccc;"
+         alt="Desktop application screenshot" />
 
     <h2>Tablet View</h2>
-    <img src="tablet-screenshot.png" width="600pt" height="800pt"
-         alt="Tablet application screenshot"
-         style="border: 1pt solid #ccc; margin-top: 20pt;" />
+    <img src="tablet-screenshot.png"
+         style="width: 600pt; height: 800pt; border: 1pt solid #ccc; margin-top: 20pt;"
+         alt="Tablet application screenshot" />
 
     <h2>Mobile View</h2>
-    <img src="mobile-screenshot.png" width="300pt" height="600pt"
-         alt="Mobile application screenshot"
-         style="border: 1pt solid #ccc; margin-top: 20pt;" />
+    <img src="mobile-screenshot.png"
+         style="width: 300pt; height: 600pt; border: 1pt solid #ccc; margin-top: 20pt;"
+         alt="Mobile application screenshot" />
 </div>
 ```
+
+---
 
 ### Table with Row Heights
 
@@ -773,25 +761,38 @@ Avoid zero or missing dimensions:
 </table>
 ```
 
+---
+
 ### Certificate/Badge Sizing
 
 ```html
 <div style="text-align: center; margin: 30pt;">
     <h2>Certifications</h2>
 
-    <img src="cert-iso.png" width="150pt" height="150pt"
-         alt="ISO 9001 certification"
-         style="margin: 10pt;" />
+    <img src="cert-iso.png" style="width: 150pt; height: 150pt; margin: 10pt;"
+         alt="ISO 9001 certification" />
 
-    <img src="cert-security.png" width="150pt" height="150pt"
-         alt="Security certification"
-         style="margin: 10pt;" />
+    <img src="cert-security.png" style="width: 150pt; height: 150pt; margin: 10pt;"
+         alt="Security certification" />
 
-    <img src="cert-quality.png" width="150pt" height="150pt"
-         alt="Quality certification"
-         style="margin: 10pt;" />
+    <img src="cert-quality.png" style="width: 150pt; height: 150pt; margin: 10pt;"
+         alt="Quality certification" />
 </div>
 ```
+
+---
+
+### Image Size and PDF File Size
+
+Display size does not affect file size — the same image data is embedded regardless:
+
+```html
+<!-- Same source image, different display sizes — identical embedded data -->
+<img src="high-res-photo.jpg" style="width: 200pt; height: 150pt;" />
+<img src="high-res-photo.jpg" style="width: 400pt; height: 300pt;" />
+```
+
+---
 
 ### Iframe Sizing Examples
 
@@ -813,31 +814,29 @@ Avoid zero or missing dimensions:
 </div>
 ```
 
+---
+
 ### Mixed Size Gallery
 
 ```html
-<!-- Model: { photos: varying sizes based on orientation } -->
-
 <div>
     <h2>Mixed Photo Gallery</h2>
 
     <!-- Landscape photo -->
-    <img src="landscape.jpg" width="400pt" height="300pt"
-         style="margin: 5pt;" />
+    <img src="landscape.jpg" style="width: 400pt; height: 300pt; margin: 5pt;" />
 
     <!-- Portrait photo -->
-    <img src="portrait.jpg" width="300pt" height="400pt"
-         style="margin: 5pt;" />
+    <img src="portrait.jpg" style="width: 300pt; height: 400pt; margin: 5pt;" />
 
     <!-- Square photo -->
-    <img src="square.jpg" width="300pt" height="300pt"
-         style="margin: 5pt;" />
+    <img src="square.jpg" style="width: 300pt; height: 300pt; margin: 5pt;" />
 
     <!-- Panorama -->
-    <img src="panorama.jpg" width="600pt" height="200pt"
-         style="margin: 5pt; display: block;" />
+    <img src="panorama.jpg" style="width: 600pt; height: 200pt; margin: 5pt; display: block;" />
 </div>
 ```
+
+---
 
 ### Signature Block with Sizing
 
@@ -846,7 +845,7 @@ Avoid zero or missing dimensions:
     <p>Approved by:</p>
 
     <div style="margin: 20pt 0;">
-        <img src="signature-ceo.png" width="200pt" height="60pt"
+        <img src="signature-ceo.png" style="width: 200pt; height: 60pt;"
              alt="CEO signature" />
         <p style="margin: 5pt 0 0 0;">
             <strong>John Smith</strong><br/>
@@ -855,7 +854,7 @@ Avoid zero or missing dimensions:
     </div>
 
     <div style="margin: 20pt 0;">
-        <img src="signature-cfo.png" width="200pt" height="60pt"
+        <img src="signature-cfo.png" style="width: 200pt; height: 60pt;"
              alt="CFO signature" />
         <p style="margin: 5pt 0 0 0;">
             <strong>Jane Doe</strong><br/>

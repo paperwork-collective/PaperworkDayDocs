@@ -7,6 +7,7 @@ grand_parent: Template reference
 grand_parent_url: /reference/
 has_children: false
 has_toc: false
+nav_exclude: true
 ---
 
 # @cite : The Citation Source Attribute

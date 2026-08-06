@@ -180,6 +180,8 @@ Using Lax in production, and strict in development means that end users will not
 | `Verbose` | Detailed execution | Detailed debugging |
 | `Diagnostic` | Everything including performance, positioning and structure | Performance analysis |
 
+See [Logging and Tracing](logging-extension) for full details on log levels, appending the log to a PDF, and routing output to custom sinks.
+
 ---
 
 ## Best Practices
@@ -233,4 +235,5 @@ var doc = Document.ParseDocument(stream, ParseSourceType.DynamicContent, setting
 
 - [Document Controllers](document-controllers) - Using the `controller` attribute
 - [Configuration Files](configuration-structure) - Application-level configuration
+- [Logging and Tracing](logging-extension) - Log levels, appending to PDF, and custom log sinks
 - [Best Practices](best-practices) - Configuration guidelines

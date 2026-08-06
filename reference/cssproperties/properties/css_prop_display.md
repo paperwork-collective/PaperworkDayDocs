@@ -71,7 +71,7 @@ The element generates a block box that flows inline. Combines characteristics of
 ### none
 The element is completely removed from the document flow and is not rendered. The element takes up no space in the layout.
 
-### flex <span class="label label-yellow">Beta</span>
+### flex
 The element becomes a **flex container**, and its direct children are arranged along a main axis (row or column). Direction, alignment, wrapping, and sizing are controlled by flex properties.
 
 ```css
@@ -86,7 +86,7 @@ The element becomes a **flex container**, and its direct children are arranged a
 
 See [Flexbox Layout](/reference/cssproperties/properties/css_prop_flexbox) for full property reference and examples.
 
-### grid <span class="label label-yellow">Beta</span>
+### grid
 The element becomes a **grid container**, and its direct children are laid out in a column-row grid. Column structure is defined by `grid-template-columns` using fr units, fixed lengths, `auto`, and `repeat()`. Items are placed in row-major order (left to right, then next row).
 
 ```css
