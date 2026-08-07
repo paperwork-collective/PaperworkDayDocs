@@ -33,9 +33,8 @@ The `@page` rule defines page properties for all pages:
 
 ```css
 @page {
-    size: Letter;           /* Page size */
+    size: Letter portrait;           /* Page size and orientation */
     margin: 1in;            /* All margins */
-    orientation: portrait;  /* or landscape */
 }
 ```
 
@@ -79,113 +78,33 @@ The `@page` rule defines page properties for all pages:
 @page {
     margin: 1in 0.75in;
 }
-```
 
----
+/* specifying margins based on page position in the final document */
 
-## Complete Document with Pages
-
-```html
-<!DOCTYPE html>
-<html xmlns='http://www.w3.org/1999/xhtml'>
-<head>
-    <title>Multi-Page Document</title>
-    <style>
-        @page {
-            size: Letter;
-            margin: 1in;
-        }
-
-        body {
-            font-family: Helvetica, sans-serif;
-            font-size: 11pt;
-        }
-
-        h1 {
-            font-size: 24pt;
-            color: #2563eb;
-        }
-    </style>
-</head>
-<body>
-    <h1>Page 1</h1>
-    <p>Content that will automatically flow across pages as needed.</p>
-
-    <!-- Content continues... -->
-</body>
-</html>
-```
-
----
-
-## Sections
-
-Sections allow different page settings within one document:
-
-```html
-<!DOCTYPE html>
-<html xmlns='http://www.w3.org/1999/xhtml'>
-<head>
-    <title>Multi-Section Document</title>
-    <style>
-        @page {
-            size: Letter;
-            margin: 1in;
-        }
-
-        .portrait-section {
-            /* Portrait orientation */
-        }
-
-        .landscape-section {
-            /* Different settings */
-        }
-    </style>
-</head>
-<body>
-    <!-- Section 1: Portrait -->
-    <section class="portrait-section">
-        <h1>Portrait Section</h1>
-        <p>This section uses portrait orientation.</p>
-    </section>
-
-    <!-- Section 2: Landscape -->
-    <section class="landscape-section" style="page-break-before: always;">
-        <h1>Landscape Section</h1>
-        <p>This section uses landscape orientation.</p>
-    </section>
-</body>
-</html>
-```
-
-### Section-Specific Page Settings
-
-```css
-/* Default page settings */
-@page {
-    size: Letter portrait;
-    margin: 1in;
+@page :first {
+    margin-left: 2in;
+    margin-right: 2in;
 }
 
-/* Landscape section */
-.landscape {
-    page-break-before: always;
+@page :left {
+    margin-right: 2in;
 }
 
-/* Use inline styles for section-specific page settings */
-```
+@page :right {
+    margin-left: 2in;
+}
 
-```html
-<section class="landscape" style="page-break-before: always;">
-    <!-- Content in landscape mode -->
-</section>
 ```
-
----
 
 ## Page Breaks
 
-Control where pages break:
+The Core engine will flow documents and content happily across hundreds of pages, and attempt to keep everything neat. 
+However it is ofter useful to explicitly split content up, and a section doesn't make visual or structural sense.
+
+The engine supports both types of `break-before`/`break-after` and the more legacy (and explicit) `page-break-before`/`page-break-after`.
+When working on a single column layout, these are equivalent and the `break-before` will take a precedent and override any set `page-break-before`.
+
+In [multi-column layouts](/learning/04-layout/04_multi_column.html), their action is, as expected, different.
 
 ### CSS Page Break Properties
 
@@ -231,9 +150,12 @@ Control where pages break:
 
 <div class="keep-together">
     <h2>Important Section</h2>
-    <p>This will not break across pages if possible.</p>
+    <p>This will not break across pages if possible and<br/>
+       move as a whole to a new page if it cannot fit the whole group.</p>
 </div>
 ```
+
+When moving to a new page, the margins, padding, borders and backgrounds are preserved so vertical and horizontal positioning within containers should be maintained.
 
 ### Page Break Values
 
@@ -242,22 +164,139 @@ Control where pages break:
 | `auto` | Default, break as needed |
 | `always` | Always force a page break |
 | `avoid` | Avoid breaking if possible |
-| `left` | Break to next left (even) page |
-| `right` | Break to next right (odd) page |
+| `left`, `verso` | Break to next left (even) page |
+| `right`, `recto` | Break to next right (odd) page |
+
+---
+
+
+### Changing page size within a document
+
+New page sizes can be named and set as part of the flow of the document against any style.
+This will apply to any new pages that are created at and within the applied content.
+
+```css
+@page{
+  size: A4 portrait;
+  margin: 10mm;
+}
+
+@page big {
+  size: A3 landspape;
+  margin: 20mm;
+}
+
+.apply-big {
+  page: big; /*A3 */
+}
+```
+
+---
+
+## Complete Document with different page sizes.
+
+
+#### STYLE Content
+```css
+
+@page{
+  size: A4 portrait; /* default size for non explicit pages */
+  margin: 10mm;
+}
+
+@page :first{
+  margin: 20mm; /* specific margins for the first pages */
+}
+
+@page :left{
+  margin-right: 20mm; /* specific right margins for left hand pages */
+}
+
+@page chart {
+  size: A3 landscape; /* Specific size for the charts */
+}
+
+@page chart:left{
+    margin-right: 30mm; /* right margins only for left page charts */
+}
+
+@page chart:right{
+    margin-left: 30mm; /* left margins only for right page charts */
+}
+
+.chart{
+  page: chart
+}
+
+body {
+    border: solid 1px blue;
+    padding: 2pt;
+}
+
+main {
+  padding:0;
+  margin: 0;
+}
+```
+
+#### HTML Content
+
+```html
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <title>Various page sizes</title>
+</head>
+
+<body>
+    <main>
+        <h1 class="title">This is the first page (with 20mm margins)</h1>
+        <section style='page-break-before: right'>
+            <p>This is on the second (left hand) page </p>
+        </section>
+        <section class="chart">
+            <p>This is A3 and landscape with default margins. </p>
+            <p style='page-break-before: always' >
+                Flowing or explicit new pages within this section will all get the same A3, 
+                and use left or right margins.</p>
+        </section>
+        <section>
+            <p>This is back to A4 portrait (but now on the right so default 10mm)</p>
+        </section>
+    </main>
+</body>
+
+</html>
+```
 
 ---
 
 ## Headers and Footers
 
+The Core engine handles page headers and footers in a different manner to browsers, giving full control of the content and a far improved layout.
+
+*The @top-right etc inner page rules for css headers will be ignored.*
+
+A `<header>` as a direct descendant of the `<body>` will be treated as repeating page header content 
+and a `<footer>` as a direct descendant of the `<body>` will be treated as repeating page footer content. They support any inner content (except page breaks), and can be styled as required.
+
+Note that the body margins and padding will always be applied outside of the headers and footers, so it is often structurally more flexible to put all inner content within a `<main>` tag where possible. 
+This will give complete flexibility on spacing and layout of the adornments.
+
+The Core engine also supports the declartation of a `<continuation-header>` and a `<continuation-footer>` tag. If defined as a direct descendant of the `<body>` then they will be used on subsequent 
+pages in the final document, and the header and/or footer will be used only on the first page.
+
+It is perfectly OK to have an empty `<header>` (and `<footer>`) and have content within a continuation(s), this will ensure the 'cover page' does not have the adornments, but all internal pages will get the adornments.
+
+It also does not matter where within the body content the header and footer appear, they will always be at the top and bottom of the page and not be part in the inner layout. 
+
+Data-binding (see **[Data Binding & Expressions](/learning/02-data-binding/index.html)** ) is supported within the headers and footers, but the current context is tricky to manage. 
+
 ### Simple Footer with Page Numbers
 
 ```html
 <style>
-    .footer {
-        position: fixed;
-        bottom: 20pt;
-        left: 0;
-        right: 0;
+    footer {
         text-align: center;
         font-size: 9pt;
         color: #666;
@@ -265,13 +304,14 @@ Control where pages break:
 </style>
 
 <body>
-    <div class="footer">
+    <footer>
         Page <page-number /> of <page-count />
-    </div>
-
-    <!-- Main content -->
-    <h1>Document Title</h1>
-    <p>Content here...</p>
+    </footer>
+    <main>
+        <!-- Main content -->
+        <h1>Document Title</h1>
+        <p>Content here...</p>
+    </main>
 </body>
 ```
 
@@ -279,41 +319,35 @@ Control where pages break:
 
 ```html
 <style>
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
+    header {
         height: 60pt;
         border-bottom: 2pt solid #2563eb;
         padding: 10pt 40pt;
     }
 
-    .header img {
+    header img {
         height: 40pt;
         float: left;
     }
 
-    .header h1 {
+    header h1 {
         font-size: 14pt;
         margin: 10pt 0 0 60pt;
         color: #2563eb;
     }
 
-    body {
-        margin-top: 80pt; /* Space for fixed header */
-    }
 </style>
 
 <body>
-    <div class="header">
+    <header>
         <img src="logo.png" alt="Logo" />
         <h1>Company Name</h1>
-    </div>
-
-    <!-- Content -->
-    <h1>Document Content</h1>
-    <p>Main content starts below the header...</p>
+    </header>
+    <main>
+        <!-- Content -->
+        <h1>Document Content</h1>
+        <p>Main content starts below the header...</p>
+    </main>
 </body>
 ```
 
@@ -326,7 +360,7 @@ Control where pages break:
     <title>Document with Header and Footer</title>
     <style>
         @page {
-            size: Letter;
+            size: A4;
             margin: 1in;
         }
 
@@ -338,11 +372,7 @@ Control where pages break:
         }
 
         /* Fixed header */
-        .header {
-            position: fixed;
-            top: 10pt;
-            left: 40pt;
-            right: 40pt;
+        header {
             border-bottom: 2pt solid #2563eb;
             padding-bottom: 10pt;
         }
@@ -364,11 +394,7 @@ Control where pages break:
         }
 
         /* Fixed footer */
-        .footer {
-            position: fixed;
-            bottom: 10pt;
-            left: 40pt;
-            right: 40pt;
+        footer {
             border-top: 1pt solid #ccc;
             padding-top: 10pt;
             font-size: 9pt;
@@ -395,37 +421,39 @@ Control where pages break:
 </head>
 <body>
     <!-- Header -->
-    <div class="header">
+    <header>
         <div class="header-content">
             <div class="header-logo">
-                <img src="logo.png" style="width: 60pt;" />
+                <img src="logo.png" style="width: 60pt; border: solid 1px #2563eb;" />
             </div>
             <div class="header-text">
-                <h2 style="margin: 0; color: #2563eb;">Company Name</h2>
+                <h3 style="margin: 0; color: #2563eb;">Company Name</h3>
                 <p style="margin: 0; font-size: 9pt;">Tagline or subtitle</p>
             </div>
         </div>
-    </div>
-
+    </header>
+  
+    <main>
     <!-- Main content -->
-    <h1>Document Title</h1>
+    <h2>Document Title</h2>
     <p>This is the main content of the document. It will flow across
        multiple pages automatically, with the header and footer appearing
        on every page.</p>
 
     <!-- More content... -->
-
+    </main>
+  
     <!-- Footer -->
-    <div class="footer">
+    <footer>
         <div class="footer-content">
             <div class="footer-left">
-                Document ID: DOC-12345 | Date: 2025-01-15
+                Document ID: DOC-12345 | Date: <time data-format="yyyy-MM-dd" />
             </div>
             <div class="footer-right">
                 Page <page-number /> of <page-count />
             </div>
         </div>
-    </div>
+    </footer>
 </body>
 </html>
 ```
@@ -441,6 +469,7 @@ Scryber provides special elements for page numbering:
 ```html
 <page-number />          <!-- Current page: 1, 2, 3... -->
 <page-count />           <!-- Total pages: 10 -->
+<page for='#lookup' />   <!-- Displays the page number of another component -->
 ```
 
 ### Page Number Formatting
@@ -449,12 +478,13 @@ Scryber provides special elements for page numbering:
 <!-- Default (Arabic numerals) -->
 Page <page-number />
 
-<!-- Roman numerals (not built-in, use CSS or data) -->
-
 <!-- With formatting -->
 <span style="font-weight: bold;">
     Page <page-number /> of <page-count />
 </span>
+
+<!-- Explicit content format for <page /> inside matching link -->
+<a href='#id'><page for='#id' data-format='Ref:#{0}' /></a>
 ```
 
 ### Page Number Styles
@@ -477,25 +507,27 @@ Page <page-number />
 
 ---
 
-## Practical Examples
+## Practical Example - Report with Sections
 
-### Example 1: Report with Sections
+[Preview]
 
-```html
-<!DOCTYPE html>
-<html xmlns='http://www.w3.org/1999/xhtml'>
-<head>
-    <title>Quarterly Report</title>
-    <style>
+#### Styles
+```css
         @page {
             size: Letter;
             margin: 1in;
         }
 
+        @page chart{
+            size: landscape;
+        }
+
+
         body {
             font-family: Helvetica, sans-serif;
             font-size: 11pt;
         }
+
 
         .cover-page {
             page-break-after: always;
@@ -507,9 +539,31 @@ Page <page-number />
             font-size: 36pt;
             color: #1e40af;
         }
+   
 
         .section {
             page-break-before: always;
+        }    
+        
+        .chart{
+          page: chart;
+        }
+      
+        .toc ul{
+          margin-top: 20pt;
+        }
+      
+      
+        .toc li{
+          padding-bottom: 10pt;
+        }
+      
+        .toc a{
+          text-decoration: none;
+        }
+
+        .toc page {
+          float: right;
         }
 
         .footer {
@@ -520,7 +574,15 @@ Page <page-number />
             font-size: 9pt;
             color: #666;
         }
-    </style>
+```
+
+#### Html
+
+```html
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <title>Quarterly Report</title>
 </head>
 <body>
     <!-- Cover page -->
@@ -530,71 +592,40 @@ Page <page-number />
         <p style="margin-top: 50pt;">December 31, 2024</p>
     </div>
 
+    <!-- TOC -->
+    <div class='section toc'>
+        <h3>Table of contents</h3>
+        <ul style='list-style-type: none'>
+          <li><a href='#summary'>Executive Summary <page for='#summary' /></a></li>
+          <li><a href='#performance'>Financial Performance <page for='#performance' /></a></li>
+          <li><a href='#recommendations'>Recommendations <page for='#recommendations' /></a></li>
+        </ul>
+    </div>
+
     <!-- Section 1 -->
     <div class="section">
-        <h1>Executive Summary</h1>
+        <h1 id='summary' >Executive Summary</h1>
         <p>Key findings and highlights from Q4 2024...</p>
     </div>
 
     <!-- Section 2 -->
-    <div class="section">
-        <h1>Financial Performance</h1>
+    <div class="section chart">
+        <h1 id='performance' >Financial Performance</h1>
         <p>Detailed financial analysis...</p>
     </div>
 
     <!-- Section 3 -->
     <div class="section">
-        <h1>Recommendations</h1>
+        <h1 id='recommendations' >Recommendations</h1>
         <p>Strategic recommendations for Q1 2025...</p>
     </div>
 
     <!-- Footer -->
-    <div class="footer">
+    <footer>
         Q4 2024 Report | Page <page-number /> of <page-count /> | Confidential
-    </div>
+    </footer>
 </body>
 </html>
-```
-
-### Example 2: Newsletter with Multiple Columns
-
-```html
-<style>
-    @page {
-        size: Letter;
-        margin: 0.5in;
-    }
-
-    .two-column {
-        column-count: 2;
-        column-gap: 20pt;
-    }
-
-    .article {
-        page-break-inside: avoid;
-        margin-bottom: 20pt;
-    }
-
-    .article h3 {
-        column-span: all; /* Span across columns */
-    }
-</style>
-
-<body>
-    <h1 style="text-align: center;">Monthly Newsletter</h1>
-
-    <div class="two-column">
-        <div class="article">
-            <h3>Article 1</h3>
-            <p>Content flows across two columns...</p>
-        </div>
-
-        <div class="article">
-            <h3>Article 2</h3>
-            <p>More content...</p>
-        </div>
-    </div>
-</body>
 ```
 
 ---
@@ -626,22 +657,6 @@ Create headers that show:
 
 ## Common Pitfalls
 
-### ❌ Forgetting Margin Space for Headers/Footers
-
-```css
-body {
-    /* Fixed header/footer overlap content */
-}
-```
-
-✅ **Solution:** Add top/bottom margin
-
-```css
-body {
-    margin-top: 80pt;    /* Space for header */
-    margin-bottom: 60pt; /* Space for footer */
-}
-```
 
 ### ❌ Using Absolute Heights for Content
 
@@ -687,6 +702,7 @@ Now that you understand pages and sections:
 1. **[Basic Content](06_basic_content.html)** - Add various content types
 2. **[Layout & Positioning](/learning/04-layout/)** - Advanced page layout
 3. **[Output Options](07_output_options.html)** - Configure PDF generation
+4. **[Multi-Column Layouts](/learning/04-layout/04_multi_column.html)** - Using multiple columns in layouts
 
 ---
 

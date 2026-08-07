@@ -149,8 +149,6 @@ These elements don't make sense in PDF context:
 | `<canvas>` | Use SVG instead |
 | `<video>`, `<audio>` | No media playback in static PDFs |
 | `<iframe>` | Limited support (use for content inclusion only) |
-| Flexbox | Use tables or absolute positioning |
-| CSS Grid | Use tables or absolute positioning |
 | CSS Animations | PDFs are static |
 | CSS Transitions | PDFs are static |
 
@@ -512,31 +510,6 @@ public void TestTemplate(string htmlPath)
 ---
 
 ## Common Pitfalls
-
-### ❌ Using Unsupported CSS
-
-```html
-<style>
-    .container {
-        display: flex;  /* Not supported */
-        display: grid;  /* Not supported */
-    }
-</style>
-```
-
-✅ **Solution:** Use tables or absolute positioning
-
-```html
-<style>
-    .container {
-        display: table;
-        width: 100%;
-    }
-    .item {
-        display: table-cell;
-    }
-</style>
-```
 
 ### ❌ Assuming JavaScript Works
 

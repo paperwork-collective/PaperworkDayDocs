@@ -268,56 +268,39 @@ Target direct children only:
 }
 ```
 
-### Attribute Selectors
-
-Target elements by attribute:
-
-```css
-/* Links with href */
-a[href] {
-    color: #2563eb;
-}
-
-/* Images with alt text */
-img[alt] {
-    border: 1pt solid #ccc;
-}
-
-/* Inputs of type text */
-input[type="text"] {
-    border: 1pt solid #999;
-}
-```
-
 ### Pseudo-classes
 
-Special selectors for states:
+Special selectors for states. Currently Scryber supports a very limited set of states for components. These are:
+
+- ::before and ::after for content
+- :first, :left and :right for the @page rule
 
 ```css
 /* First child */
-li:first-child {
-    font-weight: bold;
+li::before {
+    content: '->';
 }
 
-/* Last child */
-li:last-child {
-    margin-bottom: 0;
+@page{
+    margin: 10pt
 }
 
-/* Nth child (odd/even rows) */
-tr:nth-child(odd) {
-    background-color: #f9fafb;
+@page :left{
+    margin-right: 20pt;
 }
 
-tr:nth-child(even) {
-    background-color: white;
+@page :right{
+    margin-left: 20pt;
 }
 
-/* Specific nth child */
-li:nth-child(3) {
-    color: red;
-}
 ```
+
+Other pseudo-class definitions will be ignored e.g. nth-child, first-of-type etc.
+
+### Attribute Selectors
+
+Currently Scryber does not support attribute selectors, and these will always be ignored.
+
 
 ---
 
@@ -329,7 +312,7 @@ CSS specificity determines which styles apply when there are conflicts:
 
 1. **Inline styles** - `style="..."`  (1,0,0,0)
 2. **ID selectors** - `#header` (0,1,0,0)
-3. **Class, attribute, pseudo-class** - `.highlight`, `[type]`, `:first-child` (0,0,1,0)
+3. **Class** - `.highlight` (0,0,1,0)
 4. **Element selectors** - `p`, `div` (0,0,0,1)
 
 ### Examples
@@ -391,7 +374,7 @@ div p {
 ```css
 p {
     /* Font */
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: Helvetica, sans-serif;
     font-size: 11pt;
     font-weight: bold;  /* or normal, 100-900 */
     font-style: italic; /* or normal */
@@ -481,7 +464,7 @@ p {
 .element {
     position: static;    /* Default flow */
     position: relative;  /* Relative to normal position */
-    position: absolute;  /* Absolute positioning */
+    position: absolute;  /* Absolute positioning based on first relative parent or page */
     position: fixed;     /* Fixed on page */
 
     top: 10pt;
@@ -490,6 +473,39 @@ p {
     left: 20pt;
 
     z-index: 10;        /* Stacking order */
+}
+```
+
+### :root selector and varialbles
+
+The core engine has full support for css varialbles and calculations. 
+
+It also extends this support to allow databinding of custom values into the style's css.
+
+
+```css
+
+:root{
+    --brand-color: var(model.branding.color, "#66FF00");
+}
+.element {
+    background-img: var(model.branding.logo);    /* used directly */
+    color: --brand-color;  /* set to the dynamic value or the fallback */
+    width: calc(model.branding.logowidth + 20pt);
+    padding-left: 10pt;
+}
+```
+
+---
+
+## Global values
+
+The CSS global values (initial, inherit, unset, etc) are **not** supported and will be ignored. However processing will contine straight after.
+
+```css
+.element {
+    background-color: initial;    /* Ignored */
+    color: white;  /* will continue to be applied */
 }
 ```
 
@@ -682,10 +698,6 @@ p {
 
 These CSS properties don't work in Scryber (PDF limitations):
 
-### Layout
-- `display: flex` - Use tables instead
-- `display: grid` - Use tables instead
-- `float` - Use positioning or tables
 
 ### Animation/Interaction
 - `transition` - PDFs are static
@@ -736,24 +748,13 @@ Use them in a document.
 
 ## Common Pitfalls
 
-### ❌ Using Browser-Specific CSS
-
-```css
-.container {
-    display: flex;  /* Won't work */
-}
-```
-
-✅ **Solution:** Use supported properties
-
-```css
-.container {
-    display: table;
-    width: 100%;
-}
-```
 
 ### ❌ Forgetting Units
+
+The default units for the engine are points (72 points per inch).
+The default browser for a browser are pixels (96 pixels per inch).
+
+This can throw off any intricate layouts.
 
 ```css
 p {
