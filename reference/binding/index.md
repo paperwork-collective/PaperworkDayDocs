@@ -370,19 +370,6 @@ Average: {{format(averageOf(items, 'rating'), '0.0')}}
 ```
 {% endraw %}
 
-
-
-
-
----
-
-## Additional Resources
-
-- [Data Binding Basics](../../learning/02-data-binding/01_data_binding_basics.html)
-- [Expression Syntax](../../learning/02-data-binding/02_expression_functions.html)
-- [Template Iteration](../../learning/02-data-binding/03_template_iteration.html)
-- [Conditional Rendering](../../learning/02-data-binding/04_conditional_rendering.html)
-
 ---
 
 ## Custom Functions and Operators
@@ -397,4 +384,17 @@ BindingCalcExpressionFactory.RegisterFunction(new MyCustomFunction());
 BindingCalcExpressionFactory.RegisterOperator(new MyCustomOperator());
 ```
 
-For more information on extending the binding system, see the [Extending Data Binding](../../learning/02-data-binding/) documentation.
+For more information on extending the binding system, see the [Extending Data Binding](/configuration/expression-options.html) documentation.
+
+
+---
+
+## Additional Resources
+
+- [Data Binding Basics](../../learning/02-data-binding/01_data_binding_basics.html)
+- [Expression Syntax](../../learning/02-data-binding/02_expression_functions.html)
+- [Template Iteration](../../learning/02-data-binding/03_template_iteration.html)
+- [Conditional Rendering](../../learning/02-data-binding/04_conditional_rendering.html)
+
+
+

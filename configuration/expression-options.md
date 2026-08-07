@@ -20,7 +20,7 @@ Expression options configure the built-in expression engine and allow custom fun
     "Expressions": {
       "UseStandardFunctions": true,
       "AllowEval": true,
-      "IsCaseSensitive": true,
+      "IsCaseSensitive": false,
       "Register": [
         {
           "Name": "myFunc",
@@ -42,7 +42,7 @@ Expression options configure the built-in expression engine and allow custom fun
 |----------|------|---------|-------------|
 | `UseStandardFunctions` | bool | `true` | Load the 90+ built-in expression functions (string, math, date, collection, etc.) |
 | `AllowEval` | bool | `true` | Allow dynamic expression evaluation at runtime |
-| `IsCaseSensitive` | bool | `true` | Whether function name lookups are case-sensitive |
+| `IsCaseSensitive` | bool | `false` | Whether function name lookups are case-sensitive |
 | `Register[]` | array | `[]` | Custom function and operator registrations |
 
 ## Custom Registration Properties

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "gap [row-|column-]"
+title: "row-gap / column-gap"
 parent: flex-*
 parent_url: /reference/cssproperties/properties/css_prop_flexbox.html
 grand_parent: CSS Properties
@@ -9,7 +9,7 @@ has_children: false
 has_toc: false
 ---
 
-# gap [row-|column-] — Flex
+# row-gap / column-gap — Flex
 {: .no_toc }
 
 Sets the spacing between flex items without adding margin to the outer edges of the container. `gap` is a shorthand for `row-gap` and `column-gap`.

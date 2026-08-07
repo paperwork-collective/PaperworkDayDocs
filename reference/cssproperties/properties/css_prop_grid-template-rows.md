@@ -72,6 +72,24 @@ grid-template-rows: repeat(5, 40pt);  /* five fixed-height rows */
 grid-template-rows: repeat(3, auto);  /* three content-sized rows */
 ```
 
+### [names]
+
+The rows can be interspersed with the line names using square brackets to be referenced by the grid-column. 
+
+```css
+.grid {
+    display: grid;
+    grid-template-rows: [header-start] auto [header-end body-start] 1fr [body-end];
+}
+
+.content  { grid-row: content-start / content-end; }
+.header   { grid-row: header-start / header-end; }
+
+```
+
+
+See [grid line names](/reference/cssproperties/properties/css_prop_grid-named-lines) for more information.
+
 ---
 
 ## Notes
@@ -162,5 +180,6 @@ grid-template-rows: repeat(3, auto);  /* three content-sized rows */
 - [grid-auto-rows](/reference/cssproperties/properties/css_prop_grid-auto-tracks) — size for implicitly created rows
 - [grid-column / grid-row](/reference/cssproperties/properties/css_prop_grid-placement) — placing items by row line number
 - [gap / row-gap / column-gap](/reference/cssproperties/properties/css_prop_grid-gap) — spacing between rows
+- [grid line names](/reference/cssproperties/properties/css_prop_grid-named-lines) - Using names in template columns and rows.
 
 ---

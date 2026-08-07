@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "gap [row-|column-]"
+title: "row-gap / column-gap"
 parent: grid-*
 parent_url: /reference/cssproperties/properties/css_prop_grid.html
 grand_parent: CSS Properties
@@ -9,7 +9,7 @@ has_children: false
 has_toc: false
 ---
 
-# gap [row-|column-] — Grid
+# row-gap / column-gap — Grid
 {: .no_toc }
 
 Sets the spacing between grid tracks (rows and columns) without adding space at the outer edges of the grid. `gap` is a shorthand that sets both `row-gap` and `column-gap`.

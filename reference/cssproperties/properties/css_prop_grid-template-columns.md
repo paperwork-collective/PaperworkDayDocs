@@ -86,6 +86,28 @@ grid-template-columns: repeat(4, 150pt);        /* four fixed-width columns */
 grid-template-columns: 200pt repeat(2, 1fr);    /* fixed + two equal flexible */
 ```
 
+### [names]
+
+The columns can be interspersed with the line names using square brackets to be referenced by the grid-column. 
+
+```css
+.grid {
+    display: grid;
+    grid-template-columns: [sidebar-start] 160pt [sidebar-end content-start] 1fr [content-end];
+}
+
+.sidebar  { 
+    grid-column: sidebar-start / sidebar-end;
+}
+
+.content  { 
+    grid-column: content-start / content-end;
+}
+```
+
+
+See [grid line names](/reference/cssproperties/properties/css_prop_grid-named-lines) for more information.
+
 ### Mixing track types
 
 Any combination is valid:
@@ -388,6 +410,7 @@ Use `column-gap` to add spacing between columns. The gap is subtracted from the 
 
 - [display](/reference/cssproperties/properties/css_prop_display) - Set display mode (`grid`, `block`, `table`, etc.)
 - [column-gap](/reference/cssproperties/properties/css_prop_column-gap) - Spacing between grid columns
+- [grid line names](/reference/cssproperties/properties/css_prop_grid-named-lines) - Using names in template columns and rows.
 - [width](/reference/cssproperties/properties/css_prop_width) - Set grid container width
 - [height](/reference/cssproperties/properties/css_prop_height) - Set item height within a grid cell
 - [padding](/reference/cssproperties/properties/css_prop_padding) - Inner spacing on grid items
