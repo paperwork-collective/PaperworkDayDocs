@@ -26,6 +26,21 @@ has_toc: false
 
 ## Version 9
 
+### 9.7.1 - 13 August 2026
+
+Adds fine-grained content permissions for `<iframe>`, replacing the old all-or-nothing style passthrough.
+
+#### New Features
+
+- **`allow` attribute on `<iframe>`** — a ten-type content permissions policy (`data-passthrough`, `style-passthrough`, `inner-style`, `inner-link`, `inner-navigation`, `inner-images`, `outer-html`, `inline-styles`, `inner-frames`, `inner-forms`) controlling what is kept from embedded content and what passes through from the parent. See the [allow attribute reference](/reference/htmlattributes/attributes/attr_allow.html).
+- **`data-content` on `<iframe>` now enforces `allow`** — dynamically bound content goes through the same permission-cleaning pipeline as content loaded via `src`, including `outer-html` wrapping behaviour.
+- **`outer-html` permission** controls whether a full embedded `<html>`/`<body>` document is preserved as its own container or reduced to just its body content, now also supporting header/footer content from the embedded document.
+
+#### Fixes
+
+- **`data-passthrough` restored as a legacy attribute** — the boolean `data-passthrough="true"/"false"` attribute (superseded by `allow` during development of this release) is back as a working, `[Obsolete]`-marked convenience wrapper, so existing templates keep working. It sets both `data-passthrough` and `style-passthrough` together, matching its original pre-`allow` behaviour. New templates should use `allow` to control each independently.
+- **Expression binding regression** — deep JSON/`JObject` property access on a missing intermediate property (e.g. `deeparray[1].object.value` where `object` doesn't exist) had started silently returning a non-empty value instead of an empty result, an incidental regression introduced while building the iframe permissions work. Fixed.
+
 ### 9.7 - 6 August 2026
 
 Significant new version with more general support for CSS and HTML5 features including *major* improvements in **CSS flex, CSS grid, CSS table-xxx**. Along with support for **z-index**, **colgroup**, and **column-fill**.

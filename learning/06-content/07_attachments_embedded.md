@@ -19,10 +19,12 @@ Learn how to embed files in PDFs, attach external documents, include modular con
 
 By the end of this article, you'll be able to:
 - Attach files to PDFs
-- Embed external content
+- Embed external content with `<iframe>` and `<embed>`
+- Control what embedded content is allowed to bring in with the `allow` policy
+- Bind dynamic markup into any element with `data-content`
+- Transform HTML, XHTML, or Markdown source into rendered content
 - Include HTML fragments
 - Create modular document structures
-- Use iframe for content inclusion
 - Build PDF portfolios
 - Understand attachment limitations
 
@@ -152,11 +154,11 @@ File attachments allow you to embed external files within a PDF, making the PDF 
 
 ---
 
-## Content Inclusion
+## Embedding HTML Content
 
-### Include HTML Fragments
+### Include HTML Fragments with iframe and embed
 
-While not direct file embedding, you can modularize content:
+Scryber supports genuine content inclusion via `<iframe>` and `<embed>` — external HTML is fetched, parsed, and merged into the document tree at generation time (there's no browser-style sandboxing; think server-side include, not a live frame):
 
 **header.html:**
 ```html
@@ -174,14 +176,71 @@ While not direct file embedding, you can modularize content:
     <title>Main Document</title>
 </head>
 <body>
-    <!-- Content inclusion depends on your PDF generator -->
-    <!-- Some support <iframe>, <object>, or server-side includes -->
+    <iframe src="header.html"></iframe>
 
     <h1>Document Content</h1>
     <p>Main document body...</p>
+
+    <embed src="footer.html" />
 </body>
 </html>
 ```
+
+`<iframe>` and `<embed>` behave similarly, with one key difference: `<embed>` always inherits the parent's styles and data with no isolation, while `<iframe>` isolates most of what it pulls in by default and lets you open specific doors with the `allow` attribute. Use `<embed>` for your own trusted fragments (headers, footers, reusable snippets) and `<iframe>` when the content might be third-party, or when you need to keep the parent's styles or data from bleeding into it.
+
+### Controlling What Comes In: the allow Attribute
+
+By default, an `<iframe>` keeps inline styles, images, and links from its content, but blocks the parent's data and styles from passing in, blocks `<style>`/`<link>` tags, nested frames, and forms, and unwraps a full `<html>` document down to just its body. The `allow` attribute overrides any of these on a per-type basis:
+
+```html
+<!-- Third-party content: keep the default isolation -->
+<iframe src="vendor-report.html"></iframe>
+
+<!-- Internal section: inherit the parent's theme -->
+<iframe src="sections/summary.html" allow="style-passthrough any"></iframe>
+
+<!-- Untrusted content: strip navigation too -->
+<iframe src="external.html" allow="inner-navigation none"></iframe>
+```
+
+There are ten permission types in total (data, styles, images, links, navigation, nested frames, forms, and how a full document is wrapped) — see the [allow attribute reference](/reference/htmlattributes/attributes/attr_allow.html) for the complete list, defaults, and grammar.
+
+### Binding Dynamic Content with data-content
+
+Any visual element — not just `<iframe>` — can have its content set dynamically at data-binding time with `data-content`, instead of being loaded from a file:
+
+{% raw %}
+```html
+<!-- Model: { summaryHtml: "<p>Q3 revenue grew <strong>12%</strong>.</p>" } -->
+<div data-content="{{model.summaryHtml}}"></div>
+
+<!-- On an iframe, the same allow policy applies to bound content as to src -->
+<iframe data-content="{{model.summaryHtml}}" allow="inner-images any"></iframe>
+```
+{% endraw %}
+
+`data-content-action` (`append`, `prepend`, or `replace`) controls how the parsed content is inserted relative to any existing children — full details in the [data-content attribute reference](/reference/htmlattributes/attributes/attr_data_content.html).
+
+### Transforming Source with data-content-type
+
+`data-content-type` tells Scryber how to parse the bound (or loaded) content. HTML is the common case, but XHTML and Markdown work the same way:
+
+{% raw %}
+```html
+<!-- HTML (loose parsing) -->
+<div data-content="<p>Some <b>html</b></p>" data-content-type="text/html"></div>
+
+<!-- Strict XHTML -->
+<div data-content="<div xmlns='http://www.w3.org/1999/xhtml'><p>XHTML</p></div>"
+     data-content-type="application/xhtml+xml"></div>
+
+<!-- Markdown, converted to HTML before layout -->
+<!-- Model: { notes: "## Summary\n\nThis is the **summary**." } -->
+<div data-content="{{model.notes}}" data-content-type="text/markdown"></div>
+```
+{% endraw %}
+
+Markdown is especially useful when content originates from a CMS, a database field, or another external source that was authored in Markdown rather than HTML — Scryber converts it to HTML first, so all the usual CSS and elements apply to the result.
 
 ---
 

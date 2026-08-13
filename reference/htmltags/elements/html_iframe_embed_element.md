@@ -70,8 +70,12 @@ The `<iframe>` and `<embed>` elements enable embedded content that:
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
-| `src` | string | **Required**. Source URL or file path for the external content to load and parse. |
-| `data-passthrough` | boolean | **(iframe only)** If true, parent styles pass through to embedded content. Default: false. |
+| `src` | string | Source URL or file path for the external content to load and parse. Mutually exclusive with `data-content` in practice — if both are used, `src` loads first and `data-content` binds additional content afterwards. |
+| `allow` | string | **(iframe only)** Content permissions policy controlling what is kept from the embedded content and what passes through from the parent. See [Content Permissions](#content-permissions-allow) below. |
+| `data-content` | string | Dynamically bound content, parsed and inserted the same way as `src`-loaded content, including full `allow` policy enforcement. See [data-content attribute](/reference/htmlattributes/attributes/attr_data_content.html). |
+| `data-content-type` | string | MIME type used to parse `data-content` (e.g. `text/html`, `application/xhtml+xml`, `text/markdown`). Defaults to the document's default content type. |
+| `data-content-action` | string | `append` (default), `prepend`, or `replace` — how `data-content` is inserted relative to existing children. |
+| `data-passthrough` | boolean | *Legacy, obsolete.* Sets both `data-passthrough` and `style-passthrough` in `allow` together. Retained for templates written before `allow` existed. See the [migration note](/reference/htmlattributes/attributes/attr_data_passthrough.html). |
 
 ### CSS Style Support
 
@@ -107,7 +111,7 @@ Unlike web browsers where iframes create separate browsing contexts, Scryber's `
 1. **Parse-Time Loading**: External content is fetched and parsed during document generation
 2. **Content Merging**: The parsed content becomes part of the parent document's content tree
 3. **No Sandboxing**: Embedded content shares the same PDF document context
-4. **Style Inheritance**: Styles can be controlled via the `data-passthrough` attribute (iframe only)
+4. **Content Permissions**: Styles, images, links, navigation, and data can be controlled via the `allow` attribute (iframe only)
 5. **Static Inclusion**: Content is resolved at generation time, not at viewing time
 
 This approach is similar to server-side includes (SSI) or template partials rather than browser iframe behavior.
@@ -118,17 +122,18 @@ Both elements function similarly with one key difference:
 
 **iframe**:
 - Extends the `Div` component
-- Supports `data-passthrough` attribute for style control
-- By default, isolates embedded content from parent styles (passthrough=false)
+- Supports the `allow` attribute for a ten-type content permissions policy (styles, images, links, navigation, nested frames, forms, data, outer HTML)
+- By default, isolates most embedded content (data, parent styles, `<style>`/`<link>` tags, outer HTML, nested frames, forms all denied) while keeping inline styles, images, and navigation
 - Can contain fallback content in its body
-- Best for complete HTML documents or sections
+- Best for complete HTML documents or sections, especially untrusted or third-party content
+- `data-content` binding runs through the same permission-cleaning pipeline as `src`
 
 **embed**:
 - Extends `VisualComponent` directly
-- Always inherits parent styles
+- Always inherits parent styles and data; no `allow` support, no content cleaning
 - Simpler component model
-- Typically used for smaller content fragments
-- Best for reusable snippets and partials
+- Typically used for smaller, trusted content fragments
+- Best for reusable snippets and partials from your own templates
 
 ### External Content Sources
 
@@ -177,29 +182,40 @@ The embedded content source should be valid HTML that Scryber can parse:
 
 Content must be parseable by Scryber's HTML parser. Standard HTML5 elements and Scryber-specific components are supported.
 
-### Style Passthrough (iframe only)
+### Content Permissions (allow)
 
-The `data-passthrough` attribute controls style inheritance for iframe elements:
+The `allow` attribute controls what is kept from the embedded content and what passes through from the parent document. It replaces the older `data-passthrough` boolean with ten independent permission types, each set to `any` (allowed) or `none` (denied):
 
-**passthrough="false" (default)**:
-- Embedded content renders with isolated styles
-- Parent document styles do not affect embedded content
-- Embedded content uses only its own defined styles
-- Useful for completely independent content blocks
-
-**passthrough="true"**:
-- Parent styles are applied to embedded content
-- Embedded content inherits typography, colors, and other styles
-- Allows consistent theming across embedded content
-- Useful for themed document composition
+| Type key | Governs | Default |
+|----------|---------|---------|
+| `data-passthrough` | Parent's data-binding stack (`model`, params) visible to embedded content | `none` |
+| `style-passthrough` | Parent document's CSS styles apply to embedded elements | `none` |
+| `inner-style` | `<style>` blocks inside the embedded content are kept | `none` |
+| `inner-link` | `<link rel="stylesheet">` elements inside the embedded content are kept | `none` |
+| `inner-navigation` | `<a href>` targets inside the embedded content are kept | `any` |
+| `inner-images` | `<img>` elements inside the embedded content are kept | `any` |
+| `outer-html` | Full `<html>`/`<body>` structure preserved vs. reduced to body content | `none` |
+| `inline-styles` | `style="..."` attributes on embedded elements are kept | `any` |
+| `inner-frames` | Nested `<iframe>`/`<embed>`/`<object>` elements are kept | `none` |
+| `inner-forms` | `<form>`, `<input>`, `<select>`, `<button>` elements are kept | `none` |
 
 ```html
-<!-- Isolated styling (default) -->
-<iframe src="content.html"></iframe>
+<!-- Default policy (no allow attribute): equivalent to -->
+<iframe src="content.html"
+        allow="inline-styles any; inner-images any; inner-navigation any"></iframe>
 
-<!-- Inherit parent styles -->
-<iframe src="content.html" data-passthrough="true"></iframe>
+<!-- Inherit parent styles instead of isolating -->
+<iframe src="content.html" allow="style-passthrough any"></iframe>
+
+<!-- Fully trusted internal content -->
+<iframe src="internal.html"
+        allow="data-passthrough any; style-passthrough any; inner-style any;
+               inner-link any; outer-html any; inner-frames any; inner-forms any"></iframe>
 ```
+
+Every permission is enforced identically whether the content is loaded via `src` or bound dynamically via `data-content` — both paths run through the same content-cleaning step after parsing.
+
+Full grammar, per-type defaults, and further examples: [allow attribute reference](/reference/htmlattributes/attributes/attr_allow.html).
 
 ### Remote Content Loading
 
@@ -247,7 +263,8 @@ In the Scryber codebase:
 **HTMLiFrame**:
 - Extends `Div` → `Panel` → `ContainerComponent` → `VisualComponent`
 - Decorated with `[PDFRemoteParsableComponent("iframe", SourceAttribute = "src")]`
-- Supports `data-passthrough` for style isolation control
+- Supports `allow` (`AllowPolicy` / `DocumentPermissionsPolicy`) for the ten-type content permissions policy
+- Overrides content binding so `data-content` enforces the same policy as `src`
 - Default display mode: `block`
 
 **HTMLEmbed**:
@@ -337,6 +354,25 @@ In the Scryber codebase:
 
 
 
+### Dynamic Content with data-content
+
+Bind markup directly instead of loading it from a source path — the same `allow` policy is enforced on the bound content:
+
+{% raw %}
+```html
+<!-- Model: { customer: { name: "Acme Corp" }, sectionHtml: "<h2>Notes</h2><p>Follow up next week.</p>" } -->
+
+<iframe data-content="{{model.sectionHtml}}"
+        allow="data-passthrough any; inner-images any"></iframe>
+
+<!-- data-passthrough lets the bound content see the parent's model -->
+<iframe data-content="<div>For {{model.customer.name}}</div>"
+        allow="data-passthrough any"></iframe>
+```
+{% endraw %}
+
+See the [data-content attribute reference](/reference/htmlattributes/attributes/attr_data_content.html) for `data-content-type` (HTML, XHTML, Markdown) and `data-content-action` (append/prepend/replace).
+
 ### Styled Iframe with Dimensions
 
 ```html
@@ -372,12 +408,12 @@ In the Scryber codebase:
 </head>
 <body>
     <!-- Content inherits parent styles -->
-    <iframe src="section1.html" data-passthrough="true"></iframe>
+    <iframe src="section1.html" allow="style-passthrough any"></iframe>
 
-    <!-- Content uses its own styles only -->
-    <iframe src="section2.html" data-passthrough="false"></iframe>
+    <!-- Content uses its own styles only (explicit) -->
+    <iframe src="section2.html" allow="style-passthrough none"></iframe>
 
-    <!-- Default behavior (no passthrough) -->
+    <!-- Default behavior (style-passthrough denied by default) -->
     <iframe src="section3.html"></iframe>
 </body>
 </html>
@@ -564,10 +600,10 @@ In the Scryber codebase:
 </head>
 <body>
     <!-- All iframes with passthrough will inherit theme -->
-    <iframe src="sections/cover.html" data-passthrough="true"></iframe>
-    <iframe src="sections/toc.html" data-passthrough="true"></iframe>
-    <iframe src="sections/chapter1.html" data-passthrough="true"></iframe>
-    <iframe src="sections/chapter2.html" data-passthrough="true"></iframe>
+    <iframe src="sections/cover.html" allow="style-passthrough any"></iframe>
+    <iframe src="sections/toc.html" allow="style-passthrough any"></iframe>
+    <iframe src="sections/chapter1.html" allow="style-passthrough any"></iframe>
+    <iframe src="sections/chapter2.html" allow="style-passthrough any"></iframe>
 </body>
 </html>
 ```
@@ -737,7 +773,7 @@ In the Scryber codebase:
 
     <!-- Executive summary -->
     <div style="page-break-after: always;">
-        <iframe src="report/executive-summary.html" data-passthrough="true"></iframe>
+        <iframe src="report/executive-summary.html" allow="style-passthrough any"></iframe>
     </div>
 
     <!-- Financial statements -->
@@ -773,6 +809,8 @@ In the Scryber codebase:
 
 ## See Also
 
+- [allow attribute](/reference/htmlattributes/attributes/attr_allow.html) - Full content permissions policy reference
+- [data-content attribute](/reference/htmlattributes/attributes/attr_data_content.html) - Dynamic content binding, including markdown transform
 - [object](/reference/htmltags/elements/html_object_element.html) - Object element for file attachments
 - [picture](/reference/htmltags/elements/html_picture_element.html) - Picture element for responsive images
 - [img](/reference/htmltags/elements/html_img_element.html) - Image element

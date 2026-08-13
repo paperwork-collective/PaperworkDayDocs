@@ -113,9 +113,10 @@ The `data-content` attribute is supported on the following elements:
 - `<label>` - Text labels with dynamic content (HTMLLabel)
 - `<template>` - Template elements with inline content definition (HTMLTemplate)
 - `<frame>` - Frame elements for document assembly (HTMLFrame)
+- `<iframe>` - Inline frames with content permissions enforcement (HTMLiFrame)
 
 ### General Support
-- All `VisualComponent` descendants - Any visual element that inherits from VisualComponent
+- All `VisualComponent` descendants - Any visual element that inherits from VisualComponent, including `<div>`, `<span>`, `<embed>`, and most other HTML elements
 
 ### Implementation Details
 
@@ -124,6 +125,8 @@ The `data-content` attribute is supported on the following elements:
 **HTMLTemplate**: Content is parsed as a template and used instead of child elements.
 
 **HTMLFrame**: Content is parsed as HTML document and used for frame content.
+
+**HTMLiFrame**: Content is parsed and then passed through the same content-cleaning pipeline as `src`-loaded content — the [`allow`](/reference/htmlattributes/attributes/attr_allow.html) policy is enforced identically whether the markup came from a remote source or a bound `data-content` value. A full `<html>`/`<body>` document is wrapped according to the `outer-html` permission, just as it is for `src`.
 
 **VisualComponent**: Content is parsed according to MIME type and inserted per the specified action.
 
@@ -251,6 +254,7 @@ The default `data-content-action` varies by component:
 - **Label**: Always replaces (action ignored)
 - **Template**: Always replaces (action ignored)
 - **Frame**: Always replaces (action ignored)
+- **iframe**: Default is `append`, same as VisualComponent
 - **VisualComponent**: Default is `append`
 
 ### Performance Considerations
@@ -688,15 +692,33 @@ Define template behavior inline:
 
 
 
+### 18. Bound Content in an iframe with Permissions
+
+Bind markup into an `<iframe>` and constrain what it's allowed to keep — the `allow` policy applies to `data-content` exactly as it would to `src`:
+
+{% raw %}
+```html
+<!-- Model: { notesHtml: "<div>Notes: <a href='https://internal/x'>link</a> <img src='chart.png'/></div>" } -->
+<iframe data-content="{{model.notesHtml}}"
+        allow="inner-images any; inner-navigation none"></iframe>
+
+<!-- The <img> is kept, the <a href> is stripped -->
+```
+{% endraw %}
+
+See the [allow attribute reference](/reference/htmlattributes/attributes/attr_allow.html) for the full list of content permissions.
+
 ---
 
 ## See Also
 
+- [allow attribute](/reference/htmlattributes/attributes/attr_allow.html) - Content permissions policy for iframe
 - [data-content-type attribute](/reference/htmlattributes/data-content-type.html) - Specify content MIME type
 - [data-content-action attribute](/reference/htmlattributes/data-content-action.html) - Control content insertion
 - [label element](/reference/htmltags/elements/html_label_element.html) - Label element reference
 - [template element](/reference/htmltags/elements/html_template_element.html) - Template element reference
 - [frame element](/reference/htmltags/elements/html_frame_element.html) - Frame element reference
+- [iframe and embed elements](/reference/htmltags/elements/html_iframe_embed_element.html) - Iframe element reference
 - [Data Binding](/reference/binding/) - Data binding overview
 - [Expressions](/reference/expressions/) - Expression syntax guide
 
