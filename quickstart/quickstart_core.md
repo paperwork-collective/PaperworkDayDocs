@@ -378,7 +378,7 @@ We can now make some changes to our template and use the provided data to create
 </div>
 {{else}}
     <!-- Fallback to no skills -->
-    <div><em>{{user.fistName}} has no known skills</em></div>
+    <div><em>{{user.firstName}} has no known skills</em></div>
 {{/if}}
 </body>
 </html>
