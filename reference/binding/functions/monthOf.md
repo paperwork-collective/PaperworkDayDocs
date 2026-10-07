@@ -1,6 +1,6 @@
 ---
 layout: default
-title: monthOfYear
+title: monthOf
 parent: Expression Functions
 parent_url: /reference/binding/functions/
 grand_parent: Data Binding
@@ -9,7 +9,7 @@ has_children: false
 has_toc: false
 ---
 
-# monthOfYear() : Extract Month from Date
+# monthOf() : Extract Month from Date
 {: .no_toc }
 
 Extract the month component from a datetime value as a number (1-12).
@@ -30,7 +30,7 @@ Extract the month component from a datetime value as a number (1-12).
 ## Signature
 
 ```
-monthOfYear(date)
+monthOf(date)
 ```
 
 ---
@@ -58,7 +58,7 @@ The month as a number from 1 (January) to 12 (December).
 
 {% raw %}
 ```handlebars
-<p>Month: {{monthOfYear(model.date)}}</p>
+<p>Month: {{monthOf(model.date)}}</p>
 ```
 {% endraw %}
 
@@ -80,7 +80,7 @@ doc.Params["model"] = new {
 
 {% raw %}
 ```handlebars
-<p>Quarter: Q{{ceiling(monthOfYear(model.date) / 3)}}</p>
+<p>Quarter: Q{{ceiling(monthOf(model.date) / 3)}}</p>
 ```
 {% endraw %}
 
@@ -103,11 +103,11 @@ doc.Params["model"] = new {
 {% raw %}
 ```handlebars
 <p>Season:
-{{#if (monthOfYear(model.date) >= 3 && monthOfYear(model.date) <= 5)}}
+{{#if (monthOf(model.date) >= 3 && monthOf(model.date) <= 5)}}
   Spring
-{{else if (monthOfYear(model.date) >= 6 && monthOfYear(model.date) <= 8)}}
+{{else if (monthOf(model.date) >= 6 && monthOf(model.date) <= 8)}}
   Summer
-{{else if (monthOfYear(model.date) >= 9 && monthOfYear(model.date) <= 11)}}
+{{else if (monthOf(model.date) >= 9 && monthOf(model.date) <= 11)}}
   Fall
 {{else}}
   Winter
@@ -136,7 +136,7 @@ doc.Params["model"] = new {
 ```handlebars
 <h3>Monthly Sales</h3>
 {{#each model.sales}}
-  <p>Month {{monthOfYear(this.date)}}: ${{this.amount}}</p>
+  <p>Month {{monthOf(this.date)}}: ${{this.amount}}</p>
 {{/each}}
 ```
 {% endraw %}

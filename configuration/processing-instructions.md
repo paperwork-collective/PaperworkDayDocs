@@ -27,7 +27,7 @@ Processing instructions provide **document-level** configuration, overriding app
 
 | Attribute | Type | Values | Description |
 |-----------|------|--------|-------------|
-| `parser-mode` | enum | `Strict`, `Lax` | Strict throws on invalid elements; Lax ignores them |
+| `parser-mode` | enum | `Strict`, `Lax` | Strict throws on invalid elements; Lax ignores them. Default is `Lax`. See [Binding, Expression and Template Errors](#binding-expression-and-template-errors) for how expression errors are handled |
 | `parser-log` | bool | `true`, `false` | Enable parser trace output |
 | `append-log` | bool | `true`, `false` | Append trace log to PDF document |
 | `log-level` | enum | `Off`, `Errors`, `Warnings`, `Messages`, `Verbose`, `Diagnostic` | Minimum log level |
@@ -166,6 +166,60 @@ Using Lax in production, and strict in development means that end users will not
 ```
 <?scryber parser-mode='Lax' ?>
 ```
+
+---
+
+## Binding, Expression and Template Errors
+
+The parser mode also decides what happens when an **expression**, **binding** or **template** is wrong. Most outcomes are the same in both modes - the mode only matters where the table says so.
+
+> **Since 9.7.5** - the outcomes below were made consistent. Rows marked **9.7.5** changed in that release. In addition, `Document.CreateParserSettings()` and `CreateParserSettingsAsync()` now default to `Lax` (previously `Strict`), matching `Document.ParseDocument()` and the document render options. A `parser-mode` processing instruction still overrides the default.
+
+**Parse** is when the template is read (`Document.ParseDocument`). **Bind** is when the data is bound and the document is generated (`SaveAsPDF`, or `DataBind`). *Throw* means an exception is raised and no document is produced. *Log error* means one entry is written to the trace log at `Error` level, the value is left unset, and generation continues.
+
+The guiding rule is that **invalid syntax is invalid completely** - it always throws, in strict or lax - while **missing data is not a syntax error**.
+
+### Invalid syntax
+
+| Scenario | Example | Strict | Lax | Since |
+|----------|---------|--------|-----|-------|
+| Expression cannot be compiled, in the main template (text or attribute) | `{{concat(model.name, 'x'}}` | Throw on parse | Throw on parse | |
+| Expression compiles, but is incomplete when evaluated | `{{model.items[0}}`, `{{model.missing.[}}` | Throw on bind | Throw on bind | **9.7.5** (lax previously logged a warning) |
+| Wrong number of function parameters | `{{abs(1, 2)}}` | Throw on bind | Throw on bind | **9.7.5** (lax previously logged a warning) |
+| Invalid expression inside a repeating or conditional template | `{{#each model.items}}{{concat(this.name, 'x'}}{{/each}}` | Throw on bind | Throw on bind | **9.7.5** (lax previously logged an error and skipped the template) |
+| Invalid XML in the main template | `<p>Unclosed <b>bold</p>` | Throw on parse | Throw on parse | |
+| Invalid XML inside a repeating template | `{{#each ...}}<p>Unclosed <b>bold</p>{{/each}}` | Throw on parse | Throw on parse | |
+
+Invalid XML inside a repeating template is raised on parse, not bind, because the content of the loop is read as part of the document.
+
+### Missing data in an expression
+
+Using `model.missing.value` as the example.
+
+| Scenario | Strict | Lax | Since |
+|----------|--------|-----|-------|
+| There is no `model` (not set, or null) | Log error | Log error | **9.7.5** (strict previously threw, lax logged a warning twice) |
+| `model` exists, but `missing` does not exist or is null | Silent, value is null | Silent, value is null | **9.7.5** (strict previously threw, lax logged a warning) |
+| `missing` exists, but `value` does not exist or is null | Silent, value is null | Silent, value is null | |
+| Any other failure while evaluating (e.g. an invalid conversion) | Throw on bind | Log warning | |
+| An expression supplied as data to `eval()` is invalid | Throw on bind | Log warning | |
+
+Only the root of the path (`model`) not being set is reported. A null part way along a path, or at the end of it, is normal data and just results in null - so `{{concat(index(), '. ', .object.value)}}` with no `object` outputs `1. `.
+
+An expression that is supplied as *data* to `eval()` is not part of the template, so it is treated as any other evaluation failure, even if it is not valid syntax.
+
+### CSS expressions
+
+`var()` and `calc()` in `style` attributes and stylesheets follow the same rules.
+
+| Scenario | Example | Strict | Lax | Since |
+|----------|---------|--------|-----|-------|
+| Invalid syntax in an inline `style` attribute | `style="color: var(model.value, red;"` | Throw on parse | Throw on parse | |
+| Invalid syntax in a stylesheet | `:root { --x: var(model.value, red; }` | Throw when the styles are parsed (as the document is initialized) | Throw when the styles are parsed | **9.7.5** (previously only found later, when bound or output) |
+| Incomplete expression | `var(model.missing.[, red)`, `calc(1 + )` | Throw on bind | Throw on bind | |
+| `var()` **with** a default, and there is no `model`, no `missing` or no `value` | `var(model.missing.value, red)` | Default is used, silent | Default is used, silent | **9.7.5** (a missing `model` or `missing` previously threw) |
+| `var()` **without** a default, and there is no `model` | `var(model.missing.value)` | Log error, property unset | Log error, property unset | **9.7.5** (previously threw) |
+| `var()` **without** a default, and there is no `missing` or no `value` | `var(model.missing.value)` | Silent, property unset | Silent, property unset | **9.7.5** (a missing `missing` previously threw) |
 
 ---
 

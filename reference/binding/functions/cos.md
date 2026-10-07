@@ -75,9 +75,9 @@ The cosine of the angle (value between -1 and 1).
 
 {% raw %}
 ```handlebars
-<p>cos(0°) = {{format(cos(radians(0)), '0.000')}}</p>
-<p>cos(60°) = {{format(cos(radians(60)), '0.000')}}</p>
-<p>cos(90°) = {{format(cos(radians(90)), '0.000')}}</p>
+<p>cos(0°) = {{format(cos(rad(0)), '0.000')}}</p>
+<p>cos(60°) = {{format(cos(rad(60)), '0.000')}}</p>
+<p>cos(90°) = {{format(cos(rad(90)), '0.000')}}</p>
 ```
 {% endraw %}
 
@@ -118,7 +118,7 @@ doc.Params["model"] = new {
 
 - Input must be in radians (not degrees)
 - Returns value between -1 and 1
-- For degrees, use: `cos(radians(degrees))`
+- For degrees, use: `cos(rad(deg))`
 - Common values:
   - cos(0) = 1
   - cos(π/3) = 0.5
@@ -132,7 +132,7 @@ doc.Params["model"] = new {
 - [sin Function](./sin.md)
 - [tan Function](./tan.md)
 - [acos Function](./acos.md)
-- [radians Function](./radians.md)
+- [rad Function](./rad.md)
 - [pi Function](./pi.md)
 
 ---

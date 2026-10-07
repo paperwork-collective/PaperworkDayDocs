@@ -1,6 +1,6 @@
 ---
 layout: default
-title: degrees
+title: deg
 parent: Expression Functions
 parent_url: /reference/binding/functions/
 grand_parent: Data Binding
@@ -9,7 +9,7 @@ has_children: false
 has_toc: false
 ---
 
-# degrees() : Convert Radians to Degrees
+# deg() : Convert Radians to Degrees
 {: .no_toc }
 
 Convert an angle from radians to degrees.
@@ -30,7 +30,7 @@ Convert an angle from radians to degrees.
 ## Signature
 
 ```
-degrees(radians)
+deg(rad)
 ```
 
 ---
@@ -58,9 +58,9 @@ The angle in degrees.
 
 {% raw %}
 ```handlebars
-<p>π radians = {{format(degrees(pi()), '0.0')}}°</p>
-<p>π/2 radians = {{format(degrees(pi() / 2), '0.0')}}°</p>
-<p>π/4 radians = {{format(degrees(pi() / 4), '0.0')}}°</p>
+<p>π radians = {{format(deg(pi()), '0.0')}}°</p>
+<p>π/2 radians = {{format(deg(pi() / 2), '0.0')}}°</p>
+<p>π/4 radians = {{format(deg(pi() / 4), '0.0')}}°</p>
 ```
 {% endraw %}
 
@@ -77,7 +77,7 @@ The angle in degrees.
 
 {% raw %}
 ```handlebars
-<p>Angle: {{format(degrees(asin(0.5)), '0.0')}}°</p>
+<p>Angle: {{format(deg(asin(0.5)), '0.0')}}°</p>
 ```
 {% endraw %}
 
@@ -93,7 +93,7 @@ The angle in degrees.
 {% raw %}
 ```handlebars
 {{#each model.angles}}
-  <li>{{this}} rad = {{format(degrees(this), '0.0')}}°</li>
+  <li>{{this}} rad = {{format(deg(this), '0.0')}}°</li>
 {{/each}}
 ```
 {% endraw %}
@@ -121,7 +121,7 @@ doc.Params["model"] = new {
 
 - Converts radians to degrees
 - Formula: degrees = radians × (180/π)
-- Inverse of `radians()` function
+- Inverse of `rad()` function
 - Commonly used with trigonometric functions
 - 2π radians = 360°, π radians = 180°
 
@@ -129,7 +129,7 @@ doc.Params["model"] = new {
 
 ## See Also
 
-- [radians Function](./radians.md)
+- [rad Function](./rad.md)
 - [pi Function](./pi.md)
 - [sin Function](./sin.md)
 - [asin Function](./asin.md)

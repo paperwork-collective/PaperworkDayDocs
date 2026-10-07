@@ -59,7 +59,7 @@ The angle in radians (between -π/2 and π/2).
 {% raw %}
 ```handlebars
 <p>asin(0.5) = {{format(asin(0.5), '0.000')}} radians</p>
-<p>asin(0.5) = {{format(degrees(asin(0.5)), '0.0')}}°</p>
+<p>asin(0.5) = {{format(deg(asin(0.5)), '0.0')}}°</p>
 ```
 {% endraw %}
 
@@ -75,7 +75,7 @@ The angle in radians (between -π/2 and π/2).
 
 {% raw %}
 ```handlebars
-<p>Angle: {{format(degrees(asin(model.opposite / model.hypotenuse)), '0.0')}}°</p>
+<p>Angle: {{format(deg(asin(model.opposite / model.hypotenuse)), '0.0')}}°</p>
 ```
 {% endraw %}
 
@@ -101,7 +101,7 @@ doc.Params["model"] = new {
 - Returns angle in radians
 - Result range: -π/2 to π/2
 - Inverse of `sin()` function
-- For degrees, use: `degrees(asin(value))`
+- For degrees, use: `deg(asin(value))`
 
 ---
 
@@ -110,6 +110,6 @@ doc.Params["model"] = new {
 - [sin Function](./sin.md)
 - [acos Function](./acos.md)
 - [atan Function](./atan.md)
-- [degrees Function](./degrees.md)
+- [deg Function](./deg.md)
 
 ---

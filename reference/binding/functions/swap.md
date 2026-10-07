@@ -1,6 +1,6 @@
 ---
 layout: default
-title: regexSwap
+title: swap
 parent: Expression Functions
 parent_url: /reference/binding/functions/
 grand_parent: Data Binding
@@ -9,7 +9,7 @@ has_children: false
 has_toc: false
 ---
 
-# regexSwap() : Replace Using Regular Expression
+# swap() : Replace Using Regular Expression
 {: .no_toc }
 
 Replace all occurrences matching a regular expression pattern with a replacement string.
@@ -30,7 +30,7 @@ Replace all occurrences matching a regular expression pattern with a replacement
 ## Signature
 
 ```
-regexSwap(str, pattern, replacement)
+swap(str, pattern, replacement)
 ```
 
 ---
@@ -60,7 +60,7 @@ The string with all pattern matches replaced.
 
 {% raw %}
 ```handlebars
-<p>{{regexSwap(model.text, '\\d', '')}}</p>
+<p>{{swap(model.text, '\\d', '')}}</p>
 ```
 {% endraw %}
 
@@ -82,7 +82,7 @@ doc.Params["model"] = new {
 
 {% raw %}
 ```handlebars
-<p>{{regexSwap(model.phone, '\\d', 'X')}}</p>
+<p>{{swap(model.phone, '\\d', 'X')}}</p>
 ```
 {% endraw %}
 
@@ -104,7 +104,7 @@ doc.Params["model"] = new {
 
 {% raw %}
 ```handlebars
-<p>{{regexSwap(model.text, '\\s+', ' ')}}</p>
+<p>{{swap(model.text, '\\s+', ' ')}}</p>
 ```
 {% endraw %}
 
@@ -126,7 +126,7 @@ doc.Params["model"] = new {
 
 {% raw %}
 ```handlebars
-<p>{{regexSwap(model.filename, '[^a-zA-Z0-9_.-]', '_')}}</p>
+<p>{{swap(model.filename, '[^a-zA-Z0-9_.-]', '_')}}</p>
 ```
 {% endraw %}
 
@@ -148,7 +148,7 @@ doc.Params["model"] = new {
 
 {% raw %}
 ```handlebars
-<p>{{regexSwap(model.number, '(\\d)(?=(\\d{3})+$)', '$1,')}}</p>
+<p>{{swap(model.number, '(\\d)(?=(\\d{3})+$)', '$1,')}}</p>
 ```
 {% endraw %}
 
@@ -158,7 +158,7 @@ doc.Params["model"] = new {
 
 {% raw %}
 ```handlebars
-<p>{{regexSwap(model.html, '<[^>]+>', '')}}</p>
+<p>{{swap(model.html, '<[^>]+>', '')}}</p>
 ```
 {% endraw %}
 
@@ -181,7 +181,7 @@ doc.Params["model"] = new {
 {% raw %}
 ```handlebars
 <!-- Convert MM/DD/YYYY to YYYY-MM-DD -->
-<p>{{regexSwap(model.date, '(\\d{2})/(\\d{2})/(\\d{4})', '$3-$1-$2')}}</p>
+<p>{{swap(model.date, '(\\d{2})/(\\d{2})/(\\d{4})', '$3-$1-$2')}}</p>
 ```
 {% endraw %}
 
@@ -226,8 +226,8 @@ doc.Params["model"] = new {
 
 ## See Also
 
-- [regexIsMatch Function](./regexIsMatch.md)
-- [regexMatches Function](./regexMatches.md)
+- [isMatch Function](./isMatch.md)
+- [matches Function](./matches.md)
 - [replace Function](./replace.md)
 
 ---

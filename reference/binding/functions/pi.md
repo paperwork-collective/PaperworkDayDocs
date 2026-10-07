@@ -128,7 +128,7 @@ doc.Params["model"] = new {
 - [e Function](./e.md)
 - [sin Function](./sin.md)
 - [cos Function](./cos.md)
-- [radians Function](./radians.md)
-- [degrees Function](./degrees.md)
+- [rad Function](./rad.md)
+- [deg Function](./deg.md)
 
 ---

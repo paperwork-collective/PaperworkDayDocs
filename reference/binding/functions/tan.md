@@ -75,7 +75,7 @@ The tangent of the angle.
 
 {% raw %}
 ```handlebars
-<p>tan(45°) = {{format(tan(radians(45)), '0.000')}}</p>
+<p>tan(45°) = {{format(tan(rad(45)), '0.000')}}</p>
 ```
 {% endraw %}
 
@@ -113,7 +113,7 @@ doc.Params["model"] = new {
 
 - Input must be in radians (not degrees)
 - Undefined at π/2, 3π/2, etc. (where cosine = 0)
-- For degrees, use: `tan(radians(degrees))`
+- For degrees, use: `tan(rad(deg))`
 - tan(x) = sin(x) / cos(x)
 - Common values:
   - tan(0) = 0
@@ -127,6 +127,6 @@ doc.Params["model"] = new {
 - [sin Function](./sin.md)
 - [cos Function](./cos.md)
 - [atan Function](./atan.md)
-- [radians Function](./radians.md)
+- [rad Function](./rad.md)
 
 ---

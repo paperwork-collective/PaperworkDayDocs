@@ -141,9 +141,9 @@ Built-in functions available in `{% raw %}{{expression}}{% endraw %}` bindings.
 | **padLeft** | `padLeft(str, length, char)` | Pad string on left |
 | **padRight** | `padRight(str, length, char)` | Pad string on right |
 | **split** | `split(str, separator)` | Split string into array |
-| **regexIsMatch** | `regexIsMatch(str, pattern)` | Test if matches regex |
-| **regexMatches** | `regexMatches(str, pattern)` | Get all regex matches |
-| **regexSwap** | `regexSwap(str, pattern, replacement)` | Replace using regex |
+| **isMatch** | `isMatch(str, pattern)` | Test if matches regex |
+| **matches** | `matches(str, pattern)` | Get all regex matches |
+| **swap** | `swap(str, pattern, replacement)` | Replace using regex |
 
 [→ String Functions Details](./functions/#string-functions)
 
@@ -168,8 +168,8 @@ Built-in functions available in `{% raw %}{{expression}}{% endraw %}` bindings.
 | **asin** | `asin(value)` | Arcsine |
 | **acos** | `acos(value)` | Arccosine |
 | **atan** | `atan(value)` | Arctangent |
-| **degrees** | `degrees(radians)` | Convert radians to degrees |
-| **radians** | `radians(degrees)` | Convert degrees to radians |
+| **deg** | `deg(rad)` | Convert radians to degrees |
+| **rad** | `rad(deg)` | Convert degrees to radians |
 | **pi** | `pi()` | Pi constant (3.14159...) |
 | **e** | `e()` | Euler's number (2.71828...) |
 | **random** | `random()` | Random value between 0 and 1 |
@@ -192,7 +192,7 @@ Built-in functions available in `{% raw %}{{expression}}{% endraw %}` bindings.
 | **minutesBetween** | `minutesBetween(date1, date2)` | Calculate minutes between dates |
 | **secondsBetween** | `secondsBetween(date1, date2)` | Calculate seconds between dates |
 | **yearOf** | `yearOf(date)` | Extract year |
-| **monthOfYear** | `monthOfYear(date)` | Extract month (1-12) |
+| **monthOf** | `monthOf(date)` | Extract month (1-12) |
 | **dayOfMonth** | `dayOfMonth(date)` | Extract day of month |
 | **dayOfWeek** | `dayOfWeek(date)` | Extract day of week |
 | **dayOfYear** | `dayOfYear(date)` | Extract day of year (1-365) |

@@ -59,7 +59,7 @@ The angle in radians (between 0 and π).
 {% raw %}
 ```handlebars
 <p>acos(0.5) = {{format(acos(0.5), '0.000')}} radians</p>
-<p>acos(0.5) = {{format(degrees(acos(0.5)), '0.0')}}°</p>
+<p>acos(0.5) = {{format(deg(acos(0.5)), '0.0')}}°</p>
 ```
 {% endraw %}
 
@@ -75,7 +75,7 @@ The angle in radians (between 0 and π).
 
 {% raw %}
 ```handlebars
-<p>Angle: {{format(degrees(acos(model.adjacent / model.hypotenuse)), '0.0')}}°</p>
+<p>Angle: {{format(deg(acos(model.adjacent / model.hypotenuse)), '0.0')}}°</p>
 ```
 {% endraw %}
 
@@ -101,7 +101,7 @@ doc.Params["model"] = new {
 - Returns angle in radians
 - Result range: 0 to π
 - Inverse of `cos()` function
-- For degrees, use: `degrees(acos(value))`
+- For degrees, use: `deg(acos(value))`
 
 ---
 
@@ -110,6 +110,6 @@ doc.Params["model"] = new {
 - [cos Function](./cos.md)
 - [asin Function](./asin.md)
 - [atan Function](./atan.md)
-- [degrees Function](./degrees.md)
+- [deg Function](./deg.md)
 
 ---

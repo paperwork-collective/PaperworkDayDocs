@@ -87,9 +87,9 @@ Manipulate and format text.
 | [padLeft](./padLeft) | Pad left with characters | `{% raw %}{{padLeft(model.num, 5, '0')}}{% endraw %}` |
 | [padRight](./padRight) | Pad right with characters | `{% raw %}{{padRight(model.text, 10, ' ')}}{% endraw %}` |
 | [split](./split) | Split string into array | `{% raw %}{{split(model.text, ',')}}{% endraw %}` |
-| [regexIsMatch](./regexIsMatch) | Test regex pattern | `{% raw %}{{regexIsMatch(model.email, '^.+@.+$')}}{% endraw %}` |
-| [regexMatches](./regexMatches) | Find all regex matches | `{% raw %}{{regexMatches(model.text, '\\d+')}}{% endraw %}` |
-| [regexSwap](./regexSwap) | Replace using regex | `{% raw %}{{regexSwap(model.text, '\\d+', 'X')}}{% endraw %}` |
+| [isMatch](./isMatch) | Test regex pattern | `{% raw %}{{isMatch(model.email, '^.+@.+$')}}{% endraw %}` |
+| [matches](./matches) | Find all regex matches | `{% raw %}{{matches(model.text, '\\d+')}}{% endraw %}` |
+| [swap](./swap) | Replace using regex | `{% raw %}{{swap(model.text, '\\d+', 'X')}}{% endraw %}` |
 
 ---
 
@@ -116,8 +116,8 @@ Perform calculations and mathematical operations.
 | [asin](./asin) | Arcsine | `{% raw %}{{asin(model.value)}}{% endraw %}` |
 | [acos](./acos) | Arccosine | `{% raw %}{{acos(model.value)}}{% endraw %}` |
 | [atan](./atan) | Arctangent | `{% raw %}{{atan(model.value)}}{% endraw %}` |
-| [degrees](./degrees) | Convert radians to degrees | `{% raw %}{{degrees(model.radians)}}{% endraw %}` |
-| [radians](./radians) | Convert degrees to radians | `{% raw %}{{radians(model.degrees)}}{% endraw %}` |
+| [deg](./deg) | Convert radians to degrees | `{% raw %}{{deg(model.radians)}}{% endraw %}` |
+| [rad](./rad) | Convert degrees to radians | `{% raw %}{{rad(model.degrees)}}{% endraw %}` |
 | [pi](./pi) | Pi constant (3.14159...) | `{% raw %}{{pi()}}{% endraw %}` |
 | [e](./e) | Euler's number (2.71828...) | `{% raw %}{{e()}}{% endraw %}` |
 | [random](./random) | Random number | `{% raw %}{{random()}}{% endraw %}` |
@@ -142,7 +142,7 @@ Work with dates and timestamps.
 | [minutesBetween](./minutesBetween) | Minutes between two dates | `{% raw %}{{minutesBetween(model.start, model.end)}}{% endraw %}` |
 | [secondsBetween](./secondsBetween) | Seconds between two dates | `{% raw %}{{secondsBetween(model.start, model.end)}}{% endraw %}` |
 | [yearOf](./yearOf) | Extract year | `{% raw %}{{yearOf(model.date)}}{% endraw %}` |
-| [monthOfYear](./monthOfYear) | Extract month (1-12) | `{% raw %}{{monthOfYear(model.date)}}{% endraw %}` |
+| [monthOf](./monthOf) | Extract month (1-12) | `{% raw %}{{monthOf(model.date)}}{% endraw %}` |
 | [dayOfMonth](./dayOfMonth) | Extract day (1-31) | `{% raw %}{{dayOfMonth(model.date)}}{% endraw %}` |
 | [dayOfWeek](./dayOfWeek) | Extract day of week (0-6) | `{% raw %}{{dayOfWeek(model.date)}}{% endraw %}` |
 | [dayOfYear](./dayOfYear) | Extract day of year (1-366) | `{% raw %}{{dayOfYear(model.date)}}{% endraw %}` |

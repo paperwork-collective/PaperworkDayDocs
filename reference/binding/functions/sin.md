@@ -73,9 +73,9 @@ The sine of the angle (value between -1 and 1).
 
 {% raw %}
 ```handlebars
-<p>sin(30°) = {{format(sin(radians(30)), '0.000')}}</p>
-<p>sin(45°) = {{format(sin(radians(45)), '0.000')}}</p>
-<p>sin(90°) = {{format(sin(radians(90)), '0.000')}}</p>
+<p>sin(30°) = {{format(sin(rad(30)), '0.000')}}</p>
+<p>sin(45°) = {{format(sin(rad(45)), '0.000')}}</p>
+<p>sin(90°) = {{format(sin(rad(90)), '0.000')}}</p>
 ```
 {% endraw %}
 
@@ -116,7 +116,7 @@ doc.Params["model"] = new {
 
 - Input must be in radians (not degrees)
 - Returns value between -1 and 1
-- For degrees, use: `sin(radians(degrees))`
+- For degrees, use: `sin(rad(deg))`
 - Common values:
   - sin(0) = 0
   - sin(π/6) = 0.5
@@ -130,7 +130,7 @@ doc.Params["model"] = new {
 - [cos Function](./cos.md)
 - [tan Function](./tan.md)
 - [asin Function](./asin.md)
-- [radians Function](./radians.md)
+- [rad Function](./rad.md)
 - [pi Function](./pi.md)
 
 ---

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: radians
+title: rad
 parent: Expression Functions
 parent_url: /reference/binding/functions/
 grand_parent: Data Binding
@@ -9,7 +9,7 @@ has_children: false
 has_toc: false
 ---
 
-# radians() : Convert Degrees to Radians
+# rad() : Convert Degrees to Radians
 {: .no_toc }
 
 Convert an angle from degrees to radians.
@@ -30,7 +30,7 @@ Convert an angle from degrees to radians.
 ## Signature
 
 ```
-radians(degrees)
+rad(deg)
 ```
 
 ---
@@ -58,10 +58,10 @@ The angle in radians.
 
 {% raw %}
 ```handlebars
-<p>30° = {{format(radians(30), '0.000')}} radians</p>
-<p>45° = {{format(radians(45), '0.000')}} radians</p>
-<p>90° = {{format(radians(90), '0.000')}} radians</p>
-<p>180° = {{format(radians(180), '0.000')}} radians</p>
+<p>30° = {{format(rad(30), '0.000')}} radians</p>
+<p>45° = {{format(rad(45), '0.000')}} radians</p>
+<p>90° = {{format(rad(90), '0.000')}} radians</p>
+<p>180° = {{format(rad(180), '0.000')}} radians</p>
 ```
 {% endraw %}
 
@@ -79,9 +79,9 @@ The angle in radians.
 
 {% raw %}
 ```handlebars
-<p>sin(30°) = {{format(sin(radians(30)), '0.000')}}</p>
-<p>cos(60°) = {{format(cos(radians(60)), '0.000')}}</p>
-<p>tan(45°) = {{format(tan(radians(45)), '0.000')}}</p>
+<p>sin(30°) = {{format(sin(rad(30)), '0.000')}}</p>
+<p>cos(60°) = {{format(cos(rad(60)), '0.000')}}</p>
+<p>tan(45°) = {{format(tan(rad(45)), '0.000')}}</p>
 ```
 {% endraw %}
 
@@ -98,8 +98,8 @@ The angle in radians.
 
 {% raw %}
 ```handlebars
-<p>X: {{format(model.radius * cos(radians(model.angle)), '0.00')}}</p>
-<p>Y: {{format(model.radius * sin(radians(model.angle)), '0.00')}}</p>
+<p>X: {{format(model.radius * cos(rad(model.angle)), '0.00')}}</p>
+<p>Y: {{format(model.radius * sin(rad(model.angle)), '0.00')}}</p>
 ```
 {% endraw %}
 
@@ -124,7 +124,7 @@ doc.Params["model"] = new {
 
 - Converts degrees to radians
 - Formula: radians = degrees × (π/180)
-- Inverse of `degrees()` function
+- Inverse of `deg()` function
 - Required for trigonometric functions (sin, cos, tan)
 - 360° = 2π radians, 180° = π radians
 
@@ -132,7 +132,7 @@ doc.Params["model"] = new {
 
 ## See Also
 
-- [degrees Function](./degrees.md)
+- [deg Function](./deg.md)
 - [pi Function](./pi.md)
 - [sin Function](./sin.md)
 - [cos Function](./cos.md)

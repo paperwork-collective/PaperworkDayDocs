@@ -165,14 +165,14 @@ doc.Params["model"] = new {
 - Case-sensitive matching
 - Returns original string if find text not found
 - To remove text, use empty string as replacement
-- For pattern-based replacement, use `regexSwap()`
+- For pattern-based replacement, use `swap()`
 - For single character replacement, more efficient than regex
 
 ---
 
 ## See Also
 
-- [regexSwap Function](./regexSwap.md)
+- [swap Function](./swap.md)
 - [concat Function](./concat.md)
 - [substring Function](./substring.md)
 

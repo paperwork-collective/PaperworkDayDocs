@@ -1,6 +1,6 @@
 ---
 layout: default
-title: regexMatches
+title: matches
 parent: Expression Functions
 parent_url: /reference/binding/functions/
 grand_parent: Data Binding
@@ -9,7 +9,7 @@ has_children: false
 has_toc: false
 ---
 
-# regexMatches() : Find All Pattern Matches
+# matches() : Find All Pattern Matches
 {: .no_toc }
 
 Find all occurrences of a regular expression pattern in a string.
@@ -30,7 +30,7 @@ Find all occurrences of a regular expression pattern in a string.
 ## Signature
 
 ```
-regexMatches(str, pattern)
+matches(str, pattern)
 ```
 
 ---
@@ -60,7 +60,7 @@ An array containing all matches found.
 {% raw %}
 ```handlebars
 <ul>
-{{#each regexMatches(model.text, '\\d+')}}
+{{#each matches(model.text, '\\d+')}}
   <li>Number: {{this}}</li>
 {{/each}}
 </ul>
@@ -91,7 +91,7 @@ doc.Params["model"] = new {
 {% raw %}
 ```handlebars
 <h3>Found Emails:</h3>
-{{#each regexMatches(model.text, '[\\w\\.]+@[\\w\\.]+')}}
+{{#each matches(model.text, '[\\w\\.]+@[\\w\\.]+')}}
   <p>{{this}}</p>
 {{/each}}
 ```
@@ -118,7 +118,7 @@ doc.Params["model"] = new {
 {% raw %}
 ```handlebars
 <div class="tags">
-{{#each regexMatches(model.post, '#\\w+')}}
+{{#each matches(model.post, '#\\w+')}}
   <span class="tag">{{this}}</span>
 {{/each}}
 </div>
@@ -149,7 +149,7 @@ doc.Params["model"] = new {
 {% raw %}
 ```handlebars
 <h3>Links:</h3>
-{{#each regexMatches(model.content, 'https?://[^\\s]+')}}
+{{#each matches(model.content, 'https?://[^\\s]+')}}
   <a href="{{this}}">{{this}}</a>
 {{/each}}
 ```
@@ -161,7 +161,7 @@ doc.Params["model"] = new {
 
 {% raw %}
 ```handlebars
-<p>Found {{length(regexMatches(model.text, '\\d'))}} digits</p>
+<p>Found {{length(matches(model.text, '\\d'))}} digits</p>
 ```
 {% endraw %}
 
@@ -187,8 +187,8 @@ doc.Params["model"] = new {
 - Returns empty array if no matches found
 - Backslashes must be escaped: `\\d`, `\\w`, etc.
 - Use with `{% raw %}{{#each}}{% endraw %}` to iterate matches
-- For testing if match exists, use `regexIsMatch()`
-- For replacement, use `regexSwap()`
+- For testing if match exists, use `isMatch()`
+- For replacement, use `swap()`
 
 ---
 
@@ -207,8 +207,8 @@ doc.Params["model"] = new {
 
 ## See Also
 
-- [regexIsMatch Function](./regexIsMatch.md)
-- [regexSwap Function](./regexSwap.md)
+- [isMatch Function](./isMatch.md)
+- [swap Function](./swap.md)
 - [#each Helper](../helpers/each.md)
 - [length Function](./length.md)
 

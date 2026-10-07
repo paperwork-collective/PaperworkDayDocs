@@ -80,7 +80,7 @@ doc.Params["model"] = new {
 
 {% raw %}
 ```handlebars
-<p>Date: {{yearOf(model.date)}}-{{padLeft(string(monthOfYear(model.date)), 2, '0')}}-{{padLeft(string(dayOfMonth(model.date)), 2, '0')}}</p>
+<p>Date: {{yearOf(model.date)}}-{{padLeft(string(monthOf(model.date)), 2, '0')}}-{{padLeft(string(dayOfMonth(model.date)), 2, '0')}}</p>
 ```
 {% endraw %}
 

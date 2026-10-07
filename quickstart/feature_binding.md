@@ -175,9 +175,9 @@ Available automatically in specific contexts.
 | [padRight](/reference/binding/functions/padRight) | `padRight(str, len, char)` | Pad string on the right |
 | [split](/reference/binding/functions/split) | `split(str, separator)` | Split string into an array |
 | [format](/reference/binding/functions/format) | `format(value, formatStr)` | Format value using a .NET format string |
-| [regexIsMatch](/reference/binding/functions/regexIsMatch) | `regexIsMatch(str, pattern)` | Test if string matches a regex |
-| [regexMatches](/reference/binding/functions/regexMatches) | `regexMatches(str, pattern)` | Return all regex matches |
-| [regexSwap](/reference/binding/functions/regexSwap) | `regexSwap(str, pattern, replacement)` | Replace using a regex |
+| [isMatch](/reference/binding/functions/isMatch) | `isMatch(str, pattern)` | Test if string matches a regex |
+| [matches](/reference/binding/functions/matches) | `matches(str, pattern)` | Return all regex matches |
+| [swap](/reference/binding/functions/swap) | `swap(str, pattern, replacement)` | Replace using a regex |
 
 ### Mathematical
 
@@ -194,14 +194,14 @@ Available automatically in specific contexts.
 | [log](/reference/binding/functions/log) | `log(value)` | Natural logarithm |
 | [log10](/reference/binding/functions/log10) | `log10(value)` | Base-10 logarithm |
 | [sign](/reference/binding/functions/sign) | `sign(value)` | Returns -1, 0, or 1 |
-| [sin](/reference/binding/functions/sin) | `sin(angle)` | Sine (radians) |
-| [cos](/reference/binding/functions/cos) | `cos(angle)` | Cosine (radians) |
-| [tan](/reference/binding/functions/tan) | `tan(angle)` | Tangent (radians) |
+| [sin](/reference/binding/functions/sin) | `sin(angle)` | Sine (rad) |
+| [cos](/reference/binding/functions/cos) | `cos(angle)` | Cosine (rad) |
+| [tan](/reference/binding/functions/tan) | `tan(angle)` | Tangent (rad) |
 | [asin](/reference/binding/functions/asin) | `asin(value)` | Arcsine |
 | [acos](/reference/binding/functions/acos) | `acos(value)` | Arccosine |
 | [atan](/reference/binding/functions/atan) | `atan(value)` | Arctangent |
-| [degrees](/reference/binding/functions/degrees) | `degrees(radians)` | Convert radians to degrees |
-| [radians](/reference/binding/functions/radians) | `radians(degrees)` | Convert degrees to radians |
+| [deg](/reference/binding/functions/deg) | `deg(rad)` | Convert radians to degrees |
+| [rad](/reference/binding/functions/rad) | `rad(deg)` | Convert degrees to radians |
 | [pi](/reference/binding/functions/pi) | `pi()` | π constant (3.14159…) |
 | [e](/reference/binding/functions/e) | `e()` | Euler's number (2.71828…) |
 | [random](/reference/binding/functions/random) | `random()` | Random value between 0 and 1 |
@@ -222,7 +222,7 @@ Available automatically in specific contexts.
 | [minutesBetween](/reference/binding/functions/minutesBetween) | `minutesBetween(d1, d2)` | Minutes between two dates |
 | [secondsBetween](/reference/binding/functions/secondsBetween) | `secondsBetween(d1, d2)` | Seconds between two dates |
 | [yearOf](/reference/binding/functions/yearOf) | `yearOf(date)` | Extract the year |
-| [monthOfYear](/reference/binding/functions/monthOfYear) | `monthOfYear(date)` | Extract the month (1–12) |
+| [monthOf](/reference/binding/functions/monthOf) | `monthOf(date)` | Extract the month (1–12) |
 | [dayOfMonth](/reference/binding/functions/dayOfMonth) | `dayOfMonth(date)` | Extract the day of month |
 | [dayOfWeek](/reference/binding/functions/dayOfWeek) | `dayOfWeek(date)` | Extract the day of week |
 | [dayOfYear](/reference/binding/functions/dayOfYear) | `dayOfYear(date)` | Extract the day of year (1–365) |

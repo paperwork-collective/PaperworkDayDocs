@@ -59,7 +59,7 @@ The angle in radians (between -π/2 and π/2).
 {% raw %}
 ```handlebars
 <p>atan(1) = {{format(atan(1), '0.000')}} radians</p>
-<p>atan(1) = {{format(degrees(atan(1)), '0.0')}}°</p>
+<p>atan(1) = {{format(deg(atan(1)), '0.0')}}°</p>
 ```
 {% endraw %}
 
@@ -75,7 +75,7 @@ The angle in radians (between -π/2 and π/2).
 
 {% raw %}
 ```handlebars
-<p>Angle: {{format(degrees(atan(model.rise / model.run)), '0.0')}}°</p>
+<p>Angle: {{format(deg(atan(model.rise / model.run)), '0.0')}}°</p>
 ```
 {% endraw %}
 
@@ -98,7 +98,7 @@ doc.Params["model"] = new {
 
 {% raw %}
 ```handlebars
-<p>Bearing: {{format(degrees(atan(model.opposite / model.adjacent)), '0.1')}}°</p>
+<p>Bearing: {{format(deg(atan(model.opposite / model.adjacent)), '0.1')}}°</p>
 ```
 {% endraw %}
 
@@ -111,7 +111,7 @@ doc.Params["model"] = new {
 - Returns angle in radians
 - Result range: -π/2 to π/2
 - Inverse of `tan()` function
-- For degrees, use: `degrees(atan(value))`
+- For degrees, use: `deg(atan(value))`
 
 ---
 
@@ -120,6 +120,6 @@ doc.Params["model"] = new {
 - [tan Function](./tan.md)
 - [asin Function](./asin.md)
 - [acos Function](./acos.md)
-- [degrees Function](./degrees.md)
+- [deg Function](./deg.md)
 
 ---

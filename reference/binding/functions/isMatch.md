@@ -1,6 +1,6 @@
 ---
 layout: default
-title: regexIsMatch
+title: isMatch
 parent: Expression Functions
 parent_url: /reference/binding/functions/
 grand_parent: Data Binding
@@ -9,7 +9,7 @@ has_children: false
 has_toc: false
 ---
 
-# regexIsMatch() : Test Regular Expression
+# isMatch() : Test Regular Expression
 {: .no_toc }
 
 Test if a string matches a regular expression pattern.
@@ -30,7 +30,7 @@ Test if a string matches a regular expression pattern.
 ## Signature
 
 ```
-regexIsMatch(str, pattern)
+isMatch(str, pattern)
 ```
 
 ---
@@ -59,7 +59,7 @@ regexIsMatch(str, pattern)
 
 {% raw %}
 ```handlebars
-{{#if regexIsMatch(model.email, '^[^@]+@[^@]+\\.[^@]+$')}}
+{{#if isMatch(model.email, '^[^@]+@[^@]+\\.[^@]+$')}}
   <p class="valid">Valid email: {{model.email}}</p>
 {{else}}
   <p class="invalid">Invalid email format</p>
@@ -85,7 +85,7 @@ doc.Params["model"] = new {
 
 {% raw %}
 ```handlebars
-{{#if regexIsMatch(model.phone, '^\\d{3}-\\d{3}-\\d{4}$')}}
+{{#if isMatch(model.phone, '^\\d{3}-\\d{3}-\\d{4}$')}}
   <p>US Format: {{model.phone}}</p>
 {{else}}
   <p>Invalid phone format</p>
@@ -114,7 +114,7 @@ doc.Params["model"] = new {
 {{#each model.addresses}}
   <div class="address">
     <p>{{this.city}}, {{this.state}}</p>
-    {{#if regexIsMatch(this.zip, '^\\d{5}(-\\d{4})?$')}}
+    {{#if isMatch(this.zip, '^\\d{5}(-\\d{4})?$')}}
       <p>ZIP: {{this.zip}}</p>
     {{else}}
       <p class="error">Invalid ZIP code</p>
@@ -130,7 +130,7 @@ doc.Params["model"] = new {
 
 {% raw %}
 ```handlebars
-{{#if regexIsMatch(model.text, '\\d')}}
+{{#if isMatch(model.text, '\\d')}}
   <p>Contains numbers</p>
 {{else}}
   <p>No numbers found</p>
@@ -144,7 +144,7 @@ doc.Params["model"] = new {
 
 {% raw %}
 ```handlebars
-{{#if regexIsMatch(model.code, '^[A-Za-z0-9]+$')}}
+{{#if isMatch(model.code, '^[A-Za-z0-9]+$')}}
   <p>Valid code: {{model.code}}</p>
 {{else}}
   <p>Code must be alphanumeric</p>
@@ -173,8 +173,8 @@ doc.Params["model"] = new {
 - Backslashes must be escaped: `\\d` for digit, `\\w` for word character
 - Case-sensitive by default
 - Returns true if any part of string matches (use ^ and $ for exact match)
-- For extracting matches, use `regexMatches()`
-- For replacement, use `regexSwap()`
+- For extracting matches, use `matches()`
+- For replacement, use `swap()`
 - More powerful than `contains()` but slower
 
 ---
@@ -194,8 +194,8 @@ doc.Params["model"] = new {
 
 ## See Also
 
-- [regexMatches Function](./regexMatches.md)
-- [regexSwap Function](./regexSwap.md)
+- [matches Function](./matches.md)
+- [swap Function](./swap.md)
 - [contains Function](./contains.md)
 - [#if Helper](../helpers/if.md)
 

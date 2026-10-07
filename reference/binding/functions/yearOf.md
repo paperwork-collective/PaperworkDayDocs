@@ -136,7 +136,7 @@ doc.Params["model"] = new {
 
 {% raw %}
 ```handlebars
-<p>Fiscal Year: {{#if (monthOfYear(model.date) >= 7)}}{{yearOf(model.date) + 1}}{{else}}{{yearOf(model.date)}}{{/if}}</p>
+<p>Fiscal Year: {{#if (monthOf(model.date) >= 7)}}{{yearOf(model.date) + 1}}{{else}}{{yearOf(model.date)}}{{/if}}</p>
 ```
 {% endraw %}
 
@@ -160,14 +160,14 @@ doc.Params["model"] = new {
 - Returns 4-digit year value
 - Time component is ignored
 - Useful for copyright notices, age calculations, and date grouping
-- Combine with `monthOfYear()` and `dayOfMonth()` to build custom date formats
+- Combine with `monthOf()` and `dayOfMonth()` to build custom date formats
 - For complete date formatting, use `format()` function
 
 ---
 
 ## See Also
 
-- [monthOfYear Function](./monthOfYear.md)
+- [monthOf Function](./monthOf.md)
 - [dayOfMonth Function](./dayOfMonth.md)
 - [addYears Function](./addYears.md)
 - [format Function](./format.md)
