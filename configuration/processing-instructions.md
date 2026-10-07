@@ -149,8 +149,8 @@ Using Lax in production, and strict in development means that end users will not
 
 - **Throws exceptions** on unrecognized elements or attributes
 - **Enforces valid structure** according to component definitions
-- **Recommended for production** - catches errors early
-- **Use when**: Template structure is stable and tested
+- **Recommended for development and testing** - catches errors early, before they reach a user
+- **Use when**: Developing templates, running automated tests, or checking a template before release
 
 ```
 <?scryber parser-mode='Strict' ?>
@@ -161,7 +161,9 @@ Using Lax in production, and strict in development means that end users will not
 - **Ignores unrecognized elements** and attributes
 - **Logs warnings** instead of throwing exceptions
 - **Continues parsing** despite errors
-- **Use when**: Developing templates, gradual migration, forward compatibility
+- **Recommended for production** - the end user still receives the document they requested
+- **Use when**: Running in production, gradual migration, forward compatibility
+- **Invalid syntax is still an error** - a template with an invalid expression throws in either mode. Lax only relaxes unknown content and missing data. See [Binding, Expression and Template Errors](#binding-expression-and-template-errors).
 
 ```
 <?scryber parser-mode='Lax' ?>

@@ -26,6 +26,91 @@ has_toc: false
 
 ## Version 9
 
+### 9.7.5 - 7 October 2026
+
+Consistent error handling in strict and lax mode. Invalid syntax is now invalid completely, and missing data is not a syntax error. The full behaviour is in the [processing instructions truth table](/configuration/processing-instructions.html#binding-expression-and-template-errors).
+
+#### Behaviour Changes
+
+- **Invalid expression syntax always throws** — in strict *and* lax mode. This now includes an expression that compiles but is incomplete when evaluated (`{{model.items[0}}`, `{{model.missing.[}}`), a function with the wrong number of parameters, and an invalid expression inside a repeating or conditional template (`{{#each}}`, `{{#if}}`). Lax mode previously logged these and carried on, or skipped the template.
+- **A root variable that is not set (or is null) logs a single error in both modes** — e.g. `{{model.missing.value}}` with no `model`. Strict mode previously threw, and lax mode logged two warnings. The value is left unset and the document continues.
+- **A null part way along, or at the end of, a path is silent** — `model.missing.value` where `missing` or `value` does not exist is just null, rather than an error. `{{concat(index(), '. ', .object.value)}}` with no `object` now outputs `1. `.
+- **CSS `var()` and `calc()` follow the same rules** — `var(model.missing.value, red)` uses the default if there is no `model`, `missing` or `value`; without a default the property is left unset, with an error logged only if there is no `model`. Invalid css expressions are validated and raised when the css is parsed.
+- **`Document.CreateParserSettings()` and `CreateParserSettingsAsync()` now default to `Lax`** — matching `Document.ParseDocument()` and the render options. A `parser-mode` processing instruction still overrides the default.
+- **Expressions supplied as data to `eval()`** are still treated as any other evaluation failure (strict throws, lax logs a warning), as they are not part of the template.
+
+#### New Features
+
+- **`int()` function** — a short name for `integer()`, alongside `long()`, `double()` and `bool()`.
+
+#### Fixes
+
+- **Function documentation corrected** — the reference now uses the names the engine registers: `monthOf` (not `monthOfYear`), `deg`, `rad`, `isMatch`, `matches` and `swap` (not `degrees`, `radians`, `regexIsMatch`, `regexMatches` and `regexSwap`). The examples in the expressions crib sheet that used `monthofyear` never evaluated, and have been corrected.
+
+### 9.7.4.4 - 1 October 2026
+
+#### Fixes
+
+- **colspan cell content squeezed into one column** — the content of a cell spanning several columns (paragraphs, text) was being laid out at the width of its starting column rather than the full spanned width. The cell's outer box was already the correct size, but the content inside was not.
+- **`<figure>` no longer forces its content to be unsplittable** — a `<figure>` was set so it could never split across a page, which was meant to keep an image and its caption together but also applied to a long table wrapped in a figure. A table too tall to fit on one page now splits normally instead of failing with an `InvalidOperationException`.
+
+### 9.7.4.3 - 1 October 2026
+
+#### Fixes
+
+- **colspan cells losing a colgroup column's width** — where a `<col>` column is never occupied by a single-column cell in any row (for example a three-column percentage `colgroup` where every row spans the middle column), its width was dropped and every colspan cell crossing it lost that width. The width is now resolved through the normal style pipeline, so percentage, `em`, `rem`, viewport units, `calc()` and `var()` all work on `<col>` widths.
+
+### 9.7.4.2 - 10 September 2026
+
+#### Fixes
+
+- **Image `aspect-ratio` with a resolved width and height** — `max-width`, `max-height`, `min-width` and `min-height` are now honoured, and the other dimension re-derived from `aspect-ratio`, when both dimensions were already resolved (for example an `<img>` sized only by its `width`/`height` attributes inside a percentage-width `<figure>`). Previously that combination skipped clamping and the aspect ratio entirely.
+- **`<hr>` is a real box-model element** — it is now a block with `border-*`, `background-color`, `height`, `width` and `margin`, instead of a stroked diagonal-line path. Resets such as `border: none; height: 4pt; background-color: #369;` render a coloured bar instead of a diagonal line, and a bare `<hr>` keeps its default 1pt solid black bottom border.
+- **JSON values from a dictionary** — a `JsonElement` or `JToken` stored as a value in a `Dictionary<string, object>` parameter is now normalized in the same way as nested JSON property access, so `double()` and `string()` work on a top-level property too.
+
+### 9.7.4.1 - 8 September 2026
+
+#### New Features
+
+- **CSS Display Module 3 two-value `display`** — e.g. `block flex`, `inline flow-root`, alongside the single-keyword values.
+- **`hsl()` and `hsla()` colours** — supported anywhere a colour is accepted (the CKEditor colour pickers produce them).
+
+#### Fixes
+
+- **`display: table` and `grid` with `{{#each}}`/`{{#with}}`/`{{#if}}`** — content generated by a helper is now wrapped correctly rather than dropped or leaving an empty cell, including a table row nested inside the repeated content keeping the table's shared column grid.
+- **Loose `display: inline-block`** inside a table or grid cell is treated leniently as a block, rather than rendering blank.
+
+### 9.7.4 - 4 September 2026
+
+#### Fixes
+
+- **Multi-threaded rendering** — fixed a data race in font glyph registration (`PDFFontWidths`) that could corrupt the text of documents rendered concurrently, sometimes writing the wrong glyphs without an exception. Contributed by twofatmonkeys (PR #186). The `Scryber.Core.OpenType` dependency is updated to 9.7.4, which fixes a companion race in the glyph metric cache. Both are required for concurrent rendering to be safe.
+
+### 9.7.3 - 4 September 2026
+
+#### New Features
+
+- **Image EXIF metadata** — images now capture EXIF data (including GPS coordinates as signed decimal degrees), available in templates with the new `meta(path)` and `meta(path, key)` functions.
+
+#### Fixes
+
+- **Loose content inside `display: table`** — a child that was not a table row or cell (for example an image inside a designer-authored `<figure>` with `display: table`) was silently dropped from the layout, and never registered as a PDF image resource.
+
+### 9.7.2 - 27 August 2026
+
+#### New Features
+
+- **CSS structural pseudo-classes** — `:nth-child()`, `:nth-last-child()`, `:first-child`, `:last-child`, `:only-child` and the `-of-type` equivalents, with full `An+B` formulas (`odd`, `even`, `2n+1`, `-n+3`). These match across the wrappers produced by `{{#each}}`.
+- **CSS `!important`** — the declaration flag is now detected and takes priority in the cascade.
+
+#### Fixes
+
+- **Flex row items** no longer need to be a `Panel` — non-container children such as bare text are wrapped so they get a block layout box.
+- **Element immediately after `{{/each}}`** — an element with no whitespace after the end of a loop could be dropped when it shared its parent's tag name.
+- **Processing instruction `parser-mode`** is now passed down to the generated document.
+- **Expression that fails to evaluate** is logged as a warning, rather than an error (an expression that fails to compile is still an error).
+- **Font widths** — removed a shared buffer in `PDFFontWidths` as the first part of the multi-threading fix completed in 9.7.4.
+
 ### 9.7.1 - 13 August 2026
 
 Adds fine-grained content permissions for `<iframe>`, replacing the old all-or-nothing style passthrough.
