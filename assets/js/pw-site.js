@@ -215,6 +215,21 @@
     }
   }
 
+  // ── cancel: clear the search and close the results (the same as pressing Esc) ──
+  function bindSearchCancel() {
+    var btn = doc.querySelector('.pw-search-cancel'), input = doc.getElementById('search-input');
+    if (!btn || !input) return;
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      input.value = '';
+      var ev = new Event('keyup', { bubbles: true });
+      ev.keyCode = 27;                 // the theme's search listens for the Esc key code
+      input.dispatchEvent(ev);
+      input.blur();
+      btn.blur();
+    });
+  }
+
   // ── search results: section label, title, snippet and an arrow, as in the design ──
   var KICKERS = { 'paperwork.core': 'Paperwork.Core', 'paperwork.view': 'Paperwork.View', 'paperwork.design': 'Paperwork.Design', 'paperwork.cli': 'Paperwork.CLI', 'paperwork.skill': 'Paperwork.Skill' };
   var AREAS = { reference: 'Reference', learning: 'Learning', quickstart: 'Quick Start', configuration: 'Configuration', changelog: 'Change Log' };
@@ -263,6 +278,7 @@
     enhanceCode();
     markSupport();
     watchSearch();
+    bindSearchCancel();
   }
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', ready);
   else ready();
