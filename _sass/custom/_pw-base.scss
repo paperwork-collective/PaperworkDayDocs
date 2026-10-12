@@ -168,7 +168,8 @@ code, pre, kbd, samp { font-family: $pw-font-mono; }
 code, :not(pre, figure) > code {
   font-size: 0.86em;
   padding: 1px 5px;
-  border: 1px solid $pw-chip-border;
+  border: 0 none;
+  border-width: 0;
   background: $pw-accent-tint;
   color: $pw-accent;
   border-radius: 0;
@@ -200,8 +201,10 @@ div.highlighter-rouge div.highlight pre, div.highlighter-rouge pre.highlight, di
   tab-size: 2;
   overflow: visible;
 }
-div.highlighter-rouge pre code, pre code, .highlight pre code { padding: 0; border: 0; background: none; color: inherit; font-size: inherit; line-height: inherit; }
+div.highlighter-rouge pre code, pre code, .highlight pre code { padding: 0; border: 0 none; background: none; color: inherit; font-size: inherit; line-height: inherit; }
 .highlight .gl { display: none; }
+// the theme's script adds its own copy button to every block; ours (in the header) replaces it
+.copy-code-button, div.highlighter-rouge > button { display: none !important; }
 
 .pw-code-head {
   display: flex; align-items: center; gap: 12px;
