@@ -192,12 +192,77 @@
     }
   }
 
+
+  // ── old "On this page" blocks: mark any that were written without the class so they are hidden ──
+  function hideLegacyToc() {
+    var all = doc.querySelectorAll('#main-content details');
+    for (var i = 0; i < all.length; i++) {
+      var d = all[i], sum = d.querySelector('summary');
+      if (sum && /^\s*(on this page|table of contents)\s*$/i.test(sum.textContent) && !d.classList.contains('top-toc')) d.classList.add('top-toc');
+    }
+  }
+
+  // ── tables scroll inside their own wrapper, so a wide table never widens the page ──
+  function wrapTables() {
+    var tables = doc.querySelectorAll('#main-content table');
+    for (var i = 0; i < tables.length; i++) {
+      var t = tables[i];
+      if (t.closest('.table-wrapper')) continue;
+      var w = doc.createElement('div');
+      w.className = 'table-wrapper';
+      t.parentNode.insertBefore(w, t);
+      w.appendChild(t);
+    }
+  }
+
+  // ── search results: section label, title, snippet and an arrow, as in the design ──
+  var KICKERS = { 'paperwork.core': 'Paperwork.Core', 'paperwork.view': 'Paperwork.View', 'paperwork.design': 'Paperwork.Design', 'paperwork.cli': 'Paperwork.CLI', 'paperwork.skill': 'Paperwork.Skill' };
+  var AREAS = { reference: 'Reference', learning: 'Learning', quickstart: 'Quick Start', configuration: 'Configuration', changelog: 'Change Log' };
+  function kickerFor(relUrl) {
+    var parts = (relUrl || '').split('/').filter(Boolean);
+    if (!parts.length) return 'Home';
+    var k = KICKERS[parts[0]] || 'Paperwork';
+    return parts[1] && AREAS[parts[1]] ? k + ' \u00b7 ' + AREAS[parts[1]] : k;
+  }
+  function enhanceResults(box) {
+    var items = box.querySelectorAll('.search-result');
+    for (var i = 0; i < items.length; i++) {
+      var r = items[i];
+      if (r.getAttribute('data-pw')) continue;
+      r.setAttribute('data-pw', '1');
+      var rel = r.querySelector('.search-result-rel-url');
+      if (rel) rel.textContent = kickerFor(rel.textContent);
+    }
+    var none = box.querySelector('.search-no-result');
+    if (none && !none.getAttribute('data-pw')) {
+      none.setAttribute('data-pw', '1');
+      var input = doc.getElementById('search-input');
+      var q = input ? input.value.trim() : '';
+      none.textContent = '';
+      var h = doc.createElement('div'); h.className = 'pw-noresult-title'; h.textContent = q ? 'No results for \u201c' + q + '\u201d' : 'No results';
+      var p = doc.createElement('div'); p.className = 'pw-noresult-help'; p.textContent = 'Check the spelling, or try one of these:';
+      var chips = doc.createElement('div'); chips.className = 'pw-noresult-chips';
+      [['Quick Start', '/paperwork.core/quickstart/quickstart_core'], ['HTML Elements', '/paperwork.core/reference/htmltags/'], ['CSS Properties', '/paperwork.core/reference/cssproperties/'], ['Expression Functions', '/paperwork.core/reference/binding/']].forEach(function (c) {
+        var a = doc.createElement('a'); a.className = 'pw-chip'; a.href = c[1]; a.textContent = c[0]; chips.appendChild(a);
+      });
+      none.appendChild(h); none.appendChild(p); none.appendChild(chips);
+    }
+  }
+  function watchSearch() {
+    var box = doc.getElementById('search-results');
+    if (!box || typeof MutationObserver === 'undefined') return;
+    new MutationObserver(function () { enhanceResults(box); }).observe(box, { childList: true, subtree: true });
+  }
+
   function ready() {
     bindTheme();
     bindSearchKey();
+    hideLegacyToc();
+    wrapTables();
     buildToc();
     enhanceCode();
     markSupport();
+    watchSearch();
   }
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', ready);
   else ready();

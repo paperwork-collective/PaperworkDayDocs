@@ -13,7 +13,7 @@ nav_order: 2
 
 ---
 
-<details markdown="block">
+<details class='top-toc' markdown="block">
   <summary>
     On this page
   </summary>

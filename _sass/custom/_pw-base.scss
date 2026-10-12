@@ -250,8 +250,10 @@ div.highlighter-rouge pre code, pre code, .highlight pre code { padding: 0; bord
 // ── tables: dense reference tables with a panel-coloured header ──────────────
 
 .table-wrapper {
-  margin: 1.2rem 0 0.4rem;
+  margin: 1.2rem 0 1.4rem;
+  max-width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   border: 1px solid $pw-border;
   background: $pw-surface;
   box-shadow: none;
@@ -279,7 +281,7 @@ table {
   thead tr:first-child th, thead tr:first-child td { border-top: 0; }
   th {
     padding: 8px 10px;
-    font-size: 11px;
+    font-size: 11px !important;
     font-weight: 600;
     letter-spacing: 1.2px;
     text-transform: uppercase;
@@ -288,7 +290,7 @@ table {
     background: $pw-header-bg;
     border-top: 0;
   }
-  td { color: $pw-muted; }
+  td { font-size: 13px !important; color: $pw-muted; overflow-wrap: break-word; }
   td:first-child { color: $pw-text; }
   tbody tr:hover td { background: $pw-hover; }
   td code, td :not(pre, figure) > code { font-size: 12px; background: none; border: 0; padding: 0; color: $pw-text; }
@@ -296,7 +298,7 @@ table {
 }
 // simple variant: {: .simple } on the table
 table.simple {
-  font-size: 14px;
+  td { font-size: 14px !important; }
   border-top: 2px solid $pw-accent-bar;
   th { background: transparent; color: $pw-accent; letter-spacing: 1.3px; padding: 10px 4px; border-bottom: 1px solid $pw-border; }
   td { padding: 10px 4px; color: $pw-text; }
@@ -316,6 +318,11 @@ table.simple {
 }
 
 @media (max-width: 768px) {
+  // tables keep a readable size and scroll sideways inside their wrapper, rather than shrinking to fit
+  table td { font-size: 14px !important; }
+  table th { font-size: 11px !important; }
+  .table-wrapper table { min-width: 620px; }
+  table td code, table td :not(pre, figure) > code { font-size: 13px; }
   .main-content {
     h1 { font-size: 38px !important; }
     h2 { font-size: 26px; margin-top: 2.2rem; }

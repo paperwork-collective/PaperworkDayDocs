@@ -237,11 +237,13 @@
         {% if page.path and page.collection == nil %}<a href="https://github.com/richard-scryber/PaperworkDayDocs/edit/main/{{ page.path }}" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a>{% endif %}
       </div>
     </footer>
+    {%- unless page.pw_toc == false %}
     <aside class="pw-toc" id="pw-toc" aria-label="On this page" hidden>
       <div class="pw-toc-title">On this page</div>
       <ul class="pw-toc-list" id="pw-toc-list"></ul>
       <a class="pw-toc-top" href="#top">&uarr; Back to top</a>
     </aside>
+    {%- endunless %}
     {% if site.search_enabled != false %}
       {% if site.search.button %}
         <a href="#" id="search-button" class="search-button">
