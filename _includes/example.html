@@ -1,0 +1,64 @@
+{%- comment -%}
+  Tabbed live example: Example (rendered in the Paperwork viewer) | HTML | CSS | Data.
+
+  Usage:
+    {% include example.html id="html-invoice" base="html-invoice" file="invoice"
+       collection="richard-prod" template="invoice-example" title="Complete Invoice" %}
+
+  id          unique on the page (used for element ids and the viewer frame name)
+  base        folder under /assets/examples/ holding <file>.html, <file>.css and <file>.json
+  file        base name of the three source files
+  template    published template id, exactly as the viewer knows it (e.g. richard-prod:invoice-example).
+              When given, the Example tab shows that published template. When omitted, the
+              Example tab renders the three source files inline instead.
+  collection  optional: only for private collection templates. Leave blank for public ones.
+  title       shown in the footer strip
+  designer    optional: full URL to open the blueprint in the Designer
+  height      optional: viewer height, default 520px
+
+  The three source files are fetched at runtime (see /assets/js/pw-example.js), so the
+  handlebars expressions in them are never seen by Liquid. The code tabs always show these
+  files; keep them in step with the published template.
+{%- endcomment -%}
+{%- assign pwx_height = include.height | default: "520px" -%}
+{%- assign pwx_dir = "/assets/examples/" | append: include.base | append: "/" | append: include.file -%}
+{%- if include.template %}{% if include.collection %}{% assign pwx_viewer = "https://paperwork.vu/" | append: include.collection | append: "/" | append: include.template %}{% else %}{% assign pwx_tpl_path = include.template | replace: ":", "/" %}{% assign pwx_viewer = "https://paperwork.vu/" | append: pwx_tpl_path %}{% endif %}{% else %}{% assign pwx_viewer = "" %}{% endif -%}
+<div class="pwx" id="pwx-{{ include.id }}" data-pwx>
+  <i class="pwx-corner tl"></i><i class="pwx-corner tr"></i><i class="pwx-corner bl"></i><i class="pwx-corner br"></i>
+  <div class="pwx-bar">
+    <div class="pwx-tabs" role="tablist" aria-label="{{ include.title | default: 'Example' }}">
+      <button type="button" class="pwx-tab" role="tab" id="pwx-{{ include.id }}-t-example" aria-controls="pwx-{{ include.id }}-p-example" aria-selected="true" data-tab="example">Example</button>
+      <button type="button" class="pwx-tab" role="tab" id="pwx-{{ include.id }}-t-html" aria-controls="pwx-{{ include.id }}-p-html" aria-selected="false" tabindex="-1" data-tab="html">HTML</button>
+      <button type="button" class="pwx-tab" role="tab" id="pwx-{{ include.id }}-t-css" aria-controls="pwx-{{ include.id }}-p-css" aria-selected="false" tabindex="-1" data-tab="css">CSS</button>
+      <button type="button" class="pwx-tab" role="tab" id="pwx-{{ include.id }}-t-json" aria-controls="pwx-{{ include.id }}-p-json" aria-selected="false" tabindex="-1" data-tab="json">Data</button>
+    </div>
+    <div class="pwx-links">
+      {%- if include.designer %}<a href="{{ include.designer }}" target="_blank" rel="noopener">Open blueprint in Designer &#8599;</a>{% endif %}
+      {%- if pwx_viewer != "" %}<a href="{{ pwx_viewer }}" target="_blank" rel="noopener">Open in viewer &#8599;</a>{% endif %}
+    </div>
+  </div>
+
+  <div class="pwx-panel pwx-panel-example" role="tabpanel" id="pwx-{{ include.id }}-p-example" aria-labelledby="pwx-{{ include.id }}-t-example" style="height: {{ pwx_height }}">
+    <div class="pwx-viewer" style="height: {{ pwx_height }}" data-pwx-viewer data-name="pwx-{{ include.id }}" data-height="{{ pwx_height }}"
+         data-template="{{ include.template }}" data-collection="{{ include.collection }}"
+         data-html="{{ pwx_dir | append: '.html' | relative_url }}"
+         data-css="{{ pwx_dir | append: '.css' | relative_url }}"
+         data-json="{{ pwx_dir | append: '.json' | relative_url }}"></div>
+    <noscript><p class="pwx-fallback">Enable JavaScript to see the rendered example.</p></noscript>
+  </div>
+  <div class="pwx-panel pwx-panel-code" role="tabpanel" id="pwx-{{ include.id }}-p-html" aria-labelledby="pwx-{{ include.id }}-t-html" hidden>
+    <pre class="pwx-code" data-lang="html" data-src="{{ pwx_dir | append: '.html' | relative_url }}" tabindex="0"><code>Loading&hellip;</code></pre>
+  </div>
+  <div class="pwx-panel pwx-panel-code" role="tabpanel" id="pwx-{{ include.id }}-p-css" aria-labelledby="pwx-{{ include.id }}-t-css" hidden>
+    <pre class="pwx-code" data-lang="css" data-src="{{ pwx_dir | append: '.css' | relative_url }}" tabindex="0"><code>Loading&hellip;</code></pre>
+  </div>
+  <div class="pwx-panel pwx-panel-code" role="tabpanel" id="pwx-{{ include.id }}-p-json" aria-labelledby="pwx-{{ include.id }}-t-json" hidden>
+    <pre class="pwx-code" data-lang="json" data-src="{{ pwx_dir | append: '.json' | relative_url }}" tabindex="0"><code>Loading&hellip;</code></pre>
+  </div>
+
+  <div class="pwx-foot"><span>Blueprint &middot; {{ include.title | default: include.template }}</span><span>HTML + CSS + Data &rarr; PDF</span></div>
+</div>
+{%- unless pwx_script_added %}
+{%- assign pwx_script_added = true %}
+<script defer src="{{ '/assets/js/pw-example.js' | relative_url }}"></script>
+{%- endunless %}

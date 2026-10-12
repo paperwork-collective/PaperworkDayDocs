@@ -1,0 +1,323 @@
+// Typography, prose, code and tables - follows the help style guide.
+
+$pw-font-body: "Barlow", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+$pw-font-head: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+$pw-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+:root {
+  --pw-canvas: #{$pw-canvas};
+  --pw-surface: #{$pw-surface};
+  --pw-text: #{$pw-text};
+  --pw-muted: #{$pw-muted};
+  --pw-border: #{$pw-border};
+  --pw-accent: #{$pw-accent};
+  --pw-accent-bar: #{$pw-accent-bar};
+  --pw-focus: #{$pw-focus};
+  color-scheme: #{$color-scheme};
+}
+
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: $pw-font-body;
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
+  color: $pw-text;
+  background: $pw-canvas;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible { outline: 2px solid $pw-focus; outline-offset: 2px; }
+::selection { background: rgba($pw-accent-bar, 0.3); }
+
+// ── headings ─────────────────────────────────────────────────────────────────
+
+.main-content {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $pw-font-head;
+    font-weight: 600;
+    color: $pw-text;
+    letter-spacing: -0.015em;
+    margin: 2.2rem 0 0.6rem;
+  }
+  > h1:first-child, > h1:first-of-type { margin-top: 0; }
+  h1 { font-size: 52px !important; line-height: 1.0; margin-bottom: 14px; }
+  h2 {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 30px; line-height: 1.1;
+    margin-top: 2.8rem;
+    &::before { content: ""; flex: none; width: 22px; height: 3px; background: $pw-accent-bar; }
+  }
+  h3 { font-size: 22px !important; line-height: 1.1; }
+  h4 { font-size: 18px !important; line-height: 1.2; }
+  h5 { font-size: 16px !important; line-height: 1.2; letter-spacing: 0; }
+  h6 { font-family: $pw-font-body; font-size: 12px !important; font-weight: 500; letter-spacing: 1.4px; text-transform: uppercase; color: $pw-accent; }
+
+  // the paragraph straight after the page title is the lead
+  > h1 + p { font-size: 18px; line-height: 1.55; color: $pw-muted; max-width: 62ch; }
+
+  p, li { line-height: 1.6; }
+  p { margin: 0 0 1em; }
+  small, .text-small { font-size: 13px; line-height: 1.5; }
+}
+.no_toc { margin-bottom: 0.4rem; }
+
+// ── links: default, hover, visited, focus ────────────────────────────────────
+
+.main-content a:not(.btn):not(.pw-card):not(.anchor-heading):not(.pw-chip) {
+  color: $pw-accent;
+  background-image: none;
+  text-decoration: underline;
+  text-decoration-color: rgba($pw-accent-bar, 0.55);
+  text-underline-offset: 3px;
+  &:visited { color: $pw-link-visited; }
+  &:hover { color: $pw-link-hover; text-decoration-color: currentColor; }
+  &:focus-visible { outline: 2px solid $pw-focus; outline-offset: 2px; }
+  &[href^="http"]:not([href*="paperworkday"])::after { content: " \2197"; font-size: 0.85em; text-decoration: none; display: inline-block; }
+}
+
+// ── lists: filled square, hollow square, dash ────────────────────────────────
+
+.main-content {
+  ul, ol { margin: 0 0 1.2em; padding-left: 1.5em; }
+  li { margin: 0.35em 0; }
+  li > ul, li > ol { margin: 0.35em 0 0; }
+  ul { list-style: none; }
+  ul > li { position: relative; }
+  ul > li::before { content: ""; position: absolute; left: -1.15em; top: 0.7em; width: 7px; height: 7px; background: $pw-accent-bar; }
+  ul ul > li::before { background: transparent; border: 1.5px solid $pw-accent-bar; box-sizing: border-box; }
+  ul ul ul > li::before { width: 8px; height: 1.5px; top: 0.85em; border: 0; background: $pw-muted; }
+  ol { counter-reset: pw-ol; list-style: none; padding-left: 1.7em; }
+  ol > li { position: relative; counter-increment: pw-ol; }
+  ol > li::before { content: counter(pw-ol) "."; position: absolute; left: -1.7em; width: 1.4em; text-align: right; font: 600 18px/1.45 $pw-font-head; color: $pw-accent-bar; }
+  dl { margin: 0 0 1.2em; }
+  dt { font-weight: 600; margin-top: 0.8em; }
+  dd { margin: 0.2em 0 0 1.2em; color: $pw-muted; }
+}
+
+hr { height: 1px; margin: 2rem 0; border: 0; background: $pw-border; }
+
+// ── quote, images, details ───────────────────────────────────────────────────
+
+blockquote:not([class]) {
+  margin: 1.6rem 0;
+  padding: 4px 0 4px 20px;
+  border-left: 3px solid $pw-accent-bar;
+  color: $pw-text;
+  font: 500 22px/1.3 $pw-font-head;
+  &::before { content: none; }
+  p { margin: 0 0 8px; font: inherit; }
+  cite, footer, em:only-child { display: block; font: 400 13px/1.4 $pw-font-body; font-style: normal; color: $pw-muted; }
+}
+
+img { max-width: 100%; height: auto; }
+.main-content img {
+  display: block;
+  margin: 1.4rem 0 0.6rem;
+  padding: 8px;
+  background: $pw-surface;
+  border: 1px solid $pw-border;
+  box-sizing: border-box;
+}
+.main-content img[src$=".svg"], .main-content .pw-brand-mark, .main-content img.no-frame { padding: 0; border: 0; background: transparent; }
+figure { margin: 1.6rem 0; }
+figure img { margin-bottom: 0.6rem; }
+figcaption { font-size: 13px; line-height: 1.5; color: $pw-muted; .fig { font-weight: 600; color: $pw-accent; margin-right: 8px; } }
+
+kbd {
+  display: inline-block;
+  padding: 0 6px;
+  border: 1px solid $pw-border;
+  border-bottom-width: 2px;
+  background: $pw-surface;
+  font: 0.8em/1.6 $pw-font-mono;
+  color: $pw-text;
+}
+mark { background: rgba($pw-warn, 0.28); color: inherit; padding: 0 2px; }
+
+.main-content details {
+  margin: 0 0 1em;
+  border: 1px solid $pw-border;
+  background: $pw-surface;
+  > summary {
+    list-style: none;
+    display: flex; align-items: center; gap: 10px;
+    min-height: 44px;
+    padding: 0 14px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 15px; font-weight: 600;
+    color: $pw-text;
+    &::-webkit-details-marker { display: none; }
+    &::before {
+      content: ""; flex: none; width: 7px; height: 7px;
+      border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+      transform: rotate(-45deg); transition: transform 0.12s;
+    }
+  }
+  &[open] { border-color: $pw-chip-border; }
+  &[open] > summary { background: $pw-accent-tint; color: $pw-accent; border-bottom: 1px solid $pw-chip-border; &::before { transform: rotate(45deg); } }
+  > :not(summary) { margin: 0; padding: 12px 16px 2px 40px; font-size: 15px; }
+  > :last-child { padding-bottom: 14px; }
+}
+
+// ── inline code ──────────────────────────────────────────────────────────────
+
+code, pre, kbd, samp { font-family: $pw-font-mono; }
+code, :not(pre, figure) > code {
+  font-size: 0.86em;
+  padding: 1px 5px;
+  border: 1px solid $pw-chip-border;
+  background: $pw-accent-tint;
+  color: $pw-accent;
+  border-radius: 0;
+  font-weight: 400;
+}
+
+// ── fenced code: framed, with a header (language + copy), one palette for both modes ──
+
+div.highlighter-rouge, figure.highlight {
+  position: relative;
+  margin: 1.4rem 0 1.8rem;
+  padding: 0;
+  background: $pw-code-bg;
+  border: 1px solid $pw-code-frame;
+  border-radius: 0;
+  box-shadow: none;
+  color: $pw-code-text;
+  overflow: hidden;
+}
+div.highlighter-rouge div.highlight { background: transparent; margin: 0; padding: 0; border: 0; box-shadow: none; overflow-x: auto; }
+div.highlighter-rouge div.highlight pre, div.highlighter-rouge pre.highlight, div.highlighter-rouge pre {
+  margin: 0;
+  padding: 18px 24px;
+  background: transparent;
+  border: 0;
+  color: $pw-code-text;
+  font-size: 13px;
+  line-height: 1.65;
+  tab-size: 2;
+  overflow: visible;
+}
+div.highlighter-rouge pre code, pre code, .highlight pre code { padding: 0; border: 0; background: none; color: inherit; font-size: inherit; line-height: inherit; }
+.highlight .gl { display: none; }
+
+.pw-code-head {
+  display: flex; align-items: center; gap: 12px;
+  height: 36px;
+  padding: 0 6px 0 14px;
+  background: $pw-code-head;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  .pw-code-lang { font-size: 11px; font-weight: 600; letter-spacing: 1.3px; text-transform: uppercase; color: $pw-code-label; }
+  .pw-code-file { font: 12px $pw-font-mono; color: $pw-code-file; }
+  .pw-code-copy {
+    margin-left: auto;
+    display: inline-flex; align-items: center; gap: 6px;
+    height: 28px; padding: 0 10px;
+    background: transparent;
+    border: 1px solid #5f6670;
+    border-radius: 0;
+    color: #d6dbdf;
+    font: 500 12px $pw-font-body;
+    cursor: pointer;
+    &:hover { background: rgba(255, 255, 255, 0.08); border-color: $pw-code-label; }
+    &:focus-visible { outline: 2px solid #3fd0cc; outline-offset: 1px; }
+    &.is-copied { color: #a8d8a0; border-color: #a8d8a0; }
+  }
+}
+
+// syntax palette (Rouge classes)
+.highlight {
+  .c, .c1, .cm, .cs, .cp, .cd, .cpf { color: $pw-tk-comment; font-style: italic; }
+  .k, .kd, .kn, .kp, .kr, .kc, .kv, .ow { color: $pw-tk-kw; }
+  .kt, .nc, .nn, .no, .ne { color: $pw-tk-type; }
+  .nf, .fm, .nb, .bp, .nd { color: $pw-tk-fn; }
+  .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sx, .sr, .ss, .dl { color: $pw-tk-str; }
+  .m, .mi, .mf, .mh, .mo, .mb, .il { color: $pw-tk-num; }
+  .nt { color: $pw-tk-tag; }
+  .na, .nx { color: $pw-tk-attr; }
+  .py, .nl, .nv, .vc, .vg, .vi, .vm { color: $pw-tk-prop; }
+  .o, .p, .pi, .n, .w { color: $pw-tk-punct; }
+  .err, .gr, .gt { color: $pw-tk-expr; background: none; }
+  .gd { color: $pw-tk-expr; } .gi { color: $pw-tk-fn; } .gh, .gu { color: $pw-tk-tag; font-weight: 600; }
+  .pw-expr { color: $pw-tk-expr; }
+}
+
+// ── tables: dense reference tables with a panel-coloured header ──────────────
+
+.table-wrapper {
+  margin: 1.2rem 0 0.4rem;
+  overflow-x: auto;
+  border: 1px solid $pw-border;
+  background: $pw-surface;
+  box-shadow: none;
+  border-radius: 0;
+}
+.main-content > table, .main-content > .table-wrapper + p > table { margin: 1.2rem 0; border: 1px solid $pw-border; background: $pw-surface; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  background: transparent;
+  display: table;
+  th, td {
+    padding: 7px 10px;
+    text-align: left;
+    vertical-align: top;
+    border: 0;
+    border-top: 1px solid $pw-border;
+    background: transparent;
+    min-width: 0;
+  }
+  thead tr:first-child th, thead tr:first-child td { border-top: 0; }
+  th {
+    padding: 8px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #ffffff;
+    background: $pw-header-bg;
+    border-top: 0;
+  }
+  td { color: $pw-muted; }
+  td:first-child { color: $pw-text; }
+  tbody tr:hover td { background: $pw-hover; }
+  td code, td :not(pre, figure) > code { font-size: 12px; background: none; border: 0; padding: 0; color: $pw-text; }
+  td:first-child code { color: $pw-accent; font-size: 12.5px; white-space: nowrap; }
+}
+// simple variant: {: .simple } on the table
+table.simple {
+  font-size: 14px;
+  border-top: 2px solid $pw-accent-bar;
+  th { background: transparent; color: $pw-accent; letter-spacing: 1.3px; padding: 10px 4px; border-bottom: 1px solid $pw-border; }
+  td { padding: 10px 4px; color: $pw-text; }
+  tbody tr:hover td { background: transparent; }
+}
+
+// support markers (added to cells by pw-site.js)
+.pw-support {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 2px 8px 2px 6px;
+  font-size: 12px; font-weight: 600; line-height: 1.3;
+  background: $pw-accent-tint; border: 1px solid $pw-chip-border; color: $pw-accent;
+  &::before { content: "\2713"; font-size: 11px; font-weight: 700; }
+  &.is-partial { background: $pw-warn-bg; border-color: $pw-warn; color: $pw-warn-text; &::before { content: "\25D0"; } }
+  &.is-no { background: $pw-tag-neutral-bg; border-color: $pw-tag-neutral-border; color: $pw-tag-neutral-text; &::before { content: "\2715"; } }
+  &.is-new { background: $pw-accent-tint; border-color: $pw-accent-bar; color: $pw-accent; &::before { content: "\2605"; } }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    h1 { font-size: 38px !important; }
+    h2 { font-size: 26px; margin-top: 2.2rem; }
+    h3 { font-size: 21px !important; }
+    > h1 + p { font-size: 17px; }
+  }
+  div.highlighter-rouge div.highlight pre, div.highlighter-rouge pre { padding: 14px 16px; font-size: 12.5px; }
+}

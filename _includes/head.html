@@ -12,7 +12,25 @@
   
     {% include favicon.html %}
   
-    <link rel="stylesheet" href="{{ '/assets/css/just-the-docs-default.css' | relative_url }}">
+    {%- comment -%}
+      Two compiled colour schemes. By default the visitor's system setting decides which applies;
+      a saved choice (localStorage "pw-theme") overrides it, set here before first paint.
+    {%- endcomment %}
+    <link rel="stylesheet" id="pw-css-light" href="{{ '/assets/css/just-the-docs-paperwork-light.css' | relative_url }}" media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" id="pw-css-dark" href="{{ '/assets/css/just-the-docs-paperwork-dark.css' | relative_url }}" media="(prefers-color-scheme: dark)">
+    <script>
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem('pw-theme'); } catch (e) {}
+        if (t === 'light' || t === 'dark') {
+          document.getElementById('pw-css-light').media = t === 'light' ? 'all' : 'not all';
+          document.getElementById('pw-css-dark').media = t === 'dark' ? 'all' : 'not all';
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      }());
+    </script>
+    <link rel="preload" href="{{ '/assets/fonts/barlow-400-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ '/assets/fonts/barlow-condensed-600-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   
     {% if site.ga_tracking != nil %}
       <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga_tracking }}"></script>
@@ -35,6 +53,7 @@
     {% endif %}
   
     <script src="{{ '/assets/js/just-the-docs.js' | relative_url }}"></script>
+    <script defer src="{{ '/assets/js/pw-site.js' | relative_url }}"></script>
     <script src="https://paperwork.vu/er.js" ></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   

@@ -57,16 +57,37 @@
     {% include icons/external_link.html %}
   </svg>
 
+  <header class="pw-header" id="pw-header">
+    <a href="{{ '/' | relative_url }}" class="pw-brand-link">{% include title.html %}</a>
+    {% if site.search_enabled != false %}
+      {% capture search_placeholder %}{% include search_placeholder_custom.html %}{% endcapture %}
+      <div class="search">
+        <div class="search-input-wrap">
+          <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="{{ search_placeholder | strip_html | strip }}" aria-label="{{ search_placeholder | strip_html| strip }}" autocomplete="off">
+          <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label>
+          <kbd class="pw-search-key" aria-hidden="true">/</kbd>
+        </div>
+        <div id="search-results" class="search-results"></div>
+      </div>
+    {% endif %}
+    {% if site.aux_links %}
+      <nav aria-label="Auxiliary" class="aux-nav">
+        <ul class="aux-nav-list">
+          {% for link in site.aux_links %}
+            <li class="aux-nav-list-item"><a href="{{ link.last }}" class="site-button"{% if site.aux_links_new_tab %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ link.first }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    {% endif %}
+    <button type="button" class="pw-theme-toggle js-toggle-theme" aria-label="Switch between light and dark">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-dark-light"></use></svg>
+    </button>
+    <a href="#" id="menu-button" class="pw-menu-button" aria-label="Menu">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </a>
+  </header>
+
   <div class="side-bar">
-    <div class="site-header">
-      <a href="{{ '/' | relative_url }}" class="site-title lh-tight">{% include title.html %}</a>
-      <a href="#" class="site-button js-toggle-dark-mode">
-        <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-dark-light"></use></svg>
-      </a>
-      <a href="#" id="menu-button" class="site-button">
-        <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg>
-      </a>
-    </div>
     <nav aria-label="Main" id="site-nav" class="site-nav">
       {% assign pages_top_size = site.html_pages
           | where_exp:"item", "item.title != nil"
@@ -118,49 +139,16 @@
     {% endif %}
   </div>
   <div class="main" id="top">
-    <div id="main-header" class="main-header">
-      {% if site.search_enabled != false %}
-
-        {% capture search_placeholder %}{% include search_placeholder_custom.html %}{% endcapture %}
-
-        <div class="search">
-          <div class="search-input-wrap">
-            <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="{{ search_placeholder | strip_html | strip }}" aria-label="{{ search_placeholder | strip_html| strip }}" autocomplete="off">
-            <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label>
-          </div>
-          <div id="search-results" class="search-results"></div>
-        </div>
-      {% else %}
-        <div></div>
-      {% endif %}
-      {% include header_custom.html %}
-      <a href="#" class="site-button js-toggle-dark-mode">
-        <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-dark-light"></use></svg>
-      </a>
-      {% if site.aux_links %}
-        <nav aria-label="Auxiliary" class="aux-nav">
-          <ul class="aux-nav-list">
-            {% for link in site.aux_links %}
-              <li class="aux-nav-list-item">
-                <a href="{{ link.last }}" class="site-button"
-                  {% if site.aux_links_new_tab %}
-                  target="_blank" rel="noopener noreferrer"
-                  {% endif %}
-                >
-                  {{ link.first }}
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        </nav>
-      {% endif %}
-    </div>
     <div id="main-content-wrap" class="main-content-wrap">
       {% unless page.url == "/" %}
         {% if page.parent %}
           <nav aria-label="Breadcrumb" class="breadcrumb-nav">
             <ol class="breadcrumb-nav-list">
               {% if page.grand_parent %}
+                {% if page.ancestor %}
+                  {% assign breadcrumb_ancestor = site.html_pages | where: "title", page.ancestor | where_exp: "item", "item.parent == nil" | first %}
+                  <li class="breadcrumb-nav-list-item"><a href="{{ breadcrumb_ancestor.url | relative_url }}">{{ page.ancestor }}</a></li>
+                {% endif %}
                 <li class="breadcrumb-nav-list-item"><a href="{{ page.grand_parent_url }}">{{ page.grand_parent }}</a></li>
                 <li class="breadcrumb-nav-list-item"><a href="{{ page.parent_url }}">{{ page.parent }}</a></li>
               {% else %}
@@ -228,6 +216,42 @@
       </div>
     </div>
 
+    <footer class="pw-footer">
+      <div class="pw-footer-grid">
+        <div class="pw-footer-brand">
+          <span class="pw-brand"><img class="pw-brand-mark" src="{{ '/assets/paperwork-logo-only.svg' | relative_url }}" alt="" width="30" height="28"><span class="pw-brand-name">paperwork<span class="pw-brand-suffix">.help</span></span></span>
+          <p>One library for all your business documents.</p>
+        </div>
+        <div class="pw-footer-col">
+          <h2>Products</h2>
+          <a href="{{ '/paperwork.core/' | relative_url }}">Core Library</a>
+          <a href="{{ '/paperwork.view/' | relative_url }}">Online Viewer</a>
+          <a href="{{ '/paperwork.design/' | relative_url }}">Designer</a>
+          <a href="{{ '/paperwork.cli/' | relative_url }}">Command Line</a>
+          <a href="{{ '/paperwork.skill/' | relative_url }}">Full AI Skills</a>
+        </div>
+        <div class="pw-footer-col">
+          <h2>Reference</h2>
+          <a href="{{ '/paperwork.core/reference/htmltags/' | relative_url }}">HTML Elements</a>
+          <a href="{{ '/paperwork.core/reference/cssproperties/' | relative_url }}">CSS Properties</a>
+          <a href="{{ '/paperwork.core/reference/binding/' | relative_url }}">Data Binding</a>
+          <a href="{{ '/paperwork.core/reference/svgelements/' | relative_url }}">SVG Elements</a>
+        </div>
+        <div class="pw-footer-col">
+          <h2>Links</h2>
+          {% for link in site.aux_links %}<a href="{{ link.last }}" target="_blank" rel="noopener noreferrer">{{ link.first }}</a>{% endfor %}
+        </div>
+      </div>
+      <div class="pw-footer-base">
+        <span>&copy; {{ 'now' | date: '%Y' }} Paperwork Collective</span>
+        {% if page.path and page.collection == nil %}<a href="https://github.com/richard-scryber/PaperworkDayDocs/edit/main/{{ page.path }}" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a>{% endif %}
+      </div>
+    </footer>
+    <aside class="pw-toc" id="pw-toc" aria-label="On this page" hidden>
+      <div class="pw-toc-title">On this page</div>
+      <ul class="pw-toc-list" id="pw-toc-list"></ul>
+      <a class="pw-toc-top" href="#top">&uarr; Back to top</a>
+    </aside>
     {% if site.search_enabled != false %}
       {% if site.search.button %}
         <a href="#" id="search-button" class="search-button">
@@ -246,100 +270,6 @@
     window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
   </script>
   {% endif %}
-
-  <script type="text/javascript">
-
-    
-
-    var sampleRoot = "https://raw.githubusercontent.com/richard-scryber/PaperworkDayDocs/main/"
-
-    $().ready( () => {
-
-        var existing = jtd.getTheme();
-        if(!existing){
-            existing = "default";
-        }
-        var body = $("body");
-        if(body && !body.hasClass(existing)){
-            body.addClass(existing);
-        }
-
-        $(".document-container").each((index, ele) => {
-            var template = $(ele).data("pw-template");
-            var data = $(ele).data("pw-json");
-            var ui =$(ele).data("pw-ui") || "Default";
-            var width = $(ele).data("pw-width") || "100%";
-            var height = $(ele).data("pw-height") || "600px";
-            var scale = $(ele).data("pw-scale") || 0.75;
-            var page = $(ele).data("pw-page") || 1;
-            var name = $(ele).attr("name") || ele.id;
-            var vers = $(ele).data("pw-vers") || "latest";
-            
-
-            if(!ele.id){
-              console.error("No ID provided for initializing the container with template " + template);
-            }
-            paperwork.init({
-                name: name,
-                container: "#" + ele.id,
-                ui: ui,
-                scale: 0.5,
-                height: height,
-                width: width,
-                vers: vers,
-                page: page,
-                scale: scale,
-                loaded: (result) => {
-                    console.log("Frame with name " + result.name + " loaded");
-                      if(template){
-                      $("#" + ele.id).addClass("doc_wrapper");
-                      if(data){
-                          paperwork.generate({
-                              name: result.name,
-                              template: { source : sampleRoot + template},
-                              data: {source: sampleRoot + data}
-                          });
-                      }
-                      else{
-                          paperwork.generate({
-                              name: result.name,
-                              template: { source : sampleRoot + template}
-                          });
-                      }
-                  }
-                } //loaded
-            }); //init
-        }); //each
-
-        var currTheme = $.cookie("theme");
-        var existing = jtd.getTheme();
-        if(currTheme && currTheme != existing){
-            jtd.setTheme(currTheme);
-        }
-        else 
-          currTheme = "default";
-        var body = $("body");
-        body.addClass(currTheme);
-
-        $(".js-toggle-dark-mode").on("click", function() {
-          var currTheme = $.cookie("theme");
-          $("body").removeClass(currTheme);
-            if (!currTheme || currTheme === 'default') {
-                jtd.setTheme('light');
-                $.cookie("theme", "light", { expires: 365, path: '/' });
-                $("body").addClass("light");
-            } else {
-                jtd.setTheme('default');
-                $.cookie("theme", "default", { expires: 365, path: '/' }); 
-                $("body").addClass("default");
-            }
-            return false;
-        });
-      }
-    ); //ready
-
-    
-  </script>
 
 </body>
 </html>

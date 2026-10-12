@@ -1,0 +1,98 @@
+// Paperwork help - light palette (values from the help style guide)
+$color-scheme: light;
+
+// ── just-the-docs variables ──────────────────────────────────────────────────
+$body-background-color: #eef1f2;
+$body-heading-color: #2b3038;
+$body-text-color: #2b3038;
+$link-color: #078886;
+$sidebar-color: #ffffff;
+$nav-child-link-color: #5f6670;
+$border-color: #d3d8db;
+$table-background-color: #ffffff;
+$search-background-color: #4a515b;
+$search-result-preview-color: #5f6670;
+$base-button-color: #ffffff;
+$btn-primary-color: #078886;
+$code-background-color: #2b3038;
+$feedback-color: #ffffff;
+
+// ── paperwork tokens ─────────────────────────────────────────────────────────
+$pw-canvas: #eef1f2;
+$pw-surface: #ffffff;
+$pw-surface-2: #f6f8f9;
+$pw-hover: #f1f4f5;
+$pw-header-bg: #3a4049;
+$pw-header-border: transparent;
+$pw-header-text: #ffffff;
+$pw-header-muted: #d6dbdf;
+$pw-search-bg: #4a515b;
+$pw-search-border: #5f6670;
+$pw-search-text: #aab3ba;
+$pw-kbd-border: #6b747d;
+$pw-text: #2b3038;
+$pw-muted: #5f6670;
+$pw-border: #d3d8db;
+$pw-accent: #078886;
+$pw-accent-bar: #0bb3b0;
+$pw-accent-tint: #e3f6f5;
+$pw-chip-bg: #ffffff;
+$pw-chip-border: #a9e3e1;
+$pw-stage: #c9d0d5;
+$pw-focus: #0bb3b0;
+$pw-shadow: 0 4px 12px rgba(43, 48, 56, 0.12);
+$pw-link-hover: #055a58;
+$pw-link-visited: #4f6f78;
+
+// tags and support markers
+$pw-tag-neutral-bg: #e6e9eb;
+$pw-tag-neutral-border: #d3d8db;
+$pw-tag-neutral-text: #5f6670;
+$pw-warn: #e0a33a;
+$pw-warn-bg: #fbf0dc;
+$pw-warn-text: #7a4f0a;
+
+// buttons (primary uses deep teal in light so white text passes contrast; brand teal with dark ink in dark)
+$pw-btn: #078886;
+$pw-btn-hover: #066f6d;
+$pw-btn-active: #055a58;
+$pw-btn-text: #ffffff;
+$pw-btn2-bg: #ffffff;
+$pw-btn2-border: #a9e3e1;
+$pw-btn2-hover-bg: #e3f6f5;
+$pw-btn2-active-bg: #a9e3e1;
+
+// code: the ground stays dark in both modes; one syntax palette
+$pw-code-bg: #2b3038;
+$pw-code-frame: #2b3038;
+$pw-code-head: #3a4049;
+$pw-code-text: #d6dbdf;
+$pw-code-label: #0bb3b0;
+$pw-code-file: #aab3ba;
+$pw-tk-comment: #7d8790;
+$pw-tk-kw: #3fd0cc;
+$pw-tk-tag: #3fd0cc;
+$pw-tk-str: #f0c674;
+$pw-tk-num: #f2a36b;
+$pw-tk-attr: #9fc5e8;
+$pw-tk-prop: #9fc5e8;
+$pw-tk-fn: #a8d8a0;
+$pw-tk-type: #e6c6ff;
+$pw-tk-expr: #ff9fb8;
+$pw-tk-punct: #d6dbdf;
+
+// callouts: frame background, frame border, label tab background, label tab text
+$pw-co-note: (#ffffff, #d3d8db, #5f6670, #ffffff);
+$pw-co-important: (#ffffff, #a9e3e1, #078886, #ffffff);
+$pw-co-warning: (#fbf0dc, #e0a33a, #e0a33a, #2b3038);
+$pw-co-new: (#ffffff, #0bb3b0, #0bb3b0, #1a1e23);
+$pw-co-highlight: (#e3f6f5, #a9e3e1);
+
+// label colours used by the status labels
+$pw-note: #078886;
+$pw-important: #2b6cb0;
+$pw-warning: #c53030;
+$pw-new: #2f855a;
+$pw-highlight: #b7791f;
+
+@import "./vendor/accessible-pygments/github-dark";

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Invoice #{{model.invoiceNumber}}</title>
+    <meta name="author" content="{{model.companyName}}" />
+    <link rel="stylesheet" href="invoice.css" />
+  </head>
+  <body>
+    <div class="header">
+      <div class="invoice-title">INVOICE</div>
+      <div>Invoice #: {{model.invoiceNumber}}</div>
+      <div>Date: {{model.date}}</div>
+    </div>
+    <div style="margin-bottom: 20pt;">
+      <strong>Bill To:</strong><br/>
+      {{model.customerName}}<br/>
+      {{model.customerAddress}}
+    </div>
+    <table class="invoice-table">
+      <thead>
+        <tr><th>Description</th><th>Quantity</th>
+            <th>Unit Price</th><th>Total</th></tr>
+      </thead>
+      <tbody>
+        <template data-bind="{{model.items}}">
+          <tr>
+            <td>{{.description}}</td>
+            <td>{{.quantity}}</td>
+            <td>${{.unitPrice}}</td>
+            <td>${{.total}}</td>
+          </tr>
+        </template>
+        <tr class="total-row">
+          <td colspan="3" style="text-align: right;">TOTAL:</td>
+          <td>${{model.totalAmount}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

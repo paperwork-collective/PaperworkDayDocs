@@ -1,0 +1,8 @@
+// Paperwork help site styles. Compiled once per colour scheme (paperwork-light / paperwork-dark),
+// so every $pw-* variable below comes from _sass/color_schemes/paperwork-<scheme>.scss.
+@import "pw-defaults";
+@import "fonts";
+@import "pw-base";
+@import "pw-layout";
+@import "pw-components";
+@import "pw-example";

@@ -1,0 +1,107 @@
+// Tabbed live example (see _includes/example.html and assets/js/pw-example.js).
+
+.pwx {
+  position: relative;
+  margin: 2.25rem 0;
+  border: 1px solid $pw-border;
+  background: $pw-surface;
+  color: $pw-text;
+  box-shadow: $pw-shadow;
+}
+
+// blueprint registration marks
+.pwx-corner {
+  position: absolute;
+  width: 11px; height: 11px;
+  color: $pw-muted;
+  pointer-events: none;
+  &::before, &::after { content: ""; position: absolute; background: currentColor; }
+  &::before { left: 5px; top: 0; width: 1px; height: 100%; }
+  &::after { top: 5px; left: 0; width: 100%; height: 1px; }
+  &.tl { top: -6px; left: -6px; }
+  &.tr { top: -6px; right: -6px; }
+  &.bl { bottom: -6px; left: -6px; }
+  &.br { bottom: -6px; right: -6px; }
+}
+
+.pwx-bar {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid $pw-border;
+  padding: 0 0.75rem 0 0.25rem;
+}
+.pwx-tabs { display: flex; overflow-x: auto; scrollbar-width: none; &::-webkit-scrollbar { display: none; } }
+.pwx-tab {
+  appearance: none;
+  margin: 0;
+  min-height: 44px;
+  padding: 0.85rem 1.1rem 0.7rem;
+  background: none;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  font: 500 15px/1.2 $pw-font-body;
+  color: $pw-muted;
+  cursor: pointer;
+  &:hover { color: $pw-text; }
+  &[aria-selected="true"] { color: $pw-accent; border-bottom-color: $pw-accent-bar; }
+  &:focus-visible { outline: 2px solid $pw-focus; outline-offset: -2px; }
+}
+.pwx-links {
+  display: flex; align-items: center; gap: 1.1rem;
+  white-space: nowrap;
+  font-size: 13px;
+  a { color: $pw-accent; text-decoration: none; background-image: none; &:hover { text-decoration: underline; } }
+}
+
+.pwx-panel[hidden] { display: none; }
+.pwx-panel-example { background: $pw-stage; }
+.pwx-viewer { position: relative; width: 100%; }
+.pwx-viewer::before {
+  content: "Rendering example\2026";
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: $pw-muted; font-size: 14px; letter-spacing: 0.04em;
+}
+.pwx-viewer[data-failed]::before { content: "The rendered example could not be loaded."; }
+.pwx-viewer iframe { position: relative; display: block; width: 100%; height: 100%; border: 0; background: $pw-stage; }
+.pwx-fallback { margin: 0; padding: 1rem; color: $pw-muted; }
+
+.pwx-code {
+  margin: 0;
+  height: 520px;
+  overflow: auto;
+  padding: 1.25rem 1.5rem;
+  background: $pw-code-bg;
+  color: $pw-code-text;
+  font: 13px/1.65 $pw-font-mono;
+  white-space: pre;
+  tab-size: 2;
+  border-radius: 0;
+  code { background: none; border: 0; padding: 0; font: inherit; color: inherit; white-space: inherit; }
+  &:focus-visible { outline: 2px solid $pw-focus; outline-offset: -2px; }
+}
+.tk-t { color: $pw-tk-tag; }
+.tk-a { color: $pw-tk-attr; }
+.tk-s { color: $pw-tk-str; }
+.tk-n { color: $pw-tk-num; }
+.tk-x { color: $pw-tk-expr; }
+.tk-c { color: $pw-tk-comment; font-style: italic; }
+.tk-p { color: $pw-tk-punct; }
+
+.pwx-foot {
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  border-top: 1px solid $pw-border;
+  padding: 0.7rem 1.25rem;
+  font-size: 13px;
+  color: $pw-muted;
+}
+
+@media (max-width: 768px) {
+  .pwx { margin-left: -0.25rem; margin-right: -0.25rem; }
+  .pwx-bar { flex-direction: column; gap: 0; padding: 0; }
+  .pwx-links { padding: 0.5rem 1rem; border-top: 1px solid $pw-border; }
+  .pwx-code { height: 420px; padding: 1rem; font-size: 12px; }
+}

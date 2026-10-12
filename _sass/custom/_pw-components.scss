@@ -1,0 +1,237 @@
+// Buttons, tags, chips, callouts and the reusable content patterns - follows the help style guide.
+
+// ── buttons: primary (deep teal in light, brand teal in dark), secondary, ghost ──
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  height: 40px;
+  margin: 0 8px 8px 0;
+  padding: 0 16px;
+  font-family: $pw-font-body;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  color: $pw-accent;
+  background: $pw-btn2-bg;
+  border: 1px solid $pw-btn2-border;
+  border-radius: 0;
+  box-shadow: none;
+  text-decoration: none;
+  background-image: none;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+  &:hover { background: $pw-btn2-hover-bg; border-color: $pw-accent-bar; color: $pw-accent; text-decoration: none; background-image: none; }
+  &:active { background: $pw-btn2-active-bg; border-color: $pw-accent-bar; }
+  &:focus-visible { outline: 2px solid $pw-focus; outline-offset: 2px; }
+  &.disabled, &[disabled], &[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
+}
+.btn-primary, .btn-blue, .btn-green {
+  background: $pw-btn; border-color: $pw-btn; color: $pw-btn-text;
+  &:hover { background: $pw-btn-hover; border-color: $pw-btn-hover; color: $pw-btn-text; }
+  &:active { background: $pw-btn-active; border-color: $pw-btn-active; }
+}
+.btn-outline { background: transparent; border-color: $pw-btn2-border; }
+.btn-ghost {
+  background: transparent; border-color: transparent;
+  &:hover { background: $pw-accent-tint; border-color: transparent; }
+  &:active { background: $pw-btn2-active-bg; border-color: transparent; }
+}
+
+// ── tags: status and version ─────────────────────────────────────────────────
+
+.pw-tag, .label, .label-blue, .label-green, .label-purple, .label-red, .label-yellow {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 6px 6px 0;
+  padding: 2px 7px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  line-height: 1.5;
+  text-transform: none;
+  border-radius: 0;
+  color: $pw-text;
+  background: $pw-surface;
+  border: 1px solid $pw-border;
+}
+.pw-tag.is-new, .label-green, .label-blue { background: $pw-accent-tint; color: $pw-accent; border-color: $pw-accent-bar; }
+.pw-tag.is-version, .label-purple { background: $pw-header-bg; color: #ffffff; border-color: $pw-header-bg; }
+.pw-tag.is-muted, .pw-tag.is-deprecated, .label-red { background: $pw-tag-neutral-bg; color: $pw-tag-neutral-text; border-color: $pw-tag-neutral-border; }
+.pw-tag.is-deprecated, .label-red { text-decoration: line-through; }
+.pw-tag.is-code { background: $pw-accent-tint; color: $pw-accent; border-color: $pw-chip-border; font: 400 11px/1.5 $pw-font-mono; letter-spacing: 0; }
+.label-yellow { background: $pw-warn-bg; color: $pw-warn-text; border-color: $pw-warn; }
+
+// ── chips: filters and selections (32px; 44px in touch layouts) ──────────────
+
+.pw-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  box-sizing: border-box; height: 32px; margin: 0 6px 6px 0; padding: 0 12px;
+  font: 500 13px/1 $pw-font-body;
+  color: $pw-accent; background: $pw-chip-bg; border: 1px solid $pw-chip-border;
+  text-decoration: none; cursor: pointer;
+  .pw-chip-count { font-size: 11px; opacity: 0.8; }
+  &:hover { border-color: $pw-accent-bar; text-decoration: none; }
+  &.is-selected { background: $pw-accent-bar; border-color: $pw-accent-bar; color: #1a1e23; }
+  @media (pointer: coarse) { height: 44px; padding: 0 16px; }
+}
+
+// ── callouts: a framed box with a label tab ({: .note } on a blockquote) ─────
+
+blockquote.note, blockquote.important, blockquote.warning, blockquote.new, blockquote.highlight {
+  position: relative;
+  margin: 1.6rem 0;
+  padding: 0 18px 14px;
+  border: 1px solid $pw-border;
+  border-radius: 0;
+  background: $pw-surface;
+  color: $pw-text;
+  box-shadow: none;
+  font: 400 15px/1.6 $pw-font-body;
+
+  // the label tab sits flush top-left, on the frame
+  &::before {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin: 0 0 10px -18px;
+    padding: 5px 10px 5px 10px;
+    font: 600 11px/1.3 $pw-font-body;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    background: $pw-muted;
+    color: #ffffff;
+  }
+  > p { margin: 0 0 0.6em; font-size: 15px; }
+  > p:last-child { margin-bottom: 0; }
+  code { font-size: 0.86em; }
+}
+@mixin pw-callout($name, $spec) {
+  blockquote.#{$name} {
+    background: nth($spec, 1);
+    border-color: nth($spec, 2);
+    &::before { background: nth($spec, 3); color: nth($spec, 4); }
+  }
+}
+@include pw-callout(note, $pw-co-note);
+@include pw-callout(important, $pw-co-important);
+@include pw-callout(warning, $pw-co-warning);
+@include pw-callout(new, $pw-co-new);
+blockquote.highlight {
+  background: nth($pw-co-highlight, 1);
+  border-color: nth($pw-co-highlight, 2);
+  padding-top: 14px;
+  &::before { content: none; display: none; }
+}
+
+// ── landing page patterns ────────────────────────────────────────────────────
+
+// numbered steps:  <ol class="pw-steps">
+.main-content ol.pw-steps {
+  margin: 1.6rem 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid $pw-border;
+  counter-reset: pw-step;
+  > li {
+    counter-increment: pw-step;
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 16px;
+    margin: 0;
+    padding: 18px 0;
+    border-bottom: 1px solid $pw-border;
+    &::before {
+      content: counter(pw-step, decimal-leading-zero);
+      position: static; left: auto; width: auto;
+      text-align: left;
+      font: 600 30px/1 $pw-font-head;
+      color: $pw-accent-bar;
+    }
+    > strong:first-child { display: block; font: 600 22px/1.05 $pw-font-head; color: $pw-text; margin-bottom: 4px; }
+  }
+}
+
+// product cards:  <div class="pw-cards"> <a class="pw-card" href=...> ... </a> </div>
+.pw-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin: 1.4rem 0 2rem; }
+.main-content a.pw-card, a.pw-card {
+  position: relative;
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 18px 20px 20px;
+  border: 1px solid $pw-border;
+  background: $pw-surface;
+  color: $pw-text;
+  text-decoration: none;
+  transition: border-color 0.12s, box-shadow 0.12s;
+  &:visited { color: $pw-text; }
+  &:hover { border-color: $pw-accent-bar; box-shadow: $pw-shadow; color: $pw-text; text-decoration: none; }
+  .pw-card-kicker { font-size: 11px; font-weight: 500; letter-spacing: 1.4px; text-transform: uppercase; color: $pw-accent; }
+  .pw-card-title { font: 600 24px/1.05 $pw-font-head; color: $pw-text; }
+  .pw-card-body { font-size: 14px; line-height: 1.5; color: $pw-muted; }
+  &::after { content: "\2192"; position: absolute; right: 18px; top: 18px; color: $pw-accent-bar; font-size: 18px; }
+}
+
+// previous / next:  <nav class="pw-prevnext"> <a ...><small>Previous</small><span>Title</span></a> ... </nav>
+.pw-prevnext {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;
+  margin: 2.4rem 0 0;
+  a, .main-content & a {
+    display: flex; flex-direction: column; gap: 2px;
+    padding: 14px 16px;
+    border: 1px solid $pw-border;
+    background: $pw-surface;
+    color: $pw-text;
+    text-decoration: none;
+    small { font-size: 12px; color: $pw-muted; }
+    span { font: 600 20px/1.08 $pw-font-head; color: $pw-text; }
+    &:hover { border-color: $pw-accent-bar; box-shadow: inset -4px 0 0 $pw-accent-bar; background: $pw-accent-tint; text-decoration: none; span { color: $pw-accent; } }
+    &:last-child:not(:first-child) { text-align: right; }
+  }
+}
+@media (max-width: 768px) { .pw-prevnext { grid-template-columns: minmax(0, 1fr); } }
+
+// changelog entries:  <section class="pw-release"> <header> <h3>v6.2.0</h3> <span class="pw-release-date">12 Oct 2026</span> ... </header> ... </section>
+.pw-release {
+  display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 20px;
+  margin: 1.8rem 0; padding-top: 14px; border-top: 2px solid $pw-accent-bar;
+  .pw-release-version { font: 600 26px/1.08 $pw-font-head; }
+  .pw-release-date { font-size: 13px; color: $pw-muted; }
+  @media (max-width: 768px) { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+}
+
+// 404
+.pw-notfound {
+  margin: 1rem 0 2rem; padding: 44px 32px;
+  background: $pw-canvas; border: 1px solid $pw-border;
+  .pw-notfound-code { font: 600 110px/0.85 $pw-font-head; color: $pw-accent-bar; margin: 0 0 14px; }
+  h1 { font-size: 34px; margin: 0 0 10px; line-height: 1.08; }
+  p { font-size: 15px; color: $pw-muted; max-width: 52ch; }
+}
+
+// ── footer ───────────────────────────────────────────────────────────────────
+
+.pw-footer {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin-top: 24px;
+  padding: 28px 48px 18px;
+  background: $pw-header-bg;
+  border-top: 4px solid $pw-accent-bar;
+  color: #d6dbdf;
+  font-size: 13px;
+  a { color: #d6dbdf; text-decoration: none; background-image: none; &:hover { color: #ffffff; text-decoration: underline; text-underline-offset: 3px; } }
+}
+.pw-footer-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); gap: 20px; margin-bottom: 22px; }
+.pw-footer-brand { display: flex; flex-direction: column; gap: 10px; .pw-brand-name { font-size: 22px; } .pw-brand-mark { height: 28px; } p { margin: 0; color: #aab3ba; line-height: 1.5; } }
+.pw-footer-col { display: flex; flex-direction: column; gap: 6px; h2 { all: unset; display: block; margin: 0 0 4px; font-size: 11px; font-weight: 600; letter-spacing: 1.3px; color: $pw-accent-bar; text-transform: uppercase; } }
+.pw-footer-base { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; padding-top: 14px; border-top: 1px solid #5f6670; color: #aab3ba; font-size: 12px; }
+@media (max-width: 768px) {
+  .pw-footer { padding: 24px 16px 16px; }
+  .pw-footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pw-footer-brand { grid-column: 1 / -1; }
+}

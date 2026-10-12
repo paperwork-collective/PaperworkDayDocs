@@ -1,15 +1,15 @@
-logo: "/assets/PaperworkTransparent.svg"
 title: Paperwork
 description: The documentation for Paperwork library and the core, open source, Scryber PDF creation library for dotnet.
 theme: just-the-docs
-color_scheme: dark
+color_scheme: paperwork-dark
 
 url: https://www.paperworkday.info
 
 aux_links:
-  .git: https://github.com/richard-scryber/scryber.core
-  .com: https://www.paperwork-collective.com
-  .studio: https://paperwork.design
+  "Design ↗": https://paperwork.design
+  "Code ↗": https://github.com/richard-scryber/scryber.core
+  "Corporate ↗": https://www.paperwork-collective.com
+aux_links_new_tab: true
 
 heading_anchors: false
 

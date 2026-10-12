@@ -1,0 +1,30 @@
+{
+  "model": {
+    "invoiceNumber": "INV-1042",
+    "companyName": "Paperwork Collective",
+    "date": "12 Oct 2026",
+    "customerName": "Harbour Logistics Ltd",
+    "customerAddress": "14 Quay Street, Bristol",
+    "items": [
+      {
+        "description": "Template design",
+        "quantity": 1,
+        "unitPrice": "450.00",
+        "total": "450.00"
+      },
+      {
+        "description": "Data feed setup",
+        "quantity": 2,
+        "unitPrice": "120.00",
+        "total": "240.00"
+      },
+      {
+        "description": "Monthly hosting",
+        "quantity": 3,
+        "unitPrice": "35.00",
+        "total": "105.00"
+      }
+    ],
+    "totalAmount": "795.00"
+  }
+}

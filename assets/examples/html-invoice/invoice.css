@@ -1,0 +1,40 @@
+:root {
+  --primary-color: #2c3e50;
+  --accent-color: #3498db;
+  --border-color: #bdc3c7;
+}
+body {
+  font-family: Arial, sans-serif;
+  font-size: 10pt;
+  margin: 40pt;
+}
+.header {
+  border-bottom: 2pt solid var(--primary-color);
+  margin-bottom: 20pt;
+  padding-bottom: 10pt;
+}
+.invoice-title {
+  color: var(--primary-color);
+  font-size: 28pt;
+  font-weight: bold;
+}
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20pt;
+}
+.invoice-table th {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 8pt;
+  text-align: left;
+}
+.invoice-table td {
+  border-bottom: 1pt solid var(--border-color);
+  padding: 8pt;
+}
+.total-row {
+  font-weight: bold;
+  font-size: 12pt;
+  background-color: #ecf0f1;
+}
