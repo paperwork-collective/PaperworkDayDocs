@@ -23,7 +23,7 @@ $pw-surface: #ffffff;
 $pw-surface-2: #f6f8f9;
 $pw-hover: #f1f4f5;
 $pw-header-bg: #3a4049;
-$pw-header-border: transparent;
+$pw-header-border: #0bb3b0;
 $pw-header-text: #ffffff;
 $pw-header-muted: #d6dbdf;
 $pw-search-bg: #4a515b;
@@ -94,5 +94,10 @@ $pw-important: #2b6cb0;
 $pw-warning: #c53030;
 $pw-new: #2f855a;
 $pw-highlight: #b7791f;
+
+// home page: hero grid lines, and which system map shows
+$pw-grid-line: rgba(58, 64, 73, 0.06);
+$pw-map-light-display: block;
+$pw-map-dark-display: none;
 
 @import "./vendor/accessible-pygments/github-dark";

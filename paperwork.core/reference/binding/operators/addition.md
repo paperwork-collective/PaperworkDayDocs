@@ -100,7 +100,7 @@ doc.Params["model"] = new {
 
 
 {% raw %}
-```
+```html
 <p>Total: {{model.base + model.shipping + model.tax}}</p>
 ```
 {% endraw %}
@@ -109,7 +109,7 @@ doc.Params["model"] = new {
 ### With Formatting
 
 {% raw %}
-```
+```html
 
 <p>Grand Total: {{format(model.subtotal + model.tax, 'C2')}}</p>
 ```

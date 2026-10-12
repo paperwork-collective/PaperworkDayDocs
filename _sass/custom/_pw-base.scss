@@ -80,17 +80,18 @@ body {
 // ── lists: filled square, hollow square, dash ────────────────────────────────
 
 .main-content {
-  ul, ol { margin: 0 0 1.2em; padding-left: 1.5em; }
+  ul, ol { margin: 0 0 1.2em; padding-left: 0; }
   li { margin: 0.35em 0; }
   li > ul, li > ol { margin: 0.35em 0 0; }
   ul { list-style: none; }
-  ul > li { position: relative; }
-  ul > li::before { content: ""; position: absolute; left: -1.15em; top: 0.7em; width: 7px; height: 7px; background: $pw-accent-bar; }
+  ul > li { position: relative; padding-left: 1.3em; }
+  ul > li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 7px; height: 7px; background: $pw-accent-bar; }
   ul ul > li::before { background: transparent; border: 1.5px solid $pw-accent-bar; box-sizing: border-box; }
   ul ul ul > li::before { width: 8px; height: 1.5px; top: 0.85em; border: 0; background: $pw-muted; }
-  ol { counter-reset: pw-ol; list-style: none; padding-left: 1.7em; }
-  ol > li { position: relative; counter-increment: pw-ol; }
-  ol > li::before { content: counter(pw-ol) "."; position: absolute; left: -1.7em; width: 1.4em; text-align: right; font: 600 18px/1.45 $pw-font-head; color: $pw-accent-bar; }
+  ol { counter-reset: pw-ol; list-style: none; }
+  ol > li { position: relative; padding-left: 1.9em; counter-increment: pw-ol; }
+  ol > li::before { content: counter(pw-ol) "."; position: absolute; left: 0; width: 1.5em; text-align: left; font: 600 18px/1.45 $pw-font-head; color: $pw-accent-bar; }
+  > p, > ul, > ol, > dl, > blockquote { max-width: 76ch; }
   dl { margin: 0 0 1.2em; }
   dt { font-weight: 600; margin-top: 0.8em; }
   dd { margin: 0.2em 0 0 1.2em; color: $pw-muted; }
@@ -164,7 +165,7 @@ mark { background: rgba($pw-warn, 0.28); color: inherit; padding: 0 2px; }
 
 // ── inline code ──────────────────────────────────────────────────────────────
 
-code, pre, kbd, samp { font-family: $pw-font-mono; }
+code, pre, kbd, samp { font-family: $pw-font-mono; font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; }
 code, :not(pre, figure) > code {
   font-size: 0.86em;
   padding: 1px 5px;
@@ -314,7 +315,21 @@ table.simple {
   &::before { content: "\2713"; font-size: 11px; font-weight: 700; }
   &.is-partial { background: $pw-warn-bg; border-color: $pw-warn; color: $pw-warn-text; &::before { content: "\25D0"; } }
   &.is-no { background: $pw-tag-neutral-bg; border-color: $pw-tag-neutral-border; color: $pw-tag-neutral-text; &::before { content: "\2715"; } }
+  &.is-ext { background: transparent; border-color: $pw-border; color: $pw-text; &::before { content: ""; width: 9px; height: 9px; background: $pw-accent-bar; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); } }
+  &.is-version { background: transparent; border-color: $pw-border; color: $pw-muted; font-family: $pw-font-mono; font-weight: 500; &::before { content: none; } }
   &.is-new { background: $pw-accent-tint; border-color: $pw-accent-bar; color: $pw-accent; &::before { content: "\2605"; } }
+}
+
+@media (max-width: 600px) {
+  // narrow tables (up to 3 columns) stack: each row becomes a block, cells labelled by their column
+  .table-wrapper.is-stack { overflow: visible; border: 0; background: transparent; }
+  .table-wrapper.is-stack table { min-width: 0 !important; display: block; }
+  .table-wrapper.is-stack thead { display: none; }
+  .table-wrapper.is-stack tbody, .table-wrapper.is-stack tr { display: block; }
+  .table-wrapper.is-stack tr { margin: 0 0 12px; border: 1px solid $pw-border; background: $pw-surface; }
+  .table-wrapper.is-stack td { display: block; border-top: 1px solid $pw-border; padding: 8px 12px; }
+  .table-wrapper.is-stack td:first-child { border-top: 0; font-weight: 600; }
+  .table-wrapper.is-stack td[data-label]:not(:first-child)::before { content: attr(data-label); display: block; font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: $pw-accent; margin-bottom: 2px; }
 }
 
 @media (max-width: 768px) {

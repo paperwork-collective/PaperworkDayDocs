@@ -248,3 +248,23 @@ blockquote.highlight {
 @media (max-width: 768px) {
   .pw-footer { padding: 24px 16px 16px; }
 }
+
+// code block file name is shown in the header beside the language
+.pw-code-head .pw-code-file { margin-left: 4px; }
+
+// search results: capped list, count line and key hints
+.pw-search-meta, .pw-search-keys {
+  display: flex; align-items: center; gap: 14px; padding: 10px 16px;
+  font-size: 12px; color: $pw-muted; background: $pw-surface; border-top: 1px solid $pw-border;
+  kbd { font: 500 11px $pw-font-mono; padding: 1px 5px; border: 1px solid $pw-border; background: $pw-canvas; color: $pw-text; }
+  .pw-search-all { margin-left: auto; font-weight: 600; color: $pw-accent; background: none; border: 0; cursor: pointer; padding: 0; font-size: 12px; &:hover { text-decoration: underline; } }
+}
+.pw-search-keys { gap: 16px; }
+.search-result.pw-extra { display: none !important; }
+.pw-show-all .search-result.pw-extra { display: grid !important; }
+.pw-search-pagetitle { font-weight: 600; }
+.pw-search-sep { color: $pw-muted; margin: 0 6px; }
+
+.search-result-section::before { content: "\203A"; margin-right: 6px; color: $pw-muted; }
+
+.pw-search-keys { position: sticky; bottom: 0; }

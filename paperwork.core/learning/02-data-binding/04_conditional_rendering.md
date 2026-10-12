@@ -1237,7 +1237,7 @@ doc.Params["model"] = new
 - **Template Calculations**: Each category's bar height is calculated in the template using `<var>` elements:
 
 {% raw %}
-  ```
+  ```html
   <var data-id="barHeight" data-value="{{this.revenue / ../maxValue * 200}}" />
   ```
 {% endraw %}

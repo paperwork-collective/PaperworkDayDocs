@@ -95,4 +95,9 @@ $pw-warning: #f08a8a;
 $pw-new: #6fd39a;
 $pw-highlight: #f0c674;
 
+// home page: hero grid lines, and which system map shows
+$pw-grid-line: rgba(255, 255, 255, 0.045);
+$pw-map-light-display: none;
+$pw-map-dark-display: block;
+
 @import "./vendor/accessible-pygments/github-dark";

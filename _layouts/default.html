@@ -130,7 +130,7 @@
 
   </div>
   <div class="main" id="top">
-    <div id="main-content-wrap" class="main-content-wrap">
+    <div id="main-content-wrap" class="main-content-wrap{% if page.pw_wide %} is-wide{% endif %}">
       {% unless page.url == "/" %}
         {% if page.parent %}
           <nav aria-label="Breadcrumb" class="breadcrumb-nav">
@@ -139,6 +139,10 @@
                 {% if page.ancestor %}
                   {% assign breadcrumb_ancestor = site.html_pages | where: "title", page.ancestor | where_exp: "item", "item.parent == nil" | first %}
                   <li class="breadcrumb-nav-list-item"><a href="{{ breadcrumb_ancestor.url | relative_url }}">{{ page.ancestor }}</a></li>
+                {% else %}
+                  {%- comment -%} no explicit ancestor: the grand_parent page's own parent is the first crumb {%- endcomment -%}
+                  {% assign breadcrumb_gp = site.html_pages | where: "title", page.grand_parent | where_exp: "item", "item.parent != nil" | first %}
+                  {% if breadcrumb_gp.parent %}<li class="breadcrumb-nav-list-item"><a href="{{ breadcrumb_gp.parent_url }}">{{ breadcrumb_gp.parent }}</a></li>{% endif %}
                 {% endif %}
                 <li class="breadcrumb-nav-list-item"><a href="{{ page.grand_parent_url }}">{{ page.grand_parent }}</a></li>
                 <li class="breadcrumb-nav-list-item"><a href="{{ page.parent_url }}">{{ page.parent }}</a></li>

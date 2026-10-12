@@ -1,0 +1,92 @@
+// Home page (wide layout): hero with the system map, and the product grid.
+
+// blueprint registration marks, used on cards, the map frame and the primary button
+.pw-corner {
+  position: absolute;
+  width: 11px; height: 11px;
+  color: $pw-muted;
+  pointer-events: none;
+  &::before, &::after { content: ""; position: absolute; background: currentColor; }
+  &::before { left: 5px; top: 0; width: 1px; height: 100%; }
+  &::after { top: 5px; left: 0; width: 100%; height: 1px; }
+  &.tl { top: -6px; left: -6px; }
+  &.tr { top: -6px; right: -6px; }
+  &.bl { bottom: -6px; left: -6px; }
+  &.br { bottom: -6px; right: -6px; }
+}
+
+// wide pages use the full width of the content area
+.main-content-wrap.is-wide { max-width: none; padding: 0; }
+.is-wide .main-content { padding: 0; }
+
+.pw-hero {
+  background-color: $pw-canvas;
+  background-image: linear-gradient($pw-grid-line 1px, transparent 1px), linear-gradient(90deg, $pw-grid-line 1px, transparent 1px);
+  background-size: 40px 40px;
+  border-bottom: 1px solid $pw-border;
+}
+.pw-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 56px;
+  align-items: center;
+  padding: 72px 48px 64px;
+}
+.pw-kicker { margin: 0 0 22px; font: 500 12px/1 $pw-font-body; letter-spacing: 1.4px; text-transform: uppercase; color: $pw-accent; }
+.main-content .pw-hero h1 { font-size: clamp(44px, 5.4vw, 68px) !important; line-height: 1; letter-spacing: -0.02em; margin: 0 0 22px; }
+.main-content .pw-hero .pw-lead { font-size: 18px; line-height: 1.6; color: $pw-muted; max-width: 36ch; margin: 0 0 28px; }
+.pw-actions { display: flex; flex-wrap: wrap; gap: 14px; margin: 0; .btn { position: relative; margin: 0; height: 48px; padding: 0 26px; font-size: 16px; } }
+.pw-btn-marks .pw-corner { color: $pw-text; }
+
+.pw-hero-map { position: relative; margin: 0; padding: 12px; background: $pw-surface; border: 1px solid $pw-border; box-shadow: $pw-shadow; }
+.pw-map { display: block; width: 100%; height: auto; }
+.pw-map-light { display: $pw-map-light-display; }
+.pw-map-dark { display: $pw-map-dark-display; }
+
+.pw-home-section { padding: 56px 48px 72px; }
+.main-content h2.pw-section-title { font-size: 15px; line-height: 1; letter-spacing: 1.6px; text-transform: uppercase; margin: 0 0 26px; }
+.pw-products { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; }
+.main-content a.pw-product, .main-content .pw-product {
+  position: relative;
+  display: flex; flex-direction: column; gap: 8px;
+  min-height: 150px;
+  padding: 24px 28px 28px;
+  background: $pw-surface;
+  border: 1px solid $pw-border;
+  border-left: 4px solid $pw-accent-bar;
+  color: $pw-text;
+  text-decoration: none;
+  background-image: none;
+  transition: border-color 0.12s, box-shadow 0.12s;
+  &:visited { color: $pw-text; }
+  &:hover { box-shadow: $pw-shadow; border-color: $pw-accent-bar; color: $pw-text; text-decoration: none; }
+}
+.pw-product-kicker { font: 500 11px/1.2 $pw-font-body; letter-spacing: 1.6px; text-transform: uppercase; color: $pw-accent; }
+.main-content a.pw-product *, .main-content a.pw-product:hover * { text-decoration: none; background-image: none; }
+.pw-product-title { font: 600 30px/1.05 $pw-font-head; letter-spacing: -0.01em; }
+.pw-product-body { font-size: 15px; line-height: 1.55; color: $pw-muted; max-width: 34ch; }
+.main-content .pw-product.pw-product-dark {
+  background: $pw-header-bg; border-color: $pw-header-bg; border-left-color: $pw-accent-bar; color: #ffffff;
+  .pw-product-kicker { color: $pw-accent-bar; }
+  .pw-product-title { color: #ffffff; }
+  .pw-corner { color: $pw-muted; }
+  &:hover { box-shadow: none; }
+}
+.pw-product-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.main-content a.pw-chip-dark {
+  display: inline-flex; align-items: center; height: 36px; padding: 0 14px;
+  border: 1px solid $pw-accent-bar; color: #ffffff; font: 500 14px/1 $pw-font-body;
+  text-decoration: none; background-image: none;
+  &:hover { background: rgba($pw-accent-bar, 0.2); color: #ffffff; text-decoration: none; }
+}
+
+@container pwmain (max-width: 1000px) {
+  .pw-hero-inner { grid-template-columns: minmax(0, 1fr); gap: 40px; padding: 48px 32px; }
+  .pw-products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pw-home-section { padding: 40px 32px 56px; }
+}
+@container pwmain (max-width: 600px) {
+  .pw-hero-inner { padding: 36px 20px 40px; }
+  .pw-products { grid-template-columns: minmax(0, 1fr); }
+  .pw-home-section { padding: 32px 20px 48px; }
+}

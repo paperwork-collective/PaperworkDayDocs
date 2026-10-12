@@ -87,6 +87,7 @@ transform-origin="x y"
 Use keywords for common origin points:
 
 #### X-axis Keywords
+
 | Keyword | Position | Equivalent |
 |---------|----------|------------|
 | `left` | Left edge | `0%` |
@@ -94,6 +95,7 @@ Use keywords for common origin points:
 | `right` | Right edge | `100%` |
 
 #### Y-axis Keywords
+
 | Keyword | Position | Equivalent |
 |---------|----------|------------|
 | `top` | Top edge | `0%` |

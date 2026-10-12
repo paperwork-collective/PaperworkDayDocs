@@ -1,0 +1,67 @@
+---
+layout: default
+title: Home
+nav_order: 0
+has_children: false
+has_toc: false
+pw_toc: false
+pw_wide: true
+---
+<section class="pw-hero">
+  <div class="pw-hero-inner">
+    <div class="pw-hero-copy">
+      <div class="pw-kicker">paperwork.help</div>
+      <h1>One library for all your business documents</h1>
+      <p class="pw-lead">Design, generate and automate your standard documents with a single source.</p>
+      <p class="pw-actions">
+        <a class="btn btn-primary pw-btn-marks" href="{{ '/paperwork.core/quickstart/quickstart_core' | relative_url }}">Quick Start{% include corners.html %}</a>
+        <a class="btn" href="{{ '/paperwork.core/reference/' | relative_url }}">Browse reference</a>
+      </p>
+    </div>
+    <figure class="pw-hero-map">
+      {% include corners.html %}
+      {% include system-map-light.svg %}
+      {% include system-map-dark.svg %}
+    </figure>
+  </div>
+</section>
+
+<section class="pw-home-section">
+  <h2 class="pw-section-title">Products</h2>
+  <div class="pw-products">
+    <a class="pw-product" href="{{ '/paperwork.core/' | relative_url }}">{% include corners.html %}
+      <span class="pw-product-kicker">Paperwork.Core</span>
+      <span class="pw-product-title">Core Library</span>
+      <span class="pw-product-body">Render documents inside your own coded applications.</span>
+    </a>
+    <a class="pw-product" href="{{ '/paperwork.view/' | relative_url }}">{% include corners.html %}
+      <span class="pw-product-kicker">Paperwork.View</span>
+      <span class="pw-product-title">Online Viewer</span>
+      <span class="pw-product-body">View a template id or HTML content. Embed in any site, or link to it.</span>
+    </a>
+    <a class="pw-product" href="{{ '/paperwork.design/' | relative_url }}">{% include corners.html %}
+      <span class="pw-product-kicker">Paperwork.Design</span>
+      <span class="pw-product-title">Designer</span>
+      <span class="pw-product-body">Import, edit visually or in code, then publish.</span>
+    </a>
+    <a class="pw-product" href="{{ '/paperwork.cli/' | relative_url }}">{% include corners.html %}
+      <span class="pw-product-kicker">Paperwork.CLI</span>
+      <span class="pw-product-title">Command Line</span>
+      <span class="pw-product-body">Build documents from content or a published template.</span>
+    </a>
+    <a class="pw-product" href="{{ '/paperwork.skill/' | relative_url }}">{% include corners.html %}
+      <span class="pw-product-kicker">Paperwork.Skill</span>
+      <span class="pw-product-title">Full AI Skills</span>
+      <span class="pw-product-body">Let your AI fill in fields, generate documents and design templates.</span>
+    </a>
+    <div class="pw-product pw-product-dark">{% include corners.html %}
+      <span class="pw-product-kicker">Paperwork.Reference</span>
+      <span class="pw-product-title">Reference</span>
+      <span class="pw-product-chips">
+        <a class="pw-chip-dark" href="{{ '/paperwork.core/reference/htmltags/' | relative_url }}">HTML Tags</a>
+        <a class="pw-chip-dark" href="{{ '/paperwork.core/reference/cssproperties/' | relative_url }}">CSS</a>
+        <a class="pw-chip-dark" href="{{ '/paperwork.core/reference/binding/' | relative_url }}">Expressions</a>
+      </span>
+    </div>
+  </div>
+</section>

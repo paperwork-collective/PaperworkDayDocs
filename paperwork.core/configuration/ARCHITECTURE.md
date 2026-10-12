@@ -393,7 +393,7 @@ Component (abstract base)
 
 All components implement `IComponent` with these lifecycle phases:
 
-```
+```csharp
 1. Construction
    Component created via factory or constructor
 
@@ -994,7 +994,7 @@ For each selector + properties:
                     └─→ etc.
                         │
                         └─→ Parse value and set on Style
-```
+```csharp
 
 **Example CSS Property Parser**:
 ```csharp

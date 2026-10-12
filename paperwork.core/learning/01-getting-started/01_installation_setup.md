@@ -45,8 +45,6 @@ By the end of this article, you'll be able to:
 5. Search for **`Scryber.Core`**
 6. Click **Install**
 
-![NuGet Package Manager](../../images/nuget-install.png)
-
 ### Method 2: Package Manager Console
 
 ```powershell
@@ -298,10 +296,11 @@ Scryber.ServiceProvider.Init(config);
 
 **Solution:**
 - Ensure project targets .NET Framework 4.6.2 or later
-- Update project file:
-```xml
-<TargetFramework>net472</TargetFramework>
-```
+- Update the project file:
+
+    ```xml
+    <TargetFramework>net472</TargetFramework>
+    ```
 
 ### Issue 4: File Access Permissions
 

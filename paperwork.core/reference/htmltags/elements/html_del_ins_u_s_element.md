@@ -65,12 +65,14 @@ Specialized inline elements for marking edits and changes to textual content for
 ### Element-Specific Attributes
 
 **`<del>` Element**:
+
 | Attribute | Type | Description |
 |-----------|------|-------------|
 | `cite` | string | URL or reference explaining the deletion. |
 | `datetime` | string | Date/time when the text was deleted. |
 
 **`<ins>` Element**:
+
 | Attribute | Type | Description |
 |-----------|------|-------------|
 | `cite` | string | URL or reference explaining the insertion. |

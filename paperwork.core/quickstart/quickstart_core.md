@@ -29,7 +29,7 @@ Follow along if you want to understand some of the key features and benefits of 
 
 ## Application Type
 
-If you don't have an existing application, or platform you want to add the Scryber.Core engine to, then create a new console appliction.
+If you don't have an existing application, or platform you want to add the Scryber.Core engine to, then create a new console application.
 
 Scryber can be run and loaded from executables in all platforms that run dotnet, including client side Blazor WASM, but in this example we will not cover the outer execution.
 
@@ -41,15 +41,15 @@ Consult your own IDE documentation if you are not sure how to do this, or follow
 
 Whilst Scryber is open source and the code can be downloaded and built locally, the easiest way is to add the nuget package to a new or existing project. Or add the package from the command line in the project folder.
 
-```
+```bash
 dotnet add package Scryber.Core
 ```
 
 The package is located at [https://www.nuget.org/packages/Scryber.Core](https://www.nuget.org/packages/Scryber.Core)
 
-If you are focussed on MVC or Web development, then you can use the Scryber.Code.Mvc package, the adds helpers and extra support for sending PDF's as responses to requests, and other capabilites. It also includes a reference to the matching Scryber.Core package.
+If you are focussed on MVC or Web development, then you can use the Scryber.Core.Mvc package, that adds helpers and extra support for sending PDFs as responses to requests, and other capabilities. It also includes a reference to the matching Scryber.Core package.
 
-```
+```bash
 dotnet add package Scryber.Core.Mvc
 ```
 
@@ -409,7 +409,7 @@ This has been a quick dive into the capabilities of the core engine. There is st
 
 - [Tables](/paperwork.core/learning/04-layout/06_tables) and [Lists](/paperwork.core/learning/06-content/04_lists) in pages with binding.
 
-- Updating and modifying existing PDF's using [Framesets and Frames](/paperwork.core/reference/htmltags/elements/html_frameset_frame_element)
+- Updating and modifying existing PDFs using [Framesets and Frames](/paperwork.core/reference/htmltags/elements/html_frameset_frame_element)
 
 - [Page sizes](/paperwork.core/learning/04-layout/01_page_sizes_orientation) and column layout.
 

@@ -115,7 +115,7 @@ doc.Params["products"] = new[]
 Access the current iteration index (0-based):
 
 {% raw %}
-```
+```html
 <table>
     <thead>
         <tr>
