@@ -254,7 +254,7 @@
     nav.className = 'pw-prevnext';
     nav.setAttribute('aria-label', 'Previous and next pages');
     function card(a, label) {
-      var el = doc.createElement('a'); el.href = a.href;
+      var el = doc.createElement('a'); el.setAttribute('href', a.getAttribute('href'));
       var sm = doc.createElement('small'); sm.textContent = label;
       var sp = doc.createElement('span'); sp.textContent = a.textContent.replace(/\s+/g, ' ').trim();
       el.appendChild(sm); el.appendChild(sp); nav.appendChild(el);

@@ -193,7 +193,10 @@ blockquote.highlight {
     &:last-child:not(:first-child) { text-align: right; }
   }
 }
-@media (max-width: 768px) { .pw-prevnext { grid-template-columns: minmax(0, 1fr); } }
+// side by side until the content area is really narrow; no link arrows on the cards
+.pw-prevnext a::after, .main-content .pw-prevnext a::after { content: none !important; display: none; }
+.main-content .pw-prevnext a, .main-content .pw-prevnext a span { text-decoration: none; background-image: none; border-bottom: 0; }
+@container pwmain (max-width: 440px) { .pw-prevnext { grid-template-columns: minmax(0, 1fr); } }
 
 // changelog entries:  <section class="pw-release"> <header> <h3>v6.2.0</h3> <span class="pw-release-date">12 Oct 2026</span> ... </header> ... </section>
 .pw-release {
