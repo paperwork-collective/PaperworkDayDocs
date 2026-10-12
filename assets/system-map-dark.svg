@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1880" height="1000" viewBox="0 0 1880 1000" role="img" aria-label="Paperwork system map"><rect width="1880" height="1000" fill="#353b44"/>
+
+<defs><marker id="ah-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#3fd0cc" stroke-width="1.75"></path></marker><marker id="ahL-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#0bb3b0" stroke-width="1.75"></path></marker><filter id="sh-d" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity=".45"></feDropShadow></filter></defs>
+<rect width="1880" height="1000" fill="#262b31"></rect><path d="M40 0V1000M80 0V1000M120 0V1000M160 0V1000M200 0V1000M240 0V1000M280 0V1000M320 0V1000M360 0V1000M400 0V1000M440 0V1000M480 0V1000M520 0V1000M560 0V1000M600 0V1000M640 0V1000M680 0V1000M720 0V1000M760 0V1000M800 0V1000M840 0V1000M880 0V1000M920 0V1000M960 0V1000M1000 0V1000M1040 0V1000M1080 0V1000M1120 0V1000M1160 0V1000M1200 0V1000M1240 0V1000M1280 0V1000M1320 0V1000M1360 0V1000M1400 0V1000M1440 0V1000M1480 0V1000M1520 0V1000M1560 0V1000M1600 0V1000M1640 0V1000M1680 0V1000M1720 0V1000M1760 0V1000M1800 0V1000M1840 0V1000M0 40H1880M0 80H1880M0 120H1880M0 160H1880M0 200H1880M0 240H1880M0 280H1880M0 320H1880M0 360H1880M0 400H1880M0 440H1880M0 480H1880M0 520H1880M0 560H1880M0 600H1880M0 640H1880M0 680H1880M0 720H1880M0 760H1880M0 800H1880M0 840H1880M0 880H1880M0 920H1880M0 960H1880" stroke="#353b44" stroke-opacity=".035" stroke-width="1"></path>
+<rect width="1880" height="120" fill="#1a1e23"></rect><rect y="120" width="1880" height="4" fill="#0bb3b0"></rect>
+<text x="40" y="52" font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="500" fill="#0bb3b0" letter-spacing="1.4">PAPERWORK · SYSTEM MAP</text>
+<text x="40" y="96" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="44" font-weight="600" fill="#fff">How paperwork fits together</text>
+<rect x="400" y="148" width="1160" height="60" fill="#1b3a3b" stroke="#2f6e6d" stroke-width="1" filter="url(#sh-d)"></rect><path d="M394.5 148h11M400 142.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1554.5 148h11M1560 142.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M394.5 208h11M400 202.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1554.5 208h11M1560 202.5v11" stroke="#6b747d" stroke-width="1"></path>
+<text x="420" y="174" font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="500" fill="#3fd0cc" letter-spacing="1.4">PAPERWORK.HELP</text>
+<text x="420" y="198" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="22" font-weight="600" fill="#eef1f2">Help</text>
+<text x="600" y="184" font-family="Barlow,Arial,sans-serif" font-size="15" font-weight="400" fill="#eef1f2">Integrated help in every app, plus the full reference site: how everything works and what is supported.</text>
+<rect x="40" y="262" width="22" height="3" fill="#0bb3b0"></rect>
+<text x="40" y="276" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="15" font-weight="600" fill="#eef1f2" letter-spacing="1.6">01  SOURCES</text>
+<rect x="400" y="262" width="22" height="3" fill="#0bb3b0"></rect>
+<text x="400" y="276" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="15" font-weight="600" fill="#eef1f2" letter-spacing="1.6">02  DESIGN</text>
+<rect x="800" y="262" width="22" height="3" fill="#0bb3b0"></rect>
+<text x="800" y="276" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="15" font-weight="600" fill="#eef1f2" letter-spacing="1.6">03  TEMPLATE</text>
+<rect x="1260" y="262" width="22" height="3" fill="#0bb3b0"></rect>
+<text x="1260" y="276" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="15" font-weight="600" fill="#eef1f2" letter-spacing="1.6">04  RENDER</text>
+<rect x="1640" y="262" width="22" height="3" fill="#0bb3b0"></rect>
+<text x="1640" y="276" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="15" font-weight="600" fill="#eef1f2" letter-spacing="1.6">05  OUTPUT</text>
+<rect x="40" y="290" width="280" height="72" fill="#353b44" stroke="#4a525c" stroke-width="1" filter="url(#sh-d)"></rect><path d="M34.5 290h11M40 284.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M314.5 290h11M320 284.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M34.5 362h11M40 356.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M314.5 362h11M320 356.5v11" stroke="#6b747d" stroke-width="1"></path>
+<text x="58" y="322" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="22" font-weight="600" fill="#eef1f2">Word document</text>
+<text x="58" y="344" font-family="Barlow,Arial,sans-serif" font-size="14" font-weight="400" fill="#aab3ba">Import a .docx</text>
+<path d="M320 326H360" fill="none" stroke="#3fd0cc" stroke-width="1.75"></path>
+<rect x="40" y="378" width="280" height="72" fill="#353b44" stroke="#4a525c" stroke-width="1" filter="url(#sh-d)"></rect><path d="M34.5 378h11M40 372.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M314.5 378h11M320 372.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M34.5 450h11M40 444.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M314.5 450h11M320 444.5v11" stroke="#6b747d" stroke-width="1"></path>
+<text x="58" y="410" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="22" font-weight="600" fill="#eef1f2">Pasted content</text>
+<text x="58" y="432" font-family="Barlow,Arial,sans-serif" font-size="14" font-weight="400" fill="#aab3ba">Paste text or HTML</text>
+<path d="M320 414H360" fill="none" stroke="#3fd0cc" stroke-width="1.75"></path>
+<rect x="40" y="466" width="280" height="72" fill="#353b44" stroke="#4a525c" stroke-width="1" filter="url(#sh-d)"></rect><path d="M34.5 466h11M40 460.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M314.5 466h11M320 460.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M34.5 538h11M40 532.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M314.5 538h11M320 532.5v11" stroke="#6b747d" stroke-width="1"></path>
+<text x="58" y="498" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="22" font-weight="600" fill="#eef1f2">Existing template</text>
+<text x="58" y="520" font-family="Barlow,Arial,sans-serif" font-size="14" font-weight="400" fill="#aab3ba">Import a template</text>
+<path d="M320 502H360" fill="none" stroke="#3fd0cc" stroke-width="1.75"></path>
+<rect x="40" y="554" width="280" height="72" fill="#353b44" stroke="#4a525c" stroke-width="1" filter="url(#sh-d)"></rect><path d="M34.5 554h11M40 548.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M314.5 554h11M320 548.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M34.5 626h11M40 620.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M314.5 626h11M320 620.5v11" stroke="#6b747d" stroke-width="1"></path>
+<text x="58" y="586" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="22" font-weight="600" fill="#eef1f2">Blueprint</text>
+<text x="58" y="608" font-family="Barlow,Arial,sans-serif" font-size="14" font-weight="400" fill="#aab3ba">Standard templates</text>
+<path d="M320 590H360" fill="none" stroke="#3fd0cc" stroke-width="1.75"></path>
+<rect x="40" y="642" width="280" height="72" fill="#353b44" stroke="#4a525c" stroke-width="1" filter="url(#sh-d)"></rect><path d="M34.5 642h11M40 636.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M314.5 642h11M320 636.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M34.5 714h11M40 708.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M314.5 714h11M320 708.5v11" stroke="#6b747d" stroke-width="1"></path>
+<text x="58" y="674" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="22" font-weight="600" fill="#eef1f2">Blank</text>
+<text x="58" y="696" font-family="Barlow,Arial,sans-serif" font-size="14" font-weight="400" fill="#aab3ba">Start from scratch</text>
+<path d="M320 678H360" fill="none" stroke="#3fd0cc" stroke-width="1.75"></path>
+<path d="M360 326V678" fill="none" stroke="#3fd0cc" stroke-width="1.75"></path>
+<path d="M360 502H398" fill="none" stroke="#3fd0cc" stroke-width="1.75" marker-end="url(#ah-d)"></path>
+<rect x="400" y="290" width="320" height="424" fill="#353b44" stroke="#4a525c" stroke-width="1" filter="url(#sh-d)"></rect><path d="M394.5 290h11M400 284.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M714.5 290h11M720 284.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M394.5 714h11M400 708.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M714.5 714h11M720 708.5v11" stroke="#6b747d" stroke-width="1"></path>
+<rect x="400" y="290" width="320" height="4" fill="#0bb3b0"></rect>
+<text x="420" y="322" font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="500" fill="#3fd0cc" letter-spacing="1.4">PAPERWORK.DESIGN</text>
+<text x="420" y="354" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="30" font-weight="600" fill="#eef1f2">Designer</text>
+<rect x="420" y="376" width="280" height="64" fill="#262b31" stroke="#4a525c" stroke-width="1"></rect>
+<text x="436" y="402" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="20" font-weight="600" fill="#eef1f2">Visual editor</text>
+<text x="436" y="424" font-family="Barlow,Arial,sans-serif" font-size="14" font-weight="400" fill="#aab3ba">Change the design on the page</text>
+<rect x="420" y="452" width="280" height="64" fill="#262b31" stroke="#4a525c" stroke-width="1"></rect>
+<text x="436" y="478" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="20" font-weight="600" fill="#eef1f2">Code editor</text>
+<text x="436" y="500" font-family="Barlow,Arial,sans-serif" font-size="14" font-weight="400" fill="#aab3ba">HTML · CSS · Handlebars</text>
+<text x="420" y="600" font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="500" fill="#3fd0cc" letter-spacing="1.4">PUBLISH</text>
+<rect x="420" y="614" width="84" height="28" fill="#0bb3b0" stroke="#0bb3b0"></rect>
+<text x="462" y="633" font-family="Barlow,Arial,sans-serif" font-size="14" font-weight="500" fill="#fff" text-anchor="middle">Public</text>
+<rect x="514" y="614" width="84" height="28" fill="#1b3a3b" stroke="#2f6e6d"></rect>
+<text x="556" y="633" font-family="Barlow,Arial,sans-serif" font-size="14" font-weight="500" fill="#3fd0cc" text-anchor="middle">Personal</text>
+<rect x="608" y="614" width="84" height="28" fill="#1b3a3b" stroke="#2f6e6d"></rect>
+<text x="650" y="633" font-family="Barlow,Arial,sans-serif" font-size="14" font-weight="500" fill="#3fd0cc" text-anchor="middle">Private</text>
+<text x="420" y="670" font-family="Barlow,Arial,sans-serif" font-size="14" font-weight="400" fill="#aab3ba">To everyone, to yourself, or to a</text>
+<text x="420" y="688" font-family="Barlow,Arial,sans-serif" font-size="14" font-weight="400" fill="#aab3ba">selected set of users</text>
+<path d="M720 502H798" fill="none" stroke="#3fd0cc" stroke-width="1.75" marker-end="url(#ah-d)"></path>
+<rect x="726.5" y="465" width="67" height="22" rx="11" fill="#0a8f8c"></rect>
+<text x="760" y="481" font-family="Barlow,Arial,sans-serif" font-size="13" font-weight="500" fill="#fff" text-anchor="middle">publish</text>
+<rect x="800" y="290" width="380" height="424" fill="#1a1e23" stroke="#1a1e23" stroke-width="1" filter="url(#sh-d)"></rect><path d="M794.5 290h11M800 284.5v11" stroke="#0bb3b0" stroke-width="1"></path><path d="M1174.5 290h11M1180 284.5v11" stroke="#0bb3b0" stroke-width="1"></path><path d="M794.5 714h11M800 708.5v11" stroke="#0bb3b0" stroke-width="1"></path><path d="M1174.5 714h11M1180 708.5v11" stroke="#0bb3b0" stroke-width="1"></path>
+<text x="820" y="322" font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="500" fill="#0bb3b0" letter-spacing="1.4">OPEN STANDARD STRUCTURE</text>
+<text x="820" y="354" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="30" font-weight="600" fill="#fff">Template definition</text>
+<text x="820" y="378" font-family="Barlow,Arial,sans-serif" font-size="14" font-weight="400" fill="#c9d0d5">Every part works together in one definition</text>
+<rect x="820" y="398" width="164" height="136" fill="#2b3138" stroke="#0bb3b0" stroke-opacity=".55"></rect><rect x="820" y="398" width="164" height="4" fill="#0bb3b0"></rect>
+<text x="834" y="428" font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="500" fill="#0bb3b0" letter-spacing="1.4">HTML</text>
+<text x="834" y="462" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="28" font-weight="600" fill="#fff">Content</text>
+<text x="834" y="502" font-family="Barlow,Arial,sans-serif" font-size="13" font-weight="400" fill="#d6dbdf">Markup with</text>
+<text x="834" y="519" font-family="Barlow,Arial,sans-serif" font-size="13" font-weight="400" fill="#d6dbdf">Handlebars</text>
+<rect x="996" y="398" width="164" height="136" fill="#2b3138" stroke="#0bb3b0" stroke-opacity=".55"></rect><rect x="996" y="398" width="164" height="4" fill="#0bb3b0"></rect>
+<text x="1010" y="428" font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="500" fill="#0bb3b0" letter-spacing="1.4">CSS</text>
+<text x="1010" y="462" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="28" font-weight="600" fill="#fff">Styles</text>
+<text x="1010" y="502" font-family="Barlow,Arial,sans-serif" font-size="13" font-weight="400" fill="#d6dbdf">Look and layout</text>
+<rect x="820" y="548" width="164" height="136" fill="#2b3138" stroke="#0bb3b0" stroke-opacity=".55"></rect><rect x="820" y="548" width="164" height="4" fill="#0bb3b0"></rect>
+<text x="834" y="578" font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="500" fill="#0bb3b0" letter-spacing="1.4">JSON</text>
+<text x="834" y="612" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="28" font-weight="600" fill="#fff">Data</text>
+<text x="834" y="652" font-family="Barlow,Arial,sans-serif" font-size="13" font-weight="400" fill="#d6dbdf">Bound to</text>
+<text x="834" y="669" font-family="Barlow,Arial,sans-serif" font-size="13" font-weight="400" fill="#d6dbdf">remote feeds</text>
+<rect x="996" y="548" width="164" height="136" fill="#2b3138" stroke="#0bb3b0" stroke-opacity=".55"></rect><rect x="996" y="548" width="164" height="4" fill="#0bb3b0"></rect>
+<text x="1010" y="578" font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="500" fill="#0bb3b0" letter-spacing="1.4">KEY · VALUE</text>
+<text x="1010" y="612" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="28" font-weight="600" fill="#fff">Fields</text>
+<text x="1010" y="652" font-family="Barlow,Arial,sans-serif" font-size="13" font-weight="400" fill="#d6dbdf">Values set by</text>
+<text x="1010" y="669" font-family="Barlow,Arial,sans-serif" font-size="13" font-weight="400" fill="#d6dbdf">form fields</text>
+<path d="M1410 290V236H560V288" fill="none" stroke="#3fd0cc" stroke-width="1.75" marker-end="url(#ah-d)"></path>
+<rect x="916.5" y="223" width="137" height="22" rx="11" fill="#0a8f8c"></rect>
+<text x="985" y="239" font-family="Barlow,Arial,sans-serif" font-size="13" font-weight="500" fill="#fff" text-anchor="middle">designs templates</text>
+<path d="M1600 502H1638" fill="none" stroke="#3fd0cc" stroke-width="1.75" marker-end="url(#ah-d)"></path>
+<rect x="1640" y="400" width="200" height="204" fill="#0bb3b0" stroke="#3fd0cc" stroke-width="1" filter="url(#sh-d)"></rect><path d="M1634.5 400h11M1640 394.5v11" stroke="#1a1e23" stroke-width="1"></path><path d="M1834.5 400h11M1840 394.5v11" stroke="#1a1e23" stroke-width="1"></path><path d="M1634.5 604h11M1640 598.5v11" stroke="#1a1e23" stroke-width="1"></path><path d="M1834.5 604h11M1840 598.5v11" stroke="#1a1e23" stroke-width="1"></path>
+<text x="1660" y="430" font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="500" fill="#1a1e23" letter-spacing="1.4">RESULT</text>
+<text x="1660" y="464" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="30" font-weight="600" fill="#fff">Document</text>
+<path d="M1702 488h44l14 14v64h-58z" fill="#fff" stroke="#1a1e23" stroke-width="1.5"></path><path d="M1746 488v14h14" fill="none" stroke="#1a1e23" stroke-width="1.5"></path><path d="M1712 516h38M1712 530h38M1712 544h24" stroke="#0bb3b0" stroke-width="2"></path>
+<text x="1660" y="582" font-family="Barlow,Arial,sans-serif" font-size="13" font-weight="500" fill="#1a1e23">Output PDF for viewing,</text><text x="1660" y="598" font-family="Barlow,Arial,sans-serif" font-size="13" font-weight="500" fill="#1a1e23">form filling or signing.</text>
+<text x="400" y="838" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="15" font-weight="600" fill="#eef1f2" letter-spacing="1.6">06  INTEGRATIONS</text>
+<rect x="400" y="820" width="22" height="3" fill="#0bb3b0"></rect>
+<rect x="400" y="850" width="780" height="110" fill="#353b44" stroke="#4a525c" stroke-width="1" filter="url(#sh-d)"></rect><path d="M394.5 850h11M400 844.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1174.5 850h11M1180 844.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M394.5 960h11M400 954.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1174.5 960h11M1180 954.5v11" stroke="#6b747d" stroke-width="1"></path>
+<rect x="400" y="850" width="4" height="110" fill="#0bb3b0"></rect>
+<text x="420" y="878" font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="500" fill="#3fd0cc" letter-spacing="1.4">DATA IN · PLANNED</text>
+<text x="420" y="908" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="24" font-weight="600" fill="#eef1f2">Pull from other applications</text>
+<text x="420" y="934" font-family="Barlow,Arial,sans-serif" font-size="15" font-weight="400" fill="#aab3ba">Azure AD and more, feeding template data</text>
+<path d="M901 850V716" fill="none" stroke="#3fd0cc" stroke-width="1.75" marker-end="url(#ah-d)"></path>
+<rect x="860.5" y="771" width="81" height="22" rx="11" fill="#0a8f8c"></rect>
+<text x="901" y="787" font-family="Barlow,Arial,sans-serif" font-size="13" font-weight="500" fill="#fff" text-anchor="middle">bind data</text>
+<rect x="1260" y="850" width="580" height="110" fill="#353b44" stroke="#4a525c" stroke-width="1" filter="url(#sh-d)"></rect><path d="M1254.5 850h11M1260 844.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1834.5 850h11M1840 844.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1254.5 960h11M1260 954.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1834.5 960h11M1840 954.5v11" stroke="#6b747d" stroke-width="1"></path>
+<rect x="1260" y="850" width="4" height="110" fill="#0bb3b0"></rect>
+<text x="1280" y="878" font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="500" fill="#3fd0cc" letter-spacing="1.4">DATA OUT · PLANNED</text>
+<text x="1280" y="908" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="24" font-weight="600" fill="#eef1f2">Push to automation</text>
+<text x="1280" y="934" font-family="Barlow,Arial,sans-serif" font-size="15" font-weight="400" fill="#aab3ba">Zapier, Power Automate and more</text>
+<path d="M1740 604V848" fill="none" stroke="#3fd0cc" stroke-width="1.75" marker-end="url(#ah-d)"></path>
+<rect x="1260" y="290" width="300" height="94" fill="#353b44" stroke="#4a525c" stroke-width="1" filter="url(#sh-d)"></rect><path d="M1254.5 290h11M1260 284.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1554.5 290h11M1560 284.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1254.5 384h11M1260 378.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1554.5 384h11M1560 378.5v11" stroke="#6b747d" stroke-width="1"></path><rect x="1260" y="290" width="4" height="94" fill="#0bb3b0"></rect>
+<text x="1280" y="314" font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="500" fill="#3fd0cc" letter-spacing="1.4">PAPERWORK.SKILL</text>
+<text x="1280" y="340" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="23" font-weight="600" fill="#eef1f2">Full AI Skills</text>
+<text x="1280" y="358" font-family="Barlow,Arial,sans-serif" font-size="13.5" font-weight="400" fill="#aab3ba">Fills in fields, generates documents</text>
+<text x="1280" y="374" font-family="Barlow,Arial,sans-serif" font-size="13.5" font-weight="400" fill="#aab3ba">and designs templates</text>
+<rect x="1260" y="400" width="300" height="94" fill="#353b44" stroke="#4a525c" stroke-width="1" filter="url(#sh-d)"></rect><path d="M1254.5 400h11M1260 394.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1554.5 400h11M1560 394.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1254.5 494h11M1260 488.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1554.5 494h11M1560 488.5v11" stroke="#6b747d" stroke-width="1"></path><rect x="1260" y="400" width="4" height="94" fill="#0bb3b0"></rect>
+<text x="1280" y="424" font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="500" fill="#3fd0cc" letter-spacing="1.4">PAPERWORK.VU</text>
+<text x="1280" y="450" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="23" font-weight="600" fill="#eef1f2">Online Viewer</text>
+<text x="1280" y="468" font-family="Barlow,Arial,sans-serif" font-size="13.5" font-weight="400" fill="#aab3ba">Template id or HTML content</text>
+<text x="1280" y="484" font-family="Barlow,Arial,sans-serif" font-size="13.5" font-weight="400" fill="#aab3ba">Embed in any site, or link to it</text>
+<rect x="1260" y="510" width="300" height="94" fill="#353b44" stroke="#4a525c" stroke-width="1" filter="url(#sh-d)"></rect><path d="M1254.5 510h11M1260 504.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1554.5 510h11M1560 504.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1254.5 604h11M1260 598.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1554.5 604h11M1560 598.5v11" stroke="#6b747d" stroke-width="1"></path><rect x="1260" y="510" width="4" height="94" fill="#0bb3b0"></rect>
+<text x="1280" y="534" font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="500" fill="#3fd0cc" letter-spacing="1.4">PAPERWORK.CLI</text>
+<text x="1280" y="560" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="23" font-weight="600" fill="#eef1f2">Command Line</text>
+<text x="1280" y="578" font-family="Barlow,Arial,sans-serif" font-size="13.5" font-weight="400" fill="#aab3ba">Build documents from content</text>
+<text x="1280" y="594" font-family="Barlow,Arial,sans-serif" font-size="13.5" font-weight="400" fill="#aab3ba">or a published template</text>
+<rect x="1260" y="620" width="300" height="94" fill="#353b44" stroke="#4a525c" stroke-width="1" filter="url(#sh-d)"></rect><path d="M1254.5 620h11M1260 614.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1554.5 620h11M1560 614.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1254.5 714h11M1260 708.5v11" stroke="#6b747d" stroke-width="1"></path><path d="M1554.5 714h11M1560 708.5v11" stroke="#6b747d" stroke-width="1"></path><rect x="1260" y="620" width="4" height="94" fill="#0bb3b0"></rect>
+<text x="1280" y="644" font-family="Barlow,Arial,sans-serif" font-size="12" font-weight="500" fill="#3fd0cc" letter-spacing="1.4">PAPERWORK.CORE</text>
+<text x="1280" y="670" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="23" font-weight="600" fill="#eef1f2">Core Library</text>
+<text x="1280" y="688" font-family="Barlow,Arial,sans-serif" font-size="13.5" font-weight="400" fill="#aab3ba">Render documents inside</text>
+<text x="1280" y="704" font-family="Barlow,Arial,sans-serif" font-size="13.5" font-weight="400" fill="#aab3ba">your own coded applications</text>
+<path d="M1180 502H1220" fill="none" stroke="#3fd0cc" stroke-width="1.75"></path>
+<path d="M1220 337V667" fill="none" stroke="#3fd0cc" stroke-width="1.75"></path>
+<path d="M1220 337H1258" fill="none" stroke="#3fd0cc" stroke-width="1.75" marker-end="url(#ah-d)"></path>
+<path d="M1220 447H1258" fill="none" stroke="#3fd0cc" stroke-width="1.75" marker-end="url(#ah-d)"></path>
+<path d="M1220 557H1258" fill="none" stroke="#3fd0cc" stroke-width="1.75" marker-end="url(#ah-d)"></path>
+<path d="M1220 667H1258" fill="none" stroke="#3fd0cc" stroke-width="1.75" marker-end="url(#ah-d)"></path>
+<path d="M1560 337H1600" fill="none" stroke="#3fd0cc" stroke-width="1.75"></path>
+<path d="M1560 447H1600" fill="none" stroke="#3fd0cc" stroke-width="1.75"></path>
+<path d="M1560 557H1600" fill="none" stroke="#3fd0cc" stroke-width="1.75"></path>
+<path d="M1560 667H1600" fill="none" stroke="#3fd0cc" stroke-width="1.75"></path>
+<path d="M1600 337V667" fill="none" stroke="#3fd0cc" stroke-width="1.75"></path>
+</svg>

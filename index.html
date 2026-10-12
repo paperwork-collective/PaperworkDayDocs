@@ -20,8 +20,12 @@ pw_wide: true
     </div>
     <figure class="pw-hero-map">
       {% include corners.html %}
-      {% include system-map-light.svg %}
-      {% include system-map-dark.svg %}
+      <a class="pw-map-link pw-map-light" href="{{ '/assets/system-map-light.svg' | relative_url }}" target="_blank" rel="noopener" aria-label="Open the system map full size in a new tab">
+        {% include system-map-light.svg %}
+      </a>
+      <a class="pw-map-link pw-map-dark" href="{{ '/assets/system-map-dark.svg' | relative_url }}" target="_blank" rel="noopener" aria-label="Open the system map full size in a new tab">
+        {% include system-map-dark.svg %}
+      </a>
     </figure>
   </div>
 </section>

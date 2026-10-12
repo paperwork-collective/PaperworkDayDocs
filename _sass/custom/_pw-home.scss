@@ -40,6 +40,7 @@
 
 .pw-hero-map { position: relative; margin: 0; padding: 12px; background: $pw-surface; border: 1px solid $pw-border; box-shadow: $pw-shadow; }
 .pw-map { display: block; width: 100%; height: auto; }
+.main-content a.pw-map-link { background-image: none; border: 0; cursor: zoom-in; }
 .pw-map-light { display: $pw-map-light-display; }
 .pw-map-dark { display: $pw-map-dark-display; }
 
