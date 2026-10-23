@@ -86,7 +86,7 @@ Loaded lazily on first font request.
 
 Each font variant (weight + style combination) is a **separate entry** in the `Register` array.
 
-**scrybersettings.json:**
+**appsettings.json:**
 
 ```json
 {
@@ -101,7 +101,7 @@ Each font variant (weight + style combination) is a **separate entry** in the `R
         },
         {
           "Family": "Roboto",
-          "Style": "Bold",
+          "Style": "Regular",
           "Weight": 700,
           "File": "/path/to/fonts/Roboto-Bold.ttf"
         },
@@ -113,7 +113,7 @@ Each font variant (weight + style combination) is a **separate entry** in the `R
         },
         {
           "Family": "Roboto",
-          "Style": "BoldItalic",
+          "Style": "Italic",
           "Weight": 700,
           "File": "/path/to/fonts/Roboto-BoldItalic.ttf"
         },
@@ -125,7 +125,7 @@ Each font variant (weight + style combination) is a **separate entry** in the `R
         },
         {
           "Family": "Open Sans",
-          "Style": "Bold",
+          "Style": "Regular",
           "Weight": 700,
           "File": "/path/to/fonts/OpenSans-Bold.ttf"
         }
@@ -139,11 +139,13 @@ Each font variant (weight + style combination) is a **separate entry** in the `R
 
 | Property | Required | Description |
 |----------|----------|-------------|
-| `Family` | Yes | Font family name used in CSS `font-family` |
-| `Style` | Yes | `Regular`, `Bold`, `Italic`, or `BoldItalic` |
-| `Weight` | Yes | Numeric weight: 100–900 (400 = Regular, 700 = Bold) |
+| `Family` | Yes | Font family name used in CSS `font-family` (defaults to the name in the file) |
+| `Style` | No | `Regular`, `Italic` or `Oblique` - matched with CSS `font-style`. Bold is set with `Weight` |
+| `Weight` | No | Numeric weight: 100–900 (400 = Regular, 700 = Bold) - matched with CSS `font-weight` |
 | `File` | One of File/Resource | Absolute or relative path to a `.ttf` or `.otf` file |
 | `Resource` | One of File/Resource | Embedded resource name: `"FullTypeName.ttf, AssemblyName"` |
+
+When `Style` and `Weight` are not set, the style and weight in the font file itself are used. When a template asks for a weight that is not registered, the nearest registered weight is used.
 
 ### Registering Fonts in Code
 
@@ -164,7 +166,7 @@ config.FontOptions.Register.Add(new FontRegistrationOption(
 
 config.FontOptions.Register.Add(new FontRegistrationOption(
     family: "Roboto",
-    style: "Bold",
+    style: "Regular",
     weight: 700,
     file: "/path/to/fonts/Roboto-Bold.ttf",
     resource: null
@@ -222,9 +224,9 @@ Register a complete font family with multiple weights — one entry per variant:
     "Fonts": {
       "Register": [
         { "Family": "Roboto", "Style": "Regular",    "Weight": 400, "File": "fonts/Roboto-Regular.ttf" },
-        { "Family": "Roboto", "Style": "Bold",       "Weight": 700, "File": "fonts/Roboto-Bold.ttf" },
+        { "Family": "Roboto", "Style": "Regular",       "Weight": 700, "File": "fonts/Roboto-Bold.ttf" },
         { "Family": "Roboto", "Style": "Italic",     "Weight": 400, "File": "fonts/Roboto-Italic.ttf" },
-        { "Family": "Roboto", "Style": "BoldItalic", "Weight": 700, "File": "fonts/Roboto-BoldItalic.ttf" },
+        { "Family": "Roboto", "Style": "Italic", "Weight": 700, "File": "fonts/Roboto-BoldItalic.ttf" },
         { "Family": "Roboto", "Style": "Regular",    "Weight": 300, "File": "fonts/Roboto-Light.ttf" },
         { "Family": "Roboto", "Style": "Italic",     "Weight": 300, "File": "fonts/Roboto-LightItalic.ttf" },
         { "Family": "Roboto", "Style": "Regular",    "Weight": 500, "File": "fonts/Roboto-Medium.ttf" },
@@ -265,13 +267,13 @@ MyApp/
 │       ├── Roboto-BoldItalic.ttf
 │       ├── OpenSans-Regular.ttf
 │       └── OpenSans-Bold.ttf
-├── scrybersettings.json
+├── appsettings.json
 └── Program.cs
 ```
 
 ### 2. Configuration
 
-**scrybersettings.json:**
+**appsettings.json:**
 
 ```json
 {
@@ -279,11 +281,11 @@ MyApp/
     "Fonts": {
       "Register": [
         { "Family": "Roboto",    "Style": "Regular",    "Weight": 400, "File": "wwwroot/fonts/Roboto-Regular.ttf" },
-        { "Family": "Roboto",    "Style": "Bold",       "Weight": 700, "File": "wwwroot/fonts/Roboto-Bold.ttf" },
+        { "Family": "Roboto",    "Style": "Regular",       "Weight": 700, "File": "wwwroot/fonts/Roboto-Bold.ttf" },
         { "Family": "Roboto",    "Style": "Italic",     "Weight": 400, "File": "wwwroot/fonts/Roboto-Italic.ttf" },
-        { "Family": "Roboto",    "Style": "BoldItalic", "Weight": 700, "File": "wwwroot/fonts/Roboto-BoldItalic.ttf" },
+        { "Family": "Roboto",    "Style": "Italic", "Weight": 700, "File": "wwwroot/fonts/Roboto-BoldItalic.ttf" },
         { "Family": "Open Sans", "Style": "Regular",    "Weight": 400, "File": "wwwroot/fonts/OpenSans-Regular.ttf" },
-        { "Family": "Open Sans", "Style": "Bold",       "Weight": 700, "File": "wwwroot/fonts/OpenSans-Bold.ttf" }
+        { "Family": "Open Sans", "Style": "Regular",       "Weight": 700, "File": "wwwroot/fonts/OpenSans-Bold.ttf" }
       ]
     }
   }
@@ -356,31 +358,30 @@ MyApp/
 ### 4. Application
 
 ```csharp
-using Scryber;
-using Scryber.Components;
+using Microsoft.Extensions.Configuration;
+using Paperwork;
 
+// Pass the configuration, with the registered fonts, to the engine once at startup
 IConfigurationRoot config = new ConfigurationBuilder()
-    .AddJsonFile("scrybersettings.json")
+    .AddJsonFile("appsettings.json")
     .Build();
 
-Scryber.ServiceProvider.Init(config);
+PaperworkConfiguration.Init(config);
 
-using (var doc = Document.ParseDocument("Report.html"))
-{
-    doc.Params["model"] = reportData;
-    using (var stream = new FileStream("Report.pdf", FileMode.Create))
-    {
-        doc.SaveAsPDF(stream);
-    }
-}
+using var factory = PaperworkFactory.Create().Build();
+
+await factory.NewDocument()
+    .WithLayoutFile("Report.html")
+    .WithData("model", reportData)
+    .SaveAsync("Report.pdf");
 ```
 
 ## Font Subsetting
 
 Scryber automatically **subsets fonts** to include only used glyphs, reducing PDF file size:
 
-```csharp
-// Only glyphs for "Hello World" are embedded, not entire font
+```html
+<!-- Only glyphs for "Hello World" are embedded, not entire font -->
 <span>Hello World</span>
 ```
 
