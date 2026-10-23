@@ -12,121 +12,149 @@ ancestor: Paperwork.Core
 
 # Security
 
-Master PDF security features including encryption, password protection, and permission controls to protect sensitive documents.
+Protect documents with encryption, passwords and permission controls.
 
 ---
 
 ## Learning Objectives
 
 By the end of this article, you'll be able to:
-- Add password protection to PDFs
-- Configure user and owner passwords
-- Set document permissions
-- Control printing, copying, and editing
-- Understand encryption levels
-- Implement security best practices
+- Restrict printing, copying and editing from the template
+- Choose the encryption level
+- Add owner and user passwords
+- Set permissions in code
+- Apply security best practices
 
 ---
 
 ## PDF Security Basics
 
-PDF security provides:
-- **Encryption** - Protects document content
-- **Password Protection** - Controls who can open the document
-- **Permissions** - Controls what users can do with the document
+A secured PDF is encrypted, and carries a set of **permissions** - what a reader may do with it, such as print or copy text.
+
+- The **owner password** protects the permissions: a reader needs it to change or remove them.
+- The **user password**, when set, must be entered to open the document at all.
+
+When a document has restrictions but no passwords, it is still encrypted, and PDF viewers apply the permissions.
 
 ---
 
-## Basic Password Protection
+## Restrictions in the Template
 
-### User Password (Document Open)
+The simplest way to secure a document is with `<meta>` tags in the template head.
 
-```csharp
-using Scryber.Components;
-using Scryber.PDF;
-using System.IO;
+```html
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <title>Quarterly Results</title>
 
-var doc = Document.ParseDocument("template.html");
+    <!-- Restrict everything except printing and copying -->
+    <meta name='print-restrictions' content='printing, copying' />
 
-// Require password to open
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
-{
-    UserPassword = "secretpassword"
-};
-
-doc.SaveAsPDF(stream);
+    <!-- 128 bit encryption (the default) -->
+    <meta name='print-encryption' content='128bit' />
+</head>
+<body>
+    ...
+</body>
+</html>
 ```
 
-**User Password:**
-- Required to open the document
-- Encrypts the content
-- Users must enter password to view
+### print-restrictions
+
+When any restriction is set, everything is restricted except the permissions listed.
+
+| Content | Effect |
+|---------|--------|
+| `none` | No restrictions (the default) |
+| `all` | Everything is restricted |
+| `printing` (or `allow-printing`) | Allows printing, including high quality |
+| `copying` (or `allow-copying`) | Allows copying text and graphics |
+| `modifications` (or `allow-modifications`) | Allows changes to the document |
+| `annotations` (or `allow-annotations`) | Allows comments and annotations |
+| `forms` (or `allow-forms`) | Allows form filling |
+| `accessibility` (or `allow-accessibility`) | Allows screen readers and other accessibility tools |
+
+Combine permissions with spaces or commas: `content='printing, accessibility'`.
+
+### print-encryption
+
+| Content | Encryption |
+|---------|------------|
+| `128bit` | 128 bit (PDF 1.4 and later) - the default |
+| `40bit` | 40 bit (PDF 1.3) - for very old viewers only |
+
+---
+
+## Passwords
+
+Passwords are set in code, on an engine `Document`, so they are never stored in a template. Parse the template, set a password provider, and generate it with the builder (see [The Engine Document](/paperwork.core/configuration/engine-document)).
 
 ### Owner Password (Permissions)
 
 ```csharp
-// Owner password allows changing permissions
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
-{
-    OwnerPassword = "adminpassword"
-};
+using Paperwork;
+using Scryber.Components;
+using Scryber.PDF.Secure;
 
-// Document can be opened without password
-// But permissions can only be changed with owner password
+using var factory = PaperworkFactory.Create().Build();
+using var doc = Document.ParseDocument("report.html");
+
+// The owner password protects the restrictions set in the template
+doc.RenderOptions.PasswordProvider = new DocumentPasswordProvider(ownerPassword);
+
+await factory.NewDocument()
+    .WithLayout(doc)
+    .WithData("model", report)
+    .SaveAsync("report.pdf");
 ```
 
-### Both Passwords
+### Owner and User Passwords (Document Open)
 
 ```csharp
-// Most secure: both passwords
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
-{
-    UserPassword = "viewpassword",      // Required to open
-    OwnerPassword = "adminpassword"     // Required to change permissions
-};
+// The user password must be entered to open the document
+doc.RenderOptions.PasswordProvider = new DocumentPasswordProvider(ownerPassword, userPassword);
 ```
+
+The passwords can also be given as `SecureString` values.
 
 ---
 
-## Document Permissions
+## Permissions in Code
 
-### Common Permissions
+The permissions can be set in code, as well as, or instead of, the template.
 
 ```csharp
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
-{
-    OwnerPassword = "admin123",
+using var doc = Document.ParseDocument("report.html");
 
-    // Printing permissions
-    AllowPrinting = true,
-    AllowHighQualityPrinting = true,
+var permissions = doc.RenderOptions.Permissions;
+permissions.AllowPrinting = true;
+permissions.AllowHighQualityPrinting = true;
+permissions.AllowCopying = false;
+permissions.AllowModification = false;
+permissions.AllowAnnotations = false;
+permissions.AllowFormFilling = false;
+permissions.AllowDocumentAssembly = false;
+permissions.AllowAccessiblity = true;   // keep screen readers working
 
-    // Content permissions
-    AllowCopying = false,
-    AllowAccessibility = true,
+doc.RenderOptions.PasswordProvider = new DocumentPasswordProvider(ownerPassword);
 
-    // Editing permissions
-    AllowAnnotations = false,
-    AllowFormFilling = false,
-    AllowDocumentAssembly = false,
-
-    // Modification permissions
-    AllowModification = false
-};
+await factory.NewDocument()
+    .WithLayout(doc)
+    .SaveAsync("report.pdf");
 ```
 
 ### Permission Descriptions
 
 | Permission | Description |
 |------------|-------------|
-| AllowPrinting | Allow document printing |
-| AllowHighQualityPrinting | Allow high-resolution printing |
-| AllowCopying | Allow copying text and graphics |
-| AllowAccessibility | Allow screen readers (should be true) |
-| AllowAnnotations | Allow adding comments and annotations |
-| AllowFormFilling | Allow filling form fields |
-| AllowDocumentAssembly | Allow inserting/deleting/rotating pages |
-| AllowModification | Allow document modification |
+| `AllowPrinting` | Print the document |
+| `AllowHighQualityPrinting` | Print at full quality (otherwise a lower resolution) |
+| `AllowCopying` | Copy text and graphics |
+| `AllowModification` | Change the document |
+| `AllowAnnotations` | Add comments and annotations |
+| `AllowFormFilling` | Fill in form fields |
+| `AllowDocumentAssembly` | Insert, rotate or delete pages |
+| `AllowAccessiblity` | Extract content for screen readers and other accessibility tools |
 
 ---
 
@@ -134,286 +162,62 @@ doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
 
 ### Read-Only Document
 
-```csharp
-// Users can view and print, but not modify
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
-{
-    OwnerPassword = "admin123",
-    AllowPrinting = true,
-    AllowCopying = false,
-    AllowAnnotations = false,
-    AllowFormFilling = false,
-    AllowModification = false,
-    AllowAccessibility = true  // Important for accessibility
-};
+```html
+<meta name='print-restrictions' content='printing, accessibility' />
 ```
 
 ### Confidential Document
 
-```csharp
-// Password required, no printing or copying
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
-{
-    UserPassword = "confidential",
-    OwnerPassword = "admin123",
-    AllowPrinting = false,
-    AllowCopying = false,
-    AllowAnnotations = false,
-    AllowAccessibility = true  // Still allow screen readers
-};
+```html
+<meta name='print-restrictions' content='accessibility' />
 ```
+
+With an owner and user password set in code.
 
 ### Form Document
 
-```csharp
-// Allow form filling only
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
-{
-    OwnerPassword = "admin123",
-    AllowPrinting = true,
-    AllowCopying = false,
-    AllowFormFilling = true,
-    AllowAnnotations = false,
-    AllowModification = false,
-    AllowAccessibility = true
-};
+```html
+<meta name='print-restrictions' content='printing, forms, accessibility' />
 ```
 
 ---
 
-## Practical Examples
+## Practical Example: Security by Classification
 
-### Example 1: Secure Invoice Generator
-
-```csharp
-using Scryber.Components;
-using Scryber.PDF;
-using System;
-using System.IO;
-
-public class SecureInvoiceGenerator
-{
-    private readonly string _ownerPassword;
-
-    public SecureInvoiceGenerator(string ownerPassword)
-    {
-        _ownerPassword = ownerPassword;
-    }
-
-    public void GenerateInvoice(Invoice invoice, Stream output)
-    {
-        var doc = Document.ParseDocument("invoice-template.html");
-
-        // Set metadata
-        doc.Info.Title = $"Invoice {invoice.Number}";
-        doc.Info.Author = invoice.CompanyName;
-
-        // Configure security
-        doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
-        {
-            OwnerPassword = _ownerPassword,
-
-            // Allow printing invoice
-            AllowPrinting = true,
-            AllowHighQualityPrinting = true,
-
-            // Prevent copying (protect pricing/details)
-            AllowCopying = false,
-
-            // Prevent modification
-            AllowAnnotations = false,
-            AllowModification = false,
-            AllowDocumentAssembly = false,
-
-            // Allow accessibility
-            AllowAccessibility = true
-        };
-
-        // Bind data
-        doc.Params["invoice"] = invoice;
-
-        // Generate
-        doc.SaveAsPDF(output);
-
-        Console.WriteLine($"Secure invoice {invoice.Number} generated");
-    }
-}
-
-// Usage
-var generator = new SecureInvoiceGenerator("owner-pass-2024");
-using (var output = new FileStream("invoice.pdf", FileMode.Create))
-{
-    generator.GenerateInvoice(invoice, output);
-}
-```
-
-### Example 2: Confidential Report with Password
+The template sets nothing; the application chooses the security for each document.
 
 ```csharp
-public class ConfidentialReportGenerator
+public async Task<byte[]> GenerateAsync(string templatePath, object data, Classification classification)
 {
-    public void GenerateReport(ReportData data, string password, Stream output)
+    using var doc = Document.ParseDocument(templatePath);
+    var permissions = doc.RenderOptions.Permissions;
+
+    switch (classification)
     {
-        var doc = Document.ParseDocument("report-template.html");
+        case Classification.Public:
+            // No security
+            break;
 
-        // Set metadata
-        doc.Info.Title = $"{data.Classification} Report - {data.Title}";
-        doc.Info.Author = data.Department;
-        doc.Info.Subject = "Confidential Information";
+        case Classification.Internal:
+            permissions.AllowModification = false;
+            permissions.AllowAnnotations = false;
+            doc.RenderOptions.PasswordProvider = new DocumentPasswordProvider(_secrets.OwnerPassword);
+            break;
 
-        // High security configuration
-        doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
-        {
-            // Both passwords required
-            UserPassword = password,
-            OwnerPassword = GenerateOwnerPassword(data.ReportId),
-
-            // Minimal permissions
-            AllowPrinting = false,        // No printing
-            AllowCopying = false,         // No copying
-            AllowAnnotations = false,     // No annotations
-            AllowFormFilling = false,     // No forms
-            AllowModification = false,    // No modifications
-            AllowDocumentAssembly = false, // No assembly
-            AllowAccessibility = true     // Allow screen readers
-        };
-
-        // Bind data
-        doc.Params["report"] = data;
-
-        // Generate
-        doc.SaveAsPDF(output);
-
-        LogSecureDocumentCreation(data.ReportId, data.Classification);
+        case Classification.Confidential:
+            permissions.AllowCopying = false;
+            permissions.AllowModification = false;
+            permissions.AllowAnnotations = false;
+            permissions.AllowDocumentAssembly = false;
+            doc.RenderOptions.PasswordProvider = new DocumentPasswordProvider(
+                _secrets.OwnerPassword, _secrets.GetUserPassword(data));
+            break;
     }
 
-    private string GenerateOwnerPassword(string reportId)
-    {
-        // Generate secure owner password based on report ID
-        return Convert.ToBase64String(
-            System.Text.Encoding.UTF8.GetBytes($"owner-{reportId}-{DateTime.Now.Year}")
-        );
-    }
-
-    private void LogSecureDocumentCreation(string reportId, string classification)
-    {
-        Console.WriteLine($"[SECURITY] Confidential report generated: {reportId}");
-        Console.WriteLine($"[SECURITY] Classification: {classification}");
-        Console.WriteLine($"[SECURITY] Timestamp: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
-    }
-}
-
-// Usage
-var generator = new ConfidentialReportGenerator();
-using (var output = new FileStream("confidential-report.pdf", FileMode.Create))
-{
-    generator.GenerateReport(reportData, "SecretPassword123!", output);
-}
-```
-
-### Example 3: Dynamic Security Based on Classification
-
-```csharp
-public class ClassificationBasedGenerator
-{
-    public void GenerateDocument(
-        DocumentData data,
-        SecurityClassification classification,
-        Stream output)
-    {
-        var doc = Document.ParseDocument("template.html");
-
-        // Set metadata
-        doc.Info.Title = data.Title;
-        doc.Info.Subject = $"{classification} Information";
-
-        // Configure security based on classification
-        doc.RenderOptions.SecurityOptions = GetSecurityOptions(classification, data.DocumentId);
-
-        // Bind data
-        doc.Params["document"] = data;
-
-        // Generate
-        doc.SaveAsPDF(output);
-    }
-
-    private PDFSecurityOptions GetSecurityOptions(
-        SecurityClassification classification,
-        string documentId)
-    {
-        switch (classification)
-        {
-            case SecurityClassification.Public:
-                // No restrictions
-                return null;
-
-            case SecurityClassification.Internal:
-                // Basic protection
-                return new PDFSecurityOptions
-                {
-                    OwnerPassword = $"internal-{documentId}",
-                    AllowPrinting = true,
-                    AllowCopying = true,
-                    AllowModification = false,
-                    AllowAccessibility = true
-                };
-
-            case SecurityClassification.Confidential:
-                // Medium protection
-                return new PDFSecurityOptions
-                {
-                    UserPassword = GenerateUserPassword(documentId),
-                    OwnerPassword = GenerateOwnerPassword(documentId),
-                    AllowPrinting = true,
-                    AllowCopying = false,
-                    AllowModification = false,
-                    AllowAnnotations = false,
-                    AllowAccessibility = true
-                };
-
-            case SecurityClassification.Secret:
-                // High protection
-                return new PDFSecurityOptions
-                {
-                    UserPassword = GenerateUserPassword(documentId),
-                    OwnerPassword = GenerateOwnerPassword(documentId),
-                    AllowPrinting = false,
-                    AllowCopying = false,
-                    AllowModification = false,
-                    AllowAnnotations = false,
-                    AllowFormFilling = false,
-                    AllowDocumentAssembly = false,
-                    AllowAccessibility = true
-                };
-
-            default:
-                throw new ArgumentException($"Unknown classification: {classification}");
-        }
-    }
-
-    private string GenerateUserPassword(string documentId)
-    {
-        // Generate user password (in production, use proper key management)
-        return Convert.ToBase64String(
-            System.Text.Encoding.UTF8.GetBytes($"view-{documentId}")
-        );
-    }
-
-    private string GenerateOwnerPassword(string documentId)
-    {
-        // Generate owner password (in production, use proper key management)
-        return Convert.ToBase64String(
-            System.Text.Encoding.UTF8.GetBytes($"admin-{documentId}")
-        );
-    }
-}
-
-public enum SecurityClassification
-{
-    Public,
-    Internal,
-    Confidential,
-    Secret
+    return await _factory.NewDocument()
+        .WithLayout(doc)
+        .WithData("model", data)
+        .BuildBytesAsync();
 }
 ```
 
@@ -423,75 +227,30 @@ public enum SecurityClassification
 
 ### 40-bit Encryption (PDF 1.3)
 
-```csharp
-// Weak encryption - for legacy compatibility only
-// Not recommended for sensitive data
-```
+- Supported by very old PDF readers
+- Weak by modern standards - use only when required
 
 ### 128-bit Encryption (PDF 1.4+)
 
-```csharp
-// Standard encryption - good for most uses
-doc.RenderOptions.PDFVersion = PDFVersion.PDF14;
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
-{
-    UserPassword = "password"
-};
-```
+- The default
+- Supported by all modern PDF readers
 
-### 256-bit AES Encryption (PDF 1.7+)
-
-```csharp
-// Strong encryption - recommended for sensitive data
-doc.RenderOptions.PDFVersion = PDFVersion.PDF17;
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
-{
-    UserPassword = "strongpassword"
-};
-```
+AES encryption is not currently supported.
 
 ---
 
 ## Security Best Practices
 
-### Password Strength
+### Passwords
 
-```csharp
-// ❌ Weak passwords
-UserPassword = "12345"
-UserPassword = "password"
-
-// ✅ Strong passwords
-UserPassword = "Tr0ng!P@ssw0rd2024"  // 8+ chars, mixed case, numbers, symbols
-```
-
-### Password Management
-
-```csharp
-// ❌ Hard-coded passwords
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
-{
-    OwnerPassword = "admin123"  // Hard-coded!
-};
-
-// ✅ Secure password management
-var ownerPassword = Configuration["Security:OwnerPassword"];
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
-{
-    OwnerPassword = ownerPassword
-};
-```
+- Never put passwords in templates, source code or configuration files - load them from a secret store (Azure Key Vault, AWS Secrets Manager, environment variables)
+- Use long passwords with mixed characters
+- Always set an owner password when you set restrictions, so they cannot simply be removed
+- Use a different user password per recipient where documents are distributed
 
 ### Accessibility
 
-```csharp
-// ✅ Always allow accessibility
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
-{
-    AllowAccessibility = true,  // Important for screen readers
-    // ... other permissions
-};
-```
+Keep `accessibility` allowed (or `AllowAccessiblity = true`), so screen readers can still read secured documents.
 
 ---
 
@@ -499,107 +258,55 @@ doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
 
 ### Exercise 1: Security Profiles
 
-Create security profiles for:
-- Public documents (no restrictions)
-- Internal documents (basic protection)
-- Confidential documents (password + restrictions)
-- Test each profile
+Create read-only, confidential and form versions of the same template using `print-restrictions`.
 
-### Exercise 2: Password Generator
+### Exercise 2: Passwords from Configuration
 
-Build a password generator that:
-- Creates strong passwords
-- Stores passwords securely
-- Retrieves passwords for verification
-- Rotates passwords periodically
+Read the owner password from an environment variable, and apply it to every generated document.
 
 ### Exercise 3: Permission Tester
 
-Create a tool that:
-- Generates PDFs with different permissions
-- Tests each permission in PDF viewer
-- Documents viewer compatibility
-- Verifies security works as expected
+Generate a document with each permission turned off in turn, and check the result in two PDF viewers.
 
 ---
 
 ## Common Pitfalls
 
-### ❌ Weak Passwords
+### ❌ Restrictions Without an Owner Password
 
-```csharp
-// Too simple
-UserPassword = "pass"
-OwnerPassword = "admin"
-```
+Without an owner password, the restrictions can be removed by anyone with a PDF editor.
 
-✅ **Solution:**
-
-```csharp
-// Strong passwords
-UserPassword = "Tr0ng!Us3rP@ss2024"
-OwnerPassword = "Adm!nP@ssw0rd#2024"
-```
+✅ **Solution:** Always set an owner password when restricting a document.
 
 ### ❌ Disabling Accessibility
 
-```csharp
-// Blocks screen readers
-AllowAccessibility = false
+```html
+<meta name='print-restrictions' content='printing' />
 ```
 
-✅ **Solution:**
+✅ **Solution:** Include accessibility
 
-```csharp
-// Always allow accessibility
-AllowAccessibility = true
+```html
+<meta name='print-restrictions' content='printing, accessibility' />
 ```
 
-### ❌ Security with PDF/A
+### ❌ Hard-Coded Passwords
 
 ```csharp
-// PDF/A doesn't allow encryption
-doc.RenderOptions.Conformance = PDFConformance.PDFA2B;
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions
-{
-    UserPassword = "password"  // ❌ Will fail!
-};
+doc.RenderOptions.PasswordProvider = new DocumentPasswordProvider("admin");
 ```
 
-✅ **Solution:**
-
-```csharp
-// No security with PDF/A
-doc.RenderOptions.Conformance = PDFConformance.PDFA2B;
-doc.RenderOptions.SecurityOptions = null;  // ✅
-```
+✅ **Solution:** Load passwords from a secret store at runtime.
 
 ---
 
 ## Security Checklist
 
-- [ ] Appropriate security profile chosen
-- [ ] Strong passwords used (8+ characters)
+- [ ] Restrictions chosen for the document's audience
 - [ ] Owner password set
-- [ ] Permissions configured appropriately
-- [ ] AllowAccessibility set to true
-- [ ] PDF version supports encryption level
-- [ ] Passwords stored securely (not hard-coded)
-- [ ] Tested in PDF viewers
-- [ ] Compliance checked (no encryption with PDF/A)
-
----
-
-## Best Practices
-
-1. **Strong Passwords** - 8+ characters, mixed case, numbers, symbols
-2. **Secure Storage** - Never hard-code passwords
-3. **Owner Password** - Always set to protect permissions
-4. **Accessibility** - Always allow (set to true)
-5. **Test Thoroughly** - Verify in multiple PDF viewers
-6. **Document Policy** - Clear security classification system
-7. **Audit Trail** - Log security-related operations
-8. **Regular Review** - Update passwords periodically
+- [ ] Accessibility allowed
+- [ ] Passwords loaded from a secret store, not hard-coded
+- [ ] Tested in more than one PDF viewer
 
 ---
 
@@ -627,7 +334,6 @@ doc.RenderOptions.SecurityOptions = null;  // ✅
 
 1. **[Optimization & Performance](06_optimization_performance.html)** - File size and speed optimization
 2. **[Production & Deployment](07_production_deployment.html)** - Production configuration
-3. **[Practical Applications](/paperwork.core/learning/08-practical/)** - Real-world examples
 
 ---
 
