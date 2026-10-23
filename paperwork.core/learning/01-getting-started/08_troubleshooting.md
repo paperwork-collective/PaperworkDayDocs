@@ -238,24 +238,21 @@ public async Task<string> CheckTemplate(IPaperworkFactory factory, string templa
 <img src="./images/logo.png" />
 ```
 
-Relative paths in a template are resolved from the application's working directory, not from the folder the template file is in.
+Relative paths in a template loaded with `WithLayoutFile` are found relative to the template file. For a template given as a string or stream, there is no file to be relative to, so they are found from the application's working directory.
 
 **Debug:**
 
 ```csharp
-// Check working directory
-Console.WriteLine($"Working directory: {Directory.GetCurrentDirectory()}");
-
-// Check if image exists
-string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "images", "logo.png");
+// Check the image exists next to the template
+string imagePath = Path.Combine(Path.GetDirectoryName(templatePath), "images", "logo.png");
 Console.WriteLine($"Image exists: {File.Exists(imagePath)}");
 ```
 
 **Solutions:**
 
 ```html
-<!-- ✅ Use a path relative to the working directory -->
-<img src="Templates/images/logo.png" />
+<!-- ✅ Load the template with WithLayoutFile, and keep the path relative to the template -->
+<img src="images/logo.png" />
 
 <!-- ✅ Use absolute path -->
 <img src="C:/Projects/MyApp/images/logo.png" />

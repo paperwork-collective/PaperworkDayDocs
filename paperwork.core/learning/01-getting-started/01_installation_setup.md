@@ -231,16 +231,15 @@ using Paperwork.Generation;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Used to load remote fonts, images and stylesheets
-builder.Services.AddSingleton(new HttpClient());
-
-// Add the Paperwork factory
-builder.Services.AddPaperwork();
+// Add the Paperwork factory, and pass the configuration to the engine
+builder.Services.AddPaperwork(builder.Configuration);
 ```
+
+The factory uses the application's `HttpClient` to load remote fonts, images and stylesheets if one is registered, or its own if not.
 
 ### Configuration Loading on Command Line
 
-Fonts, imaging, output and other engine options can be set in `appsettings.json`, under the `"Scryber"` section. Load the configuration once at startup (in ASP.NET Core, pass `builder.Configuration` instead).
+Fonts, imaging, output and other engine options can be set in `appsettings.json`, under the `"Scryber"` section. Load the configuration once at startup (in ASP.NET Core, `AddPaperwork(builder.Configuration)` does this for you).
 
 ```csharp
 using Microsoft.Extensions.Configuration;

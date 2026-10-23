@@ -104,7 +104,7 @@ A `<title>` in the template always replaces a title set in code (plain engine). 
 
 ## B. Paperwork.Core (if this is also yours — otherwise please pass on)
 
-> **Status 2026-10-23:** the Review HTML5 session owns Scryber.Core only and has **not** taken the B items (Paperwork.Core is a separate repo). A1 and A2 confirmed against source; A items going to Richard for scope and order. **B items need an owner — Richard to decide.**
+> **Status 2026-10-23:** the Review HTML5 session owns Scryber.Core only (A items going to Richard for scope and order). Richard asked the docs session to do the B items: **B1–B7 done** on Paperwork.Core branch `v10-builder-fixes` (`f51a7db`), tests on Paperwork branch `v10-builder-tests` (`6fcf19f`, 101 passing). B2 was done as a new `PaperworkRequestLogOption.Template` (builder default) so `Off` still means off for Designer/Viewer requests. **B8 is still a decision.** Not pushed or released — part of v10.0.
 
 | # | Issue | Where |
 |---|---|---|

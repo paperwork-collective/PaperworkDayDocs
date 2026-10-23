@@ -11,6 +11,8 @@ current behaviour, library may still want a fix), **fixed**.
 
 ## 1. Paperwork.Core library issues
 
+> **2026-10-23:** L1, L2, L3, L4, L5, L7 and L8 fixed on Paperwork.Core branch `v10-builder-fixes` (`f51a7db`); tests on Paperwork `v10-builder-tests` (`6fcf19f`). Docs updated to the fixed behaviour. L6 (appsettings "Paperwork" root) is still a decision.
+
 | # | Issue | Where | Effect | Status |
 |---|---|---|---|---|
 | L1 | Builder log level defaults to `Off` and forces `doc.AppendTraceLog = false`, so `<?paperwork append-log='true' ?>` in a template is ignored. | `Generation/v1/PDFGeneratorV1.cs` `UpdateDocumentTraceLevel` | Template-level logging silently does nothing through the builder. Suggest `Off` = leave the template setting alone. | open (docs use `WithLogLevel`) |

@@ -150,6 +150,24 @@ public class PdfController : Controller
 
 The factory is registered at startup, see [Service Registration](#service-registration) below.
 
+### ASP.NET Core - Stream Directly to Response
+
+```csharp
+[HttpGet("report")]
+public async Task GenerateReport()
+{
+    // Set response headers
+    Response.ContentType = "application/pdf";
+    Response.Headers.Append("Content-Disposition", "inline; filename=report.pdf");
+
+    // Write the PDF to the response
+    await _factory.NewDocument()
+        .WithLayoutFile("./Templates/report.html")
+        .WithData("model", GetReportData())
+        .SaveAsync(Response.Body);
+}
+```
+
 ### ASP.NET Core - Force Download vs Inline Display
 
 ```csharp
@@ -182,11 +200,9 @@ using Paperwork.Generation;
 
 builder.Services.AddControllers();
 
-// Used to load remote fonts, images and stylesheets
-builder.Services.AddSingleton(new HttpClient());
-
-// Register the Paperwork factory as IPaperworkFactory
-builder.Services.AddPaperwork();
+// Register the Paperwork factory as IPaperworkFactory,
+// and pass the configuration to the engine
+builder.Services.AddPaperwork(builder.Configuration);
 
 // Register your own PDF service
 builder.Services.AddScoped<IPdfService, PdfService>();

@@ -425,8 +425,7 @@ In an ASP.NET application, register the factory with dependency injection once a
 ```csharp
 using Paperwork.Generation;
 
-builder.Services.AddSingleton(new HttpClient()); //used to load remote fonts, images and stylesheets
-builder.Services.AddPaperwork();
+builder.Services.AddPaperwork(builder.Configuration);
 ```
 
 Then ask for an `IPaperworkFactory` wherever you need it, and return the bytes as the response.

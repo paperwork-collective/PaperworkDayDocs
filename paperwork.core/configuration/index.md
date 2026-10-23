@@ -111,7 +111,7 @@ IConfigurationRoot config = new ConfigurationBuilder()
 Scryber.ServiceProvider.Init(config);
 ```
 
-In ASP.NET Core, use the application's configuration: `Scryber.ServiceProvider.Init(builder.Configuration);`. See [Configuration Structure](configuration-structure) for the sections and values.
+In ASP.NET Core, `builder.Services.AddPaperwork(builder.Configuration);` registers the factory and passes the configuration to the engine. See [Configuration Structure](configuration-structure) for the sections and values.
 
 ## Extension Points Summary
 

@@ -262,7 +262,7 @@ else
 }
 ```
 
-The `<title>` in the template becomes the title of the PDF. The linked stylesheet is loaded relative to the application's working directory, so run the program from the project folder.
+The `<title>` in the template becomes the title of the PDF. The linked stylesheet is found next to the template file.
 
 ---
 
@@ -482,7 +482,7 @@ string templatePath = Path.Combine(
 builder.WithLayoutFile(templatePath);
 ```
 
-Images and stylesheets referenced with relative paths inside a template are resolved from the application's working directory.
+Images and stylesheets referenced with relative paths inside a template file are found relative to the template file.
 
 ---
 
