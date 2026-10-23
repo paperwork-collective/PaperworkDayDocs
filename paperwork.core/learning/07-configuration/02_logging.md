@@ -12,92 +12,103 @@ ancestor: Paperwork.Core
 
 # Logging
 
-Master Scryber's logging system to diagnose issues, monitor performance, and troubleshoot PDF generation in development and production.
+See what happens as a document is generated - for debugging templates, monitoring production, and finding performance problems.
 
 ---
 
 ## Learning Objectives
 
 By the end of this article, you'll be able to:
-- Configure Scryber logging
-- Use different log levels appropriately
-- Implement custom log handlers
-- Analyze log output for troubleshooting
-- Configure logging for production
-- Monitor PDF generation performance
+- Append the generation log to a document
+- Choose the right log level
+- Collect log entries in code
+- Send the log to your own logging system
+- Use the log to troubleshoot problems
 
 ---
 
 ## Log Levels
 
-Scryber provides several logging levels:
-
-```csharp
-using Scryber.Logging;
-
-public enum TraceRecordLevel
-{
-    Off,        // No logging
-    Errors,     // Only errors
-    Warnings,   // Errors and warnings
-    Messages,   // Errors, warnings, and informational messages
-    Verbose     // Everything (debugging)
-}
-```
+| Level | Records |
+|-------|---------|
+| `Off` | Nothing |
+| `Errors` | Errors only |
+| `Warnings` | Errors and warnings |
+| `Messages` | Errors, warnings and information messages |
+| `Verbose` | Everything above, plus detailed processing steps |
+| `Diagnostic` | Everything, including layout and positioning detail (engine logs only) |
 
 ---
 
-## Basic Logging
+## Appending the Log to the Document
 
-### Console Logging
+The quickest way to see what happened is to add the log as pages at the end of the PDF.
+
+### With the document builder
 
 ```csharp
-using Scryber.Components;
-using Scryber.Logging;
-using System.IO;
+using Paperwork;
+using Paperwork.Generation;
 
-// Create document
-var doc = Document.ParseDocument("template.html");
-
-// Enable console logging
-doc.TraceLog = new PDFTraceLog();
-doc.TraceLog.SetRecordLevel(TraceRecordLevel.Messages);
-
-// Generate PDF
-using (var stream = new FileStream("output.pdf", FileMode.Create))
-{
-    doc.SaveAsPDF(stream);
-}
-
-// Output goes to console:
-// [INFO] Document parsing started
-// [INFO] Loading template: template.html
-// [INFO] Rendering page 1
-// [INFO] Document generated successfully
+await factory.NewDocument()
+    .WithLayoutFile("invoice.html")
+    .WithData("model", invoice)
+    .WithLogLevel(PaperworkRequestLogOption.Messages)
+    .SaveAsync("invoice.pdf");
 ```
 
-### Collector Logging
+The builder levels are `Template` (the default - use the template's own setting), `Off`, `Errors`, `Warnings`, `Messages` and `Verbose`.
+
+### In the template
+
+```html
+<?paperwork append-log='true' log-level='Messages' ?>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+    ...
+</html>
+```
+
+See [Processing Instructions](/paperwork.core/configuration/processing-instructions).
+
+### On an engine Document
 
 ```csharp
+using var doc = Document.ParseDocument("invoice.html");
+doc.AppendTraceLog = true;
+doc.TraceLog.SetRecordLevel(TraceRecordLevel.Messages);
+
+await factory.NewDocument()
+    .WithLayout(doc)
+    .SaveAsync("invoice.pdf");
+```
+
+{: .note }
+> The appended log is a development tool. Turn it off for documents that go to users.
+
+---
+
+## Collecting Log Entries in Code
+
+A `CollectorTraceLog` keeps the entries in memory, so they can be read after the document is generated. Add it to an engine `Document` (see [The Engine Document](/paperwork.core/configuration/engine-document)).
+
+```csharp
+using Scryber;
+using Scryber.Components;
 using Scryber.Logging;
 
-// Collect log entries for analysis
-var logger = new PDFCollectorTraceLog(TraceRecordLevel.Verbose);
-doc.TraceLog = logger;
+using var doc = Document.ParseDocument("invoice.html");
 
-// Generate document
-doc.SaveAsPDF(stream);
+var collector = new CollectorTraceLog(TraceRecordLevel.Warnings, "Invoice", autostart: true);
+doc.AddTraceLog(collector);
 
-// Analyze collected entries
-foreach (var entry in logger.Entries)
+await factory.NewDocument()
+    .WithLayout(doc)
+    .WithData("model", invoice)
+    .SaveAsync("invoice.pdf");
+
+foreach (var entry in collector)
 {
     Console.WriteLine($"[{entry.Level}] {entry.Category}: {entry.Message}");
-
-    if (entry.Level == TraceRecordLevel.Errors)
-    {
-        // Handle errors
-        HandleError(entry);
-    }
 }
 ```
 
@@ -107,375 +118,125 @@ foreach (var entry in logger.Entries)
 
 ### Development
 
-```csharp
-// Development: Log everything
-doc.TraceLog = new PDFCollectorTraceLog(TraceRecordLevel.Verbose);
-```
+Use `Verbose`, appended to the document, while building and testing templates.
 
-**Use Verbose when:**
-- Debugging issues
-- Understanding document generation flow
-- Learning Scryber behavior
-- Investigating performance problems
+```csharp
+builder.WithLogLevel(PaperworkRequestLogOption.Verbose);
+```
 
 ### Production
 
-```csharp
-// Production: Log warnings and errors only
-doc.TraceLog = new PDFCollectorTraceLog(TraceRecordLevel.Warnings);
-```
+Collect `Warnings` and above in code, and send them to your logging system. Don't append the log to the document.
 
-**Use Warnings when:**
-- Running in production
-- Want to know about potential issues
-- Avoid excessive log volume
-- Monitor system health
+```csharp
+var collector = new CollectorTraceLog(TraceRecordLevel.Warnings, "Production", autostart: true);
+doc.AddTraceLog(collector);
+```
 
 ### Performance-Critical
 
-```csharp
-// Performance-critical: Errors only
-doc.TraceLog = new PDFCollectorTraceLog(TraceRecordLevel.Errors);
-
-// Or disable logging entirely
-doc.TraceLog = new PDFTraceLog();
-doc.TraceLog.SetRecordLevel(TraceRecordLevel.Off);
-```
+Use `Errors` or `Off` - detailed logging takes time on large documents.
 
 ---
 
 ## Custom Log Handlers
 
-### File Logging
+A custom log inherits from `TraceLog` and overrides `Record`. Every entry the document logs at or above its level is passed to it.
+
+### Forwarding to Microsoft.Extensions.Logging
 
 ```csharp
+using Microsoft.Extensions.Logging;
+using Scryber;
 using Scryber.Logging;
-using System;
-using System.IO;
 
-public class FileTraceLog : PDFTraceLog
-{
-    private readonly string _logFilePath;
-    private readonly object _lock = new object();
-
-    public FileTraceLog(string logFilePath, TraceRecordLevel level)
-    {
-        _logFilePath = logFilePath;
-        this.SetRecordLevel(level);
-    }
-
-    public override void Begin(TraceRecordLevel level, string category, string message)
-    {
-        if (!ShouldLog(level)) return;
-
-        lock (_lock)
-        {
-            var logEntry = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} [{level}] {category}: {message}";
-            File.AppendAllText(_logFilePath, logEntry + Environment.NewLine);
-        }
-    }
-
-    protected override void End(TraceRecordLevel level, string category, string message)
-    {
-        // Optional: Log completion messages
-    }
-
-    private bool ShouldLog(TraceRecordLevel level)
-    {
-        return level <= this.RecordLevel;
-    }
-}
-
-// Usage
-var doc = Document.ParseDocument("template.html");
-doc.TraceLog = new FileTraceLog("pdf-generation.log", TraceRecordLevel.Messages);
-doc.SaveAsPDF(stream);
-```
-
-### Database Logging
-
-```csharp
-using Scryber.Logging;
-using System;
-
-public class DatabaseTraceLog : PDFTraceLog
-{
-    private readonly string _connectionString;
-    private readonly string _sessionId;
-
-    public DatabaseTraceLog(string connectionString, TraceRecordLevel level)
-    {
-        _connectionString = connectionString;
-        _sessionId = Guid.NewGuid().ToString();
-        this.SetRecordLevel(level);
-    }
-
-    public override void Begin(TraceRecordLevel level, string category, string message)
-    {
-        if (!ShouldLog(level)) return;
-
-        try
-        {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                var command = new SqlCommand(
-                    "INSERT INTO PDFLogs (SessionId, Timestamp, Level, Category, Message) " +
-                    "VALUES (@SessionId, @Timestamp, @Level, @Category, @Message)",
-                    connection);
-
-                command.Parameters.AddWithValue("@SessionId", _sessionId);
-                command.Parameters.AddWithValue("@Timestamp", DateTime.Now);
-                command.Parameters.AddWithValue("@Level", level.ToString());
-                command.Parameters.AddWithValue("@Category", category);
-                command.Parameters.AddWithValue("@Message", message);
-
-                command.ExecuteNonQuery();
-            }
-        }
-        catch (Exception ex)
-        {
-            // Don't let logging errors break PDF generation
-            Console.WriteLine($"Logging error: {ex.Message}");
-        }
-    }
-
-    private bool ShouldLog(TraceRecordLevel level)
-    {
-        return level <= this.RecordLevel;
-    }
-}
-
-// Usage
-var doc = Document.ParseDocument("template.html");
-doc.TraceLog = new DatabaseTraceLog("connection-string", TraceRecordLevel.Warnings);
-doc.SaveAsPDF(stream);
-```
-
-### Structured Logging (Serilog, NLog)
-
-```csharp
-using Scryber.Logging;
-using Serilog;
-
-public class SerilogTraceLog : PDFTraceLog
+public class LoggerTraceLog : TraceLog
 {
     private readonly ILogger _logger;
 
-    public SerilogTraceLog(ILogger logger, TraceRecordLevel level)
+    public LoggerTraceLog(ILogger logger, TraceRecordLevel level)
+        : base(level, "Paperwork")
     {
         _logger = logger;
-        this.SetRecordLevel(level);
     }
 
-    public override void Begin(TraceRecordLevel level, string category, string message)
+    protected override void Record(string inset, TraceLevel level, TimeSpan timestamp,
+        string category, string message, Exception ex)
     {
-        if (!ShouldLog(level)) return;
-
-        switch (level)
+        var logLevel = level switch
         {
-            case TraceRecordLevel.Errors:
-                _logger.Error("[{Category}] {Message}", category, message);
-                break;
-            case TraceRecordLevel.Warnings:
-                _logger.Warning("[{Category}] {Message}", category, message);
-                break;
-            case TraceRecordLevel.Messages:
-                _logger.Information("[{Category}] {Message}", category, message);
-                break;
-            case TraceRecordLevel.Verbose:
-                _logger.Debug("[{Category}] {Message}", category, message);
-                break;
-        }
-    }
+            TraceLevel.Failure => LogLevel.Critical,
+            TraceLevel.Error   => LogLevel.Error,
+            TraceLevel.Warning => LogLevel.Warning,
+            TraceLevel.Message => LogLevel.Information,
+            TraceLevel.Verbose => LogLevel.Debug,
+            _                  => LogLevel.Trace
+        };
 
-    private bool ShouldLog(TraceRecordLevel level)
-    {
-        return level <= this.RecordLevel;
+        _logger.Log(logLevel, ex, "{Category}: {Message}", category, message);
     }
 }
-
-// Usage with Serilog
-Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
-    .WriteTo.File("logs/pdf-generation.txt", rollingInterval: RollingInterval.Day)
-    .CreateLogger();
-
-var doc = Document.ParseDocument("template.html");
-doc.TraceLog = new SerilogTraceLog(Log.Logger, TraceRecordLevel.Messages);
-doc.SaveAsPDF(stream);
 ```
+
+**Usage:**
+
+```csharp
+using var doc = Document.ParseDocument("invoice.html");
+doc.AddTraceLog(new LoggerTraceLog(_logger, TraceRecordLevel.Warnings));
+
+await factory.NewDocument()
+    .WithLayout(doc)
+    .SaveAsync("invoice.pdf");
+```
+
+The same pattern works for Serilog, NLog, a file or a database - write the entry in `Record`.
+
+To add a log to every document without changing code, register a log factory in configuration. See [Logging and Tracing](/paperwork.core/configuration/logging-extension).
 
 ---
 
-## Practical Examples
-
-### Example 1: Production Invoice Generator with Logging
+## Practical Example: Production Generator with Logging
 
 ```csharp
-using Scryber.Components;
-using Scryber.Logging;
-using System;
-using System.IO;
-using System.Linq;
-
 public class InvoiceGenerator
 {
-    private readonly string _logDirectory;
+    private readonly IPaperworkFactory _factory;
+    private readonly ILogger<InvoiceGenerator> _logger;
 
-    public InvoiceGenerator(string logDirectory)
+    public InvoiceGenerator(IPaperworkFactory factory, ILogger<InvoiceGenerator> logger)
     {
-        _logDirectory = logDirectory;
+        _factory = factory;
+        _logger = logger;
     }
 
-    public void GenerateInvoice(Invoice invoice, Stream output)
+    public async Task<byte[]> GenerateAsync(Invoice invoice)
     {
-        // Set up logging for this invoice
-        var logger = new PDFCollectorTraceLog(TraceRecordLevel.Warnings);
+        using var doc = Document.ParseDocument("Templates/invoice.html");
 
-        try
+        var collector = new CollectorTraceLog(TraceRecordLevel.Warnings, "Invoice", autostart: true);
+        doc.AddTraceLog(collector);
+
+        var result = await _factory.NewDocument()
+            .WithLayout(doc)
+            .WithData("model", invoice)
+            .BuildAsync();
+
+        // Report any warnings or errors with the invoice number
+        foreach (var entry in collector)
         {
-            // Load and configure document
-            var doc = Document.ParseDocument("invoice-template.html");
-            doc.TraceLog = logger;
-
-            // Set metadata
-            doc.Info.Title = $"Invoice {invoice.Number}";
-            doc.Info.Author = "Acme Corp";
-
-            // Bind data
-            doc.Params["invoice"] = invoice;
-
-            // Generate
-            doc.SaveAsPDF(output);
-
-            // Check for warnings
-            var warnings = logger.Entries
-                .Where(e => e.Level == TraceRecordLevel.Warnings)
-                .ToList();
-
-            if (warnings.Any())
-            {
-                LogWarningsToFile(invoice.Number, warnings);
-            }
-
-            Console.WriteLine($"Invoice {invoice.Number} generated successfully");
+            _logger.LogWarning("Invoice {Number} [{Level}] {Category}: {Message}",
+                invoice.Number, entry.Level, entry.Category, entry.Message);
         }
-        catch (Exception ex)
+
+        if (!result.Success)
         {
-            // Log error with all diagnostic information
-            LogErrorToFile(invoice.Number, ex, logger.Entries);
-            throw;
+            _logger.LogError("Invoice {Number} failed: {Message} {Error}",
+                invoice.Number, result.Message, result.Error);
+            throw new InvalidOperationException(result.Message);
         }
+
+        return result.Document.Binary;
     }
-
-    private void LogWarningsToFile(string invoiceNumber, List<TraceRecord> warnings)
-    {
-        var logFile = Path.Combine(_logDirectory, $"warnings_{DateTime.Now:yyyyMMdd}.log");
-        var logEntry = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] Invoice {invoiceNumber} - " +
-                      $"{warnings.Count} warnings:{Environment.NewLine}";
-
-        foreach (var warning in warnings)
-        {
-            logEntry += $"  - {warning.Category}: {warning.Message}{Environment.NewLine}";
-        }
-
-        File.AppendAllText(logFile, logEntry);
-    }
-
-    private void LogErrorToFile(string invoiceNumber, Exception ex, TraceRecordCollection entries)
-    {
-        var logFile = Path.Combine(_logDirectory, $"errors_{DateTime.Now:yyyyMMdd}.log");
-        var logEntry = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] Invoice {invoiceNumber} FAILED{Environment.NewLine}" +
-                      $"Error: {ex.Message}{Environment.NewLine}" +
-                      $"Stack: {ex.StackTrace}{Environment.NewLine}" +
-                      $"Log entries:{Environment.NewLine}";
-
-        foreach (var entry in entries)
-        {
-            logEntry += $"  [{entry.Level}] {entry.Category}: {entry.Message}{Environment.NewLine}";
-        }
-
-        File.AppendAllText(logFile, logEntry);
-    }
-}
-
-// Usage
-var generator = new InvoiceGenerator("./logs");
-using (var output = new FileStream("invoice.pdf", FileMode.Create))
-{
-    generator.GenerateInvoice(invoice, output);
-}
-```
-
-### Example 2: Performance Monitoring
-
-```csharp
-using Scryber.Components;
-using Scryber.Logging;
-using System;
-using System.Diagnostics;
-using System.IO;
-
-public class PerformanceMonitor
-{
-    public void GenerateWithPerformanceLogging(string templatePath, Stream output)
-    {
-        var logger = new PDFCollectorTraceLog(TraceRecordLevel.Verbose);
-        var stopwatch = Stopwatch.StartNew();
-
-        var doc = Document.ParseDocument(templatePath);
-        doc.TraceLog = logger;
-
-        var parseTime = stopwatch.ElapsedMilliseconds;
-        Console.WriteLine($"Parse time: {parseTime}ms");
-
-        stopwatch.Restart();
-        doc.SaveAsPDF(output);
-        var renderTime = stopwatch.ElapsedMilliseconds;
-
-        Console.WriteLine($"Render time: {renderTime}ms");
-        Console.WriteLine($"Total time: {parseTime + renderTime}ms");
-
-        // Analyze log for performance bottlenecks
-        AnalyzePerformance(logger.Entries);
-    }
-
-    private void AnalyzePerformance(TraceRecordCollection entries)
-    {
-        Console.WriteLine("\nPerformance Analysis:");
-
-        // Count operations by category
-        var categories = entries.GroupBy(e => e.Category)
-            .Select(g => new { Category = g.Key, Count = g.Count() })
-            .OrderByDescending(x => x.Count);
-
-        foreach (var cat in categories)
-        {
-            Console.WriteLine($"  {cat.Category}: {cat.Count} operations");
-        }
-
-        // Find slow operations (if logged with timing)
-        var slowOps = entries
-            .Where(e => e.Message.Contains("ms") || e.Message.Contains("slow"))
-            .ToList();
-
-        if (slowOps.Any())
-        {
-            Console.WriteLine("\nPotential bottlenecks:");
-            foreach (var op in slowOps)
-            {
-                Console.WriteLine($"  - {op.Message}");
-            }
-        }
-    }
-}
-
-// Usage
-var monitor = new PerformanceMonitor();
-using (var output = new FileStream("output.pdf", FileMode.Create))
-{
-    monitor.GenerateWithPerformanceLogging("template.html", output);
 }
 ```
 
@@ -485,66 +246,13 @@ using (var output = new FileStream("output.pdf", FileMode.Create))
 
 ### Common Error Patterns
 
-```csharp
-public class LogAnalyzer
-{
-    public void AnalyzeLogs(TraceRecordCollection entries)
-    {
-        // Check for errors
-        var errors = entries.Where(e => e.Level == TraceRecordLevel.Errors).ToList();
-        if (errors.Any())
-        {
-            Console.WriteLine($"ERRORS FOUND: {errors.Count}");
-            foreach (var error in errors)
-            {
-                Console.WriteLine($"  - {error.Category}: {error.Message}");
-            }
-        }
-
-        // Check for warnings
-        var warnings = entries.Where(e => e.Level == TraceRecordLevel.Warnings).ToList();
-        if (warnings.Any())
-        {
-            Console.WriteLine($"\nWARNINGS: {warnings.Count}");
-            foreach (var warning in warnings)
-            {
-                Console.WriteLine($"  - {warning.Category}: {warning.Message}");
-            }
-        }
-
-        // Check for common issues
-        CheckForCommonIssues(entries);
-    }
-
-    private void CheckForCommonIssues(TraceRecordCollection entries)
-    {
-        // Missing resources
-        if (entries.Any(e => e.Message.Contains("not found") || e.Message.Contains("missing")))
-        {
-            Console.WriteLine("\n⚠ Possible missing resources detected");
-        }
-
-        // Font issues
-        if (entries.Any(e => e.Category.Contains("Font") && e.Level == TraceRecordLevel.Warnings))
-        {
-            Console.WriteLine("\n⚠ Font loading issues detected");
-        }
-
-        // Image issues
-        if (entries.Any(e => e.Category.Contains("Image") && e.Level == TraceRecordLevel.Warnings))
-        {
-            Console.WriteLine("\n⚠ Image loading issues detected");
-        }
-
-        // Performance concerns
-        var verboseCount = entries.Count(e => e.Level == TraceRecordLevel.Verbose);
-        if (verboseCount > 10000)
-        {
-            Console.WriteLine($"\n⚠ High operation count ({verboseCount}) - potential performance issue");
-        }
-    }
-}
-```
+| Log message | Likely cause |
+|-------------|--------------|
+| Could not load the image for component ... | The image path or url is wrong, or the request failed |
+| The font ... could not be loaded, falling back to Courier ... | The font is not registered, or not at the requested weight or style |
+| Cannot bind the values for ... | An expression in the template failed - the message gives the reason |
+| Could not compile the expression ... | Invalid expression syntax in the template |
+| Skipping unknown attribute ... | An unknown attribute (an error in Strict mode, skipped in Lax) |
 
 ---
 
@@ -552,28 +260,15 @@ public class LogAnalyzer
 
 ### Exercise 1: Custom Logger
 
-Implement a custom logger that:
-- Writes to a file
-- Rotates log files daily
-- Includes timestamps
-- Filters by level
-- Tests with document generation
+Write a `TraceLog` that writes each entry to the console in colour by level.
 
-### Exercise 2: Log Dashboard
+### Exercise 2: Template Health Check
 
-Create a simple dashboard that:
-- Collects logs from multiple generations
-- Shows error/warning counts
-- Displays recent entries
-- Highlights critical issues
+Generate each of your templates with a `CollectorTraceLog` at `Warnings`, and list any template with entries.
 
-### Exercise 3: Performance Profiler
+### Exercise 3: Find the Slow Template
 
-Build a profiler that:
-- Measures generation time
-- Tracks operations by category
-- Identifies slowest operations
-- Generates performance report
+Append the `Verbose` log to a large document, and look at the timings for each stage.
 
 ---
 
@@ -581,91 +276,36 @@ Build a profiler that:
 
 ### ❌ No Logging in Production
 
-```csharp
-// Can't diagnose issues
-doc.TraceLog = null;
-doc.SaveAsPDF(stream);
-```
+Problems in production documents go unnoticed.
 
-✅ **Solution:**
-
-```csharp
-// Always log at least warnings
-doc.TraceLog = new PDFCollectorTraceLog(TraceRecordLevel.Warnings);
-doc.SaveAsPDF(stream);
-```
+✅ **Solution:** Collect `Warnings` and above, and send them to your logging system.
 
 ### ❌ Too Much Logging in Production
 
-```csharp
-// Excessive log volume, performance impact
-doc.TraceLog = new PDFCollectorTraceLog(TraceRecordLevel.Verbose);
-```
+`Verbose` and `Diagnostic` logging slow down generation.
 
-✅ **Solution:**
+✅ **Solution:** Use `Warnings` or `Errors` in production.
 
-```csharp
-// Appropriate level for production
-doc.TraceLog = new PDFCollectorTraceLog(TraceRecordLevel.Warnings);
-```
+### ❌ Appending the Log to User Documents
 
-### ❌ Ignoring Log Output
-
-```csharp
-// Logs generated but never reviewed
-var logger = new PDFCollectorTraceLog(TraceRecordLevel.Warnings);
-doc.TraceLog = logger;
-doc.SaveAsPDF(stream);
-// Log entries never checked
-```
-
-✅ **Solution:**
-
-```csharp
-var logger = new PDFCollectorTraceLog(TraceRecordLevel.Warnings);
-doc.TraceLog = logger;
-doc.SaveAsPDF(stream);
-
-// Check for issues
-if (logger.Entries.Any(e => e.Level == TraceRecordLevel.Warnings))
-{
-    AnalyzeAndReport(logger.Entries);
-}
-```
+✅ **Solution:** Only use `WithLogLevel` or `append-log` while developing.
 
 ---
 
 ## Logging Best Practices Checklist
 
-- [ ] Logging enabled in development (Verbose)
-- [ ] Logging enabled in production (Warnings or Messages)
-- [ ] Log output reviewed regularly
-- [ ] Errors logged with context
-- [ ] Performance logged for optimization
-- [ ] Log level appropriate for environment
-- [ ] Custom logger implemented if needed
-- [ ] Log rotation configured for file logging
-
----
-
-## Best Practices
-
-1. **Always Log** - Even if only errors
-2. **Verbose in Development** - See everything during testing
-3. **Warnings in Production** - Balance detail and performance
-4. **Review Logs Regularly** - Don't just collect
-5. **Log Context** - Include document identifiers
-6. **Handle Logging Errors** - Don't break generation
-7. **Rotate Log Files** - Prevent disk space issues
-8. **Structured Logging** - Use existing frameworks when possible
+- [ ] `Verbose` appended log while developing templates
+- [ ] `Warnings` collected in production
+- [ ] Log entries sent to the application's logging system
+- [ ] Appended log turned off for user documents
+- [ ] Template and data identifiers included in logged messages
 
 ---
 
 ## Next Steps
 
-1. **[Error Handling & Conformance](03_error_handling_conformance.html)** - Handle errors gracefully
-2. **[Security](05_security.html)** - Secure your documents
-3. **[Optimization & Performance](06_optimization_performance.html)** - Optimize generation
+1. **[Error Handling & Conformance](03_error_handling_conformance.html)** - Strict and Lax modes
+2. **[Security](05_security.html)** - Passwords and permissions
 
 ---
 
