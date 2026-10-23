@@ -130,11 +130,11 @@ The `data-test` attribute accepts any expression that evaluates to a boolean val
 | **Equality** | `{% raw %}{{model.status == 'approved'}}{% endraw %}` | Equality check |
 | **Inequality** | `{% raw %}{{model.status != 'rejected'}}{% endraw %}` | Not equal check |
 | **Logical AND** | `{% raw %}{{model.a && model.b}}{% endraw %}` | Both conditions must be true |
-| **Logical OR** | `{% raw %}{{model.a \|\| model.b}}{% endraw %}` | At least one condition true |
+| **Logical OR** | <code>{% raw %}{{model.a &#124;&#124; model.b}}{% endraw %}</code> | At least one condition true |
 | **Negation** | `{% raw %}{{!model.isDisabled}}{% endraw %}` | Logical NOT |
 | **Null Check** | `{% raw %}{{model.value != null}}{% endraw %}` | Check for null values |
 | **Length Check** | `{% raw %}{{model.items.length > 0}}{% endraw %}` | Array/collection size |
-| **Complex** | `{% raw %}{{(model.a && model.b) \|\| model.c}}{% endraw %}` | Combined logic |
+| **Complex** | <code>{% raw %}{{(model.a && model.b) &#124;&#124; model.c}}{% endraw %}</code> | Combined logic |
 
 ### Type
 
@@ -161,7 +161,7 @@ Supported logical operators:
 | Operator | Description | Example |
 |----------|-------------|---------|
 | `&&` | Logical AND | `{% raw %}{{model.a && model.b}}{% endraw %}` |
-| `\|\|` | Logical OR | `{% raw %}{{model.a \|\| model.b}}{% endraw %}` |
+| <code>&#124;&#124;</code> | Logical OR | <code>{% raw %}{{model.a &#124;&#124; model.b}}{% endraw %}</code> |
 | `!` | Logical NOT | `{% raw %}{{!model.isDisabled}}{% endraw %}` |
 
 ### Operator Precedence

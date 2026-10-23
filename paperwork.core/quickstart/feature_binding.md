@@ -104,7 +104,7 @@ Used within `{{expression}}` bindings. Operator precedence follows standard math
 | Operator | Example | Description | Reference |
 |----------|---------|-------------|-----------|
 | `&&` | `{{a && b}}` | Logical AND | [→](/paperwork.core/reference/binding/operators/and) |
-| `\|\|` | `{{a \|\| b}}` | Logical OR | [→](/paperwork.core/reference/binding/operators/or) |
+| <code>&#124;&#124;</code> | <code>{{a &#124;&#124; b}}</code> | Logical OR | [→](/paperwork.core/reference/binding/operators/or) |
 | `!` | `{{!a}}` | Logical NOT | |
 
 ### Navigation & Null Handling

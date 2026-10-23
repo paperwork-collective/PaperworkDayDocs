@@ -59,7 +59,7 @@ Combine boolean expressions.
 | Operator | Description | Precedence | Example |
 |----------|-------------|------------|---------|
 | [&&](./and) | Logical AND | 9 | `{% raw %}{{#if model.age >= 18 && model.hasLicense}}{% endraw %}` |
-| [\|\|](./or) | Logical OR | 10 | `{% raw %}{{#if model.isAdmin \|\| model.isModerator}}{% endraw %}` |
+| [\|\|](./or) | Logical OR | 10 | <code>{% raw %}{{#if model.isAdmin &#124;&#124; model.isModerator}}{% endraw %}</code> |
 
 ---
 
