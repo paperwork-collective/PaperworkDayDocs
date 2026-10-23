@@ -10,7 +10,7 @@ grand_parent_url: /paperwork.core/
 
 # Document Remote Request Events and the Document Object Model (DOM)
 
-They both revolve around a parsed document instance, these provides ways to extract and interact with the underlying content and handle requests for external content.
+Both work with a parsed engine `Document`: handling requests for external content, and finding and changing the content of the document before it is generated with the builder (see [The Engine Document](engine-document)).
 
 ---
 
@@ -23,208 +23,174 @@ They both revolve around a parsed document instance, these provides ways to extr
 
 ### Remote File Request Event
 
-The Document instance fires an event when external resources (fonts, images, stylesheets, iframe content) need to be loaded:
+The engine `Document` raises an event when external content (stylesheets, fonts, images and iframe content) needs to be loaded. Handling it lets you load content from your own locations - a database, cloud storage, a CMS, or a custom path such as `asset://` - instead of the file system or the web.
 
 **Event: `RemoteFileRegistered`**
-- Fires when a remote resource is requested during document processing
-- Allows custom resource resolution, caching, or providing alternative content
-- **Call `args.Request.CompleteRequest()` to signal completion** after handling
+- Raised once for each external path when the document is generated
 - Access via: `doc.RemoteFileRegistered += handler`
-- If the request is not completed, then processing will continue to happen in the normal manner.
+- If the handler does nothing with the request, it is loaded in the normal way
 
+The handler is a **requestor**: it loads the content for the path, and passes it back to the request as a stream. The document then reads the stream in the way it needs for that type of content - parsing a stylesheet, loading a font, decoding an image.
 
-**Event Args:**
 ```csharp
-public class RemoteFileRequestedEventArgs : EventArgs
+doc.RemoteFileRegistered += (sender, args) =>
 {
-    public IRemoteFileRequest Request { get; }     // The request object with methods and properties
-    
-    // Request properties/methods:
-    // - Request.FilePath: The path being requested
-    // - Request.CompleteRequest(): Call this when done handling the request
-    // - Use Request.CompleteRequest(Stream, true, null): If successful
-    // - Use Request.CompleteRequest(null, false, error.Message): If it failed.
-}
+    var request = args.Request;
+
+    if (request.FilePath.StartsWith("asset://"))
+    {
+        using var stream = LoadAsset(request.FilePath);
+
+        // Pass the content back to the document
+        request.Callback(request.Owner, request, stream);
+    }
+    // Any other path - do nothing, and it is loaded as normal
+};
 ```
+
+**The request:**
+
+| Member | Description |
+|---|---|
+| `FilePath` | The path being requested, as it appears in the template |
+| `ResourceType` | The type of content requested, e.g. `CSSLink`, `Font`, `XObject` (an image), or the mime type of iframe content |
+| `Owner` | The component that requested the content |
+| `Callback(owner, request, stream)` | Passes the loaded content to the document, which reads it and completes the request |
+| `CompleteRequest(null, false, error)` | Completes the request as failed, with the reason |
+
+The document is generated with the builder as normal, by passing it to `WithLayout(doc)`. See [The Engine Document](engine-document).
 
 ---
 
 ### Handling Remote File Requests
 
-Control how external resources (fonts, images, iframes) are loaded and processed.
+#### Example: Loading from a custom path
 
-#### Example: Custom Font Loading
+Stylesheets, fonts, images and iframe content in the template can all use a custom path, and be loaded by the same handler.
+
+```html
+<head>
+    <link rel='stylesheet' href='asset://styles/brand.css' />
+    <style>
+        @font-face { font-family: 'Brand'; src: url('asset://fonts/Brand-Regular.ttf'); }
+    </style>
+</head>
+<body>
+    <img src='asset://images/logo.png' />
+    <iframe src='asset://parts/terms.html'></iframe>
+</body>
+```
 
 ```csharp
 using Scryber.Components;
-using System.IO;
 
-var doc = Document.ParseDocument("template.html");
+using var doc = Document.ParseDocument("template.html");
 
-// Intercept font requests to provide custom loading
 doc.RemoteFileRegistered += (sender, args) =>
 {
     var request = args.Request;
     string filePath = request.FilePath;
-    
-    // Check if requesting a font file
-    if (filePath.EndsWith(".ttf") || filePath.EndsWith(".otf") || filePath.EndsWith(".woff"))
+
+    if (!filePath.StartsWith("asset://"))
+        return; // not ours - processing will continue as normal
+
+    try
     {
-        Console.WriteLine($"Font requested: {filePath}");
-        
-        try
-        {
-            // Option 1: Load from custom location
-            if (filePath.StartsWith("fonts://"))
-            {
-                // Custom URI scheme - resolve to actual path
-                string fontId = filePath.Substring(8);
-                string actualPath = ResolveFontFromDatabase(fontId);
-                byte[] fontData = File.ReadAllBytes(actualPath);
+        // asset://images/logo.png -> /var/assets/images/logo.png
+        string localPath = System.IO.Path.Combine("/var/assets", filePath.Substring("asset://".Length));
 
-                // Success, so we can complete.
-                request.CompleteRequest(fontData, true);
+        using var stream = File.OpenRead(localPath);
+        request.Callback(request.Owner, request, stream);
 
-                Console.WriteLine($"  ✓ Loaded from DB: {actualPath}");
-            }
-            // Option 2: Load from cache
-            else if (filePath.Contains("cached-font"))
-            {
-                byte[] cachedFontData = LoadFromCache(filePath);
-                if(null != cachedFontData)
-                {
-                    request.CompleteRequest(cachedFontData, true);
-                    Console.WriteLine($"  ✓ Served from cache: {filePath}");
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"  ✗ Could not load font : {ex.Message}");
-
-            //report the error and stop any further processing,
-            request.CompleteRequest(null, false, ex);
-        }
-        
+        Console.WriteLine($"Loaded {request.ResourceType}: {filePath}");
     }
-    // Not a font - the processing will continue as normal
+    catch (Exception ex)
+    {
+        // report the error, and stop any further processing of this request
+        request.CompleteRequest(null, false, ex);
+    }
 };
 
 await factory.NewDocument()
     .WithLayout(doc)
     .SaveAsync("output.pdf");
-
-string ResolveFontFromDatabase(string fontId)
-{
-    // Your custom font resolution logic
-    return $"/var/fonts/{fontId}.ttf";
-}
-
-byte[] LoadFromCache(string path)
-{
-    // Your caching logic
-    return File.ReadAllBytes(path);
-}
 ```
 
-----
+#### Example: Images from a database
 
-#### Example: Image Request Interception
+The content is passed back as a stream, so it can come from anywhere.
 
 ```csharp
-var doc = Document.ParseDocument("template.html");
-
-// Create image cache
-var imageCache = new Dictionary<string, byte[]>();
+using var doc = Document.ParseDocument("template.html");
 
 doc.RemoteFileRegistered += (sender, args) =>
 {
     var request = args.Request;
-    string filePath = request.FilePath;
-    
-    // Intercept image requests
-    if (filePath.EndsWith(".jpg") || filePath.EndsWith(".png") || filePath.EndsWith(".gif"))
+
+    // <img src='db://products/12345.png' />
+    if (request.FilePath.StartsWith("db://"))
     {
-        Console.WriteLine($"Image requested: {filePath}");
-        
         try
         {
-            // Check cache first
-            if (imageCache.TryGetValue(filePath, out byte[] cachedImage))
-            {
-                Console.WriteLine($"  → Serving from cache for {filePath}");
-                request.CompleteRequest(new MemoryStream(cachedImage), true);
-            }
-            // Handle remote URLs with custom logic
-            else if (filePath.StartsWith("http://") || filePath.StartsWith("https://"))
-            {
-                // Add authentication headers, implement retry logic, etc.
-                byte[] imageData = DownloadImageWithAuth(filePath);
-                imageCache[filePath] = imageData; // Cache for future use
-                request.CompleteRequest(new MemoryStream(imageData), true);
-                Console.WriteLine($"  → Downloaded and cached");
-            }
+            byte[] imageData = LoadProductImage(request.FilePath);
+
+            using var stream = new MemoryStream(imageData);
+            request.Callback(request.Owner, request, stream);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"  ✗ Failed to load: {ex.Message}");
             request.CompleteRequest(null, false, ex);
         }
     }
-    // don't want to handle this request, so let processing continue as normal.
 };
 
 await factory.NewDocument()
     .WithLayout(doc)
     .SaveAsync("output.pdf");
 
-byte[] DownloadImageWithAuth(string url)
+byte[] LoadProductImage(string path)
 {
-    using (var client = new HttpClient())
-    {
-        client.DefaultRequestHeaders.Add("Authorization", "Bearer YOUR_TOKEN");
-        return client.GetByteArrayAsync(url).Result;
-    }
+    // Your database logic
+    return File.ReadAllBytes("product.png");
 }
 ```
 
 #### Example: Iframe Content Filtering
 
+Content can be checked or changed before it is passed back.
+
 ```csharp
-var doc = Document.ParseDocument("template.html");
+using var doc = Document.ParseDocument("template.html");
 
 doc.RemoteFileRegistered += (sender, args) =>
 {
     var request = args.Request;
     string filePath = request.FilePath;
-    
+
     // Intercept iframe/embed content requests
     if (filePath.EndsWith(".html"))
     {
         Console.WriteLine($"Loading iframe content: {filePath}");
-        
+
         try
         {
             // Apply security checks
             if (!IsAllowedSource(filePath))
             {
-                Console.WriteLine($"  ✗ Source not allowed");
                 request.CompleteRequest(null, false, new UnauthorizedAccessException("Content source not allowed"));
                 return;
             }
-            
+
             // Load and sanitize HTML content
             string content = File.ReadAllText(filePath);
             content = SanitizeHtmlContent(content);
-            
+
             // Provide sanitized content
-            byte[] modifiedBytes = System.Text.Encoding.UTF8.GetBytes(content);
-            request.CompleteRequest(new MemoryStream(modifiedBytes), true, null);
-            Console.WriteLine($"  ✓ Content loaded and sanitized");
+            using var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(content));
+            request.Callback(request.Owner, request, stream);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"  ✗ Error: {ex.Message}");
             request.CompleteRequest(null, false, ex);
         }
     }
@@ -249,14 +215,16 @@ string SanitizeHtmlContent(string html)
 
 ---
 
-### Expected types
+### Images and image types
 
-For all requests, the returned data can either be a `byte[]` or a `System.IO.Stream`. These will be converted to the approprite instance required by the calling request, and re-used by the library for matching paths in future.
+Images are decoded by the document's image factories, which are matched on the path. A path that ends with a standard image extension (`.png`, `.jpg`, `.jpeg`, `.gif`, `.tif`, `.tiff`, `.webp`, `.svg`) needs nothing more than the handler above.
+
+If the image path does not end with a known extension, such as `db://products/12345`, an image factory must also be registered to match the path and decode the content. The handler is the **requestor** for the path, and the image factory is the **handler** for the type. See [Image Factories](image-factories).
 
 {: .note}
-> Fonts and images can be cached by the engine across multiple documents. 
+> Fonts and images can be cached by the engine across multiple documents.
 >
-> So it may be a new document will not need to request the custom font, and use the same one previously loaded from a separate request invocation.
+> So it may be a new document will not need to request the same path again, and will use the content previously loaded.
 
 ---
 
@@ -401,72 +369,75 @@ object GetInvoiceData()
 
 ### Advanced Pattern: Resource Loading Pipeline
 
-Complete control over document resource loading with fallbacks and caching.
+A reusable requestor with caching, custom paths and retries for remote content.
 
 ```csharp
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using Scryber;
+using Scryber.Components;
 
 public class ResourceLoadingPipeline
 {
     private readonly Dictionary<string, byte[]> _cache = new Dictionary<string, byte[]>();
     private readonly HttpClient _httpClient = new HttpClient();
-    
+
     public void ConfigureDocument(Document doc)
     {
         doc.RemoteFileRegistered += OnRemoteFileRegistered;
     }
-    
-    private void OnRemoteFileRegistered(object sender, RemoteFileRequestedEventArgs args)
+
+    private void OnRemoteFileRegistered(object sender, RemoteFileRequestEventArgs args)
     {
         var request = args.Request;
         string filePath = request.FilePath;
-        
-        Console.WriteLine($"[REQUEST] {filePath}");
-        
+
         try
         {
+            byte[] data = null;
+
             // Check cache first
             if (_cache.TryGetValue(filePath, out byte[] cachedData))
             {
-                Console.WriteLine($"  ✓ Served from cache ({cachedData.Length} bytes)");
-                request.CompleteRequest(new MemoryStream(cachedData), true, null);
+                data = cachedData;
             }
             // Handle custom URI schemes
             else if (filePath.StartsWith("asset://"))
             {
-                string assetPath = ResolveAssetPath(filePath);
-                byte[] assetData = File.ReadAllBytes(assetPath);
-                _cache[filePath] = assetData;
-                request.CompleteRequest(new MemoryStream(assetData), true, null);
-                Console.WriteLine($"  ✓ Loaded from asset system ({assetData.Length} bytes)");
+                data = File.ReadAllBytes(ResolveAssetPath(filePath));
+                _cache[filePath] = data;
             }
-            // Handle remote resources with authentication
+            // Handle remote resources with retries
             else if (filePath.StartsWith("https://"))
             {
-                byte[] remoteData = DownloadWithRetry(filePath, maxRetries: 3);
-                _cache[filePath] = remoteData;
-                request.CompleteRequest(new MemoryStream(remoteData), true, null);
-                Console.WriteLine($"  ✓ Downloaded from remote ({remoteData.Length} bytes)");
+                data = DownloadWithRetry(filePath, maxRetries: 3);
+                _cache[filePath] = data;
             }
+
+            if (data != null)
+            {
+                using var stream = new MemoryStream(data);
+                request.Callback(request.Owner, request, stream);
+                Console.WriteLine($"[LOADED] {request.ResourceType} {filePath} ({data.Length} bytes)");
+            }
+            // otherwise not handled, and loaded as normal
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"  ✗ Error: {ex.Message}");
+            Console.WriteLine($"[FAILED] {filePath}: {ex.Message}");
             request.CompleteRequest(null, false, ex);
         }
     }
-    
-    
+
     private string ResolveAssetPath(string assetUri)
     {
         // asset://fonts/roboto.ttf → /var/assets/fonts/roboto.ttf
-        string path = assetUri.Substring(8);
-        return Path.Combine("/var/assets", path);
+        string path = assetUri.Substring("asset://".Length);
+        return System.IO.Path.Combine("/var/assets", path);
     }
-    
+
     private byte[] DownloadWithRetry(string url, int maxRetries)
     {
         for (int i = 0; i < maxRetries; i++)
@@ -478,15 +449,19 @@ public class ResourceLoadingPipeline
             catch
             {
                 if (i == maxRetries - 1) throw;
-                System.Threading.Thread.Sleep(1000 * (i + 1)); // Exponential backoff
+                System.Threading.Thread.Sleep(1000 * (i + 1)); // Back off before retrying
             }
         }
         throw new Exception("Max retries exceeded");
     }
 }
+```
 
-// Usage
-var doc = Document.ParseDocument("template.html");
+**Usage:**
+
+```csharp
+using var doc = Document.ParseDocument("template.html");
+
 var pipeline = new ResourceLoadingPipeline();
 pipeline.ConfigureDocument(doc);
 

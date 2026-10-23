@@ -71,6 +71,8 @@ doc.RemoteFileRegistered += (s, a) =>
 
 Suggested fix (your call): let `ImageFactoryCustom` forward decoding to the wrapped `IPDFImageDataFactory` (`LoadImageData(doc, owner, bytes, type)`), and/or let configuration register `ImageFactoryBase` types directly so they keep their own `Match`/`ImageType`/`DoDecodeImageData`.
 
+Docs status (2026-10-23): **Image Factories** and **Request Events and DOM** are rewritten around this model and verified end to end (requestor passes every resource type back with `request.Callback(request.Owner, request, stream)` — stylesheets, fonts, iframe content and images all load; an `ImageFactoryBase` handler decodes extension-less paths). The Image Factories page documents **per-document registration only** (`doc.ImageFactories.Insert(0, …)`); a "register for every document in configuration" section will be added once configured handlers work in v10.
+
 Also worth deciding: should completing a request with raw `byte[]`/`Stream` be accepted for images (decoded by the matched factory)? The old docs claimed it was; today it silently does nothing.
 
 ### A3. `Document.ComponentRegistered` never fires for a parsed document

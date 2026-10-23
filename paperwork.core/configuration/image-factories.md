@@ -12,387 +12,181 @@ grand_parent_url: /paperwork.core/
 
 # Image Factories
 
-Image factories provide **custom image loading** from sources beyond the file system and HTTP URLs. Use image factories to load images from:
-- Databases (binary blobs)
-- Cloud storage (S3, Azure Blob, etc.)
-- Content management systems
-- Custom protocols
+Image factories decode image content into the image data that is written to the PDF. Every document has a list of image factories, and each one handles a *type* of image, matched on the image path.
 
-Images in `data:` URLs (PNG, JPEG, GIF, WebP and SVG) are supported without a custom factory.
+The standard factories handle paths that end in `.png`, `.jpg`, `.jpeg`, `.gif`, `.tif`, `.tiff`, `.webp` and `.svg`, along with `data:` URLs. A custom image factory is needed when images in a template use a path that does not end with one of these, such as `db://products/12345`.
 
-## Architecture
+---
+
+## Requestors and handlers
+
+Loading an image from a custom location takes two parts:
+
+- A **requestor** for the custom *path*. It loads the content - from a database, cloud storage, a CMS or anywhere else - and passes it back to the document. See [Request Events and DOM](document-events-and-access).
+- A **handler** for the image *type*. This is the image factory: it is matched on the path, and decodes the content the requestor passes back.
 
 ```
 ┌──────────────────────────────────────────────────────┐
 │ PDF Template                                          │
-│  <img src='db://Products/12345' />                   │
+│  <img src='db://products/12345' />                   │
 └──────────────────────────────────────────────────────┘
               ↓
 ┌──────────────────────────────────────────────────────┐
-│ Document image factories                              │
-│  Configured (appsettings) and per-document factories │
-│  are checked first, then the standard factories      │
+│ Image factory (the handler) matched on the path      │
+│  Match: ^db://   →  raises a request for the content │
 └──────────────────────────────────────────────────────┘
               ↓
 ┌──────────────────────────────────────────────────────┐
-│ Factory Matching (Regex)                              │
-│  The first factory whose pattern matches the source  │
+│ RemoteFileRegistered (the requestor)                  │
+│  Loads the content, and passes the stream back       │
+│  request.Callback(request.Owner, request, stream)    │
 └──────────────────────────────────────────────────────┘
               ↓
 ┌──────────────────────────────────────────────────────┐
-│ Image Loading                                         │
-│  factory.LoadImageData(document, owner, "db://...")  │
-│  Returns: ImageData                                   │
+│ Image factory decodes the stream                      │
+│  DoDecodeImageData(stream, ...)  →  ImageData        │
 └──────────────────────────────────────────────────────┘
               ↓
 ┌──────────────────────────────────────────────────────┐
-│ Image Rendering                                       │
-│  The image data is written to the PDF                │
+│ The image is written to the PDF                       │
 └──────────────────────────────────────────────────────┘
 ```
 
-## IPDFImageDataFactory Interface
+{: .note}
+> If the custom path ends with a standard extension, e.g. `db://products/12345.png`, the standard factory for that type is the handler, and only the requestor is needed.
 
-A custom factory implements `IPDFImageDataFactory` (in the `Scryber` namespace). The pattern it matches is set when it is registered, not by the factory itself.
+---
+
+## Creating an Image Factory
+
+An image factory inherits from `ImageFactoryBase` (in the `Scryber.Imaging` namespace). The constructor sets the pattern it matches, the type of image it produces, its name, and whether the decoded image can be cached and re-used for the same path.
 
 ```csharp
-public interface IPDFImageDataFactory
-{
-    // True if the loaded image data can be cached and re-used for the same source
-    bool ShouldCache { get; }
-
-    // Load the image for a source path in the template, e.g. 'db://Products/12345'
-    ImageData LoadImageData(IDocument document, IComponent owner, string path);
-
-    // Load the image from binary data of a known type
-    ImageData LoadImageData(IDocument document, IComponent owner, byte[] data, MimeType type);
-}
+public ImageFactoryBase(Regex match, MimeType type, string name, bool shouldCache)
 ```
 
-## Creating a Custom Image Factory
-
-Most custom factories load the binary content of an image (a PNG or JPEG file) from somewhere. The document already has factories that decode each image type, so the custom factory can load the bytes and hand them to the document's own image factory for that type.
-
-### 1. A base class for binary images
+The factory overrides `DoDecodeImageData` to turn the content passed back by the requestor into image data.
 
 ```csharp
-using System;
+protected virtual ImageData DoDecodeImageData(Stream stream, IDocument document, IComponent owner, string path)
+```
+
+### Example: Database image factory
+
+The images in the database are stored as PNG, so the factory reads the stream and decodes it with the document's own PNG image factory.
+
+```csharp
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Scryber;
 using Scryber.Components;
 using Scryber.Drawing;
+using Scryber.Imaging;
 
 namespace MyCompany.Imaging
 {
     /// <summary>
-    /// Loads the bytes of an image, and decodes them with the document's own image factories.
+    /// The handler for images with a db:// path, which are stored as PNG.
     /// </summary>
-    public abstract class BinaryImageFactory : IPDFImageDataFactory
+    public class DatabaseImageFactory : ImageFactoryBase
     {
-        public virtual bool ShouldCache => true;
-
-        public ImageData LoadImageData(IDocument document, IComponent owner, string path)
-        {
-            byte[] data = LoadImageBytes(path, out MimeType type);
-            return LoadImageData(document, owner, data, type);
-        }
-
-        public ImageData LoadImageData(IDocument document, IComponent owner, byte[] data, MimeType type)
-        {
-            // Find the document's image factory for this type of image, e.g. image/png
-            var factory = ((Document)document).ImageFactories
-                .FirstOrDefault(f => f.ImageType.Equals(type))
-                ?? throw new NotSupportedException($"No image factory is available for the type {type}");
-
-            return factory.LoadImageData(document, owner, data, type);
-        }
-
-        /// <summary>
-        /// Inheritors load the binary content of the image for the path, and return its type.
-        /// </summary>
-        protected abstract byte[] LoadImageBytes(string path, out MimeType type);
-    }
-}
-```
-
-The standard image types are `MimeType.PngImage`, `MimeType.JpegImage`, `MimeType.GifImage` and `MimeType.TiffImage`.
-
-### 2. Implement the factory
-
-**Example: Database image factory**
-
-```csharp
-using System;
-using System.IO;
-using Microsoft.Data.SqlClient;
-using Scryber;
-
-namespace MyCompany.Imaging
-{
-    public class DatabaseImageFactory : BinaryImageFactory
-    {
-        private readonly string _connectionString;
-
-        // Used when the factory is registered in configuration
         public DatabaseImageFactory()
-            : this(Environment.GetEnvironmentVariable("PRODUCT_DB"))
+            : base(new Regex("^db://"), MimeType.PngImage, "Database", shouldCache: true)
         {
         }
 
-        public DatabaseImageFactory(string connectionString)
+        protected override ImageData DoDecodeImageData(Stream stream, IDocument document, IComponent owner, string path)
         {
-            _connectionString = connectionString;
-        }
+            using var ms = new MemoryStream();
+            stream.CopyTo(ms);
 
-        protected override byte[] LoadImageBytes(string path, out MimeType type)
-        {
-            // Parse source: db://tablename/id or db://tablename/columnname/id
-            var uri = new Uri(path);
-            var parts = (uri.Host + uri.AbsolutePath).Trim('/').Split('/');
+            // Decode with the document's own image factory for the type
+            var png = ((Document)document).ImageFactories
+                .First(f => f != this && f.ImageType.Equals(MimeType.PngImage));
 
-            string tableName;
-            string columnName = "ImageData";  // Default column
-            string id;
-
-            if (parts.Length == 2)
-            {
-                tableName = parts[0];
-                id = parts[1];
-            }
-            else if (parts.Length == 3)
-            {
-                tableName = parts[0];
-                columnName = parts[1];
-                id = parts[2];
-            }
-            else
-            {
-                throw new ArgumentException($"Invalid database image path: {path}");
-            }
-
-            type = MimeType.PngImage; // The images in this database are all PNG
-            return LoadFromDatabase(tableName, columnName, id);
-        }
-
-        private byte[] LoadFromDatabase(string tableName, string columnName, string id)
-        {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-
-                var query = $"SELECT [{columnName}] FROM [{tableName}] WHERE Id = @Id";
-                using (var command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Id", id);
-
-                    var result = command.ExecuteScalar();
-
-                    if (result == null || result is DBNull)
-                        throw new FileNotFoundException($"Image not found: {tableName}/{id}");
-
-                    return (byte[])result;
-                }
-            }
+            return png.LoadImageData(document, owner, ms.ToArray(), MimeType.PngImage);
         }
     }
 }
 ```
 
-### 3. Register the factory
+The standard image types are `MimeType.PngImage`, `MimeType.JpegImage`, `MimeType.GifImage` and `MimeType.TiffImage`. A factory for a new image format would decode the stream itself.
 
-In the `Imaging` section of the configuration, give the factory a name, a regular expression for the sources it loads, and its type and assembly. A configured factory is created with its parameterless constructor.
+### The requestor
 
-**appsettings.json:**
-
-```json
-{
-  "Scryber": {
-    "Imaging": {
-      "Factories": [
-        {
-          "Name": "Database",
-          "Match": "^db://",
-          "FactoryType": "MyCompany.Imaging.DatabaseImageFactory",
-          "FactoryAssembly": "MyCompany.Imaging"
-        }
-      ]
-    }
-  }
-}
-```
-
-The configuration must be passed to the engine at startup with `Scryber.ServiceProvider.Init(configuration)`. See [Configuration Structure](configuration-structure).
-
-### 4. Use in Templates
-
-```xml
-<html xmlns='http://www.w3.org/1999/xhtml'>
-    <body>
-        <main>
-
-            <!-- Load from database: Products table, row 12345 -->
-            <img src='db://Products/12345' />
-
-            <!-- Specify column: Products table, Thumbnail column, row 67890 -->
-            <img src='db://Products/Thumbnail/67890' />
-
-        </main>
-    </body>
-</html>
-```
-
-## Factory Examples
-
-### Azure Blob Storage Factory
+The requestor loads the content for the path, and passes it back to the request. The document hands the stream to the matching image factory.
 
 ```csharp
-using System;
-using System.IO;
-using Azure.Storage.Blobs;
-using Scryber;
+using Microsoft.Data.SqlClient;
 
-namespace MyCompany.Imaging
+public class DatabaseImageRequestor
 {
-    public class AzureBlobImageFactory : BinaryImageFactory
+    private readonly string _connectionString;
+
+    public DatabaseImageRequestor(string connectionString)
     {
-        private readonly BlobServiceClient _client;
-
-        // Pattern: azblob://container/blobname
-        public AzureBlobImageFactory(string connectionString)
-        {
-            _client = new BlobServiceClient(connectionString);
-        }
-
-        protected override byte[] LoadImageBytes(string path, out MimeType type)
-        {
-            // Parse: azblob://container/blob/path
-            var uri = new Uri(path);
-            var containerName = uri.Host;
-            var blobName = uri.AbsolutePath.TrimStart('/');
-
-            // The type from the blob name
-            type = blobName.EndsWith(".png", StringComparison.OrdinalIgnoreCase)
-                ? MimeType.PngImage
-                : MimeType.JpegImage;
-
-            // Download blob
-            var container = _client.GetBlobContainerClient(containerName);
-            var blobClient = container.GetBlobClient(blobName);
-
-            using (var memoryStream = new MemoryStream())
-            {
-                blobClient.DownloadTo(memoryStream);
-                return memoryStream.ToArray();
-            }
-        }
+        _connectionString = connectionString;
     }
-}
-```
 
-### CMS Image Factory
-
-```csharp
-using System.Net.Http;
-using Scryber;
-
-namespace MyCompany.Imaging
-{
-    public class CMSImageFactory : BinaryImageFactory
+    public void Attach(Document doc)
     {
-        private static readonly HttpClient _httpClient = new HttpClient();
-        private readonly string _cmsApiUrl;
-        private readonly string _apiKey;
-
-        // Pattern: cms://12345 or cms://images/12345
-        public CMSImageFactory(string cmsApiUrl, string apiKey)
+        doc.RemoteFileRegistered += (sender, args) =>
         {
-            _cmsApiUrl = cmsApiUrl;
-            _apiKey = apiKey;
-        }
+            var request = args.Request;
+            if (!request.FilePath.StartsWith("db://"))
+                return; // not ours
 
-        protected override byte[] LoadImageBytes(string path, out MimeType type)
-        {
-            // Parse: cms://12345 or cms://images/12345
-            var assetId = path.Substring("cms://".Length);
+            try
+            {
+                using var stream = new MemoryStream(LoadImage(request.FilePath));
+                request.Callback(request.Owner, request, stream);
+            }
+            catch (Exception ex)
+            {
+                request.CompleteRequest(null, false, ex);
+            }
+        };
+    }
 
-            // Build API request
-            var request = new HttpRequestMessage(HttpMethod.Get, $"{_cmsApiUrl}/assets/{assetId}");
-            request.Headers.Add("Authorization", $"Bearer {_apiKey}");
+    private byte[] LoadImage(string path)
+    {
+        // Parse: db://tablename/id
+        var uri = new Uri(path);
+        string tableName = uri.Host;
+        string id = uri.AbsolutePath.Trim('/');
 
-            // Download image
-            var response = _httpClient.Send(request);
-            response.EnsureSuccessStatusCode();
+        using var connection = new SqlConnection(_connectionString);
+        connection.Open();
 
-            // Use the content type returned by the CMS
-            type = new MimeType(response.Content.Headers.ContentType?.MediaType ?? "image/png");
+        using var command = new SqlCommand($"SELECT [ImageData] FROM [{tableName}] WHERE Id = @Id", connection);
+        command.Parameters.AddWithValue("@Id", id);
 
-            return response.Content.ReadAsByteArrayAsync().Result;
-        }
+        var result = command.ExecuteScalar();
+
+        if (result == null || result is DBNull)
+            throw new FileNotFoundException($"Image not found: {path}");
+
+        return (byte[])result;
     }
 }
 ```
 
-## Configuration
+### Register both with the document
 
-### Factory Registration
-
-Several factories can be registered. They are checked in order, before the standard factories.
-
-**appsettings.json:**
-
-```json
-{
-  "Scryber": {
-    "Imaging": {
-      "Factories": [
-        {
-          "Name": "Database",
-          "Match": "^db://",
-          "FactoryType": "MyCompany.Imaging.DatabaseImageFactory",
-          "FactoryAssembly": "MyCompany.Imaging"
-        },
-        {
-          "Name": "AzureBlob",
-          "Match": "^azblob://",
-          "FactoryType": "MyCompany.Imaging.AzureBlobImageFactory",
-          "FactoryAssembly": "MyCompany.Imaging"
-        }
-      ]
-    }
-  }
-}
-```
-
-### Programmatic Registration
-
-Factories can also be added to the engine configuration in code at startup. They apply to every document created afterwards.
+The image factory is added to the document's image factories, and the requestor to the document's events. The document is then generated with the builder. See [The Engine Document](engine-document).
 
 ```csharp
-using Scryber;
-using Scryber.Options;
-
-var config = Scryber.ServiceProvider.GetService<IScryberConfigurationService>();
-
-config.ImagingOptions.Factories ??= new List<ImageDataFactoryOption>();
-config.ImagingOptions.Factories.Add(
-    new ImageDataFactoryOption("Database", "^db://", typeof(DatabaseImageFactory)));
-```
-
-### Per-document Registration
-
-To use a factory that needs constructor arguments, or for a single document only, add it to the document's own image factories, and generate the document with the builder. See [The Engine Document](engine-document).
-
-```csharp
-using System.Text.RegularExpressions;
 using Scryber.Components;
-using Scryber.Imaging;
+using MyCompany.Imaging;
 
 using var doc = Document.ParseDocument("ProductCatalog.html");
 
-// Checked in order, so insert at the start
-doc.ImageFactories.Insert(0, new ImageFactoryCustom(
-    new Regex("^cms://"), "CMS", shouldCache: true,
-    new CMSImageFactory(cmsApiUrl, apiKey)));
+// The handler - checked in order, so insert at the start
+doc.ImageFactories.Insert(0, new DatabaseImageFactory());
+
+// The requestor
+new DatabaseImageRequestor(connectionString).Attach(doc);
 
 await factory.NewDocument()
     .WithLayout(doc)
@@ -400,211 +194,74 @@ await factory.NewDocument()
     .SaveAsync("ProductCatalog.pdf");
 ```
 
-## Factory Ordering
+### Use in Templates
 
-**Custom factories are checked BEFORE standard factories:**
-
-```csharp
-// Scryber.Imaging/Options/_Extensions.cs (simplified)
-public static ImageFactoryList GetConfiguredFactories(this ImagingOptions options)
-{
-    var list = new ImageFactoryList();
-
-    // 1. Custom factories from configuration (checked first)
-    foreach (var configFactory in options.Factories)
-    {
-        var instance = configFactory.GetInstance() as IPDFImageDataFactory;
-        list.Add(new ImageFactoryCustom(new Regex(configFactory.Match),
-            configFactory.Name, instance.ShouldCache, instance));
-    }
-
-    // 2. Standard factories (png, jpeg, gif, tiff, webp and data urls)
-    list.AddRange(GetStandardFactories());
-
-    return list;
-}
-```
-
-This allows custom factories to **override** standard behavior for specific patterns.
-
-## Complete Example
-
-### Factory Implementation
-
-```csharp
-using System;
-using System.IO;
-using Microsoft.Data.SqlClient;
-using Scryber;
-
-namespace ProductCatalog.Imaging
-{
-    public class ProductImageFactory : BinaryImageFactory
-    {
-        private readonly string _connectionString;
-
-        public ProductImageFactory()
-            : this(Environment.GetEnvironmentVariable("PRODUCT_CATALOG_DB"))
-        {
-        }
-
-        public ProductImageFactory(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
-
-        protected override byte[] LoadImageBytes(string path, out MimeType type)
-        {
-            // Parse: product://SKU-12345
-            var productSku = path.Substring("product://".Length);
-
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-
-                var query = @"
-                    SELECT ImageData
-                    FROM ProductImages
-                    WHERE ProductSKU = @SKU AND IsPrimary = 1";
-
-                using (var command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@SKU", productSku);
-
-                    var result = command.ExecuteScalar();
-
-                    if (result == null || result is DBNull)
-                        throw new FileNotFoundException($"Product image not found: {productSku}");
-
-                    type = MimeType.JpegImage;
-                    return (byte[])result;
-                }
-            }
-        }
-    }
-}
-```
-
-### Configuration
-
-```json
-{
-  "Scryber": {
-    "Imaging": {
-      "Factories": [
-        {
-          "Name": "ProductImages",
-          "Match": "^product://",
-          "FactoryType": "ProductCatalog.Imaging.ProductImageFactory",
-          "FactoryAssembly": "ProductCatalog"
-        }
-      ]
-    }
-  }
-}
-```
-
-### Template
-
-```xml
+```html
 <html xmlns='http://www.w3.org/1999/xhtml'>
     <body>
         <main>
+            {{#each model.products}}
+            <div class='product'>
+                <span>{{this.name}}</span>
 
-            <div>
-                <span>Product: Widget Pro</span>
-
-                <!-- Load product image from database -->
-                <img src='product://WIDGET-PRO-001'
-                     width='200'
-                     height='200' />
-
-                <span>Price: $99.99</span>
+                <!-- Load the product image from the database -->
+                <img src='db://Products/{{this.id}}' width='200' />
             </div>
-
-            <!-- Load another product -->
-            <div>
-                <span>Product: Gadget Plus</span>
-                <img src='product://GADGET-PLUS-002'
-                     width='200'
-                     height='200' />
-            </div>
-
+            {{/each}}
         </main>
     </body>
 </html>
 ```
 
-### Usage
+---
+
+## Factory Ordering
+
+The document checks its image factories in order, and uses the first one whose pattern matches the path. Insert custom factories at the start of the list, so they are checked before the standard factories.
 
 ```csharp
-using Microsoft.Extensions.Configuration;
-using Paperwork;
-
-// Pass the configuration, with the image factory, to the engine once at startup
-var config = new ConfigurationBuilder()
-    .AddJsonFile("appsettings.json")
-    .Build();
-
-Scryber.ServiceProvider.Init(config);
-
-// Generate documents
-using var factory = PaperworkFactory.Create().Build();
-
-await factory.NewDocument()
-    .WithLayoutFile("ProductCatalog.html")
-    .SaveAsync("ProductCatalog.pdf");
+doc.ImageFactories.Insert(0, new DatabaseImageFactory());
 ```
+
+---
 
 ## Best Practices
 
-### Factory Design
-- **Single Responsibility**: Each factory handles one type of source
-- **Decode with the document**: Load the bytes, and use the document's image factories to decode them
-- **Error Handling**: Throw descriptive exceptions for missing images
-- **Resource Management**: Dispose connections, streams properly
-- **Thread Safety**: Factories may be called from multiple threads
+### Handler Design
+- **One type per factory**: each factory handles one kind of path and image type
+- **Decode with the document**: for standard formats, use the document's own image factories to decode the content
+- **Cache when you can**: pass `shouldCache: true` so the decoded image is re-used for the same path
+
+### Requestor Design
+- Only handle the paths you recognise, and leave the others to load as normal
+- Complete the request as failed, with the exception, when content cannot be loaded
+- Dispose connections and streams properly
+- Requestors and factories may be used from multiple threads
 
 ### Pattern Design
 - Use specific patterns: `^myprotocol://` not `.*`
 - Avoid overlapping patterns between factories
-- Document the pattern format alongside the factory
-- Test patterns thoroughly
+- Use a standard extension in the path where you can, so no custom factory is needed
 
-### Performance
-- Return `true` from `ShouldCache` so loaded images are re-used for the same source
-- Use connection pooling for database factories
-- Monitor factory performance in production
-
-### Configuration
-- Externalize connection strings and API keys
-- Register factories in order of specificity (most specific first)
-- Use per-document registration for factories that need constructor arguments
-- Document required configuration
+---
 
 ## Troubleshooting
 
 ### Image not shown
-- Check the factory's `Match` pattern matches the source exactly
-- Verify the configuration is passed to `Scryber.ServiceProvider.Init` at startup
-- Check the factory assembly is loaded, and the type has a parameterless constructor
-- Turn on the log to see which factory was used, and any errors
+- Turn on the log (`doc.AppendTraceLog = true`) to see which factory matched the path, and any errors
+- Check the factory's pattern matches the path exactly, and that it was inserted before the standard factories
+- Check the requestor handles the path and calls `request.Callback`
 
 ### "Could not load image data"
-- Verify source path/ID is correct
-- Check database/API connectivity
-- Ensure image data exists, and the returned type matches the data
-- Add logging to factory implementation
+- Verify the path or ID is correct
+- Check database or API connectivity
+- Ensure the image content is the type the factory decodes
 
-### Performance issues
-- Return `true` from `ShouldCache`
-- Use connection pooling
-- Monitor database query performance
-- Consider pre-loading images
+---
 
 ## Related Documentation
 
+- [Request Events and DOM](document-events-and-access) - Requestors for stylesheets, fonts, images and iframe content
+- [The Engine Document](engine-document) - Configuring a document and generating it with the builder
 - [Font Configuration](font-configuration) - Custom font loading
-- [Custom Components](custom-components) - Using images in custom components
-- [Integration Example](integration-example) - Complete example with image factories
 - [Best Practices](best-practices) - Factory design patterns
