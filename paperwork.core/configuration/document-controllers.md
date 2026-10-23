@@ -28,7 +28,7 @@ Controllers implement a **two-phase initialization pattern**:
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ Document Parsing                                             │
-│  1. <?scryber controller='...' ?> → Instantiate controller  │
+│  1. <?paperwork controller='...' ?> → Instantiate controller  │
 │  2. <Component id='myLabel' /> → Assign to outlet           │
 │  3. All required outlets assigned? → Attach controller      │
 └─────────────────────────────────────────────────────────────┘
@@ -158,7 +158,7 @@ public class ReportController
         var data = LoadReportData();
         DataRepeater.DataSource = data;
         
-        args.Context.Document.Params["RecordCount"] = data.Count;
+        ((Document)args.Context.Document).Params["RecordCount"] = data.Count;
     }
 
     // DataBinding: Modify binding context
@@ -194,8 +194,9 @@ public class ReportController
     [PDFAction]
     public void HandlePostLayout(object sender, LayoutContext args)
     {
+        var layout = args.GetLayout<PDFLayoutDocument>();
         args.TraceLog.Add(TraceLevel.Message, "Report Controller", 
-            $"Layout complete: {args.DocumentLayout.AllPages.Count} pages");
+            $"Layout complete: {layout.AllPages.Count} pages");
     }
 
     private List<ReportData> LoadReportData()
@@ -235,7 +236,7 @@ Actions are bound via **event handler attributes** on any components:
 
 ```xml
 <?xml version='1.0' encoding='utf-8' ?>
-<?scryber controller='MyCompany.Reports.SalesReportController, MyCompany.Reports' ?>
+<?paperwork controller='MyCompany.Reports.SalesReportController, MyCompany.Reports' ?>
 
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <body on-init='InitReport'
@@ -433,11 +434,9 @@ namespace MyCompany.Reports
 **Usage:**
 
 ```csharp
-using (var stream = new System.IO.FileStream("../../../Output/Invoice.pdf", FileMode.Create))
-{
-    var doc = Document.ParseDocument("SalesReport.html");
-    doc.SaveAsPDF("SalesReport.pdf");
-}
+await factory.NewDocument()
+    .WithLayoutFile("SalesReport.html")
+    .SaveAsync("SalesReport.pdf");
 ```
 
 ## Implementation Details
