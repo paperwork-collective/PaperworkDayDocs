@@ -159,7 +159,7 @@ Image factories load image data from various sources (files, URLs, data URLs, st
 | Property | Type | Description |
 |----------|------|-------------|
 | `AllowMissingImages` | bool | If true, missing images log warning; if false, throw exception |
-| `ImageCacheDuration` | int | Cache duration in minutes (-1 = no cache, 0 = session only, >0 = duration) |
+| `ImageCacheDuration` | int | How long images loaded from a path or url are cached, in minutes, shared by all documents. `-1` (the default) keeps them for the life of the application, `0` turns caching off |
 | `MinimumScaleReduction` | double | Minimum scale factor before forcing a new layout container, e.g. a column, or a page. Default is 0.249 |
 | `Factories[]` | array | Custom image factory registrations |
 
