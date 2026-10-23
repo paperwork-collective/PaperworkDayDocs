@@ -12,7 +12,7 @@ parent_url: /paperwork.core/
 # Library Quick Start
 {: .no_toc}
 
-Follow along if you want to understand some of the key features and benefits of the Scryber.Core library. Here we add the package and build out a data template with dynamic styling and some repeating content. Based on your knowledge level you may then want to dive straight into your own use-cases to complete, or review the reference section to understand supported features.
+Follow along if you want to understand some of the key features and benefits of the Paperwork.Core library. Here we add the package and build out a data template with dynamic styling and some repeating content. Based on your knowledge level you may then want to dive straight into your own use-cases to complete, or review the reference section to understand supported features.
 
 ---
 
@@ -29,39 +29,38 @@ Follow along if you want to understand some of the key features and benefits of 
 
 ## Application Type
 
-If you don't have an existing application, or platform you want to add the Scryber.Core engine to, then create a new console application.
+If you don't have an existing application, or platform you want to add Paperwork.Core to, then create a new console application.
 
-Scryber can be run and loaded from executables in all platforms that run dotnet, including client side Blazor WASM, but in this example we will not cover the outer execution.
+```bash
+dotnet new console -n HelloPaperwork
+cd HelloPaperwork
+```
+
+Paperwork.Core can be run and loaded from executables in all platforms that run dotnet, including client side Blazor WASM, but in this example we will not cover the outer execution.
 
 Consult your own IDE documentation if you are not sure how to do this, or follow the [Learning Guides](/paperwork.core/learning/) articles.
 
 ---
 
-## Adding Scryber.Core
+## Adding Paperwork.Core
 
-Whilst Scryber is open source and the code can be downloaded and built locally, the easiest way is to add the nuget package to a new or existing project. Or add the package from the command line in the project folder.
-
-```bash
-dotnet add package Scryber.Core
-```
-
-The package is located at [https://www.nuget.org/packages/Scryber.Core](https://www.nuget.org/packages/Scryber.Core)
-
-If you are focussed on MVC or Web development, then you can use the Scryber.Core.Mvc package, that adds helpers and extra support for sending PDFs as responses to requests, and other capabilities. It also includes a reference to the matching Scryber.Core package.
+The easiest way to get started is to add the NuGet package to a new or existing project, either from your IDE or from the command line in the project folder.
 
 ```bash
-dotnet add package Scryber.Core.Mvc
+dotnet add package Paperwork.Core
 ```
 
-The package is located at [https://www.nuget.org/packages/Scryber.Core.Mvc](https://www.nuget.org/packages/Scryber.Core.Mvc)
+The package is located at [https://www.nuget.org/packages/Paperwork.Core](https://www.nuget.org/packages/Paperwork.Core)
+
+It brings in everything needed to generate documents, including the open-source Scryber engine that does the layout and rendering.
 
 ---
 
 ## Create a template file
 
-The first thing we can do is add a simple html template file (the ubiquitous Hello World) as a starter and call the file 'Hello.html'.
+The first thing we can do is add a simple html template file (the ubiquitous Hello World) as a starter and call the file 'hello.html'.
 
-#### Hello.html
+#### hello.html
 {: .no_toc}
 ```handlebars
 {% raw %}<!-- the namespace is important  -->
@@ -77,7 +76,7 @@ The first thing we can do is add a simple html template file (the ubiquitous Hel
 
     <!-- custom style support -->
     <p class='intro'>
-      This is my first dynamic PDF generated with Scryber.Core.
+      This is my first dynamic PDF generated with Paperwork.Core.
     </p>
 </body>
 </html>{% endraw %}
@@ -92,24 +91,31 @@ Save the file in your project, and we can move on to generate our first PDF in c
 ## Generate our first template
 
 
-At an approprite location within your code, in the main function, or either responding to an event firing, or web request add the following
+At an appropriate location within your code (in the main function, responding to an event, or handling a web request) add the following.
 
 #### PDF Generation
 {: .no_toc}
 ```csharp
-        //using Scryber.Components
+using Paperwork;
 
-        //Load the XHTML template from a file wherever you saved it (or open stream, or text reader)
-        var input = "hello.html"; 
-        using var doc = Document.ParseDocument(input);
+//Create a factory once, and re-use it for every document you generate
+using var factory = PaperworkFactory.Create().Build();
 
-        //this is your opportunity to alter ANYTHING you want in the template
-
-        //create a stream to write to - in this case a file.
-        using var output = new FileStream("hello.pdf", FileMode.Create);
-        doc.SaveAsPDF(stream); //write the pdf file.
-
+//Start a new document, give it the template you saved, and write the PDF file
+await factory.NewDocument()
+             .WithLayoutFile("hello.html")
+             .SaveAsync("hello.pdf");
 ```
+
+The factory is the entry point to the library. Each call to `NewDocument()` returns a fluent builder that collects the layout, styles and data, and then generates the document when you call one of the output methods.
+
+| Method | Returns |
+|---|---|
+| `SaveAsync(path)` | Writes the PDF to a file. |
+| `BuildBytesAsync()` | The PDF as a `byte[]`, to stream to a response or store. Throws if generation fails. |
+| `BuildAsync()` | A `PaperworkResult` with `Success`, `Message` and `Error`, plus the generated `Document.Binary`. |
+
+The layout can also be given as a string with `WithLayout(html)`, a `Stream`, or a remote address with `WithLayoutUrl(url)`.
 
 ---
 
@@ -126,7 +132,18 @@ The resultant file should now be able to be opened in any PDF Viewer application
 
 If it didn't work at all, then check the package and the template structure (it needs to be valid xml and include the namespace).
 
-If it did work, but doesn't look like it should then you can check the logs with what SCryber is doing, using the `doc.AppendTraceLog = true` after parsing. Any errors that occur should appear within pages appended to the output.
+If it did work, but doesn't look like it should, then you can see what the library is doing by turning on the log. Any errors and messages are then added as pages at the end of the output.
+
+```csharp
+using Paperwork.Generation;
+
+await factory.NewDocument()
+             .WithLayoutFile("hello.html")
+             .WithLogLevel(PaperworkRequestLogOption.Messages)
+             .SaveAsync("hello.pdf");
+```
+
+The levels are `Off` (the default), `Errors`, `Warnings`, `Messages` and `Verbose`.
 
 
 ---
@@ -135,19 +152,27 @@ If it did work, but doesn't look like it should then you can check the logs with
 
 This is fine, but not exactly dynamic! We can add a little more 'pizzazz' with some data. We can do anything we want between parsing, setting content, adding components (tables, lists, sections etc), updating styles and much more.
 
-But - one of the core principals of **scryber** is a clear *separation of data*, to layout and style. So we can add an object to the document parameters. This can be accessed by the template during document processing.
+But - one of the core principles of **Paperwork** is a clear *separation of data*, from layout and style. So we can add a named data object to the document, which the template can access during processing.
 
 #### Add our user
 {: .no_toc}
 ```csharp
-        var input = "hello.html";
-        using var doc = Document.ParseDocument(input);
+await factory.NewDocument()
+             .WithLayoutFile("hello.html")
+             //set the 'user' to an instance value
+             .WithData("user", new { firstName = "John", lastName = "Smith" })
+             .SaveAsync("hello.pdf");
+```
 
-        //set the 'user' to an instance value
-        doc.Params["user"] = new { firstName = "John", lastName = "Smith" };
+The data can be any object, or a JSON string, stream or file.
 
-        using var output = new FileStream("hello.pdf", FileMode.Create);
-        doc.SaveAsPDF(stream);
+```csharp
+await factory.NewDocument()
+             .WithLayoutFile("hello.html")
+             .WithData("user", "{ \"firstName\": \"Jane\", \"lastName\": \"Doe\" }")
+             .SaveAsync("hello.pdf");
+
+//or .WithDataFile("user", "user.json")
 
 ```
 ---
@@ -181,7 +206,7 @@ So we can update our template to use this data within the content.
 <h1>Hello, {{concat(user.firstName, " ", user.lastName) ?? "World"}}</h1>
 
 <p class='intro'>
-    This is {{(user.firstName + "'s") ?? "my"}} first dynamic PDF generated with Scryber.Core.
+    This is {{(user.firstName + "'s") ?? "my"}} first dynamic PDF generated with Paperwork.Core.
 </p>
 </body>
 </html>
@@ -237,23 +262,19 @@ The current item within the loop can be accessed using the `this` reference.
 
 ## Extending our sample
 
-If we add more data to our user, with some skils, and also add some custom branding.
+If we add more data to our user, with some skills, and also add some custom branding.
 
 #### Add our user
 ```csharp
-        var input = "hello.html";
-        using var doc = Document.ParseDocument(input);
-
-        //set the user to an instance (or JSON) value
-        doc.Params["user"] = new { firstName = "John", lastName = "Smith", emailAddress = "j.smith@company.com",
-                                   skills = new[] {"C Sharp", "javascript", "scrum master", "Team leader"},
-                                   profilePicture = "" };
-
-        //add some custom style information.
-        doc.Params["brand"] = new { mainColor = "rgb(0,168,161)", lightColor = "silver"};
-
-        using var output = new FileStream("hello.pdf", FileMode.Create);
-        doc.SaveAsPDF(stream);
+await factory.NewDocument()
+             .WithLayoutFile("hello.html")
+             //set the user to an instance (or JSON) value
+             .WithData("user", new { firstName = "John", lastName = "Smith", emailAddress = "j.smith@company.com",
+                                     skills = new[] {"C Sharp", "javascript", "scrum master", "Team leader"},
+                                     profilePicture = "" })
+             //add some custom style information.
+             .WithData("brand", new { mainColor = "rgb(0,168,161)", lightColor = "silver" })
+             .SaveAsync("hello.pdf");
 
 ```
 ---
@@ -264,7 +285,7 @@ We can now make some changes to our template and use the provided data to create
 
 - an external stylesheet for 'font-awesome'
 - adding google fonts for 'Roboto'
-- define custom css varialbles
+- define custom css variables
 - add a decision for a dynamic image or an icon.
 - add a collection function to count items
 - include a list of items if present
@@ -393,7 +414,34 @@ Hopefully you are able re-generate and see the following output.
 <div class='pdf-container' data-pw-container='quick-start-styled' data-pw-template='RaXBkrp7dQpSwiXIBjQm' data-pw-zoom='FullWidth' style='height:400pt' ></div>
 
 We have added a lot into the template - looping, images, links, styles, functions, positioning, remote fonts and stylesheets.
-But the static styles can be moved to a separate linked file, and the actual body is only about 20 lines long, and quite readable.
+But the static styles can be moved to a separate linked file (or added with `.WithStyleFile("styles.css")`), and the actual body is only about 20 lines long, and quite readable.
+
+---
+
+## Returning a PDF from a web request
+
+In an ASP.NET application, register the factory with dependency injection once at startup.
+
+```csharp
+using Paperwork.Generation;
+
+builder.Services.AddSingleton(new HttpClient()); //used to load remote fonts, images and stylesheets
+builder.Services.AddPaperwork();
+```
+
+Then ask for an `IPaperworkFactory` wherever you need it, and return the bytes as the response.
+
+```csharp
+app.MapGet("/hello", async (IPaperworkFactory factory) =>
+{
+    var pdf = await factory.NewDocument()
+                           .WithLayoutFile("hello.html")
+                           .WithData("user", new { firstName = "John", lastName = "Smith" })
+                           .BuildBytesAsync();
+
+    return Results.File(pdf, "application/pdf", "hello.pdf");
+});
+```
 
 ---
 
