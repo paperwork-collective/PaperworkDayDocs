@@ -27,6 +27,8 @@ current behaviour, library may still want a fix), **fixed**.
 | # | Issue | Where | Effect | Status |
 |---|---|---|---|---|
 | E1 | HTML5 parser only recognises `<?scryber ... ?>`; `<?paperwork ... ?>` is ignored (XHTML parser accepts both). Verified: `append-log` works with `<?scryber` but not `<?paperwork` in an HTML5 template. | `Scryber.Components/Html/Parsing/HTMLParser.cs:473` (`StartsWith("<?scryber")`) | Docs lead with `<?paperwork ?>`, which silently does nothing in HTML5 templates. One-line fix. | open — **docs assume the fix** |
+| E3 | Completing a request inside a `RemoteFileRegistered` handler (`args.Request.CompleteRequest(bytes or stream, true)`) never calls the request's callback, so the content is not used. Verified for images with `byte[]` and `Stream`, plain engine and builder: no image drawn, and the same request is raised 6 times. `RegisterRemoteFileRequest` only invokes `Callback` on cache hits or when it fulfils the request itself. | `Document.RegisterRemoteFileRequest` / `RemoteFileRequest.CompleteRequest` | Every custom-loading example on **Request Events and DOM** (fonts, images, iframes, pipeline) does not work. Docs also claim `byte[]`/`Stream` are converted to the needed type — unverified once fixed. | open — **blocks configuration/document-events-and-access**; also consider documenting Paperwork's `WithFileRequests(IPaperworkRemoteFileRequestService)` instead (factory path only, L7) |
+| E4 | `Document.ComponentRegistered` never fires for a parsed document (0 events after parse and after build). | `Document.ComponentRegistered` | Example that collected all components via the event returned nothing. Replaced with a recursive `IContainerComponent.Content` walk (verified). | docs-done |
 | E2 | No `Document.ParseDocument(..., ParserSettings)` overload; custom settings need `Document.Parse(source, reader, type, settings.Resolver, settings)` and a cast. | `Document.cs` | Awkward but works (verified). | docs-done |
 
 ## 2. Engine behaviour worth knowing (documented)
@@ -50,6 +52,8 @@ Found with the compile checker (`scratchpad/sem`, compiles each C# block against
 | `<base href>` to resolve relative paths | Not honoured | removed |
 | `doc.ProcessDocument(...)` | Does not exist | step 3 |
 | `new ParserSettings(/* ... */)` + `Document.ParseDocument(stream, type, settings)` | Use `Document.CreateParserSettings(...)` + `Document.Parse(...)` (E2) | fixed in processing-instructions |
+| `request.Cancel(...)` on a remote request | No such method; complete with `success: false` and an exception | fixed |
+| `doc.TryFindComponentById(id, out IComponent)` | Real: `TryFindAComponentById<T>(id, out T)` extension | fixed in events page |
 | `out Label badge` for a `<span id>` in an HTML template | Parsed as `HTMLSpan` (`Scryber.Html.Components`); `Span` clashes with `System.Span<T>` under implicit usings | fixed in engine-document; working-in-code next |
 | ASP.NET reads `"Scryber"` appsettings automatically | It doesn't — `ServiceProvider.Init(configuration)` is always needed (L8) | fixed in configuration index + installation |
 

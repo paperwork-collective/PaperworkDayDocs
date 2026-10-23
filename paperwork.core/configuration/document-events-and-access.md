@@ -110,7 +110,9 @@ doc.RemoteFileRegistered += (sender, args) =>
     // Not a font - the processing will continue as normal
 };
 
-doc.SaveAsPDF("output.pdf");
+await factory.NewDocument()
+    .WithLayout(doc)
+    .SaveAsync("output.pdf");
 
 string ResolveFontFromDatabase(string fontId)
 {
@@ -172,7 +174,9 @@ doc.RemoteFileRegistered += (sender, args) =>
     // don't want to handle this request, so let processing continue as normal.
 };
 
-doc.SaveAsPDF("output.pdf");
+await factory.NewDocument()
+    .WithLayout(doc)
+    .SaveAsync("output.pdf");
 
 byte[] DownloadImageWithAuth(string url)
 {
@@ -205,8 +209,7 @@ doc.RemoteFileRegistered += (sender, args) =>
             if (!IsAllowedSource(filePath))
             {
                 Console.WriteLine($"  ✗ Source not allowed");
-                request.Cancel("Content source not allowed");
-                request.CompleteRequest(null, false, null);
+                request.CompleteRequest(null, false, new UnauthorizedAccessException("Content source not allowed"));
                 return;
             }
             
@@ -227,7 +230,9 @@ doc.RemoteFileRegistered += (sender, args) =>
     }
 };
 
-doc.SaveAsPDF("output.pdf");
+await factory.NewDocument()
+    .WithLayout(doc)
+    .SaveAsync("output.pdf");
 
 bool IsAllowedSource(string path)
 {
@@ -270,8 +275,7 @@ using Scryber.Components;
 
 var doc = Document.ParseDocument("template.html");
 
-
-// Find a specific component by ID
+// Find a specific component by ID - <label id="CustomerLabel"></label> in the template
 var customerLabel = doc.FindAComponentById("CustomerLabel") as Label;
 if (customerLabel != null)
 {
@@ -279,7 +283,7 @@ if (customerLabel != null)
     Console.WriteLine("Updated customer label");
 }
 
-// Find and modify a table
+// Find and modify a table - <table id="InvoiceItems"> in the template
 var invoiceTable = doc.FindAComponentById("InvoiceItems") as TableGrid;
 if (invoiceTable != null)
 {
@@ -298,7 +302,9 @@ if (headerPanel != null)
     headerPanel.Visible = false; // Hide the header
 }
 
-doc.SaveAsPDF("output.pdf");
+await factory.NewDocument()
+    .WithLayout(doc)
+    .SaveAsync("output.pdf");
 ```
 
 #### Searching with TryFindComponentById
@@ -306,9 +312,8 @@ doc.SaveAsPDF("output.pdf");
 ```csharp
 var doc = Document.ParseDocument("template.html");
 
-// Safe lookup with TryFind pattern
-IComponent component;
-if (doc.TryFindComponentById("ReportTitle", out component) && component is Label titleLabel)
+// Safe lookup with TryFind pattern - <label id="ReportTitle"></label> in the template
+if (doc.TryFindAComponentById("ReportTitle", out Label titleLabel))
 {
     titleLabel.Text = "Q4 Financial Report";
 }
@@ -323,20 +328,20 @@ else
 #### Complete Example: Dynamic Document Manipulation
 
 ```csharp
+using Scryber;
 using Scryber.Components;
 using System.Linq;
 
 var doc = Document.ParseDocument("invoice-template.html");
 
-// Track all components as they're registered
-var allComponents = new List<IComponent>();
-doc.ComponentRegistered += (sender, args) => allComponents.Add(args.Component);
-
+// Walk the parsed component tree
+var allComponents = AllComponents(doc).ToList();
 
 // Now search and manipulate
 Console.WriteLine($"Total components in document: {allComponents.Count}");
 
 // Find and update specific components
+// <label id="CompanyName"></label> and <label id="InvoiceNumber"></label> in the template
 var companyName = doc.FindAComponentById("CompanyName") as Label;
 if (companyName != null)
 {
@@ -363,8 +368,21 @@ var allTables = allComponents.OfType<TableGrid>().ToList();
 Console.WriteLine($"Document contains {allTables.Count} tables");
 
 // Bind data and generate
-doc.Params["invoice"] = GetInvoiceData();
-doc.SaveAsPDF("invoice-output.pdf");
+await factory.NewDocument()
+    .WithLayout(doc)
+    .WithData("invoice", GetInvoiceData())
+    .SaveAsync("invoice-output.pdf");
+
+static IEnumerable<IComponent> AllComponents(IComponent parent)
+{
+    yield return parent;
+    if (parent is IContainerComponent container && container.HasContent)
+    {
+        foreach (IComponent child in container.Content)
+            foreach (var found in AllComponents(child))
+                yield return found;
+    }
+}
 
 object GetInvoiceData()
 {
@@ -472,8 +490,10 @@ var doc = Document.ParseDocument("template.html");
 var pipeline = new ResourceLoadingPipeline();
 pipeline.ConfigureDocument(doc);
 
-doc.Params["data"] = GetData();
-doc.SaveAsPDF("output.pdf");
+await factory.NewDocument()
+    .WithLayout(doc)
+    .WithData("data", GetData())
+    .SaveAsync("output.pdf");
 ```
 
 ## Related Documentation
