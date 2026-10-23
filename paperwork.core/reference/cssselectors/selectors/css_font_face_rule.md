@@ -12,7 +12,7 @@ has_toc: false
 # @font-face At-Rule
 {: .no_toc }
 
-The `@font-face` at-rule allows you to define specific fonts to be used within the template, outside of any directly loaded by the engine. This is particularly important in PDF generation with Scryber.
+The `@font-face` at-rule allows you to define specific fonts to be used within the template, outside of any directly loaded by the engine. Fonts defined this way are embedded in the generated PDF, so the document looks the same everywhere.
 
 ---
 
@@ -36,7 +36,7 @@ The `@font-face` at-rule allows you to define specific fonts to be used within t
     font-family: 'font name';
     src: url('[relative or remote path to font file]') format('truetype') [, ...more formats];
     font-weight: [100 ... 900];
-    font-style: reglular | italic | oblique;
+    font-style: normal | italic | oblique;
 }
 
 .main{
@@ -45,44 +45,74 @@ The `@font-face` at-rule allows you to define specific fonts to be used within t
 
 ```
 
-The `@font-face` defines an explicit font that can be used within the document, and will be embedded (if allowed) into the document itself so it can be used to by reader applications.
+The `@font-face` defines an explicit font that can be used within the document, and is embedded into the document itself so it can be used by reader applications.
 
 Each definition is a single font based on family, weight and style, and multiple definitions of the same family are supported (encouraged) to allow for bold and italic variants. 
 
-PDF readers support embedded Open Type (aka. TrueType&trade; fonts).
+PDF readers support embedded OpenType (and TrueType&trade;) fonts.
 
-The library can convert .otc/.ttc collections, along with WOFF fonts directly to the supported formats. Any fonts defined in other formats (e.g. WOFF2), will be ignored. 
-
----
-
-### Font Matching and fallbacks
-
-Every font used within a document should have it's own set (or subset) of font definition. As such, when specifying a `b`old or `strong` font weight, there should be an available, matching font file for that weight. The engine will use system fonts if able, and has the default fonts to use (embedded within the engine).
-
-So in order to find the best font to display the applied characters with, the following table is used.
-
-- Take the first font-family in the list
-    - Find the font family and style. If matched...
-        - Find the requested weight and use.
-        - No exact weight, so find the nearest (larger or smaller) and use that.
-    - No matched family and style so switch to the next family in the list
-- No matching family with that style
-    - Find the font family in regular style
-         - Find the requested weight and use.
-        - No exact weight, so find the nearest (larger or smaller) and use that.
-    - No matching family in regular
-        - Use the built-in Courier / mono-spaced font (easily identified as not matching).
-    
-When used with a fall-back font in the style, it is 'guaranteed' to find an appropriate font for the requested component.
+TrueType (`.ttf`), OpenType (`.otf`) and WOFF (`.woff`) font files are supported. When `src` lists more than one format, a TrueType or OpenType source is used first, then WOFF. Other formats, such as WOFF2 and font collections, are ignored.
 
 ---
 
-### Syntax Examples
+### Font Matching and Fallbacks
 
+Each `@font-face` is one font file, for one family, weight and style. Define one for each weight and style the document uses - for example a regular and a bold - so text is shown in the right font.
+
+When text asks for a font, the engine looks for it in order:
+
+1. Each family in the `font-family` list, in order - from `@font-face` rules, the fonts registered in [configuration](/paperwork.core/configuration/font-configuration), the system fonts, and the built-in standard fonts (Helvetica, Times, Courier).
+2. If a family is found, but not at the requested weight or style, the nearest weight or style of that family is used, and a **Warning** is logged - for example *The font 'Open Light,Bold' could not be found, falling back to Open Light: 300 for rendering*.
+3. If no family in the list can be found, an **Error** is logged and the built-in Courier font is used, so the problem is easy to see.
+
+Ending the `font-family` list with a generic family - `sans-serif`, `serif` or `monospace` - means a font is always found.
+
+### Strict mode and missing fonts
+
+In [Strict mode](/paperwork.core/learning/07-configuration/03_error_handling_conformance), a font that cannot be found stops the document from being generated, rather than using Courier.
+
+```html
+<?paperwork parser-mode='Strict' ?>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+    ...
+</html>
+```
+
+See [Processing Instructions](/paperwork.core/configuration/processing-instructions).
+
+### Turning off substitution
+
+The nearest-weight substitution in step 2 can be turned off, so only exact matches are used - useful to check that every weight and style has a font file. A font without an exact match is then treated as missing: Courier with an error in Lax mode, and a failure in Strict mode.
+
+For a single document, on an engine `Document` (see [The Engine Document](/paperwork.core/configuration/engine-document)):
+
+```csharp
+using var doc = Document.ParseDocument("template.html");
+doc.RenderOptions.UseFontSubstitution = false;
+
+await factory.NewDocument()
+    .WithLayout(doc)
+    .SaveAsync("output.pdf");
+```
+
+For every document, in the application [configuration](/paperwork.core/configuration/configuration-structure):
+
+```json
+{
+  "Paperwork": {
+    "Fonts": {
+      "FontSubstitution": false
+    }
+  }
+}
+```
+
+---
+
+## Syntax Examples
 
 ```css
-
-/* Load custom font - Roboto regular and bold */
+/* Roboto regular and bold */
 @font-face {
     font-family: 'Roboto';
     src: url('./fonts/Roboto-Regular.ttf') format('truetype');
@@ -95,310 +125,78 @@ When used with a fall-back font in the style, it is 'guaranteed' to find an appr
     font-weight: 700;
 }
 
-/* specify the default page font as 'Roboto' with fallbacks */
+/* An italic variant */
+@font-face {
+    font-family: 'Roboto';
+    src: url('./fonts/Roboto-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* More than one source - the TrueType file is used, the WOFF2 ignored */
+@font-face {
+    font-family: 'Lato';
+    src: url('./fonts/Lato-Regular.woff2') format('woff2'),
+         url('./fonts/Lato-Regular.ttf') format('truetype');
+}
+
+/* Use the font, with fallbacks */
 body {
     font-family: 'Roboto', Arial, sans-serif;
-    font-size: 11pt;
-    line-height: 1.6;
-    color: #333;
 }
 
-/* set the heading as bold */
 h1 {
-    font-size: 24pt;
-    font-weight: 700;
-    line-height: 1.2;
-    text-align: center;
-    letter-spacing: 2pt;
+    font-weight: 700;   /* uses Roboto-Bold.ttf */
 }
 
-
-```
-
-When an exact match is not found for a font then a 'Warning' entry is added to the log.
-If no font can be found then either an exception will be raised (if the [conformance mode](/paperwork.core/learning/07-configuration/03_error_handling_conformance) is 'Strict') or an error added to the log.
-
-```csharp
-//change the document conformance mode in code
-doc.ConformanceMode = ParserConformanceMode.Strict;
-
-```
-
-Or use the template [processing](/paperwork.core/learning/07-configuration/02_logging) instructions.
-
-```xml
-<?scryber conformance-mode='strict' ... >
-<html> ...
-```
-
-
----
-
-### No Fallback
-
-By default the engine will always try to fallback to the best font it can find. If it is better, or you want to check everything is in place, then you it ios possible to switch off this behaviour either individually, or globally.
-
-#### For a specific document
-```csharp
-doc.RenderOptions.FontFallback = false;
-```
-
-#### Withing the application
-
-Add the section to the application [configuration file](/paperwork.core/learning/07-configuration/07_production_deployment)
-```json
-"Scryber" : {
-    "Fonts" : {
-        "FontSubstitution" : "false"
-    }
+em {
+    font-style: italic; /* uses Roboto-Italic.ttf */
 }
 ```
 
----
+Relative urls are resolved from the stylesheet, or from the template for a `<style>` in the template. Remote urls (`https://...`) are loaded when the document is generated.
 
-//NEED A BREAK!
+---
 
 ## Font-Face Properties
 
-- `size` - Page dimensions (A4, Letter, Legal, or custom dimensions)
-- `margin` - Page margins (shorthand)
-- `margin-top`, `margin-right`, `margin-bottom`, `margin-left` - Individual margins
-- `orientation` - Page orientation (portrait or landscape)
+| Property | Description |
+|----------|-------------|
+| `font-family` | The name the font is used by, in `font-family` on other rules |
+| `src` | One or more `url(...)` sources, each with an optional `format(...)` - `truetype`, `opentype` or `woff` |
+| `font-weight` | The weight of this font file - `100` to `900`, `normal` (400) or `bold` (700). Default `400` |
+| `font-style` | The style of this font file - `normal`, `italic` or `oblique`. Default `normal` |
 
 ---
 
-## Standard Page Sizes
+## Web Fonts
 
-- `A4` - 210mm × 297mm
-- `A3` - 297mm × 420mm
-- `A5` - 148mm × 210mm
-- `Letter` - 8.5in × 11in
-- `Legal` - 8.5in × 14in
-- `Tabloid` - 11in × 17in
+Stylesheets from font services, such as Google Fonts, contain `@font-face` rules, and can be linked directly:
+
+```html
+<link rel='stylesheet'
+      href='https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&amp;display=swap' />
+```
+
+```css
+body { font-family: 'Barlow', sans-serif; }
+```
+
+See [Web Fonts](/paperwork.core/learning/05-typography/03_web_fonts).
 
 ---
 
 ## Notes
 
-- The @page rule defines properties of the page box itself
-- Page margins define the printable area within the page
-- Size can be specified using standard names or custom dimensions
-- Orientation can be portrait (default) or landscape
-- Multiple @page rules can be defined for different sections
-- Particularly important for PDF generation in Scryber
-
----
-
-## Examples
-
-### Example 1: Basic A4 page setup
-
-```html
-<style>
-    @page {
-        size: A4;
-        margin: 25mm;
-    }
-</style>
-<body>
-    <h1>Document Title</h1>
-    <p>Content with A4 page size and 25mm margins.</p>
-</body>
-```
-
-### Example 2: Letter size with custom margins
-
-```html
-<style>
-    @page {
-        size: Letter;
-        margin-top: 1in;
-        margin-bottom: 1in;
-        margin-left: 0.75in;
-        margin-right: 0.75in;
-    }
-</style>
-<body>
-    <h1>US Letter Format</h1>
-    <p>Document formatted for US Letter size paper.</p>
-</body>
-```
-
-### Example 3: Landscape orientation
-
-```html
-<style>
-    @page {
-        size: A4 landscape;
-        margin: 20mm 30mm;
-    }
-</style>
-<body>
-    <h1>Landscape Document</h1>
-    <p>This page is in landscape orientation.</p>
-</body>
-```
-
-### Example 4: Custom page size
-
-```html
-<style>
-    @page {
-        size: 8in 10in;
-        margin: 0.5in;
-    }
-</style>
-<body>
-    <h1>Custom Size</h1>
-    <p>Document with custom page dimensions.</p>
-</body>
-```
-
-### Example 5: Minimal margins for full bleed
-
-```html
-<style>
-    @page {
-        size: A4;
-        margin: 0;
-    }
-
-    body {
-        margin: 0;
-        padding: 0;
-    }
-</style>
-<body>
-    <div style="background-color: #0066cc; width: 100%; height: 100%;">
-        <p style="color: white; padding: 20pt;">Full bleed background</p>
-    </div>
-</body>
-```
-
-### Example 6: Report format
-
-```html
-<style>
-    @page {
-        size: Letter portrait;
-        margin-top: 0.75in;
-        margin-bottom: 0.75in;
-        margin-left: 1in;
-        margin-right: 1in;
-    }
-
-    body {
-        font-family: "Times New Roman", serif;
-        font-size: 12pt;
-    }
-</style>
-<body>
-    <h1>Business Report</h1>
-    <p>Professional document formatting.</p>
-</body>
-```
-
-### Example 7: Brochure format
-
-```html
-<style>
-    @page {
-        size: A4 landscape;
-        margin: 15mm;
-    }
-
-    body {
-        column-count: 3;
-        column-gap: 10mm;
-    }
-</style>
-<body>
-    <h1>Product Brochure</h1>
-    <p>Three-column layout in landscape orientation.</p>
-</body>
-```
-
-### Example 8: Legal document
-
-```html
-<style>
-    @page {
-        size: Legal;
-        margin: 1in 1.25in;
-    }
-
-    body {
-        font-family: "Courier New", monospace;
-        font-size: 12pt;
-        line-height: 2;
-    }
-</style>
-<body>
-    <h1>Legal Document</h1>
-    <p>Double-spaced legal format.</p>
-</body>
-```
-
-### Example 9: Invoice format
-
-```html
-<style>
-    @page {
-        size: A4;
-        margin-top: 40mm;
-        margin-bottom: 30mm;
-        margin-left: 20mm;
-        margin-right: 20mm;
-    }
-</style>
-<body>
-    <h1>Invoice #12345</h1>
-    <p>Extra top margin for letterhead.</p>
-</body>
-```
-
-### Example 10: Multi-page document with consistent formatting
-
-```html
-<style>
-    @page {
-        size: A4 portrait;
-        margin: 25mm 20mm;
-    }
-
-    body {
-        font-family: Arial, sans-serif;
-        font-size: 11pt;
-        line-height: 1.5;
-    }
-
-    h1 {
-        font-size: 24pt;
-        margin-bottom: 10mm;
-    }
-
-    h2 {
-        font-size: 18pt;
-        margin-top: 8mm;
-        margin-bottom: 6mm;
-    }
-</style>
-<body>
-    <h1>Document Title</h1>
-    <h2>Section 1</h2>
-    <p>Content for section 1...</p>
-    <h2>Section 2</h2>
-    <p>Content for section 2...</p>
-</body>
-```
+- One `@font-face` per font file - family, weight and style
+- Every `@font-face` file is loaded when the document is generated, but only the fonts used by the document are embedded
+- Fonts used by every document are better [registered in configuration](/paperwork.core/configuration/font-configuration), so they are loaded once
+- The built-in standard fonts (Helvetica, Times, Courier) need no `@font-face`
 
 ---
 
 ## See Also
 
-- [@media Rule](/paperwork.core/reference/cssselectors/selectors/css_media_rule)
-- [Page Size Configuration](/guides/page_setup)
-- [Element Selector](/paperwork.core/reference/cssselectors/selectors/css_element_selector)
-- [PDF Generation Pipeline](/architecture/generation_pipeline)
-
----
+- [font-family](/paperwork.core/reference/cssproperties/properties/css_prop_font-family)
+- [Font Configuration](/paperwork.core/configuration/font-configuration)
+- [Custom Fonts](/paperwork.core/learning/05-typography/02_custom_fonts)

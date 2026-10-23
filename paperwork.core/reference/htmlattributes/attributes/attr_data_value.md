@@ -80,7 +80,7 @@ This attribute is essential for:
 <var data-id="total" data-value="{{model.subtotal + model.tax}}"></var>
 
 <!-- Store complex expression -->
-<var data-id="discount" data-value="{{model.isPremium ? 0.15 : 0.05}}"></var>
+<var data-id="discount" data-value="{{if(model.isPremium, 0.15, 0.05)}}"></var>
 
 <!-- Number element with data-value -->
 <num data-value="{{model.quantity * model.unitPrice}}" data-format="C"></num>
@@ -110,11 +110,11 @@ The `data-value` attribute is supported on the following elements:
 
 | Value Type | Description |
 |------------|-------------|
-| **Literal Value** | Direct string, number, or boolean value |
+| **Literal Value** | A string, number, or boolean, inside an expression: `{% raw %}{{0}}{% endraw %}`, `{% raw %}{{'text'}}{% endraw %}` |
 | **Binding Expression** | Expression that evaluates to a value: `{% raw %}{{expression}}{% endraw %}` |
 | **Property Access** | Reference to model property: `{% raw %}{{model.property}}{% endraw %}` |
 | **Calculation** | Mathematical expression: `{% raw %}{{value1 + value2}}{% endraw %}` |
-| **Conditional** | Ternary expression: `{% raw %}{{condition ? value1 : value2}}{% endraw %}` |
+| **Conditional** | The `if()` function: `{% raw %}{{if(condition, value1, value2)}}{% endraw %}` |
 
 ### Type
 
@@ -141,7 +141,7 @@ The attribute accepts any valid binding expression:
 <var data-id="fullName" data-value="{{model.firstName + ' ' + model.lastName}}"></var>
 
 <!-- Conditional expression -->
-<var data-id="status" data-value="{{model.isActive ? 'Active' : 'Inactive'}}"></var>
+<var data-id="status" data-value="{{if(model.isActive, 'Active', 'Inactive')}}"></var>
 
 <!-- Complex calculation -->
 <var data-id="total" data-value="{{(model.subtotal + model.shipping) * (1 + model.taxRate)}}"></var>
@@ -246,7 +246,7 @@ The `data-format` attribute controls display formatting while `data-value` provi
 
 {% raw %}
 ```html
-<var data-id="discountRate" data-value="{{model.isVIP ? 0.20 : 0.10}}"></var>
+<var data-id="discountRate" data-value="{{if(model.isVIP, 0.20, 0.10)}}"></var>
 ```
 {% endraw %}
 
@@ -338,7 +338,7 @@ Compute and store discount amount:
 
 {% raw %}
 ```html
-<var data-id="discountPercent" data-value="{{model.isPremium ? 0.15 : 0.05}}"></var>
+<var data-id="discountPercent" data-value="{{if(model.isPremium, 0.15, 0.05)}}"></var>
 <var data-id="discountAmount" data-value="{{model.subtotal * discountPercent}}"></var>
 
 <div style="padding: 15pt; background-color: #d4edda;">
@@ -417,9 +417,9 @@ Store conditional status string:
 {% raw %}
 ```html
 <var data-id="statusText"
-     data-value="{{model.isPaid ? 'PAID IN FULL' : 'PAYMENT PENDING'}}"></var>
+     data-value="{{if(model.isPaid, 'PAID IN FULL', 'PAYMENT PENDING')}}"></var>
 <var data-id="statusColor"
-     data-value="{{model.isPaid ? 'green' : 'red'}}"></var>
+     data-value="{{if(model.isPaid, 'green', 'red')}}"></var>
 
 <div style="color: {{statusColor}}; font-weight: bold; font-size: 16pt;">
     {{statusText}}
@@ -444,7 +444,7 @@ Multi-step calculation with intermediate values:
 <!-- Store intermediate calculations -->
 <var data-id="itemTotal" data-value="{{model.subtotal}}"></var>
 <var data-id="taxAmount" data-value="{{itemTotal * 0.0825}}"></var>
-<var data-id="shippingCost" data-value="{{itemTotal > 100 ? 0 : 9.99}}"></var>
+<var data-id="shippingCost" data-value="{{if(itemTotal &gt; 100, 0, 9.99)}}"></var>
 <var data-id="grandTotal" data-value="{{itemTotal + taxAmount + shippingCost}}"></var>
 
 <table style="width: 100%; font-size: 12pt;">
@@ -543,12 +543,12 @@ Store pricing based on customer type:
 ```html
 <var data-id="basePrice" data-value="{{model.listPrice}}"></var>
 <var data-id="discount"
-     data-value="{{model.customerType == 'wholesale' ? 0.30 : model.customerType == 'retail' ? 0.10 : 0}}"></var>
+     data-value="{{if(model.customerType == 'wholesale', 0.30, if(model.customerType == 'retail', 0.10, 0))}}"></var>
 <var data-id="finalPrice" data-value="{{basePrice * (1 - discount)}}"></var>
 
 <div>
     <p>List Price: ${{basePrice}}</p>
-    <if data-test="{{discount > 0}}">
+    <if data-test="{{discount &gt; 0}}">
         <p>Your Discount: {{discount * 100}}%</p>
     </if>
     <p style="font-size: 16pt; font-weight: bold;">
@@ -646,10 +646,10 @@ Complex shipping logic:
 ```html
 <var data-id="weight" data-value="{{model.totalWeight}}"></var>
 <var data-id="baseShipping" data-value="{{5.99}}"></var>
-<var data-id="weightCharge" data-value="{{weight > 5 ? (weight - 5) * 0.99 : 0}}"></var>
+<var data-id="weightCharge" data-value="{{if(weight &gt; 5, (weight - 5) * 0.99, 0)}}"></var>
 <var data-id="totalShipping" data-value="{{baseShipping + weightCharge}}"></var>
-<var data-id="freeShipping" data-value="{{model.subtotal > 50}}"></var>
-<var data-id="finalShipping" data-value="{{freeShipping ? 0 : totalShipping}}"></var>
+<var data-id="freeShipping" data-value="{{model.subtotal &gt; 50}}"></var>
+<var data-id="finalShipping" data-value="{{if(freeShipping, 0, totalShipping)}}"></var>
 
 <div>
     <p>Package Weight: {{weight}} lbs</p>
@@ -707,18 +707,18 @@ Generate dynamic messages:
 ```html
 <var data-id="daysUntilDue" data-value="{{model.daysUntilDue}}"></var>
 <var data-id="urgencyMessage"
-     data-value="{{daysUntilDue < 0 ? 'OVERDUE' : daysUntilDue == 0 ? 'DUE TODAY' : daysUntilDue < 7 ? 'DUE SOON' : 'ON TRACK'}}"></var>
+     data-value="{{if(daysUntilDue &lt; 0, 'OVERDUE', if(daysUntilDue == 0, 'DUE TODAY', if(daysUntilDue &lt; 7, 'DUE SOON', 'ON TRACK')))}}"></var>
 <var data-id="urgencyColor"
-     data-value="{{daysUntilDue < 0 ? 'red' : daysUntilDue < 7 ? 'orange' : 'green'}}"></var>
+     data-value="{{if(daysUntilDue &lt; 0, 'red', if(daysUntilDue &lt; 7, 'orange', 'green'))}}"></var>
 
 <div style="padding: 15pt; border: 2pt solid {{urgencyColor}}; background-color: rgba(255,255,255,0.9);">
     <div style="color: {{urgencyColor}}; font-weight: bold; font-size: 14pt;">
         {{urgencyMessage}}
     </div>
-    <if data-test="{{daysUntilDue >= 0}}">
+    <if data-test="{{daysUntilDue &gt;= 0}}">
         <p>Payment due in {{daysUntilDue}} days</p>
     </if>
-    <if data-test="{{daysUntilDue < 0}}">
+    <if data-test="{{daysUntilDue &lt; 0}}">
         <p>Payment is {{-daysUntilDue}} days overdue</p>
     </if>
 </div>
@@ -782,7 +782,7 @@ Compute inventory metrics:
 <var data-id="committed" data-value="{{model.quantityCommitted}}"></var>
 <var data-id="available" data-value="{{onHand - committed}}"></var>
 <var data-id="reorderPoint" data-value="{{model.reorderPoint}}"></var>
-<var data-id="needsReorder" data-value="{{available <= reorderPoint}}"></var>
+<var data-id="needsReorder" data-value="{{available &lt;= reorderPoint}}"></var>
 
 <div style="padding: 15pt; border: 1pt solid #ddd;">
     <h3>{{model.productName}}</h3>
@@ -892,7 +892,7 @@ Compute grade statistics:
 <var data-id="possiblePoints" data-value="{{sum(model.assignments, .pointsPossible)}}"></var>
 <var data-id="percentage" data-value="{{(totalPoints / possiblePoints) * 100}}"></var>
 <var data-id="letterGrade"
-     data-value="{{percentage >= 90 ? 'A' : percentage >= 80 ? 'B' : percentage >= 70 ? 'C' : percentage >= 60 ? 'D' : 'F'}}"></var>
+     data-value="{{if(percentage &gt;= 90, 'A', if(percentage &gt;= 80, 'B', if(percentage &gt;= 70, 'C', if(percentage &gt;= 60, 'D', 'F'))))}}"></var>
 
 <div style="padding: 20pt; border: 2pt solid #336699;">
     <h2>Grade Report for {{model.studentName}}</h2>
@@ -959,18 +959,18 @@ Production-ready invoice with complete calculations:
 
 <!-- Invoice Calculations -->
 <var data-id="itemsSubtotal" data-value="{{sum(model.lineItems, .lineTotal)}}"></var>
-<var data-id="discountPercent" data-value="{{model.customerType == 'VIP' ? 0.10 : 0}}"></var>
+<var data-id="discountPercent" data-value="{{if(model.customerType == 'VIP', 0.10, 0)}}"></var>
 <var data-id="discountAmount" data-value="{{itemsSubtotal * discountPercent}}"></var>
 <var data-id="subtotalAfterDiscount" data-value="{{itemsSubtotal - discountAmount}}"></var>
 <var data-id="taxRate" data-value="{{0.0825}}"></var>
 <var data-id="taxAmount" data-value="{{subtotalAfterDiscount * taxRate}}"></var>
-<var data-id="shippingCost" data-value="{{subtotalAfterDiscount > 100 ? 0 : 12.99}}"></var>
+<var data-id="shippingCost" data-value="{{if(subtotalAfterDiscount &gt; 100, 0, 12.99)}}"></var>
 <var data-id="grandTotal" data-value="{{subtotalAfterDiscount + taxAmount + shippingCost}}"></var>
 
 <!-- Status Variables -->
 <var data-id="isPaid" data-value="{{model.paymentStatus == 'paid'}}"></var>
-<var data-id="statusColor" data-value="{{isPaid ? 'green' : 'red'}}"></var>
-<var data-id="statusText" data-value="{{isPaid ? 'PAID' : 'UNPAID'}}"></var>
+<var data-id="statusColor" data-value="{{if(isPaid, 'green', 'red')}}"></var>
+<var data-id="statusText" data-value="{{if(isPaid, 'PAID', 'UNPAID')}}"></var>
 
 <!-- Document -->
 <div style="padding: 30pt;">
@@ -1033,7 +1033,7 @@ Production-ready invoice with complete calculations:
                     <num data-value="{{itemsSubtotal}}" data-format="C"></num>
                 </td>
             </tr>
-            <if data-test="{{discountAmount > 0}}">
+            <if data-test="{{discountAmount &gt; 0}}">
                 <tr>
                     <td style="padding: 5pt; text-align: right;">
                         Discount ({{discountPercent * 100}}%):

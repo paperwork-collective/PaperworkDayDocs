@@ -282,17 +282,41 @@ Available automatically in specific contexts.
 
 ## Custom Functions & Operators
 
-The binding system can be extended with custom functions and operators registered at startup:
+The binding system can be extended with your own functions, registered once at startup. A function inherits from `FunctionBase`, and is used in templates by its `Name`.
 
 ```csharp
-// Register a custom function
-BindingCalcExpressionFactory.RegisterFunction(new MyCustomFunction());
+using Scryber.Binding;
+using Scryber.Expressive;
+using Scryber.Expressive.Expressions;
+using Scryber.Expressive.Functions;
 
-// Register a custom operator
-BindingCalcExpressionFactory.RegisterOperator(new MyCustomOperator());
+public class InitialsFunction : FunctionBase
+{
+    public override string Name => "initials";
+
+    public override object Evaluate(IExpression[] parameters, IDictionary<string, object> variables, ExpressionContext context)
+    {
+        this.ValidateParameterCount(parameters, 1, 1);
+
+        var text = parameters[0].Evaluate(variables)?.ToString();
+        if (string.IsNullOrWhiteSpace(text))
+            return string.Empty;
+
+        return string.Concat(text.Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(w => char.ToUpper(w[0])));
+    }
+}
+
+// Once, at startup
+BindingCalcExpressionFactory.RegisterFunction(new InitialsFunction());
 ```
 
-See the [Configuration section](/paperwork.core/configuration/) for more on extending Scryber.
+{% raw %}
+```html
+<p>{{initials(model.name)}}</p>   <!-- "Ada Mary Lovelace" → AML -->
+```
+{% endraw %}
+
+Custom operators implement `IOperator` (in `Scryber.Expressive.Operators`) and are registered with `BindingCalcExpressionFactory.RegisterOperator(...)`.
 
 ---
 
