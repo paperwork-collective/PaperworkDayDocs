@@ -383,13 +383,12 @@ Contributions welcome! See [Contributing Guide](https://github.com/richard-scryb
 
 
 
-**Parsing Methods:**
-```csharp
-// XHTML with namespace (ParseDocument)
-var doc = Document.ParseDocument("template.html");
+**Template formats:** templates can be XHTML, with the `xmlns='http://www.w3.org/1999/xhtml'` namespace, or HTML5 without it - the builder reads both.
 
-// HTML5 without namespace (ParseHTML)
-var doc = Document.ParseHTML("template.html");
+```csharp
+await factory.NewDocument()
+    .WithLayoutFile("template.html")   // XHTML or HTML5
+    .SaveAsync("output.pdf");
 ```
 
 ### Common Patterns

@@ -304,8 +304,8 @@ Variables available in specific contexts:
 | `@last` | `{% raw %}{{#each}}{% endraw %}` loops | True if last item |
 | `this` | Any context | Reference to current data context |
 | `.` | Any context | Shorthand for current context |
-| `..` | Nested contexts | Reference to parent context |
-| `model` | Root | Root data model (from `doc.Params["model"]`) |
+| `../` | Nested contexts | The parent context, one level up |
+| `model` | Root | A value added with `WithData("model", ...)` - any name can be used |
 
 ---
 

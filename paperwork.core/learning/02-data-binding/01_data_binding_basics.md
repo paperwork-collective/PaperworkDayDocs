@@ -161,7 +161,7 @@ var person = new Person
     Age = 30
 };
 
-doc.Params["model"] = person;
+builder.WithData("model", person);
 ```
 
 ### Using Collections
@@ -525,24 +525,13 @@ A JSON string, `Stream` or remote address can be used in the same way, with `Wit
 ### Load JSON from API
 
 ```csharp
-using System.Net.Http;
-using System.Text.Json;
-
 public async Task<byte[]> GenerateReportFromApi(string apiUrl)
 {
-    using var client = new HttpClient();
-    string jsonResponse = await client.GetStringAsync(apiUrl);
-
-    var data = JsonSerializer.Deserialize<dynamic>(jsonResponse);
-
-    var doc = Document.ParseDocument("report.html");
-    doc.Params["model"] = data;
-
-    using (var ms = new MemoryStream())
-    {
-        doc.SaveAsPDF(ms);
-        return ms.ToArray();
-    }
+    // The factory loads the JSON from the url
+    return await factory.NewDocument()
+        .WithLayoutFile("report.html")
+        .WithDataUrl("model", apiUrl)
+        .BuildBytesAsync();
 }
 ```
 

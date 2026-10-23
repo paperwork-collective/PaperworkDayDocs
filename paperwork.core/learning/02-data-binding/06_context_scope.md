@@ -171,15 +171,14 @@ builder.WithData("orders", new[]
 });
 ```
 
-### Multiple Levels Up
+### Values from Further Out
 
-
-
-
+`../` goes up **one level only**. To use a value from a loop further out, store it in a `<var>` in that loop - it can then be used by name in every loop inside it.
 
 {% raw %}
 ```html
 {{#each departments}}
+    <var data-id='deptName' data-value='{{this.name}}' />
     <h2>{{this.name}}</h2>
 
     {{#each this.teams}}
@@ -187,7 +186,7 @@ builder.WithData("orders", new[]
 
         {{#each this.members}}
             <p>
-                {{this.memberName}} in {{../teamName}} ({{../../name}})
+                {{this.memberName}} in {{../teamName}} ({{deptName}})
             </p>
         {{/each}}
     {{/each}}
@@ -195,13 +194,9 @@ builder.WithData("orders", new[]
 ```
 {% endraw %}
 
-
-
-
-
 - `this.memberName` - Current member
-- `../teamName` - Parent team
-- `../../name` - Grandparent department
+- `../teamName` - Parent team (one level up)
+- `deptName` - The department, stored in a `<var>` in the outer loop
 
 ---
 
@@ -643,7 +638,9 @@ builder.WithData("organization", new
             </div>
 
             <!-- Department level (2nd nesting) -->
+            <var data-id='divisionName' data-value='{{this.divisionName}}' />
             {{#each this.departments}}
+                <var data-id='deptName' data-value='{{this.deptName}}' />
                 <div class="department">
                     <h3 style="margin-top: 0;">{{this.deptName}} Department</h3>
                     <p><strong>Manager:</strong> {{this.manager}}</p>
@@ -658,8 +655,8 @@ builder.WithData("organization", new
                         <div class="employee">
                             <strong>{{this.name}}</strong> - {{this.role}}<br />
                             <span style="font-size: 9pt; color: #666;">
-                                {{../../deptName}} → {{../../../divisionName}} →
-                                {{../../../../organization.companyName}}
+                                {{deptName}} → {{divisionName}} →
+                                {{organization.companyName}}
                             </span>
                         </div>
                     {{/each}}
@@ -691,7 +688,7 @@ builder.WithData("organization", new
 |---------|--------------|---------|
 | Current | `{% raw %}{{this.property}}{% endraw %}` | `{% raw %}{{this.name}}{% endraw %}` |
 | Parent | `{% raw %}{{../property}}{% endraw %}` | `{% raw %}{{../categoryName}}{% endraw %}` |
-| Grandparent | `{% raw %}{{../../property}}{% endraw %}` | `{% raw %}{{../../divisionName}}{% endraw %}` |
+| Further out | A `<var>` set in that loop | `{% raw %}{{divisionName}}{% endraw %}` |
 | Root parameter | `{% raw %}{{paramName}}{% endraw %}` | `{% raw %}{{companyName}}{% endraw %}` |
 
 ### When to Use Each
@@ -747,45 +744,29 @@ Create a template with:
 
 ## Common Pitfalls
 
-### ❌ Wrong Number of `../`
-
-
-
-
+### ❌ Using `../` for Document Values
 
 {% raw %}
 ```html
 {{#each departments}}
     {{#each this.employees}}
-        <p>{{../companyName}}</p>  <!-- Too few ../ -->
+        <p>{{../../companyName}}</p>  <!-- Won't work: ../ is one level only -->
     {{/each}}
 {{/each}}
 ```
 {% endraw %}
 
-
-
-
-
-✅ **Solution:** Count nesting levels
-
-
-
-
+✅ **Solution:** Values added to the document are available by name, at any level
 
 {% raw %}
 ```html
 {{#each departments}}
     {{#each this.employees}}
-        <p>{{../../companyName}}</p>  <!-- Correct -->
+        <p>{{companyName}}</p>
     {{/each}}
 {{/each}}
 ```
 {% endraw %}
-
-
-
-
 
 ### ❌ Forgetting `this` in Loops
 

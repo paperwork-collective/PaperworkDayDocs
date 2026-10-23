@@ -74,52 +74,47 @@ Without `this`, the binding engine may look for the property in the wrong scope,
 
 ## Mistake 2: Incorrect Parent Context Navigation
 
-### ❌ Problem: Wrong Number of `../`
-
-
-
-
+### ❌ Problem: Using `../` for Values Passed to the Document
 
 {% raw %}
 ```html
 {{#each departments}}
     {{#each this.employees}}
-        <p>{{../companyName}}</p>  <!-- Too few ../ -->
+        <p>{{../../companyName}}</p>  <!-- Won't work -->
     {{/each}}
 {{/each}}
 ```
 {% endraw %}
 
+### ✅ Solution: Use the Name Directly
 
-
-
-
-### ✅ Solution: Count Your Nesting Levels
-
-
-
-
+Values added with `WithData` - such as `companyName` or `model` - are available everywhere by their name, inside any number of loops.
 
 {% raw %}
 ```html
 {{#each departments}}
     {{#each this.employees}}
-        <p>{{../../companyName}}</p>  <!-- Correct: goes up 2 levels -->
+        <p>{{companyName}}</p>
     {{/each}}
 {{/each}}
 ```
 {% endraw %}
 
+### `../` is one level only
 
+`../` reads a property of the item in the loop **directly outside** the current one. It goes up a single level - `../../` is not supported.
 
+{% raw %}
+```html
+{{#each departments}}
+    {{#each this.employees}}
+        <p>{{this.name}} - {{../name}}</p>  <!-- employee - department -->
+    {{/each}}
+{{/each}}
+```
+{% endraw %}
 
-
-### Debugging Tip
-
-Count the `{% raw %}{{#each}}{% endraw %}` blocks you're inside:
-- 1 level deep: `../property`
-- 2 levels deep: `../../property`
-- 3 levels deep: `../../../property`
+To use a value from further out, store it in a `<var>` in the outer loop. See [Parent (`../`)](/paperwork.core/reference/binding/navigation/parent).
 
 ---
 
@@ -280,71 +275,42 @@ builder.WithData("model", new
 
 ---
 
-## Mistake 6: Incorrect calc() Syntax
+## Mistake 6: Expression Syntax
 
-### ❌ Problem: Passing as String
-
-
-
-
+### ❌ Problem: Expression in Quotes
 
 {% raw %}
 ```html
-{{'model.price + model.tax'}}  <!-- Won't work - string literal -->
+{{'model.price + model.tax'}}  <!-- Outputs the text "model.price + model.tax" -->
 ```
 {% endraw %}
 
-
-
-
-
-### ✅ Solution: Use Direct Expression
-
-
-
-
+### ✅ Solution: Write the Expression Directly
 
 {% raw %}
 ```html
-{{model.price + model.tax}}  <!-- Correct -->
+{{model.price + model.tax}}
 ```
 {% endraw %}
 
-
-
-
-
-### ❌ Problem: Using Comma-Separated Arguments
-
-
-
-
+### ❌ Problem: Operator Precedence
 
 {% raw %}
 ```html
-{{model.a +  model.b *  model.c}}  <!-- Won't work -->
+<!-- a = 1, b = 2, c = 3 -->
+{{model.a + model.b * model.c}}  <!-- 7: the multiplication is done first -->
 ```
 {% endraw %}
 
-
-
-
-
-### ✅ Solution: Use Standard Math Expression
-
-
-
-
+### ✅ Solution: Use Parentheses
 
 {% raw %}
 ```html
-{{calc((model.a + model.b) * model.c)}}  <!-- Correct -->
+{{(model.a + model.b) * model.c}}  <!-- 9 -->
 ```
 {% endraw %}
 
-
-
-
+`calc()` is not needed inside `{% raw %}{{ }}{% endraw %}` - the operators work directly. See [Operators](/paperwork.core/reference/binding/operators/).
 
 ---
 
@@ -526,8 +492,7 @@ builder.WithData("invoice", invoiceData);
 
 {% raw %}
 ```html
-<p>{{format(calc(calc(model.price *  model.quantity) + 
-            calc(calc(model.price *  model.quantity) *  0.08)), 'C2')}}</p>
+<p>{{format((model.price * model.quantity) + (model.price * model.quantity * 0.08), 'C2')}}</p>
 ```
 {% endraw %}
 
@@ -711,7 +676,7 @@ When data binding doesn't work, check:
 - [ ] **Context** - Using `this` in loops?
 - [ ] **Null values** - Checking for null before accessing properties?
 - [ ] **Closed blocks** - Every `{% raw %}{{#if}}{% endraw %}` has `{% raw %}{{/if}}{% endraw %}`?
-- [ ] **Parameters set** - `doc.Params` set before `SaveAsPDF()`?
+- [ ] **Data added** - `WithData` called with the name the template uses?
 - [ ] **Data types** - Numbers as numbers, not strings?
 - [ ] **Format strings** - Using correct format specifiers?
 - [ ] **Operators** - Using `==` for comparison, not `=`?
@@ -774,43 +739,33 @@ public object CreateTestData()
 
 ```csharp
 [Test]
-public void TestTemplateWithEmptyData()
+public async Task TestTemplateWithEmptyData()
 {
-    var doc = Document.ParseDocument("template.html");
-    doc.Params["model"] = new
-    {
-        items = new object[] { }  // Empty collection
-    };
+    var result = await _factory.NewDocument()
+        .WithLayoutFile("template.html")
+        .WithData("model", new
+        {
+            items = new object[] { }  // Empty collection
+        })
+        .BuildAsync();
 
-    byte[] pdf;
-    using (var ms = new MemoryStream())
-    {
-        doc.SaveAsPDF(ms);
-        pdf = ms.ToArray();
-    }
-
-    Assert.IsNotNull(pdf);
-    Assert.Greater(pdf.Length, 0);
+    Assert.IsTrue(result.Success, result.Error);
+    Assert.Greater(result.Document.Binary.Length, 0);
 }
 
 [Test]
-public void TestTemplateWithNullValues()
+public async Task TestTemplateWithNullValues()
 {
-    var doc = Document.ParseDocument("template.html");
-    doc.Params["model"] = new
-    {
-        optionalField = (string)null
-    };
+    var result = await _factory.NewDocument()
+        .WithLayoutFile("template.html")
+        .WithData("model", new
+        {
+            optionalField = (string)null
+        })
+        .BuildAsync();
 
-    // Should not throw exception
-    byte[] pdf;
-    using (var ms = new MemoryStream())
-    {
-        doc.SaveAsPDF(ms);
-        pdf = ms.ToArray();
-    }
-
-    Assert.IsNotNull(pdf);
+    // Should still generate
+    Assert.IsTrue(result.Success, result.Error);
 }
 ```
 
@@ -822,11 +777,11 @@ public void TestTemplateWithNullValues()
 |-------|-----|
 | Property not binding | Check case sensitivity |
 | Null reference | Add `{% raw %}{{#if}}{% endraw %}` check |
-| Wrong parent context | Count `../` correctly |
-| calc() not working | Operators as strings: `'+'` |
+| Wrong parent context | Use names directly for document values; `../` is one level only |
+| Wrong calculation result | Add parentheses - `*` and `/` are done before `+` and `-` |
 | Percentage shows wrong | Check if value needs `P` format |
 | Block not rendering | Check for closing `{% raw %}{{/if}}{% endraw %}` or `{% raw %}{{/each}}{% endraw %}` |
-| Data not appearing | Verify `doc.Params` set before save |
+| Data not appearing | Check the `WithData` name matches the template |
 | Empty collection shows nothing | Add `{% raw %}{{else}}{% endraw %}` clause |
 
 ---

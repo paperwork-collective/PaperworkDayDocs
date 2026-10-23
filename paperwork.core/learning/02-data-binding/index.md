@@ -119,7 +119,7 @@ This series covers everything you need to create sophisticated data-driven docum
 ### 3. [Template Iteration](03_template_iteration.html)
 - Using the `<template>` element
 - Iterating with `{% raw %}{{#each}}{% endraw %}`
-- Working with `{% raw %}{{@index}}{% endraw %}` and `{% raw %}{{@key}}{% endraw %}`
+- Working with `{% raw %}{{@index}}{% endraw %}`, `{% raw %}{{@first}}{% endraw %}` and `{% raw %}{{@last}}{% endraw %}`
 - Nested loops and complex data structures
 
 ### 4. [Conditional Rendering](04_conditional_rendering.html)

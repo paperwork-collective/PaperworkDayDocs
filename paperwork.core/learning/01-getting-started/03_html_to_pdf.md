@@ -484,27 +484,23 @@ h1{ font: 'CustomFont' 24pt bold; }
 3. Check how content flows across pages
 4. Note any page break issues
 
-**Limitations:** Browser print preview doesn't perfectly match Scryber output
+**Limitations:** Browser print preview doesn't perfectly match the PDF output
 
-### Scryber Testing Method
+### Paperwork.Core Testing Method
+
+Generate each template with `BuildAsync`, and check the result.
 
 ```csharp
-public void TestTemplate(string htmlPath)
+public async Task TestTemplateAsync(IPaperworkFactory factory, string htmlPath)
 {
-    try
-    {
-        var doc = Document.ParseDocument(htmlPath);
+    var result = await factory.NewDocument()
+        .WithLayoutFile(htmlPath)
+        .BuildAsync();
 
-        using (var ms = new MemoryStream())
-        {
-            doc.SaveAsPDF(ms);
-            Console.WriteLine($"✓ Valid: {htmlPath} ({ms.Length} bytes)");
-        }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"✗ Error in {htmlPath}: {ex.Message}");
-    }
+    if (result.Success)
+        Console.WriteLine($"✓ Valid: {htmlPath} ({result.Document.Binary.Length} bytes)");
+    else
+        Console.WriteLine($"✗ Error in {htmlPath}: {result.Message}\n{result.Error}");
 }
 ```
 

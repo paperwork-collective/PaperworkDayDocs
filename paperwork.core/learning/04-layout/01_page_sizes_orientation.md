@@ -258,22 +258,15 @@ Define exact dimensions when standard sizes don't fit.
 
 ### In C# Code
 
+The page size comes from the `@page` rule, so it is set in the template or a stylesheet. To choose the size in code, add a stylesheet with the builder:
+
 ```csharp
-using Scryber.Components;
-using Scryber.Drawing;
+var pageSize = customer.Region == "US" ? "Letter" : "A4";
 
-// Create document
-var doc = Document.ParseHTML("template.html");
-
-// Set page size programmatically (if not set in CSS)
-// This is typically unnecessary if you use @page in CSS
-// But useful for dynamic documents
-
-// Generate PDF
-using (var stream = new FileStream("output.pdf", FileMode.Create))
-{
-    doc.SaveAsPDF(stream);
-}
+await factory.NewDocument()
+    .WithLayoutFile("template.html")
+    .WithStyle($"@page {{ size: {pageSize} portrait; }}")
+    .SaveAsync("output.pdf");
 ```
 
 ---

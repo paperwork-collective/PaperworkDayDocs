@@ -169,7 +169,7 @@ builder.WithData("model", new {
     <address>
       {{street}}<br>
       {{city}}, {{state}} {{zip}}<br>
-      Company: {{../../name}}
+      Company: {{../name}}
     </address>
   {{/with}}
 {{/with}}
@@ -204,8 +204,7 @@ For the alias syntax `{% raw %}{{#with object as | alias |}}{% endraw %}`, it cr
 
 - Empty/null objects trigger the `{% raw %}{{else}}{% endraw %}` block
 - Use `{% raw %}{{.}}{% endraw %}` to reference the entire context object
-- Use `{% raw %}{{../property}}{% endraw %}` to go up one level
-- Use `{% raw %}{{../../property}}{% endraw %}` to go up two levels
+- Use `{% raw %}{{../property}}{% endraw %}` to go up one level (one level only - use a `<var>` for values from further out)
 - Alias names must be valid identifiers
 - Context switching simplifies deeply nested property access
 

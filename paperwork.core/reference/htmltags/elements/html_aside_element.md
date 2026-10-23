@@ -183,7 +183,7 @@ Common styling patterns for asides include:
 ## Class Hierarchy
 
 ```c#
-Scryber.Html.Components.HTMLAnchor, Scryber.Components
+Scryber.Html.Components.HTMLAside, Scryber.Components
 ```
 
 In the library codebase:
@@ -499,9 +499,10 @@ aside.Style.Margins.Left = 10;
         Example Code:
     </div>
     <pre style="margin: 0; font-size: 10pt; white-space: pre-wrap;">
-var doc = Document.Parse("template.html");
-doc.Params["title"] = "My Document";
-doc.SaveAsPDF("output.pdf");
+await factory.NewDocument()
+    .WithLayoutFile("template.html")
+    .WithData("title", "My Document")
+    .SaveAsync("output.pdf");
     </pre>
 </aside>
 ```

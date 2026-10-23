@@ -145,7 +145,7 @@ builder.WithData("model", new {
 {{#each model.departments}}
   <h2>{{this.name}}</h2>
   {{#each this.employees}}
-    <li>{{this.name}} works at {{../../companyName}}</li>
+    <li>{{this.name}} works at {{model.companyName}} in {{../name}}</li>
   {{/each}}
 {{/each}}
 ```

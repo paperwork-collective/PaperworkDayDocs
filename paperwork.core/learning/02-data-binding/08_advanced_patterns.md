@@ -805,7 +805,7 @@ Create an invoice with:
     {{#each this.level2}}
         {{#each this.level3}}
             {{#each this.level4}}
-                <!-- Accessing parent data becomes error-prone -->
+                <!-- Won't work: ../ goes up one level only -->
                 <p>{{../../../level1Property}}</p>
             {{/each}}
         {{/each}}
@@ -818,12 +818,25 @@ Create an invoice with:
 
 
 
-✅ **Solution:** Restructure data or use root parameters
+✅ **Solution:** Store the value in a `<var>` in the outer loop, or pass it to the document
+
+{% raw %}
+```html
+{{#each level1}}
+    <var data-id='level1Property' data-value='{{this.level1Property}}' />
+    {{#each this.level2}}
+        {{#each this.level3}}
+            {{#each this.level4}}
+                <p>{{level1Property}}</p>
+            {{/each}}
+        {{/each}}
+    {{/each}}
+{{/each}}
+```
+{% endraw %}
 
 ```csharp
-// Option 1: Flatten data structure
-// Option 2: Pass needed values at each level
-builder.WithData("companyName", "Tech Corp");  // Accessible from anywhere
+builder.WithData("companyName", "Tech Corp");  // Available by name everywhere
 ```
 
 ### ❌ Complex Inline Conditionals

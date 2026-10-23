@@ -19,7 +19,7 @@ Store, reuse, and pass data throughout your PDF templates using parameters and c
 ## Learning Objectives
 
 By the end of this article, you'll be able to:
-- Set and use document parameters via `doc.Params`
+- Pass named values to a document with `WithData`
 - Pass data from C# to templates
 - Create calculated values and reuse them
 - Understand parameter scope and lifetime
@@ -28,9 +28,11 @@ By the end of this article, you'll be able to:
 
 ---
 
-## Document Parameters (doc.Params)
+## Document Data (WithData)
 
-The `doc.Params` dictionary is the primary way to pass data from C# to your templates.
+`WithData` is the way to pass values from C# to your templates. Each value has a name, and is used in the template by that name.
+
+On an engine `Document`, the same values are in `doc.Params` - see [The Engine Document](/paperwork.core/configuration/engine-document).
 
 ### Basic Usage
 
@@ -131,7 +133,7 @@ var invoice = new Invoice
     Total = 95.00m
 };
 
-doc.Params["model"] = invoice;
+builder.WithData("model", invoice);
 ```
 
 ---
@@ -244,7 +246,7 @@ builder.WithData("model", new
 
 ### Global Parameters
 
-Parameters set via `doc.Params` are available throughout the entire document:
+Values added with `WithData` are available throughout the entire document:
 
 ```csharp
 builder.WithData("companyName", "Tech Corp");

@@ -227,8 +227,8 @@ The log entry is written to the document's trace log during databinding and does
 - Multiple values are automatically concatenated with spaces
 - Supports expressions (function calls, property access, etc.)
 - Unknown parameters are silently ignored
-- Use `doc.AppendTraceLog = true` to enable logging in C#
-- View log output in CollectorTraceLog for unit testing
+- Use `WithLogLevel(...)` on the builder, or `append-log='true'` in the template, to add the log to the document
+- Collect log output with a `CollectorTraceLog` for unit testing
 - Category helps filter log messages for specific features
 - Log level affects visibility based on trace log configuration
 - Useful for debugging complex conditional logic and iterations
@@ -237,19 +237,40 @@ The log entry is written to the document's trace log during databinding and does
 
 ## Enabling Trace Logging
 
-To see log output, enable trace logging in your document:
+To see log output, add the log to the end of the document:
 
 ```csharp
-doc.AppendTraceLog = true;
-doc.SaveAsPDF(output);
+await factory.NewDocument()
+    .WithLayoutFile("template.html")
+    .WithData("model", model)
+    .WithLogLevel(PaperworkRequestLogOption.Verbose)
+    .SaveAsync("output.pdf");
+```
 
-// Access log entries
-var collector = doc.TraceLog as CollectorTraceLog;
+Or collect the entries in code, for example in a unit test:
+
+```csharp
+using Scryber;
+using Scryber.Components;
+using Scryber.Logging;
+
+using var doc = Document.ParseDocument("template.html");
+
+var collector = new CollectorTraceLog(TraceRecordLevel.Verbose, "Test", autostart: true);
+doc.AddTraceLog(collector);
+
+await factory.NewDocument()
+    .WithLayout(doc)
+    .WithData("model", model)
+    .SaveAsync("output.pdf");
+
 foreach (var entry in collector)
 {
     Console.WriteLine($"[{entry.Level}] {entry.Category}: {entry.Message}");
 }
 ```
+
+See [Logging](/paperwork.core/learning/07-configuration/02_logging).
 
 ---
 

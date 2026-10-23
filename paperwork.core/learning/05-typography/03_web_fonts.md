@@ -705,12 +705,11 @@ project/
 
     <p>Here's an example with inline code: <code>const fontSize = '11pt';</code></p>
 
-    <pre>// Function with Inconsolata font
-function generatePDF(template, data) {
-    const doc = Document.ParseHTML(template);
-    doc.Params["model"] = data;
-    return doc.SaveAsPDF();
-}</pre>
+    <pre>// Code in the Inconsolata font
+await factory.NewDocument()
+    .WithLayoutFile("template.html")
+    .WithData("model", data)
+    .SaveAsync("output.pdf");</pre>
 
     <p>
         The monospace font makes code easy to read and distinguish from regular text,

@@ -21,7 +21,7 @@ Loop through collections and arrays to generate dynamic, repeating content in yo
 By the end of this article, you'll be able to:
 - Use the `{% raw %}{{#each}}{% endraw %}` helper to iterate over collections
 - Access current item properties in loops
-- Use `{% raw %}{{@index}}{% endraw %}` and `{% raw %}{{@key}}{% endraw %}` for position tracking
+- Use `{% raw %}{{@index}}{% endraw %}`, `{% raw %}{{@first}}{% endraw %}` and `{% raw %}{{@last}}{% endraw %}` for position tracking
 - Create nested loops for complex data
 - Handle empty collections gracefully
 - Build dynamic tables, lists, and repeating sections
@@ -139,28 +139,29 @@ Access the current iteration index (0-based):
 
 ---
 
-## Using {% raw %}{{@key}}{% endraw %}
+## Iterating Named Values
 
-When iterating over dictionaries or objects with named properties:
+`{% raw %}{{#each}}{% endraw %}` repeats over a list or array. A dictionary, or a JSON object, is not a list - it is used as a single item. To show named values, pass them as a list of name and value pairs.
 
 **C# Code:**
-```
-doc.Params["stats"] = new Dictionary<string, int>
+```csharp
+var stats = new Dictionary<string, int>
 {
     { "Users", 1250 },
     { "Orders", 3480 },
     { "Revenue", 125000 }
 };
+
+builder.WithData("stats", stats.Select(s => new { name = s.Key, value = s.Value }).ToList());
 ```
 
 **Template:**
 {% raw %}
 ```html
-
 <dl>
     {{#each stats}}
-        <dt>{{@key}}</dt>
-        <dd>{{this}}</dd>
+        <dt>{{this.name}}</dt>
+        <dd>{{this.value}}</dd>
     {{/each}}
 </dl>
 ```
@@ -177,6 +178,8 @@ doc.Params["stats"] = new Dictionary<string, int>
     <dd>125000</dd>
 </dl>
 ```
+
+In JSON data, use an array of objects: `[{ "name": "Users", "value": 1250 }, ...]`.
 
 ---
 
@@ -263,18 +266,18 @@ Access parent scope data inside loops:
 ```
 {% endraw %}
 
-The `../` syntax accesses the parent context.
+The `../` syntax accesses the parent context, one level up.
 
 ### Root Context
 
-Access the root data from any nested level:
+Values added to the document are available by name from any nested level - no `../` is needed:
 
 {% raw %}
 ```html
 
 {{#each departments}}
     {{#each this.employees}}
-        <p>{{this.name}} works for {{../../companyName}}</p>
+        <p>{{this.name}} works for {{companyName}}</p>
     {{/each}}
 {{/each}}
 ```
