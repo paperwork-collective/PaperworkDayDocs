@@ -64,9 +64,9 @@ The value of π (approximately 3.14159265358979).
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     radius = 5
-};
+});
 ```
 
 **Output:**

@@ -65,9 +65,9 @@ The natural logarithm of the value.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     value = 10
-};
+});
 ```
 
 **Output:**
@@ -87,9 +87,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     rate = 0.07
-};
+});
 ```
 
 **Output:**

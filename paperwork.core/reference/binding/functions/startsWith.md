@@ -70,9 +70,9 @@ startsWith(str, prefix)
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     url = "https://example.com"
-};
+});
 ```
 
 **Output:**
@@ -98,13 +98,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     files = new[] {
         new { name = "report_2024.pdf" },
         new { name = "data.csv" },
         new { name = "report_summary.xlsx" }
     }
-};
+});
 ```
 
 **Output:**
@@ -151,9 +151,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     phone = "+1-555-123-4567"
-};
+});
 ```
 
 **Output:**

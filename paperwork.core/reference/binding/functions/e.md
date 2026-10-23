@@ -78,11 +78,11 @@ The value of e (approximately 2.71828182845905).
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     initial = 100,
     rate = 0.05,
     time = 10
-};
+});
 ```
 
 **Output:**

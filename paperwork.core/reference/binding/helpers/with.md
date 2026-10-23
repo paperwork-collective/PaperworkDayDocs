@@ -91,13 +91,13 @@ Change the data context to a specific object, simplifying property access within
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     user = new {
         name = "John Doe",
         email = "john@example.com",
         age = 30
     }
-};
+});
 ```
 
 **Output:**

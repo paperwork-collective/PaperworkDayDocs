@@ -37,8 +37,8 @@ In Scryber templates, **context** refers to the current data object being access
 At the document level, the context is the parameters you set:
 
 ```csharp
-doc.Params["title"] = "My Document";
-doc.Params["author"] = "John Doe";
+builder.WithData("title", "My Document");
+builder.WithData("author", "John Doe");
 ```
 
 
@@ -121,7 +121,7 @@ When iterating over simple arrays, `this` is the value itself:
 
 
 ```csharp
-doc.Params["colors"] = new[] { "#ff0000", "#00ff00", "#0000ff" };
+builder.WithData("colors", new[] { "#ff0000", "#00ff00", "#0000ff" });
 ```
 
 ---
@@ -156,8 +156,8 @@ Access the parent scope from within a nested context.
 
 
 ```csharp
-doc.Params["customerName"] = "Acme Corp";
-doc.Params["orders"] = new[]
+builder.WithData("customerName", "Acme Corp");
+builder.WithData("orders", new[]
 {
     new
     {
@@ -168,7 +168,7 @@ doc.Params["orders"] = new[]
             new { name = "Widget B", quantity = 3 }
         }
     }
-};
+});
 ```
 
 ### Multiple Levels Up
@@ -234,14 +234,14 @@ While `../` accesses parent, you can navigate to root by using the parameter nam
 
 
 ```csharp
-doc.Params["companyName"] = "Tech Corp";
-doc.Params["model"] = new
+builder.WithData("companyName", "Tech Corp");
+builder.WithData("model", new
 {
     orders = new[]
     {
         new { items = new[] { new { name = "Widget" } } }
     }
-};
+});
 ```
 
 ---
@@ -267,7 +267,7 @@ doc.Params["model"] = new
 
 
 ```csharp
-doc.Params["items"] = new[] { "Apple", "Banana", "Orange" };
+builder.WithData("items", new[] { "Apple", "Banana", "Orange" });
 ```
 
 ### Arrays of Objects
@@ -358,14 +358,14 @@ Context remains the same inside `{% raw %}{{#if}}{% endraw %}` blocks:
 
 **C# Code:**
 ```csharp
-doc.Params["company"] = new
+builder.WithData("company", new
 {
     name = "Tech Corp",
     address = "123 Main St",
     phone = "555-1234"
-};
+});
 
-doc.Params["invoice"] = new
+builder.WithData("invoice", new
 {
     number = "INV-2025-001",
     date = DateTime.Now,
@@ -384,7 +384,7 @@ doc.Params["invoice"] = new
     subtotal = 8500.00,
     tax = 680.00,
     total = 9180.00
-};
+});
 ```
 
 **Template:**
@@ -512,7 +512,7 @@ doc.Params["invoice"] = new
 
 **C# Code:**
 ```csharp
-doc.Params["organization"] = new
+builder.WithData("organization", new
 {
     companyName = "Tech Corp",
     ceo = "Jane Smith",
@@ -565,7 +565,7 @@ doc.Params["organization"] = new
             }
         }
     }
-};
+});
 ```
 
 **Template:**
@@ -826,21 +826,21 @@ Create a template with:
 ### ❌ Conflicting Names
 
 ```csharp
-doc.Params["name"] = "Company Name";
-doc.Params["products"] = new[]
+builder.WithData("name", "Company Name");
+builder.WithData("products", new[]
 {
     new { name = "Product A" }  // Conflicts with root "name"
-};
+});
 ```
 
 ✅ **Solution:** Use clear naming
 
 ```csharp
-doc.Params["companyName"] = "Company Name";
-doc.Params["products"] = new[]
+builder.WithData("companyName", "Company Name");
+builder.WithData("products", new[]
 {
     new { productName = "Product A" }
-};
+});
 ```
 
 ---

@@ -65,9 +65,9 @@ The base-10 logarithm of the value.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     value = 100
-};
+});
 ```
 
 **Output:**
@@ -87,9 +87,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     value = 45000
-};
+});
 ```
 
 **Output:**
@@ -109,10 +109,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     power = 100,
     reference = 1
-};
+});
 ```
 
 **Output:**

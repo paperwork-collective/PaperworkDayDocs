@@ -66,13 +66,13 @@ The arithmetic mean of the specified property. Returns null for empty collection
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { name = "Widget A", price = 15.50 },
         new { name = "Widget B", price = 22.00 },
         new { name = "Widget C", price = 8.75 }
     }
-};
+});
 ```
 
 **Output:**
@@ -95,14 +95,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     dailySales = new[] {
         new { date = "2024-03-01", amount = 1250.00 },
         new { date = "2024-03-02", amount = 1580.50 },
         new { date = "2024-03-03", amount = 1420.00 },
         new { date = "2024-03-04", amount = 1890.25 }
     }
-};
+});
 ```
 
 **Output:**
@@ -129,7 +129,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     teams = new[] {
         new {
             name = "Development",
@@ -147,7 +147,7 @@ doc.Params["model"] = new {
             }
         }
     }
-};
+});
 ```
 
 **Output:**
@@ -175,13 +175,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     servers = new[] {
         new { name = "Server-01", cpuUsage = 45, memoryUsage = 62 },
         new { name = "Server-02", cpuUsage = 52, memoryUsage = 58 },
         new { name = "Server-03", cpuUsage = 38, memoryUsage = 71 }
     }
-};
+});
 ```
 
 **Output:**

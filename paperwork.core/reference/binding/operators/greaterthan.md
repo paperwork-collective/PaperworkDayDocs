@@ -87,9 +87,9 @@ Evaluated before: `==`, `!=`, `??`, `&&`, `||`
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     age = 25
-};
+});
 ```
 
 **Output:**
@@ -130,9 +130,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     quantity = 15
-};
+});
 ```
 
 **Output:**
@@ -159,10 +159,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     revenue = 125000m,
     target = 100000m
-};
+});
 ```
 
 **Output:**

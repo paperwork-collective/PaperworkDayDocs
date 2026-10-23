@@ -70,14 +70,14 @@ A new array containing only items where the specified property equals the given 
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     tasks = new[] {
         new { name = "Task 1", status = "active", priority = "high" },
         new { name = "Task 2", status = "completed", priority = "medium" },
         new { name = "Task 3", status = "active", priority = "low" },
         new { name = "Task 4", status = "pending", priority = "high" }
     }
-};
+});
 ```
 
 **Output:**
@@ -102,7 +102,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { name = "Laptop", category = "Electronics", sales = 2500.00 },
         new { name = "Phone", category = "Electronics", sales = 1800.00 },
@@ -110,7 +110,7 @@ doc.Params["model"] = new {
         new { name = "Shirt", category = "Clothing", sales = 450.00 },
         new { name = "Tablet", category = "Electronics", sales = 1200.00 }
     }
-};
+});
 ```
 
 **Output:**
@@ -136,13 +136,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     users = new[] {
         new { name = "Alice", email = "alice@example.com", verified = true },
         new { name = "Bob", email = "bob@example.com", verified = false },
         new { name = "Charlie", email = "charlie@example.com", verified = true }
     }
-};
+});
 ```
 
 **Output:**
@@ -169,14 +169,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     tasks = new[] {
         new { name = "Fix Bug", status = "active", priority = "high", dueDate = new DateTime(2024, 3, 20) },
         new { name = "Write Docs", status = "active", priority = "low", dueDate = new DateTime(2024, 3, 25) },
         new { name = "Deploy", status = "active", priority = "high", dueDate = new DateTime(2024, 3, 18) },
         new { name = "Review Code", status = "completed", priority = "high", dueDate = new DateTime(2024, 3, 15) }
     }
-};
+});
 ```
 
 **Output:**

@@ -70,7 +70,7 @@ The number of items where the specified property equals the given value.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     tasks = new[] {
         new { name = "Task 1", status = "active" },
         new { name = "Task 2", status = "completed" },
@@ -78,7 +78,7 @@ doc.Params["model"] = new {
         new { name = "Task 4", status = "pending" },
         new { name = "Task 5", status = "completed" }
     }
-};
+});
 ```
 
 **Output:**
@@ -102,14 +102,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     users = new[] {
         new { name = "Alice", verified = true },
         new { name = "Bob", verified = false },
         new { name = "Charlie", verified = true },
         new { name = "Diana", verified = true }
     }
-};
+});
 ```
 
 **Output:**
@@ -133,7 +133,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     categories = new[] { "Electronics", "Books", "Clothing" },
     products = new[] {
         new { name = "Laptop", category = "Electronics" },
@@ -142,7 +142,7 @@ doc.Params["model"] = new {
         new { name = "Shirt", category = "Clothing" },
         new { name = "Tablet", category = "Electronics" }
     }
-};
+});
 ```
 
 **Output:**
@@ -168,7 +168,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     issues = new[] {
         new { id = 1, priority = "high" },
         new { id = 2, priority = "medium" },
@@ -176,7 +176,7 @@ doc.Params["model"] = new {
         new { id = 4, priority = "low" },
         new { id = 5, priority = "high" }
     }
-};
+});
 ```
 
 **Output:**

@@ -85,10 +85,10 @@ Evaluated before: `??`, `&&`, `||`
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     status = "pending",
     orderNumber = "12345"
-};
+});
 ```
 
 **Output:**
@@ -160,10 +160,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     stock = 47,
     expectedStock = 50
-};
+});
 ```
 
 **Output:**

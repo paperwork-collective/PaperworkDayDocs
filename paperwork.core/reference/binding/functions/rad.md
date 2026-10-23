@@ -106,10 +106,10 @@ The angle in radians.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     radius = 10,
     angle = 45  // degrees
-};
+});
 ```
 
 **Output:**

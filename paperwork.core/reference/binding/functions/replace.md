@@ -67,9 +67,9 @@ A new string with all occurrences replaced.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     text = "The old car was sold to an old friend."
-};
+});
 ```
 
 **Output:**
@@ -89,9 +89,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     phone = "555-123-4567"
-};
+});
 ```
 
 **Output:**
@@ -111,9 +111,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     code = "PREMIUM_CUSTOMER_DISCOUNT"
-};
+});
 ```
 
 **Output:**
@@ -145,11 +145,11 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     template = "Hello {name}, today is {date}",
     name = "John",
     date = "March 15"
-};
+});
 ```
 
 **Output:**

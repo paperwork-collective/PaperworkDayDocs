@@ -157,14 +157,10 @@ See `wwf_tigers_report_data.json` for the complete JSON structure with all conte
 If you prefer to construct the data model in C# instead of JSON:
 
 ```csharp
-using System;
-using System.IO;
-using Scryber.Components;
-
-using (var doc = Document.ParseDocument("wwf_tigers_report_template.html"))
-{
+await factory.NewDocument()
+    .WithLayoutFile("wwf_tigers_report_template.html")
     // Populate with your data object
-    doc.Params["model"] = new
+    .WithData("model", new
     {
         reportYear = 2024,
         globalStats = new { /* ... */ },
@@ -172,14 +168,9 @@ using (var doc = Document.ParseDocument("wwf_tigers_report_template.html"))
         sections = new { /* ... */ },
         conclusion = new { /* ... */ },
         footer = new { /* ... */ }
-    };
-
-    // SaveAsPDF handles all processing automatically
-    using (var stream = new FileStream("output.pdf", FileMode.Create))
-    {
-        doc.SaveAsPDF(stream);
-    }
-}
+    })
+    // SaveAsync handles all processing automatically
+    .SaveAsync("output.pdf");
 ```
 
 ### How the JSON Parsing Works
@@ -200,18 +191,10 @@ That's it! Scryber automatically handles:
 
 **Complete implementation:**
 ```csharp
-string jsonContent = File.ReadAllText(jsonDataPath);
-var model = JsonSerializer.Deserialize<object>(jsonContent);
-
-using (var doc = Document.ParseDocument(templatePath))
-{
-    doc.Params["model"] = model;
-
-    using (var stream = new FileStream(outputPdfPath, FileMode.Create))
-    {
-        doc.SaveAsPDF(stream);
-    }
-}
+await factory.NewDocument()
+    .WithLayoutFile(templatePath)
+    .WithDataFile("model", jsonDataPath)
+    .SaveAsync(outputPdfPath);
 ```
 
 ### Benefits of Using JSON for Data

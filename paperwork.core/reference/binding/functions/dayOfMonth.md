@@ -65,9 +65,9 @@ The day of the month as a number from 1 to 31.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     date = new DateTime(2024, 3, 15)
-};
+});
 ```
 
 **Output:**
@@ -87,9 +87,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     date = new DateTime(2024, 3, 5)
-};
+});
 ```
 
 **Output:**
@@ -114,13 +114,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     events = new[] {
         new { date = new DateTime(2024, 3, 10), title = "Team Meeting" },
         new { date = new DateTime(2024, 3, 20), title = "Project Review" },
         new { date = new DateTime(2024, 3, 5), title = "Sprint Planning" }
     }
-};
+});
 ```
 
 **Output:**
@@ -148,9 +148,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     today = new DateTime(2024, 3, 10)
-};
+});
 ```
 
 **Output:**

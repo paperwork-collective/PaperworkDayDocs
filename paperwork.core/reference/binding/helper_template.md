@@ -89,9 +89,9 @@ Brief description of what this helper does.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     data = new { property = "value" }
-};
+});
 ```
 
 **Output:**

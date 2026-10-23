@@ -66,10 +66,10 @@ The number of hours between the two datetimes. Positive if endDateTime is after 
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     now = new DateTime(2024, 3, 15, 9, 0, 0),
     meetingTime = new DateTime(2024, 3, 15, 14, 30, 0)
-};
+});
 ```
 
 **Output:**
@@ -92,7 +92,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     shifts = new[] {
         new {
             employee = "Alice",
@@ -105,7 +105,7 @@ doc.Params["model"] = new {
             clockOut = new DateTime(2024, 3, 15, 18, 30, 0)
         }
     }
-};
+});
 ```
 
 **Output:**
@@ -134,11 +134,11 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     ticketCreated = new DateTime(2024, 3, 15, 10, 0, 0),
     firstResponse = new DateTime(2024, 3, 15, 11, 30, 0),
     slaHours = 4
-};
+});
 ```
 
 **Output:**

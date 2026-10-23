@@ -35,17 +35,15 @@ The `doc.Params` dictionary is the primary way to pass data from C# to your temp
 ### Basic Usage
 
 ```csharp
-var doc = Document.ParseDocument("template.html");
-
-// Set a single parameter
-doc.Params["title"] = "Monthly Report";
-
-// Set multiple parameters
-doc.Params["author"] = "John Doe";
-doc.Params["date"] = DateTime.Now;
-doc.Params["pageCount"] = 10;
-
-doc.SaveAsPDF("output.pdf");
+await factory.NewDocument()
+    .WithLayoutFile("template.html")
+    // Set a single parameter
+    .WithData("title", "Monthly Report")
+    // Set multiple parameters
+    .WithData("author", "John Doe")
+    .WithData("date", DateTime.Now)
+    .WithData("pageCount", 10)
+    .SaveAsync("output.pdf");
 ```
 
 **Template:**
@@ -65,7 +63,7 @@ doc.SaveAsPDF("output.pdf");
 ### Anonymous Objects
 
 ```csharp
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     customerName = "Acme Corporation",
     invoiceNumber = "INV-2025-001",
@@ -76,7 +74,7 @@ doc.Params["model"] = new
         new { description = "Widget B", quantity = 3, price = 15.00 }
     },
     total = 95.00
-};
+});
 ```
 
 **Template:**
@@ -144,35 +142,35 @@ You can set multiple independent parameters:
 
 ```csharp
 // Company info
-doc.Params["company"] = new
+builder.WithData("company", new
 {
     name = "Tech Corp",
     address = "123 Main St",
     phone = "555-1234"
-};
+});
 
 // Report data
-doc.Params["report"] = new
+builder.WithData("report", new
 {
     title = "Q4 Sales",
     period = "2024 Q4",
     data = salesData
-};
+});
 
 // User info
-doc.Params["currentUser"] = new
+builder.WithData("currentUser", new
 {
     name = "John Doe",
     role = "Manager"
-};
+});
 
 // Configuration
-doc.Params["config"] = new
+builder.WithData("config", new
 {
     showHeader = true,
     showFooter = true,
     includeCharts = false
-};
+});
 ```
 
 **Template:**
@@ -212,7 +210,7 @@ var subtotal = items.Sum(i => i.quantity * i.price);
 var tax = subtotal * 0.08m;
 var total = subtotal + tax;
 
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     items = items,
     subtotal = subtotal,
@@ -220,7 +218,7 @@ doc.Params["model"] = new
     total = total,
     taxRate = 0.08,
     itemCount = items.Length
-};
+});
 ```
 
 **Template:**
@@ -249,8 +247,8 @@ doc.Params["model"] = new
 Parameters set via `doc.Params` are available throughout the entire document:
 
 ```csharp
-doc.Params["companyName"] = "Tech Corp";
-doc.Params["year"] = 2025;
+builder.WithData("companyName", "Tech Corp");
+builder.WithData("year", 2025);
 ```
 
 {% raw %}
@@ -280,40 +278,40 @@ doc.Params["year"] = 2025;
 
 ```csharp
 // Content data
-doc.Params["data"] = actualData;
+builder.WithData("data", actualData);
 
 // Metadata
-doc.Params["meta"] = new
+builder.WithData("meta", new
 {
     generatedDate = DateTime.Now,
     generatedBy = currentUser.Name,
     version = "1.0",
     documentType = "Invoice"
-};
+});
 
 // Configuration
-doc.Params["config"] = new
+builder.WithData("config", new
 {
     showWatermark = false,
     includePageNumbers = true,
     colorScheme = "blue"
-};
+});
 ```
 
 ### Pattern 2: Passing Helper Values
 
 ```csharp
-doc.Params["model"] = invoiceData;
+builder.WithData("model", invoiceData);
 
 // Helper values for calculations and formatting
-doc.Params["helpers"] = new
+builder.WithData("helpers", new
 {
     currentDate = DateTime.Now,
     currencySymbol = "$",
     dateFormat = "MMMM dd, yyyy",
     numberFormat = "F2",
     taxRate = 0.08
-};
+});
 ```
 
 **Template:**
@@ -330,14 +328,14 @@ doc.Params["helpers"] = new
 ```csharp
 var reportType = "detailed"; // or "summary"
 
-doc.Params["model"] = reportData;
-doc.Params["config"] = new
+builder.WithData("model", reportData);
+builder.WithData("config", new
 {
     reportType = reportType,
     showDetails = reportType == "detailed",
     showCharts = reportType == "detailed",
     showSummaryOnly = reportType == "summary"
-};
+});
 ```
 
 **Template:**
@@ -374,48 +372,44 @@ doc.Params["config"] = new
 
 **C# Code:**
 ```csharp
-var doc = Document.ParseDocument("report.html");
-
-// Global company info
-doc.Params["company"] = new
-{
-    name = "Tech Corp",
-    logo = "./images/logo.png",
-    address = "123 Main St, Springfield, IL",
-    phone = "555-1234",
-    email = "info@techcorp.com"
-};
-
-// Report metadata
-doc.Params["report"] = new
-{
-    title = "Annual Financial Report",
-    year = 2024,
-    preparedBy = "Finance Department",
-    preparedDate = DateTime.Now,
-    confidential = true
-};
-
-// Financial data
-doc.Params["financials"] = new
-{
-    revenue = 5000000,
-    expenses = 3500000,
-    profit = 1500000,
-    profitMargin = 0.30,
-    yearOverYearGrowth = 0.15
-};
-
-// Quarterly breakdown
-doc.Params["quarters"] = new[]
-{
-    new { quarter = "Q1", revenue = 1100000, expenses = 850000 },
-    new { quarter = "Q2", revenue = 1200000, expenses = 900000 },
-    new { quarter = "Q3", revenue = 1300000, expenses = 875000 },
-    new { quarter = "Q4", revenue = 1400000, expenses = 875000 }
-};
-
-doc.SaveAsPDF("annual-report.pdf");
+await factory.NewDocument()
+    .WithLayoutFile("report.html")
+    // Global company info
+    .WithData("company", new
+    {
+        name = "Tech Corp",
+        logo = "./images/logo.png",
+        address = "123 Main St, Springfield, IL",
+        phone = "555-1234",
+        email = "info@techcorp.com"
+    })
+    // Report metadata
+    .WithData("report", new
+    {
+        title = "Annual Financial Report",
+        year = 2024,
+        preparedBy = "Finance Department",
+        preparedDate = DateTime.Now,
+        confidential = true
+    })
+    // Financial data
+    .WithData("financials", new
+    {
+        revenue = 5000000,
+        expenses = 3500000,
+        profit = 1500000,
+        profitMargin = 0.30,
+        yearOverYearGrowth = 0.15
+    })
+    // Quarterly breakdown
+    .WithData("quarters", new[]
+    {
+        new { quarter = "Q1", revenue = 1100000, expenses = 850000 },
+        new { quarter = "Q2", revenue = 1200000, expenses = 900000 },
+        new { quarter = "Q3", revenue = 1300000, expenses = 875000 },
+        new { quarter = "Q4", revenue = 1400000, expenses = 875000 }
+    })
+    .SaveAsync("annual-report.pdf");
 ```
 
 **Template:**
@@ -607,10 +601,10 @@ var layout = new
     sidebarWidth = "2in"
 };
 
-doc.Params["brand"] = brandColors;
-doc.Params["typography"] = typography;
-doc.Params["layout"] = layout;
-doc.Params["model"] = actualData;
+builder.WithData("brand", brandColors);
+builder.WithData("typography", typography);
+builder.WithData("layout", layout);
+builder.WithData("model", actualData);
 ```
 
 **Template:**
@@ -699,37 +693,38 @@ Create a C# method that:
 ### ❌ Modifying Parameters After Parsing
 
 ```csharp
-var doc = Document.ParseDocument("template.html");
-doc.SaveAsPDF("output.pdf");
-doc.Params["model"] = data; // Too late!
+var builder = factory.NewDocument().WithLayoutFile("template.html");
+await builder.SaveAsync("output.pdf");
+builder.WithData("model", data); // Too late!
 ```
 
 ✅ **Solution:** Set parameters before saving
 
 ```csharp
-var doc = Document.ParseDocument("template.html");
-doc.Params["model"] = data; // Set first
-doc.SaveAsPDF("output.pdf");
+await factory.NewDocument()
+    .WithLayoutFile("template.html")
+    .WithData("model", data) // Set first
+    .SaveAsync("output.pdf");
 ```
 
 ### ❌ Overwriting Parameters
 
 ```csharp
-doc.Params["model"] = customerData;
-doc.Params["model"] = invoiceData; // Overwrites customer data!
+builder.WithData("model", customerData);
+builder.WithData("model", invoiceData); // Overwrites customer data!
 ```
 
 ✅ **Solution:** Use different keys
 
 ```csharp
-doc.Params["customer"] = customerData;
-doc.Params["invoice"] = invoiceData;
+builder.WithData("customer", customerData);
+builder.WithData("invoice", invoiceData);
 ```
 
 ### ❌ Not Null-Checking Data
 
 ```csharp
-doc.Params["model"] = null; // Will cause issues in template
+builder.WithData("model", null); // Will cause issues in template
 ```
 
 ✅ **Solution:** Validate data
@@ -737,11 +732,11 @@ doc.Params["model"] = null; // Will cause issues in template
 ```csharp
 if (data != null)
 {
-    doc.Params["model"] = data;
+    builder.WithData("model", data);
 }
 else
 {
-    doc.Params["model"] = new { /* default values */ };
+    builder.WithData("model", new { /* default values */ });
 }
 ```
 

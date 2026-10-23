@@ -116,8 +116,8 @@ The HTML element automatically applies user-agent styles to elements, including:
 Document parameters starting with `--` are automatically added to the `:root` CSS context:
 
 ```csharp
-doc.Params["--primary-color"] = "#336699";
-doc.Params["--font-size"] = "12pt";
+builder.WithData("--primary-color", "#336699");
+builder.WithData("--font-size", "12pt");
 ```
 
 These become available as CSS variables:
@@ -276,25 +276,18 @@ The `lang` attribute specifies the document's language but does not affect text 
 
 ```csharp
 // C# Code
-var path = "templates/branded-document.html";
-using (var doc = Document.ParseDocument(path))
-{
+await factory.NewDocument()
+    .WithLayoutFile("templates/branded-document.html")
     // Set CSS variables via parameters
-    doc.Params["--brand-color"] = "#FF6600";
-    doc.Params["--brand-font"] = "Helvetica";
-    doc.Params["--logo-url"] = "url('images/logo.png')";
-
+    .WithData("--brand-color", "#FF6600")
+    .WithData("--brand-font", "Helvetica")
+    .WithData("--logo-url", "url('images/logo.png')")
     // Set content parameters
-    doc.Params["model"] = new {
+    .WithData("model", new {
         title = "Branded Report",
         content = "Document content here"
-    };
-
-    using (var stream = new FileStream("output.pdf", FileMode.Create))
-    {
-        doc.SaveAsPDF(stream);
-    }
-}
+    })
+    .SaveAsync("output.pdf");
 ```
 
 

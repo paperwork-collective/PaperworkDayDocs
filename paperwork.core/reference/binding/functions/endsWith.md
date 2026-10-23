@@ -76,13 +76,13 @@ endsWith(str, suffix)
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     files = new[] {
         new { name = "document.pdf" },
         new { name = "photo.jpg" },
         new { name = "report.docx" }
     }
-};
+});
 ```
 
 **Output:**
@@ -111,9 +111,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     email = "john.doe@company.com"
-};
+});
 ```
 
 **Output:**
@@ -158,13 +158,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { name = "Product A", version = "1.0.0" },
         new { name = "Product B", version = "2.0.0-beta" },
         new { name = "Product C", version = "3.0.0-alpha" }
     }
-};
+});
 ```
 
 **Output:**

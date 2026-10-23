@@ -302,12 +302,12 @@ The `calc()` function allows complex math expressions:
 **Example:**
 
 ```csharp
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     price = 100,
     quantity = 3,
     tax = 15
-};
+});
 ```
 
 
@@ -684,25 +684,24 @@ Use in conditional functions:
 
 **C# Code:**
 ```csharp
-var doc = Document.ParseDocument("report.html");
-
-doc.Params["model"] = new
-{
-    reportTitle = "Q4 Sales Report",
-    generatedDate = DateTime.Now,
-    author = "sales department",
-    sales = new[]
+await factory.NewDocument()
+    .WithLayoutFile("report.html")
+    .WithData("model", new
     {
-        new { region = "North", revenue = 125000, target = 100000 },
-        new { region = "South", revenue = 98000, target = 110000 },
-        new { region = "East", revenue = 150000, target = 140000 },
-        new { region = "West", revenue = 87000, target = 90000 }
-    },
-    totalRevenue = 460000,
-    totalTarget = 440000
-};
-
-doc.SaveAsPDF("report.pdf");
+        reportTitle = "Q4 Sales Report",
+        generatedDate = DateTime.Now,
+        author = "sales department",
+        sales = new[]
+        {
+            new { region = "North", revenue = 125000, target = 100000 },
+            new { region = "South", revenue = 98000, target = 110000 },
+            new { region = "East", revenue = 150000, target = 140000 },
+            new { region = "West", revenue = 87000, target = 90000 }
+        },
+        totalRevenue = 460000,
+        totalTarget = 440000
+    })
+    .SaveAsync("report.pdf");
 ```
 
 **Template:**

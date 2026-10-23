@@ -70,9 +70,9 @@ The zero-based index of the first occurrence, or -1 if not found.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     text = "user@example.com"
-};
+});
 ```
 
 **Output:**
@@ -92,9 +92,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     email = "john@company.com"
-};
+});
 ```
 
 **Output:**
@@ -115,9 +115,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     text = "apple, orange, banana"
-};
+});
 ```
 
 **Output:**
@@ -144,12 +144,12 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = new[] {
         new { code = "ABC-123" },
         new { code = "XYZ789" }
     }
-};
+});
 ```
 
 **Output:**

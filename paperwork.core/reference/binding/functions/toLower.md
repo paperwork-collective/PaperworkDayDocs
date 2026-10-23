@@ -65,9 +65,9 @@ The string converted to lowercase.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     text = "HELLO WORLD"
-};
+});
 ```
 
 **Output:**
@@ -89,9 +89,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     status = "ACTIVE"
-};
+});
 ```
 
 **Output:**
@@ -111,9 +111,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     email = "John.Doe@EXAMPLE.COM"
-};
+});
 ```
 
 **Output:**
@@ -137,12 +137,12 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     categories = new[] {
         new { name = "Product Reviews" },
         new { name = "Technical Support" }
     }
-};
+});
 ```
 
 **Output:**

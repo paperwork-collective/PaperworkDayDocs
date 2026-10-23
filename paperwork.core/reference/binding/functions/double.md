@@ -65,9 +65,9 @@ A double-precision floating-point representation of the value.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     stringValue = "3.14159"
-};
+});
 ```
 
 **Output:**
@@ -87,10 +87,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     coefficient = "6.626",
     exponent = -34
-};
+});
 ```
 
 **Output:**
@@ -110,9 +110,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     percentage = "8.5"
-};
+});
 ```
 
 **Output:**

@@ -66,9 +66,9 @@ A new DateTime with the specified minutes added.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     boardingTime = new DateTime(2024, 3, 15, 14, 15, 0)
-};
+});
 ```
 
 **Output:**
@@ -90,14 +90,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     startTime = new DateTime(2024, 3, 15, 9, 0, 0),
     appointments = new[] {
         new { name = "Check-in", offset = 0 },
         new { name = "Consultation", offset = 15 },
         new { name = "Procedure", offset = 30 }
     }
-};
+});
 ```
 
 **Output:**

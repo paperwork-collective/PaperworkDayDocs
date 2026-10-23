@@ -65,9 +65,9 @@ The arithmetic mean of all values. Returns null for empty collections.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     scores = new[] { 85, 92, 78, 95, 88 }
-};
+});
 ```
 
 **Output:**
@@ -93,13 +93,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     students = new[] {
         new { name = "Alice", scores = new[] { 85, 90, 92 } },
         new { name = "Bob", scores = new[] { 78, 82, 88 } },
         new { name = "Charlie", scores = new[] { 95, 93, 97 } }
     }
-};
+});
 ```
 
 **Output:**
@@ -125,14 +125,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     requests = new[] {
         new { endpoint = "/api/users", responseTime = 250 },
         new { endpoint = "/api/orders", responseTime = 180 },
         new { endpoint = "/api/products", responseTime = 320 },
         new { endpoint = "/api/inventory", responseTime = 290 }
     }
-};
+});
 ```
 
 **Output:**
@@ -158,14 +158,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { name = "Widget A", price = 15.50 },
         new { name = "Widget B", price = 22.00 },
         new { name = "Widget C", price = 8.75 },
         new { name = "Widget D", price = 31.25 }
     }
-};
+});
 ```
 
 **Output:**

@@ -69,13 +69,13 @@ A new sorted array with items ordered by the specified property in ascending ord
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     students = new[] {
         new { name = "Charlie", grade = "A" },
         new { name = "Alice", grade = "B" },
         new { name = "Bob", grade = "A-" }
     }
-};
+});
 ```
 
 **Output:**
@@ -101,13 +101,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { name = "Widget A", price = 29.99 },
         new { name = "Widget B", price = 9.99 },
         new { name = "Widget C", price = 19.99 }
     }
-};
+});
 ```
 
 **Output:**
@@ -133,13 +133,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     events = new[] {
         new { title = "Conference", date = new DateTime(2024, 4, 20) },
         new { title = "Workshop", date = new DateTime(2024, 3, 15) },
         new { title = "Webinar", date = new DateTime(2024, 3, 30) }
     }
-};
+});
 ```
 
 **Output:**
@@ -165,14 +165,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     players = new[] {
         new { name = "Alice", score = 850 },
         new { name = "Bob", score = 1200 },
         new { name = "Charlie", score = 950 },
         new { name = "Diana", score = 1100 }
     }
-};
+});
 ```
 
 **Output:**
@@ -199,14 +199,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     tasks = new[] {
         new { name = "Fix Bug", status = "active", priority = 3 },
         new { name = "Write Docs", status = "completed", priority = 2 },
         new { name = "Deploy", status = "active", priority = 1 },
         new { name = "Review", status = "active", priority = 2 }
     }
-};
+});
 ```
 
 **Output:**

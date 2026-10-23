@@ -80,10 +80,10 @@ The difference between the left and right operands.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     originalPrice = 99.99m,
     salePrice = 79.99m
-};
+});
 ```
 
 **Output:**
@@ -103,10 +103,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     totalStock = 500,
     soldQuantity = 347
-};
+});
 ```
 
 **Output:**
@@ -141,10 +141,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     actual = 125000m,
     expected = 100000m
-};
+});
 ```
 
 **Output:**

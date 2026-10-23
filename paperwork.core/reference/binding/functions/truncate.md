@@ -65,9 +65,9 @@ The integer portion of the number.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     value = 19.99m
-};
+});
 ```
 
 **Output:**
@@ -88,9 +88,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     price = 19.75m
-};
+});
 ```
 
 **Output:**
@@ -113,9 +113,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     values = new[] { 1.1, 2.5, 3.9, 4.0, -2.8 }
-};
+});
 ```
 
 **Output:**

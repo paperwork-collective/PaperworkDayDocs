@@ -82,10 +82,10 @@ The angle in radians (between -π/2 and π/2).
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     rise = 5.77,
     run = 10
-};
+});
 ```
 
 **Output:**

@@ -66,9 +66,9 @@ A single string with all array elements joined by the separator.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     tags = new[] { "JavaScript", "HTML", "CSS", "React" }
-};
+});
 ```
 
 **Output:**
@@ -88,9 +88,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     categories = new[] { "Electronics", "Computers", "Accessories" }
-};
+});
 ```
 
 **Output:**
@@ -110,9 +110,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     nameParts = new[] { "John", "Q", "Doe" }
-};
+});
 ```
 
 **Output:**
@@ -132,9 +132,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     features = new[] { "Fast", "Reliable", "Secure", "Scalable" }
-};
+});
 ```
 
 **Output:**
@@ -154,9 +154,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     pathParts = new[] { "home", "user", "documents", "file.txt" }
-};
+});
 ```
 
 **Output:**

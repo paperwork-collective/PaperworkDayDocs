@@ -70,9 +70,9 @@ An array containing all matches found.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     text = "Order 123 contains 45 items at $67.89"
-};
+});
 ```
 
 **Output:**
@@ -100,9 +100,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     text = "Contact john@example.com or jane.doe@company.co.uk for details"
-};
+});
 ```
 
 **Output:**
@@ -128,9 +128,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     post = "Great day! #travel #adventure #nature #photography"
-};
+});
 ```
 
 **Output:**
@@ -168,9 +168,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     text = "ABC123XYZ456"
-};
+});
 ```
 
 **Output:**

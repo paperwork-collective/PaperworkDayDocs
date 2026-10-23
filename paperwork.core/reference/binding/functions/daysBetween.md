@@ -66,10 +66,10 @@ The number of days between the two dates. Positive if endDate is after startDate
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     today = new DateTime(2024, 3, 15),
     launchDate = new DateTime(2024, 4, 20)
-};
+});
 ```
 
 **Output:**
@@ -92,10 +92,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     startDate = new DateTime(2024, 1, 15),
     endDate = new DateTime(2024, 3, 30)
-};
+});
 ```
 
 **Output:**
@@ -126,13 +126,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     today = new DateTime(2024, 3, 15),
     tasks = new[] {
         new { name = "Design", dueDate = new DateTime(2024, 3, 10) },
         new { name = "Development", dueDate = new DateTime(2024, 3, 20) }
     }
-};
+});
 ```
 
 **Output:**

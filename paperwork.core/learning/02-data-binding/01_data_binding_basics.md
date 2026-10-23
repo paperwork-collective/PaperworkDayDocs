@@ -53,7 +53,7 @@ Data binding connects your data to template placeholders, allowing you to genera
 
 **With Data:**
 ```csharp
-doc.Params["model"] = new { name = "John" };
+builder.WithData("model", new { name = "John" });
 ```
 
 **Result:**
@@ -114,17 +114,16 @@ doc.Params["model"] = new { name = "John" };
 ### Using Anonymous Objects
 
 ```csharp
-var doc = Document.ParseDocument("template.html");
-
-// Pass data
-doc.Params["model"] = new
-{
-    name = "John Doe",
-    email = "john@example.com",
-    age = 30
-};
-
-doc.SaveAsPDF("output.pdf");
+await factory.NewDocument()
+    .WithLayoutFile("template.html")
+    // Pass data
+    .WithData("model", new
+    {
+        name = "John Doe",
+        email = "john@example.com",
+        age = 30
+    })
+    .SaveAsync("output.pdf");
 ```
 
 **Template:**
@@ -175,7 +174,7 @@ var users = new[]
     new { name = "Charlie", role = "Guest" }
 };
 
-doc.Params["users"] = users;
+builder.WithData("users", users);
 ```
 
 
@@ -217,9 +216,9 @@ doc.Params["users"] = users;
 
 
 ```csharp
-doc.Params["firstName"] = "John";
-doc.Params["lastName"] = "Doe";
-doc.Params["age"] = 30;
+builder.WithData("firstName", "John");
+builder.WithData("lastName", "Doe");
+builder.WithData("age", 30);
 ```
 
 ### Object Properties
@@ -241,12 +240,12 @@ doc.Params["age"] = 30;
 
 
 ```csharp
-doc.Params["customer"] = new
+builder.WithData("customer", new
 {
     name = "John Doe",
     email = "john@example.com",
     phone = "555-1234"
-};
+});
 ```
 
 ### Nested Properties
@@ -269,7 +268,7 @@ doc.Params["customer"] = new
 
 
 ```csharp
-doc.Params["user"] = new
+builder.WithData("user", new
 {
     profile = new
     {
@@ -282,7 +281,7 @@ doc.Params["user"] = new
         city = "Springfield",
         state = "IL"
     }
-};
+});
 ```
 
 ---
@@ -293,18 +292,17 @@ doc.Params["user"] = new
 
 **C# Code:**
 ```csharp
-var doc = Document.ParseDocument("business-card.html");
-
-doc.Params["model"] = new
-{
-    name = "John Doe",
-    title = "Software Engineer",
-    company = "Tech Corp",
-    email = "john@techcorp.com",
-    phone = "(555) 123-4567"
-};
-
-doc.SaveAsPDF("business-card.pdf");
+await factory.NewDocument()
+    .WithLayoutFile("business-card.html")
+    .WithData("model", new
+    {
+        name = "John Doe",
+        title = "Software Engineer",
+        company = "Tech Corp",
+        email = "john@techcorp.com",
+        phone = "(555) 123-4567"
+    })
+    .SaveAsync("business-card.pdf");
 ```
 
 **Template (business-card.html):**
@@ -371,24 +369,23 @@ doc.SaveAsPDF("business-card.pdf");
 
 **C# Code:**
 ```csharp
-var doc = Document.ParseDocument("invoice.html");
-
-doc.Params["model"] = new
-{
-    invoiceNumber = "INV-2025-001",
-    date = "2025-01-15",
-    customerName = "Acme Corporation",
-    items = new[]
+await factory.NewDocument()
+    .WithLayoutFile("invoice.html")
+    .WithData("model", new
     {
-        new { description = "Consulting Services", hours = 10, rate = 150.00, total = 1500.00 },
-        new { description = "Software Development", hours = 20, rate = 200.00, total = 4000.00 }
-    },
-    subtotal = 5500.00,
-    tax = 440.00,
-    total = 5940.00
-};
-
-doc.SaveAsPDF("invoice.pdf");
+        invoiceNumber = "INV-2025-001",
+        date = "2025-01-15",
+        customerName = "Acme Corporation",
+        items = new[]
+        {
+            new { description = "Consulting Services", hours = 10, rate = 150.00, total = 1500.00 },
+            new { description = "Software Development", hours = 20, rate = 200.00, total = 4000.00 }
+        },
+        subtotal = 5500.00,
+        tax = 440.00,
+        total = 5940.00
+    })
+    .SaveAsync("invoice.pdf");
 ```
 
 **Template (invoice.html):**
@@ -501,11 +498,10 @@ doc.SaveAsPDF("invoice.pdf");
 ### Load JSON from File
 
 ```csharp
-string jsonContent = File.ReadAllText("data.json");
-var data = JsonSerializer.Deserialize<dynamic>(jsonContent);
-
-doc.Params["model"] = data;
+builder.WithDataFile("model", "data.json");
 ```
+
+A JSON string, `Stream` or remote address can be used in the same way, with `WithData("model", json)` or `WithDataUrl("model", url)`.
 
 **data.json:**
 ```json
@@ -572,7 +568,7 @@ var data = new
     }).ToArray()
 };
 
-doc.Params["model"] = data;
+builder.WithData("model", data);
 ```
 
 **data.xml:**
@@ -632,10 +628,10 @@ doc.Params["model"] = data;
 {% raw %}
 ```csharp
 // Avoid null reference errors
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     user = null  // Or any property could be null
-};
+});
 
 // Safe in template if user is null - just shows nothing
 // {{model.user.name}}
@@ -699,14 +695,14 @@ Pass an array of products from C#.
 
 ```csharp
 // But C# property is: name (lowercase)
-doc.Params["model"] = new { name = "John" };
+builder.WithData("model", new { name = "John" });
 // Won't bind! Property names are case-sensitive
 ```
 
 ✅ **Solution:** Match case exactly
 
 ```csharp
-doc.Params["model"] = new { Name = "John" };
+builder.WithData("model", new { Name = "John" });
 ```
 
 ### ❌ Forgetting to Pass Data
@@ -730,9 +726,10 @@ doc.Params["model"] = new { Name = "John" };
 
 {% raw %}
 ```csharp
-var doc = Document.ParseDocument("template.html");
-// Forgot: doc.Params["model"] = data;
-doc.SaveAsPDF("output.pdf");
+await factory.NewDocument()
+    .WithLayoutFile("template.html")
+    // Forgot: .WithData("model", data)
+    .SaveAsync("output.pdf");
 // Shows: {{model.name}} literally in PDF
 ```
 {% endraw %}
@@ -744,7 +741,7 @@ doc.SaveAsPDF("output.pdf");
 ✅ **Solution:** Always pass data
 
 ```csharp
-doc.Params["model"] = data;
+builder.WithData("model", data);
 ```
 
 ### ❌ Using Wrong Context Name
@@ -765,13 +762,13 @@ doc.Params["model"] = data;
 
 ```csharp
 // But passed as "model"
-doc.Params["model"] = new { name = "John" };
+builder.WithData("model", new { name = "John" });
 ```
 
 ✅ **Solution:** Match context names
 
 ```csharp
-doc.Params["user"] = new { name = "John" };
+builder.WithData("user", new { name = "John" });
 ```
 
 ---

@@ -105,10 +105,10 @@ Evaluated before: `||`
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     age = 20,
     hasLicense = true
-};
+});
 ```
 
 **Output:**
@@ -160,9 +160,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     age = 17
-};
+});
 ```
 
 **Output:**
@@ -191,14 +191,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     maxBudget = 100,
     products = new[] {
         new { name = "Widget A", price = 49.99m, stock = 10 },
         new { name = "Widget B", price = 149.99m, stock = 5 },
         new { name = "Widget C", price = 79.99m, stock = 0 }
     }
-};
+});
 ```
 
 **Output:**

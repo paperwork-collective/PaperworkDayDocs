@@ -66,10 +66,10 @@ The number of minutes between the two datetimes. Positive if endDateTime is afte
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     startTime = new DateTime(2024, 3, 15, 14, 0, 0),
     endTime = new DateTime(2024, 3, 15, 15, 30, 0)
-};
+});
 ```
 
 **Output:**
@@ -93,11 +93,11 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     entryTime = new DateTime(2024, 3, 15, 10, 15, 0),
     exitTime = new DateTime(2024, 3, 15, 14, 45, 0),
     hourlyRate = 5.00
-};
+});
 ```
 
 **Output:**
@@ -128,7 +128,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     calls = new[] {
         new {
             id = "001",
@@ -143,7 +143,7 @@ doc.Params["model"] = new {
             duration = 15
         }
     }
-};
+});
 ```
 
 **Output:**

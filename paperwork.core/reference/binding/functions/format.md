@@ -92,7 +92,7 @@ The formatted string representation of the value.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new { price = 19.99m };
+builder.WithData("model", new { price = 19.99m });
 ```
 
 ### Number Formatting
@@ -119,7 +119,7 @@ doc.Params["model"] = new { price = 19.99m };
 
 **Data:**
 ```csharp
-doc.Params["model"] = new { growth = 0.156 };
+builder.WithData("model", new { growth = 0.156 });
 ```
 
 ### Date Formatting

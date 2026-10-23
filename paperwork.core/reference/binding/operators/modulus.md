@@ -83,14 +83,14 @@ The remainder after dividing the left operand by the right operand.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = new[] {
         new { name = "Item 1" },
         new { name = "Item 2" },
         new { name = "Item 3" },
         new { name = "Item 4" }
     }
-};
+});
 ```
 
 **Output:**
@@ -149,10 +149,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     quantity = 47,
     packSize = 12
-};
+});
 ```
 
 **Output:**

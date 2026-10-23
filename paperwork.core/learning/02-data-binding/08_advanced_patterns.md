@@ -35,7 +35,7 @@ Create documents with variable numbers of sections based on data.
 
 **C# Code:**
 ```csharp
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     documentTitle = "Comprehensive Report",
     sections = new[]
@@ -68,7 +68,7 @@ doc.Params["model"] = new
             }
         }
     }
-};
+});
 ```
 
 **Template:**
@@ -171,7 +171,7 @@ Display hierarchical data with master records and their associated details.
 
 **C# Code:**
 ```csharp
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     reportTitle = "Customer Orders Report",
     reportDate = DateTime.Now,
@@ -236,7 +236,7 @@ doc.Params["model"] = new
             }
         }
     }
-};
+});
 ```
 
 **Template:**
@@ -436,13 +436,13 @@ var grouped = salesData
     })
     .ToArray();
 
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     title = "Sales by Region",
     reportDate = DateTime.Now,
     regions = grouped,
     grandTotal = salesData.Sum(s => s.amount)
-};
+});
 ```
 
 **Template:**
@@ -594,11 +594,11 @@ Create responsive multi-column layouts based on data count.
 
 **C# Code:**
 ```csharp
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     products = productList,
     columnCount = productList.Length <= 3 ? 1 : (productList.Length <= 6 ? 2 : 3)
-};
+});
 ```
 
 **Template:**
@@ -659,8 +659,8 @@ var brandStyle = new
 };
 
 // Apply to multiple documents
-doc.Params["brand"] = brandStyle;
-doc.Params["data"] = actualData;
+builder.WithData("brand", brandStyle);
+builder.WithData("data", actualData);
 ```
 
 **Template:**
@@ -823,7 +823,7 @@ Create an invoice with:
 ```csharp
 // Option 1: Flatten data structure
 // Option 2: Pass needed values at each level
-doc.Params["companyName"] = "Tech Corp";  // Accessible from anywhere
+builder.WithData("companyName", "Tech Corp");  // Accessible from anywhere
 ```
 
 ### ❌ Complex Inline Conditionals
@@ -846,7 +846,7 @@ doc.Params["companyName"] = "Tech Corp";  // Accessible from anywhere
 
 ```csharp
 var displayValue = DetermineDisplayValue(model);
-doc.Params["displayValue"] = displayValue;
+builder.WithData("displayValue", displayValue);
 ```
 
 ### ❌ Repeating Calculations

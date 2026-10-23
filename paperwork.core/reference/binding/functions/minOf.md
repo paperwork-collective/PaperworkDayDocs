@@ -66,13 +66,13 @@ The smallest value of the specified property. Returns null for empty collections
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { name = "Widget A", price = 15.50 },
         new { name = "Widget B", price = 22.00 },
         new { name = "Widget C", price = 8.75 }
     }
-};
+});
 ```
 
 **Output:**
@@ -96,13 +96,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     inventory = new[] {
         new { sku = "A001", quantity = 45 },
         new { sku = "A002", quantity = 5 },
         new { sku = "A003", quantity = 32 }
     }
-};
+});
 ```
 
 **Output:**
@@ -127,13 +127,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     requests = new[] {
         new { endpoint = "/api/users", responseTime = 250 },
         new { endpoint = "/api/orders", responseTime = 180 },
         new { endpoint = "/api/products", responseTime = 320 }
     }
-};
+});
 ```
 
 **Output:**
@@ -156,14 +156,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     participants = new[] {
         new { name = "Alice", age = 28 },
         new { name = "Bob", age = 35 },
         new { name = "Charlie", age = 22 },
         new { name = "Diana", age = 41 }
     }
-};
+});
 ```
 
 **Output:**

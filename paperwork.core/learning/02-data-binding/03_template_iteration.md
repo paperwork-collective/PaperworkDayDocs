@@ -50,7 +50,7 @@ The `{% raw %}{{#each}}{% endraw %}` helper iterates over arrays and collections
 
 **C# Code:**
 ```csharp
-doc.Params["items"] = new[] { "Apple", "Banana", "Orange" };
+builder.WithData("items", new[] { "Apple", "Banana", "Orange" });
 ```
 
 **Template:**
@@ -78,12 +78,12 @@ doc.Params["items"] = new[] { "Apple", "Banana", "Orange" };
 
 **C# Code:**
 ```csharp
-doc.Params["products"] = new[]
+builder.WithData("products", new[]
 {
     new { name = "Widget A", price = 10.00 },
     new { name = "Widget B", price = 15.00 },
     new { name = "Widget C", price = 20.00 }
-};
+});
 ```
 
 **Template:**
@@ -186,7 +186,7 @@ doc.Params["stats"] = new Dictionary<string, int>
 
 **C# Code:**
 ```csharp
-doc.Params["departments"] = new[]
+builder.WithData("departments", new[]
 {
     new
     {
@@ -206,7 +206,7 @@ doc.Params["departments"] = new[]
             new { name = "Alice Brown", title = "Developer" }
         }
     }
-};
+});
 ```
 
 **Template:**
@@ -308,7 +308,7 @@ Handle empty collections gracefully:
 
 **C# Code:**
 ```csharp
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     invoiceNumber = "INV-2025-001",
     items = new[]
@@ -320,7 +320,7 @@ doc.Params["model"] = new
     subtotal = 135.00,
     tax = 10.80,
     total = 145.80
-};
+});
 ```
 
 **Template:**
@@ -404,7 +404,7 @@ doc.Params["model"] = new
 
 **C# Code:**
 ```csharp
-doc.Params["catalog"] = new
+builder.WithData("catalog", new
 {
     categoryName = "Electronics",
     products = new[]
@@ -422,7 +422,7 @@ doc.Params["catalog"] = new
             features = new[] { "5G Enabled", "128GB Storage", "Triple Camera" }
         }
     }
-};
+});
 ```
 
 **Template:**
@@ -488,7 +488,7 @@ doc.Params["catalog"] = new
 
 **C# Code:**
 ```csharp
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     companyName = "Tech Corp",
     employees = new[]
@@ -498,7 +498,7 @@ doc.Params["model"] = new
         new { name = "Carol Williams", department = "Engineering", email = "carol@techcorp.com" },
         new { name = "David Brown", department = "HR", email = "david@techcorp.com" }
     }
-};
+});
 ```
 
 **Template:**
@@ -562,7 +562,7 @@ doc.Params["model"] = new
 
 **C# Code:**
 ```csharp
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     reportTitle = "Q4 2024 Sales Report",
     generatedDate = DateTime.Now,
@@ -590,7 +590,7 @@ doc.Params["model"] = new
             }
         }
     }
-};
+});
 ```
 
 **Template:**

@@ -70,9 +70,9 @@ isMatch(str, pattern)
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     email = "user@example.com"
-};
+});
 ```
 
 **Output:**
@@ -96,9 +96,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     phone = "555-123-4567"
-};
+});
 ```
 
 **Output:**
@@ -155,9 +155,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     code = "ABC123"
-};
+});
 ```
 
 **Output:**

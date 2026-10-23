@@ -65,9 +65,9 @@ e raised to the power of the value (e^value).
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     value = 2
-};
+});
 ```
 
 **Output:**
@@ -87,11 +87,11 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     initial = 1000,
     rate = 0.05,
     time = 10
-};
+});
 ```
 
 **Output:**
@@ -111,11 +111,11 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     initial = 100,
     decayRate = 0.1,
     time = 5
-};
+});
 ```
 
 **Output:**

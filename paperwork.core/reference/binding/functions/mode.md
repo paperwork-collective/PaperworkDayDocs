@@ -65,9 +65,9 @@ The most frequently occurring value. If multiple values tie for most frequent, r
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     scores = new[] { 85, 90, 85, 92, 88, 85, 95 }  // 85 appears 3 times
-};
+});
 ```
 
 **Output:**
@@ -91,9 +91,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     scores = new[] { 78, 85, 85, 90, 85, 92, 88 }
-};
+});
 ```
 
 **Output:**
@@ -117,7 +117,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     orders = new[] {
         new { orderId = 1, productId = "A001" },
         new { orderId = 2, productId = "A002" },
@@ -125,7 +125,7 @@ doc.Params["model"] = new {
         new { orderId = 4, productId = "A003" },
         new { orderId = 5, productId = "A001" }
     }
-};
+});
 ```
 
 **Output:**
@@ -150,7 +150,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     responses = new[] {
         new { respondent = "User1", choice = "Option A" },
         new { respondent = "User2", choice = "Option B" },
@@ -159,7 +159,7 @@ doc.Params["model"] = new {
         new { respondent = "User5", choice = "Option A" },
         new { respondent = "User6", choice = "Option B" }
     }
-};
+});
 ```
 
 **Output:**
@@ -182,7 +182,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     tasks = new[] {
         new { id = 1, status = "active" },
         new { id = 2, status = "completed" },
@@ -190,7 +190,7 @@ doc.Params["model"] = new {
         new { id = 4, status = "pending" },
         new { id = 5, status = "active" }
     }
-};
+});
 ```
 
 **Output:**

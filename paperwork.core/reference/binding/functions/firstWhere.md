@@ -70,14 +70,14 @@ The first item where the specified property equals the given value, or null if n
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     currentUserId = 2,
     users = new[] {
         new { id = 1, name = "Alice", email = "alice@example.com" },
         new { id = 2, name = "Bob", email = "bob@example.com" },
         new { id = 3, name = "Charlie", email = "charlie@example.com" }
     }
-};
+});
 ```
 
 **Output:**
@@ -102,13 +102,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { sku = "WIDGET-001", name = "Premium Widget", price = 29.99, quantity = 45 },
         new { sku = "WIDGET-002", name = "Standard Widget", price = 19.99, quantity = 120 },
         new { sku = "WIDGET-003", name = "Basic Widget", price = 9.99, quantity = 200 }
     }
-};
+});
 ```
 
 **Output:**
@@ -135,13 +135,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     subscriptions = new[] {
         new { planName = "Basic", status = "expired", renewalDate = new DateTime(2024, 1, 15) },
         new { planName = "Pro", status = "active", renewalDate = new DateTime(2024, 4, 20) },
         new { planName = "Enterprise", status = "pending", renewalDate = new DateTime(2024, 3, 30) }
     }
-};
+});
 ```
 
 **Output:**
@@ -166,7 +166,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { id = 101, name = "Widget A", price = 10.00 },
         new { id = 102, name = "Widget B", price = 15.00 },
@@ -177,7 +177,7 @@ doc.Params["model"] = new {
         new { productId = 101, quantity = 3 },
         new { productId = 103, quantity = 1 }
     }
-};
+});
 ```
 
 **Output:**

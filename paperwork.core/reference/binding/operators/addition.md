@@ -83,10 +83,10 @@ The sum of the two operands.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     price = 99.99m,
     tax = 8.00m
-};
+});
 ```
 
 **Output:**

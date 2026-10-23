@@ -65,9 +65,9 @@ A 64-bit integer representation of the value.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     population = "7800000000"
-};
+});
 ```
 
 **Output:**
@@ -87,9 +87,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     bytes = "52428800"
-};
+});
 ```
 
 **Output:**
@@ -109,9 +109,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     timestamp = "1679875200000"
-};
+});
 ```
 
 **Output:**

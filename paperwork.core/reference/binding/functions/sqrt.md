@@ -65,9 +65,9 @@ The square root of the value.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     value = 25
-};
+});
 ```
 
 **Output:**
@@ -87,10 +87,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     dx = 3,
     dy = 4
-};
+});
 ```
 
 **Output:**
@@ -110,9 +110,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     variance = 15.625
-};
+});
 ```
 
 **Output:**

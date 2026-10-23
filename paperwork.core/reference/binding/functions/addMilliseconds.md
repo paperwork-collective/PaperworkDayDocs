@@ -66,9 +66,9 @@ A new DateTime with the specified milliseconds added.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     time = new DateTime(2024, 3, 15, 14, 30, 0, 0)
-};
+});
 ```
 
 **Output:**
@@ -89,10 +89,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     started = new DateTime(2024, 3, 15, 10, 0, 0, 0),
     elapsedMs = 1250
-};
+});
 ```
 
 **Output:**

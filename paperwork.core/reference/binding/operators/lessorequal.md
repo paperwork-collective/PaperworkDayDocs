@@ -84,9 +84,9 @@ Evaluated before: `==`, `!=`, `??`, `&&`, `||`
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     stock = 8
-};
+});
 ```
 
 **Output:**
@@ -127,10 +127,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     attendees = 98,
     capacity = 100
-};
+});
 ```
 
 **Output:**
@@ -173,14 +173,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     maxBudget = 50,
     products = new[] {
         new { name = "Basic Widget", price = 29.99m },
         new { name = "Premium Widget", price = 79.99m },
         new { name = "Standard Widget", price = 49.99m }
     }
-};
+});
 ```
 
 **Output:**

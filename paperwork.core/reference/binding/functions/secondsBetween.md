@@ -66,10 +66,10 @@ The number of seconds between the two datetimes. Positive if endDateTime is afte
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     currentTime = new DateTime(2024, 3, 15, 10, 0, 0),
     launchTime = new DateTime(2024, 3, 15, 10, 5, 30)
-};
+});
 ```
 
 **Output:**
@@ -96,7 +96,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     operations = new[] {
         new {
             name = "Database Query",
@@ -111,7 +111,7 @@ doc.Params["model"] = new {
             threshold = 5
         }
     }
-};
+});
 ```
 
 **Output:**
@@ -133,10 +133,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     startTime = new DateTime(2024, 3, 15, 0, 0, 0),
     endTime = new DateTime(2024, 3, 15, 0, 3, 45)
-};
+});
 ```
 
 **Output:**
@@ -159,14 +159,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     requests = new[] {
         new { responseTime = 2 },
         new { responseTime = 5 },
         new { responseTime = 3 },
         new { responseTime = 8 }
     }
-};
+});
 ```
 
 **Output:**

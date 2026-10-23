@@ -101,10 +101,10 @@ The cosine of the angle (value between -1 and 1).
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     radius = 10,
     angle = Math.PI / 3  // 60 degrees
-};
+});
 ```
 
 **Output:**

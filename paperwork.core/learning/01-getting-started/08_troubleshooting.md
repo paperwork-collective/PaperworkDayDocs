@@ -615,7 +615,7 @@ var model = new
     name = "John Doe",
     email = "john@example.com"
 };
-doc.Params["model"] = model;
+builder.WithData("model", model);
 
 // ✅ Verify property names match
 // Template uses: {{model.name}}

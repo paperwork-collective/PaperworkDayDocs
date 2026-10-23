@@ -65,9 +65,9 @@ The smallest integer greater than or equal to the value.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     price = 19.01m
-};
+});
 ```
 
 **Output:**
@@ -87,10 +87,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = 47,
     itemsPerPage = 10
-};
+});
 ```
 
 **Output:**
@@ -110,10 +110,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     quantity = 38,
     boxSize = 12
-};
+});
 ```
 
 **Output:**
@@ -135,9 +135,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     values = new[] { 1.1, 2.5, 3.9, 4.0 }
-};
+});
 ```
 
 **Output:**

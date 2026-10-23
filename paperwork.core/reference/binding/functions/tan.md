@@ -97,9 +97,9 @@ The tangent of the angle.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     angle = Math.PI / 6  // 30 degrees
-};
+});
 ```
 
 **Output:**

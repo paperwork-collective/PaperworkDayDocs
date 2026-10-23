@@ -70,9 +70,9 @@ An array containing the split substrings.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     tags = "javascript, html, css, react"
-};
+});
 ```
 
 **Output:**
@@ -98,9 +98,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     fullName = "John Doe"
-};
+});
 ```
 
 **Output:**
@@ -125,9 +125,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     path = "home/documents/reports/2024"
-};
+});
 ```
 
 **Output:**
@@ -152,9 +152,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     sentence = "This is a sample sentence"
-};
+});
 ```
 
 **Output:**

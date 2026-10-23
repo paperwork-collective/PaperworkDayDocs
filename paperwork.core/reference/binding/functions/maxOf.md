@@ -66,13 +66,13 @@ The largest value of the specified property. Returns null for empty collections.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { name = "Widget A", price = 15.50 },
         new { name = "Widget B", price = 22.00 },
         new { name = "Widget C", price = 8.75 }
     }
-};
+});
 ```
 
 **Output:**
@@ -95,14 +95,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     orders = new[] {
         new { id = "ORD001", total = 150.00 },
         new { id = "ORD002", total = 520.50 },
         new { id = "ORD003", total = 85.25 },
         new { id = "ORD004", total = 310.75 }
     }
-};
+});
 ```
 
 **Output:**
@@ -128,7 +128,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     servers = new[] {
         new {
             name = "Server-01",
@@ -149,7 +149,7 @@ doc.Params["model"] = new {
             }
         }
     }
-};
+});
 ```
 
 **Output:**
@@ -175,13 +175,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     locations = new[] {
         new { name = "Room A", capacity = 50, attendance = 45 },
         new { name = "Room B", capacity = 100, attendance = 85 },
         new { name = "Room C", capacity = 75, attendance = 60 }
     }
-};
+});
 ```
 
 **Output:**

@@ -99,10 +99,10 @@ Description of what the operator returns.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     value1 = 10,
     value2 = 5
-};
+});
 ```
 
 **Output:**

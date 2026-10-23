@@ -66,13 +66,13 @@ An array containing the values of the specified property from each item.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { name = "Widget A", price = 15.50 },
         new { name = "Widget B", price = 22.00 },
         new { name = "Widget C", price = 8.75 }
     }
-};
+});
 ```
 
 **Output:**
@@ -93,13 +93,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = new[] {
         new { name = "Item A", price = 10.00, quantity = 2 },
         new { name = "Item B", price = 15.50, quantity = 1 },
         new { name = "Item C", price = 8.25, quantity = 3 }
     }
-};
+});
 ```
 
 **Output:**
@@ -121,13 +121,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     orders = new[] {
         new { id = "ORD001", customer = "Alice", total = 150.00 },
         new { id = "ORD002", customer = "Bob", total = 200.00 },
         new { id = "ORD003", customer = "Charlie", total = 175.50 }
     }
-};
+});
 ```
 
 **Output:**
@@ -152,14 +152,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     sales = new[] {
         new { date = "2024-03-01", amount = 1250.00 },
         new { date = "2024-03-02", amount = 1580.50 },
         new { date = "2024-03-03", amount = 1420.00 },
         new { date = "2024-03-04", amount = 1890.25 }
     }
-};
+});
 ```
 
 **Output:**
@@ -187,7 +187,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     teams = new[] {
         new {
             name = "Development",
@@ -204,7 +204,7 @@ doc.Params["model"] = new {
             }
         }
     }
-};
+});
 ```
 
 **Output:**

@@ -80,11 +80,11 @@ Returns the left operand if it's not null, otherwise returns the right operand.
 
 **Data (with name):**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     user = new {
         name = "John Doe"
     }
-};
+});
 ```
 
 **Output:**
@@ -94,11 +94,11 @@ doc.Params["model"] = new {
 
 **Data (without name):**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     user = new {
         name = (string)null
     }
-};
+});
 ```
 
 **Output:**
@@ -123,13 +123,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { name = "Widget A", description = "High quality widget" },
         new { name = "Widget B", description = (string)null },
         new { name = "Widget C", description = "Premium widget" }
     }
-};
+});
 ```
 
 **Output:**
@@ -174,11 +174,11 @@ doc.Params["model"] = new {
 
 **Data (nested null):**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     user = new {
         address = (object)null
     }
-};
+});
 ```
 
 **Output:**
@@ -205,12 +205,12 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = new[] {
         new { name = "Item 1", category = "Electronics", price = 99.99m, notes = "In stock" },
         new { name = "Item 2", category = (string)null, price = (decimal?)null, notes = (string)null }
     }
-};
+});
 ```
 
 **Output:**

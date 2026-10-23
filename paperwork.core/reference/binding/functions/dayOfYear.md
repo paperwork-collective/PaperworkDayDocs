@@ -65,9 +65,9 @@ The day of the year as a number from 1 (January 1st) to 365 or 366 (December 31s
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     date = new DateTime(2024, 3, 15)
-};
+});
 ```
 
 **Output:**
@@ -87,9 +87,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     today = new DateTime(2024, 6, 30)
-};
+});
 ```
 
 **Output:**
@@ -109,10 +109,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     date = new DateTime(2024, 3, 15),
     batchNumber = "A42"
-};
+});
 ```
 
 **Output:**
@@ -142,9 +142,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     date = new DateTime(2024, 8, 15)
-};
+});
 ```
 
 **Output:**
@@ -164,9 +164,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     today = new DateTime(2024, 12, 20)
-};
+});
 ```
 
 **Output:**

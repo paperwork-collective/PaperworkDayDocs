@@ -66,9 +66,9 @@ A new array with items in reverse order (last item becomes first, etc.).
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = new[] { "First", "Second", "Third", "Fourth" }
-};
+});
 ```
 
 **Output:**
@@ -92,13 +92,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { name = "Widget A", price = 29.99 },
         new { name = "Widget B", price = 9.99 },
         new { name = "Widget C", price = 19.99 }
     }
-};
+});
 ```
 
 **Output:**
@@ -124,13 +124,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     orders = new[] {
         new { id = "001", date = new DateTime(2024, 3, 10), total = 150.00 },
         new { id = "002", date = new DateTime(2024, 3, 15), total = 200.00 },
         new { id = "003", date = new DateTime(2024, 3, 12), total = 175.50 }
     }
-};
+});
 ```
 
 **Output:**
@@ -157,9 +157,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     numbers = new[] { 1, 2, 3, 4, 5 }
-};
+});
 ```
 
 **Output:**
@@ -190,13 +190,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     players = new[] {
         new { name = "Alice", score = 850 },
         new { name = "Bob", score = 1200 },
         new { name = "Charlie", score = 950 }
     }
-};
+});
 ```
 
 **Output:**

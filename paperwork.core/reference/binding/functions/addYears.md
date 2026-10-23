@@ -66,9 +66,9 @@ A new DateTime with the specified years added.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     issued = new DateTime(2024, 3, 15)
-};
+});
 ```
 
 **Output:**
@@ -101,10 +101,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     startDate = new DateTime(2024, 1, 1),
     renewalYears = new[] { 1, 2, 3, 5, 10 }
-};
+});
 ```
 
 **Output:**

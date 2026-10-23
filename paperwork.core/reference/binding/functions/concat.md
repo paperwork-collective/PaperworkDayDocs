@@ -76,10 +76,10 @@ All input strings joined together.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     firstName = "John",
     lastName = "Doe"
-};
+});
 ```
 
 **Output:**

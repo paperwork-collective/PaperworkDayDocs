@@ -97,9 +97,9 @@ No parameters. The `{% raw %}{{else}}{% endraw %}` helper is used as a separator
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     hasStock = false
-};
+});
 ```
 
 **Output:**
@@ -125,9 +125,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = new object[] { }  // Empty array
-};
+});
 ```
 
 **Output:**
@@ -158,9 +158,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     user = (object)null
-};
+});
 ```
 
 **Output:**

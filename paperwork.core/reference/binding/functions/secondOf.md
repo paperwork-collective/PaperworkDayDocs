@@ -65,9 +65,9 @@ The second as a number from 0 to 59.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     time = new DateTime(2024, 3, 15, 14, 30, 45)
-};
+});
 ```
 
 **Output:**
@@ -87,9 +87,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     time = new DateTime(2024, 3, 15, 9, 5, 3)
-};
+});
 ```
 
 **Output:**
@@ -115,13 +115,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     events = new[] {
         new { timestamp = new DateTime(2024, 3, 15, 10, 30, 0) },
         new { timestamp = new DateTime(2024, 3, 15, 10, 32, 15) },
         new { timestamp = new DateTime(2024, 3, 15, 10, 35, 0) }
     }
-};
+});
 ```
 
 **Output:**
@@ -146,10 +146,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     startTime = new DateTime(2024, 3, 15, 10, 0, 12),
     endTime = new DateTime(2024, 3, 15, 10, 0, 47)
-};
+});
 ```
 
 **Output:**
@@ -178,9 +178,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     lastSync = new DateTime(2024, 3, 15, 10, 30, 3)
-};
+});
 ```
 
 **Output:**

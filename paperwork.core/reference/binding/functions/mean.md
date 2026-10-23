@@ -65,9 +65,9 @@ The arithmetic mean of all values. Returns null for empty collections.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     temperatures = new[] { 72, 68, 75, 70, 73 }
-};
+});
 ```
 
 **Output:**
@@ -91,9 +91,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     values = new[] { 10, 15, 20, 25, 30, 35, 40 }
-};
+});
 ```
 
 **Output:**
@@ -122,9 +122,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     scores = new[] { 85, 87, 90, 92, 95, 45 }  // 45 is an outlier
-};
+});
 ```
 
 **Output:**
@@ -147,14 +147,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     reviews = new[] {
         new { author = "Alice", rating = 5 },
         new { author = "Bob", rating = 4 },
         new { author = "Charlie", rating = 5 },
         new { author = "Diana", rating = 3 }
     }
-};
+});
 ```
 
 **Output:**

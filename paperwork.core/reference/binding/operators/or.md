@@ -98,10 +98,10 @@ Evaluated after: All other operators
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     isAdmin = false,
     isModerator = true
-};
+});
 ```
 
 **Output:**
@@ -134,9 +134,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     status = "shipped"
-};
+});
 ```
 
 **Output:**
@@ -191,13 +191,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = new[] {
         new { name = "Item A", stock = 5, expirationDays = 60 },
         new { name = "Item B", stock = 50, expirationDays = 15 },
         new { name = "Item C", stock = 8, expirationDays = 10 }
     }
-};
+});
 ```
 
 **Output:**

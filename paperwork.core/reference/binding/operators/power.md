@@ -80,9 +80,9 @@ The base raised to the power of the exponent.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     side = 5
-};
+});
 ```
 
 **Output:**
@@ -102,9 +102,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     side = 3
-};
+});
 ```
 
 **Output:**
@@ -124,11 +124,11 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     principal = 1000m,
     rate = 0.05,
     years = 10
-};
+});
 ```
 
 **Output:**
@@ -158,10 +158,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     value = 1.5,
     decimals = 3
-};
+});
 ```
 
 **Output:**

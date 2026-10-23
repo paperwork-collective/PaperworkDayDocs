@@ -364,7 +364,7 @@ The `format()` function applies .NET format strings to values:
 
 **C# Code:**
 ```csharp
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     companyName = "Tech Corp",
     reportDate = DateTime.Now,
@@ -384,7 +384,7 @@ doc.Params["model"] = new
         new { region = "Europe", revenue = 1800000.00, growth = 0.22 },
         new { region = "Asia Pacific", revenue = 1350000.00, growth = 0.19 }
     }
-};
+});
 ```
 
 **Template:**
@@ -544,7 +544,7 @@ doc.Params["model"] = new
 
 **C# Code:**
 ```csharp
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     catalogTitle = "Spring 2025 Product Catalog",
     publishDate = DateTime.Now,
@@ -598,7 +598,7 @@ doc.Params["model"] = new
             }
         }
     }
-};
+});
 ```
 
 **Template:**

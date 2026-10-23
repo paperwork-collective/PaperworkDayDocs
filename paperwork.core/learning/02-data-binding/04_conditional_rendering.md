@@ -71,7 +71,7 @@ Show content only when a condition is true:
 
 
 ```csharp
-doc.Params["model"] = new { isPremium = true };
+builder.WithData("model", new { isPremium = true });
 ```
 
 ### Null/Empty Checks
@@ -480,7 +480,7 @@ Use the `if()` function for inline conditional values:
 
 **C# Code:**
 ```csharp
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     invoiceNumber = "INV-2025-001",
     customerName = "Acme Corporation",
@@ -499,7 +499,7 @@ doc.Params["model"] = new
     tax = 440.00,
     total = 5940.00,
     notes = "Payment due within 30 days."
-};
+});
 ```
 
 **Template:**
@@ -667,7 +667,7 @@ doc.Params["model"] = new
 
 **C# Code:**
 ```csharp
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     userName = "John Doe",
     userLevel = "premium", // or "standard", "admin"
@@ -691,7 +691,7 @@ doc.Params["model"] = new
         new { type = "warning", message = "Sales down 5% from last month" },
         new { type = "info", message = "New products added to inventory" }
     }
-};
+});
 ```
 
 **Template:**
@@ -891,7 +891,7 @@ var categories = new[]
 var maxRevenue = categories.Max(c => c.revenue);
 var maxValue = Math.Max(maxRevenue, categories.Max(c => c.target));
 
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     reportTitle = "Q4 Sales Performance by Category",
     reportDate = DateTime.Now,
@@ -908,7 +908,7 @@ doc.Params["model"] = new
     chartHeight = 250,
     chartWidth = 550,
     maxValue = maxValue  // Used for scaling calculations in template
-};
+});
 ```
 
 **Template:**

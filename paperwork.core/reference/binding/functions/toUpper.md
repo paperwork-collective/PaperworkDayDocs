@@ -65,9 +65,9 @@ The string converted to uppercase.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     text = "hello world"
-};
+});
 ```
 
 **Output:**
@@ -87,9 +87,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     title = "Important Notice"
-};
+});
 ```
 
 **Output:**
@@ -109,9 +109,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     sku = "wdg-12345-a"
-};
+});
 ```
 
 **Output:**
@@ -131,9 +131,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     name = "john doe"
-};
+});
 ```
 
 **Output:**
@@ -157,12 +157,12 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     alerts = new[] {
         new { level = "warning", message = "Low disk space" },
         new { level = "error", message = "Connection failed" }
     }
-};
+});
 ```
 
 **Output:**

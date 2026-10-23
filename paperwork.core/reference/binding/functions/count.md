@@ -65,9 +65,9 @@ The number of items in the collection. Returns 0 for null or empty collections.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = new[] { "Apple", "Banana", "Cherry", "Date" }
-};
+});
 ```
 
 **Output:**
@@ -90,13 +90,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     orderItems = new[] {
         new { name = "Widget A", price = 10.50 },
         new { name = "Widget B", price = 15.00 },
         new { name = "Widget C", price = 8.75 }
     }
-};
+});
 ```
 
 **Output:**
@@ -123,9 +123,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     notifications = new[] { "Message 1", "Message 2", "Message 3" }
-};
+});
 ```
 
 **Output:**
@@ -145,14 +145,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     tasks = new[] {
         new { name = "Task 1", completed = true },
         new { name = "Task 2", completed = false },
         new { name = "Task 3", completed = true },
         new { name = "Task 4", completed = true }
     }
-};
+});
 ```
 
 **Output:**

@@ -65,9 +65,9 @@ The hour in 24-hour format as a number from 0 (midnight) to 23 (11 PM).
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     time = new DateTime(2024, 3, 15, 14, 30, 0)
-};
+});
 ```
 
 **Output:**
@@ -93,9 +93,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     currentTime = new DateTime(2024, 3, 15, 10, 30, 0)
-};
+});
 ```
 
 **Output:**
@@ -123,9 +123,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     clockIn = new DateTime(2024, 3, 15, 14, 0, 0)
-};
+});
 ```
 
 **Output:**
@@ -151,13 +151,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     transactions = new[] {
         new { time = new DateTime(2024, 3, 15, 14, 30, 0), amount = 5.00 },
         new { time = new DateTime(2024, 3, 15, 18, 15, 0), amount = 7.50 },
         new { time = new DateTime(2024, 3, 15, 21, 0, 0), amount = 5.00 }
     }
-};
+});
 ```
 
 **Output:**

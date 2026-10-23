@@ -65,9 +65,9 @@ The sum of all numeric values in the collection. Returns 0 for empty or null col
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     values = new[] { 10, 20, 30, 40 }
-};
+});
 ```
 
 **Output:**
@@ -91,13 +91,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = new[] {
         new { name = "Widget A", price = 15.50 },
         new { name = "Widget B", price = 22.00 },
         new { name = "Widget C", price = 8.75 }
     }
-};
+});
 ```
 
 **Output:**
@@ -124,14 +124,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     totalBudget = 1000,
     expenses = new[] {
         new { category = "Office", amount = 250 },
         new { category = "Travel", amount = 400 },
         new { category = "Equipment", amount = 180 }
     }
-};
+});
 ```
 
 **Output:**
@@ -156,13 +156,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     students = new[] {
         new { name = "Alice", scores = new[] { 85, 90, 92 } },
         new { name = "Bob", scores = new[] { 78, 82, 88 } },
         new { name = "Charlie", scores = new[] { 95, 93, 97 } }
     }
-};
+});
 ```
 
 **Output:**

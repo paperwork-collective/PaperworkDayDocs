@@ -82,10 +82,10 @@ The angle in radians (between 0 and π).
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     adjacent = 8.66,
     hypotenuse = 10
-};
+});
 ```
 
 **Output:**

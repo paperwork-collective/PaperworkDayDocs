@@ -65,9 +65,9 @@ The largest value in the collection. Returns null for empty collections.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     scores = new[] { 85, 92, 78, 95, 88 }
-};
+});
 ```
 
 **Output:**
@@ -87,14 +87,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { name = "Widget A", price = 15.50 },
         new { name = "Widget B", price = 22.00 },
         new { name = "Widget C", price = 8.75 },
         new { name = "Widget D", price = 31.25 }
     }
-};
+});
 ```
 
 **Output:**
@@ -117,7 +117,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     dailySales = new[] {
         new { day = "Mon", amount = 1250.00 },
         new { day = "Tue", amount = 1580.50 },
@@ -125,7 +125,7 @@ doc.Params["model"] = new {
         new { day = "Thu", amount = 1890.25 },
         new { day = "Fri", amount = 2150.00 }
     }
-};
+});
 ```
 
 **Output:**
@@ -150,13 +150,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     classes = new[] {
         new { name = "Math 101", scores = new[] { 85, 90, 92, 88, 95 } },
         new { name = "English 101", scores = new[] { 78, 82, 88, 75, 91 } },
         new { name = "Science 101", scores = new[] { 95, 93, 97, 92, 89 } }
     }
-};
+});
 ```
 
 **Output:**

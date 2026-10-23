@@ -65,9 +65,9 @@ The number of characters in the string or items in the array.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     text = "Hello World"
-};
+});
 ```
 
 **Output:**
@@ -87,9 +87,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = new[] { "Item 1", "Item 2", "Item 3" }
-};
+});
 ```
 
 **Output:**
@@ -129,9 +129,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     comment = "This is a sample comment."
-};
+});
 ```
 
 **Output:**
@@ -156,13 +156,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { name = "Widget A" },
         new { name = "Widget B" },
         new { name = "Widget C" }
     }
-};
+});
 ```
 
 **Output:**

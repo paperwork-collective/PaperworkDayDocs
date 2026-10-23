@@ -73,9 +73,9 @@ sign(value)
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     balance = -150.00m
-};
+});
 ```
 
 **Output:**
@@ -100,12 +100,12 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     accounts = new[] {
         new { name = "Account A", change = 5.2 },
         new { name = "Account B", change = -3.1 }
     }
-};
+});
 ```
 
 **Output:**

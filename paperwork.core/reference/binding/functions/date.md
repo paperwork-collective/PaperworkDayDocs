@@ -77,9 +77,9 @@ A DateTime object representing the parsed date.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     orderDate = "2024-03-15"
-};
+});
 ```
 
 **Output:**
@@ -99,10 +99,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     today = new DateTime(2024, 3, 1),
     deadline = "2024-03-31"
-};
+});
 ```
 
 **Output:**
@@ -127,13 +127,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     events = new[] {
         new { name = "Conference", dateString = "2024-04-15" },
         new { name = "Workshop", dateString = "2024-05-20" },
         new { name = "Seminar", dateString = "2024-06-10" }
     }
-};
+});
 ```
 
 **Output:**
@@ -165,9 +165,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     orderDate = "2024-03-15"
-};
+});
 ```
 
 **Output:**

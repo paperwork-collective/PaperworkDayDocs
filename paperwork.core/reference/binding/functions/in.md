@@ -66,9 +66,9 @@ Returns `true` if the value exists in the collection, `false` otherwise.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     features = new[] { "basic", "premium", "analytics" }
-};
+});
 ```
 
 **Output:**
@@ -96,14 +96,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     adminRoles = new[] { "admin", "superadmin", "moderator" },
     users = new[] {
         new { name = "Alice", role = "admin" },
         new { name = "Bob", role = "user" },
         new { name = "Charlie", role = "moderator" }
     }
-};
+});
 ```
 
 **Output:**
@@ -133,11 +133,11 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     status = "pending",
     activeStatuses = new[] { "active", "running", "ok" },
     warningStatuses = new[] { "pending", "degraded", "slow" }
-};
+});
 ```
 
 **Output:**
@@ -161,7 +161,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     user = new {
         permissions = new[] { "read", "write", "delete" }
     },
@@ -170,7 +170,7 @@ doc.Params["model"] = new {
         new { id = "write", name = "Edit Data" },
         new { id = "admin", name = "Admin Panel" }
     }
-};
+});
 ```
 
 **Output:**
@@ -196,14 +196,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     priorityCategories = new[] { "urgent", "critical", "high" },
     items = new[] {
         new { name = "Bug Fix", category = "urgent" },
         new { name = "Feature Request", category = "low" },
         new { name = "Security Patch", category = "critical" }
     }
-};
+});
 ```
 
 **Output:**

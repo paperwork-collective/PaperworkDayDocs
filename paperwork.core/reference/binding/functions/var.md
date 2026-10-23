@@ -69,7 +69,7 @@ A formatted CSS var() expression string.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new { };
+builder.WithData("model", new { });
 ```
 
 **Output:**
@@ -93,7 +93,7 @@ doc.Params["model"] = new { };
 
 **Data:**
 ```csharp
-doc.Params["model"] = new { };
+builder.WithData("model", new { });
 ```
 
 **Output:**
@@ -121,12 +121,12 @@ doc.Params["model"] = new { };
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     themes = new[] {
         new { name = "light" },
         new { name = "dark" }
     }
-};
+});
 ```
 
 **Output:**
@@ -166,10 +166,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     title = "Card Title",
     content = "Card content with CSS variables for theming."
-};
+});
 ```
 
 **Output:**
@@ -207,7 +207,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new { };
+builder.WithData("model", new { });
 ```
 
 **Output:**

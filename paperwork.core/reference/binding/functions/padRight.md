@@ -71,13 +71,13 @@ The padded string.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = new[] {
         new { name = "Widget", price = 19.99m },
         new { name = "Gadget", price = 29.99m },
         new { name = "Tool", price = 9.99m }
     }
-};
+});
 ```
 
 **Output:**
@@ -106,12 +106,12 @@ Tool                 $9.99
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { name = "Product A", status = "Active", price = "99.99" },
         new { name = "Product B", status = "Sold Out", price = "149.99" }
     }
-};
+});
 ```
 
 **Output:**
@@ -135,9 +135,9 @@ Product B       Sold Out   $149.99
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     label = "Total"
-};
+});
 ```
 
 **Output:**
@@ -160,9 +160,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     title = "Section Header"
-};
+});
 ```
 
 **Output:**

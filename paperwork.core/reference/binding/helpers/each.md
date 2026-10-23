@@ -79,9 +79,9 @@ Iterate over arrays or collections, rendering the enclosed template for each ite
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = new[] { "Apple", "Banana", "Orange" }
-};
+});
 ```
 
 **Output:**
@@ -113,12 +113,12 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { name = "Widget", price = 19.99m },
         new { name = "Gadget", price = 29.99m }
     }
-};
+});
 ```
 
 ### Using Special Variables

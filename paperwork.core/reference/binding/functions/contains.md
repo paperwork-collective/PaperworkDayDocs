@@ -68,9 +68,9 @@ contains(str, search)
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     description = "This is a premium quality product"
-};
+});
 ```
 
 **Output:**
@@ -97,13 +97,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { name = "Widget" },
         new { name = "Widget Pro" },
         new { name = "Gadget Pro Max" }
     }
-};
+});
 ```
 
 **Output:**
@@ -151,9 +151,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     email = "user@example.com"
-};
+});
 ```
 
 **Output:**

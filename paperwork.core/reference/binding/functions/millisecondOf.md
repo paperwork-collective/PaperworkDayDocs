@@ -65,9 +65,9 @@ The millisecond as a number from 0 to 999.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     time = new DateTime(2024, 3, 15, 14, 30, 45, 123)
-};
+});
 ```
 
 **Output:**
@@ -87,9 +87,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     time = new DateTime(2024, 3, 15, 14, 30, 45, 5)
-};
+});
 ```
 
 **Output:**
@@ -112,13 +112,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     requests = new[] {
         new { endpoint = "/api/users", duration = new DateTime(1, 1, 1, 0, 0, 2, 150) },
         new { endpoint = "/api/orders", duration = new DateTime(1, 1, 1, 0, 0, 0, 850) },
         new { endpoint = "/api/products", duration = new DateTime(1, 1, 1, 0, 0, 1, 500) }
     }
-};
+});
 ```
 
 **Output:**
@@ -149,13 +149,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     measurements = new[] {
         new { name = "Sensor A", timestamp = new DateTime(2024, 3, 15, 10, 0, 0, 0) },
         new { name = "Sensor B", timestamp = new DateTime(2024, 3, 15, 10, 0, 0, 125) },
         new { name = "Sensor C", timestamp = new DateTime(2024, 3, 15, 10, 0, 1, 0) }
     }
-};
+});
 ```
 
 **Output:**
@@ -180,13 +180,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     racers = new[] {
         new { name = "Runner 1", finishTime = new DateTime(1, 1, 1, 0, 5, 23, 450) },
         new { name = "Runner 2", finishTime = new DateTime(1, 1, 1, 0, 5, 25, 120) },
         new { name = "Runner 3", finishTime = new DateTime(1, 1, 1, 0, 5, 23, 890) }
     }
-};
+});
 ```
 
 **Output:**

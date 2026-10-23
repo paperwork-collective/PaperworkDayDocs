@@ -78,15 +78,22 @@ Data binding connects your template to your data. In Scryber, this means:
 
 
 ### C# Code
+
+The data is added to the document builder with `WithData`, using the name the template refers to.
+
 ```csharp
-doc.Params["invoice"] = new {
+var builder = factory.NewDocument().WithLayoutFile("invoice.html");
+
+builder.WithData("invoice", new {
     number = "INV-2025-001",
     total = "$1,250.00",
     items = new[] {
         new { name = "Service A", price = "$500.00" },
         new { name = "Service B", price = "$750.00" }
     }
-};
+});
+
+await builder.SaveAsync("invoice.pdf");
 ```
 
 ### Result

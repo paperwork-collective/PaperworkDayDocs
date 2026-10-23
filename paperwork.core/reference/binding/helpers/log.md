@@ -87,12 +87,12 @@ Output debug messages to the trace log during template processing. Useful for de
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     user = new {
         name = "John Doe",
         id = 12345
     }
-};
+});
 ```
 
 **Log Output:**
@@ -150,13 +150,13 @@ User: John Doe (ID: 12345)
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     orders = new[] {
         new { orderNumber = "12345", total = 1250.00m },
         new { orderNumber = "12346", total = 45.99m },
         new { orderNumber = "12347", total = 2100.00m }
     }
-};
+});
 ```
 
 **Log Output:**

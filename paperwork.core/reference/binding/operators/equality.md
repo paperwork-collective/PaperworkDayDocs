@@ -86,9 +86,9 @@ Compares two values for equality. Returns `true` if values are equal, `false` ot
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     status = "active"
-};
+});
 ```
 
 ### Number Comparison

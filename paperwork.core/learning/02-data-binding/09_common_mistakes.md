@@ -129,7 +129,7 @@ Count the `{% raw %}{{#each}}{% endraw %}` blocks you're inside:
 
 ```csharp
 // C# code
-doc.Params["model"] = new { Name = "John" };  // Capital N
+builder.WithData("model", new { Name = "John" });  // Capital N
 ```
 
 
@@ -150,7 +150,7 @@ doc.Params["model"] = new { Name = "John" };  // Capital N
 ### ✅ Solution: Match Case Exactly
 
 ```csharp
-doc.Params["model"] = new { name = "John" };  // lowercase n
+builder.WithData("model", new { name = "John" });  // lowercase n
 ```
 
 
@@ -180,10 +180,10 @@ Use consistent casing convention:
 ### ❌ Problem: Accessing Null Properties
 
 ```csharp
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     customer = null  // Null object
-};
+});
 ```
 
 
@@ -223,10 +223,10 @@ doc.Params["model"] = new
 Or provide defaults in C#:
 
 ```csharp
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     customer = customerData ?? new { name = "N/A", email = "N/A" }
-};
+});
 ```
 
 ---
@@ -483,17 +483,18 @@ Count your opening and closing tags:
 ### ❌ Problem: Setting Params Too Late
 
 ```csharp
-var doc = Document.ParseDocument("template.html");
-doc.SaveAsPDF("output.pdf");
-doc.Params["model"] = data;  // Too late!
+var builder = factory.NewDocument().WithLayoutFile("template.html");
+await builder.SaveAsync("output.pdf");
+builder.WithData("model", data);  // Too late!
 ```
 
 ### ✅ Solution: Set Parameters Before Saving
 
 ```csharp
-var doc = Document.ParseDocument("template.html");
-doc.Params["model"] = data;  // Set first
-doc.SaveAsPDF("output.pdf");  // Then save
+await factory.NewDocument()
+    .WithLayoutFile("template.html")
+    .WithData("model", data)   // Set first
+    .SaveAsync("output.pdf");  // Then save
 ```
 
 ---
@@ -503,15 +504,15 @@ doc.SaveAsPDF("output.pdf");  // Then save
 ### ❌ Problem: Same Key Used Twice
 
 ```csharp
-doc.Params["model"] = customerData;
-doc.Params["model"] = invoiceData;  // Overwrites customer data!
+builder.WithData("model", customerData);
+builder.WithData("model", invoiceData);  // Overwrites customer data!
 ```
 
 ### ✅ Solution: Use Different Keys
 
 ```csharp
-doc.Params["customer"] = customerData;
-doc.Params["invoice"] = invoiceData;
+builder.WithData("customer", customerData);
+builder.WithData("invoice", invoiceData);
 ```
 
 ---
@@ -540,14 +541,14 @@ var subtotal = price * quantity;
 var tax = subtotal * 0.08;
 var total = subtotal + tax;
 
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     price = price,
     quantity = quantity,
     subtotal = subtotal,
     tax = tax,
     total = total
-};
+});
 ```
 
 
@@ -657,10 +658,10 @@ doc.Params["model"] = new
 ### ❌ Problem: Treating Numbers as Strings
 
 ```csharp
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     price = "123.45"  // String, not number
-};
+});
 ```
 
 
@@ -680,10 +681,10 @@ doc.Params["model"] = new
 ### ✅ Solution: Use Correct Data Types
 
 ```csharp
-doc.Params["model"] = new
+builder.WithData("model", new
 {
     price = 123.45  // Numeric type
-};
+});
 ```
 
 

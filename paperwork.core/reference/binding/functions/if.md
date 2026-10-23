@@ -80,10 +80,10 @@ Returns `trueValue` if condition is true, `falseValue` otherwise.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     name = "John Doe",
     isPremium = true
-};
+});
 ```
 
 **Output:**

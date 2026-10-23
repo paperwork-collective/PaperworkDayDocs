@@ -65,9 +65,9 @@ The year as a 4-digit number (e.g., 2024).
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     currentDate = new DateTime(2024, 3, 15)
-};
+});
 ```
 
 **Output:**
@@ -87,11 +87,11 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     name = "Alice",
     birthDate = new DateTime(1990, 5, 20),
     today = new DateTime(2024, 3, 15)
-};
+});
 ```
 
 **Output:**
@@ -114,13 +114,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     orders = new[] {
         new { orderDate = new DateTime(2023, 6, 15), total = 150.00 },
         new { orderDate = new DateTime(2023, 8, 20), total = 200.00 },
         new { orderDate = new DateTime(2024, 1, 10), total = 175.00 }
     }
-};
+});
 ```
 
 **Output:**
@@ -143,9 +143,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     date = new DateTime(2024, 8, 15)
-};
+});
 ```
 
 **Output:**

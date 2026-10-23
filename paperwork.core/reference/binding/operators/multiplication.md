@@ -80,10 +80,10 @@ The product of the left and right operands.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     quantity = 5,
     price = 19.99m
-};
+});
 ```
 
 **Output:**
@@ -103,10 +103,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     width = 12.5,
     height = 8.0
-};
+});
 ```
 
 **Output:**
@@ -128,10 +128,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     price = 100.00m,
     taxRate = 0.08m
-};
+});
 ```
 
 **Output:**
@@ -166,14 +166,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     data = new[] {
         new { value = 50 },
         new { value = 75 },
         new { value = 100 }
     },
     scaleFactor = 2
-};
+});
 ```
 
 ---

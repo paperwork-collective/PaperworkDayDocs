@@ -67,9 +67,9 @@ The string with all pattern matches replaced.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     text = "Product ABC123 costs $45.99"
-};
+});
 ```
 
 **Output:**
@@ -89,9 +89,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     phone = "555-123-4567"
-};
+});
 ```
 
 **Output:**
@@ -111,9 +111,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     text = "Too    many     spaces"
-};
+});
 ```
 
 **Output:**
@@ -133,9 +133,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     filename = "My File (2024)!.pdf"
-};
+});
 ```
 
 **Output:**
@@ -165,9 +165,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     html = "<strong>Bold</strong> and <em>italic</em> text"
-};
+});
 ```
 
 **Output:**
@@ -188,9 +188,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     date = "03/15/2024"
-};
+});
 ```
 
 **Output:**

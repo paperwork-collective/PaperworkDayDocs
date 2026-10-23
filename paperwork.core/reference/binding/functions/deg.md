@@ -101,9 +101,9 @@ The angle in degrees.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     angles = new[] { 0, Math.PI / 6, Math.PI / 4, Math.PI / 3, Math.PI / 2 }
-};
+});
 ```
 
 **Output:**

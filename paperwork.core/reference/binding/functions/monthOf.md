@@ -65,9 +65,9 @@ The month as a number from 1 (January) to 12 (December).
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     date = new DateTime(2024, 3, 15)
-};
+});
 ```
 
 **Output:**
@@ -87,9 +87,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     date = new DateTime(2024, 8, 15)
-};
+});
 ```
 
 **Output:**
@@ -119,9 +119,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     date = new DateTime(2024, 7, 15)
-};
+});
 ```
 
 **Output:**
@@ -144,13 +144,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     sales = new[] {
         new { date = new DateTime(2024, 1, 15), amount = 5000 },
         new { date = new DateTime(2024, 2, 15), amount = 6000 },
         new { date = new DateTime(2024, 3, 15), amount = 5500 }
     }
-};
+});
 ```
 
 **Output:**

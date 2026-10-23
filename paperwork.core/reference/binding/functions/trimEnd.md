@@ -65,9 +65,9 @@ The string with trailing whitespace removed.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     text = "Hello World   "
-};
+});
 ```
 
 **Output:**
@@ -89,13 +89,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     lines = new[] {
         "Line 1   ",
         "Line 2\t\t",
         "Line 3\n"
     }
-};
+});
 ```
 
 **Output:**
@@ -117,9 +117,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     code = "    function test() {   "
-};
+});
 ```
 
 **Output:**

@@ -67,9 +67,9 @@ The padded string.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     orderNumber = 12345
-};
+});
 ```
 
 **Output:**
@@ -91,13 +91,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     invoices = new[] {
         new { id = 1 },
         new { id = 42 },
         new { id = 999 }
     }
-};
+});
 ```
 
 **Output:**
@@ -123,13 +123,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = new[] {
         new { name = "Widget", price = 19.99m },
         new { name = "Gadget", price = 29.99m },
         new { name = "Tool", price = 9.99m }
     }
-};
+});
 ```
 
 **Output:**
@@ -153,9 +153,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     code = "ABC"
-};
+});
 ```
 
 **Output:**

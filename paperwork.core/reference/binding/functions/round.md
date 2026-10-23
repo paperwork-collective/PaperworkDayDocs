@@ -66,9 +66,9 @@ The rounded value.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     value = 19.6
-};
+});
 ```
 
 **Output:**
@@ -88,9 +88,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     price = 19.995m
-};
+});
 ```
 
 **Output:**
@@ -110,10 +110,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     completed = 17,
     total = 25
-};
+});
 ```
 
 **Output:**
@@ -135,12 +135,12 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     measurements = new[] {
         new { name = "Width", value = 12.3456 },
         new { name = "Height", value = 8.7654 }
     }
-};
+});
 ```
 
 **Output:**

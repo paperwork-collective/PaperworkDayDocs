@@ -65,9 +65,9 @@ The median value. For even-length collections, returns the average of the two mi
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     scores = new[] { 78, 82, 85, 88, 92 }  // Odd count: middle is 85
-};
+});
 ```
 
 **Output:**
@@ -87,9 +87,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     values = new[] { 10, 20, 30, 40 }  // Even count: (20 + 30) / 2 = 25
-};
+});
 ```
 
 **Output:**
@@ -112,9 +112,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     prices = new[] { 10.00, 12.50, 15.00, 18.00, 95.00 }  // 95.00 is outlier
-};
+});
 ```
 
 **Output:**
@@ -142,7 +142,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     households = new[] {
         new { id = 1, income = 45000 },
         new { id = 2, income = 52000 },
@@ -150,7 +150,7 @@ doc.Params["model"] = new {
         new { id = 4, income = 150000 },  // High earner
         new { id = 5, income = 50000 }
     }
-};
+});
 ```
 
 **Output:**
@@ -178,9 +178,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     scores = new[] { 85, 90, 85, 92, 88, 85, 95, 78 }
-};
+});
 ```
 
 **Output:**

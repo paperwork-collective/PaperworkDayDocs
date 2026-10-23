@@ -65,9 +65,9 @@ The day of the week as a number from 0 (Sunday) to 6 (Saturday).
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     date = new DateTime(2024, 3, 15)  // Friday
-};
+});
 ```
 
 **Output:**
@@ -93,9 +93,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     date = new DateTime(2024, 3, 16)  // Saturday
-};
+});
 ```
 
 **Output:**
@@ -120,13 +120,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     appointments = new[] {
         new { date = new DateTime(2024, 3, 15), description = "Team Meeting" },      // Friday
         new { date = new DateTime(2024, 3, 16), description = "Workshop" },          // Saturday
         new { date = new DateTime(2024, 3, 18), description = "Client Call" }       // Monday
     }
-};
+});
 ```
 
 **Output:**
@@ -160,14 +160,14 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     dates = new[] {
         new DateTime(2024, 3, 18),  // Monday
         new DateTime(2024, 3, 20),  // Wednesday
         new DateTime(2024, 3, 22),  // Friday
         new DateTime(2024, 3, 23)   // Saturday
     }
-};
+});
 ```
 
 **Output:**

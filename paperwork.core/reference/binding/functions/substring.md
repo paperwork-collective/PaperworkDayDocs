@@ -67,9 +67,9 @@ The extracted substring.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     fullName = "Christopher Anderson"
-};
+});
 ```
 
 **Output:**
@@ -89,9 +89,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     fullName = "John Doe"
-};
+});
 ```
 
 **Output:**
@@ -120,12 +120,12 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     articles = new[] {
         new { title = "Article 1", content = "Short content." },
         new { title = "Article 2", content = "This is a very long article content that exceeds one hundred characters and should be truncated with a read more link." }
     }
-};
+});
 ```
 
 **Output:**
@@ -152,9 +152,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     fullCode = "PRE-12345678-SUF"
-};
+});
 ```
 
 **Output:**
@@ -174,9 +174,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     name = "alice"
-};
+});
 ```
 
 **Output:**

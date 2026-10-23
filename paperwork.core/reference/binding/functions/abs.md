@@ -77,10 +77,10 @@ The absolute value of the input number.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     actual = 95,
     expected = 100
-};
+});
 ```
 
 **Output:**

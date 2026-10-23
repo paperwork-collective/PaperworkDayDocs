@@ -83,9 +83,9 @@ bool(value)
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     isActiveString = "true"
-};
+});
 ```
 
 **Output:**
@@ -109,9 +109,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     statusCode = 1
-};
+});
 ```
 
 **Output:**
@@ -139,13 +139,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     features = new[] {
         new { name = "Email Notifications", enabled = "true" },
         new { name = "SMS Alerts", enabled = "false" },
         new { name = "Push Notifications", enabled = "1" }
     }
-};
+});
 ```
 
 **Output:**

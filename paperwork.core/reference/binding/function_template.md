@@ -91,9 +91,9 @@ Description of what the function returns.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     value = "input"
-};
+});
 ```
 
 **Output:**

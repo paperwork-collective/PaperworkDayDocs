@@ -36,6 +36,27 @@ This reference covers all data binding features available in Scryber templates, 
 
 ---
 
+## Passing data in the examples
+
+The **Data** examples on these pages show the values passed to the template, using a document builder from the Paperwork.Core factory.
+
+```csharp
+using var factory = PaperworkFactory.Create().Build();
+
+var builder = factory.NewDocument().WithLayoutFile("template.html");
+
+builder.WithData("model", new {
+    firstName = "John",
+    lastName = "Doe"
+});
+
+await builder.SaveAsync("output.pdf");
+```
+
+Each `WithData(name, value)` call makes the value available to the template by its name, e.g. `{% raw %}{{model.firstName}}{% endraw %}`. The value can be any object, or JSON as a string or stream. Use `WithDataFile` or `WithDataUrl` to load JSON from a file or address.
+
+---
+
 ## Handlebars Helpers
 
 Block-level helpers for control flow and iteration in templates.

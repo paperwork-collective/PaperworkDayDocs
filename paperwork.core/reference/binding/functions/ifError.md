@@ -66,10 +66,10 @@ Returns the result of `expression` if successful, otherwise returns `fallbackVal
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     total = 100,
     count = 0  // Would cause division by zero
-};
+});
 ```
 
 **Output:**
@@ -91,12 +91,12 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = new[] {
         new { name = "Item A", details = new { description = "Description A" } },
         new { name = "Item B", details = (object)null }  // Null details
     }
-};
+});
 ```
 
 **Output:**
@@ -117,9 +117,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     userInput = "not a number"
-};
+});
 ```
 
 **Output:**
@@ -141,12 +141,12 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     records = new[] {
         new { id = "A", dateString = "2024-03-15" },
         new { id = "B", dateString = "not-a-date" }
     }
-};
+});
 ```
 
 **Output:**
@@ -167,9 +167,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = new string[] { }  // Empty array
-};
+});
 ```
 
 **Output:**

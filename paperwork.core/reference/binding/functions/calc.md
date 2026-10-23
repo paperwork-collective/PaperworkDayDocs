@@ -67,7 +67,7 @@ A formatted CSS calc() expression string.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new { };
+builder.WithData("model", new { });
 ```
 
 **Output:**
@@ -91,9 +91,9 @@ doc.Params["model"] = new { };
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     indent = 20
-};
+});
 ```
 
 **Output:**
@@ -119,9 +119,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     sidebarWidth = 200
-};
+});
 ```
 
 **Output:**
@@ -149,13 +149,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     columns = new[] {
         new { content = "Column 1" },
         new { content = "Column 2" },
         new { content = "Column 3" }
     }
-};
+});
 ```
 
 **Output:**
@@ -185,11 +185,11 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     title = "Scaled Heading",
     baseFontSize = 12,
     scale = 2.5
-};
+});
 ```
 
 **Output:**

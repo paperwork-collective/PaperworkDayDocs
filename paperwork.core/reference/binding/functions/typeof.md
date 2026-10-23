@@ -82,9 +82,9 @@ The .NET type name of the value.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     value = 42
-};
+});
 ```
 
 **Log Output:**
@@ -142,12 +142,12 @@ Value type: System.Int32
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     user = "John Doe",
     count = 42,
     price = 19.99m,
     isActive = true
-};
+});
 ```
 
 **Output:**

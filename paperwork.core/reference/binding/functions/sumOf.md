@@ -66,13 +66,13 @@ The sum of the specified property across all items. Returns 0 for empty collecti
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     products = new[] {
         new { name = "Widget A", price = 15.50 },
         new { name = "Widget B", price = 22.00 },
         new { name = "Widget C", price = 8.75 }
     }
-};
+});
 ```
 
 **Output:**
@@ -95,13 +95,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     sales = new[] {
         new { date = "2024-03-01", amount = 150.00, quantity = 5 },
         new { date = "2024-03-02", amount = 200.00, quantity = 8 },
         new { date = "2024-03-03", amount = 175.50, quantity = 6 }
     }
-};
+});
 ```
 
 **Output:**
@@ -128,7 +128,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     warehouses = new[] {
         new {
             name = "Warehouse A",
@@ -147,7 +147,7 @@ doc.Params["model"] = new {
             }
         }
     }
-};
+});
 ```
 
 **Output:**
@@ -174,7 +174,7 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     projects = new[] {
         new {
             name = "Project Alpha",
@@ -193,7 +193,7 @@ doc.Params["model"] = new {
             }
         }
     }
-};
+});
 ```
 
 **Output:**

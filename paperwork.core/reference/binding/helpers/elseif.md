@@ -96,9 +96,9 @@ Same as `{% raw %}{{#if}}{% endraw %}`:
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     score = 75
-};
+});
 ```
 
 **Output:**
@@ -131,9 +131,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     status = "processing"
-};
+});
 ```
 
 **Output:**
@@ -163,9 +163,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     age = 17
-};
+});
 ```
 
 **Output:**

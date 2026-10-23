@@ -65,9 +65,9 @@ The minute as a number from 0 to 59.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     time = new DateTime(2024, 3, 15, 14, 30, 0)
-};
+});
 ```
 
 **Output:**
@@ -87,9 +87,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     time = new DateTime(2024, 3, 15, 9, 5, 0)
-};
+});
 ```
 
 **Output:**
@@ -117,9 +117,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     appointmentTime = new DateTime(2024, 3, 15, 14, 30, 0)
-};
+});
 ```
 
 **Output:**
@@ -141,10 +141,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     entry = new DateTime(2024, 3, 15, 10, 15, 0),
     exit = new DateTime(2024, 3, 15, 12, 45, 0)
-};
+});
 ```
 
 **Output:**
@@ -172,13 +172,13 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     meetings = new[] {
         new { startTime = new DateTime(2024, 3, 15, 9, 0, 0) },
         new { startTime = new DateTime(2024, 3, 15, 10, 15, 0) },
         new { startTime = new DateTime(2024, 3, 15, 11, 30, 0) }
     }
-};
+});
 ```
 
 **Output:**

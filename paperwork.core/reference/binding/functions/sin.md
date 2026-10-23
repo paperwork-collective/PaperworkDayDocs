@@ -99,10 +99,10 @@ The sine of the angle (value between -1 and 1).
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     amplitude = 10,
     angle = Math.PI / 4  // 45 degrees
-};
+});
 ```
 
 **Output:**

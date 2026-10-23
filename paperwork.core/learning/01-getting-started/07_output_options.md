@@ -32,12 +32,9 @@ By the end of this article, you'll be able to:
 ### Basic File Save
 
 ```csharp
-var doc = Document.ParseDocument("template.html");
-
-using (var stream = new FileStream("output.pdf", FileMode.Create))
-{
-    doc.SaveAsPDF(stream);
-}
+await factory.NewDocument()
+    .WithLayoutFile("template.html")
+    .SaveAsync("output.pdf");
 ```
 
 ### With Full Path
@@ -650,8 +647,9 @@ return File(pdfBytes, "application/pdf", "doc.pdf");
 ### ❌ Missing Error Handling
 
 ```csharp
-var doc = Document.ParseDocument(template);
-doc.SaveAsPDF("output.pdf");
+await factory.NewDocument()
+    .WithLayoutFile(template)
+    .SaveAsync("output.pdf");
 ```
 
 ✅ **Solution:** Add try-catch

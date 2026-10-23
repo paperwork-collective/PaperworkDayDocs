@@ -65,9 +65,9 @@ A decimal representation with exact precision (28-29 significant digits).
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     price = "19.99"
-};
+});
 ```
 
 **Output:**
@@ -87,10 +87,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     principal = "1000.00",
     rate = "0.05"
-};
+});
 ```
 
 **Output:**
@@ -112,11 +112,11 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     price = "9.99",
     quantity = "3",
     taxRate = "0.08"
-};
+});
 ```
 
 **Output:**

@@ -80,10 +80,10 @@ The quotient of the left operand divided by the right operand.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     total = 487.50m,
     count = 5
-};
+});
 ```
 
 **Output:**
@@ -103,10 +103,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     totalPrice = 149.99m,
     quantity = 12
-};
+});
 ```
 
 **Output:**
@@ -126,10 +126,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     completed = 17,
     total = 25
-};
+});
 ```
 
 **Output:**

@@ -66,9 +66,9 @@ A 32-bit integer representation of the value.
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     stringValue = "42"
-};
+});
 ```
 
 **Output:**
@@ -88,9 +88,9 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     decimalValue = 19.95m
-};
+});
 ```
 
 **Output:**
@@ -111,10 +111,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     items = 47,
     boxSize = 12
-};
+});
 ```
 
 **Output:**
@@ -135,10 +135,10 @@ doc.Params["model"] = new {
 
 **Data:**
 ```csharp
-doc.Params["model"] = new {
+builder.WithData("model", new {
     birthDate = new DateTime(1990, 5, 15),
     today = new DateTime(2024, 3, 15)
-};
+});
 ```
 
 **Output:**
