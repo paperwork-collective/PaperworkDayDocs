@@ -96,6 +96,12 @@ The same fragment added into an element of a parsed HTML template renders correc
 There is no `ParseDocument` overload taking `ParserSettings`; custom settings need
 `(Document)Document.Parse(path, reader, ParseSourceType.LocalFile, settings.Resolver, settings)`. Works, but awkward to document.
 
+### A7. Custom components: `Panel` drops child content; moved collection children don't render
+
+- A custom component deriving from `Panel` (or a `[PDFElement]` property typed `Panel`/`Label`) gets no child content from the template — `Panel` doesn't override `Contents` with `[PDFArray(typeof(Component))]` like `Div` does. Same components work when derived from / typed as `Div`. Should `Panel` parse children?
+- Children parsed into a `[PDFElement("Sections")][PDFArray(typeof(Component))] ComponentList` property and then added to `Contents` in `OnInitialized` don't render (none with 1 column, only the first with 2). `[PDFArray(typeof(Panel))]` on a `ComponentList` fails to parse ("No 'Add' method … accepting Panel").
+- Docs now use `Div` and the component's own `Contents` (verified end to end).
+
 ### A6. FYI — `<title>` overrides `doc.Info.Title`
 
 A `<title>` in the template always replaces a title set in code (plain engine). Probably by design; docs now say so.

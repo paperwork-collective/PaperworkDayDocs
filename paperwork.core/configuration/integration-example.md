@@ -95,9 +95,9 @@ namespace ProductCatalog.Components
         {
         }
         
-        protected override void OnInit(InitContext context)
+        protected override void OnInitialized(InitContext context)
         {
-            base.OnInit(context);
+            base.OnInitialized(context);
             BuildCardContent();
         }
         
@@ -107,9 +107,9 @@ namespace ProductCatalog.Components
             this.Style.Size.Width = 250;
             this.Style.Padding.All = 15;
             this.Style.Margins.All = 10;
-            this.Style.Background.Color = PDFColors.White;
+            this.Style.Background.Color = StandardColors.White;
             this.Style.Border.Width = 1;
-            this.Style.Border.Color = new PDFColor(200, 200, 200);
+            this.Style.Border.Color = new Color(200, 200, 200);
             this.Style.Border.CornerRadius = 8;
             
             // Product image
@@ -144,7 +144,7 @@ namespace ProductCatalog.Components
                 priceLabel.StyleClass = "product-price";
                 priceLabel.Style.Font.FontFamily = new FontSelector("Roboto");
                 priceLabel.Style.Font.FontSize = 20;
-                priceLabel.Style.Fill.Color = new PDFColor(220, 20, 60);
+                priceLabel.Style.Fill.Color = new Color(220, 20, 60);
                 priceLabel.Style.Font.FontBold = true;
                 priceLabel.Style.Margins.Bottom = 8;
                 this.Contents.Add(priceLabel);
@@ -167,7 +167,7 @@ namespace ProductCatalog.Components
                 descLabel.StyleClass = "product-description";
                 descLabel.Style.Font.FontFamily = new FontSelector("Open Sans");
                 descLabel.Style.Font.FontSize = 10;
-                descLabel.Style.Fill.Color = new PDFColor(100, 100, 100);
+                descLabel.Style.Fill.Color = new Color(100, 100, 100);
                 descLabel.Style.Margins.Bottom = 8;
                 this.Contents.Add(descLabel);
             }
@@ -183,7 +183,7 @@ namespace ProductCatalog.Components
                 var stockLabel = new Label();
                 stockLabel.Text = StockLevel;
                 stockLabel.Style.Font.FontSize = 9;
-                stockLabel.Style.Fill.Color = PDFColors.White;
+                stockLabel.Style.Fill.Color = StandardColors.White;
                 stockPanel.Contents.Add(stockLabel);
                 
                 this.Contents.Add(stockPanel);
@@ -194,10 +194,10 @@ namespace ProductCatalog.Components
         {
             return level.ToLower() switch
             {
-                "in stock" => new PDFColor(34, 139, 34),
-                "low stock" => new PDFColor(255, 140, 0),
-                "out of stock" => new PDFColor(220, 20, 60),
-                _ => PDFColors.Gray
+                "in stock" => new Color(34, 139, 34),
+                "low stock" => new Color(255, 140, 0),
+                "out of stock" => new Color(220, 20, 60),
+                _ => StandardColors.Gray
             };
         }
     }
@@ -227,9 +227,9 @@ namespace ProductCatalog.Components
         {
         }
         
-        protected override void OnInit(InitContext context)
+        protected override void OnInitialized(InitContext context)
         {
-            base.OnInit(context);
+            base.OnInitialized(context);
             BuildStars();
         }
         
@@ -245,17 +245,17 @@ namespace ProductCatalog.Components
                 if (i < fullStars)
                 {
                     star.Text = "★";  // Full star
-                    star.Style.Fill.Color = new PDFColor(255, 215, 0);  // Gold
+                    star.Style.Fill.Color = new Color(255, 215, 0);  // Gold
                 }
                 else if (i == fullStars && hasHalfStar)
                 {
                     star.Text = "⯨";  // Half star
-                    star.Style.Fill.Color = new PDFColor(255, 215, 0);
+                    star.Style.Fill.Color = new Color(255, 215, 0);
                 }
                 else
                 {
                     star.Text = "☆";  // Empty star
-                    star.Style.Fill.Color = new PDFColor(200, 200, 200);
+                    star.Style.Fill.Color = new Color(200, 200, 200);
                 }
                 
                 star.Style.Font.FontSize = 14;
@@ -266,7 +266,7 @@ namespace ProductCatalog.Components
             var ratingLabel = new Label();
             ratingLabel.Text = $" {Rating:0.0}";
             ratingLabel.Style.Font.FontSize = 11;
-            ratingLabel.Style.Fill.Color = PDFColors.Gray;
+            ratingLabel.Style.Fill.Color = StandardColors.Gray;
             this.Contents.Add(ratingLabel);
         }
     }

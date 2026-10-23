@@ -61,6 +61,8 @@ namespace MyCompany.Components
     {
         // Properties exposed as XML attributes
         
+        // Text, or a character from an icon font such as Font Awesome -
+        // emoji are not in the standard PDF fonts
         [PDFAttribute("icon")]
         public string Icon { get; set; }
         
@@ -82,9 +84,9 @@ namespace MyCompany.Components
         }
         
         // Initialization lifecycle
-        protected override void OnInit(InitContext context)
+        protected override void OnInitialized(InitContext context)
         {
-            base.OnInit(context);
+            base.OnInitialized(context);
             BuildCardContent();
         }
         
@@ -93,9 +95,9 @@ namespace MyCompany.Components
             // Container styling
             this.Style.Size.Width = 200;
             this.Style.Padding.All = 15;
-            this.Style.Background.Color = new PDFColor(240, 245, 250);
+            this.Style.Background.Color = new Color(240, 245, 250);
             this.Style.Border.Width = 1;
-            this.Style.Border.Color = PDFColors.Gray;
+            this.Style.Border.Color = StandardColors.Gray;
             this.Style.Border.CornerRadius = 8;
             
             // Icon
@@ -105,7 +107,7 @@ namespace MyCompany.Components
                 iconLabel.Text = Icon;
                 iconLabel.StyleClass = "stat-icon";
                 iconLabel.Style.Font.FontSize = 24;
-                iconLabel.Style.Fill.Color = PDFColors.Blue;
+                iconLabel.Style.Fill.Color = StandardColors.Blue;
                 this.Contents.Add(iconLabel);
             }
             
@@ -118,6 +120,7 @@ namespace MyCompany.Components
                 valueLabel.Style.Font.FontSize = 32;
                 valueLabel.Style.Font.FontBold = true;
                 valueLabel.Style.Padding.Top = 8;
+                valueLabel.Style.Position.DisplayMode = DisplayMode.Block;
                 this.Contents.Add(valueLabel);
             }
             
@@ -128,8 +131,9 @@ namespace MyCompany.Components
                 labelText.Text = Label;
                 labelText.StyleClass = "stat-label";
                 labelText.Style.Font.FontSize = 12;
-                labelText.Style.Fill.Color = PDFColors.Gray;
+                labelText.Style.Fill.Color = StandardColors.Gray;
                 labelText.Style.Padding.Top = 4;
+                labelText.Style.Position.DisplayMode = DisplayMode.Block;
                 this.Contents.Add(labelText);
             }
             
@@ -137,13 +141,14 @@ namespace MyCompany.Components
             if (!string.IsNullOrEmpty(Trend))
             {
                 var trendLabel = new Label();
-                trendLabel.Text = (TrendPositive ? "▲ " : "▼ ") + Trend;
+                trendLabel.Text = (TrendPositive ? "Up " : "Down ") + Trend;
                 trendLabel.StyleClass = "stat-trend";
                 trendLabel.Style.Font.FontSize = 11;
                 trendLabel.Style.Fill.Color = TrendPositive 
-                    ? new PDFColor(34, 139, 34) 
-                    : new PDFColor(220, 20, 60);
+                    ? new Color(34, 139, 34) 
+                    : new Color(220, 20, 60);
                 trendLabel.Style.Padding.Top = 4;
+                trendLabel.Style.Position.DisplayMode = DisplayMode.Block;
                 this.Contents.Add(trendLabel);
             }
         }
@@ -180,21 +185,21 @@ namespace MyCompany.Components
         <main>
             
             <!-- Simple usage -->
-            <custom:StatCard icon='💰' 
+            <custom:StatCard icon='$' 
                             value='$125,432' 
                             label='Total Sales' 
                             trend='+12.5%' 
                             trend-positive='true' />
             
             <!-- Negative trend -->
-            <custom:StatCard icon='📉' 
+            <custom:StatCard icon='%' 
                             value='423' 
                             label='Returns' 
                             trend='-5.2%' 
                             trend-positive='false' />
             
             <!-- Without trend -->
-            <custom:StatCard icon='👥' 
+            <custom:StatCard icon='#' 
                             value='1,847' 
                             label='Active Users' />
             
@@ -225,7 +230,7 @@ public string PropertyName { get; set; }
 ```
 
 - **attribute-name**: XML attribute name (defaults to property name, converted to lowercase)
-- Works with: `string`, `int`, `bool`, `double`, `enum`, unit types (`Unit`, `PDFColor`)
+- Works with: `string`, `int`, `bool`, `double`, `enum`, and typed values (`Unit`, `Color`)
 
 ### PDFElement
 
@@ -237,101 +242,68 @@ public Label ChildElement { get; set; }
 ```
 
 - **element-name**: XML child element name
-- Property type must be a component type
+- Property type must be a component type. For an element with child content, use a type that reads its children, such as `Div` - a `Panel` or `Label` property is created, but its content is not read.
 
 ### PDFArray
 
 Maps a property to a collection of child elements.
 
 ```csharp
-[PDFArray(typeof(DataItem))]
-public ComponentList<DataItem> Items { get; set; }
+[PDFElement("Items")]
+[PDFArray(typeof(Component))]
+public ComponentList Items { get; set; }
 ```
 
-- **ElementType**: Type of elements in collection
-- Used with `ComponentList<T>` or `List<T>` where T is a component
+- **ElementType**: Type of elements in collection - use `typeof(Component)` with a `ComponentList`
+- Combined with `[PDFElement]` to name the child element that holds the collection
+- The `ComponentList` is created in the constructor with `new ComponentList(this, ObjectTypes.Panel)`
 
 ## Advanced Component Example
 
-**Multi-column card with child elements:**
+**A card that wraps child content:**
+
+A component that has its own child content in the template derives from `Div`. The child elements are read into its `Contents`, and the component can add to them. (A `Panel` does not read child elements.)
 
 ```csharp
 using Scryber;
 using Scryber.Components;
+using Scryber.Drawing;
 using Scryber.Styles;
 
 namespace MyCompany.Components
 {
     [PDFParsableComponent("DashboardCard")]
-    public class DashboardCard : Panel
+    public class DashboardCard : Div
     {
         [PDFAttribute("title")]
         public string Title { get; set; }
-        
-        [PDFAttribute("columns")]
-        public int Columns { get; set; } = 1;
-        
-        [PDFElement("Header")]
-        public Panel Header { get; set; }
-        
-        [PDFArray(typeof(Panel))]
-        public ComponentList<Panel> Sections { get; set; }
-        
+
         public DashboardCard() : base(ObjectTypes.Panel)
         {
-            this.Sections = new ComponentList<Panel>(this, ObjectTypes.Panel);
         }
-        
-        protected override void OnInit(InitContext context)
+
+        protected override void OnInitialized(InitContext context)
         {
-            base.OnInit(context);
-            
+            base.OnInitialized(context);
+
             // Card container styling
             this.Style.Padding.All = 20;
-            this.Style.Background.Color = PDFColors.White;
+            this.Style.Background.Color = StandardColors.White;
             this.Style.Border.Width = 1;
-            this.Style.Border.Color = PDFColors.Gray;
+            this.Style.Border.Color = StandardColors.Gray;
             this.Style.Border.CornerRadius = 12;
             this.Style.Margins.Bottom = 20;
-            
-            // Build header
-            if (Header != null)
-            {
-                this.Contents.Add(Header);
-            }
-            else if (!string.IsNullOrEmpty(Title))
+
+            // Add the title before the child content from the template
+            if (!string.IsNullOrEmpty(Title))
             {
                 var titleLabel = new Label();
                 titleLabel.Text = Title;
                 titleLabel.Style.Font.FontSize = 18;
                 titleLabel.Style.Font.FontBold = true;
                 titleLabel.Style.Margins.Bottom = 15;
-                this.Contents.Add(titleLabel);
-            }
-            
-            // Multi-column layout for sections
-            if (Sections.Count > 0)
-            {
-                if (Columns > 1)
-                {
-                    var columnContainer = new Div();
-                    columnContainer.Style.ColumnCount = Columns;
-                    columnContainer.Style.ColumnGap = 15;
-                    
-                    foreach (var section in Sections)
-                    {
-                        columnContainer.Contents.Add(section);
-                    }
-                    
-                    this.Contents.Add(columnContainer);
-                }
-                else
-                {
-                    foreach (var section in Sections)
-                    {
-                        this.Contents.Add(section);
-                    }
-                }
+                titleLabel.Style.Position.DisplayMode = DisplayMode.Block;
+                this.Contents.Insert(0, titleLabel);
             }
         }
     }
@@ -341,21 +313,11 @@ namespace MyCompany.Components
 **Template usage:**
 
 ```xml
-<custom:DashboardCard title='Sales Overview' columns='2'>
-    <Sections>
-        <section>
-            <span text='Q1 Sales: $45,000' />
-        </section>
-        <section>
-            <span text='Q2 Sales: $52,000' />
-        </section>
-        <section>
-            <span text='Q3 Sales: $48,000' />
-        </section>
-        <section>
-            <span text='Q4 Sales: $61,000' />
-        </section>
-    </Sections>
+<custom:DashboardCard title='Sales Overview'>
+    <div>Q1 Sales: $45,000</div>
+    <div>Q2 Sales: $52,000</div>
+    <div>Q3 Sales: $48,000</div>
+    <div>Q4 Sales: $61,000</div>
 </custom:DashboardCard>
 ```
 
@@ -366,9 +328,9 @@ Components participate in the standard Scryber lifecycle:
 ### Initialization Phase
 
 ```csharp
-protected override void OnInit(InitContext context)
+protected override void OnInitialized(InitContext context)
 {
-    base.OnInit(context);
+    base.OnInitialized(context);
     
     // Called once after component is constructed and all properties are set
     // Use for: Building child content, setting up initial state
@@ -380,9 +342,9 @@ protected override void OnInit(InitContext context)
 ### Loading Phase
 
 ```csharp
-protected override void OnLoad(LoadContext context)
+protected override void OnLoaded(LoadContext context)
 {
-    base.OnLoad(context);
+    base.OnLoaded(context);
     
     // Called during document load phase
     // Use for: Loading data, accessing services
@@ -479,11 +441,11 @@ public class DashboardController
         <main>
             
             <custom:StatCard id='SalesCard' 
-                            icon='💰' 
+                            icon='$' 
                             label='Total Sales' />
             
             <custom:StatCard id='UsersCard' 
-                            icon='👥' 
+                            icon='#' 
                             label='Active Users' />
             
             <custom:StatCard id='RevenueCard' 
@@ -514,12 +476,13 @@ public class ProductCard : Panel
     [PDFElement("Image")]
     public Image ProductImage { get; set; }
     
+    // A Div reads the child content of the <Description> element
     [PDFElement("Description")]
-    public Label Description { get; set; }
+    public Div Description { get; set; }
     
-    protected override void OnInit(InitContext context)
+    protected override void OnInitialized(InitContext context)
     {
-        base.OnInit(context);
+        base.OnInitialized(context);
         
         // Add product image
         if (ProductImage != null)
@@ -542,7 +505,7 @@ public class ProductCard : Panel
         // Add price
         var priceLabel = new Label { Text = Price.ToString("C") };
         priceLabel.Style.Font.FontSize = 14;
-        priceLabel.Style.Fill.Color = new PDFColor(220, 20, 60);
+        priceLabel.Style.Fill.Color = new Color(220, 20, 60);
         this.Contents.Add(priceLabel);
     }
 }
@@ -560,24 +523,24 @@ public class ChartBar : Panel
     public double Percentage { get; set; }
     
     [PDFAttribute("color")]
-    public string Color { get; set; } = "#3498db";
+    public string BarColor { get; set; } = "#3498db";
     
     [PDFAttribute("height")]
     public Unit Height { get; set; } = 20;
     
-    protected override void OnInit(InitContext context)
+    protected override void OnInitialized(InitContext context)
     {
-        base.OnInit(context);
+        base.OnInitialized(context);
         
         // Bar container
         this.Style.Size.Height = Height;
-        this.Style.Background.Color = PDFColor.Parse("#ecf0f1");
+        this.Style.Background.Color = Color.Parse("#ecf0f1");
         
         // Bar fill
         var fill = new Panel();
         fill.Style.Size.Width = new Unit(Percentage, PageUnits.Percent);
         fill.Style.Size.Height = Height;
-        fill.Style.Background.Color = PDFColor.Parse(Color);
+        fill.Style.Background.Color = Color.Parse(BarColor);
         
         this.Contents.Add(fill);
     }
@@ -589,8 +552,8 @@ public class ChartBar : Panel
 Provide structure for child content:
 
 ```csharp
-[PDFParsableComponent("Section")]
-public class Section : Panel
+[PDFParsableComponent("TitledSection")]
+public class TitledSection : Panel
 {
     [PDFAttribute("title")]
     public string Title { get; set; }
@@ -598,16 +561,17 @@ public class Section : Panel
     [PDFAttribute("collapsible")]
     public bool Collapsible { get; set; }
     
+    // A Div reads the child content of the <Content> element
     [PDFElement("Content")]
-    public Panel ContentPanel { get; set; }
+    public Div ContentPanel { get; set; }
     
-    protected override void OnInit(InitContext context)
+    protected override void OnInitialized(InitContext context)
     {
-        base.OnInit(context);
+        base.OnInitialized(context);
         
         // Section header
         var header = new Div();
-        header.Style.Background.Color = new PDFColor(240, 240, 240);
+        header.Style.Background.Color = new Color(240, 240, 240);
         header.Style.Padding.All = 10;
         
         var titleLabel = new Label { Text = Title };
@@ -643,8 +607,8 @@ public class Section : Panel
 - Support both attributes and child elements where appropriate
 
 ### Lifecycle Usage
-- Use `OnInit` for building child content
-- Use `OnLoad` for loading data
+- Use `OnInitialized` for building child content
+- Use `OnLoaded` for loading data
 - Use `OnDataBinding`/`OnDataBound` for data manipulation
 - Keep lifecycle methods focused and fast
 
@@ -669,7 +633,7 @@ public class Section : Panel
 - Check for type conversion issues
 
 ### Component not rendering
-- Verify `OnInit` is calling `base.OnInit(context)`
+- Verify `OnInitialized` calls `base.OnInitialized(context)`
 - Check child components are added to `Contents`
 - Ensure properties are being set correctly
 - Add trace logging to lifecycle methods

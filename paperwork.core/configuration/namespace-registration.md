@@ -204,9 +204,9 @@ namespace MyCompany.Components
         {
         }
         
-        protected override void OnInit(InitContext context)
+        protected override void OnInitialized(InitContext context)
         {
-            base.OnInit(context);
+            base.OnInitialized(context);
             BuildContent();
         }
         

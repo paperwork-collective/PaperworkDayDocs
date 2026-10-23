@@ -261,9 +261,9 @@ public class Dashboard : Panel
 
 **Lifecycle Usage:**
 ```csharp
-protected override void OnInit(InitContext context)
+protected override void OnInitialized(InitContext context)
 {
-    base.OnInit(context);
+    base.OnInitialized(context);
     
     // ✅ Do: Build child content
     BuildCardContent();
@@ -272,9 +272,9 @@ protected override void OnInit(InitContext context)
     // var data = _httpClient.GetAsync("...").Result;
 }
 
-protected override void OnLoad(LoadContext context)
+protected override void OnLoaded(LoadContext context)
 {
-    base.OnLoad(context);
+    base.OnLoaded(context);
     
     // ✅ Do: Load external data, access services
     var service = context.ServiceProvider.GetService<IDataService>();
@@ -306,9 +306,9 @@ public class ProgressBar : Panel
     public double Percentage { get; set; } = 0;
     
     // Validation in lifecycle method
-    protected override void OnInit(InitContext context)
+    protected override void OnInitialized(InitContext context)
     {
-        base.OnInit(context);
+        base.OnInitialized(context);
         
         // Validate and clamp
         if (Percentage < 0) Percentage = 0;
@@ -522,9 +522,9 @@ public class ReportController
 
 ```csharp
 // ✅ Good: Efficient child creation
-protected override void OnInit(InitContext context)
+protected override void OnInitialized(InitContext context)
 {
-    base.OnInit(context);
+    base.OnInitialized(context);
     
     // Create children once
     BuildContent();
@@ -817,15 +817,15 @@ public class StatCard : Panel
 
 ```csharp
 // ❌ Bad: Missing base call
-protected override void OnInit(InitContext context)
+protected override void OnInitialized(InitContext context)
 {
     BuildContent();  // Base.OnInit not called!
 }
 
 // ✅ Good: Call base first
-protected override void OnInit(InitContext context)
+protected override void OnInitialized(InitContext context)
 {
-    base.OnInit(context);
+    base.OnInitialized(context);
     BuildContent();
 }
 ```
@@ -841,9 +841,9 @@ protected override void OnPreLayout(LayoutContext context)
 }
 
 // ✅ Good: Build structure in Init
-protected override void OnInit(InitContext context)
+protected override void OnInitialized(InitContext context)
 {
-    base.OnInit(context);
+    base.OnInitialized(context);
     this.Contents.Add(new Label());  // Correct phase
 }
 ```
