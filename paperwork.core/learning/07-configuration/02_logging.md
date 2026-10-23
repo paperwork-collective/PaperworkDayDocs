@@ -251,8 +251,10 @@ public class InvoiceGenerator
 | Could not load the image for component ... | The image path or url is wrong, or the request failed |
 | The font ... could not be loaded, falling back to Courier ... | The font is not registered, or not at the requested weight or style |
 | Cannot bind the values for ... | An expression in the template failed - the message gives the reason |
-| Could not compile the expression ... | Invalid expression syntax in the template |
-| Skipping unknown attribute ... | An unknown attribute (an error in Strict mode, skipped in Lax) |
+| Skipping unknown attribute ... | An unknown attribute in Lax mode - logged when `parser-log='true'` is set |
+| No Type could be found in the namespace ... | An unknown element in Lax mode - logged when `parser-log='true'` is set |
+
+Invalid expression syntax, and unknown content in Strict mode, are not logged - they stop the document being generated. See [Error Handling & Conformance](03_error_handling_conformance.html).
 
 ---
 

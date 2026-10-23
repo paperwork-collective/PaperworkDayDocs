@@ -12,555 +12,233 @@ ancestor: Paperwork.Core
 
 # Error Handling & Conformance
 
-Master error handling strategies and conformance modes to build robust PDF generation systems that gracefully handle invalid input and unexpected situations.
+Choose how strictly templates are read, handle documents that cannot be generated, and find the problems in documents that can.
 
 ---
 
 ## Learning Objectives
 
 By the end of this article, you'll be able to:
-- Implement proper error handling
 - Choose between Strict and Lax conformance modes
-- Handle parsing and rendering errors
-- Validate input before generation
-- Build fault-tolerant systems
-- Recover from common errors
+- Know which problems stop a document, and which are logged
+- Handle failures with `BuildAsync`, or with exceptions
+- Report warnings and errors from documents that were generated
 
 ---
 
 ## Conformance Modes
 
-Scryber provides two conformance modes for HTML/CSS parsing:
+The conformance mode decides what happens when a template has content the engine does not know - an unknown element, an unknown attribute, or an attribute value that cannot be used.
 
-### Strict Mode
+| | Strict | Lax (the default) |
+|---|--------|-------------------|
+| Unknown element | The document is not generated | The element is skipped, its content is kept |
+| Unknown attribute | The document is not generated | The attribute is skipped |
+| Best for | Templates you write and test | Templates from other sources |
+
+Set the mode in the template with the processing instruction:
+
+```html
+<?paperwork parser-mode='Strict' ?>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+    ...
+</html>
+```
+
+Add `parser-log='true'` to see what Lax mode skipped - each item is logged as an error in the *Xml Parser* category.
+
+```html
+<?paperwork parser-mode='Lax' parser-log='true' append-log='true' log-level='Warnings' ?>
+```
+
+{: .note }
+> A good approach is Strict while a template is being written, so mistakes are found straight away, and Lax once it is in use.
+
+---
+
+## What Stops a Document
+
+Some problems are always errors, in either mode, because the template cannot be read:
+
+- Invalid XML - `<p>Unclosed <b>bold</p>`
+- An expression that cannot be compiled - `{{concat(model.name, 'x'}}`
+- An incomplete expression, or the wrong number of function parameters
+- Invalid syntax in a `var()` or `calc()` style value
+
+**Missing data is not an error.** A null value part way along a path just gives null, and if the root (such as `model`) has not been set at all, one error is logged and the document is still generated.
+
+The full list is in [Binding, Expression and Template Errors](/paperwork.core/configuration/processing-instructions#binding-expression-and-template-errors).
+
+---
+
+## Handling Failures
+
+### With BuildAsync
+
+`BuildAsync` never throws for a template problem. It returns a `PaperworkResult` with the outcome.
 
 ```csharp
+using Paperwork;
+
+var result = await factory.NewDocument()
+    .WithLayoutFile("invoice.html")
+    .WithData("model", invoice)
+    .BuildAsync();
+
+if (result.Success)
+{
+    await File.WriteAllBytesAsync("invoice.pdf", result.Document.Binary);
+}
+else
+{
+    // e.g. -406 "303. Document could not be created from the layout, check the syntax and sources"
+    Console.WriteLine($"{result.ResultCode}: {result.Message}");
+
+    // The detail - e.g. "The parsed type '...HTMLParagraph' does not contain a definiton
+    // for the attribute with name 'wibble' ... [line 2, pos 53]"
+    Console.WriteLine(result.Error);
+}
+```
+
+`Message` is a general description, and `Error` has the engine's own messages, including the line and position in the template.
+
+### With exceptions
+
+`SaveAsync` and `BuildBytesAsync` throw an `InvalidOperationException` when the document cannot be generated. Its message includes the result message and error.
+
+```csharp
+try
+{
+    await factory.NewDocument()
+        .WithLayoutFile("invoice.html")
+        .WithData("model", invoice)
+        .SaveAsync("invoice.pdf");
+}
+catch (InvalidOperationException ex)
+{
+    _logger.LogError(ex, "Invoice {Number} could not be generated", invoice.Number);
+    throw;
+}
+```
+
+### With an engine Document
+
+`Document.ParseDocument` reads the template straight away, so template problems throw a `Scryber.PDFParserException` from the parse, before the builder is used.
+
+```csharp
+using Scryber;
 using Scryber.Components;
-using Scryber.PDF;
 
-var doc = Document.ParseDocument("template.html");
-doc.ConformanceMode = ParserConformanceMode.Strict;
-
-// Strict mode behavior:
-// - Fails on invalid HTML/CSS
-// - Throws exceptions for errors
-// - Ensures standards compliance
-// - Best for controlled environments
-```
-
-**Use Strict Mode when:**
-- Templates are controlled by your team
-- You want to catch errors early
-- Standards compliance is critical
-- Testing and validation
-
-### Lax Mode
-
-```csharp
-var doc = Document.ParseDocument("template.html");
-doc.ConformanceMode = ParserConformanceMode.Lax;
-
-// Lax mode behavior:
-// - Attempts to recover from errors
-// - Logs warnings instead of failing
-// - Skips invalid elements
-// - Best for user-generated content
-```
-
-**Use Lax Mode when:**
-- Handling user-generated HTML
-- Graceful degradation needed
-- Can't guarantee input quality
-- Production systems
-
----
-
-## Basic Error Handling
-
-### Try-Catch Pattern
-
-```csharp
-using Scryber.Components;
-using Scryber.PDF;
-using System;
-using System.IO;
-
-public void GeneratePDF(string templatePath, Stream output)
+try
 {
-    try
-    {
-        var doc = Document.ParseDocument(templatePath);
-        doc.SaveAsPDF(output);
-        Console.WriteLine("PDF generated successfully");
-    }
-    catch (PDFException ex)
-    {
-        // Scryber-specific errors
-        Console.WriteLine($"PDF Generation Error: {ex.Message}");
-        throw;
-    }
-    catch (FileNotFoundException ex)
-    {
-        // File errors
-        Console.WriteLine($"Template not found: {ex.FileName}");
-        throw;
-    }
-    catch (Exception ex)
-    {
-        // Other errors
-        Console.WriteLine($"Unexpected error: {ex.Message}");
-        throw;
-    }
+    using var doc = Document.ParseDocument("invoice.html");
+
+    await factory.NewDocument()
+        .WithLayout(doc)
+        .WithData("model", invoice)
+        .SaveAsync("invoice.pdf");
 }
-```
-
-### With Logging
-
-```csharp
-using Scryber.Logging;
-
-public void GeneratePDFWithLogging(string templatePath, Stream output)
+catch (PDFParserException ex)
 {
-    var logger = new PDFCollectorTraceLog(TraceRecordLevel.Verbose);
-
-    try
-    {
-        var doc = Document.ParseDocument(templatePath);
-        doc.TraceLog = logger;
-        doc.SaveAsPDF(output);
-    }
-    catch (Exception ex)
-    {
-        // Log includes diagnostic information
-        Console.WriteLine($"Error: {ex.Message}");
-        Console.WriteLine("\nDiagnostic Log:");
-
-        foreach (var entry in logger.Entries)
-        {
-            Console.WriteLine($"[{entry.Level}] {entry.Message}");
-        }
-
-        throw;
-    }
+    // The template could not be read
+    _logger.LogError(ex, "The invoice template is invalid");
+    throw;
 }
 ```
 
 ---
 
-## Conformance-Based Error Handling
+## Reporting Problems in Generated Documents
 
-### Strict Mode with Validation
-
-```csharp
-public void GenerateStrictPDF(string templatePath, Stream output)
-{
-    var logger = new PDFCollectorTraceLog(TraceRecordLevel.Verbose);
-
-    try
-    {
-        var doc = Document.ParseDocument(templatePath);
-        doc.ConformanceMode = ParserConformanceMode.Strict;
-        doc.TraceLog = logger;
-
-        doc.SaveAsPDF(output);
-    }
-    catch (PDFException ex)
-    {
-        // Document has invalid HTML/CSS
-        Console.WriteLine("Document validation failed:");
-        Console.WriteLine(ex.Message);
-
-        // Show specific errors from log
-        var errors = logger.Entries
-            .Where(e => e.Level == TraceRecordLevel.Errors)
-            .ToList();
-
-        foreach (var error in errors)
-        {
-            Console.WriteLine($"  - {error.Category}: {error.Message}");
-        }
-
-        throw;
-    }
-}
-```
-
-### Lax Mode with Warning Checks
+A document can be generated and still have problems - a missing image, a font that was not found, a binding that failed. Collect them with a `CollectorTraceLog` (see [Logging](02_logging.html)).
 
 ```csharp
-public bool GenerateLaxPDF(string templatePath, Stream output)
-{
-    var logger = new PDFCollectorTraceLog(TraceRecordLevel.Warnings);
-
-    try
-    {
-        var doc = Document.ParseDocument(templatePath);
-        doc.ConformanceMode = ParserConformanceMode.Lax;
-        doc.TraceLog = logger;
-
-        doc.SaveAsPDF(output);
-
-        // Check for warnings
-        var warnings = logger.Entries
-            .Where(e => e.Level == TraceRecordLevel.Warnings)
-            .ToList();
-
-        if (warnings.Any())
-        {
-            Console.WriteLine($"PDF generated with {warnings.Count} warnings:");
-            foreach (var warning in warnings.Take(5))
-            {
-                Console.WriteLine($"  - {warning.Message}");
-            }
-
-            // Return false to indicate issues (but PDF was generated)
-            return false;
-        }
-
-        return true;
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"PDF generation failed: {ex.Message}");
-        throw;
-    }
-}
-```
-
----
-
-## Input Validation
-
-### Pre-Generation Validation
-
-```csharp
-public class DocumentValidator
-{
-    public ValidationResult ValidateTemplate(string templatePath)
-    {
-        var result = new ValidationResult();
-
-        // Check file exists
-        if (!File.Exists(templatePath))
-        {
-            result.Errors.Add($"Template file not found: {templatePath}");
-            return result;
-        }
-
-        // Check file is readable
-        try
-        {
-            var content = File.ReadAllText(templatePath);
-
-            // Basic HTML validation
-            if (!content.Contains("<html") && !content.Contains("<HTML"))
-            {
-                result.Warnings.Add("Template may not be valid HTML");
-            }
-
-            // Check for required elements
-            if (!content.Contains("<body") && !content.Contains("<BODY"))
-            {
-                result.Warnings.Add("Template missing body element");
-            }
-        }
-        catch (Exception ex)
-        {
-            result.Errors.Add($"Cannot read template: {ex.Message}");
-            return result;
-        }
-
-        result.IsValid = !result.Errors.Any();
-        return result;
-    }
-
-    public ValidationResult ValidateData(object data)
-    {
-        var result = new ValidationResult();
-
-        if (data == null)
-        {
-            result.Errors.Add("Data cannot be null");
-            result.IsValid = false;
-            return result;
-        }
-
-        // Add specific data validation logic here
-
-        result.IsValid = !result.Errors.Any();
-        return result;
-    }
-}
-
-public class ValidationResult
-{
-    public bool IsValid { get; set; }
-    public List<string> Errors { get; set; } = new List<string>();
-    public List<string> Warnings { get; set; } = new List<string>();
-}
-
-// Usage
-var validator = new DocumentValidator();
-var validationResult = validator.ValidateTemplate("template.html");
-
-if (!validationResult.IsValid)
-{
-    Console.WriteLine("Validation failed:");
-    foreach (var error in validationResult.Errors)
-    {
-        Console.WriteLine($"  - {error}");
-    }
-    return;
-}
-
-// Proceed with generation
-GeneratePDF("template.html", output);
-```
-
----
-
-## Practical Examples
-
-### Example 1: Robust Invoice Generator
-
-```csharp
+using Scryber;
 using Scryber.Components;
 using Scryber.Logging;
-using Scryber.PDF;
-using System;
-using System.IO;
-using System.Linq;
 
-public class RobustInvoiceGenerator
+using var doc = Document.ParseDocument("invoice.html");
+
+var log = new CollectorTraceLog(TraceRecordLevel.Warnings, "Invoice", autostart: true);
+doc.AddTraceLog(log);
+
+var result = await factory.NewDocument()
+    .WithLayout(doc)
+    .WithData("model", invoice)
+    .BuildAsync();
+
+foreach (var entry in log)
 {
-    private readonly string _templatePath;
-    private readonly ILogger _logger;
+    // e.g. [Error] Data Binding: The expression {model.name} failed for 'text:kdd_text1' ...
+    //      The root variable of the expression has not been set or is null ...
+    Console.WriteLine($"[{entry.Level}] {entry.Category}: {entry.Message}");
+}
+```
 
-    public RobustInvoiceGenerator(string templatePath, ILogger logger)
+---
+
+## Practical Example: Invoice Generator
+
+```csharp
+public record InvoiceOutcome(bool Success, byte[] Pdf, string Message, IReadOnlyList<string> Problems);
+
+public class InvoiceGenerator
+{
+    private readonly IPaperworkFactory _factory;
+    private readonly ILogger<InvoiceGenerator> _logger;
+
+    public InvoiceGenerator(IPaperworkFactory factory, ILogger<InvoiceGenerator> logger)
     {
-        _templatePath = templatePath;
+        _factory = factory;
         _logger = logger;
     }
 
-    public GenerationResult Generate(Invoice invoice, Stream output)
+    public async Task<InvoiceOutcome> GenerateAsync(Invoice invoice)
     {
-        var result = new GenerationResult { InvoiceNumber = invoice.Number };
-        var scryberLogger = new PDFCollectorTraceLog(TraceRecordLevel.Warnings);
-
-        try
-        {
-            // Validate input
-            ValidateInvoice(invoice);
-
-            // Load and configure document
-            var doc = Document.ParseDocument(_templatePath);
-            doc.ConformanceMode = ParserConformanceMode.Lax;  // Graceful degradation
-            doc.TraceLog = scryberLogger;
-
-            // Set metadata
-            doc.Info.Title = $"Invoice {invoice.Number}";
-            doc.Info.Author = invoice.CompanyName;
-
-            // Bind data
-            doc.Params["invoice"] = invoice;
-
-            // Generate
-            doc.SaveAsPDF(output);
-
-            // Check for warnings
-            var warnings = scryberLogger.Entries
-                .Where(e => e.Level == TraceRecordLevel.Warnings)
-                .Select(e => e.Message)
-                .ToList();
-
-            if (warnings.Any())
-            {
-                result.Warnings.AddRange(warnings);
-                _logger.LogWarning($"Invoice {invoice.Number} generated with {warnings.Count} warnings");
-            }
-
-            result.Success = true;
-            result.Message = "Invoice generated successfully";
-        }
-        catch (ArgumentException ex)
-        {
-            // Validation error
-            result.Success = false;
-            result.Message = $"Invalid invoice data: {ex.Message}";
-            _logger.LogError(ex, $"Validation failed for invoice {invoice.Number}");
-        }
-        catch (PDFException ex)
-        {
-            // PDF generation error
-            result.Success = false;
-            result.Message = $"PDF generation failed: {ex.Message}";
-            result.LogEntries.AddRange(scryberLogger.Entries.Select(e => e.Message));
-            _logger.LogError(ex, $"PDF generation failed for invoice {invoice.Number}");
-        }
-        catch (Exception ex)
-        {
-            // Unexpected error
-            result.Success = false;
-            result.Message = $"Unexpected error: {ex.Message}";
-            _logger.LogError(ex, $"Unexpected error generating invoice {invoice.Number}");
-        }
-
-        return result;
-    }
-
-    private void ValidateInvoice(Invoice invoice)
-    {
+        // Check the data before generating
         if (string.IsNullOrWhiteSpace(invoice.Number))
-            throw new ArgumentException("Invoice number is required");
+            return new InvoiceOutcome(false, null, "Invoice number is required", Array.Empty<string>());
 
-        if (string.IsNullOrWhiteSpace(invoice.CompanyName))
-            throw new ArgumentException("Company name is required");
+        if (invoice.Items == null || invoice.Items.Count == 0)
+            return new InvoiceOutcome(false, null, "An invoice needs at least one item", Array.Empty<string>());
 
-        if (invoice.Items == null || !invoice.Items.Any())
-            throw new ArgumentException("Invoice must have at least one item");
-
-        if (invoice.Total <= 0)
-            throw new ArgumentException("Invoice total must be positive");
-    }
-}
-
-public class GenerationResult
-{
-    public bool Success { get; set; }
-    public string Message { get; set; }
-    public string InvoiceNumber { get; set; }
-    public List<string> Warnings { get; set; } = new List<string>();
-    public List<string> LogEntries { get; set; } = new List<string>();
-}
-
-// Usage
-var generator = new RobustInvoiceGenerator("invoice-template.html", logger);
-
-using (var output = new FileStream("invoice.pdf", FileMode.Create))
-{
-    var result = generator.Generate(invoice, output);
-
-    if (result.Success)
-    {
-        Console.WriteLine($"✓ {result.Message}");
-
-        if (result.Warnings.Any())
-        {
-            Console.WriteLine($"  {result.Warnings.Count} warnings (see logs)");
-        }
-    }
-    else
-    {
-        Console.WriteLine($"✗ {result.Message}");
-
-        if (result.LogEntries.Any())
-        {
-            Console.WriteLine("  Diagnostic information:");
-            foreach (var entry in result.LogEntries.Take(10))
-            {
-                Console.WriteLine($"    - {entry}");
-            }
-        }
-    }
-}
-```
-
-### Example 2: User-Generated Content Handler
-
-```csharp
-public class UserContentHandler
-{
-    public PDFGenerationResult GenerateFromUserContent(
-        string userHtml,
-        object userData,
-        Stream output)
-    {
-        var result = new PDFGenerationResult();
-        var logger = new PDFCollectorTraceLog(TraceRecordLevel.Warnings);
-
+        Document doc;
         try
         {
-            // Sanitize user HTML (basic example - use proper sanitization library)
-            var sanitizedHtml = SanitizeHtml(userHtml);
-
-            // Create document from string
-            var doc = Document.ParseDocument(new StringReader(sanitizedHtml));
-
-            // ALWAYS use Lax mode for user content
-            doc.ConformanceMode = ParserConformanceMode.Lax;
-            doc.TraceLog = logger;
-
-            // Bind user data
-            doc.Params["data"] = userData;
-
-            // Generate
-            doc.SaveAsPDF(output);
-
-            // Collect warnings for user feedback
-            result.Success = true;
-            result.Warnings = logger.Entries
-                .Where(e => e.Level == TraceRecordLevel.Warnings)
-                .Select(e => new UserFriendlyWarning
-                {
-                    Message = SimplifyWarningMessage(e.Message),
-                    Category = e.Category
-                })
-                .ToList();
-
-            if (result.Warnings.Any())
-            {
-                result.Message = $"PDF generated with {result.Warnings.Count} issues";
-            }
-            else
-            {
-                result.Message = "PDF generated successfully";
-            }
+            doc = Document.ParseDocument("Templates/invoice.html");
         }
-        catch (Exception ex)
+        catch (PDFParserException ex)
         {
-            result.Success = false;
-            result.Message = "Failed to generate PDF from provided content";
-            result.TechnicalDetails = ex.Message;
+            _logger.LogError(ex, "The invoice template is invalid");
+            return new InvoiceOutcome(false, null, "The invoice template is invalid", new[] { ex.Message });
         }
 
-        return result;
+        using (doc)
+        {
+            var log = new CollectorTraceLog(TraceRecordLevel.Warnings, "Invoice", autostart: true);
+            doc.AddTraceLog(log);
+
+            var result = await _factory.NewDocument()
+                .WithLayout(doc)
+                .WithData("model", invoice)
+                .BuildAsync();
+
+            var problems = log.Select(e => $"{e.Category}: {e.Message}").ToList();
+
+            if (!result.Success)
+            {
+                _logger.LogError("Invoice {Number} failed: {Message} {Error}",
+                    invoice.Number, result.Message, result.Error);
+                return new InvoiceOutcome(false, null, result.Message, problems);
+            }
+
+            if (problems.Count > 0)
+                _logger.LogWarning("Invoice {Number} generated with {Count} problems",
+                    invoice.Number, problems.Count);
+
+            return new InvoiceOutcome(true, result.Document.Binary, "Generated", problems);
+        }
     }
-
-    private string SanitizeHtml(string html)
-    {
-        // Use HtmlSanitizer or similar library in production
-        // This is a simplified example
-        return html;
-    }
-
-    private string SimplifyWarningMessage(string technicalMessage)
-    {
-        // Convert technical messages to user-friendly ones
-        if (technicalMessage.Contains("font not found"))
-            return "Some text may not display with the requested font";
-
-        if (technicalMessage.Contains("image not found"))
-            return "Some images could not be loaded";
-
-        if (technicalMessage.Contains("invalid CSS"))
-            return "Some styling may not be applied correctly";
-
-        return "Minor issue detected (document still generated)";
-    }
-}
-
-public class PDFGenerationResult
-{
-    public bool Success { get; set; }
-    public string Message { get; set; }
-    public string TechnicalDetails { get; set; }
-    public List<UserFriendlyWarning> Warnings { get; set; } = new List<UserFriendlyWarning>();
-}
-
-public class UserFriendlyWarning
-{
-    public string Message { get; set; }
-    public string Category { get; set; }
 }
 ```
 
@@ -568,131 +246,61 @@ public class UserFriendlyWarning
 
 ## Try It Yourself
 
-### Exercise 1: Validation Framework
+### Exercise 1: Strict and Lax
 
-Build a validation framework that:
-- Checks template exists
-- Validates HTML structure
-- Verifies required data fields
-- Returns detailed validation results
-- Tests with various inputs
+Add an unknown attribute to a template. Generate it in Strict mode and look at `result.Error`, then in Lax mode with `parser-log='true'` and an appended log.
 
-### Exercise 2: Error Recovery
+### Exercise 2: Missing Data
 
-Implement error recovery that:
-- Catches specific exception types
-- Logs detailed error information
-- Attempts alternative approaches
-- Provides fallback behavior
-- Tests with invalid inputs
+Generate a template without setting its `model`, and find the binding error in a `CollectorTraceLog`.
 
-### Exercise 3: Conformance Comparison
+### Exercise 3: Friendly Messages
 
-Create a comparison tool that:
-- Generates same document in Strict and Lax modes
-- Compares results
-- Shows differences in error handling
-- Documents best practices
+Turn the result of a failed `BuildAsync` into a message your users would understand, and log the detail for yourself.
 
 ---
 
 ## Common Pitfalls
 
-### ❌ No Error Handling
+### ❌ Not Checking the Result
 
 ```csharp
-// Fails silently or crashes
-var doc = Document.ParseDocument("template.html");
-doc.SaveAsPDF(stream);
+var result = await builder.BuildAsync();
+await File.WriteAllBytesAsync("invoice.pdf", result.Document.Binary);   // null on failure
 ```
 
-✅ **Solution:**
+✅ **Solution:** Check `result.Success`, or use `SaveAsync` and catch the exception.
 
-```csharp
-try
-{
-    var doc = Document.ParseDocument("template.html");
-    doc.SaveAsPDF(stream);
-}
-catch (PDFException ex)
-{
-    Logger.LogError($"PDF generation failed: {ex.Message}");
-    throw;
-}
-```
+### ❌ Strict Mode for Templates You Don't Control
 
-### ❌ Wrong Conformance Mode
+Any unknown attribute stops the document.
 
-```csharp
-// Strict mode with user-generated content - will fail often
-doc.ConformanceMode = ParserConformanceMode.Strict;
-```
-
-✅ **Solution:**
-
-```csharp
-// Lax mode for user content
-doc.ConformanceMode = ParserConformanceMode.Lax;
-```
+✅ **Solution:** Use Lax for templates from users or other systems, and log what was skipped.
 
 ### ❌ Ignoring Warnings
 
-```csharp
-// Warnings ignored - issues not addressed
-var logger = new PDFCollectorTraceLog(TraceRecordLevel.Warnings);
-doc.TraceLog = logger;
-doc.SaveAsPDF(stream);
-// Never check logger.Entries
-```
+A generated document can still be missing an image or a value.
 
-✅ **Solution:**
-
-```csharp
-var logger = new PDFCollectorTraceLog(TraceRecordLevel.Warnings);
-doc.TraceLog = logger;
-doc.SaveAsPDF(stream);
-
-// Check and report warnings
-if (logger.Entries.Any(e => e.Level == TraceRecordLevel.Warnings))
-{
-    ReportWarnings(logger.Entries);
-}
-```
+✅ **Solution:** Collect `Warnings` and above, and report them.
 
 ---
 
 ## Error Handling Checklist
 
-- [ ] Try-catch blocks around PDF generation
-- [ ] Specific exception handling (PDFException, FileNotFoundException)
-- [ ] Logging enabled for diagnostics
-- [ ] Appropriate conformance mode chosen
-- [ ] Input validation before generation
-- [ ] Warnings checked and reported
-- [ ] Error messages user-friendly
-- [ ] Recovery strategies implemented
-
----
-
-## Best Practices
-
-1. **Always Use Try-Catch** - Never assume success
-2. **Lax Mode for User Content** - Graceful degradation
-3. **Strict Mode for Testing** - Catch issues early
-4. **Log Everything** - Diagnostic information crucial
-5. **Validate Input** - Before attempting generation
-6. **Check Warnings** - Even in Lax mode
-7. **User-Friendly Messages** - Translate technical errors
-8. **Test Error Paths** - Verify error handling works
+- [ ] Conformance mode chosen for each template
+- [ ] `result.Success` checked, or exceptions caught
+- [ ] `result.Error` logged for failures
+- [ ] Warnings and errors collected for generated documents
+- [ ] Data checked before generating
+- [ ] Messages for users are friendly, details go to the log
 
 ---
 
 ## Next Steps
 
-1. **[PDF Versions](04_pdf_versions.html)** - Version and compliance settings
-2. **[Security](05_security.html)** - Protect your documents
-3. **[Production & Deployment](07_production_deployment.html)** - Production best practices
+1. **[Security](05_security.html)** - Protect your documents
+2. **[Production & Deployment](07_production_deployment.html)** - Production best practices
 
 ---
 
-**Continue learning →** [PDF Versions](04_pdf_versions.html)
+**Continue learning →** [Security](05_security.html)
