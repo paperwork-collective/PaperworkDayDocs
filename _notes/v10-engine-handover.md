@@ -104,6 +104,8 @@ A `<title>` in the template always replaces a title set in code (plain engine). 
 
 ## B. Paperwork.Core (if this is also yours — otherwise please pass on)
 
+> **Status 2026-10-23:** the Review HTML5 session owns Scryber.Core only and has **not** taken the B items (Paperwork.Core is a separate repo). A1 and A2 confirmed against source; A items going to Richard for scope and order. **B items need an owner — Richard to decide.**
+
 | # | Issue | Where |
 |---|---|---|
 | B1 | **Two build paths behave differently.** Any `WithData(name, object)`, `WithLayout(Document/IComponent)` or `WithStyle(StyleGroup)` switches to `BuildDirectAsync`, which ignores `WithLogLevel`, throws for `WithLayoutUrl`/`WithDataUrl` ("Remote URLs require the factory path"), and skips the factory's auth and file-request services. JSON/string-only data uses the factory path, where the opposite holds. **Docs assume fix** (log level applies in both). | `Generation/v1/DocumentBuilderV1.cs` |
