@@ -93,7 +93,7 @@ builder.WithData("model", new {
 ```csharp
 builder.WithData("model", new {
     items = new[] {
-        new { name = "Item A", details = new { description = "Description A" } },
+        new { name = "Item A", details = (object)new { description = "Description A" } },
         new { name = "Item B", details = (object)null }  // Null details
     }
 });

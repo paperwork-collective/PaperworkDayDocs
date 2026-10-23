@@ -630,7 +630,7 @@ builder.WithData("model", data);
 // Avoid null reference errors
 builder.WithData("model", new
 {
-    user = null  // Or any property could be null
+    user = (object)null  // Or any property could be null
 });
 
 // Safe in template if user is null - just shows nothing

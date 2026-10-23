@@ -207,7 +207,7 @@ builder.WithData("model", new {
 ```csharp
 builder.WithData("model", new {
     items = new[] {
-        new { name = "Item 1", category = "Electronics", price = 99.99m, notes = "In stock" },
+        new { name = "Item 1", category = "Electronics", price = (decimal?)99.99m, notes = "In stock" },
         new { name = "Item 2", category = (string)null, price = (decimal?)null, notes = (string)null }
     }
 });

@@ -182,7 +182,7 @@ Use consistent casing convention:
 ```csharp
 builder.WithData("model", new
 {
-    customer = null  // Null object
+    customer = (object)null  // Null object
 });
 ```
 

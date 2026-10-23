@@ -200,9 +200,9 @@ Pre-calculate values in C# and pass them to templates:
 ```csharp
 var items = new[]
 {
-    new { description = "Item 1", quantity = 5, price = 10.00 },
-    new { description = "Item 2", quantity = 3, price = 15.00 },
-    new { description = "Item 3", quantity = 2, price = 20.00 }
+    new { description = "Item 1", quantity = 5, price = 10.00m },
+    new { description = "Item 2", quantity = 3, price = 15.00m },
+    new { description = "Item 3", quantity = 2, price = 20.00m }
 };
 
 // Calculate totals

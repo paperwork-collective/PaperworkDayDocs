@@ -38,7 +38,7 @@ Create documents with variable numbers of sections based on data.
 builder.WithData("model", new
 {
     documentTitle = "Comprehensive Report",
-    sections = new[]
+    sections = new object[]
     {
         new
         {
