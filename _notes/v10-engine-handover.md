@@ -115,11 +115,11 @@ Data binding fails: "Databinding failed for component …_NOOP1, Specified metho
 
 `Fonts:Register` entries ignore their `Weight`/`Style`; the face is added at the file's own weight, and there's no nearest-weight fallback - a Light (300) file isn't used for `font-weight: normal`, and Helvetica is used silently. Intended?
 
-### A10. `@first` / `@last` are not implemented
+### A10. `@first` / `@last` are not implemented — FIXED (scryber.core 99163184, unreleased)
 
 `{{@first}}` fails at parse ("Unrecognised token '@first'"); only `@index` is special-cased in the tokeniser/parser. Docs, the quick start chart and CLAUDE.md list `@first`/`@last`. Requested for v10 (output and `{{#if @first}}`). Workaround meanwhile: `{{@index == 0}}`.
 
-### A11. `../` returns nothing inside `{{#each}}`
+### A11. `../` returns nothing inside `{{#each}}` — FIXED (scryber.core 99163184, unreleased; `../` single level, `../this.name` empty, use `../name`)
 
 Works in `{{#with}}` (`{{#with model}}{{#with groups[0]}}{{../title}}` gives the title), but in `{{#each}}` - nested or not - `../name`, `../this.name`, `../../name` all return empty. So the parent loop item cannot be reached from an inner loop. Expected `{{../name}}` in an inner each to give the outer item's name. Richard wants the docs to say `../` is single level only (not chained).
 

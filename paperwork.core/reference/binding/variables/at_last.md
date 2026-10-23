@@ -71,6 +71,8 @@ Widget, Gadget, Gizmo
 ## Notes
 
 - Equivalent to `@index == count(collection) - 1`.
+- Works in output, in `{{#if}}` conditions, in functions such as {% raw %}`{{if(@last, '.', ',')}}`{% endraw %}, and in CSS expressions inside the loop.
+- With a single item, `@first` and `@last` are both `true`. Outside a loop both are `false`. In nested loops each refers to the innermost loop.
 - Useful for separators, borders and headings that only belong on the last item.
 
 {: .note }
