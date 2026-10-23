@@ -12,111 +12,99 @@ grand_parent_url: /paperwork.core/
 
 # Document Configuration
 
-Configure logging, security, conformance, and optimization for production-ready PDF documents.
+Configure metadata, logging, error handling, security and performance for production-ready documents.
 
 ---
 
 ## Table of Contents
 
-1. [Document Properties](01_document_properties.html) - Title, author, metadata, custom properties
-2. [Logging](02_logging.html) - Log levels, handlers, performance logging, troubleshooting
-3. [Error Handling & Conformance](03_error_handling_conformance.html) - Strict/Lax modes, validation, recovery
+1. [Document Properties](01_document_properties.html) - Title, author, subject and keywords
+2. [Logging](02_logging.html) - Log levels, collecting entries, custom log handlers
+3. [Error Handling & Conformance](03_error_handling_conformance.html) - Strict and Lax modes, handling failures
 <!-- 4. [PDF Versions](04_pdf_versions.html) - PDF versions, PDF/A, PDF/X compliance -->
 5. [Security](05_security.html) - Encryption, passwords, permissions
 6. [Optimization & Performance](06_optimization_performance.html) - File size, compression, caching, scaling
-7. [Production & Deployment](07_production_deployment.html) - Production config, monitoring, troubleshooting
+7. [Production & Deployment](07_production_deployment.html) - Production setup, monitoring, troubleshooting
 
 ---
 
 ## Overview
 
-Moving from development to production requires proper configuration. This series covers everything you need to create secure, compliant, performant PDFs that are ready for enterprise deployment.
+Most configuration can be done in two places:
 
-## What is Document Configuration?
+- **In the template** - `<title>`, `<meta>` tags and the `<?paperwork ?>` processing instruction. The template carries its own settings wherever it is used.
+- **In code** - on the document builder, or on an engine `Document` that is parsed, configured and passed to the builder with `WithLayout(doc)`. See [The Engine Document](/paperwork.core/configuration/engine-document).
 
-Document configuration controls:
-
-- **Metadata** - Title, author, keywords for document information
-- **Logging** - Diagnostic information and error tracking
-- **Error Handling** - How the system responds to problems
-- **Conformance** - Strict vs lax HTML/CSS parsing
-<!-- - **PDF Version** - PDF/A, PDF/X compliance -->
-- **Security** - Encryption, passwords, and permissions
-- **Performance** - Optimization and resource management
+Settings that apply to every document - fonts, image caching, output compression, logging - go in the application's configuration. See [Configuration Structure](/paperwork.core/configuration/configuration-structure).
 
 ## Quick Example
 
+**In the template:**
+
+{% raw %}
+```html
+<?paperwork parser-mode='Lax' ?>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <title>Invoice {{model.number}}</title>
+    <meta name='author' content='Acme Corporation' />
+    <meta name='description' content='Invoice for {{model.customerName}}' />
+    <meta name='keywords' content='invoice, {{model.number}}' />
+
+    <meta name='print-restrictions' content='printing, accessibility' />
+</head>
+<body>
+    ...
+</body>
+</html>
+```
+{% endraw %}
+
+**In code:**
+
 ```csharp
+using Paperwork;
+using Scryber;
 using Scryber.Components;
-using Scryber.PDF;
 using Scryber.Logging;
+using Scryber.PDF.Secure;
 
-// Load document
-var doc = Document.ParseDocument("template.html");
+using var factory = PaperworkFactory.Create().Build();
+using var doc = Document.ParseDocument("invoice.html");
 
-// Set metadata
-doc.Info.Title = "Annual Report 2025";
-doc.Info.Author = "Acme Corporation";
-doc.Info.Subject = "Financial Results";
-doc.Info.Keywords = "annual, report, 2025, financial";
+// Collect any warnings or errors
+var log = new CollectorTraceLog(TraceRecordLevel.Warnings, "Invoice", autostart: true);
+doc.AddTraceLog(log);
 
-// Configure logging
-doc.TraceLog = new PDFCollectorTraceLog(TraceRecordLevel.Verbose);
+// Protect the restrictions with an owner password
+doc.RenderOptions.PasswordProvider = new DocumentPasswordProvider(ownerPassword);
 
-// Set conformance mode
-doc.ConformanceMode = ParserConformanceMode.Lax;
+var result = await factory.NewDocument()
+    .WithLayout(doc)
+    .WithData("model", invoice)
+    .BuildAsync();
 
-// Add security
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions()
-{
-    UserPassword = "user123",
-    OwnerPassword = "owner456",
-    AllowPrinting = true,
-    AllowCopying = false
-};
-
-// Optimize performance
-doc.RenderOptions.Compression = PDFCompressionType.FlateDecode;
-doc.RenderOptions.ImageCacheDurationMinutes = 60;
-
-// Generate PDF
-using (var stream = new FileStream("output.pdf", FileMode.Create))
-{
-    doc.SaveAsPDF(stream);
-}
-
-// Review log
-foreach (var entry in ((PDFCollectorTraceLog)doc.TraceLog).Entries)
-{
+foreach (var entry in log)
     Console.WriteLine($"{entry.Level}: {entry.Message}");
-}
 ```
 
 ## What You'll Learn
 
-This series covers production-ready configuration:
-
 ### 1. [Document Properties](01_document_properties.html)
-- Title, author, subject, keywords
-- Creator and producer
-- Metadata and custom properties
-- Document information dictionary
+- Title, author, subject and keywords from the template
+- Setting properties in code
+- Bound values in metadata
 
 ### 2. [Logging](02_logging.html)
-- **Scryber logging system**
-- Log levels (Error, Warning, Info, Verbose)
-- Configuring logging output
+- Log levels
+- Appending the log to the document
+- Collecting log entries in code
 - Custom log handlers
-- Performance and diagnostic logging
-- Log analysis and troubleshooting
 
 ### 3. [Error Handling & Conformance](03_error_handling_conformance.html)
-- Error handling strategies
-- Try-catch patterns
-- **Strict vs Lax conformance modes**
-- HTML conformance
-- Validation and error recovery
-- Graceful degradation
+- Strict and Lax conformance modes
+- Handling generation failures with `BuildAsync`
+- Graceful degradation for missing data
 
 <!-- ### 4. [PDF Versions](04_pdf_versions.html)
 - PDF version selection (1.4 - 2.0)
@@ -125,47 +113,38 @@ This series covers production-ready configuration:
 - Feature compatibility by version -->
 
 ### 5. [Security](05_security.html)
-- Document encryption
-- User and owner passwords
-- Permission levels (printing, copying, editing)
-- Form filling permissions
-- Security best practices
+- Restrictions in the template
+- Owner and user passwords
+- Permissions in code
 
 ### 6. [Optimization & Performance](06_optimization_performance.html)
-- File size optimization
-- Image compression
-- Font subsetting
-- Resource caching
-- Performance best practices
-- Memory management
-- Benchmarking and scaling
+- File size
+- Image and font choices
+- Re-using the factory
+- Scaling generation
 
 ### 7. [Production & Deployment](07_production_deployment.html)
 - Production configuration
-- Error handling in production
-- Monitoring and alerting
-- Backup and recovery
+- Monitoring and logging
 - Common deployment scenarios
-- Troubleshooting guide
+- Troubleshooting
 
 ## Prerequisites
 
-Before starting this series:
-
-- **Complete [Getting Started](/paperwork.core/learning/01-getting-started/)** - Basic Scryber knowledge
-- **Understand C# Basics** - Configuration is typically done in code
+- **Complete [Getting Started](/paperwork.core/learning/01-getting-started/)**
+- **Read [The Factory and the Document Builder](/paperwork.core/quickstart/factory_builder)**
 
 ## Key Concepts
 
-### Document Metadata
+### Conformance Modes
 
-```csharp
-doc.Info.Title = "My Document";
-doc.Info.Author = "John Doe";
-doc.Info.Subject = "Important Information";
-doc.Info.Keywords = "pdf, scryber, documentation";
-doc.Info.Creator = "Scryber.Core";
-```
+**Strict:**
+- Unknown elements, attributes and invalid values are errors
+- Best for templates you control and test
+
+**Lax** (the default):
+- Unknown content is skipped and logged
+- Best for templates from other sources
 
 ### Logging Levels
 
@@ -177,308 +156,45 @@ Errors   → Critical problems
 Off      → No logging
 ```
 
-### Conformance Modes
-
-**Strict Mode:**
-- Fails on invalid HTML/CSS
-- Ensures standards compliance
-- Best for controlled environments
-
-**Lax Mode:**
-- Attempts to recover from errors
-- Logs warnings instead of failing
-- Best for user-generated content
-
-### Security Options
-
-```csharp
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions()
-{
-    // Passwords
-    UserPassword = "user123",      // Required to open
-    OwnerPassword = "owner456",    // Required to change permissions
-
-    // Permissions
-    AllowPrinting = true,
-    AllowCopying = false,
-    AllowAnnotations = false,
-    AllowFormFilling = true,
-    AllowAccessibility = true,
-    AllowDocumentAssembly = false,
-    AllowHighQualityPrinting = true
-};
-```
-
-## Logging Configuration
-
-### Console Logging
-
-```csharp
-// Simple console output
-doc.TraceLog = new PDFTraceLog();
-doc.TraceLog.SetRecordLevel(TraceRecordLevel.Messages);
-```
-
-### Collector Logging
-
-```csharp
-// Collect entries for analysis
-var logger = new PDFCollectorTraceLog(TraceRecordLevel.Verbose);
-doc.TraceLog = logger;
-
-// Generate document
-doc.SaveAsPDF(stream);
-
-// Analyze log entries
-foreach (var entry in logger.Entries)
-{
-    if (entry.Level == TraceRecordLevel.Errors)
-    {
-        Console.WriteLine($"ERROR: {entry.Message}");
-    }
-}
-```
-
-### Custom Logging
-
-```csharp
-public class CustomTraceLog : PDFTraceLog
-{
-    public override void Begin(TraceRecordLevel level, string category, string message)
-    {
-        // Custom logging to database, file, etc.
-        LogToDatabase(level, category, message);
-    }
-}
-
-doc.TraceLog = new CustomTraceLog();
-```
-
-## Error Handling Patterns
-
-### Basic Try-Catch
-
-```csharp
-try
-{
-    var doc = Document.ParseDocument("template.html");
-    doc.SaveAsPDF(stream);
-}
-catch (PDFException ex)
-{
-    // Scryber-specific errors
-    Console.WriteLine($"PDF Error: {ex.Message}");
-}
-catch (Exception ex)
-{
-    // Other errors
-    Console.WriteLine($"Error: {ex.Message}");
-}
-```
-
-### Conformance-Based Error Handling
-
-```csharp
-// Strict mode - fail fast
-doc.ConformanceMode = ParserConformanceMode.Strict;
-
-try
-{
-    doc.SaveAsPDF(stream);
-}
-catch (PDFException ex)
-{
-    // Document has invalid HTML/CSS
-    LogError(ex);
-    throw;
-}
-
-// Lax mode - attempt recovery
-doc.ConformanceMode = ParserConformanceMode.Lax;
-doc.SaveAsPDF(stream);
-
-// Check log for warnings
-if (logger.HasErrors)
-{
-    // Document generated but with issues
-    NotifyAdmin(logger.Entries);
-}
-```
-
-## Security Examples
-
-### Read-Only PDF
-
-```csharp
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions()
-{
-    UserPassword = "",              // No password to open
-    OwnerPassword = "secret123",    // Password to change permissions
-    AllowPrinting = true,
-    AllowCopying = false,
-    AllowAnnotations = false,
-    AllowFormFilling = false
-};
-```
-
-### Confidential Document
-
-```csharp
-doc.RenderOptions.SecurityOptions = new PDFSecurityOptions()
-{
-    UserPassword = "confidential",   // Password required to open
-    OwnerPassword = "admin123",
-    AllowPrinting = false,
-    AllowCopying = false,
-    AllowAnnotations = false
-};
-```
-
-## Performance Optimization
-
-### Image Compression
-
-```csharp
-doc.RenderOptions.Compression = PDFCompressionType.FlateDecode;
-doc.RenderOptions.ImageCacheDurationMinutes = 60;
-
-// Image quality (0-100, higher = better quality, larger file)
-doc.RenderOptions.ImageQuality = 85;
-```
-
-### Font Subsetting
-
-```csharp
-// Only embed used characters
-doc.RenderOptions.FontSubsetting = true;
-
-// File size: 2MB → 200KB
-```
-
-### Resource Caching
-
-```csharp
-// Cache remote resources
-doc.RenderOptions.ImageCacheDurationMinutes = 120;
-
-// Improves performance for repeated generation
-```
-
-## Real-World Configuration
-
-### Production Invoice Generator
-
-```csharp
-public class InvoiceGenerator
-{
-    public void GenerateInvoice(Invoice invoice, Stream output)
-    {
-        var doc = Document.ParseDocument("invoice-template.html");
-
-        // Metadata
-        doc.Info.Title = $"Invoice {invoice.Number}";
-        doc.Info.Author = "Acme Corp";
-        doc.Info.Subject = $"Invoice for {invoice.CustomerName}";
-        doc.Info.Keywords = $"invoice,{invoice.Number},{invoice.Year}";
-
-        // Production logging
-        var logger = new PDFCollectorTraceLog(TraceRecordLevel.Warnings);
-        doc.TraceLog = logger;
-
-        // Lax mode for customer data
-        doc.ConformanceMode = ParserConformanceMode.Lax;
-
-        // Security
-        doc.RenderOptions.SecurityOptions = new PDFSecurityOptions()
-        {
-            AllowPrinting = true,
-            AllowCopying = false
-        };
-
-        // Optimization
-        doc.RenderOptions.Compression = PDFCompressionType.FlateDecode;
-        doc.RenderOptions.FontSubsetting = true;
-
-        // Data binding
-        doc.Params["invoice"] = invoice;
-
-        // Generate
-        try
-        {
-            doc.SaveAsPDF(output);
-
-            // Log any warnings
-            if (logger.Entries.Any(e => e.Level == TraceRecordLevel.Warnings))
-            {
-                LogWarnings(invoice.Number, logger.Entries);
-            }
-        }
-        catch (PDFException ex)
-        {
-            LogError(invoice.Number, ex);
-            throw;
-        }
-    }
-}
-```
-
-## Learning Path
-
-**Recommended progression:**
-
-1. **Set Document Properties** - Metadata basics
-2. **Configure Logging** - Diagnostic information
-3. **Handle Errors** - Conformance and recovery
-5. **Add Security** - Protection and permissions
-6. **Optimize Performance** - Production-ready
-7. **Deploy to Production** - Best practices
-
 ## Tips for Success
 
-1. **Log Everything in Development** - Use Verbose level
-2. **Log Warnings in Production** - Balance detail and noise
-3. **Use Lax Mode for User Content** - Graceful degradation
-4. **Use Strict Mode for Controlled Content** - Ensure quality
-5. **Always Set Metadata** - Helps users find documents
-6. **Test Security Settings** - Verify permissions work
-7. **Benchmark Performance** - Optimize based on data
-8. **Cache Resources** - Reduce generation time
+1. **Log everything in development** - `WithLogLevel(PaperworkRequestLogOption.Verbose)`
+2. **Collect warnings in production** - and send them to your logging system
+3. **Use Lax mode for templates you don't control**
+4. **Use Strict mode while developing your own templates**
+5. **Always set a title** - PDF viewers show it instead of the file name
+6. **Set an owner password whenever you restrict a document**
+7. **Re-use one factory** for the whole application
 
 ## Common Pitfalls
 
-❌ **Not handling errors**
+❌ **Ignoring the result**
+
 ```csharp
-// Fails silently
-doc.SaveAsPDF(stream);
+var result = await factory.NewDocument()
+    .WithLayoutFile("invoice.html")
+    .BuildAsync();
+
+await File.WriteAllBytesAsync("invoice.pdf", result.Document.Binary);
 ```
 
-✅ **Proper error handling**
+✅ **Check for success**
+
 ```csharp
-try
+if (!result.Success)
 {
-    doc.SaveAsPDF(stream);
+    _logger.LogError("Invoice failed: {Message} {Error}", result.Message, result.Error);
+    return;
 }
-catch (PDFException ex)
-{
-    Log.Error($"PDF generation failed: {ex.Message}");
-    throw;
-}
+
+await File.WriteAllBytesAsync("invoice.pdf", result.Document.Binary);
 ```
 
-❌ **No logging in production**
-```csharp
-// Can't diagnose issues
-doc.TraceLog = null;
-```
-
-✅ **Always log warnings and errors**
-```csharp
-doc.TraceLog = new PDFCollectorTraceLog(TraceRecordLevel.Warnings);
-```
+Or use `SaveAsync` or `BuildBytesAsync`, which throw an exception when generation fails.
 
 ## Next Steps
 
-Ready to configure production-ready documents? Start with [Document Properties](01_document_properties.html) to learn about metadata.
+Start with [Document Properties](01_document_properties.html).
 
 Jump to specific topics:
 - [Logging](02_logging.html) for diagnostic information
