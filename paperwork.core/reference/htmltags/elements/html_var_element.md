@@ -34,7 +34,34 @@ The `<var>` element serves a dual purpose in Scryber:
 1. **Semantic Markup**: Represents a variable or mathematical expression (rendered in italic by default)
 2. **Data Storage**: Stores values in the document parameters using `data-id` and `data-value` attributes
 
-When a `<var>` element includes both `data-id` and `data-value` attributes, the value is stored in `Document.Params` and can be retrieved anywhere in the document using `{% raw %}{{params.data-id-value}}{% endraw %}`.
+When a `<var>` element includes both `data-id` and `data-value` attributes, the value is stored in the document parameters under the `data-id` name, and can be used in any later [binding expression](/paperwork.core/reference/binding/) by that name, e.g. `{% raw %}{{totalAmount}}{% endraw %}`.
+
+---
+
+## Temporary and incrementing values
+
+A `<var>` is a simple way to keep a value while the document is bound - a calculation used several times, a running total, or a counter. Set it once, then set it again with the same `data-id` to update it: the `data-value` is a [binding expression](/paperwork.core/reference/binding/), and can use the current value.
+
+{% raw %}
+```html
+<!-- Start a counter and a running total -->
+<var data-id='count' data-value='{{0}}'></var>
+<var data-id='running' data-value='{{0}}'></var>
+
+{{#each model.items}}
+    <!-- Update them for each item -->
+    <var data-id='count' data-value='{{count + 1}}'></var>
+    <var data-id='running' data-value='{{running + this.price}}'></var>
+    <p>{{count}}. {{this.name}} - running total {{running}}</p>
+{{/each}}
+
+<p>{{count}} items, total {{running}}</p>
+```
+{% endraw %}
+
+- Values are set in document order, as the template is bound, so a value is only available after the `<var>` that sets it.
+- A starting value is written as a binding, e.g. `{% raw %}{{0}}{% endraw %}` or `{% raw %}{{'text'}}{% endraw %}` - a plain `data-value='0'` is not read.
+- See [Names](/paperwork.core/reference/binding/navigation/names) for how stored values are referred to in expressions.
 
 ---
 
@@ -50,13 +77,13 @@ When a `<var>` element includes both `data-id` and `data-value` attributes, the 
 <var data-id="totalAmount" data-value="{{model.total}}"></var>
 
 <!-- Later retrieve the value anywhere in the document -->
-<p>Total: {{params.totalAmount}}</p>
+<p>Total: {{totalAmount}}</p>
 
 <!-- Within repeating templates -->
-<div data-bind="{{model.items}}">
+{{#each model.items}}
     <p>Item total: {{.price}}</p>
-    <p>Grand total: {{params.totalAmount}}</p>
-</div>
+    <p>Grand total: {{totalAmount}}</p>
+{{/each}}
 ```
 {% endraw %}
 
@@ -102,7 +129,7 @@ Values are stored during the data binding phase using the `data-id` and `data-va
 
 ### Retrieving Values
 
-Stored values can be retrieved anywhere in the document using the `params` object:
+Stored values are referred to by their `data-id` name in any later expression:
 
 
 
@@ -110,7 +137,7 @@ Stored values can be retrieved anywhere in the document using the `params` objec
 
 {% raw %}
 ```html
-{{params.myVariable}}
+{{myVariable}}
 ```
 {% endraw %}
 
@@ -150,7 +177,7 @@ Values stored in `<var>` elements are available:
 {% raw %}
 ```html
 <var data-id="username" data-value="{{user.name}}"></var>
-<p>Welcome back, {{params.username}}!</p>
+<p>Welcome back, {{username}}!</p>
 ```
 {% endraw %}
 
@@ -167,12 +194,12 @@ Values stored in `<var>` elements are available:
 {% raw %}
 ```html
 <var data-id="totalPrice" data-value="{{product.price * product.quantity}}"></var>
-<var data-id="taxAmount" data-value="{{params.totalPrice * 0.08}}"></var>
-<var data-id="grandTotal" data-value="{{params.totalPrice + params.taxAmount}}"></var>
+<var data-id="taxAmount" data-value="{{totalPrice * 0.08}}"></var>
+<var data-id="grandTotal" data-value="{{totalPrice + taxAmount}}"></var>
 
-<p>Subtotal: ${{params.totalPrice}}</p>
-<p>Tax (8%): ${{params.taxAmount}}</p>
-<p>Grand Total: ${{params.grandTotal}}</p>
+<p>Subtotal: ${{totalPrice}}</p>
+<p>Tax (8%): ${{taxAmount}}</p>
+<p>Grand Total: ${{grandTotal}}</p>
 ```
 {% endraw %}
 
@@ -201,11 +228,13 @@ Values stored in `<var>` elements are available:
         </tr>
     </thead>
     <tbody>
-        <tr data-bind="{{invoice.items}}">
+        {{#each invoice.items}}
+        <tr>
             <td>{{.itemName}}</td>
             <td>{{.price}}</td>
-            <td>{{params.customerName}}</td>
+            <td>{{customerName}}</td>
         </tr>
+        {{/each}}
     </tbody>
 </table>
 ```
@@ -223,12 +252,12 @@ Values stored in `<var>` elements are available:
 
 {% raw %}
 ```html
-<var data-id="itemCount" data-value="0"></var>
+<var data-id="itemCount" data-value="{{0}}"></var>
 
-<div data-bind="{{model.products}}">
-    <var data-id="itemCount" data-value="{{params.itemCount + 1}}"></var>
-    <p>Item #{{params.itemCount}}: {{.name}}</p>
-</div>
+{{#each model.products}}
+    <var data-id="itemCount" data-value="{{itemCount + 1}}"></var>
+    <p>Item #{{itemCount}}: {{.name}}</p>
+{{/each}}
 ```
 {% endraw %}
 
@@ -244,11 +273,12 @@ Values stored in `<var>` elements are available:
 
 {% raw %}
 ```html
-<var data-id="reportDate" data-value="{{DateTime.Now}}"></var>
-<var data-id="reportYear" data-value="{{DateTime.Now.Year}}"></var>
+<!-- The date is passed in the data - a template cannot read the clock -->
+<var data-id="reportDate" data-value="{{model.reportDate}}"></var>
+<var data-id="reportYear" data-value="{{yearOf(model.reportDate)}}"></var>
 
-<h1>Annual Report {{params.reportYear}}</h1>
-<p>Generated on: {{params.reportDate}}</p>
+<h1>Annual Report {{reportYear}}</h1>
+<p>Generated on: {{reportDate}}</p>
 ```
 {% endraw %}
 
@@ -265,17 +295,17 @@ Values stored in `<var>` elements are available:
 {% raw %}
 ```html
 <!-- Store page number or section -->
-<var data-id="currentSection" data-value="Financial Summary"></var>
+<var data-id="currentSection" data-value="{{'Financial Summary'}}"></var>
 
 <!-- Calculate total -->
-<var data-id="pageTotal" data-value="0"></var>
-<div data-bind="{{model.transactions}}">
-    <var data-id="pageTotal" data-value="{{params.pageTotal + .amount}}"></var>
+<var data-id="pageTotal" data-value="{{0}}"></var>
+{{#each model.transactions}}
+    <var data-id="pageTotal" data-value="{{pageTotal + .amount}}"></var>
     <p>{{.description}}: ${{.amount}}</p>
-</div>
+{{/each}}
 
-<p><strong>Section: {{params.currentSection}}</strong></p>
-<p><strong>Total: ${{params.pageTotal}}</strong></p>
+<p><strong>Section: {{currentSection}}</strong></p>
+<p><strong>Total: ${{pageTotal}}</strong></p>
 ```
 {% endraw %}
 
@@ -292,10 +322,10 @@ Values stored in `<var>` elements are available:
 {% raw %}
 ```html
 <var data-id="hasErrors" data-value="{{model.errorCount > 0}}"></var>
-<var data-id="statusColor" data-value="{{params.hasErrors ? 'red' : 'green'}}"></var>
+<var data-id="statusColor" data-value="{{if(hasErrors, 'red', 'green')}}"></var>
 
-<div style="color: {{params.statusColor}}">
-    <p>Status: {{params.hasErrors ? 'Failed' : 'Success'}}</p>
+<div style="color: {{statusColor}}">
+    <p>Status: {{if(hasErrors, 'Failed', 'Success')}}</p>
 </div>
 ```
 {% endraw %}
@@ -318,13 +348,13 @@ Values stored in `<var>` elements are available:
 
 <!-- Use on every page header -->
 <header>
-    <img src="{{params.companyLogo}}" alt="Logo" />
-    <h1>{{params.companyName}}</h1>
+    <img src="{{companyLogo}}" alt="Logo" />
+    <h1>{{companyName}}</h1>
 </header>
 
 <!-- Multiple pages can reference the same stored values -->
 <section>
-    <p>This report is provided by {{params.companyName}}</p>
+    <p>This report is provided by {{companyName}}</p>
 </section>
 ```
 {% endraw %}
@@ -341,21 +371,21 @@ Values stored in `<var>` elements are available:
 
 {% raw %}
 ```html
-<var data-id="runningTotal" data-value="0"></var>
+<var data-id="runningTotal" data-value="{{0}}"></var>
 
 <h2>Q1 Sales</h2>
-<div data-bind="{{sales.q1}}">
-    <var data-id="runningTotal" data-value="{{params.runningTotal + .amount}}"></var>
-    <p>{{.month}}: ${{.amount}} (Running Total: ${{params.runningTotal}})</p>
-</div>
+{{#each sales.q1}}
+    <var data-id="runningTotal" data-value="{{runningTotal + .amount}}"></var>
+    <p>{{.month}}: ${{.amount}} (Running Total: ${{runningTotal}})</p>
+{{/each}}
 
 <h2>Q2 Sales</h2>
-<div data-bind="{{sales.q2}}">
-    <var data-id="runningTotal" data-value="{{params.runningTotal + .amount}}"></var>
-    <p>{{.month}}: ${{.amount}} (Running Total: ${{params.runningTotal}})</p>
-</div>
+{{#each sales.q2}}
+    <var data-id="runningTotal" data-value="{{runningTotal + .amount}}"></var>
+    <p>{{.month}}: ${{.amount}} (Running Total: ${{runningTotal}})</p>
+{{/each}}
 
-<h2>Year-to-Date Total: ${{params.runningTotal}}</h2>
+<h2>Year-to-Date Total: ${{runningTotal}}</h2>
 ```
 {% endraw %}
 
@@ -373,9 +403,9 @@ Values stored in `<var>` elements are available:
 ```html
 <var data-id="selectedProduct" data-value="{{model.products[0]}}"></var>
 
-<h2>Featured Product: {{params.selectedProduct.name}}</h2>
-<p>Price: ${{params.selectedProduct.price}}</p>
-<p>Description: {{params.selectedProduct.description}}</p>
+<h2>Featured Product: {{selectedProduct.name}}</h2>
+<p>Price: ${{selectedProduct.price}}</p>
+<p>Description: {{selectedProduct.description}}</p>
 ```
 {% endraw %}
 
@@ -391,18 +421,18 @@ Values stored in `<var>` elements are available:
 
 {% raw %}
 ```html
-<var data-id="maxValue" data-value="0"></var>
-<var data-id="minValue" data-value="999999"></var>
+<var data-id="maxValue" data-value="{{0}}"></var>
+<var data-id="minValue" data-value="{{999999}}"></var>
 
-<div data-bind="{{model.measurements}}">
-    <var data-id="maxValue" data-value="{{.value > params.maxValue ? .value : params.maxValue}}"></var>
-    <var data-id="minValue" data-value="{{.value < params.minValue ? .value : params.minValue}}"></var>
+{{#each model.measurements}}
+    <var data-id="maxValue" data-value="{{if(.value &gt; maxValue, .value, maxValue)}}"></var>
+    <var data-id="minValue" data-value="{{if(.value &lt; minValue, .value, minValue)}}"></var>
     <p>Reading: {{.value}}</p>
-</div>
+{{/each}}
 
-<p>Maximum: {{params.maxValue}}</p>
-<p>Minimum: {{params.minValue}}</p>
-<p>Range: {{params.maxValue - params.minValue}}</p>
+<p>Maximum: {{maxValue}}</p>
+<p>Minimum: {{minValue}}</p>
+<p>Range: {{maxValue - minValue}}</p>
 ```
 {% endraw %}
 
@@ -419,9 +449,9 @@ Values stored in `<var>` elements are available:
 {% raw %}
 ```html
 <var data-id="invoiceNumber" data-value="{{invoice.number}}"></var>
-<var data-id="invoiceSubtotal" data-value="0"></var>
+<var data-id="invoiceSubtotal" data-value="{{0}}"></var>
 
-<h1>Invoice #{{params.invoiceNumber}}</h1>
+<h1>Invoice #{{invoiceNumber}}</h1>
 
 <table>
     <thead>
@@ -433,27 +463,29 @@ Values stored in `<var>` elements are available:
         </tr>
     </thead>
     <tbody>
-        <tr data-bind="{{invoice.lineItems}}">
+        {{#each invoice.lineItems}}
+        <tr>
             <var data-id="lineTotal" data-value="{{.quantity * .unitPrice}}"></var>
-            <var data-id="invoiceSubtotal" data-value="{{params.invoiceSubtotal + params.lineTotal}}"></var>
+            <var data-id="invoiceSubtotal" data-value="{{invoiceSubtotal + lineTotal}}"></var>
             <td>{{.description}}</td>
             <td>{{.quantity}}</td>
             <td>${{.unitPrice}}</td>
-            <td>${{params.lineTotal}}</td>
+            <td>${{lineTotal}}</td>
         </tr>
+        {{/each}}
     </tbody>
     <tfoot>
         <tr>
             <td colspan="3">Subtotal:</td>
-            <td>${{params.invoiceSubtotal}}</td>
+            <td>${{invoiceSubtotal}}</td>
         </tr>
         <tr>
             <td colspan="3">Tax (8%):</td>
-            <td>${{params.invoiceSubtotal * 0.08}}</td>
+            <td>${{invoiceSubtotal * 0.08}}</td>
         </tr>
         <tr>
             <td colspan="3"><strong>Total:</strong></td>
-            <td><strong>${{params.invoiceSubtotal * 1.08}}</strong></td>
+            <td><strong>${{invoiceSubtotal * 1.08}}</strong></td>
         </tr>
     </tfoot>
 </table>
@@ -474,15 +506,15 @@ Values stored in `<var>` elements are available:
 ```html
 <var data-id="reportTitle" data-value="{{report.title}}"></var>
 
-<div data-bind="{{report.departments}}">
+{{#each report.departments}}
     <var data-id="deptName" data-value="{{.name}}"></var>
-    <h2>{{params.deptName}} - {{params.reportTitle}}</h2>
+    <h2>{{deptName}} - {{reportTitle}}</h2>
 
-    <div data-bind="{{.employees}}">
-        <p>Employee: {{.name}} (Department: {{params.deptName}})</p>
-        <p>Report: {{params.reportTitle}}</p>
-    </div>
-</div>
+    {{#each .employees}}
+        <p>Employee: {{.name}} (Department: {{deptName}})</p>
+        <p>Report: {{reportTitle}}</p>
+    {{/each}}
+{{/each}}
 ```
 {% endraw %}
 
@@ -505,8 +537,8 @@ Values stored in `<var>` elements are available:
 <var data-id="dateFormat" data-value="MM/dd/yyyy"></var>
 
 <!-- Use throughout document -->
-<p>Amount: {{params.currencySymbol}}100.00 {{params.currency}}</p>
-<p>Locale: {{params.locale}}</p>
+<p>Amount: {{currencySymbol}}100.00 {{currency}}</p>
+<p>Locale: {{locale}}</p>
 ```
 {% endraw %}
 
@@ -528,7 +560,7 @@ Values stored in `<var>` elements are available:
 </p>
 
 <!-- Later use the stored value in calculations -->
-<p>Tax Amount: ${{params.orderTotal * params.taxRate / 100}}</p>
+<p>Tax Amount: ${{orderTotal * taxRate / 100}}</p>
 ```
 {% endraw %}
 
@@ -544,22 +576,22 @@ Values stored in `<var>` elements are available:
 
 {% raw %}
 ```html
-<var data-id="totalOrders" data-value="0"></var>
-<var data-id="completedOrders" data-value="0"></var>
-<var data-id="cancelledOrders" data-value="0"></var>
+<var data-id="totalOrders" data-value="{{0}}"></var>
+<var data-id="completedOrders" data-value="{{0}}"></var>
+<var data-id="cancelledOrders" data-value="{{0}}"></var>
 
-<div data-bind="{{orders}}">
-    <var data-id="totalOrders" data-value="{{params.totalOrders + 1}}"></var>
-    <var data-id="completedOrders" data-value="{{.status == 'completed' ? params.completedOrders + 1 : params.completedOrders}}"></var>
-    <var data-id="cancelledOrders" data-value="{{.status == 'cancelled' ? params.cancelledOrders + 1 : params.cancelledOrders}}"></var>
+{{#each orders}}
+    <var data-id="totalOrders" data-value="{{totalOrders + 1}}"></var>
+    <var data-id="completedOrders" data-value="{{if(.status == 'completed', completedOrders + 1, completedOrders)}}"></var>
+    <var data-id="cancelledOrders" data-value="{{if(.status == 'cancelled', cancelledOrders + 1, cancelledOrders)}}"></var>
     <p>Order {{.id}}: {{.status}}</p>
-</div>
+{{/each}}
 
 <h2>Order Statistics</h2>
-<p>Total Orders: {{params.totalOrders}}</p>
-<p>Completed: {{params.completedOrders}}</p>
-<p>Cancelled: {{params.cancelledOrders}}</p>
-<p>Success Rate: {{params.completedOrders / params.totalOrders * 100}}%</p>
+<p>Total Orders: {{totalOrders}}</p>
+<p>Completed: {{completedOrders}}</p>
+<p>Cancelled: {{cancelledOrders}}</p>
+<p>Success Rate: {{completedOrders / totalOrders * 100}}%</p>
 ```
 {% endraw %}
 
@@ -575,16 +607,16 @@ Values stored in `<var>` elements are available:
 
 {% raw %}
 ```html
-<div data-bind="{{report.sections}}">
+{{#each report.sections}}
     <var data-id="sectionTitle" data-value="{{.title}}"></var>
     <var data-id="sectionIndex" data-value="{{$index + 1}}"></var>
 
-    <h2>Section {{params.sectionIndex}}: {{params.sectionTitle}}</h2>
+    <h2>Section {{sectionIndex}}: {{sectionTitle}}</h2>
 
-    <div data-bind="{{.items}}">
-        <p>Item {{$index + 1}} in {{params.sectionTitle}}</p>
-    </div>
-</div>
+    {{#each .items}}
+        <p>Item {{$index + 1}} in {{sectionTitle}}</p>
+    {{/each}}
+{{/each}}
 ```
 {% endraw %}
 
@@ -600,16 +632,16 @@ Values stored in `<var>` elements are available:
 
 {% raw %}
 ```html
-<var data-id="sum" data-value="0"></var>
-<var data-id="count" data-value="0"></var>
+<var data-id="sum" data-value="{{0}}"></var>
+<var data-id="count" data-value="{{0}}"></var>
 
-<div data-bind="{{model.scores}}">
-    <var data-id="sum" data-value="{{params.sum + .score}}"></var>
-    <var data-id="count" data-value="{{params.count + 1}}"></var>
+{{#each model.scores}}
+    <var data-id="sum" data-value="{{sum + .score}}"></var>
+    <var data-id="count" data-value="{{count + 1}}"></var>
     <p>Score: {{.score}}</p>
-</div>
+{{/each}}
 
-<p><strong>Average Score: {{params.sum / params.count}}</strong></p>
+<p><strong>Average Score: {{sum / count}}</strong></p>
 ```
 {% endraw %}
 
@@ -626,16 +658,16 @@ Values stored in `<var>` elements are available:
 {% raw %}
 ```html
 <var data-id="itemCount" data-value="{{model.items.length}}"></var>
-<var data-id="hasItems" data-value="{{params.itemCount > 0}}"></var>
+<var data-id="hasItems" data-value="{{itemCount > 0}}"></var>
 
-<div data-if="{{params.hasItems}}">
-    <p>Showing {{params.itemCount}} items</p>
-    <div data-bind="{{model.items}}">
+<div data-if="{{hasItems}}">
+    <p>Showing {{itemCount}} items</p>
+    {{#each model.items}}
         <p>{{.name}}</p>
     </div>
-</div>
+{{/each}}
 
-<div data-if="{{!params.hasItems}}">
+<div data-if="{{!hasItems}}">
     <p>No items to display</p>
 </div>
 ```
@@ -653,22 +685,22 @@ Values stored in `<var>` elements are available:
 
 {% raw %}
 ```html
-<var data-id="grandTotal" data-value="0"></var>
+<var data-id="grandTotal" data-value="{{0}}"></var>
 
-<div data-bind="{{categories}}">
-    <var data-id="categoryTotal" data-value="0"></var>
+{{#each categories}}
+    <var data-id="categoryTotal" data-value="{{0}}"></var>
     <h2>{{.categoryName}}</h2>
 
-    <div data-bind="{{.items}}">
-        <var data-id="categoryTotal" data-value="{{params.categoryTotal + .amount}}"></var>
-        <var data-id="grandTotal" data-value="{{params.grandTotal + .amount}}"></var>
+    {{#each .items}}
+        <var data-id="categoryTotal" data-value="{{categoryTotal + .amount}}"></var>
+        <var data-id="grandTotal" data-value="{{grandTotal + .amount}}"></var>
         <p>{{.name}}: ${{.amount}}</p>
-    </div>
+    {{/each}}
 
-    <p><strong>Category Total: ${{params.categoryTotal}}</strong></p>
-</div>
+    <p><strong>Category Total: ${{categoryTotal}}</strong></p>
+{{/each}}
 
-<h2>Grand Total: ${{params.grandTotal}}</h2>
+<h2>Grand Total: ${{grandTotal}}</h2>
 ```
 {% endraw %}
 

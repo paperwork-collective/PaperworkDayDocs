@@ -123,6 +123,13 @@ Data binding fails: "Databinding failed for component …_NOOP1, Specified metho
 
 Works in `{{#with}}` (`{{#with model}}{{#with groups[0]}}{{../title}}` gives the title), but in `{{#each}}` - nested or not - `../name`, `../this.name`, `../../name` all return empty. So the parent loop item cannot be reached from an inner loop. Expected `{{../name}}` in an inner each to give the outer item's name. Richard wants the docs to say `../` is single level only (not chained).
 
+### A12. Smaller binding findings (for the engine docs / CLAUDE.md)
+
+- The `? :` ternary is **not** supported (`{{a ? 'x' : 'y'}}` fails: "Unrecognised token ': 'y''"). scryber.core CLAUDE.md lists it under expression types; use `if(a, 'x', 'y')`. Add the ternary, or correct CLAUDE.md?
+- `<var data-id='x' data-value='0'>` (a plain literal) fails to parse: "Could not read the value data-value from the Xml source". `data-value='{{0}}'` works. Should a literal be accepted?
+- `{{params.name}}` does not read a `<var>` value (returns nothing); the plain name `{{name}}` does. The docs used `params.` throughout the var page (now fixed).
+- `data-bind` on a `<div>` switches the data context; it does not repeat the element. Several docs examples used it as a loop (now `{{#each}}`).
+
 ### A6. FYI — `<title>` overrides `doc.Info.Title`
 
 A `<title>` in the template always replaces a title set in code (plain engine). Probably by design; docs now say so.
