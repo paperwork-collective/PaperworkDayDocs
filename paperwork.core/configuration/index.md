@@ -18,6 +18,7 @@ This documentation covers the complete architecture for extending and configurin
 ## Document Configuration
 Applies to individual document templates
 
+- **[The Engine Document](engine-document)** - Parsing a template into an engine `Document`, configuring it, and generating it with the document builder
 - **[Processing Instructions](processing-instructions)** - Document-level parser configuration via XML processing instructions
 - **[DOM and Event Handling](document-events-and-access)** - Directly accessing content and responding to document remote file request events
 - **[Working in Code](working-in-code)** - Building and modifying component trees directly with the object model and typed style values.
@@ -73,7 +74,7 @@ Applies to any number of applications or processes
 
 ```xml
 <?xml version='1.0' encoding='utf-8' ?>
-<?scryber parser-mode='Strict' 
+<?paperwork parser-mode='Strict' 
           log-level='Warnings'
           controller='MyNamespace.MyController, MyAssembly' ?>
 <html xmlns='http://www.w3.org/1999/xhtml'>
@@ -96,15 +97,27 @@ public class MyController
 }
 ```
 
-## Initializing the configuration in Scryber.Core
+## Initializing the configuration
 
+The engine options are read from the `"Scryber"` section of the configuration. Pass the configuration to the engine once at startup, before any documents are generated.
 
+```csharp
+using Microsoft.Extensions.Configuration;
+
+IConfigurationRoot config = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build();
+
+Scryber.ServiceProvider.Init(config);
+```
+
+In ASP.NET Core, use the application's configuration: `Scryber.ServiceProvider.Init(builder.Configuration);`. See [Configuration Structure](configuration-structure) for the sections and values.
 
 ## Extension Points Summary
 
 | Extension Point | Purpose | Configuration |
 |----------------|---------|---------------|
-| **Processing Instructions** | Document-level settings | `<?scryber ... ?>` |
+| **Processing Instructions** | Document-level settings | `<?paperwork ... ?>` |
 | **Controllers** | Code-behind with outlets/actions | `controller='Type, Assembly'` |
 | **Custom Components** | Reusable widgets | Namespace registration |
 | **Image Factories** | Custom image sources | `Imaging:Factories[]` |
@@ -130,4 +143,4 @@ public class MyController
 
 **Documentation Version**: 1.0  
 **Last Updated**: February 2026  
-**Target**: Scryber.Core 6.x / 7.x
+**Target**: Paperwork.Core 9.x

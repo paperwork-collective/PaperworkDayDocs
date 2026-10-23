@@ -2,7 +2,6 @@
 layout: default
 title: Processing Instructions
 parent: Configuration & Extension
-parent: Configuration & Extension
 parent_url: /paperwork.core/configuration/
 has_children: false
 has_toc: false
@@ -15,10 +14,12 @@ grand_parent_url: /paperwork.core/
 
 Processing instructions provide **document-level** configuration, overriding application configuration for a specific document.
 
+The instruction is named `paperwork`. The engine also accepts the same instruction named `scryber` (`<?scryber ... ?>`), with the same attributes, so existing templates continue to work.
+
 ## Syntax
 
 ```
-<?scryber parser-mode='Strict' parser-log='false' append-log='false' 
+<?paperwork parser-mode='Strict' parser-log='false' append-log='false' 
          log-level='Warnings' controller='MyNamespace.MyController, MyAssembly' 
          parser-culture='en-GB' ?>
 ```
@@ -43,20 +44,20 @@ Processing instructions provide **document-level** configuration, overriding app
 ### Basic Parser Configuration
 
 ```
-<?scryber parser-mode='Lax' log-level='Warnings' ?>
+<?paperwork parser-mode='Lax' log-level='Warnings' ?>
 ```
 
 ### With Controller
 
 ```
-<?scryber parser-mode='Strict' 
+<?paperwork parser-mode='Strict' 
           controller='MyCompany.Reports.SalesController, MyCompany.Reports' ?>
 ```
 
 ### Development Mode
 
 ```
-<?scryber parser-mode='Strict' 
+<?paperwork parser-mode='Strict' 
           parser-log='true' 
           append-log='true' 
           log-level='Verbose' ?>
@@ -65,7 +66,7 @@ Processing instructions provide **document-level** configuration, overriding app
 ### Localized Document
 
 ```
-<?scryber parser-culture='fr-FR' ?>
+<?paperwork parser-culture='fr-FR' ?>
 ```
 
 ---
@@ -97,7 +98,7 @@ protected void ParseProcessingInstructions(XmlReader reader, string name)
 ### 1. Production Document (Lax Mode)
 
 ```html
-<?scryber parser-mode='Lax' log-level='Errors' ?>
+<?paperwork parser-mode='Lax' log-level='Errors' ?>
 <html xmlns='http://www.w3.org/1999/xhtml'>
     <!-- Skips invalid elements, but logs everything. -->
 </html>
@@ -106,7 +107,7 @@ protected void ParseProcessingInstructions(XmlReader reader, string name)
 ### 2. Development Document (Strict Mode with Logging)
 
 ```html
-<?scryber parser-mode='Strict' 
+<?paperwork parser-mode='Strict' 
           parser-log='true' 
           append-log='true' 
           log-level='Messages' ?>
@@ -118,7 +119,7 @@ protected void ParseProcessingInstructions(XmlReader reader, string name)
 ### 3. Controller-Based Document
 
 ```html
-<?scryber controller='MyCompany.Reports.InvoiceController, MyCompany.Reports' ?>
+<?paperwork controller='MyCompany.Reports.InvoiceController, MyCompany.Reports' ?>
 <html xmlns='http://www.w3.org/1999/xhtml'>
     <body on-init='InitInvoice' on-load='LoadData'>
         <main>
@@ -131,7 +132,7 @@ protected void ParseProcessingInstructions(XmlReader reader, string name)
 ### 4. Localized Document
 
 ```html
-<?scryber parser-culture='de-DE' ?>
+<?paperwork parser-culture='de-DE' ?>
 <html xmlns='http://www.w3.org/1999/xhtml'>
     <!-- Numbers formatted as 1.234,56 in template content -->
     <!-- Dates formatted as 31.12.2025 in template content -->
@@ -155,7 +156,7 @@ Using Lax in production, and strict in development means that end users will not
 - **Use when**: Developing templates, running automated tests, or checking a template before release
 
 ```
-<?scryber parser-mode='Strict' ?>
+<?paperwork parser-mode='Strict' ?>
 ```
 
 ### Lax Mode
@@ -168,7 +169,7 @@ Using Lax in production, and strict in development means that end users will not
 - **Invalid syntax is still an error** - a template with an invalid expression throws in either mode. Lax only relaxes unknown content and missing data. See [Binding, Expression and Template Errors](#binding-expression-and-template-errors).
 
 ```
-<?scryber parser-mode='Lax' ?>
+<?paperwork parser-mode='Lax' ?>
 ```
 
 ---
@@ -177,9 +178,9 @@ Using Lax in production, and strict in development means that end users will not
 
 The parser mode also decides what happens when an **expression**, **binding** or **template** is wrong. Most outcomes are the same in both modes - the mode only matters where the table says so.
 
-> **Since 9.7.5** - the outcomes below were made consistent. Rows marked **9.7.5** changed in that release. In addition, `Document.CreateParserSettings()` and `CreateParserSettingsAsync()` now default to `Lax` (previously `Strict`), matching `Document.ParseDocument()` and the document render options. A `parser-mode` processing instruction still overrides the default.
+> **Since 9.7.5** - the outcomes below were made consistent. Rows marked **9.7.5** changed in that release. In addition, the engine's `Document.CreateParserSettings()` and `CreateParserSettingsAsync()` now default to `Lax` (previously `Strict`), matching `Document.ParseDocument()` and the document render options. A `parser-mode` processing instruction still overrides the default.
 
-**Parse** is when the template is read (`Document.ParseDocument`). **Bind** is when the data is bound and the document is generated (`SaveAsPDF`, or `DataBind`). *Throw* means an exception is raised and no document is produced. *Log error* means one entry is written to the trace log at `Error` level, the value is left unset, and generation continues.
+**Parse** is when the template is read (by the document builder, or `Document.ParseDocument`). **Bind** is when the data is bound and the document is generated (`SaveAsync`, `BuildBytesAsync` or `BuildAsync`). *Throw* means an exception is raised and no document is produced. *Log error* means one entry is written to the trace log at `Error` level, the value is left unset, and generation continues.
 
 The guiding rule is that **invalid syntax is invalid completely** - it always throws, in strict or lax - while **missing data is not a syntax error**.
 
@@ -247,17 +248,17 @@ See [Logging and Tracing](logging-extension) for full details on log levels, app
 ### Production Documents
 
 ```
-<?scryber parser-mode='Lax' log-level='Errors' ?>
+<?paperwork parser-mode='Lax' log-level='Errors' ?>
 ```
 
 ### Development Documents
 ```
-<?scryber parser-mode='Strict' parser-log='true' log-level='Messages' ?>
+<?paperwork parser-mode='Strict' parser-log='true' log-level='Messages' ?>
 ```
 
 ### Debugging Documents
 ```
-<?scryber parser-mode='Lax' 
+<?paperwork parser-mode='Lax' 
           parser-log='true' 
           append-log='true' 
           log-level='Verbose' ?>
@@ -267,24 +268,32 @@ Verbose provides a high level of detail to identify what issues have occured wit
 
 ### Localized Documents
 ```
-<?scryber parser-culture='en-GB' log-level='Warnings' ?>
+<?paperwork parser-culture='en-GB' log-level='Warnings' ?>
 ```
 
 ---
 
 ## Programmatic Configuration
 
-Processing instructions can also be set programmatically:
+The same settings can be made in code, by parsing the template into an engine `Document` with your own parser settings, and passing it to the document builder. See [The Engine Document](engine-document).
 
 ```csharp
-var settings = new ParserSettings(/* ... */);
-settings.ConformanceMode = ParserConformanceMode.Strict;
+using System.Globalization;
+using Scryber;
+using Scryber.Components;
+
+var settings = Document.CreateParserSettings("template.html", ParserConformanceMode.Strict);
 settings.LogParserOutput = false;
 settings.TraceLog.SetRecordLevel(TraceRecordLevel.Warnings);
 settings.SpecificCulture = new CultureInfo("en-GB");
 settings.ControllerType = typeof(MyController);
 
-var doc = Document.ParseDocument(stream, ParseSourceType.DynamicContent, settings);
+using var reader = new StreamReader("template.html");
+using var doc = (Document)Document.Parse("template.html", reader, ParseSourceType.LocalFile, settings.Resolver, settings);
+
+await factory.NewDocument()
+    .WithLayout(doc)
+    .SaveAsync("output.pdf");
 ```
 
 ---

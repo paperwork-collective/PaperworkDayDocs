@@ -240,7 +240,7 @@ builder.Services.AddPaperwork();
 
 ### Configuration Loading on Command Line
 
-Fonts, imaging, output and other engine options can be set in `appsettings.json`, under the `"Scryber"` section. In a console application, load the configuration once at startup.
+Fonts, imaging, output and other engine options can be set in `appsettings.json`, under the `"Scryber"` section. Load the configuration once at startup (in ASP.NET Core, pass `builder.Configuration` instead).
 
 ```csharp
 using Microsoft.Extensions.Configuration;
