@@ -262,147 +262,134 @@ The current item within the loop can be accessed using the `this` reference.
 
 ## Extending our sample
 
-If we add more data to our user, with some skills, and also add some custom branding.
+If we add more data to our user - a role and some skills with a level - and also add some custom branding.
 
 #### Add our user
 ```csharp
 await factory.NewDocument()
              .WithLayoutFile("hello.html")
              //set the user to an instance (or JSON) value
-             .WithData("user", new { firstName = "John", lastName = "Smith", emailAddress = "j.smith@company.com",
-                                     skills = new[] {"C Sharp", "javascript", "scrum master", "Team leader"},
-                                     profilePicture = "" })
+             .WithData("user", new { firstName = "John", lastName = "Smith", role = "Engineering Lead",
+                                     emailAddress = "j.smith@company.com", profilePicture = "",
+                                     skills = new[] {
+                                         new { name = "C Sharp", level = 90 },
+                                         new { name = "JavaScript", level = 75 },
+                                         new { name = "Scrum master", level = 60 },
+                                         new { name = "Team leader", level = 80 } } })
              //add some custom style information.
-             .WithData("brand", new { mainColor = "rgb(0,168,161)", lightColor = "silver" })
+             .WithData("brand", new { mainColor = "#5980a6", darkColor = "#1f3347", lightColor = "#e8eef4" })
              .SaveAsync("hello.pdf");
-
 ```
+
 ---
 
 ## Update the template
 
 We can now make some changes to our template and use the provided data to create a more useful template. Including:
 
-- an external stylesheet for 'font-awesome'
-- adding google fonts for 'Roboto'
-- define custom css variables
-- add a decision for a dynamic image or an icon.
-- add a collection function to count items
-- include a list of items if present
-- add a fallback 
-
+- remote fonts from Google ('Barlow' and 'Barlow Condensed') and icons from Font Awesome
+- css variables from the brand data, with fallback defaults
+- a header band with a diagonal gradient, and positioned, rotated and transparent text
+- a decision for a profile picture, or an icon if there isn't one
+- a clickable email link
+- a collection function to count the skills, shown in a rotated stamp with a radial gradient
+- a two column list of skills, each with a gradient level bar sized from the data
+- a fallback when there are no skills
 
 ```handlebars
 {% raw %}<html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
     <!-- Give it a title -->
     <title>Hello {{concat(user.firstName, " ", user.lastName) ?? "World"}}</title>
-    <!-- Add some remote fonts from google -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet" />
-    <!-- Load some icons from font-awesome -->
+    <!-- Remote fonts from google, and icons from font-awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&amp;family=Barlow+Condensed:wght@500;700&amp;display=swap" rel="stylesheet" />
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/all.css' />
-
     <style>
-        /* define some css variables based on the properties, but with a fallback default */
+        /* css variables from the brand properties, with fallback defaults */
         :root{
-            --brand-color: var(brand.mainColor, red);
-            --brand-bg: var(brand.lightColor, #faa);
+            --brand-color: var(brand.mainColor, #5980a6);
+            --brand-dark: var(brand.darkColor, #1f3347);
+            --brand-bg: var(brand.lightColor, #e8eef4);
         }
+        body{ font-family: 'Barlow', Arial, Helvetica, sans-serif; margin: 0; color: #1d1f20; font-size: 11pt; }
 
-        /* Add remote fonts as the base font with fallback */
-        body{
-            font-family: 'Roboto', Arial, Helvetica, sans-serif;
-            margin: 20pt;
-            color: black;
-        }
+        /* header holds the band and the overlapping picture */
+        .head{ position: relative; height: 150pt; }
 
-        /* classes with custom styling from the properties */
-        .title{
-            font-size: 18pt;
-            color: var(--brand-color);
-            margin-bottom: 1rem;
-        }
-        
-        .intro{
-            font-size: 12pt;
-            border: solid 1pt var(--brand-color);
-            padding: 5pt;
-            border-radius: 2.5pt;
-            background-color: var(--brand-bg);
-        }
+        /* a header band with a diagonal gradient, and everything inside it positioned */
+        .band{ position: relative; height: 150pt; overflow: hidden; color: white;
+               background: linear-gradient(135deg, var(--brand-dark), var(--brand-color)); }
+        .band .watermark{ position: absolute; right: -10pt; top: -40pt; font-family: 'Barlow Condensed';
+               font-weight: 700; font-size: 170pt; color: white; opacity: 0.08; transform: rotate(-8deg); }
+        .band .kicker{ position: absolute; left: 30pt; top: 34pt; width: 300pt; font-size: 9pt; letter-spacing: 2pt; text-transform: uppercase; opacity: 0.8; }
+        .band .title{ position: absolute; left: 30pt; top: 48pt; margin: 0; font-family: 'Barlow Condensed'; font-weight: 700; font-size: 44pt; }
+        .band .title a{ color: white; text-decoration: none; }
+        .band .role{ position: absolute; left: 30pt; top: 104pt; font-size: 12pt; opacity: 0.9; }
 
-        .intro ul{
-            list-style: none;
-            margin: 0;
-            padding-left: 20pt;
-        }
+        /* profile picture overlapping the bottom edge of the band */
+        .profile-picture{ position: absolute; right: 40pt; top: 105pt; width: 80pt; height: 80pt; border-radius: 40pt;
+               object-fit: cover; border: solid 4pt white; background-color: var(--brand-bg); }
+        div.profile-picture{ font-size: 40pt; color: var(--brand-color); text-align: center; line-height: 80pt; }
 
-        .intro ul li{
-            line-height: 1.5;
-        }
+        .content{ position: relative; padding: 30pt; }
+        .email{ font-size: 11pt; margin-bottom: 30pt; }
+        .email a{ color: var(--brand-dark); }
+        .email i{ color: var(--brand-color); margin-right: 4pt; }
 
-        .intro i.far {
-            font-size: 80%;
-            color: var(--brand-color)
-        }
+        /* a rotated stamp with a radial gradient fill */
+        .stamp{ position: absolute; right: 52pt; top: 80pt; width: 60pt; height: 60pt; border-radius: 30pt;
+               border: dashed 1.5pt var(--brand-color); text-align: center; color: var(--brand-dark);
+               background: radial-gradient(circle, white, var(--brand-bg)); transform: rotate(-12deg); }
+        .stamp b{ display: block; font-family: 'Barlow Condensed'; font-size: 26pt; padding-top: 8pt; }
+        .stamp span{ font-size: 7pt; letter-spacing: 1.5pt; text-transform: uppercase; }
 
-        /* floating profile picture with some spacing */
-        .profile-picture{
-            width: 50px;
-            height: 50px;
-            border-radius: 25px;
-            object-fit: cover;
-            float: left;
-            margin-right: 10pt;
-            border: solid 2pt var(--brand-color);
-        }
+        h2{ font-family: 'Barlow Condensed'; font-weight: 500; font-size: 16pt; color: var(--brand-dark);
+            border-bottom: solid 1pt var(--brand-color); padding-bottom: 4pt; margin: 0 0 12pt 0; width: 60%; }
 
-        div.profile-picture{
-            font-size: 36px;
-            overflow:visible;
-            color: var(--brand-color);
-        }
-
-        div.profile-picture i{
-            display: inline-block;
-            overflow: visible;
-            padding-left: 7pt;
-            padding-top: 4pt;
-            vertical-align: bottom;
-        }
-</style>
+        /* skills in two columns, each with a gradient level bar */
+        .skills{ column-count: 2; column-gap: 24pt; list-style: none; margin: 0; padding: 0; width: 60%; }
+        .skills li{ margin-bottom: 12pt; }
+        .skills .level{ float: right; color: var(--brand-color); font-size: 9pt; }
+        .skills .track{ height: 4pt; margin-top: 3pt; background-color: var(--brand-bg); }
+        .skills .fill{ height: 4pt; background: linear-gradient(90deg, var(--brand-color), var(--brand-dark)); }
+    </style>
 </head>
-
 <body>
-<!-- Only include the picture if it exists -->
- {{#if (length(user.profilePicture) > 0) }}
+<div class="head">
+<div class="band">
+    <div class="watermark">Hello</div>
+    <div class="kicker">Hello, my name is</div>
+    <!-- make the name a clickable email link -->
+    <h1 class="title"><a href="mailto:{{user.emailAddress}}">{{concat(user.firstName, " ", user.lastName) ?? "World"}}</a></h1>
+    <div class="role">{{user.role}}</div>
+</div>
+
+<!-- Only include the picture if it exists, otherwise fall back to an icon -->
+{{#if (length(user.profilePicture) > 0) }}
     <img src='{{user.profilePicture}}' class='profile-picture'/>
 {{else}}
-    <!-- fall back to an icon -->
     <div class="profile-picture"><i class='far fa-user'></i></div>
- {{/if}}
-
- <!-- make the name a clickable email link -->
-<h1 class="title">
-    <a href="mailto:{{user.emailAddress}}" style="color: var(--brand-color);">
-        {{concat(user.firstName, " ", user.lastName) ?? "World"}}
-    </a></h1>
-
-<!-- if we have skills, loop through them skills with a count at the start -->
-{{#if count(user.skills)}}
-<div class='intro'>
-    {{user.firstName}} has {{count(user.skills)}} skills:
-    <ul>
-        {{#each user.skills}}
-            <!-- a list of skills  with a check icon -->
-            <li><i class="far fa-check-circle"></i> {{this}}</li>
-        {{/each}}
-    </ul>
-</div>
-{{else}}
-    <!-- Fallback to no skills -->
-    <div><em>{{user.firstName}} has no known skills</em></div>
 {{/if}}
+</div>
+
+<div class="content">
+    <div class="email"><i class="far fa-envelope"></i><a href="mailto:{{user.emailAddress}}">{{user.emailAddress}}</a></div>
+
+    <!-- if we have skills, show a count stamp and loop through them -->
+    {{#if count(user.skills)}}
+        <div class="stamp"><b>{{count(user.skills)}}</b><span>Skills</span></div>
+        <h2>What {{user.firstName}} brings</h2>
+        <ul class="skills">
+            {{#each user.skills}}
+                <li>{{this.name}} <span class="level">{{this.level}}%</span>
+                    <div class="track"><div class="fill" style="width: {{this.level}}%;"></div></div>
+                </li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <div><em>{{user.firstName}} has no known skills</em></div>
+    {{/if}}
+</div>
 </body>
 </html>
 {% endraw %}```
@@ -413,8 +400,8 @@ Hopefully you are able re-generate and see the following output.
 
 <div class='pdf-container' data-pw-container='quick-start-styled' data-pw-template='RaXBkrp7dQpSwiXIBjQm' data-pw-zoom='FullWidth' style='height:400pt' ></div>
 
-We have added a lot into the template - looping, images, links, styles, functions, positioning, remote fonts and stylesheets.
-But the static styles can be moved to a separate linked file (or added with `.WithStyleFile("styles.css")`), and the actual body is only about 20 lines long, and quite readable.
+We have added a lot into the template - looping, gradients, transforms, columns, images, links, styles, functions, positioning, remote fonts and stylesheets.
+But the static styles can be moved to a separate linked file (or added with `.WithStyleFile("styles.css")`), and the actual body is only about 35 lines long, and quite readable.
 
 ---
 
