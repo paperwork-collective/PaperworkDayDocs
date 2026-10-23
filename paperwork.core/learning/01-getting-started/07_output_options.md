@@ -45,10 +45,9 @@ string outputPath = Path.Combine(
     "output.pdf"
 );
 
-using (var stream = new FileStream(outputPath, FileMode.Create))
-{
-    doc.SaveAsPDF(stream);
-}
+await factory.NewDocument()
+    .WithLayoutFile("template.html")
+    .SaveAsync(outputPath);
 
 Console.WriteLine($"PDF saved to: {outputPath}");
 ```
@@ -56,7 +55,7 @@ Console.WriteLine($"PDF saved to: {outputPath}");
 ### Safe File Save with Error Handling
 
 ```csharp
-public bool SavePdfSafely(Document doc, string outputPath)
+public async Task<bool> SavePdfSafely(IDocumentBuilder builder, string outputPath)
 {
     try
     {
@@ -68,17 +67,14 @@ public bool SavePdfSafely(Document doc, string outputPath)
         }
 
         // Save PDF
-        using (var stream = new FileStream(outputPath, FileMode.Create))
-        {
-            doc.SaveAsPDF(stream);
-        }
+        await builder.SaveAsync(outputPath);
 
-        Console.WriteLine($"✓ PDF saved: {outputPath}");
+        Console.WriteLine($"PDF saved: {outputPath}");
         return true;
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"✗ Error saving PDF: {ex.Message}");
+        Console.WriteLine($"Error saving PDF: {ex.Message}");
         return false;
     }
 }
@@ -86,20 +82,35 @@ public bool SavePdfSafely(Document doc, string outputPath)
 
 ---
 
-## Streaming Output
+## In-Memory Output
 
-### To Memory Stream
+### As a Byte Array
 
 ```csharp
-using (var ms = new MemoryStream())
+byte[] pdfBytes = await factory.NewDocument()
+    .WithLayoutFile("template.html")
+    .BuildBytesAsync();
+
+// Use bytes (e.g., save, send, upload)
+File.WriteAllBytes("output.pdf", pdfBytes);
+```
+
+### As a Result
+
+`BuildAsync` does not throw when generation fails. It returns a `PaperworkResult` to check.
+
+```csharp
+PaperworkResult result = await factory.NewDocument()
+    .WithLayoutFile("template.html")
+    .BuildAsync();
+
+if (result.Success)
 {
-    doc.SaveAsPDF(ms);
-
-    // Get byte array
-    byte[] pdfBytes = ms.ToArray();
-
-    // Use bytes (e.g., save, send, upload)
-    File.WriteAllBytes("output.pdf", pdfBytes);
+    byte[] pdfBytes = result.Document.Binary;
+}
+else
+{
+    Console.WriteLine($"{result.Message} {result.Error}");
 }
 ```
 
@@ -107,69 +118,52 @@ using (var ms = new MemoryStream())
 
 ```csharp
 using Microsoft.AspNetCore.Mvc;
-using Scryber.Components;
+using Paperwork;
 
 public class PdfController : Controller
 {
-    [HttpGet("invoice/{id}")]
-    public IActionResult GenerateInvoice(int id)
+    private readonly IPaperworkFactory _factory;
+
+    public PdfController(IPaperworkFactory factory)
     {
-        // Load template
-        var doc = Document.ParseDocument("./Templates/invoice.html");
+        _factory = factory;
+    }
 
-        // Pass data
+    [HttpGet("invoice/{id}")]
+    public async Task<IActionResult> GenerateInvoice(int id)
+    {
         var invoice = GetInvoiceData(id);
-        doc.Params["model"] = invoice;
 
-        // Generate PDF to memory
-        using (var ms = new MemoryStream())
-        {
-            doc.SaveAsPDF(ms);
+        byte[] pdf = await _factory.NewDocument()
+            // Load template
+            .WithLayoutFile("./Templates/invoice.html")
+            // Pass data
+            .WithData("model", invoice)
+            // Generate PDF to memory
+            .BuildBytesAsync();
 
-            // Return as file download
-            return File(
-                ms.ToArray(),
-                "application/pdf",
-                $"invoice-{id}.pdf"
-            );
-        }
+        // Return as file download
+        return File(pdf, "application/pdf", $"invoice-{id}.pdf");
     }
 }
 ```
 
-### ASP.NET Core - Stream Directly to Response
-
-```csharp
-[HttpGet("report")]
-public async Task GenerateReport()
-{
-    var doc = Document.ParseDocument("./Templates/report.html");
-    doc.Params["model"] = GetReportData();
-
-    // Set response headers
-    Response.ContentType = "application/pdf";
-    Response.Headers.Add("Content-Disposition", "inline; filename=report.pdf");
-
-    // Stream directly to response
-    await Response.StartAsync();
-    doc.SaveAsPDF(Response.Body);
-}
-```
+The factory is registered at startup, see [Service Registration](#service-registration) below.
 
 ### ASP.NET Core - Force Download vs Inline Display
 
 ```csharp
-public IActionResult DownloadPdf()
+public async Task<IActionResult> DownloadPdf()
 {
-    var pdfBytes = GeneratePdfBytes();
+    var pdfBytes = await GeneratePdfBytes();
 
     // Force download
     return File(pdfBytes, "application/pdf", "document.pdf");
 }
 
-public IActionResult ViewPdf()
+public async Task<IActionResult> ViewPdf()
 {
-    var pdfBytes = GeneratePdfBytes();
+    var pdfBytes = await GeneratePdfBytes();
 
     // Display inline in browser
     return File(pdfBytes, "application/pdf");
@@ -183,14 +177,19 @@ public IActionResult ViewPdf()
 ### Service Registration
 
 ```csharp
-// Startup.cs or Program.cs
-public void ConfigureServices(IServiceCollection services)
-{
-    services.AddControllers();
+// Program.cs
+using Paperwork.Generation;
 
-    // Register PDF service
-    services.AddScoped<IPdfService, PdfService>();
-}
+builder.Services.AddControllers();
+
+// Used to load remote fonts, images and stylesheets
+builder.Services.AddSingleton(new HttpClient());
+
+// Register the Paperwork factory as IPaperworkFactory
+builder.Services.AddPaperwork();
+
+// Register your own PDF service
+builder.Services.AddScoped<IPdfService, PdfService>();
 ```
 
 ### PDF Service Pattern
@@ -198,23 +197,26 @@ public void ConfigureServices(IServiceCollection services)
 ```csharp
 public interface IPdfService
 {
-    byte[] GeneratePdf(string templatePath, object data);
+    Task<byte[]> GeneratePdf(string templatePath, object data);
 }
 
 public class PdfService : IPdfService
 {
+    private readonly IPaperworkFactory _factory;
     private readonly IWebHostEnvironment _env;
     private readonly ILogger<PdfService> _logger;
 
     public PdfService(
+        IPaperworkFactory factory,
         IWebHostEnvironment env,
         ILogger<PdfService> logger)
     {
+        _factory = factory;
         _env = env;
         _logger = logger;
     }
 
-    public byte[] GeneratePdf(string templatePath, object data)
+    public async Task<byte[]> GeneratePdf(string templatePath, object data)
     {
         try
         {
@@ -225,18 +227,11 @@ public class PdfService : IPdfService
                 templatePath
             );
 
-            // Parse document
-            var doc = Document.ParseDocument(fullPath);
-
-            // Pass data
-            doc.Params["model"] = data;
-
             // Generate PDF
-            using (var ms = new MemoryStream())
-            {
-                doc.SaveAsPDF(ms);
-                return ms.ToArray();
-            }
+            return await _factory.NewDocument()
+                .WithLayoutFile(fullPath)
+                .WithData("model", data)
+                .BuildBytesAsync();
         }
         catch (Exception ex)
         {
@@ -260,11 +255,11 @@ public class ReportController : Controller
     }
 
     [HttpGet("monthly-report")]
-    public IActionResult MonthlyReport()
+    public async Task<IActionResult> MonthlyReport()
     {
         var data = GetMonthlyData();
 
-        byte[] pdf = _pdfService.GeneratePdf("monthly-report.html", data);
+        byte[] pdf = await _pdfService.GeneratePdf("monthly-report.html", data);
 
         return File(pdf, "application/pdf", "monthly-report.pdf");
     }
@@ -275,13 +270,18 @@ public class ReportController : Controller
 
 ## Document Properties and Metadata
 
+The title of the PDF comes from the `<title>` in the template, which can be bound to data, e.g. `{% raw %}<title>{{model.title}}</title>{% endraw %}`.
+
+For other metadata and output settings, parse the template into an engine `Document`, set its properties, and pass it to the builder with `WithLayout(doc)`.
+
 ### Setting Document Information
 
 ```csharp
+using Scryber.Components;
+
 var doc = Document.ParseDocument("template.html");
 
 // Basic metadata
-doc.Info.Title = "Monthly Sales Report";
 doc.Info.Author = "Sales Department";
 doc.Info.Subject = "Q4 2024 Sales Analysis";
 doc.Info.Keywords = "sales, report, quarterly, analysis";
@@ -290,53 +290,16 @@ doc.Info.Keywords = "sales, report, quarterly, analysis";
 doc.Info.Creator = "Sales Reporting System v2.0";
 
 // Generate with metadata
-doc.SaveAsPDF("report.pdf");
+await factory.NewDocument()
+    .WithLayout(doc)
+    .SaveAsync("report.pdf");
 ```
 
 These properties appear in PDF viewers:
 
 ![PDF Properties Dialog](../../images/pdf-properties.png)
 
-### Complete Metadata Example
-
-```csharp
-public void SetDocumentMetadata(Document doc, string title, string author)
-{
-    doc.Info.Title = title;
-    doc.Info.Author = author;
-    doc.Info.Subject = $"Generated on {DateTime.Now:yyyy-MM-dd}";
-    doc.Info.Keywords = "scryber, pdf, generated";
-    doc.Info.Creator = "My Application";
-    doc.Info.Producer = "Scryber.Core";
-
-    // These are set automatically by Scryber:
-    // doc.Info.CreationDate
-    // doc.Info.ModificationDate
-}
-```
-
----
-
-## PDF Version Selection
-
-```csharp
-var doc = Document.ParseDocument("template.html");
-
-// Set PDF version
-doc.RenderOptions.PDFVersion = PDFVersion.PDF15; // PDF 1.5
-// or
-doc.RenderOptions.PDFVersion = PDFVersion.PDF17; // PDF 1.7
-
-doc.SaveAsPDF("output.pdf");
-```
-
-Available versions:
-- `PDF12` - PDF 1.2
-- `PDF13` - PDF 1.3
-- `PDF14` - PDF 1.4
-- `PDF15` - PDF 1.5 (default)
-- `PDF16` - PDF 1.6
-- `PDF17` - PDF 1.7
+The creation and modification dates are set automatically.
 
 ---
 
@@ -352,7 +315,9 @@ doc.RenderOptions.Compression = OutputCompressionType.FlateDecode;
 // - None (no compression)
 // - FlateDecode (default, good compression)
 
-doc.SaveAsPDF("output.pdf");
+await factory.NewDocument()
+    .WithLayout(doc)
+    .SaveAsync("output.pdf");
 ```
 
 ---
@@ -365,24 +330,19 @@ doc.SaveAsPDF("output.pdf");
 var doc = Document.ParseDocument("template.html");
 
 // Document info
-doc.Info.Title = "Sales Report";
 doc.Info.Author = "John Doe";
 
 // Render options
-doc.RenderOptions.PDFVersion = PDFVersion.PDF17;
 doc.RenderOptions.Compression = OutputCompressionType.FlateDecode;
 
 // Conformance mode (Strict vs Lax)
 doc.ConformanceMode = ParserConformanceMode.Lax;
 
-// Pass data
-doc.Params["model"] = GetData();
-
-// Generate
-using (var stream = new FileStream("output.pdf", FileMode.Create))
-{
-    doc.SaveAsPDF(stream);
-}
+// Pass data, and generate
+await factory.NewDocument()
+    .WithLayout(doc)
+    .WithData("model", GetData())
+    .SaveAsync("output.pdf");
 ```
 
 ---
@@ -391,8 +351,10 @@ using (var stream = new FileStream("output.pdf", FileMode.Create))
 
 ### Generate Multiple PDFs
 
+Create the factory once, and start a new document for each output.
+
 ```csharp
-public void GenerateInvoiceBatch(List<Invoice> invoices, string outputDirectory)
+public async Task GenerateInvoiceBatch(IPaperworkFactory factory, List<Invoice> invoices, string outputDirectory)
 {
     // Ensure directory exists
     Directory.CreateDirectory(outputDirectory);
@@ -401,32 +363,24 @@ public void GenerateInvoiceBatch(List<Invoice> invoices, string outputDirectory)
     {
         try
         {
-            // Load template
-            var doc = Document.ParseDocument("./Templates/invoice.html");
-
-            // Pass data
-            doc.Params["model"] = invoice;
-
-            // Set metadata
-            doc.Info.Title = $"Invoice #{invoice.Number}";
-            doc.Info.Subject = $"Invoice for {invoice.CustomerName}";
-
-            // Save
             string outputPath = Path.Combine(
                 outputDirectory,
                 $"invoice-{invoice.Number}.pdf"
             );
 
-            using (var stream = new FileStream(outputPath, FileMode.Create))
-            {
-                doc.SaveAsPDF(stream);
-            }
+            await factory.NewDocument()
+                // Load template
+                .WithLayoutFile("./Templates/invoice.html")
+                // Pass data
+                .WithData("model", invoice)
+                // Save
+                .SaveAsync(outputPath);
 
-            Console.WriteLine($"✓ Generated: {outputPath}");
+            Console.WriteLine($"Generated: {outputPath}");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"✗ Failed invoice {invoice.Number}: {ex.Message}");
+            Console.WriteLine($"Failed invoice {invoice.Number}: {ex.Message}");
         }
     }
 }
@@ -435,10 +389,7 @@ public void GenerateInvoiceBatch(List<Invoice> invoices, string outputDirectory)
 ### Parallel Processing
 
 ```csharp
-using System.Threading.Tasks;
-using System.Collections.Concurrent;
-
-public async Task GenerateBatchParallel(List<InvoiceData> invoices)
+public async Task GenerateBatchParallel(IPaperworkFactory factory, List<InvoiceData> invoices)
 {
     var options = new ParallelOptions
     {
@@ -449,19 +400,16 @@ public async Task GenerateBatchParallel(List<InvoiceData> invoices)
     {
         try
         {
-            var doc = Document.ParseDocument("template.html");
-            doc.Params["model"] = invoice;
+            await factory.NewDocument()
+                .WithLayoutFile("template.html")
+                .WithData("model", invoice)
+                .SaveAsync($"invoice-{invoice.Id}.pdf");
 
-            using (var stream = new FileStream($"invoice-{invoice.Id}.pdf", FileMode.Create))
-            {
-                doc.SaveAsPDF(stream);
-            }
-
-            Console.WriteLine($"✓ Generated invoice {invoice.Id}");
+            Console.WriteLine($"Generated invoice {invoice.Id}");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"✗ Failed invoice {invoice.Id}: {ex.Message}");
+            Console.WriteLine($"Failed invoice {invoice.Id}: {ex.Message}");
         }
     });
 }
@@ -476,10 +424,17 @@ public async Task GenerateBatchParallel(List<InvoiceData> invoices)
 ```csharp
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
-using Scryber.Components;
+using Paperwork;
 
 public class PdfFunction
 {
+    private readonly IPaperworkFactory _factory;
+
+    public PdfFunction(IPaperworkFactory factory)
+    {
+        _factory = factory;
+    }
+
     [Function("GeneratePdf")]
     public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req)
@@ -488,21 +443,18 @@ public class PdfFunction
         var requestData = await req.ReadFromJsonAsync<PdfRequest>();
 
         // Generate PDF
-        var doc = Document.ParseDocument("./Templates/template.html");
-        doc.Params["model"] = requestData;
+        byte[] pdf = await _factory.NewDocument()
+            .WithLayoutFile("./Templates/template.html")
+            .WithData("model", requestData)
+            .BuildBytesAsync();
 
-        using (var ms = new MemoryStream())
-        {
-            doc.SaveAsPDF(ms);
+        // Create response
+        var response = req.CreateResponse(HttpStatusCode.OK);
+        response.Headers.Add("Content-Type", "application/pdf");
+        response.Headers.Add("Content-Disposition", "attachment; filename=document.pdf");
 
-            // Create response
-            var response = req.CreateResponse(HttpStatusCode.OK);
-            response.Headers.Add("Content-Type", "application/pdf");
-            response.Headers.Add("Content-Disposition", "attachment; filename=document.pdf");
-
-            await response.Body.WriteAsync(ms.ToArray());
-            return response;
-        }
+        await response.Body.WriteAsync(pdf);
+        return response;
     }
 }
 ```
@@ -513,73 +465,40 @@ public class PdfFunction
 
 ### Comprehensive Error Handling
 
+`BuildAsync` reports a failed generation in its result, so only problems before generation need a `try`/`catch`.
+
 ```csharp
-public class PdfGenerationResult
+public async Task<PaperworkResult> GeneratePdfSafely(IPaperworkFactory factory, string templatePath, object data)
 {
-    public bool Success { get; set; }
-    public byte[] PdfData { get; set; }
-    public string ErrorMessage { get; set; }
-    public Exception Exception { get; set; }
-}
+    // Validate inputs
+    if (string.IsNullOrEmpty(templatePath))
+        throw new ArgumentNullException(nameof(templatePath));
 
-public PdfGenerationResult GeneratePdfSafely(string templatePath, object data)
-{
-    var result = new PdfGenerationResult();
+    if (!File.Exists(templatePath))
+        throw new FileNotFoundException("Template not found", templatePath);
 
-    try
-    {
-        // Validate inputs
-        if (string.IsNullOrEmpty(templatePath))
-            throw new ArgumentNullException(nameof(templatePath));
-
-        if (!File.Exists(templatePath))
-            throw new FileNotFoundException("Template not found", templatePath);
-
-        // Generate PDF
-        var doc = Document.ParseDocument(templatePath);
-        doc.Params["model"] = data;
-
-        using (var ms = new MemoryStream())
-        {
-            doc.SaveAsPDF(ms);
-            result.PdfData = ms.ToArray();
-            result.Success = true;
-        }
-    }
-    catch (FileNotFoundException ex)
-    {
-        result.ErrorMessage = $"Template file not found: {ex.FileName}";
-        result.Exception = ex;
-    }
-    catch (PDFException ex)
-    {
-        result.ErrorMessage = $"PDF generation error: {ex.Message}";
-        result.Exception = ex;
-    }
-    catch (Exception ex)
-    {
-        result.ErrorMessage = $"Unexpected error: {ex.Message}";
-        result.Exception = ex;
-    }
-
-    return result;
+    // Generate PDF
+    return await factory.NewDocument()
+        .WithLayoutFile(templatePath)
+        .WithData("model", data)
+        .BuildAsync();
 }
 ```
 
 ### Usage
 
 ```csharp
-var result = GeneratePdfSafely("invoice.html", invoiceData);
+var result = await GeneratePdfSafely(factory, "invoice.html", invoiceData);
 
 if (result.Success)
 {
-    File.WriteAllBytes("output.pdf", result.PdfData);
-    Console.WriteLine("✓ PDF generated successfully");
+    File.WriteAllBytes("output.pdf", result.Document.Binary);
+    Console.WriteLine("PDF generated successfully");
 }
 else
 {
-    Console.WriteLine($"✗ Error: {result.ErrorMessage}");
-    _logger.LogError(result.Exception, "PDF generation failed");
+    Console.WriteLine($"Error: {result.Message}");
+    _logger.LogError("PDF generation failed: {Error}", result.Error);
 }
 ```
 
@@ -615,20 +534,24 @@ Create a console application that:
 
 ## Common Pitfalls
 
-### ❌ Not Disposing Streams
+### ❌ Creating a Factory for Every Document
 
 ```csharp
-var stream = new FileStream("output.pdf", FileMode.Create);
-doc.SaveAsPDF(stream);
-// Stream not closed!
+foreach (var invoice in invoices)
+{
+    using var factory = PaperworkFactory.Create().Build();
+    await factory.NewDocument().WithLayoutFile("invoice.html").WithData("model", invoice).SaveAsync($"invoice-{invoice.Number}.pdf");
+}
 ```
 
-✅ **Solution:** Use `using` statement
+✅ **Solution:** Create the factory once (or inject it), and call `NewDocument()` for each document
 
 ```csharp
-using (var stream = new FileStream("output.pdf", FileMode.Create))
+using var factory = PaperworkFactory.Create().Build();
+
+foreach (var invoice in invoices)
 {
-    doc.SaveAsPDF(stream);
+    await factory.NewDocument().WithLayoutFile("invoice.html").WithData("model", invoice).SaveAsync($"invoice-{invoice.Number}.pdf");
 }
 ```
 
@@ -652,13 +575,14 @@ await factory.NewDocument()
     .SaveAsync("output.pdf");
 ```
 
-✅ **Solution:** Add try-catch
+✅ **Solution:** Add try-catch, or use `BuildAsync` and check the result
 
 ```csharp
 try
 {
-    var doc = Document.ParseDocument(template);
-    doc.SaveAsPDF("output.pdf");
+    await factory.NewDocument()
+        .WithLayoutFile(template)
+        .SaveAsync("output.pdf");
 }
 catch (Exception ex)
 {

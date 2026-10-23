@@ -20,7 +20,7 @@ Create your first PDF document from scratch using HTML and C# in minutes.
 
 By the end of this article, you'll be able to:
 - Create a basic HTML template for PDFs
-- Parse HTML documents with Scryber
+- Load HTML templates with the Paperwork.Core document builder
 - Generate and save PDF files
 - Understand XHTML vs HTML5 formats
 - Add basic styling to your document
@@ -43,33 +43,27 @@ Create a file named `hello.html`:
 </head>
 <body>
     <h1>Hello, World!</h1>
-    <p>This is my first PDF generated with Scryber.Core.</p>
+    <p>This is my first PDF generated with Paperwork.Core.</p>
 </body>
 </html>
 ```
 
 ### Step 2: Generate the PDF
 
+Replace the contents of `Program.cs` with:
+
 ```csharp
-using Scryber.Components;
-using System.IO;
+using Paperwork;
 
-class Program
-{
-    static void Main(string[] args)
-    {
-        // Load the HTML template
-        var doc = Document.ParseDocument("hello.html");
+// Create the factory - once per application
+using var factory = PaperworkFactory.Create().Build();
 
-        // Generate the PDF
-        using (var stream = new FileStream("hello.pdf", FileMode.Create))
-        {
-            doc.SaveAsPDF(stream);
-        }
+// Load the HTML template, and generate the PDF
+await factory.NewDocument()
+    .WithLayoutFile("hello.html")
+    .SaveAsync("hello.pdf");
 
-        Console.WriteLine("PDF created: hello.pdf");
-    }
-}
+Console.WriteLine("PDF created: hello.pdf");
 ```
 
 ### Step 3: Run and View
@@ -84,7 +78,7 @@ Open `hello.pdf` - you should see your first PDF!
 
 ## XHTML vs HTML5 Format
 
-Scryber supports two document formats:
+Paperwork.Core supports two document formats, and the document builder chooses the right parser for each template automatically.
 
 ### XHTML Format (Recommended)
 
@@ -102,16 +96,13 @@ Uses XML namespace:
 </html>
 ```
 
-**Parse with:**
-```csharp
-var doc = Document.ParseDocument("template.html");
-```
+Parsed as strict XHTML, because the `<html>` element has the `xmlns` namespace.
 
 **Benefits:**
 - Full XML namespace support
 - Stricter validation
 - Better for complex documents
-- Supports Scryber-specific namespaces
+- Supports library-specific namespaces
 
 ### HTML5 Format
 
@@ -129,10 +120,7 @@ Standard HTML5 without namespace:
 </html>
 ```
 
-**Parse with:**
-```csharp
-var doc = Document.ParseHTML("template.html");
-```
+Parsed as HTML5, because there is no namespace on the `<html>` element.
 
 **Benefits:**
 - Familiar HTML5 syntax
@@ -146,7 +134,7 @@ var doc = Document.ParseHTML("template.html");
 |----------------|----------------|
 | Building templates from scratch | Converting existing HTML |
 | Need strict validation | Prefer simpler syntax |
-| Using Scryber-specific elements | Working with HTML5 tools |
+| Using library-specific elements | Working with HTML5 tools |
 | Want explicit namespace control | Don't need custom namespaces |
 
 **Both formats produce identical PDF output!**
@@ -166,17 +154,17 @@ Let's create a more complete document with styling:
     <link rel='stylesheet' href='./first-styles.css' />
 </head>
 <body>
-    <h1>Welcome to Scryber.Core</h1>
+    <h1>Welcome to Paperwork.Core</h1>
 
     <h2>Introduction</h2>
     <p>
-        Scryber.Core is a powerful .NET library for generating PDF documents
+        Paperwork.Core is a powerful .NET library for generating PDF documents
         using HTML and CSS. This document demonstrates basic features.
     </p>
 
     <h2>Key Features</h2>
     <ul>
-        <li>HTML & CSS templating</li>
+        <li>HTML &amp; CSS templating</li>
         <li>Data binding with Handlebars syntax</li>
         <li>No browser required</li>
         <li>Full programmatic control</li>
@@ -190,12 +178,12 @@ Let's create a more complete document with styling:
 
     <h2>Getting Started</h2>
     <p>
-        Creating PDFs with Scryber is as simple as writing HTML. You already
+        Creating PDFs with Paperwork.Core is as simple as writing HTML. You already
         have all the skills you need!
     </p>
 
     <div class="footer">
-        Page <page-number /> of <page-count /> | Generated with Scryber.Core
+        Page <page-number /> of <page-count /> | Generated with Paperwork.Core
     </div>
 </body>
 </html>
@@ -254,52 +242,36 @@ p {
 **C# Code:**
 
 ```csharp
-using Scryber.Components;
-using System;
-using System.IO;
+using Paperwork;
 
-class Program
+using var factory = PaperworkFactory.Create().Build();
+
+// Generate the document, and check the result
+var result = await factory.NewDocument()
+    .WithLayoutFile("first-document.html")
+    .BuildAsync();
+
+if (result.Success)
 {
-    static void Main(string[] args)
-    {
-        try
-        {
-            // Parse the document
-            var doc = Document.ParseDocument("first-document.html");
-
-            // Set document properties
-            doc.Info.Title = "My First PDF Document";
-            doc.Info.Author = "Your Name";
-            doc.Info.Subject = "Learning Scryber.Core";
-
-            // Generate the PDF
-            using (var stream = new FileStream("first-document.pdf", FileMode.Create))
-            {
-                doc.SaveAsPDF(stream);
-            }
-
-            Console.WriteLine("✓ PDF created successfully: first-document.pdf");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"✗ Error: {ex.Message}");
-        }
-    }
+    File.WriteAllBytes("first-document.pdf", result.Document.Binary);
+    Console.WriteLine("PDF created successfully: first-document.pdf");
+}
+else
+{
+    Console.WriteLine($"Error: {result.Message} {result.Error}");
 }
 ```
 
+The `<title>` in the template becomes the title of the PDF. The linked stylesheet is loaded relative to the application's working directory, so run the program from the project folder.
+
 ---
 
-## Parsing From Different Sources
+## Loading From Different Sources
 
 ### From File
 
 ```csharp
-// XHTML format
-var doc = Document.ParseDocument("template.html");
-
-// HTML5 format
-var doc = Document.ParseHTMLDocument("template.html");
+builder.WithLayoutFile("template.html");
 ```
 
 ### From String
@@ -312,29 +284,24 @@ string html = @"
 <body><h1>Hello!</h1></body>
 </html>";
 
-using (var reader = new StringReader(html))
-{
-    var doc = Document.ParseDocument(reader, ParseSourceType.DynamicContent);
-}
+builder.WithLayout(html);
 ```
 
 ### From Stream
 
 ```csharp
-using (var fileStream = File.OpenRead("template.html"))
-{
-    var doc = Document.ParseDocument(fileStream, ParseSourceType.LocalFile);
-}
+using var fileStream = File.OpenRead("template.html");
+
+builder.WithLayout(fileStream);
 ```
 
 ### From URL (Remote)
 
 ```csharp
-var doc = Document.ParseDocument(
-    "https://example.com/template.html",
-    ParseSourceType.RemoteFile
-);
+builder.WithLayoutUrl("https://example.com/template.html");
 ```
+
+Where `builder` is the result of `factory.NewDocument()`.
 
 ---
 
@@ -343,51 +310,43 @@ var doc = Document.ParseDocument(
 ### To File
 
 ```csharp
-using (var stream = new FileStream("output.pdf", FileMode.Create))
-{
-    doc.SaveAsPDF(stream);
-}
+await builder.SaveAsync("output.pdf");
 ```
 
-### To Memory Stream (for HTTP Response)
+### To a Byte Array (for HTTP Response)
 
 ```csharp
-using (var ms = new MemoryStream())
-{
-    doc.SaveAsPDF(ms);
-    byte[] pdfBytes = ms.ToArray();
-    return File(pdfBytes, "application/pdf", "document.pdf");
-}
+byte[] pdfBytes = await builder.BuildBytesAsync();
+return File(pdfBytes, "application/pdf", "document.pdf");
 ```
 
-### To Response Stream (ASP.NET Core)
+### With the Result
 
 ```csharp
-public IActionResult GeneratePdf()
-{
-    var doc = Document.ParseDocument("template.html");
+PaperworkResult result = await builder.BuildAsync();
 
-    return new FileStreamResult(
-        doc.SaveAsPDF(),
-        "application/pdf"
-    )
-    {
-        FileDownloadName = "document.pdf"
-    };
+if (result.Success)
+{
+    byte[] pdfBytes = result.Document.Binary;
 }
 ```
+
+`SaveAsync` and `BuildBytesAsync` throw an exception if the document could not be generated. `BuildAsync` returns the outcome, along with any `Message` and `Error`.
 
 ---
 
 ## Document Properties
 
-Set metadata for your PDFs:
+The title of the PDF comes from the `<title>` in the template, and can be bound to data, e.g. `{% raw %}<title>{{model.title}}</title>{% endraw %}`. A `<title>` in the template replaces any title set in code.
+
+To set other metadata, parse the template into an engine `Document`, set its properties, and pass it to the builder.
 
 ```csharp
+using Scryber.Components;
+
 var doc = Document.ParseDocument("template.html");
 
 // Document information
-doc.Info.Title = "Invoice #12345";
 doc.Info.Author = "Acme Corporation";
 doc.Info.Subject = "Monthly Invoice";
 doc.Info.Keywords = "invoice, billing, payment";
@@ -396,7 +355,9 @@ doc.Info.Keywords = "invoice, billing, payment";
 doc.Info.Creator = "My Application v1.0";
 
 // Generate with metadata
-doc.SaveAsPDF("invoice.pdf");
+await factory.NewDocument()
+    .WithLayout(doc)
+    .SaveAsync("invoice.pdf");
 ```
 
 These properties appear in PDF viewers:
@@ -410,18 +371,13 @@ These properties appear in PDF viewers:
 ### 1. Template + Data Pattern
 
 ```csharp
-public byte[] GeneratePdf(string templatePath, object data)
+public Task<byte[]> GeneratePdf(IPaperworkFactory factory, string templatePath, object data)
 {
-    var doc = Document.ParseDocument(templatePath);
-
-    // Pass data to template
-    doc.Params["model"] = data;
-
-    using (var ms = new MemoryStream())
-    {
-        doc.SaveAsPDF(ms);
-        return ms.ToArray();
-    }
+    return factory.NewDocument()
+        .WithLayoutFile(templatePath)
+        // Pass data to template
+        .WithData("model", data)
+        .BuildBytesAsync();
 }
 ```
 
@@ -430,25 +386,23 @@ public byte[] GeneratePdf(string templatePath, object data)
 ```csharp
 public class PdfService
 {
+    private readonly IPaperworkFactory _factory;
     private readonly string _templateDirectory;
 
-    public PdfService(string templateDirectory)
+    public PdfService(IPaperworkFactory factory, string templateDirectory)
     {
+        _factory = factory;
         _templateDirectory = templateDirectory;
     }
 
-    public byte[] GenerateFromTemplate(string templateName, object data)
+    public Task<byte[]> GenerateFromTemplate(string templateName, object data)
     {
         string templatePath = Path.Combine(_templateDirectory, templateName);
-        var doc = Document.ParseDocument(templatePath);
 
-        doc.Params["model"] = data;
-
-        using (var ms = new MemoryStream())
-        {
-            doc.SaveAsPDF(ms);
-            return ms.ToArray();
-        }
+        return _factory.NewDocument()
+            .WithLayoutFile(templatePath)
+            .WithData("model", data)
+            .BuildBytesAsync();
     }
 }
 ```
@@ -456,8 +410,8 @@ public class PdfService
 Usage:
 
 ```csharp
-var pdfService = new PdfService("./Templates");
-byte[] pdf = pdfService.GenerateFromTemplate("invoice.html", invoiceData);
+var pdfService = new PdfService(factory, "./Templates");
+byte[] pdf = await pdfService.GenerateFromTemplate("invoice.html", invoiceData);
 ```
 
 ---
@@ -480,12 +434,12 @@ Create a PDF with:
 - Background colors alternating between items
 - A border around the entire list
 
-### Exercise 3: Parse Methods
+### Exercise 3: Load Methods
 
 Create the same document three ways:
-1. From an `.html` file using `ParseDocument`
-2. From a string using `StringReader`
-3. Using `ParseHTML` instead of `ParseDocument`
+1. From an `.html` file using `WithLayoutFile`
+2. From a string using `WithLayout`
+3. As HTML5, without the `xmlns` namespace
 
 Compare the results - they should be identical!
 
@@ -493,57 +447,42 @@ Compare the results - they should be identical!
 
 ## Common Pitfalls
 
-### ❌ Forgetting the Namespace
+### ❌ Invalid XHTML
 
 ```html
-<!-- This won't work with ParseDocument -->
-<html>
-<body>Hello</body>
+<!-- With the namespace, the template must be valid XML -->
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<body>Hello<br></body>
 </html>
 ```
 
-✅ **Solution:** Add the namespace or use ParseHTML
+✅ **Solution:** Close every tag (`<br />`), or remove the namespace to use HTML5 parsing
 
 ```html
 <html xmlns='http://www.w3.org/1999/xhtml'>
-<body>Hello</body>
+<body>Hello<br /></body>
 </html>
-```
-
-### ❌ Not Disposing Streams
-
-```csharp
-var stream = new FileStream("output.pdf", FileMode.Create);
-doc.SaveAsPDF(stream);
-// Stream not disposed!
-```
-
-✅ **Solution:** Use `using` statements
-
-```csharp
-using (var stream = new FileStream("output.pdf", FileMode.Create))
-{
-    doc.SaveAsPDF(stream);
-}
 ```
 
 ### ❌ Relative Paths Without Context
 
 ```csharp
 // May not find the file
-var doc = Document.ParseDocument("template.html");
+builder.WithLayoutFile("template.html");
 ```
 
 ✅ **Solution:** Use absolute or properly resolved paths
 
 ```csharp
 string templatePath = Path.Combine(
-    Directory.GetCurrentDirectory(),
+    AppContext.BaseDirectory,
     "Templates",
     "template.html"
 );
-var doc = Document.ParseDocument(templatePath);
+builder.WithLayoutFile(templatePath);
 ```
+
+Images and stylesheets referenced with relative paths inside a template are resolved from the application's working directory.
 
 ---
 
@@ -560,7 +499,6 @@ Now that you can create basic documents:
 ## Additional Resources
 
 - **[HTML Element Reference](/paperwork.core/reference/htmltags/)** - All supported HTML elements
-- **[Document API](/api/document/)** - Complete API documentation
 - **[Code Examples](/examples/)** - More complete examples
 
 ---

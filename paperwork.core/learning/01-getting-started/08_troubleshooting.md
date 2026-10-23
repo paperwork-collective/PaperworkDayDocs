@@ -12,7 +12,7 @@ ancestor: Paperwork.Core
 
 # Troubleshooting
 
-Diagnose and fix common issues when generating PDF documents with Scryber.Core.
+Diagnose and fix common issues when generating PDF documents with Paperwork.Core.
 
 ---
 
@@ -46,19 +46,19 @@ System.IO.FileNotFoundException: Could not find file 'template.html'
 
 ```csharp
 // ❌ Relative path might not resolve
-var doc = Document.ParseDocument("template.html");
+builder.WithLayoutFile("template.html");
 
 // ✅ Use absolute path
 string templatePath = Path.Combine(
-    Directory.GetCurrentDirectory(),
+    AppContext.BaseDirectory,
     "Templates",
     "template.html"
 );
-var doc = Document.ParseDocument(templatePath);
+builder.WithLayoutFile(templatePath);
 
 // ✅ Or use full path
 string fullPath = Path.GetFullPath("./Templates/template.html");
-var doc = Document.ParseDocument(fullPath);
+builder.WithLayoutFile(fullPath);
 
 // ✅ Check if file exists first
 if (!File.Exists(templatePath))
@@ -67,74 +67,45 @@ if (!File.Exists(templatePath))
 }
 ```
 
-### Error: "Root element is missing"
+### Error: "Document could not be created from the layout"
 
-**Problem:** Invalid XML/HTML structure
+**Problem:** The template could not be parsed
 
 ```
-System.Xml.XmlException: Root element is missing
+303. Document could not be created from the layout, check the syntax and sources
 ```
 
 **Causes:**
 - Missing `<html>` tag
-- Unclosed tags
-- Invalid XML
+- Unclosed tags in an XHTML template (one with the `xmlns` namespace)
+- Invalid XML, such as an unescaped `&`
 
 **Solutions:**
 
 ```html
-<!-- ❌ Missing root element -->
-<body>
-    <p>Content</p>
-</body>
-
-<!-- ✅ Complete structure -->
-<!DOCTYPE html>
+<!-- ❌ Unclosed tag with the XHTML namespace -->
 <html xmlns='http://www.w3.org/1999/xhtml'>
-<head>
-    <title>Document</title>
-</head>
 <body>
-    <p>Content</p>
+    <p>Content<br></p>
 </body>
 </html>
-```
 
-### Error: "Namespace prefix is not defined"
+<!-- ✅ Option 1: Close every tag -->
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<body>
+    <p>Content<br /></p>
+</body>
+</html>
 
-**Problem:** Using ParseDocument without XML namespace
-
-```
-System.Xml.XmlException: The 'html' start tag on line 2 position 2 does not match the end tag of 'body'
-```
-
-**Causes:**
-- Using `ParseDocument` on HTML5 (no namespace)
-- Missing namespace declaration
-
-**Solutions:**
-
-```html
-<!-- ❌ ParseDocument requires namespace -->
+<!-- ✅ Option 2: Remove the namespace, and the template is parsed as HTML5 -->
 <html>
-<body>Content</body>
+<body>
+    <p>Content<br></p>
+</body>
 </html>
-
-<!-- ✅ Option 1: Add namespace -->
-<html xmlns='http://www.w3.org/1999/xhtml'>
-<body>Content</body>
-</html>
-
-<!-- ✅ Option 2: Use ParseHTML instead -->
 ```
 
-```csharp
-// For HTML without namespace
-var doc = Document.ParseHTML("template.html");
-
-// For XHTML with namespace
-var doc = Document.ParseDocument("template.html");
-```
+The document builder chooses the parser from the `<html>` element: with the `xmlns` namespace the template must be valid XML, without it the more forgiving HTML5 parser is used.
 
 ### Error: "Object reference not set to an instance"
 
@@ -147,18 +118,20 @@ System.NullReferenceException: Object reference not set to an instance of an obj
 **Common causes:**
 
 ```csharp
-// ❌ Document not initialized
-Document doc = null;
-doc.SaveAsPDF("output.pdf"); // NullReferenceException
+// ❌ Builder not created
+IDocumentBuilder builder = null;
+await builder.SaveAsync("output.pdf"); // NullReferenceException
 
 // ❌ Missing data
-doc.Params["model"] = null; // May cause null reference in template
+builder.WithData("model", data); // data is null - may cause null reference in template
 
 // ✅ Check for null
-if (doc != null && data != null)
+if (data != null)
 {
-    doc.Params["model"] = data;
-    doc.SaveAsPDF("output.pdf");
+    await factory.NewDocument()
+        .WithLayoutFile("template.html")
+        .WithData("model", data)
+        .SaveAsync("output.pdf");
 }
 ```
 
@@ -200,68 +173,31 @@ if (fileInfo.Exists && fileInfo.IsReadOnly)
 
 ### Enable Logging
 
-```csharp
-using Scryber;
-
-// Set log level
-TraceLog.SetLogLevel(TraceRecordLevel.Verbose);
-
-// Create custom log handler
-var logger = new ConsoleTraceLog(TraceRecordLevel.Verbose);
-
-// Use logger
-var doc = Document.ParseDocument("template.html");
-doc.Params["model"] = data;
-
-using (var stream = new FileStream("output.pdf", FileMode.Create))
-{
-    doc.SaveAsPDF(stream, logger);
-}
-```
-
-### Custom Log Handler
+Set a log level on the document builder, and the log is added as pages at the end of the generated PDF.
 
 ```csharp
-public class CustomTraceLog : TraceLog
-{
-    private readonly ILogger _logger;
+using Paperwork.Generation;
 
-    public CustomTraceLog(ILogger logger) : base(TraceRecordLevel.Verbose)
-    {
-        _logger = logger;
-    }
-
-    protected override void WriteLog(TraceRecord record)
-    {
-        string message = $"[{record.Level}] {record.Category}: {record.Message}";
-
-        switch (record.Level)
-        {
-            case TraceRecordLevel.Error:
-                _logger.LogError(message);
-                break;
-            case TraceRecordLevel.Warning:
-                _logger.LogWarning(message);
-                break;
-            case TraceRecordLevel.Message:
-                _logger.LogInformation(message);
-                break;
-            case TraceRecordLevel.Verbose:
-                _logger.LogDebug(message);
-                break;
-        }
-    }
-}
+await factory.NewDocument()
+    .WithLayoutFile("template.html")
+    .WithData("model", data)
+    .WithLogLevel(PaperworkRequestLogOption.Verbose)
+    .SaveAsync("output.pdf");
 ```
+
+Remove the log level (or set it to `Off`) for production output.
 
 ### Log Levels
 
 | Level | When to Use |
 |-------|-------------|
-| `Error` | Only errors |
-| `Warning` | Errors and warnings |
-| `Message` | Info, warnings, and errors |
+| `Off` | No log (the default) |
+| `Errors` | Only errors |
+| `Warnings` | Errors and warnings |
+| `Messages` | Info, warnings, and errors |
 | `Verbose` | Everything (debugging) |
+
+See [Logging](/paperwork.core/learning/07-configuration/02_logging) for more on the log output.
 
 ---
 
@@ -269,68 +205,23 @@ public class CustomTraceLog : TraceLog
 
 ### Test Template Validity
 
-```csharp
-public bool IsValidTemplate(string templatePath, out string error)
-{
-    error = null;
-    try
-    {
-        var doc = Document.ParseDocument(templatePath);
-        return true;
-    }
-    catch (XmlException ex)
-    {
-        error = $"XML Error at line {ex.LineNumber}: {ex.Message}";
-        return false;
-    }
-    catch (Exception ex)
-    {
-        error = $"Error: {ex.Message}";
-        return false;
-    }
-}
-```
-
-### Validate Template Structure
+`BuildAsync` reports problems in its result rather than throwing.
 
 ```csharp
-public List<string> ValidateTemplate(string templatePath)
+public async Task<string> CheckTemplate(IPaperworkFactory factory, string templatePath, object sampleData)
 {
-    var issues = new List<string>();
+    var result = await factory.NewDocument()
+        .WithLayoutFile(templatePath)
+        .WithData("model", sampleData)
+        .BuildAsync();
 
-    try
-    {
-        var doc = Document.ParseDocument(templatePath);
+    if (!result.Success)
+        return $"{result.Message} {result.Error}";
 
-        // Check for head section
-        if (string.IsNullOrEmpty(doc.Info.Title))
-        {
-            issues.Add("Missing document title");
-        }
+    if (result.Document?.Binary == null || result.Document.Binary.Length == 0)
+        return "Generated PDF is empty";
 
-        // Check for body
-        if (doc.Pages.Count == 0)
-        {
-            issues.Add("No content pages generated");
-        }
-
-        // Try to generate PDF
-        using (var ms = new MemoryStream())
-        {
-            doc.SaveAsPDF(ms);
-
-            if (ms.Length == 0)
-            {
-                issues.Add("Generated PDF is empty");
-            }
-        }
-    }
-    catch (Exception ex)
-    {
-        issues.Add($"Template error: {ex.Message}");
-    }
-
-    return issues;
+    return null; // No problems found
 }
 ```
 
@@ -347,6 +238,8 @@ public List<string> ValidateTemplate(string templatePath)
 <img src="./images/logo.png" />
 ```
 
+Relative paths in a template are resolved from the application's working directory, not from the folder the template file is in.
+
 **Debug:**
 
 ```csharp
@@ -361,16 +254,11 @@ Console.WriteLine($"Image exists: {File.Exists(imagePath)}");
 **Solutions:**
 
 ```html
+<!-- ✅ Use a path relative to the working directory -->
+<img src="Templates/images/logo.png" />
+
 <!-- ✅ Use absolute path -->
 <img src="C:/Projects/MyApp/images/logo.png" />
-
-<!-- ✅ Or use base tag -->
-<head>
-    <base href="file:///C:/Projects/MyApp/" />
-</head>
-<body>
-    <img src="images/logo.png" />
-</body>
 
 <!-- ✅ Or embed as base64 -->
 <img src="data:image/png;base64,iVBORw0KG..." />
@@ -389,13 +277,7 @@ Console.WriteLine($"Image exists: {File.Exists(imagePath)}");
 
 ```html
 <!-- ✅ Use full path -->
-<link rel="stylesheet" href="file:///C:/Projects/MyApp/styles/common.css" />
-
-<!-- ✅ Or use base tag -->
-<head>
-    <base href="file:///C:/Projects/MyApp/" />
-    <link rel="stylesheet" href="styles/common.css" />
-</head>
+<link rel="stylesheet" href="C:/Projects/MyApp/styles/common.css" />
 
 <!-- ✅ Or embed styles -->
 <head>
@@ -403,6 +285,12 @@ Console.WriteLine($"Image exists: {File.Exists(imagePath)}");
         /* Styles here */
     </style>
 </head>
+```
+
+Or add the stylesheet with the document builder, which reads the file from the path given.
+
+```csharp
+builder.WithStyleFile("Templates/styles/common.css");
 ```
 
 ### Remote Resource Timeout
@@ -416,10 +304,9 @@ Console.WriteLine($"Image exists: {File.Exists(imagePath)}");
 **Solutions:**
 
 ```csharp
-// Configure timeout
-var doc = Document.ParseDocument("template.html");
-doc.RemoteRequests.Timeout = TimeSpan.FromSeconds(30);
-doc.SaveAsPDF("output.pdf");
+// Configure the timeout on the HttpClient used by the factory
+var client = new HttpClient { Timeout = TimeSpan.FromSeconds(30) };
+using var factory = PaperworkFactory.Create(client).Build();
 
 // Or cache remote resources locally
 string localImage = DownloadAndCache("https://example.com/image.jpg");
@@ -436,48 +323,28 @@ string localImage = DownloadAndCache("https://example.com/image.jpg");
 
 **Diagnose:**
 
+Turn on the log, and it includes the time taken by each stage of generation.
+
 ```csharp
-var stopwatch = Stopwatch.StartNew();
-
-// Parse
-var parseStart = stopwatch.Elapsed;
-var doc = Document.ParseDocument("template.html");
-Console.WriteLine($"Parse: {stopwatch.Elapsed - parseStart}");
-
-// Bind data
-var bindStart = stopwatch.Elapsed;
-doc.Params["model"] = GetData();
-doc.DataBind(null);
-Console.WriteLine($"Data bind: {stopwatch.Elapsed - bindStart}");
-
-// Render
-var renderStart = stopwatch.Elapsed;
-using (var stream = new FileStream("output.pdf", FileMode.Create))
-{
-    doc.SaveAsPDF(stream);
-}
-Console.WriteLine($"Render: {stopwatch.Elapsed - renderStart}");
-
-stopwatch.Stop();
-Console.WriteLine($"Total: {stopwatch.Elapsed}");
+await factory.NewDocument()
+    .WithLayoutFile("template.html")
+    .WithData("model", GetData())
+    .WithLogLevel(PaperworkRequestLogOption.Messages)
+    .SaveAsync("output.pdf");
 ```
 
 **Solutions:**
 
-1. **Cache templates:**
+1. **Re-use the factory, and cache template text:**
 
 ```csharp
-private static readonly Dictionary<string, Document> _templateCache =
-    new Dictionary<string, Document>();
+private static readonly ConcurrentDictionary<string, string> _templateCache = new();
 
-public Document GetTemplate(string templatePath)
+public IDocumentBuilder NewFromTemplate(IPaperworkFactory factory, string templatePath)
 {
-    if (!_templateCache.ContainsKey(templatePath))
-    {
-        _templateCache[templatePath] = Document.ParseDocument(templatePath);
-    }
+    string html = _templateCache.GetOrAdd(templatePath, File.ReadAllText);
 
-    return _templateCache[templatePath];
+    return factory.NewDocument().WithLayout(html);
 }
 ```
 
@@ -536,12 +403,8 @@ body div.content div.section div.subsection p.text span.highlight {
 **Solutions:**
 
 ```csharp
-// ✅ Dispose properly
-using (var doc = Document.ParseDocument("template.html"))
-using (var stream = new FileStream("output.pdf", FileMode.Create))
-{
-    doc.SaveAsPDF(stream);
-}
+// ✅ Create one factory and dispose of it when finished
+using var factory = PaperworkFactory.Create().Build();
 
 // ✅ Process in batches
 foreach (var batch in items.Chunk(100))
@@ -586,19 +449,8 @@ foreach (var batch in items.Chunk(100))
 **Debug:**
 
 ```csharp
-// Check if data is passed
-if (doc.Params["model"] == null)
-{
-    Console.WriteLine("Error: No model data passed");
-}
-
-// Check property names
-var data = doc.Params["model"];
-var properties = data.GetType().GetProperties();
-foreach (var prop in properties)
-{
-    Console.WriteLine($"Property: {prop.Name} = {prop.GetValue(data)}");
-}
+// Check the data being passed
+Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(data));
 ```
 
 **Solutions:**
@@ -635,7 +487,7 @@ builder.WithData("model", model);
 
 ```csharp
 [Test]
-public void TestInvoiceGeneration()
+public async Task TestInvoiceGeneration()
 {
     // Arrange
     var testData = new Invoice
@@ -650,15 +502,12 @@ public void TestInvoiceGeneration()
     };
 
     // Act
-    var doc = Document.ParseDocument("./Templates/invoice.html");
-    doc.Params["model"] = testData;
+    using var factory = PaperworkFactory.Create().Build();
 
-    byte[] pdfBytes;
-    using (var ms = new MemoryStream())
-    {
-        doc.SaveAsPDF(ms);
-        pdfBytes = ms.ToArray();
-    }
+    byte[] pdfBytes = await factory.NewDocument()
+        .WithLayoutFile("./Templates/invoice.html")
+        .WithData("model", testData)
+        .BuildBytesAsync();
 
     // Assert
     Assert.IsNotNull(pdfBytes);
@@ -671,7 +520,7 @@ public void TestInvoiceGeneration()
 
 ```csharp
 [Test]
-public void TestPdfFileGeneration()
+public async Task TestPdfFileGeneration()
 {
     // Arrange
     string outputPath = Path.Combine(Path.GetTempPath(), "test.pdf");
@@ -679,8 +528,11 @@ public void TestPdfFileGeneration()
     try
     {
         // Act
-        var doc = Document.ParseDocument("template.html");
-        doc.SaveAsPDF(outputPath);
+        using var factory = PaperworkFactory.Create().Build();
+
+        await factory.NewDocument()
+            .WithLayoutFile("template.html")
+            .SaveAsync(outputPath);
 
         // Assert
         Assert.That(File.Exists(outputPath));
@@ -714,21 +566,20 @@ public void TestPdfFileGeneration()
 
 1. **[HTML Element Reference](/paperwork.core/reference/htmltags/)** - Supported elements
 2. **[CSS Property Reference](/paperwork.core/reference/css/)** - Supported CSS
-3. **[API Documentation](/api/)** - Complete API reference
 
 ### Community Resources
 
-- **[GitHub Issues](https://github.com/richard-scryber/scryber.core/issues)** - Report bugs
+- **[GitHub Issues](https://github.com/richard-scryber/scryber.core/issues)** - Report layout and rendering bugs in the Scryber engine
 - **[GitHub Discussions](https://github.com/richard-scryber/scryber.core/discussions)** - Ask questions
-- **[Examples Repository](https://github.com/richard-scryber/scryber.core.examples)** - Sample code
 
 ### Reporting Issues
 
 When reporting an issue, include:
 
-1. **Scryber version:**
+1. **Package versions:**
    ```csharp
-   Console.WriteLine(typeof(Document).Assembly.GetName().Version);
+   Console.WriteLine(typeof(Paperwork.PaperworkFactory).Assembly.GetName().Version);
+   Console.WriteLine(typeof(Scryber.Components.Document).Assembly.GetName().Version);
    ```
 
 2. **Minimal reproducible example:**
@@ -762,11 +613,11 @@ When encountering issues, check:
 
 - [ ] File paths are correct and files exist
 - [ ] Template has valid HTML/XHTML structure
-- [ ] Using correct parsing method (ParseDocument vs ParseHTML)
-- [ ] Data is passed to document via `Params`
+- [ ] XHTML templates (with the `xmlns` namespace) are valid XML
+- [ ] Data is passed to the document with `WithData`
 - [ ] Property names in template match data model
 - [ ] Images and resources are accessible
-- [ ] Streams are disposed properly
+- [ ] The factory is created once and re-used
 - [ ] Sufficient permissions to write files
 - [ ] Error handling is in place
 - [ ] Logging is enabled for debugging

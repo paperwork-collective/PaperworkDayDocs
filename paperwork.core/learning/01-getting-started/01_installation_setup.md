@@ -12,14 +12,14 @@ ancestor: Paperwork.Core
 
 # Installation & Setup
 
-Get Scryber.Core installed and configured in your .NET project in minutes.
+Get Paperwork.Core installed and configured in your .NET project in minutes.
 
 ---
 
 ## Learning Objectives
 
 By the end of this article, you'll be able to:
-- Install Scryber.Core via NuGet
+- Install Paperwork.Core via NuGet
 - Configure your project for PDF generation
 - Verify your installation
 - Set up your IDE for optimal development
@@ -28,7 +28,7 @@ By the end of this article, you'll be able to:
 
 ## Prerequisites
 
-- **.NET 6.0 or later** (or .NET Framework 4.6.2+)
+- **.NET 8.0 or later**
 - **Visual Studio 2022**, **VS Code**, or **Rider**
 - **Basic C# knowledge**
 
@@ -42,26 +42,26 @@ By the end of this article, you'll be able to:
 2. **Right-click** on your project in Solution Explorer
 3. Select **Manage NuGet Packages**
 4. Click the **Browse** tab
-5. Search for **`Scryber.Core`**
+5. Search for **`Paperwork.Core`**
 6. Click **Install**
 
 ### Method 2: Package Manager Console
 
 ```powershell
-Install-Package Scryber.Core
+Install-Package Paperwork.Core
 ```
 
 ### Method 3: .NET CLI
 
 ```bash
-dotnet add package Scryber.Core
+dotnet add package Paperwork.Core
 ```
 
 ### Method 4: Direct `.csproj` Edit
 
 ```xml
 <ItemGroup>
-  <PackageReference Include="Scryber.Core" Version="6.*" />
+  <PackageReference Include="Paperwork.Core" Version="9.*" />
 </ItemGroup>
 ```
 
@@ -75,7 +75,7 @@ dotnet restore
 
 ## Project Types Supported
 
-Scryber.Core works with various .NET project types:
+Paperwork.Core works with various .NET project types:
 
 | Project Type | Supported | Notes |
 |--------------|-----------|-------|
@@ -85,53 +85,38 @@ Scryber.Core works with various .NET project types:
 | **WPF** | ✅ | Desktop applications |
 | **Azure Functions** | ✅ | Serverless PDF generation |
 | **Blazor Server** | ✅ | Interactive web apps |
-| **Blazor WebAssembly** | ✅ | Full suport for client side |
-| **.NET Framework 4.6.2+** | ✅ | Legacy applications |
+| **Blazor WebAssembly** | ✅ | Full support for client side |
 
 ---
 
 ## Verifying Installation
 
-Create a simple test to verify Scryber is installed correctly:
+Replace the contents of `Program.cs` with a simple test to verify Paperwork.Core is installed correctly:
 
 ```csharp
-using Scryber.Components;
-using System.IO;
+using Paperwork;
 
-namespace ScryberTest
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            // Create a simple HTML document
-            string html = @"
+// Create a simple HTML document
+string html = @"
 <!DOCTYPE html>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
     <title>Installation Test</title>
 </head>
 <body>
-    <h1>Hello, Scryber!</h1>
-    <p>If you can see this PDF, Scryber is installed correctly.</p>
+    <h1>Hello, Paperwork!</h1>
+    <p>If you can see this PDF, Paperwork.Core is installed correctly.</p>
 </body>
 </html>";
 
-            // Parse and generate PDF
-            using (var reader = new StringReader(html))
-            {
-                var doc = Document.ParseDocument(reader, ParseSourceType.DynamicContent);
+// Create the factory, and generate the PDF from the html
+using var factory = PaperworkFactory.Create().Build();
 
-                using (var stream = new FileStream("test.pdf", FileMode.Create))
-                {
-                    doc.SaveAsPDF(stream);
-                }
-            }
+await factory.NewDocument()
+    .WithLayout(html)
+    .SaveAsync("test.pdf");
 
-            Console.WriteLine("PDF generated successfully: test.pdf");
-        }
-    }
-}
+Console.WriteLine("PDF generated successfully: test.pdf");
 ```
 
 **Run the program:**
@@ -145,7 +130,7 @@ dotnet run
 PDF generated successfully: test.pdf
 ```
 
-Open `test.pdf` to verify it contains "Hello, Scryber!"
+Open `test.pdf` to verify it contains "Hello, Paperwork!"
 
 ---
 
@@ -159,7 +144,7 @@ Open `test.pdf` to verify it contains "Hello, Scryber!"
 - **HTML/CSS IntelliSense** (built-in)
 
 **Project Configuration:**
-1. **Target Framework**: .NET 6.0 or later recommended
+1. **Target Framework**: .NET 8.0 or later
 2. **Language Version**: C# 10.0 or later
 3. **Nullable Reference Types**: Optional but recommended
 
@@ -181,7 +166,7 @@ Open `test.pdf` to verify it contains "Hello, Scryber!"
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/net6.0/YourProject.dll",
+            "program": "${workspaceFolder}/bin/Debug/net8.0/YourProject.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
@@ -202,7 +187,7 @@ Open `test.pdf` to verify it contains "Hello, Scryber!"
 
 ## Project Structure
 
-Recommended folder structure for Scryber projects:
+Recommended folder structure for Paperwork.Core projects:
 
 ```
 YourProject/
@@ -226,7 +211,7 @@ YourProject/
 **Add to `.gitignore`:**
 
 ```
-# Scryber output
+# Generated PDFs
 Output/*.pdf
 
 # But keep the directory
@@ -239,20 +224,23 @@ Output/*.pdf
 
 ### Dependency Injection Setup (ASP.NET Core)
 
-```csharp
-using Microsoft.Extensions.DependencyInjection;
+Register the factory once at startup, and it can then be injected as an `IPaperworkFactory` wherever documents are generated.
 
-public class Startup
-{
-    public void ConfigureServices(IServiceCollection services)
-    {
-        // Add Scryber services (if using ASP.NET Core)
-        services.AddScryber();
-    }
-}
+```csharp
+using Paperwork.Generation;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Used to load remote fonts, images and stylesheets
+builder.Services.AddSingleton(new HttpClient());
+
+// Add the Paperwork factory
+builder.Services.AddPaperwork();
 ```
 
 ### Configuration Loading on Command Line
+
+Fonts, imaging, output and other engine options can be set in `appsettings.json`, under the `"Scryber"` section. In a console application, load the configuration once at startup.
 
 ```csharp
 using Microsoft.Extensions.Configuration;
@@ -271,7 +259,7 @@ Scryber.ServiceProvider.Init(config);
 
 ### Issue 1: NuGet Package Not Found
 
-**Problem:** Cannot find `Scryber.Core` in NuGet
+**Problem:** Cannot find `Paperwork.Core` in NuGet
 
 **Solution:**
 - Ensure NuGet package sources include nuget.org
@@ -285,24 +273,12 @@ Scryber.ServiceProvider.Init(config);
 **Solution:**
 ```xml
 <ItemGroup>
-  <PackageReference Include="Scryber.Core" Version="6.*" />
+  <PackageReference Include="Paperwork.Core" Version="9.*" />
   <!-- Explicitly specify conflicting dependencies if needed -->
 </ItemGroup>
 ```
 
-### Issue 3: .NET Framework Compatibility
-
-**Problem:** Cannot install on .NET Framework project
-
-**Solution:**
-- Ensure project targets .NET Framework 4.6.2 or later
-- Update the project file:
-
-    ```xml
-    <TargetFramework>net472</TargetFramework>
-    ```
-
-### Issue 4: File Access Permissions
+### Issue 3: File Access Permissions
 
 **Problem:** Cannot write PDF files
 
@@ -322,7 +298,7 @@ string outputPath = Path.Combine(
 
 ## Next Steps
 
-Now that Scryber is installed and configured:
+Now that Paperwork.Core is installed and configured:
 
 1. **[Create Your First Document](02_first_document.html)** - Build a simple PDF from scratch
 2. **[HTML to PDF](03_html_to_pdf.html)** - Learn how HTML converts to PDF
@@ -332,8 +308,8 @@ Now that Scryber is installed and configured:
 
 ## Additional Resources
 
-- **[Scryber GitHub](https://github.com/richard-scryber/scryber.core)** - Source code and issues
-- **[NuGet Package](https://www.nuget.org/packages/Scryber.Core/)** - Official package
+- **[NuGet Package](https://www.nuget.org/packages/Paperwork.Core/)** - Official package
+- **[Scryber engine on GitHub](https://github.com/richard-scryber/scryber.core)** - Source code and issues for the open-source layout and rendering engine
 - **[API Documentation](/api/)** - Complete API reference
 
 ---

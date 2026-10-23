@@ -10,15 +10,15 @@ grand_parent: Paperwork.Core
 grand_parent_url: /paperwork.core/
 ---
 
-# Getting Started with Scryber.Core
+# Getting Started with Paperwork.Core
 
-Welcome to the Scryber.Core learning series! This comprehensive guide will take you from complete beginner to confident PDF document creator.
+Welcome to the Paperwork.Core learning series! This comprehensive guide will take you from complete beginner to confident PDF document creator.
 
 ---
 
 ## Table of Contents
 
-1. [Installation & Setup](01_installation_setup.html) - Get Scryber installed and configured
+1. [Installation & Setup](01_installation_setup.html) - Get Paperwork.Core installed and configured
 2. [Your First Document](02_first_document.html) - Create a complete PDF from scratch
 3. [HTML to PDF](03_html_to_pdf.html) - Understand how HTML translates to PDF
 4. [CSS Basics](04_css_basics.html) - Style your documents with CSS
@@ -29,9 +29,9 @@ Welcome to the Scryber.Core learning series! This comprehensive guide will take 
 
 ---
 
-## What is Scryber.Core?
+## What is Paperwork.Core?
 
-Scryber.Core is a powerful .NET library that enables you to generate PDF documents using HTML and CSS. Unlike browser-based PDF generation, Scryber is designed specifically for server-side PDF creation, offering:
+Paperwork.Core is a powerful .NET library that enables you to generate PDF documents using HTML and CSS. Unlike browser-based PDF generation, Paperwork.Core is designed specifically for server-side PDF creation, offering:
 
 - **HTML & CSS Templating** - Use familiar web technologies to design PDFs
 - **Data Binding** - Dynamic content with Handlebars-style expressions
@@ -39,9 +39,9 @@ Scryber.Core is a powerful .NET library that enables you to generate PDF documen
 - **Full Control** - Programmatic access to all PDF features
 - **Production Ready** - Built for high-volume, enterprise applications
 
-## Who Should Use Scryber?
+## Who Should Use Paperwork.Core?
 
-Scryber.Core is ideal for:
+Paperwork.Core is ideal for:
 
 - .NET developers who need to generate PDFs programmatically
 - Teams who want to use HTML/CSS skills for PDF design
@@ -65,7 +65,7 @@ Here's a simple example to show you how easy it is:
 ### 1. Install the Package
 
 ```bash
-dotnet add package Scryber.Core
+dotnet add package Paperwork.Core
 ```
 
 ### 2. Create a Simple Template
@@ -87,7 +87,7 @@ dotnet add package Scryber.Core
 </head>
 <body>
     <h1>Hello, {{model.name}}!</h1>
-    <p>Welcome to PDF generation with Scryber.Core.</p>
+    <p>Welcome to PDF generation with Paperwork.Core.</p>
 </body>
 </html>
 ```
@@ -100,29 +100,25 @@ dotnet add package Scryber.Core
 ### 3. Generate the PDF
 
 ```csharp
-using Scryber.Components;
+using Paperwork;
 
-// Load the template (XHTML format with namespace)
-var doc = Document.ParseDocument("template.html");
+// Create the factory once, and re-use it
+using var factory = PaperworkFactory.Create().Build();
 
-// Or use ParseHTML for standard HTML5 (without namespace)
-// var doc = Document.ParseHTML("template.html");
-
-// Pass data to the template
-doc.Params["model"] = new { name = "World" };
-
-// Generate the PDF
-using (var stream = new FileStream("output.pdf", FileMode.Create))
-{
-    doc.SaveAsPDF(stream);
-}
+await factory.NewDocument()
+    // Load the template
+    .WithLayoutFile("template.html")
+    // Pass data to the template
+    .WithData("model", new { name = "World" })
+    // Generate the PDF
+    .SaveAsync("output.pdf");
 ```
 
 That's it! You've created your first PDF with dynamic content.
 
 ## XHTML vs HTML5 Format
 
-Scryber supports two document formats:
+Paperwork.Core supports two document formats:
 
 ### XHTML Format (Recommended)
 
@@ -142,13 +138,13 @@ Uses XML namespace and strict XHTML syntax:
 ```
 
 
-**Parse with:** `Document.ParseDocument()`
+**Parsed as:** strict XHTML, because the `<html>` element has the `xmlns` namespace.
 
 **Benefits:**
 - Full XML namespace support
 - Stricter validation
 - Better for complex documents
-- Supports Scryber-specific namespaces
+- Supports library-specific namespaces
 
 ### HTML5 Format
 
@@ -166,7 +162,7 @@ Standard HTML5 syntax without namespace:
 </html>
 ```
 
-**Parse with:** `Document.ParseHTML()`
+**Parsed as:** HTML5, because there is no namespace on the `<html>` element.
 
 **Benefits:**
 - Familiar HTML5 syntax
@@ -176,13 +172,15 @@ Standard HTML5 syntax without namespace:
 
 ### When to Use Each
 
-**Use XHTML (ParseDocument) when:**
+The document builder checks the `<html>` element of each layout and chooses the parser for you, so there is nothing to change in code.
+
+**Use XHTML when:**
 - Building templates from scratch
 - Need strict validation
-- Using Scryber-specific elements
+- Using library-specific elements
 - Want explicit namespace control
 
-**Use HTML5 (ParseHTML) when:**
+**Use HTML5 when:**
 - Converting existing HTML content
 - Prefer simpler syntax
 - Working with HTML5 tools
@@ -192,9 +190,9 @@ Both formats produce the same PDF output!
 
 ## What You'll Learn in This Series
 
-This series covers the essential foundations of Scryber.Core:
+This series covers the essential foundations of Paperwork.Core:
 
-1. **[Installation & Setup](01_installation_setup.html)** - Get Scryber installed and configured
+1. **[Installation & Setup](01_installation_setup.html)** - Get Paperwork.Core installed and configured
 2. **[Your First Document](02_first_document.html)** - Create a complete PDF from scratch, including XHTML vs HTML5 formats
 3. **[HTML to PDF](03_html_to_pdf.html)** - Understand how HTML translates to PDF
 4. **[CSS Basics](04_css_basics.html)** - Style your documents with CSS
@@ -233,7 +231,7 @@ Each article in this series is designed to be:
 5. Complete the series in order
 
 **For Experienced Developers:**
-1. Skim articles 1-2 for Scryber-specific concepts
+1. Skim articles 1-2 for library-specific concepts
 2. Focus on articles 3-4 for HTML/CSS differences
 3. Jump to specific topics as needed
 4. Use article 8 as a reference for troubleshooting
@@ -247,7 +245,7 @@ Each article in this series is designed to be:
 
 ## Next Steps
 
-Ready to begin? Start with [Installation & Setup](01_installation_setup.html) to get Scryber.Core installed and configured in your project.
+Ready to begin? Start with [Installation & Setup](01_installation_setup.html) to get Paperwork.Core installed and configured in your project.
 
 If you run into issues, jump to [Troubleshooting](08_troubleshooting.html) for help.
 
