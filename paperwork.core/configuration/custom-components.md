@@ -31,7 +31,7 @@ A custom component:
 └──────────────────────────────────────────────────────┘
               ↓
 ┌──────────────────────────────────────────────────────┐
-│ Namespace Registration (scrybersettings.json)        │
+│ Namespace Registration (appsettings.json)        │
 │  - XML namespace → .NET namespace                    │
 │  - Assembly reference                                │
 └──────────────────────────────────────────────────────┘
@@ -158,7 +158,7 @@ namespace MyCompany.Components
 
 ### 2. Namespace Registration
 
-**scrybersettings.json:**
+**appsettings.json:**
 
 ```json
 {
@@ -166,8 +166,9 @@ namespace MyCompany.Components
     "Parsing": {
       "Namespaces": [
         {
-          "XMLNamespace": "http://mycompany.com/schemas/components",
-          "AssemblyPrefix": "MyCompany.Components, MyCompany.Components"
+          "Source": "http://mycompany.com/schemas/components",
+          "Namespace": "MyCompany.Components",
+          "Assembly": "MyCompany.Components"
         }
       ]
     }
@@ -437,7 +438,7 @@ public class DashboardController
 <?scryber controller='MyCompany.Controllers.DashboardController, MyCompany.Reports' ?>
 <html xmlns='http://www.w3.org/1999/xhtml' 
       xmlns:custom='http://mycompany.com/schemas/components'>
-    <body on-load='LoadData'>
+    <body on-loaded='LoadData'>
         <main>
             
             <custom:StatCard id='SalesCard' 

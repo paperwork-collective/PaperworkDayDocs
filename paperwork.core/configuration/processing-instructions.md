@@ -121,7 +121,7 @@ protected void ParseProcessingInstructions(XmlReader reader, string name)
 ```html
 <?paperwork controller='MyCompany.Reports.InvoiceController, MyCompany.Reports' ?>
 <html xmlns='http://www.w3.org/1999/xhtml'>
-    <body on-init='InitInvoice' on-load='LoadData'>
+    <body on-init='InitInvoice' on-loaded='LoadData'>
         <main>
             <span id='CustomerLabel' />
         </main>

@@ -57,7 +57,7 @@ Comprehensive guidelines for configuring and extending Scryber effectively.
 
 ```csharp
 var config = new ConfigurationBuilder()
-    .AddJsonFile("scrybersettings.json", optional: false)
+    .AddJsonFile("appsettings.json", optional: false)
     .AddJsonFile($"scrybersettings.{env}.json", optional: true)
     .AddEnvironmentVariables()
     .Build();
@@ -356,12 +356,14 @@ MyCompany.Components/
 {
   "Namespaces": [
     {
-      "XMLNamespace": "http://mycompany.com/components/cards",
-      "AssemblyPrefix": "MyCompany.Components.Cards, MyCompany.Components"
+      "Source": "http://mycompany.com/components/cards",
+      "Namespace": "MyCompany.Components.Cards",
+      "Assembly": "MyCompany.Components"
     },
     {
-      "XMLNamespace": "http://mycompany.com/components/charts",
-      "AssemblyPrefix": "MyCompany.Components.Charts, MyCompany.Components"
+      "Source": "http://mycompany.com/components/charts",
+      "Namespace": "MyCompany.Components.Charts",
+      "Assembly": "MyCompany.Components"
     }
   ]
 }

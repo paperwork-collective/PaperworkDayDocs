@@ -12,22 +12,20 @@ grand_parent_url: /paperwork.core/
 
 # Complete Integration Example
 
-This example demonstrates **all extension mechanisms working together**:
+This example brings the extension mechanisms together in one application:
 - Custom components with namespace registration
-- Document controller with outlets and actions
-- Custom image factory for database images
+- A document controller with outlets and actions
+- Product images loaded from a custom path
 - Custom font registration
-- Processing instructions
-- Complete configuration
+- Data from the document builder
 
 ## Scenario
 
 A **product catalog application** that generates PDF catalogs with:
-- Custom `ProductCard` component
-- Custom `RatingStars` component  
-- Controller loading products from database
-- Product images loaded from database
-- Custom fonts (Roboto, Open Sans)
+- A custom `ProductCard` component, and a `RatingStars` component it uses
+- A controller that sets the title, date and product count
+- Product images loaded by the application from its own store
+- A registered font (Open Sans)
 
 ## Project Structure
 
@@ -38,20 +36,18 @@ ProductCatalog/
 │   └── RatingStars.cs
 ├── Controllers/
 │   └── CatalogController.cs
-├── Imaging/
-│   └── DatabaseImageFactory.cs
 ├── Models/
 │   └── Product.cs
 ├── Services/
 │   └── ProductService.cs
 ├── Templates/
-│   └── Catalog.pdfx
+│   └── Catalog.html
 ├── Fonts/
-│   ├── Roboto-Regular.ttf
-│   ├── Roboto-Bold.ttf
 │   ├── OpenSans-Regular.ttf
 │   └── OpenSans-Bold.ttf
-├── scrybersettings.json
+├── Images/
+│   └── placeholder.png
+├── appsettings.json
 ├── ProductCatalog.csproj
 └── Program.cs
 ```
@@ -62,11 +58,12 @@ ProductCatalog/
 
 **Components/ProductCard.cs:**
 
+The card's attributes are bound to the data in the template, so it builds its content once it has been data bound.
+
 ```csharp
 using Scryber;
 using Scryber.Components;
 using Scryber.Drawing;
-using Scryber.Styles;
 
 namespace ProductCatalog.Components
 {
@@ -75,124 +72,87 @@ namespace ProductCatalog.Components
     {
         [PDFAttribute("product-name")]
         public string ProductName { get; set; }
-        
+
         [PDFAttribute("price")]
         public string Price { get; set; }
-        
+
         [PDFAttribute("description")]
         public string Description { get; set; }
-        
+
         [PDFAttribute("image-src")]
         public string ImageSource { get; set; }
-        
+
         [PDFAttribute("rating")]
         public double Rating { get; set; }
-        
+
         [PDFAttribute("stock-level")]
         public string StockLevel { get; set; }
-        
+
         public ProductCard() : base(ObjectTypes.Panel)
         {
         }
-        
-        protected override void OnInitialized(InitContext context)
+
+        // The attribute values are bound from the data ({{this.name}} etc.),
+        // so the content is built once the card has been data bound
+        protected override void OnDataBound(DataContext context)
         {
-            base.OnInitialized(context);
+            base.OnDataBound(context);
             BuildCardContent();
         }
-        
+
         private void BuildCardContent()
         {
             // Card container styling
             this.Style.Size.Width = 250;
-            this.Style.Padding.All = 15;
-            this.Style.Margins.All = 10;
+            this.Style.Padding.All = 12;
+            this.Style.Margins.Bottom = 12;
             this.Style.Background.Color = StandardColors.White;
             this.Style.Border.Width = 1;
             this.Style.Border.Color = new Color(200, 200, 200);
             this.Style.Border.CornerRadius = 8;
-            
+
             // Product image
             if (!string.IsNullOrEmpty(ImageSource))
             {
                 var image = new Image();
                 image.Source = ImageSource;
-                image.Style.Size.Width = 220;
-                image.Style.Size.Height = 180;
-                image.Style.Margins.Bottom = 10;
+                image.Style.Size.Width = 80;
+                image.Style.Margins.Bottom = 8;
                 this.Contents.Add(image);
             }
-            
-            // Product name
-            if (!string.IsNullOrEmpty(ProductName))
-            {
-                var nameLabel = new Label();
-                nameLabel.Text = ProductName;
-                nameLabel.StyleClass = "product-name";
-                nameLabel.Style.Font.FontFamily = new FontSelector("Roboto");
-                nameLabel.Style.Font.FontSize = 16;
-                nameLabel.Style.Font.FontBold = true;
-                nameLabel.Style.Margins.Bottom = 5;
-                this.Contents.Add(nameLabel);
-            }
-            
-            // Price
-            if (!string.IsNullOrEmpty(Price))
-            {
-                var priceLabel = new Label();
-                priceLabel.Text = Price;
-                priceLabel.StyleClass = "product-price";
-                priceLabel.Style.Font.FontFamily = new FontSelector("Roboto");
-                priceLabel.Style.Font.FontSize = 20;
-                priceLabel.Style.Fill.Color = new Color(220, 20, 60);
-                priceLabel.Style.Font.FontBold = true;
-                priceLabel.Style.Margins.Bottom = 8;
-                this.Contents.Add(priceLabel);
-            }
-            
-            // Rating stars
+
+            AddLine(ProductName, 16, true, StandardColors.Black);
+            AddLine(Price, 14, true, new Color(220, 20, 60));
+
             if (Rating > 0)
             {
                 var stars = new RatingStars();
                 stars.Rating = Rating;
-                stars.Style.Margins.Bottom = 8;
                 this.Contents.Add(stars);
             }
-            
-            // Description
-            if (!string.IsNullOrEmpty(Description))
-            {
-                var descLabel = new Label();
-                descLabel.Text = Description;
-                descLabel.StyleClass = "product-description";
-                descLabel.Style.Font.FontFamily = new FontSelector("Open Sans");
-                descLabel.Style.Font.FontSize = 10;
-                descLabel.Style.Fill.Color = new Color(100, 100, 100);
-                descLabel.Style.Margins.Bottom = 8;
-                this.Contents.Add(descLabel);
-            }
-            
-            // Stock level badge
-            if (!string.IsNullOrEmpty(StockLevel))
-            {
-                var stockPanel = new Panel();
-                stockPanel.Style.Padding.All = 5;
-                stockPanel.Style.Background.Color = GetStockLevelColor(StockLevel);
-                stockPanel.Style.Border.CornerRadius = 4;
-                
-                var stockLabel = new Label();
-                stockLabel.Text = StockLevel;
-                stockLabel.Style.Font.FontSize = 9;
-                stockLabel.Style.Fill.Color = StandardColors.White;
-                stockPanel.Contents.Add(stockLabel);
-                
-                this.Contents.Add(stockPanel);
-            }
+
+            AddLine(Description, 10, false, new Color(100, 100, 100));
+            AddLine(StockLevel, 9, true, GetStockLevelColor(StockLevel));
         }
-        
-        private PDFColor GetStockLevelColor(string level)
+
+        private void AddLine(string text, double size, bool bold, Color color)
         {
-            return level.ToLower() switch
+            if (string.IsNullOrEmpty(text))
+                return;
+
+            var label = new Label();
+            label.Text = text;
+            label.Style.Font.FontSize = size;
+            label.Style.Font.FontBold = bold;
+            label.Style.Fill.Color = color;
+            label.Style.Margins.Bottom = 4;
+            label.Style.Position.DisplayMode = DisplayMode.Block;
+            this.Contents.Add(label);
+        }
+
+        private Color GetStockLevelColor(string level)
+        {
+            return (level ?? "").ToLower() switch
             {
                 "in stock" => new Color(34, 139, 34),
                 "low stock" => new Color(255, 140, 0),
@@ -219,53 +179,33 @@ namespace ProductCatalog.Components
     {
         [PDFAttribute("rating")]
         public double Rating { get; set; }
-        
+
         [PDFAttribute("max-rating")]
         public int MaxRating { get; set; } = 5;
-        
+
         public RatingStars() : base(ObjectTypes.Panel)
         {
         }
-        
-        protected override void OnInitialized(InitContext context)
+
+        // Built just before layout, so it works when the stars are created in code
+        // by another component, as well as from the template
+        protected override void OnPreLayout(LayoutContext context)
         {
-            base.OnInitialized(context);
-            BuildStars();
-        }
-        
-        private void BuildStars()
-        {
-            int fullStars = (int)Math.Floor(Rating);
-            bool hasHalfStar = (Rating - fullStars) >= 0.5;
-            
-            for (int i = 0; i < MaxRating; i++)
-            {
-                var star = new Label();
-                
-                if (i < fullStars)
-                {
-                    star.Text = "★";  // Full star
-                    star.Style.Fill.Color = new Color(255, 215, 0);  // Gold
-                }
-                else if (i == fullStars && hasHalfStar)
-                {
-                    star.Text = "⯨";  // Half star
-                    star.Style.Fill.Color = new Color(255, 215, 0);
-                }
-                else
-                {
-                    star.Text = "☆";  // Empty star
-                    star.Style.Fill.Color = new Color(200, 200, 200);
-                }
-                
-                star.Style.Font.FontSize = 14;
-                this.Contents.Add(star);
-            }
-            
-            // Add rating number
+            base.OnPreLayout(context);
+
+            // The standard PDF fonts have no star characters, so draw the
+            // rating as text - or use an icon font such as Font Awesome
+            int fullStars = (int)Math.Round(Rating);
+
+            var stars = new Label();
+            stars.Text = new string('*', fullStars) + new string('-', Math.Max(0, MaxRating - fullStars));
+            stars.Style.Font.FontSize = 14;
+            stars.Style.Fill.Color = new Color(218, 165, 32);
+            this.Contents.Add(stars);
+
             var ratingLabel = new Label();
-            ratingLabel.Text = $" {Rating:0.0}";
-            ratingLabel.Style.Font.FontSize = 11;
+            ratingLabel.Text = $" {Rating:0.0} / {MaxRating}";
+            ratingLabel.Style.Font.FontSize = 10;
             ratingLabel.Style.Fill.Color = StandardColors.Gray;
             this.Contents.Add(ratingLabel);
         }
@@ -277,12 +217,12 @@ namespace ProductCatalog.Components
 
 **Controllers/CatalogController.cs:**
 
+The controller is created by the application, so it can be given the services it needs. Its outlets are assigned from the components in the template with the matching `id`, and its actions are named in the template.
+
 ```csharp
-using System.Collections.Generic;
+using System;
 using Scryber;
 using Scryber.Components;
-using Scryber.Data;
-using ProductCatalog.Models;
 using ProductCatalog.Services;
 
 namespace ProductCatalog.Controllers
@@ -290,180 +230,47 @@ namespace ProductCatalog.Controllers
     public class CatalogController
     {
         private readonly ProductService _productService;
-        
-        // Outlets
+
+        // Outlets - assigned from the template elements with matching ids
         [PDFOutlet(Required = true)]
         public Label CatalogTitleLabel { get; set; }
-        
+
         [PDFOutlet(Required = true)]
         public Label GeneratedDateLabel { get; set; }
-        
-        [PDFOutlet(Required = true)]
-        public ForEach ProductRepeater { get; set; }
-        
+
         [PDFOutlet]
         public Label TotalProductsLabel { get; set; }
-        
+
         public CatalogController(ProductService productService)
         {
             _productService = productService;
         }
-        
-        // Actions
-        public void InitCatalog(InitContext context)
+
+        // Actions - named in the template with on-init, on-loaded and so on
+        [PDFAction]
+        public void InitCatalog(object sender, InitEventArgs args)
         {
-            context.TraceLog.Add(TraceLevel.Message, "Catalog", "Initializing product catalog");
-            
+            args.Context.TraceLog.Add(TraceLevel.Message, "Catalog", "Initializing product catalog");
+
             CatalogTitleLabel.Text = "Product Catalog 2026";
-            GeneratedDateLabel.Text = $"Generated: {DateTime.Now:MMMM dd, yyyy}";
-        }
-        
-        public void LoadProducts(LoadContext context)
-        {
-            context.TraceLog.Add(TraceLevel.Message, "Catalog", "Loading products from database");
-            
-            // Load products via service
-            var products = _productService.GetAllProducts();
-            
-            // Transform for display
-            var productData = products.Select(p => new
-            {
-                ProductName = p.Name,
-                Price = p.Price.ToString("C"),
-                Description = p.Description,
-                ImageSource = $"db://ProductImages/{p.Id}",  // Database image factory
-                Rating = p.AverageRating,
-                StockLevel = GetStockLevelText(p.StockQuantity)
-            }).ToList();
-            
-            // Bind to repeater
-            ProductRepeater.DataSource = productData;
-            ProductRepeater.Value = productData;
-            
-            // Set total count
+            GeneratedDateLabel.Text = $"Generated: {_productService.CatalogDate:MMMM dd, yyyy}";
+
             if (TotalProductsLabel != null)
-            {
-                TotalProductsLabel.Text = $"Total Products: {products.Count}";
-            }
-            
-            context.TraceLog.Add(TraceLevel.Verbose, "Catalog", 
-                $"Loaded {products.Count} products");
+                TotalProductsLabel.Text = $"Total Products: {_productService.GetAllProducts().Count}";
         }
-        
-        public void PreLayoutHandler(LayoutContext context)
+
+        [PDFAction]
+        public void CatalogLaidOut(object sender, LayoutEventArgs args)
         {
-            context.TraceLog.Add(TraceLevel.Verbose, "Catalog", "Pre-layout processing");
-            
-            // Adjust layout based on product count
-            if (ProductRepeater.ChildCount > 50)
-            {
-                context.TraceLog.Add(TraceLevel.Warning, "Catalog", 
-                    "Large product count may affect performance");
-            }
-        }
-        
-        public void PostLayoutHandler(LayoutContext context)
-        {
-            var pageCount = context.DocumentLayout.AllPages.Count;
-            
-            context.TraceLog.Add(TraceLevel.Message, "Catalog", 
-                $"Catalog generated: {pageCount} pages, {ProductRepeater.ChildCount} products");
-        }
-        
-        private string GetStockLevelText(int quantity)
-        {
-            if (quantity == 0) return "Out of Stock";
-            if (quantity < 10) return "Low Stock";
-            return "In Stock";
+            var layout = args.Context.GetLayout<Scryber.PDF.Layout.PDFLayoutDocument>();
+            args.Context.TraceLog.Add(TraceLevel.Message, "Catalog",
+                $"Catalog generated: {layout.AllPages.Count} pages");
         }
     }
 }
 ```
 
-### 3. Custom Image Factory
-
-**Imaging/DatabaseImageFactory.cs:**
-
-```csharp
-using System;
-using System.Data.SqlClient;
-using System.IO;
-using System.Text.RegularExpressions;
-using Scryber;
-using Scryber.Components;
-using Scryber.Imaging;
-
-namespace ProductCatalog.Imaging
-{
-    public class DatabaseImageFactory : IPDFImageDataFactory
-    {
-        private readonly string _connectionString;
-        private readonly Regex _pattern;
-        
-        public string FactoryKey => @"^db://[\w/]+$";
-        
-        public DatabaseImageFactory(string connectionString)
-        {
-            _connectionString = connectionString;
-            _pattern = new Regex(FactoryKey, RegexOptions.IgnoreCase);
-        }
-        
-        public bool ShouldMatch(string source)
-        {
-            return !string.IsNullOrEmpty(source) && _pattern.IsMatch(source);
-        }
-        
-        public byte[] LoadImageData(IDocument document, IComponent component, string source)
-        {
-            // Parse: db://ProductImages/12345
-            var uri = new Uri(source);
-            var parts = uri.AbsolutePath.Trim('/').Split('/');
-            
-            if (parts.Length != 2)
-                throw new ArgumentException($"Invalid database image path: {source}");
-            
-            string tableName = parts[0];
-            string id = parts[1];
-            
-            return LoadFromDatabase(tableName, id);
-        }
-        
-        private byte[] LoadFromDatabase(string tableName, string id)
-        {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                
-                var query = $"SELECT ImageData FROM {tableName} WHERE ProductId = @ProductId";
-                
-                using (var command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@ProductId", id);
-                    
-                    var result = command.ExecuteScalar();
-                    
-                    if (result == null || result is DBNull)
-                    {
-                        // Return placeholder image
-                        return GetPlaceholderImage();
-                    }
-                    
-                    return (byte[])result;
-                }
-            }
-        }
-        
-        private byte[] GetPlaceholderImage()
-        {
-            // Return a simple placeholder PNG
-            var placeholderPath = Path.Combine("Images", "placeholder.png");
-            return File.ReadAllBytes(placeholderPath);
-        }
-    }
-}
-```
-
-### 4. Models and Services
+### 3. Models and Services
 
 **Models/Product.cs:**
 
@@ -478,7 +285,6 @@ namespace ProductCatalog.Models
         public decimal Price { get; set; }
         public int StockQuantity { get; set; }
         public double AverageRating { get; set; }
-        public DateTime CreatedDate { get; set; }
     }
 }
 ```
@@ -486,233 +292,207 @@ namespace ProductCatalog.Models
 **Services/ProductService.cs:**
 
 ```csharp
+using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using System.IO;
 using ProductCatalog.Models;
 
 namespace ProductCatalog.Services
 {
+    /// <summary>
+    /// The products and their images. Replace with your own database or API calls.
+    /// </summary>
     public class ProductService
     {
-        private readonly string _connectionString;
-        
-        public ProductService(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
-        
+        public DateTime CatalogDate { get; } = new DateTime(2026, 3, 15);
+
         public List<Product> GetAllProducts()
         {
-            var products = new List<Product>();
-            
-            using (var connection = new SqlConnection(_connectionString))
+            return new List<Product>
             {
-                connection.Open();
-                
-                var query = @"
-                    SELECT Id, Name, Description, Price, StockQuantity, AverageRating
-                    FROM Products 
-                    WHERE IsActive = 1
-                    ORDER BY Name";
-                
-                using (var command = new SqlCommand(query, connection))
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        products.Add(new Product
-                        {
-                            Id = reader.GetInt32(0),
-                            Name = reader.GetString(1),
-                            Description = reader.GetString(2),
-                            Price = reader.GetDecimal(3),
-                            StockQuantity = reader.GetInt32(4),
-                            AverageRating = reader.GetDouble(5)
-                        });
-                    }
-                }
-            }
-            
-            return products;
+                new Product { Id = 1, Name = "Widget Pro", Description = "Our best selling widget.", Price = 99.99m, StockQuantity = 42, AverageRating = 4.5 },
+                new Product { Id = 2, Name = "Gadget Plus", Description = "Twice the gadget.", Price = 149.00m, StockQuantity = 6, AverageRating = 4.0 },
+                new Product { Id = 3, Name = "Gizmo Mini", Description = "Small but mighty.", Price = 24.50m, StockQuantity = 0, AverageRating = 3.5 }
+            };
+        }
+
+        public byte[] GetProductImage(int productId)
+        {
+            // e.g. SELECT ImageData FROM ProductImages WHERE ProductId = @ProductId
+            return File.ReadAllBytes(Path.Combine("Images", "placeholder.png"));
         }
     }
 }
 ```
 
-### 5. Configuration
+### 4. Configuration
 
-**scrybersettings.json:**
+**appsettings.json:**
 
 ```json
 {
-  "ConnectionStrings": {
-    "ProductCatalog": "Server=localhost;Database=ProductCatalog;Integrated Security=true;"
-  },
   "Scryber": {
     "Parsing": {
       "Namespaces": [
         {
-          "XMLNamespace": "http://productcatalog.com/components",
-          "AssemblyPrefix": "ProductCatalog.Components, ProductCatalog"
+          "Source": "http://productcatalog.com/components",
+          "Namespace": "ProductCatalog.Components",
+          "Assembly": "ProductCatalog"
         }
       ]
     },
     "Fonts": {
       "Register": [
         {
-          "Family": "Roboto",
-          "File": "Fonts/Roboto-Regular.ttf",
-          "Bold": "Fonts/Roboto-Bold.ttf"
+          "Family": "Open Sans",
+          "File": "Fonts/OpenSans-Regular.ttf"
         },
         {
           "Family": "Open Sans",
-          "File": "Fonts/OpenSans-Regular.ttf",
-          "Bold": "Fonts/OpenSans-Bold.ttf"
+          "File": "Fonts/OpenSans-Bold.ttf"
         }
       ]
-    },
-    "Imaging": {
-      "Factories": [
-        {
-          "Key": "database-images",
-          "Type": "ProductCatalog.Imaging.DatabaseImageFactory, ProductCatalog"
-        }
-      ]
-    },
-    "Tracing": {
-      "TraceLevel": "Messages",
-      "LogOutput": true
     }
   }
 }
 ```
 
-### 6. Template
+A registered font is used for the weight and style of the font file itself - register a file for each weight and style used, such as regular and bold.
 
-**Templates/Catalog.pdfx:**
+### 5. Template
 
-```xml
-<?xml version='1.0' encoding='utf-8' ?>
-<?scryber controller='ProductCatalog.Controllers.CatalogController, ProductCatalog' 
-          parser-mode='Strict' 
-          log-level='Messages' ?>
+**Templates/Catalog.html:**
 
+```html
+{% raw %}<?xml version='1.0' encoding='utf-8' ?>
 <html xmlns='http://www.w3.org/1999/xhtml'
       xmlns:prod='http://productcatalog.com/components'>
     <head>
+        <title>Product Catalog</title>
         <style>
+            body {
+                font-family: 'Open Sans', sans-serif;
+                font-size: 11pt;
+                padding: 20pt;
+            }
             .header {
-                font-family: Roboto;
+                display: block;
                 font-size: 28pt;
                 font-weight: bold;
                 color: #1a1a1a;
-                margin-bottom: 10pt;
+                margin-bottom: 4pt;
             }
             .subheader {
-                font-family: 'Open Sans';
+                display: block;
                 font-size: 12pt;
                 color: #666666;
                 margin-bottom: 20pt;
             }
-            .product-grid {
-                column-count: 3;
-                column-gap: 20pt;
+            footer {
+                font-size: 9pt;
+                color: #666666;
+                padding: 0pt 20pt 10pt 20pt;
             }
         </style>
     </head>
-    <body on-init='InitCatalog' 
-          on-load='LoadProducts'
-          on-prelayout='PreLayoutHandler'
-          on-postlayout='PostLayoutHandler'>
-        
-        <header>
-            <div>
-                <span id='CatalogTitleLabel' class='header' />
-                <span id='GeneratedDateLabel' class='subheader' />
-            </div>
-        </header>
-        
+    <body on-init='InitCatalog' on-postlayout='CatalogLaidOut'>
+
         <main>
-            
-            <!-- Product grid -->
-            <div class='product-grid'>
-                
-                <template id='ProductRepeater' data-bind='foreach'>
-                    
-                    <!-- Custom ProductCard component -->
-                    <prod:ProductCard product-name='{@:ProductName}'
-                                     price='{@:Price}'
-                                     description='{@:Description}'
-                                     image-src='{@:ImageSource}'
-                                     rating='{@:Rating}'
-                                     stock-level='{@:StockLevel}' />
-                    
-                </template>
-                
-            </div>
-            
+            <!-- Outlets are found in the main content - not in a header or footer -->
+            <label id='CatalogTitleLabel' class='header'></label>
+            <label id='GeneratedDateLabel' class='subheader'></label>
+            {{#each model.products}}
+                <!-- Custom ProductCard component -->
+                <prod:ProductCard product-name='{{this.name}}'
+                                  price='{{format(this.price, "C")}}'
+                                  description='{{this.description}}'
+                                  image-src='{{this.imageSource}}'
+                                  rating='{{this.rating}}'
+                                  stock-level='{{this.stockLevel}}' />
+            {{/each}}
+
+            <label id='TotalProductsLabel' class='subheader'></label>
         </main>
-        
+
         <footer>
-            <div>
-                <span id='TotalProductsLabel' />
-                <span> | Page </span>
-                <data-page-number />
-                <span> of </span>
-                <data-page-count />
-            </div>
+            <span>Page <page-number /> of <page-count /></span>
         </footer>
-        
+
     </body>
 </html>
+{% endraw %}
 ```
 
-### 7. Application Startup
+Outlets are found in the main content of the template. Components in a header or footer are repeated on every page, and are not assigned to outlets.
+
+### 6. Application
 
 **Program.cs:**
 
 ```csharp
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Paperwork;
 using Scryber;
 using Scryber.Components;
 using ProductCatalog.Controllers;
 using ProductCatalog.Services;
-using ProductCatalog.Imaging;
 
-var host = Host.CreateDefaultBuilder(args)
-    .ConfigureServices((context, services) =>
-    {
-        var config = context.Configuration;
-        var connectionString = config.GetConnectionString("ProductCatalog");
-        
-        // Register Scryber with configuration
-        services.AddScryber(options =>
-        {
-            // Custom image factory
-            options.ImagingOptions.Register.Add(
-                new DatabaseImageFactory(connectionString));
-        });
-        
-        // Register application services
-        services.AddSingleton(new ProductService(connectionString));
-        services.AddTransient<CatalogController>();
-    })
+// 1. Pass the configuration - namespaces and fonts - to the engine once at startup
+var config = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json")
     .Build();
 
-// Generate catalog
-var productService = host.Services.GetRequiredService<ProductService>();
+Scryber.ServiceProvider.Init(config);
+
+using var factory = PaperworkFactory.Create().Build();
+var productService = new ProductService();
+
+// 2. Parse the template with a controller instance, so it can use the product service
+var templatePath = "Templates/Catalog.html";
 var controller = new CatalogController(productService);
+var settings = Document.CreateParserSettings(templatePath, ParserConformanceMode.Lax, controller);
 
-var settings = new ParserSettings();
-settings.Controller = controller;
+using var reader = new StreamReader(templatePath);
+using var doc = (Document)Document.Parse(templatePath, reader, ParseSourceType.LocalFile, settings.Resolver, settings);
 
-using (var reader = new StreamReader("Templates/Catalog.pdfx"))
+// 3. Load the product images for product:// paths - the requestor
+doc.RemoteFileRegistered += (sender, args) =>
 {
-    var doc = Document.ParseDocument(reader, ParseSourceType.DynamicContent, settings);
-    doc.ProcessDocument("ProductCatalog.pdf");
-}
+    var request = args.Request;
+    if (!request.FilePath.StartsWith("product://"))
+        return;
+
+    try
+    {
+        // product://12.png -> 12
+        var id = int.Parse(System.IO.Path.GetFileNameWithoutExtension(request.FilePath.Substring("product://".Length)));
+
+        using var stream = new MemoryStream(productService.GetProductImage(id));
+        request.Callback(request.Owner, request, stream);
+    }
+    catch (Exception ex)
+    {
+        request.CompleteRequest(null, false, ex);
+    }
+};
+
+// 4. The data for the template
+var products = productService.GetAllProducts().Select(p => new
+{
+    name = p.Name,
+    price = p.Price,
+    description = p.Description,
+    imageSource = $"product://{p.Id}.png",
+    rating = p.AverageRating,
+    stockLevel = p.StockQuantity == 0 ? "Out of Stock" : p.StockQuantity < 10 ? "Low Stock" : "In Stock"
+});
+
+// 5. Generate the catalog
+await factory.NewDocument()
+    .WithLayout(doc)
+    .WithData("model", new { products })
+    .SaveAsync("ProductCatalog.pdf");
 
 Console.WriteLine("Product catalog generated successfully!");
 ```
@@ -720,77 +500,66 @@ Console.WriteLine("Product catalog generated successfully!");
 ## How It Works Together
 
 ### 1. Configuration Loading
-- `AddScryber()` loads `scrybersettings.json`
+- `Scryber.ServiceProvider.Init(config)` passes `appsettings.json` to the engine
 - Namespace registration: `http://productcatalog.com/components` → `ProductCatalog.Components`
-- Fonts registered: Roboto, Open Sans from `Fonts/` directory
-- Image factory registered: `DatabaseImageFactory` for `db://` URLs
+- Fonts registered: Open Sans regular and bold from the `Fonts/` directory
 
 ### 2. Template Parsing
-- Processing instruction specifies `CatalogController`
-- Parser encounters `<prod:ProductCard>` element
-- Namespace lookup resolves to `ProductCatalog.Components.ProductCard`
-- Component instantiated, properties set from XML attributes
+- The template is parsed with the application's own `CatalogController` instance in the parser settings
+- The parser finds `<prod:ProductCard>` in the `{{#each}}` template
+- The namespace resolves to `ProductCatalog.Components.ProductCard`
+- Outlets are assigned: `CatalogTitleLabel`, `GeneratedDateLabel`, `TotalProductsLabel`
 
-### 3. Controller Initialization
-- Controller instantiated with `ProductService` dependency
-- Outlets assigned: `CatalogTitleLabel`, `GeneratedDateLabel`, `ProductRepeater`, `TotalProductsLabel`
-- Outlets validated (required outlets must be assigned)
+### 3. Document Lifecycle
+- **Init**: `InitCatalog()` sets the title, date and product count
+- **DataBind**: the `{{#each}}` creates a `ProductCard` for each product, with its attributes bound from the data
+- **DataBound**: each `ProductCard` builds its content
+- **PreLayout**: each `RatingStars` builds its stars
+- **PostLayout**: `CatalogLaidOut()` logs the page count
 
-### 4. Document Lifecycle
-- **Init**: `InitCatalog()` sets title and date labels
-- **Load**: `LoadProducts()` queries database, transforms data, binds to repeater
-- **DataBind**: ForEach creates `ProductCard` for each product
-- **PreLayout**: `PreLayoutHandler()` logs warnings for large datasets
-- **Layout**: Scryber calculates positions, pages
-- **PostLayout**: `PostLayoutHandler()` logs final page count
+### 4. Image Loading
+- `ProductCard` creates an image with `product://1.png`
+- The `RemoteFileRegistered` handler loads the image from the product service, and passes it back with `request.Callback(...)`
+- The `.png` extension means the document's standard PNG image factory decodes it
+- See [Request Events and DOM](document-events-and-access) and [Image Factories](image-factories)
 
-### 5. Image Loading
-- `ProductCard` specifies `image-src='db://ProductImages/12345'`
-- `DatabaseImageFactory.ShouldMatch()` returns true (matches pattern)
-- `LoadImageData()` queries database, retrieves BLOB
-- Image rendered in PDF
-
-### 6. Font Rendering
-- "Roboto" requested for product name
-- Font lookup: Custom registry → finds `Fonts/Roboto-Bold.ttf`
-- Font metrics extracted, glyphs subset
-- Text rendered with Roboto font in PDF
+### 5. Generation
+- The parsed document is passed to the builder with `WithLayout(doc)`, with the products as data
+- The builder generates the PDF, with any `WithLogLevel`, auth and file request settings applied
 
 ## Result
 
 The generated `ProductCatalog.pdf` contains:
-- Custom fonts (Roboto, Open Sans) throughout
-- Product grid with custom `ProductCard` components
-- Rating stars (custom `RatingStars` components)
-- Product images loaded from database
-- Dynamic product count and page numbers
-- Controller-driven data binding
+- The title, date and product count set by the controller
+- A `ProductCard` for each product, with its image, price, rating, description and stock level
+- The Open Sans font throughout
+- Page numbers in the footer
 
 ## Extension Points Summary
 
 | Extension | File | Purpose |
 |-----------|------|---------|
 | Custom Components | `ProductCard.cs`, `RatingStars.cs` | Reusable product display widgets |
-| Document Controller | `CatalogController.cs` | Data loading, lifecycle management |
-| Image Factory | `DatabaseImageFactory.cs` | Load product images from database |
-| Font Registration | `scrybersettings.json` | Custom fonts (Roboto, Open Sans) |
-| Namespace Registration | `scrybersettings.json` | Component discovery |
-| Processing Instructions | `Catalog.pdfx` | Controller specification, parser mode |
+| Document Controller | `CatalogController.cs` | Title, date and count, lifecycle logging |
+| Remote file requests | `Program.cs` | Load product images from the application |
+| Font Registration | `appsettings.json` | Custom font (Open Sans) |
+| Namespace Registration | `appsettings.json` | Component discovery |
+| Document builder | `Program.cs` | Data and generation |
 
 ## Key Benefits
 
-1. **Separation of Concerns**: Presentation (PDFX), logic (Controller), data (Service)
+1. **Separation of Concerns**: Presentation (template), logic (controller), data (service)
 2. **Reusability**: `ProductCard` and `RatingStars` can be used in multiple templates
-3. **Testability**: Controller and components can be unit tested
-4. **Maintainability**: Change data source without touching template
-5. **Extensibility**: Add new components, factories without core changes
+3. **Testability**: The controller, components and service can be unit tested
+4. **Maintainability**: Change the data source without touching the template
+5. **Extensibility**: Add new components and resource sources without core changes
 
 ## Related Documentation
 
 - [Custom Components](custom-components) - Creating parseable components
 - [Document Controllers](document-controllers) - Controller architecture
-- [Image Factories](image-factories) - Custom image loading
+- [Request Events and DOM](document-events-and-access) - Loading content from your own sources
+- [Image Factories](image-factories) - Custom image types
 - [Font Configuration](font-configuration) - Font registration
 - [Namespace Registration](namespace-registration) - Component discovery
-- [Processing Instructions](processing-instructions) - Document configuration
-- [Best Practices](best-practices) - Design patterns and guidelines
+- [The Engine Document](engine-document) - Parsing and configuring a document for the builder

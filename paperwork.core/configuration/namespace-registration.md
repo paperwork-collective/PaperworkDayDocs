@@ -28,9 +28,10 @@ Namespace registration maps **XML namespaces** to **.NET assembly namespaces**, 
 └──────────────────────────────────────────────────────┘
               ↓
 ┌──────────────────────────────────────────────────────┐
-│ Namespace Registration (scrybersettings.json)        │
-│  XMLNamespace: http://mycompany.com/components       │
-│  AssemblyPrefix: MyCompany.Components, MyAssembly    │
+│ Namespace Registration (appsettings.json)            │
+│  Source: http://mycompany.com/components             │
+│  Namespace: MyCompany.Components                     │
+│  Assembly: MyAssembly                                │
 └──────────────────────────────────────────────────────┘
               ↓
 ┌──────────────────────────────────────────────────────┐
@@ -49,7 +50,7 @@ Namespace registration maps **XML namespaces** to **.NET assembly namespaces**, 
 
 ### JSON Configuration
 
-**scrybersettings.json:**
+**appsettings.json:**
 
 ```json
 {
@@ -57,12 +58,14 @@ Namespace registration maps **XML namespaces** to **.NET assembly namespaces**, 
     "Parsing": {
       "Namespaces": [
         {
-          "XMLNamespace": "http://mycompany.com/schemas/components",
-          "AssemblyPrefix": "MyCompany.Components, MyCompany.Components"
+          "Source": "http://mycompany.com/schemas/components",
+          "Namespace": "MyCompany.Components",
+          "Assembly": "MyCompany.Components"
         },
         {
-          "XMLNamespace": "http://mycompany.com/schemas/charts",
-          "AssemblyPrefix": "MyCompany.Charts, MyCompany.Charts"
+          "Source": "http://mycompany.com/schemas/charts",
+          "Namespace": "MyCompany.Charts",
+          "Assembly": "MyCompany.Charts"
         }
       ]
     }
@@ -74,8 +77,11 @@ Namespace registration maps **XML namespaces** to **.NET assembly namespaces**, 
 
 | Property | Description | Example |
 |----------|-------------|---------|
-| `XMLNamespace` | XML namespace URI (must match `xmlns:prefix` declaration) | `http://mycompany.com/components` |
-| `AssemblyPrefix` | Assembly-qualified namespace: `Namespace, AssemblyName` | `MyCompany.Components, MyCompany.Components` |
+| `Source` | XML namespace URI (must match the `xmlns:prefix` declaration) | `http://mycompany.com/components` |
+| `Namespace` | The .NET namespace of the component classes | `MyCompany.Components` |
+| `Assembly` | The name of the assembly that contains them | `MyCompany.Components` |
+
+The configuration is passed to the engine at startup, e.g. with `services.AddPaperwork(builder.Configuration)` - see [Configuration Structure](configuration-structure).
 
 ## Template Declaration
 
@@ -108,76 +114,16 @@ When the parser encounters an unknown element (e.g., `<custom:StatCard>`), it:
 
 1. Extracts the **namespace prefix** (`custom`)
 2. Looks up the **XML namespace URI** (`http://mycompany.com/schemas/components`)
-3. Finds the **AssemblyPrefix** (`MyCompany.Components, MyCompany.Components`)
+3. Finds the registered **Namespace** and **Assembly** (`MyCompany.Components`, `MyCompany.Components`)
 4. Loads or locates the **assembly** (`MyCompany.Components.dll`)
 
-### 2. Type Reflection
+### 2. Type Resolution
 
-**Implementation in `ParserDefintionFactory.UnsafeGetType()`:**
-
-```csharp
-private static Type UnsafeGetType(string xmlnamespace, string name, 
-    ParsingOptions options, bool throwNotFound, out NamespaceKey key)
-{
-    // Check cache first
-    string fullkey = xmlnamespace + ":" + name;
-    if (_knownTypes.TryGetValue(fullkey, out Type found))
-    {
-        key = default;
-        return found;
-    }
-
-    // Look up assembly for XML namespace
-    string assemblyPrefixString = 
-        options.LookupAssemblyForXmlNamespace(xmlnamespace, throwNotFound);
-    
-    if (string.IsNullOrEmpty(assemblyPrefixString))
-        return null;
-
-    // Parse assembly-qualified name
-    string[] parts = assemblyPrefixString.Split(',');
-    string namespacePrefix = parts[0].Trim();
-    string assemblyName = parts.Length > 1 ? parts[1].Trim() : null;
-
-    // Load assembly
-    Assembly assembly = null;
-    if (!string.IsNullOrEmpty(assemblyName))
-    {
-        assembly = Assembly.Load(assemblyName);
-    }
-
-    // Build full type name
-    string fullTypeName = namespacePrefix + "." + name;
-    
-    // Try to get type
-    Type type = null;
-    if (assembly != null)
-    {
-        type = assembly.GetType(fullTypeName, false);
-    }
-    else
-    {
-        type = Type.GetType(fullTypeName, false);
-    }
-
-    // Cache result
-    if (type != null)
-    {
-        _knownTypes[fullkey] = type;
-    }
-
-    return type;
-}
-```
+The element name (`StatCard`) is looked up as a type in the registered namespace and assembly (`MyCompany.Components.StatCard`), or as the name given in its `[PDFParsableComponent("Name")]` attribute. The lookup is made by `ParserDefintionFactory` in the engine - see [Configuration Structure](configuration-structure) for the code.
 
 ### 3. Type Caching
 
-Resolved types are cached in `_knownTypes` dictionary to avoid repeated reflection:
-
-```csharp
-private static Dictionary<string, Type> _knownTypes = 
-    new Dictionary<string, Type>();
-```
+Resolved types are cached, so the reflection only happens the first time an element is used.
 
 ## Complete Example
 
@@ -226,7 +172,7 @@ namespace MyCompany.Components
 
 ### 2. Configuration
 
-**scrybersettings.json:**
+**appsettings.json:**
 
 ```json
 {
@@ -234,8 +180,9 @@ namespace MyCompany.Components
     "Parsing": {
       "Namespaces": [
         {
-          "XMLNamespace": "http://mycompany.com/schemas/components",
-          "AssemblyPrefix": "MyCompany.Components, MyCompany.Components"
+          "Source": "http://mycompany.com/schemas/components",
+          "Namespace": "MyCompany.Components",
+          "Assembly": "MyCompany.Components"
         }
       ]
     }
@@ -265,21 +212,22 @@ namespace MyCompany.Components
 **Program.cs:**
 
 ```csharp
-using Microsoft.Extensions.DependencyInjection;
-using Scryber;
-using Scryber.Components;
+using Microsoft.Extensions.Configuration;
+using Paperwork;
 
-// Setup dependency injection
-var services = new ServiceCollection();
-services.AddScryber();  // Loads scrybersettings.json
-var provider = services.BuildServiceProvider();
+// Pass the configuration, with the namespace registration, to the engine once at startup
+var config = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build();
 
-// Parse document with custom components
-using (var reader = new StreamReader("Dashboard.pdfx"))
-{
-    var doc = Document.ParseDocument(reader, ParseSourceType.DynamicContent);
-    doc.ProcessDocument("Dashboard.pdf");
-}
+Scryber.ServiceProvider.Init(config);
+
+// Generate the document with custom components
+using var factory = PaperworkFactory.Create().Build();
+
+await factory.NewDocument()
+    .WithLayoutFile("Dashboard.html")
+    .SaveAsync("Dashboard.pdf");
 ```
 
 ## Advanced Configuration
@@ -294,16 +242,19 @@ Register multiple component libraries:
     "Parsing": {
       "Namespaces": [
         {
-          "XMLNamespace": "http://mycompany.com/components",
-          "AssemblyPrefix": "MyCompany.Components, MyCompany.Components"
+          "Source": "http://mycompany.com/components",
+          "Namespace": "MyCompany.Components",
+          "Assembly": "MyCompany.Components"
         },
         {
-          "XMLNamespace": "http://mycompany.com/charts",
-          "AssemblyPrefix": "MyCompany.Charting, MyCompany.Charting"
+          "Source": "http://mycompany.com/charts",
+          "Namespace": "MyCompany.Charting",
+          "Assembly": "MyCompany.Charting"
         },
         {
-          "XMLNamespace": "http://thirdparty.com/widgets",
-          "AssemblyPrefix": "ThirdParty.Widgets, ThirdParty.Widgets"
+          "Source": "http://thirdparty.com/widgets",
+          "Namespace": "ThirdParty.Widgets",
+          "Assembly": "ThirdParty.Widgets"
         }
       ]
     }
@@ -332,16 +283,19 @@ MyCompany.Components
     "Parsing": {
       "Namespaces": [
         {
-          "XMLNamespace": "http://mycompany.com/components",
-          "AssemblyPrefix": "MyCompany.Components, MyCompany.Components"
+          "Source": "http://mycompany.com/components",
+          "Namespace": "MyCompany.Components",
+          "Assembly": "MyCompany.Components"
         },
         {
-          "XMLNamespace": "http://mycompany.com/components/cards",
-          "AssemblyPrefix": "MyCompany.Components.Cards, MyCompany.Components"
+          "Source": "http://mycompany.com/components/cards",
+          "Namespace": "MyCompany.Components.Cards",
+          "Assembly": "MyCompany.Components"
         },
         {
-          "XMLNamespace": "http://mycompany.com/components/charts",
-          "AssemblyPrefix": "MyCompany.Components.Charts, MyCompany.Components"
+          "Source": "http://mycompany.com/components/charts",
+          "Namespace": "MyCompany.Components.Charts",
+          "Assembly": "MyCompany.Components"
         }
       ]
     }
@@ -365,71 +319,7 @@ MyCompany.Components
 
 ## Implementation Details
 
-### Namespace Lookup
-
-**`ParsingOptions.LookupAssemblyForXmlNamespace()`:**
-
-```csharp
-public string LookupAssemblyForXmlNamespace(string xmlnamespace, bool throwNotFound)
-{
-    NamespaceDefn found = null;
-    
-    // Search registered namespaces
-    foreach (NamespaceDefn defn in this.Namespaces)
-    {
-        if (string.Equals(defn.XmlNamespace, xmlnamespace, 
-            StringComparison.OrdinalIgnoreCase))
-        {
-            found = defn;
-            break;
-        }
-    }
-    
-    if (found == null)
-    {
-        if (throwNotFound)
-            throw new PDFParserException(
-                $"No assembly registered for XML namespace: {xmlnamespace}");
-        return null;
-    }
-    
-    return found.AssemblyPrefix;
-}
-```
-
-### Namespace Discovery
-
-**`ParserDefintionFactory.PopulateNamespaceFromAssembly()`:**
-
-When an assembly is loaded, Scryber scans for types with `[PDFParsableComponent]`:
-
-```csharp
-private static void PopulateNamespaceFromAssembly(
-    string xmlnamespace, Assembly assembly, NamespaceDefn defn)
-{
-    Type[] alltypes = assembly.GetTypes();
-    
-    foreach (Type atype in alltypes)
-    {
-        // Check for PDFParsableComponent attribute
-        Attribute found = System.Attribute.GetCustomAttribute(
-            atype, typeof(PDFParsableComponentAttribute), false);
-        
-        if (found != null)
-        {
-            PDFParsableComponentAttribute parseable = 
-                (PDFParsableComponentAttribute)found;
-            
-            string name = string.IsNullOrEmpty(parseable.Name) 
-                ? atype.Name 
-                : parseable.Name;
-            
-            // Cache type definition
-            defn.Components[name] = new ComponentTypeDefinition(atype, name);
-        }
-    }
-}
-```
+Namespaces are registered from the `Scryber:Parsing:Namespaces` configuration the first time a document is parsed, and the engine's own namespaces (HTML, SVG and the Scryber component namespaces) are always included. Component types are found by reflection on the registered assembly, and cached. See [Configuration Structure](configuration-structure) for the engine code.
 
 ## Best Practices
 
@@ -460,14 +350,14 @@ private static void PopulateNamespaceFromAssembly(
 
 ### "No assembly registered for XML namespace"
 - Verify namespace URI matches exactly (including http/https, case)
-- Check scrybersettings.json is loaded
+- Check the configuration is passed to the engine (`AddPaperwork(configuration)` or `Scryber.ServiceProvider.Init(configuration)`)
 - Ensure JSON syntax is valid
 - Verify namespace is in `Parsing:Namespaces[]` array
 
 ### "Could not load type 'MyCompany.Components.StatCard'"
-- Check assembly name matches AssemblyPrefix
+- Check the assembly name matches `Assembly`
 - Verify assembly is referenced by application
-- Ensure namespace matches AssemblyPrefix
+- Ensure the class namespace matches `Namespace`
 - Check component class is public
 - Verify [PDFParsableComponent] attribute is present
 

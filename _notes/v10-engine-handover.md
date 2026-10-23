@@ -102,6 +102,19 @@ There is no `ParseDocument` overload taking `ParserSettings`; custom settings ne
 - Children parsed into a `[PDFElement("Sections")][PDFArray(typeof(Component))] ComponentList` property and then added to `Contents` in `OnInitialized` don't render (none with 1 column, only the first with 2). `[PDFArray(typeof(Panel))]` on a `ComponentList` fails to parse ("No 'Add' method … accepting Panel").
 - Docs now use `Div` and the component's own `Contents` (verified end to end).
 
+### A8. Strict parser mode breaks `{{#each}}`
+
+```html
+<?paperwork parser-mode='Strict' ?>
+<html xmlns='http://www.w3.org/1999/xhtml'><body><main>{{#each model.products}}<p>{{this.name}}</p>{{/each}}</main></body></html>
+```
+
+Data binding fails: "Databinding failed for component …_NOOP1, Specified method is not supported." The same template works in Lax. Also via `Document.CreateParserSettings(path, ParserConformanceMode.Strict)` + `Document.Parse(...)`, and through the builder. The Processing Instructions page recommends Strict for development, so this bites anyone following the docs.
+
+### A9. Registered fonts only match the file's own weight
+
+`Fonts:Register` entries ignore their `Weight`/`Style`; the face is added at the file's own weight, and there's no nearest-weight fallback - a Light (300) file isn't used for `font-weight: normal`, and Helvetica is used silently. Intended?
+
 ### A6. FYI — `<title>` overrides `doc.Info.Title`
 
 A `<title>` in the template always replaces a title set in code (plain engine). Probably by design; docs now say so.

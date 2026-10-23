@@ -156,7 +156,7 @@ public class ReportController
     public void Load(object sender, LoadEventArgs args)
     {
         var data = LoadReportData();
-        DataRepeater.DataSource = data;
+        DataRepeater.Value = data;
         
         ((Document)args.Context.Document).Params["RecordCount"] = data.Count;
     }
@@ -213,17 +213,17 @@ Actions are bound via **event handler attributes** on any components:
 
 ```xml
 <body on-init='Init' 
-      on-load='Load' 
+      on-loaded='Load' 
       on-databinding='HandleDataBinding'
       on-databound='HandleDataBound'
       on-prelayout='HandlePreLayout'
       on-postlayout='HandlePostLayout'>
     
     <main>
-        <span id='ReportDateLabel' />
-        <data id='DataRepeater' data-bind='foreach'>
+        <label id='ReportDateLabel'></label>
+        <template id='DataRepeater'>
             <!-- Template content -->
-        </data>
+        </template>
     </main>
     
 </body>
@@ -298,6 +298,7 @@ Actions are bound via **event handler attributes** on any components:
 using Scryber;
 using Scryber.Components;
 using Scryber.Data;
+using Scryber.PDF.Layout;
 
 namespace MyCompany.Reports
 {
