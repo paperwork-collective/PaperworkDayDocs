@@ -130,6 +130,11 @@ Works in `{{#with}}` (`{{#with model}}{{#with groups[0]}}{{../title}}` gives the
 - `{{params.name}}` does not read a `<var>` value (returns nothing); the plain name `{{name}}` does. The docs used `params.` throughout the var page (now fixed).
 - `data-bind` on a `<div>` switches the data context; it does not repeat the element. Several docs examples used it as a loop (now `{{#each}}`).
 
+### A13. Docs described extension APIs that don't exist
+
+- Custom HTML tags: `HTMLParserComponentFactory.RegisterTag(...)` / `new HTMLParser(factory)` - the factory is internal, no `RegisterTag`. Docs now use namespace-registered components.
+- Custom CSS properties: `CSSStyleAttributeParser<T>.RegisterProperty(...)` / `CSSStyleParser.RegisterParser(...)` - no runtime registration. Docs now say new properties are added in the engine source. Is a public extension point wanted for v10?
+
 ### A6. FYI — `<title>` overrides `doc.Info.Title`
 
 A `<title>` in the template always replaces a title set in code (plain engine). Probably by design; docs now say so.

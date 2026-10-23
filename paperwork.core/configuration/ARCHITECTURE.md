@@ -28,6 +28,8 @@ grand_parent_url: /paperwork.core/
 ## Overview
 
 ### Purpose
+Paperwork.Core is built on the open-source Scryber engine, described on this page. Applications use the Paperwork.Core document builder, which parses the templates, adds the data and generates the documents with the engine; the engine's own API is used directly only for advanced configuration (see [The Engine Document](engine-document)).
+
 Scryber.Core is a .NET PDF generation engine that transforms HTML/XML templates with CSS styling into high-quality PDF documents. It bridges web technologies (HTML, CSS, JavaScript-like expressions) with PDF output, enabling developers to create complex documents using familiar web development patterns.
 
 ### Key Design Goals
@@ -55,7 +57,13 @@ Scryber.Core is a .NET PDF generation engine that transforms HTML/XML templates 
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        Public API Layer                         │
+│                   Paperwork.Core (Document Builder)             │
+│  PaperworkFactory.Create() → factory.NewDocument()              │
+│  .WithLayout / .WithData / .WithStyle → SaveAsync / BuildAsync  │
+└───────────────────────────┬─────────────────────────────────────┘
+                            │
+┌───────────────────────────┴─────────────────────────────────────┐
+│                     Engine Public API Layer                     │
 │  Document.ParseDocument() / Document.ParseHtmlDocument()        │
 │  Document.SaveAsPDF() / Document.SaveAsPDFAsync()               │
 └───────────────────────────┬─────────────────────────────────────┘
@@ -1645,101 +1653,73 @@ Result PDF:
 
 ### Adding Custom Components
 
+Custom components are classes marked with `[PDFParsableComponent]`, in a .NET namespace that is registered against an XML namespace in the configuration. See [Custom Components](custom-components) and [Namespace Registration](namespace-registration) for the full detail.
+
 **1. Define Component Class**:
 ```csharp
-public class CustomBanner : Panel
+using Scryber;
+using Scryber.Components;
+using Scryber.Drawing;
+
+namespace MyCompany.Components
 {
-    public string BannerText { get; set; }
-    public PDFColor BannerColor { get; set; } = PDFColors.Blue;
-
-    protected override void DoDataBind(DataContext context)
+    [PDFParsableComponent("Banner")]
+    public class Banner : Div
     {
-        base.DoDataBind(context);
+        [PDFAttribute("banner-text")]
+        public string BannerText { get; set; }
 
-        // Add custom data binding logic
-        if(!string.IsNullOrEmpty(BannerText))
+        [PDFAttribute("banner-color")]
+        public Color BannerColor { get; set; } = StandardColors.Blue;
+
+        public Banner() : base(ObjectTypes.Panel) { }
+
+        protected override void OnDataBound(DataContext context)
         {
-            var label = new Label();
-            label.Text = BannerText;
-            label.ForeColor = BannerColor;
-            this.Contents.Add(label);
+            base.OnDataBound(context);
+
+            // Build the content once the attribute values are bound
+            if (!string.IsNullOrEmpty(BannerText))
+            {
+                var label = new Label();
+                label.Text = BannerText;
+                label.Style.Fill.Color = BannerColor;
+                this.Contents.Add(label);
+            }
         }
     }
 }
 ```
 
-**2. Register with Factory** (for HTML parsing):
-```csharp
-public class CustomComponentFactory : HTMLParserComponentFactory
+**2. Register the Namespace** (appsettings.json):
+```json
 {
-    public CustomComponentFactory()
-    {
-        // Register custom tag
-        this.RegisterTag("banner", typeof(CustomBanner));
+  "Paperwork": {
+    "Parsing": {
+      "Namespaces": [
+        { "Source": "http://mycompany.com/components", "Namespace": "MyCompany.Components", "Assembly": "MyCompany" }
+      ]
     }
+  }
 }
-
-// Use custom factory
-var parser = new HTMLParser(new CustomComponentFactory());
-var doc = parser.Parse(html);
 ```
 
-**3. Use in HTML**:
+**3. Use in the Template**:
 ```html
-<banner banner-text="Welcome!" banner-color="#FF0000" />
+<html xmlns='http://www.w3.org/1999/xhtml' xmlns:my='http://mycompany.com/components'>
+    <body>
+        <my:Banner banner-text="Welcome!" banner-color="#FF0000" />
+    </body>
+</html>
 ```
 
 ---
 
 ### Adding Custom CSS Properties
 
+CSS properties are parsed by typed parsers built into the engine (`CSSStyleAttributeParser<T>` subclasses in `Scryber.Styles/Styles/Parsing/Typed/`), and there is no public registration for new properties at runtime. A new CSS property is added to the engine source itself - see the [Scryber engine on GitHub](https://github.com/richard-scryber/scryber.core).
 
-**1. Define Style Property**:
-```csharp
-public class CustomStyle : StyleBase
-{
-    public string CustomProperty { get; set; }
-}
-```
-
-**2. Create Parser**:
-```csharp
-public class CSSCustomParser : CSSStyleAttributeParser<CustomStyle>
-{
-    public CSSCustomParser()
-    {
-        // Register CSS property name
-        this.RegisterProperty("custom-property");
-    }
-
-    protected override bool DoSetStyleValue(Style style,
-                                           CSSStyleItemReader reader,
-                                           PDFContextBase context)
-    {
-        string value = reader.CurrentTextValue;
-
-        if(reader.CurrentAttribute == "custom-property")
-        {
-            style.Custom.CustomProperty = value;
-            return true;
-        }
-
-        return false;
-    }
-}
-```
-
-**3. Register Parser**:
-```csharp
-CSSStyleParser.RegisterParser(new CSSCustomParser());
-```
-
-**4. Use in CSS**:
-```css
-.my-class {
-    custom-property: "my value";
-}
-```
+For values that change per document, use [CSS variables and `var()`](/paperwork.core/reference/cssproperties/) with bound data, or set styles in code on an [engine Document](engine-document).
 
 ---
 
