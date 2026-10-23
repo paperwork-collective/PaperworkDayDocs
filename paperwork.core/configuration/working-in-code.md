@@ -14,6 +14,8 @@ grand_parent_url: /paperwork.core/
 
 Scryber supports a full object model, so you can build, inspect, and modify documents directly in C# without relying only on template markup.
 
+Documents built or changed in code are generated with the document builder, by passing the engine `Document` to `WithLayout(doc)`. See [The Engine Document](engine-document).
+
 This is often most useful when you need:
 - dynamic structure generation at runtime
 - shared document composition logic across many templates
@@ -63,7 +65,10 @@ div.Contents.Add(body);
 page.Contents.Add(div);
 doc.Pages.Add(page);
 
-doc.SaveAsPDF("working-in-code.pdf");
+// Generate the document with the Paperwork.Core builder
+await factory.NewDocument()
+    .WithLayout(doc)
+    .SaveAsync("working-in-code.pdf");
 ```
 ---
 
@@ -84,20 +89,19 @@ var xhtml = new StringBuilder()
     .AppendLine("</div>")
     .ToString();
 
-var parsed = Document.ParseComponent(new StringReader(xhtml), ParseSourceType.Template);
+// Parse the main template, and the fragment into the same document
+using var doc = Document.ParseDocument("report.html");
+var parsed = doc.ParseTemplate(doc, "", new StringReader(xhtml));
 
-var doc = new Document();
-var page = new Page();
-var section = new Section();
-
-if (parsed is Div card)
+// Add the fragment to an element in the template - e.g. <main id="content"></main>
+if (parsed is Div card && doc.FindAComponentById("content") is IContainerComponent content)
 {
-    section.Contents.Add(card);
+    content.Content.Add(card);
 }
 
-page.Contents.Add(section);
-doc.Pages.Add(page);
-doc.SaveAsPDF("component-from-xhtml.pdf");
+await factory.NewDocument()
+    .WithLayout(doc)
+    .SaveAsync("component-from-xhtml.pdf");
 ```
 
 Use `ParseSourceType.Template` for fragments (single component trees) and include the XHTML namespace on the fragment root.
@@ -176,8 +180,8 @@ var all = new Thickness(8);                                    // all edges
 var verticalHorizontal = Thickness.Parse("12pt 18pt");        // TB RL
 var eachEdge = new Thickness(10, 20, 10, 20);                  // T R B L
 
-component.Style.Padding = all;
-component.Style.Margins = verticalHorizontal;
+component.Style.Padding.SetThickness(all);
+component.Style.Margins.SetThickness(verticalHorizontal);
 component.Style.Border.Dash.Offset = 0; // normal property still typed
 ```
 
@@ -207,7 +211,7 @@ if (Unit.TryParse(input.Width, out var width))
     component.Style.Size.Width = width;
 
 if (Thickness.TryParse(input.Padding, out var padding))
-    component.Style.Padding = padding;
+    component.Style.Padding.SetThickness(padding);
 
 if (Color.TryParse(input.AccentColor, out var accent))
     component.Style.Border.Color = accent;
@@ -226,25 +230,28 @@ A common pattern is:
 4. Render PDF
 
 ```csharp
-var doc = Document.ParseDocument("invoice.html");
+using var doc = Document.ParseDocument("invoice.html");
 
-if (doc.TryFindComponentById("StatusBadge", out IComponent found) && found is Label badge)
+// <label id="StatusBadge">DUE</label> in the template
+if (doc.TryFindAComponentById("StatusBadge", out Label badge))
 {
     badge.Text = "PAID";
     badge.Style.Background.Color = StandardColors.Green;
     badge.Style.Fill.Color = StandardColors.White;
-    badge.Style.Padding = new Thickness(4, 8, 4, 8);
+    badge.Style.Padding.SetThickness(new Thickness(4, 8, 4, 8));
 }
 
-doc.SaveAsPDF("invoice.pdf");
+await factory.NewDocument()
+    .WithLayout(doc)
+    .SaveAsync("invoice.pdf");
 ```
 
 Of adding an overlay when the document is generated from a development machine - so it is not confused.
 
 ```csharp
-var doc = Document.ParseDocument("invoice.html");
+using var doc = Document.ParseDocument("invoice.html");
 
-if (this.IsNonProduction())
+if (isDraft) // your own check, e.g. a non-production environment
 {
     var styleDef = new StyleDefn("body");
     styleDef.Background.ImageSource = "./Asssets/DraftUnderlay.png";
@@ -257,7 +264,9 @@ if (this.IsNonProduction())
     doc.Styles.Add(styleDef);
 }
 
-doc.SaveAsPDF("invoice.pdf");
+await factory.NewDocument()
+    .WithLayout(doc)
+    .SaveAsync("invoice.pdf");
 ```
 
 ---
