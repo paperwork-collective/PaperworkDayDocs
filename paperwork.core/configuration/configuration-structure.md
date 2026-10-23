@@ -228,7 +228,7 @@ private static readonly ImageFactoryBase[] Standards = new ImageFactoryBase[]
     new ImageFactoryJpegDataUrl(),// data:image/jpeg
     new ImageFactoryGifDataUrl(),  // data:image/gif
     new ImageFactorySvg(),        // .*\.svg$
-    new ImageFactorySvgDataUrl(). // data:image/svg
+    new ImageFactorySvgDataUrl()  // data:image/svg
 };
 ```
 

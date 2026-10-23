@@ -48,33 +48,45 @@ A message is recorded when `(int)TraceLevel >= (int)TraceRecordLevel`. So a log 
 
 The quickest way to see what Scryber is doing is to append the trace log as extra pages at the end of the generated PDF. This is a development tool — remove it before going to production.
 
+### Via the document builder
+
+Set a log level on the document builder.
+
+```csharp
+using Paperwork.Generation;
+
+await factory.NewDocument()
+    .WithLayoutFile("template.html")
+    .WithLogLevel(PaperworkRequestLogOption.Verbose)
+    .SaveAsync("output.pdf");
+```
+
 ### Via processing instruction
 
-Add the `scryber` processing instruction near the top of the template, before the root element:
+Add the `paperwork` processing instruction near the top of the template, before the root element:
 
 ```html
 <!DOCTYPE html>
-<?scryber append-log='true' ?>
-<html>
+<?paperwork append-log='true' ?>
+<html xmlns='http://www.w3.org/1999/xhtml'>
   <head>...</head>
   <body>...</body>
 </html>
 ```
 
-### Via code
+### Via an engine Document
 
-Set `AppendTraceLog` on the document before calling `SaveAsPDF`:
+When generating from an engine `Document` (see [The Engine Document](engine-document)), set `AppendTraceLog` on the document before it is generated:
 
 ```csharp
 using (var doc = Document.ParseDocument("template.html"))
 {
     doc.AppendTraceLog = true;
-    doc.Params["model"] = data;
 
-    using (var stream = new FileStream("output.pdf", FileMode.Create))
-    {
-        doc.SaveAsPDF(stream);
-    }
+    await factory.NewDocument()
+        .WithLayout(doc)
+        .WithData("model", data)
+        .SaveAsync("output.pdf");
 }
 ```
 
@@ -102,10 +114,9 @@ using (var doc = Document.ParseDocument("template.html"))
     doc.AppendTraceLog = true;
     doc.TraceLog.SetRecordLevel(TraceRecordLevel.Verbose);
 
-    using (var stream = new FileStream("output.pdf", FileMode.Create))
-    {
-        doc.SaveAsPDF(stream);
-    }
+    await factory.NewDocument()
+        .WithLayout(doc)
+        .SaveAsync("output.pdf");
 }
 ```
 
@@ -199,12 +210,11 @@ using (var doc = Document.ParseDocument("template.html"))
         TraceRecordLevel.Messages, "MyCollector", autostart: true);
 
     doc.AddTraceLog(collector);
-    doc.Params["model"] = data;
 
-    using (var stream = new FileStream("output.pdf", FileMode.Create))
-    {
-        doc.SaveAsPDF(stream);
-    }
+    await factory.NewDocument()
+        .WithLayout(doc)
+        .WithData("model", data)
+        .SaveAsync("output.pdf");
 
     // Inspect entries after generation
     foreach (var entry in collector)
@@ -224,6 +234,7 @@ Scryber's trace log system is independent of `Microsoft.Extensions.Logging`, but
 
 ```csharp
 using Microsoft.Extensions.Logging;
+using Scryber;
 using Scryber.Logging;
 
 namespace MyApp.Logging
@@ -238,7 +249,7 @@ namespace MyApp.Logging
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        protected internal override void Record(
+        protected override void Record(
             string inset, TraceLevel level, TimeSpan timestamp,
             string category, string message, Exception ex)
         {
@@ -266,6 +277,7 @@ The factory is what Scryber instantiates from configuration. Inject `ILoggerFact
 
 ```csharp
 using Microsoft.Extensions.Logging;
+using Scryber;
 using Scryber.Logging;
 
 namespace MyApp.Logging
