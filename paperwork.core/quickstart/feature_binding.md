@@ -111,11 +111,12 @@ Used within `{{expression}}` bindings. Operator precedence follows standard math
 
 | Operator | Example | Description | Reference |
 |----------|---------|-------------|-----------|
-| `.` | `{{model.address.city}}` | Property access | |
-| `[]` | `{{items[0]}}` | Array index access | |
-| `..` | `{{../parentValue}}` | Navigate to parent context | |
+| `.` | `{{model.address.city}}` | Property access | [→](/paperwork.core/reference/binding/navigation/dot) |
+| `[]` | `{{items[0]}}`, `{{rates["GBP"]}}` | Array, list and dictionary index access | [→](/paperwork.core/reference/binding/navigation/indexer) |
+| `../` | `{{../parentValue}}` | Parent context - one level only, cannot be chained | [→](/paperwork.core/reference/binding/navigation/parent) |
+| `( )` | `{{(a + b) * c}}` | Grouping - evaluated first | [→](/paperwork.core/reference/binding/navigation/parentheses) |
 | `??` | `{{value ?? 'default'}}` | Null coalescing — returns right side if left is null | [→](/paperwork.core/reference/binding/operators/nullcoalesce) |
-| `this` | `{{this.name}}` | Current context reference | |
+| `this` | `{{this.name}}` | Current context reference | [→](/paperwork.core/reference/binding/navigation/this) |
 
 {% endraw %}
 
@@ -129,13 +130,13 @@ Available automatically in specific contexts.
 
 | Variable | Context | Description |
 |----------|---------|-------------|
-| `@index` | `{{#each}}` loops | Zero-based index of the current item |
-| `@first` | `{{#each}}` loops | `true` if this is the first item |
-| `@last` | `{{#each}}` loops | `true` if this is the last item |
-| `this` | Any | Current data context |
-| `.` | Any | Shorthand for current context |
-| `..` | Nested contexts | Parent context reference |
-| `model` | Root | Root data model (from `doc.Params["model"]`) |
+| [`@index`](/paperwork.core/reference/binding/variables/at_index) | `{{#each}}` loops | Zero-based index of the current item |
+| [`@first`](/paperwork.core/reference/binding/variables/at_first) | `{{#each}}` loops | `true` if this is the first item (v10) |
+| [`@last`](/paperwork.core/reference/binding/variables/at_last) | `{{#each}}` loops | `true` if this is the last item (v10) |
+| [`this`](/paperwork.core/reference/binding/navigation/this) | Any | Current data context |
+| [`.`](/paperwork.core/reference/binding/navigation/this) | Any | Shorthand for current context |
+| [`../`](/paperwork.core/reference/binding/navigation/parent) | Nested contexts | Parent context - one level only |
+| [`model`](/paperwork.core/reference/binding/navigation/names) | Root | Data added with `WithData("model", ...)` - any name can be used |
 
 {% endraw %}
 

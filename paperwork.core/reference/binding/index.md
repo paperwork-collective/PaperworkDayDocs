@@ -57,6 +57,20 @@ Each `WithData(name, value)` call makes the value available to the template by i
 
 ---
 
+## Values & Navigation
+
+How an expression finds a value: [names](./navigation/names) such as `model`, [property access `.`](./navigation/dot), [indexers `[]`](./navigation/indexer), [`this` and `.`](./navigation/this), the [parent `../`](./navigation/parent) and [parentheses `( )`](./navigation/parentheses).
+
+[→ Values & Navigation](./navigation/)
+
+## Loop Variables
+
+[`@index`](./variables/at_index), [`@first`](./variables/at_first) and [`@last`](./variables/at_last) inside a `{% raw %}{{#each}}{% endraw %}` loop.
+
+[→ Loop Variables](./variables/)
+
+---
+
 ## Handlebars Helpers
 
 Block-level helpers for control flow and iteration in templates.
