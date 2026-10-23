@@ -55,7 +55,11 @@ Where a property or value was added or significantly improved in a specific vers
 | [ID](/paperwork.core/reference/cssselectors/selectors/css_id_selector) | `#id` | **Supported** | |
 | [Root](/paperwork.core/reference/cssselectors/selectors/css_root_selector) | `:root` | **Supported** | Used to set CSS custom properties (variables) |
 | [Universal](/paperwork.core/reference/cssselectors/selectors/css_universal_selector) | `*` | **Supported** | Can be combined with another selector |
-| Pseudo-class | `:hover`, `:focus`, `:nth-child` | **No** | Interactivity is not applicable in PDF |
+| Structural pseudo-classes | `:first-child`, `:last-child`, `:only-child` | **Supported** | Position of the element among its siblings |
+| Typed structural pseudo-classes | `:first-of-type`, `:last-of-type`, `:only-of-type` | **Supported** | Position among siblings of the same element type |
+| Nth pseudo-classes | `:nth-child(An+B)`, `:nth-last-child(An+B)`, `:nth-of-type(An+B)`, `:nth-last-of-type(An+B)` | **Supported** | Includes `odd`, `even`, and `An+B` expressions such as `2n+1` (v9.7.2) |
+| Interactive pseudo-classes | `:hover`, `:focus`, `:active`, `:visited` | **No** | Interactivity is not applicable in PDF |
+| Logical pseudo-classes | `:not()`, `:is()`, `:where()`, `:has()` | **No** | |
 | Attribute | `[attr="value"]` | **No** | |
 | Adjacent sibling | `+` | **No** | |
 | General sibling | `~` | **No** | |
@@ -100,7 +104,7 @@ Where a property or value was added or significantly improved in a specific vers
 
 | Property | Support | Notes |
 |----------|---------|-------|
-| [background](/paperwork.core/reference/cssproperties/properties/css_prop_background) | **Supported** | Shorthand |
+| [background](/paperwork.core/reference/cssproperties/properties/css_prop_background) | **Partial** | Shorthand for a single background. Multiple comma-separated backgrounds (layers) are not supported |
 | [background-color](/paperwork.core/reference/cssproperties/properties/css_prop_background-color) | **Supported** | |
 | [background-image](/paperwork.core/reference/cssproperties/properties/css_prop_background-image) | **Supported** | URL, `linear-gradient()`, `radial-gradient()`, `none` |
 | [background-size](/paperwork.core/reference/cssproperties/properties/css_prop_background-size) | **Supported** | `cover`, `contain` (v9.3 improved), lengths, percentages |
@@ -304,7 +308,7 @@ These are valid CSS properties when styling SVG elements.
 | Value | Support | Notes |
 |-------|---------|-------|
 | `initial`, `inherit`, `revert`, `unset` | **No** | Global keyword values are not supported; the property is ignored if one of these values is encountered |
-| `!important` | **No** | The important prioritization is not currently supported, but is expected to be in the near future |
+| `!important` | **Supported** | Raises a declaration above normal declarations, whatever the selector specificity (v9.7.2) |
 
 ---
 

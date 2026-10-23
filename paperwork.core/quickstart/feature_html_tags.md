@@ -63,7 +63,7 @@ A quick-reference chart showing which HTML elements are supported in Scryber tem
 
 | Element | Tag | Support | Notes |
 |---------|-----|---------|-------|
-| [Section](/paperwork.core/reference/htmltags/elements/html_section_element) | `<section>` | **Partial** | Each `<section>` starts on a new page by default |
+| [Section](/paperwork.core/reference/htmltags/elements/html_section_element) | `<section>` | **Supported** | Starts on a new page by default (`page-break-before: always`) - set `page-break-before: auto` to flow with the content |
 | [Header](/paperwork.core/reference/htmltags/elements/html_header_footer_element) | `<header>` | **Supported** | Repeats on first page (and all pages unless continuation header defined) |
 | [Footer](/paperwork.core/reference/htmltags/elements/html_header_footer_element) | `<footer>` | **Supported** | Repeats on first page (and all pages unless continuation footer defined) |
 | [Continuation Header](/paperwork.core/reference/htmltags/elements/html_continuation-header_element) | `<continuation-header>` | **Scryber** | Header shown on every page *except* the first |
