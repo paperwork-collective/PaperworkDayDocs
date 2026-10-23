@@ -77,6 +77,8 @@ Found with the compile checker (`scratchpad/sem`, compiles each C# block against
 
 ## 4. Docs follow-ups
 
+- [ ] **Step 3 resume point (2026-10-23):** done - engine-document (new), configuration index, processing-instructions, document-events-and-access, working-in-code, document-controllers, configuration-structure, logging-extension, image-factories, custom-components, namespace-registration, integration-example. **Next: configuration/best-practices.md** (controller actions must be `[PDFAction] (object sender, InitEventArgs/LoadEventArgs args)`, data via controller constructor + parser settings not `context.Document.Params`, `ForEach.Value` not `DataSource`, no `context.ServiceProvider`, no async actions, no `PDFControllerException`/`PDFImageException` types, image example -> requestor pattern, tests -> `CreateParserSettings` + `Document.Parse` + builder). Then font-configuration, ARCHITECTURE, expression-options (clean), learning/07-configuration (7 pages), learning/01 03/06, 02-data-binding/03, 04-layout/01 (`ParseHTML`), 05-typography/03, learning/index, quickstart/feature_binding, binding/helpers/log, attr_data_value, html_aside_element, css_font_face_rule.
+
 - [ ] Compile checker (`scratchpad/sem`) gives false positives for `??=` on option lists and `protected override` of `TraceLog.Record`; the real compiler (scratchpad `qs`) is authoritative — both verified OK.
 - [ ] `scrybersettings.json` is used as a file name 53 times; it's only a user-chosen name — step 4: prefer `appsettings.json`.
 
