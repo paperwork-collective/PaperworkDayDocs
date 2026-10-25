@@ -131,8 +131,9 @@ Available automatically in specific contexts.
 | Variable | Context | Description |
 |----------|---------|-------------|
 | [`@index`](/paperwork.core/reference/binding/variables/at_index) | `{{#each}}` loops | Zero-based index of the current item |
-| [`@first`](/paperwork.core/reference/binding/variables/at_first) | `{{#each}}` loops | `true` if this is the first item (v10) |
-| [`@last`](/paperwork.core/reference/binding/variables/at_last) | `{{#each}}` loops | `true` if this is the last item (v10) |
+| [`@first`](/paperwork.core/reference/binding/variables/at_first) | `{{#each}}` loops | `true` if this is the first item (9.8) |
+| [`@last`](/paperwork.core/reference/binding/variables/at_last) | `{{#each}}` loops | `true` if this is the last item (9.8) |
+| [`@key`](/paperwork.core/reference/binding/variables/at_key) | `{{#each}}` loops | The key of the current entry for a dictionary or object, or the index for a collection (9.8) |
 | [`this`](/paperwork.core/reference/binding/navigation/this) | Any | Current data context |
 | [`.`](/paperwork.core/reference/binding/navigation/this) | Any | Shorthand for current context |
 | [`../`](/paperwork.core/reference/binding/navigation/parent) | Nested contexts | Parent context - one level only |

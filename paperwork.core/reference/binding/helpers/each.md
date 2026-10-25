@@ -45,7 +45,7 @@ Iterate over arrays or collections, rendering the enclosed template for each ite
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `collection` | Array/IEnumerable | Yes | The collection to iterate over |
+| `collection` | Array/IEnumerable, Dictionary or object | Yes | The collection to iterate over, or a dictionary or JSON object to iterate the entries of |
 
 ---
 
@@ -56,6 +56,7 @@ Iterate over arrays or collections, rendering the enclosed template for each ite
 | `@index` | Zero-based index of current item (0, 1, 2, ...) |
 | `@first` | Boolean, `true` for the first item |
 | `@last` | Boolean, `true` for the last item |
+| `@key` | The key of the current entry (dictionary or object), or the index (collection) |
 | `this` | Reference to the current item |
 | `../` | Access parent context |
 
@@ -136,6 +137,23 @@ builder.WithData("model", new {
 {% endraw %}
 
 
+### Iterating a Dictionary or Object
+
+From 9.8, `{% raw %}{{#each}}{% endraw %}` over a dictionary, or a JSON object (Newtonsoft `JObject` or `System.Text.Json`), runs once for each entry. `this` is the value, and [`@key`](../variables/at_key) is the key or property name.
+
+
+{% raw %}
+```handlebars
+{{#each model.prices}}
+  <p>{{@key}}: {{this}}</p>
+{{/each}}
+```
+{% endraw %}
+
+
+{: .note }
+> Before 9.8 a dictionary or JSON object was bound once, with the whole object as `this`. To bind an object once now, use `{% raw %}{{#with}}{% endraw %}`.
+
 ### Accessing Parent Context
 
 
@@ -179,7 +197,8 @@ This uses Scryber's [`ForEach` component](../../components/foreach.html) interna
 - Can be nested for multi-dimensional data
 - Context changes to current item within the block
 - Use `{% raw %}{{.}}{% endraw %}` to reference the entire current item
-- Provides `@index`, `@first`, and `@last` special variables
+- Provides `@index`, `@first`, `@last` and `@key` special variables
+- Iterates the entries of a dictionary or JSON object (9.8 onwards)
 
 ---
 

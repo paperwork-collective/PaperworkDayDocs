@@ -76,7 +76,7 @@ Widget, Gadget, Gizmo
 - Useful for separators, borders and headings that only belong on the first item.
 
 {: .note }
-> `@first` is added in Paperwork.Core 10. In earlier versions use {% raw %}`{{#if @index == 0}}`{% endraw %} instead.
+> `@first` is added in Paperwork.Core 9.8. In earlier versions use {% raw %}`{{#if @index == 0}}`{% endraw %} instead.
 
 ---
 

@@ -151,6 +151,23 @@ Linear gradients support dynamic data binding for personalized backgrounds:
 {% endraw %}
 
 
+### Example: Gradient with CSS variables
+
+CSS `var()` and `calc()` values can be used for the colors and positions in a gradient, including variables bound from data. This also works in the `background` shorthand.
+
+{% raw %}
+```html
+<style>
+    :root { --start: #1f3347; --end: #5980a6; }
+    .banner { height: 25pt; background: linear-gradient(90deg, var(--start), var(--end)); }
+    .brand  { height: 25pt; background-image: linear-gradient(90deg, var(model.brand.dark, #1f3347), #5980a6); }
+</style>
+```
+{% endraw %}
+
+{: .note }
+> `var()` and `calc()` inside gradients are supported from Paperwork.Core 9.8. Earlier versions drop the gradient.
+
 ---
 
 ## Browser & PDF Support

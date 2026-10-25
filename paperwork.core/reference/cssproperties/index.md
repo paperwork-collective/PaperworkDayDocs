@@ -272,6 +272,7 @@ The following properties control the way any text within the element will be out
 | <a href='properties/line-height.html' >line-height</a>   | Specifies the leading of a line which can either be a relative or an absolute value.  |
 | <a href='properties/text-decoration.html' >text-decoration</a>   | Specifies any decoration on the text - A line above, below or in the middle of the characters is supported. |
 | <a href='properties/text-decoration.html' >text-decoration-line</a>   | As per text-decoration - Specifies any decoration on the text - A line above, below or in the middle of the characters is supported. |
+| <a href='properties/text-transform.html' >text-transform</a>   | Changes the case of the text - none, uppercase, lowercase or capitalize. Inherited. |
 | <a href='properties/letter-spacing.html' >letter-spacing</a>   | Defines an adjustment to the space applied between letters on a word, phrase or run of text. O is the standard value. |
 | <a href='properties/hyphens.html' >hyphens</a>   | Sets the model for hypenation, auto or none. NOTE: The library default is none, the manual option is considered equivalent to none. |
 | <a href='properties/hyphenate-limit-chars.html' >hyphenate-limit-chars</a>   | Specifies upt to 3 values representing the minimum word length to hyphenate and then the minimum left and or right length of characters, allowed before or after a hyphen. |

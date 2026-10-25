@@ -91,7 +91,7 @@ V2 in Vans
 - Data names such as `model` never need `../`.
 - Write the parent's property directly after `../` - {% raw %}`{{../name}}`{% endraw %}. `{% raw %}{{../this.name}}{% endraw %}` gives no value, and `{% raw %}{{../.name}}{% endraw %}` is not valid.
 - `../../` gives no value (there is no error).
-- Requires Paperwork.Core 10 inside `{{#each}}` loops; earlier versions support `../` inside `{{#with}}` blocks only.
+- Requires Paperwork.Core 9.8 inside `{{#each}}` loops; earlier versions support `../` inside `{{#with}}` blocks only.
 
 ---
 

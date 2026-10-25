@@ -28,6 +28,36 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
+### 9.8.0-beta - 25 October 2026
+
+New loop variables and dictionary iteration, the `text-transform` property, and a number of binding, parsing and font fixes.
+
+#### Behaviour Changes
+
+- **`{{#each}}` over a dictionary or JSON object now iterates the entries** - for a `Dictionary<,>` (or any `IDictionary`), a Newtonsoft `JObject` or a `System.Text.Json` object, the loop runs once per entry, with `this` as the value and `@key` as the key. It used to run once with the whole object as `this`, so a template that used `{{#each model.someObject}}` to bind a single object should use `{{#with model.someObject}}` instead. The `<template data-bind>` element and the `ForEach` component still bind an object once.
+- **`../` inside `{{#each}}` gives the outer item** - it used to return the collection being enumerated, so `{{../name}}` in a nested loop was always empty. It is a single level only; `../../` is not supported.
+
+#### New Features
+
+- **`text-transform`** - `none`, `uppercase`, `lowercase` and `capitalize`. Inherited by child elements, can be set from an expression, and a capitalized word continues across inline elements. See [text-transform](/paperwork.core/reference/cssproperties/properties/css_prop_text-transform).
+- **`@first` and `@last`** - alongside `@index`, in output, `{{#if}}`, `if()` and css expressions inside a loop. `@last` is correct for arrays, lists, dictionaries and Linq iterators. They are restored after a nested loop.
+- **`@key`** - the key or property name of the current entry when iterating a dictionary or object, or the index for a collection. It is set for each loop and restored when the loop ends, so nested loops see the right value before and after. See [@key](/paperwork.core/reference/binding/variables/at_key).
+- **`var()` and `calc()` inside gradients** - `linear-gradient()` and `radial-gradient()` colors and positions can use css variables and bound values.
+- **`background` shorthand accepts gradients** - `background: linear-gradient(...)` and `radial-gradient(...)` were previously not applied.
+- **`Document.ParseDocument()` and `ParseHtmlDocument()` (and the async versions) have overloads that take `ParserSettings`** - for a `TextReader` or a `Stream`, so the conformance mode no longer needs the longer `Document.Parse()` call.
+
+#### Fixes
+
+- **Strict mode with `{{#each}}` over a Linq iterator** - a non-resettable enumerable (for example `list.Select(...)`) failed with `Specified method is not supported`. Arrays and lists were not affected.
+- **`Fonts:Register` weight and style** - the `Weight` and `Style` of a registered font are now used, rather than the weight and style declared in the font file. A light font file can be registered as weight 400.
+- **`<?paperwork ?>` processing instruction in HTML5 templates** - it was only recognised in XHTML templates.
+- **Image factories registered in configuration** - a handler for a custom path or type can now decode the stream supplied by a `RemoteFileRegistered` requestor (`request.Callback(owner, request, stream)`). The handler receives an empty mime type and should work out the format from the data. Set `shouldCache` to avoid the request being raised twice for one image.
+- **Custom components derived from `Panel`** - child content in the template was silently dropped; it is now kept. A parsed `ComponentList` declared with `[PDFArray(typeof(Panel))]` no longer fails with `No 'Add' method ... accepting Panel`.
+
+#### Deprecated
+
+- **`HtmlFragment`** - the component is marked obsolete. HTML content is parsed directly into the component tree, or can be included with the object, embed and iframe elements, or `data-content` binding.
+
 ### 9.7.5 - 7 October 2026
 
 Consistent error handling in strict and lax mode. Invalid syntax is now invalid completely, and missing data is not a syntax error. The full behaviour is in the [processing instructions truth table](/paperwork.core/configuration/processing-instructions.html#binding-expression-and-template-errors).

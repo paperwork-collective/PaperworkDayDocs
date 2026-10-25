@@ -76,7 +76,7 @@ Widget, Gadget, Gizmo
 - Useful for separators, borders and headings that only belong on the last item.
 
 {: .note }
-> `@last` is added in Paperwork.Core 10. In earlier versions use {% raw %}`{{#if @index == count(model.items) - 1}}`{% endraw %} instead.
+> `@last` is added in Paperwork.Core 9.8. In earlier versions use {% raw %}`{{#if @index == count(model.items) - 1}}`{% endraw %} instead.
 
 ---
 
