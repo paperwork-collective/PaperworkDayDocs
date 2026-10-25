@@ -267,6 +267,7 @@ Built-in functions available in `{% raw %}{{expression}}{% endraw %}` bindings.
 | **selectWhere** | `selectWhere(array, condition)` | Filter array by condition |
 | **sortBy** | `sortBy(array, 'property')` | Sort array by property |
 | **reverse** | `reverse(array)` | Reverse array order |
+| **keys** | `keys(object)` | Keys of a dictionary, or property names of an object |
 
 [→ Collection Functions Details](./functions/#collection-functions)
 

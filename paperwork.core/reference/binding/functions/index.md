@@ -186,6 +186,7 @@ Aggregate and manipulate collections.
 | [selectWhere](./selectWhere) | Filter collection | `{% raw %}{{selectWhere(model.items, 'isActive')}}{% endraw %}` |
 | [sortBy](./sortBy) | Sort by property | `{% raw %}{{sortBy(model.items, 'name')}}{% endraw %}` |
 | [reverse](./reverse) | Reverse order | `{% raw %}{{reverse(model.items)}}{% endraw %}` |
+| [keys](./keys) | Keys of a dictionary or object | `{% raw %}{{keys(model.prices)}}{% endraw %}` |
 
 ---
 
