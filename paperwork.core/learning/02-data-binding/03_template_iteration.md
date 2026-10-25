@@ -21,7 +21,7 @@ Loop through collections and arrays to generate dynamic, repeating content in yo
 By the end of this article, you'll be able to:
 - Use the `{% raw %}{{#each}}{% endraw %}` helper to iterate over collections
 - Access current item properties in loops
-- Use `{% raw %}{{@index}}{% endraw %}`, `{% raw %}{{@first}}{% endraw %}` and `{% raw %}{{@last}}{% endraw %}` for position tracking
+- Use `{% raw %}{{@index}}{% endraw %}`, `{% raw %}{{@first}}{% endraw %}`, `{% raw %}{{@last}}{% endraw %}` and `{% raw %}{{@key}}{% endraw %}` for position tracking
 - Create nested loops for complex data
 - Handle empty collections gracefully
 - Build dynamic tables, lists, and repeating sections
@@ -139,20 +139,18 @@ Access the current iteration index (0-based):
 
 ---
 
-## Iterating Named Values
+## Using {% raw %}{{@key}}{% endraw %}
 
-`{% raw %}{{#each}}{% endraw %}` repeats over a list or array. A dictionary, or a JSON object, is not a list - it is used as a single item. To show named values, pass them as a list of name and value pairs.
+`{% raw %}{{#each}}{% endraw %}` over a dictionary, or a JSON object, repeats for each entry. `{% raw %}{{@key}}{% endraw %}` is the key (or property name), and `this` is the value.
 
 **C# Code:**
 ```csharp
-var stats = new Dictionary<string, int>
+builder.WithData("stats", new Dictionary<string, int>
 {
     { "Users", 1250 },
     { "Orders", 3480 },
     { "Revenue", 125000 }
-};
-
-builder.WithData("stats", stats.Select(s => new { name = s.Key, value = s.Value }).ToList());
+});
 ```
 
 **Template:**
@@ -160,8 +158,8 @@ builder.WithData("stats", stats.Select(s => new { name = s.Key, value = s.Value 
 ```html
 <dl>
     {{#each stats}}
-        <dt>{{this.name}}</dt>
-        <dd>{{this.value}}</dd>
+        <dt>{{@key}}</dt>
+        <dd>{{this}}</dd>
     {{/each}}
 </dl>
 ```
@@ -179,7 +177,10 @@ builder.WithData("stats", stats.Select(s => new { name = s.Key, value = s.Value 
 </dl>
 ```
 
-In JSON data, use an array of objects: `[{ "name": "Users", "value": 1250 }, ...]`.
+The same works for JSON data: `{ "Users": 1250, "Orders": 3480 }`. For a list or array, `{% raw %}{{@key}}{% endraw %}` is the same as `{% raw %}{{@index}}{% endraw %}`.
+
+{: .note }
+> Dictionary and object iteration, and `@key`, are available from Scryber.Core 9.8. Before that, a dictionary was used as a single item. See [@key](/paperwork.core/reference/binding/variables/at_key).
 
 ---
 
