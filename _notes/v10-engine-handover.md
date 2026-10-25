@@ -135,13 +135,20 @@ Works in `{{#with}}` (`{{#with model}}{{#with groups[0]}}{{../title}}` gives the
 - Custom HTML tags: `HTMLParserComponentFactory.RegisterTag(...)` / `new HTMLParser(factory)` - the factory is internal, no `RegisterTag`. Docs now use namespace-registered components.
 - Custom CSS properties: `CSSStyleAttributeParser<T>.RegisterProperty(...)` / `CSSStyleParser.RegisterParser(...)` - no runtime registration. Docs now say new properties are added in the engine source. Is a public extension point wanted for v10?
 
-### A14. Observations from the configuration guides (2026-10-23, not yet sent)
+### A14. Observations from the configuration guides (2026-10-23, sent to Review HTML5 2026-10-25)
 
 - **Parallel generation scales poorly.** 8 documents (87 pages each) on one factory, 10 cores, Release: 8 sequential ~1,200 ms, 8 at once (`Task.WhenAll` or `Task.Run`) ~850 ms - about 1.4x. Outputs are correct (same page counts). Suggests a lock or shared state in layout or text measuring. Worth a profile for v10? Docs only recommend a limited concurrency and measuring.
 - **Appended trace log says "Scryber Version 1.0.0.0 (9.7.5)"** in the Document Overview. For the Paperwork.Core rename, can the label (and the 1.0.0.0 assembly version) come from configuration or the generator name?
 - **`ImageCacheDuration`**: `-1` (default) caches images from paths/urls in the static, application-wide cache with no expiry; `0` disables. The old docs said `-1` = no cache - docs corrected. Is "never expires" the intended default for long-running servers (a changed image file is never reloaded)?
 - **`{{@key}}` is not supported** ("Unrecognised token '@key'"), and `{{#each}}` over a `Dictionary<,>` or a JSON object runs **once** with the whole object as `this` (not per entry; `this.Key`/`this.Value` empty). Docs now pass a list of name/value pairs. Add `@key` + dictionary/object iteration for v10, as Handlebars does?
 - In Lax mode, skipped unknown attributes/elements are logged (as `Error`, "Xml Parser") only with `parser-log='true'`; a `CollectorTraceLog` added after `ParseDocument` never sees them. Fine, but worth knowing.
+
+### A15. From the designer quick start template (sent to Review HTML5 2026-10-25)
+
+- `text-transform` (uppercase/lowercase/capitalize) is ignored silently - add it as a new style attribute.
+- `var()` inside `linear-gradient()` drops the whole gradient silently, even with literal custom properties (`var()` works in `background-color`).
+- The `background` shorthand rejects gradients ("The css style item background could not be set"); `background-image` works.
+- (Not engine: the Google Fonts multi-family url failure was `&amp;` in the Designer url field - fixed in Paperwork `d533888`.)
 
 ### A6. FYI — `<title>` overrides `doc.Info.Title`
 
