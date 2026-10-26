@@ -28,7 +28,7 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
-### 9.8.0-beta.5 - not yet released
+### 9.8.0-beta.5 - 26 October 2026
 
 #### New css properties
 
