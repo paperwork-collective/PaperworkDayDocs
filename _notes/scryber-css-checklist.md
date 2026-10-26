@@ -8,9 +8,9 @@ Status of each, as checked on 9.8.0-beta: none of these have any effect today (n
 
 - [x] `text-indent` (done 2026-10-26, commit 'Add the text-indent css property') - very small. The style key and layout support already exist (`TextFirstLineIndentKey`, `FirstLineInset`); only the CSS parser is missing.
 - [x] `box-sizing` (done 2026-10-26) - FINDING: Scryber's default already includes the padding in the width (border-box like; the border is drawn inside and does not reduce the content). So `border-box` is accepted and is the default, and `content-box` is the new opt-in (adds padding + border). Not yet checked for flex items, grid items and table cells, which size some boxes their own way. Changing the default to browser sizing (content-box) is a v10 decision.
-- [ ] `border-collapse`, `border-spacing` - tables. Check `cellspacing`/`cellpadding` handling first. Medium.
-- [ ] `object-fit`, `object-position` on `<img>` - `fill`, `contain`, `cover`, `none`, `scale-down`. Medium; reuse the aspect-ratio and background-size logic.
-- [ ] `visibility: hidden` - the element keeps its space but is not painted. There is no `visibility` CSS parser today (the `display: none` path is separate). Medium.
+- [x] `border-collapse`, `border-spacing` - tables. (done 2026-10-26) Check `cellspacing`/`cellpadding` handling first. Medium.
+- [x] `object-fit`, `object-position` on `<img>` (done 2026-10-26) - `fill`, `contain`, `cover`, `none`, `scale-down`. Medium; reuse the aspect-ratio and background-size logic.
+- [x] `visibility: hidden` (done 2026-10-26; hidden blocks hide their whole subtree, so a visible child of a hidden block is not shown) - the element keeps its space but is not painted. There is no `visibility` CSS parser today (the `display: none` path is separate). Medium.
 
 ## Block 2 - Visual polish
 
