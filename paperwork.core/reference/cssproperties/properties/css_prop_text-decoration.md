@@ -61,7 +61,8 @@ text-decoration: line-through;
 - Underline is commonly used for hyperlinks
 - Line-through is useful for showing deleted content, old prices, or corrections
 - Overline is less commonly used but can be effective for special emphasis
-- The decoration color typically matches the text color
+- The decoration color matches the text color unless [text-decoration-color](css_prop_text-decoration-color) is set
+- The shorthand also accepts a style, color and thickness: `text-decoration: underline wavy red 2pt`. See [text-decoration-style](css_prop_text-decoration-style) and [text-decoration-thickness](css_prop_text-decoration-thickness) (9.8)
 - Text decoration does not affect the spacing or layout of text
 - Decoration lines span the entire length of the text element
 

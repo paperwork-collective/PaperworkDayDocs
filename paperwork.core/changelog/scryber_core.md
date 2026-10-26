@@ -30,6 +30,13 @@ parent_url: /paperwork.core/
 
 ### 9.8.0-beta.3 - not yet released
 
+#### New Features
+
+- **`text-decoration-color`, `text-decoration-style` and `text-decoration-thickness`** - the color, style (`solid`, `double`, `dotted`, `dashed` or `wavy`) and thickness of underline, overline and line-through, also accepted in the `text-decoration` shorthand (`text-decoration: underline wavy red 2pt`). See [text-decoration-style](/paperwork.core/reference/cssproperties/properties/css_prop_text-decoration-style).
+- **`outline`, `outline-color`, `outline-style`, `outline-width` and `outline-offset`** - a line around an element, outside its border, that takes up no space. See [outline](/paperwork.core/reference/cssproperties/properties/css_prop_outline).
+- **`box-shadow`** - offset, blur, spread and color, with more than one shadow and rounded corners. `inset` shadows are not drawn. See [box-shadow](/paperwork.core/reference/cssproperties/properties/css_prop_box-shadow).
+- **`text-shadow`** - offset, blur and color, with more than one shadow. Inherited. See [text-shadow](/paperwork.core/reference/cssproperties/properties/css_prop_text-shadow).
+
 #### Fixes
 
 - **Inline images with a margin** - an inline `<img>` (or other drawn component) with a margin was drawn at its width and height plus the margins, starting at the edge of the margin. It is now drawn at its own size, inside the margin, as a `display: block` image is. The border was already in the right place.

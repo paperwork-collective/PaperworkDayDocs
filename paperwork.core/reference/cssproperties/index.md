@@ -149,6 +149,12 @@ The following properties are supported to alter the position and size appearance
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_object-fit.html' >object-fit</a>   | Sets how an image is fitted into its box - fill, contain, cover, none or scale-down. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_object-position.html' >object-position</a>   | Sets the position of an image within its box, when it does not fill it. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_visibility.html' >visibility</a>   | Sets if an element is drawn. Hidden elements still take up their space. Inherited. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_box-shadow.html' >box-shadow</a>   | Draws one or more shadows behind a box. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_outline.html' >outline</a>   | Draws a line around an element, outside its border, that takes up no space. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_outline-color.html' >outline-color</a>   | Sets the color of the outline. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_outline-style.html' >outline-style</a>   | Sets the style of the outline. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_outline-width.html' >outline-width</a>   | Sets the thickness of the outline. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_outline-offset.html' >outline-offset</a>   | Sets the space between the border and the outline. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_box-sizing.html' >box-sizing</a>   | Sets whether the width and height of a box include the padding (the default) or are the content only (content-box). |
 | <a href='/reference/cssproperties/properties/css_prop_min-width.html' >min-width</a>   | Specifies the minimim width for the 'boxed' element.   |
 | <a href='/reference/cssproperties/properties/css_prop_min-height.html' >min-height</a>   | Specifies the minimim height for the 'boxed' element. |
@@ -277,6 +283,10 @@ The following properties control the way any text within the element will be out
 | <a href='properties/vertical-align.html' >vertical-align</a>   | Specifies the vertical alignment of content on a line, or content within a block with a specific height or a table cell |
 | <a href='properties/line-height.html' >line-height</a>   | Specifies the leading of a line which can either be a relative or an absolute value.  |
 | <a href='properties/text-decoration.html' >text-decoration</a>   | Specifies any decoration on the text - A line above, below or in the middle of the characters is supported. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-decoration-color.html' >text-decoration-color</a>   | Sets the color of the text decoration lines. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-decoration-style.html' >text-decoration-style</a>   | Sets the style of the text decoration lines - solid, double, dotted, dashed or wavy. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-decoration-thickness.html' >text-decoration-thickness</a>   | Sets the thickness of the text decoration lines. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-shadow.html' >text-shadow</a>   | Draws one or more shadows behind text. Inherited. |
 | <a href='properties/text-decoration.html' >text-decoration-line</a>   | As per text-decoration - Specifies any decoration on the text - A line above, below or in the middle of the characters is supported. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-indent.html' >text-indent</a>   | Indents the first line of a block of text by a length or a percentage of the width. Inherited. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-transform.html' >text-transform</a>   | Changes the case of the text - none, uppercase, lowercase or capitalize. Inherited. |

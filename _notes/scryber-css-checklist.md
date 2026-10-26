@@ -14,10 +14,10 @@ Status of each, as checked on 9.8.0-beta: none of these have any effect today (n
 
 ## Block 2 - Visual polish
 
-- [ ] `box-shadow` - start with offset, spread and colour (no blur), then consider blur. Medium.
-- [ ] `text-decoration-color`, `text-decoration-style`, `text-decoration-thickness` - the line is currently always drawn in the text colour. Small to medium.
-- [ ] `outline`, `outline-offset` (and `outline-color`, `-style`, `-width`) - drawn outside the border box, no layout space. Medium.
-- [ ] `text-shadow` - draw the text twice, offset (no blur at first). Medium.
+- [x] `box-shadow` - start with offset, spread and colour (no blur), then consider blur. Medium.
+- [x] `text-decoration-color`, `text-decoration-style`, `text-decoration-thickness` - the line is currently always drawn in the text colour. Small to medium.
+- [x] `outline`, `outline-offset` (and `outline-color`, `-style`, `-width`) - drawn outside the border box, no layout space. Medium.
+- [x] `text-shadow` - draw the text twice, offset (no blur at first). Medium.
 
 ## Block 3 - Text flow
 
