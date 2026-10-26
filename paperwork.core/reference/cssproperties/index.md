@@ -140,6 +140,20 @@ The following properties are supported to alter the position and size appearance
 | <a href='/reference/cssproperties/properties/css_prop_display.html' >display</a> | Defines how the elements contents should be laid-out - in a block, inline with the flow, grid, table, or just ignored. |
 | <a href='/reference/cssproperties/properties/css_prop_float.html' >float</a> | Defines the positioning of the element on the current line. And how content will move around it. |
 | <a href='/reference/cssproperties/properties/css_prop_top.html' >top</a> | Specifies the top postion for an element that can be explictly moved. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_inset.html' >inset</a>   | Shorthand for top, right, bottom and left of a positioned element. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_inset-block.html' >inset-block</a>   | Sets the top and bottom of a positioned element. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_inset-block.html' >inset-block-start</a>   | Sets the top (see inset-block). |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_inset-block.html' >inset-block-end</a>   | Sets the bottom (see inset-block). |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_inset-inline.html' >inset-inline</a>   | Sets the left and right of a positioned element. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_inset-inline.html' >inset-inline-start</a>   | Sets the left (see inset-inline). |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_inset-inline.html' >inset-inline-end</a>   | Sets the right (see inset-inline). |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_ignored-properties.html' >cursor</a>   | Accepted, with no effect on the PDF. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_ignored-properties.html' >pointer-events</a>   | Accepted, with no effect on the PDF. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_ignored-properties.html' >will-change</a>   | Accepted, with no effect on the PDF. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_ignored-properties.html' >scroll-behavior</a>   | Accepted, with no effect on the PDF. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_ignored-properties.html' >user-select</a>   | Accepted, with no effect on the PDF. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_ignored-properties.html' >transition</a>   | Accepted, with no effect on the PDF. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_ignored-properties.html' >animation</a>   | Accepted, with no effect on the PDF. |
 | <a href='/reference/cssproperties/properties/css_prop_left.html' >left</a> | Specifies the left postion for an element that can be explictly moved. |
 | <a href='/reference/cssproperties/properties/css_prop_bottom.html' >bottom</a> | Specifies the bottom postion for an element that can be explictly moved, as long as top is not set. |
 | <a href='/reference/cssproperties/properties/css_prop_right.html' >right</a> | Specifies the top postion for an element that can be explictly moved, as long as left is not set. |
@@ -179,6 +193,9 @@ The following properties manage the spacing in and around elements. The border r
 | <a href='/reference/cssproperties/properties/css_prop_padding-inline.html' >padding-inline</a>   |  Sets the start and end padding of an *inline* element to either one value or two values. |
 | <a href='/reference/cssproperties/properties/css_prop_padding-inline-start.html' >padding-inline-start</a>   | Sets the start padding of an *inline* element to a specific value. |
 | <a href='/reference/cssproperties/properties/css_prop_padding-inline-end.html' >padding-inline-end</a>   | Sets the end padding of an *inline* element to a specific value. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_padding-block.html' >padding-block</a>   | Sets the top and bottom padding to either one value or two values. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_padding-block.html' >padding-block-start</a>   | Sets the top padding (see padding-block). |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_padding-block.html' >padding-block-end</a>   | Sets the bottom padding (see padding-block). |
 | <a href='/reference/cssproperties/properties/css_prop_margin.html' >margin</a>   | A shorthand property of setting the space between other sibling content and the border rectangle of any inner the content for a *boxed* element. |
 | <a href='/reference/cssproperties/properties/css_prop_margin-top.html' >margin-top</a>   |  Sets the space between other content and the top of the border rectangle of any inner content for a *boxed* element. |
 | <a href='/reference/cssproperties/properties/css_prop_margin-left.html' >margin-left</a>   | Sets the space between other content and the left of the border rectangle of any inner content for a *boxed* element. |
@@ -187,6 +204,9 @@ The following properties manage the spacing in and around elements. The border r
 | <a href='/reference/cssproperties/properties/css_prop_margin-inline.html' >margin-inline</a>   | Sets the start and end margins of an *inline* element to either one value or two values. |
 | <a href='/reference/cssproperties/properties/css_prop_margin-inline-start.html' >margin-inline-start</a>   | Sets the start margins of an *inline* element to a specific value. |
 | <a href='/reference/cssproperties/properties/css_prop_margin-inline-end.html' >margin-inline-end</a>   | Sets the start margins of an *inline* element to a specific value. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_margin-block.html' >margin-block</a>   | Sets the top and bottom margins to either one value or two values. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_margin-block.html' >margin-block-start</a>   | Sets the top margin (see margin-block). |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_margin-block.html' >margin-block-end</a>   | Sets the bottom margin (see margin-block). |
 
 ---
 

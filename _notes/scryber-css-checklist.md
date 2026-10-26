@@ -26,9 +26,9 @@ Status of each, as checked on 9.8.0-beta: none of these have any effect today (n
 
 ## Block 4 - Shorthands and noise reduction
 
-- [ ] `margin-block`, `padding-block`, `inset` (and `inset-block`, `inset-inline`) - shorthands over properties we already have. Small.
+- [x] `margin-block`, `padding-block`, `inset` (and `inset-block`, `inset-inline`) - shorthands over properties we already have. Small.
 - [ ] `place-items`, `place-content`, `place-self`, `justify-self` - `justify-items` and `justify-self` do not exist yet either (only `justify-content`, `align-items`, `align-content`, `align-self`). Small to medium; grid-aware.
-- [ ] Accept and ignore `cursor`, `pointer-events`, `will-change`, `scroll-behavior` (consider `user-select`, `transition`, `animation`) - no warning, no effect. Trivial.
+- [x] Accept and ignore `cursor`, `pointer-events`, `will-change`, `scroll-behavior` (consider `user-select`, `transition`, `animation`) - no warning, no effect. Trivial.
 
 ## Scheduled separately
 
