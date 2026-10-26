@@ -105,6 +105,8 @@ The following properties alter the border appearance on 'boxed'* elements. **NOT
 | Property  | Description |
 |---|---|
 | <a href='/reference/cssproperties/properties/css_prop_border.html' >border</a>   | A shorthand property of setting the style, width and color of all the borders |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_border-collapse.html' >border-collapse</a>   | Sets if the borders of table cells are drawn separately (default) or are shared between the cells (collapse). |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_border-spacing.html' >border-spacing</a>   | Sets the space between the cells of a table with separate borders. |
 | <a href='/reference/cssproperties/properties/css_prop_border-width.html' >border-width</a>   | Sets the width of all the borders around an element. |
 | <a href='/reference/cssproperties/properties/css_prop_border-color.html' >border-color</a>   | Sets the color of all the borders around an element.  |
 | <a href='/reference/cssproperties/properties/css_prop_border-style.html' >border-style</a>   | Sets the style (solid, dash, none) of all the borders around an element. |
@@ -144,6 +146,9 @@ The following properties are supported to alter the position and size appearance
 | <a href='/reference/cssproperties/properties/css_prop_z-index.html' >z-index</a>   | Sets the stacking order of a positioned element — higher values appear in front of lower ones. |
 | <a href='/reference/cssproperties/properties/css_prop_width.html' >width</a>  | Specifies the width taken up for the 'boxed' element. |
 | <a href='/reference/cssproperties/properties/css_prop_height.html' >height</a> |  Specifies the height taken up for the 'boxed' element.  |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_object-fit.html' >object-fit</a>   | Sets how an image is fitted into its box - fill, contain, cover, none or scale-down. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_object-position.html' >object-position</a>   | Sets the position of an image within its box, when it does not fill it. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_visibility.html' >visibility</a>   | Sets if an element is drawn. Hidden elements still take up their space. Inherited. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_box-sizing.html' >box-sizing</a>   | Sets whether the width and height of a box include the padding (the default) or are the content only (content-box). |
 | <a href='/reference/cssproperties/properties/css_prop_min-width.html' >min-width</a>   | Specifies the minimim width for the 'boxed' element.   |
 | <a href='/reference/cssproperties/properties/css_prop_min-height.html' >min-height</a>   | Specifies the minimim height for the 'boxed' element. |

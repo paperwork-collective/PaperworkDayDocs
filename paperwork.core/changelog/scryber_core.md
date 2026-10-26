@@ -34,6 +34,9 @@ parent_url: /paperwork.core/
 
 - **`keys()` function** - the keys of a dictionary, or the names of the properties of an object or JSON object, as an array that can be counted, sorted and enumerated. See [keys](/paperwork.core/reference/binding/functions/keys).
 - **`text-indent`** - indents the first line of a block of text. Inherited. See [text-indent](/paperwork.core/reference/cssproperties/properties/css_prop_text-indent).
+- **`object-fit` and `object-position`** - fit a raster image into its box with `contain`, `cover`, `none` or `scale-down`, and place it with keywords, percentages or lengths. See [object-fit](/paperwork.core/reference/cssproperties/properties/css_prop_object-fit) and [object-position](/paperwork.core/reference/cssproperties/properties/css_prop_object-position).
+- **`border-collapse` and `border-spacing`** - collapsed table borders are drawn once between cells and with the table (the wider wins), and separate borders can have space between the cells. See [border-collapse](/paperwork.core/reference/cssproperties/properties/css_prop_border-collapse) and [border-spacing](/paperwork.core/reference/cssproperties/properties/css_prop_border-spacing).
+- **`visibility`** - `hidden` content keeps its space in the layout but is not drawn. Inherited. See [visibility](/paperwork.core/reference/cssproperties/properties/css_prop_visibility).
 - **`box-sizing`** - `content-box` makes `width` and `height` the content only, adding the padding and border. The default (as `border-box`) includes the padding in the width, and is unchanged. See [box-sizing](/paperwork.core/reference/cssproperties/properties/css_prop_box-sizing).
 
 #### Fixes
