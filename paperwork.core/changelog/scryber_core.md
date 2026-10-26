@@ -28,7 +28,7 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
-### 9.8.0-beta.2 - not yet released
+### 9.8.0-beta.2 - 26 October 2026
 
 #### New Features
 
@@ -45,7 +45,7 @@ parent_url: /paperwork.core/
 - **Properties named `e`, `pi`, `true`, `false` and `null`** - a name directly after `.` or `../` is always a property, so `model.e` and `model.pi` work. A bare `e` or `pi` is still the constant.
 - **`join()` accepts `join(collection, separator)`** as well as `join(separator, item, item...)`. The collection first order is the one documented.
 
-### Scryber.Core.Mvc 9.8.0-beta.1
+### Scryber.Core.Mvc 9.8.0-beta.1 (and 9.8.0-beta.2)
 
 - **Package dependency fixed** - Scryber.Core.Mvc 9.6.0.14-beta to 9.8.0-beta listed a dependency on `Scryber.Common`, which is not a package (it is included in Scryber.Core), so the package could not be restored from nuget.org. Version 9.8.0-beta.1 depends only on `Scryber.Core`. Use this version or later.
 
