@@ -68,7 +68,7 @@ The color can be before or after the lengths. More than one shadow can be separa
 - The corners follow the `border-radius` of the element.
 - The blur is made with several layers of the shadow fading out (up to 12), rather than a true Gaussian blur, so very large blurs are approximate.
 - `inset` shadows are accepted, but are not drawn.
-- Applies to block elements (div, p, table, td and so on). Inline text, spans and images are not given a shadow.
+- Applies to block elements (div, p, table, td and so on) and to images (inline or block). Inline text and spans are not given a shadow. Images from 9.8.0-beta.4.
 - The value can be set from data, for example {% raw %}`box-shadow: {{model.shadow}}`{% endraw %}.
 - Added in Paperwork.Core 9.8.
 

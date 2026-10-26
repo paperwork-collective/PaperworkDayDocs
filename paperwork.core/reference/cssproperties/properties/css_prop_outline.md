@@ -67,7 +67,7 @@ An outline is only drawn when there is a style other than `none`.
 ## Notes
 
 - The outline is drawn outside the border (and the `outline-offset`), over any content next to it, and does not change the size or position of the element.
-- Applies to block elements (div, p, table, td and so on). Inline text and spans are not outlined.
+- Applies to block elements (div, p, table, td and so on) and to images (inline or block). Inline text and spans are not outlined. Images from 9.8.0-beta.4.
 - The outline is a rectangle, and does not follow `border-radius`.
 - Not related to the PDF document outline (bookmarks).
 - The value can be set from data, for example {% raw %}`outline: 2pt solid {{model.color}}`{% endraw %}.
