@@ -260,6 +260,7 @@ Define exact dimensions when standard sizes don't fit.
 
 The page size comes from the `@page` rule, so it is set in the template or a stylesheet. To choose the size in code, add a stylesheet with the builder:
 
+{% raw %}
 ```csharp
 var pageSize = customer.Region == "US" ? "Letter" : "A4";
 
@@ -268,6 +269,7 @@ await factory.NewDocument()
     .WithStyle($"@page {{ size: {pageSize} portrait; }}")
     .SaveAsync("output.pdf");
 ```
+{% endraw %}
 
 ---
 
