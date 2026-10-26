@@ -140,7 +140,7 @@ builder.WithData("model", new {
 
 {% raw %}
 ```handlebars
-<p>Mean rating: {{round(mean(collect(model.reviews, 'rating')), 1)}} stars</p>
+<p>Mean rating: {{round(mean(eachOf(model.reviews, 'rating')), 1)}} stars</p>
 ```
 {% endraw %}
 
@@ -172,7 +172,7 @@ builder.WithData("model", new {
 - All items must be numeric
 - Result is a decimal (use `round()` for formatting)
 - Formula: sum of all values divided by count
-- For property-based means, combine with `collect()`: `mean(collect(items, 'property'))`
+- For property-based means, combine with `eachOf()`: `mean(eachOf(items, 'property'))`
 - Useful for:
   - Statistical reports
   - Scientific calculations

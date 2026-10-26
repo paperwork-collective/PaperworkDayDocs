@@ -121,7 +121,7 @@ builder.WithData("model", new {
   {{/if}}
   </p>
 {{/each}}
-<p>Average: {{average(collect(model.calls, 'duration'))}} min</p>
+<p>Average: {{average(eachOf(model.calls, 'duration'))}} min</p>
 ```
 {% endraw %}
 

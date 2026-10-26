@@ -131,9 +131,9 @@ builder.WithData("model", new {
 {% raw %}
 ```handlebars
 <h3>Household Income Statistics</h3>
-<p>Median income: ${{round(median(collect(model.households, 'income')), 0)}}</p>
-<p>Mean income: ${{round(mean(collect(model.households, 'income')), 0)}}</p>
-{{#if (median(collect(model.households, 'income')) < mean(collect(model.households, 'income')))}}
+<p>Median income: ${{round(median(eachOf(model.households, 'income')), 0)}}</p>
+<p>Mean income: ${{round(mean(eachOf(model.households, 'income')), 0)}}</p>
+{{#if (median(eachOf(model.households, 'income')) < mean(eachOf(model.households, 'income')))}}
   <p style="color: blue;">Income distribution is right-skewed (high earners pull mean up)</p>
 {{/if}}
 ```
@@ -213,7 +213,7 @@ builder.WithData("model", new {
   - Data has outliers
   - Distribution is skewed
   - You want the "typical" value
-- For property-based median, use with `collect()`: `median(collect(items, 'property'))`
+- For property-based median, use with `eachOf()`: `median(eachOf(items, 'property'))`
 
 ---
 

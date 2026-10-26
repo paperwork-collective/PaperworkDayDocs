@@ -9,10 +9,12 @@ has_children: false
 has_toc: false
 ---
 
-# collect() : Extract Property from All Items
+# collect() : Combine Values into One Array
 {: .no_toc }
 
-Extract a specific property from all items in a collection, returning a new array of those property values.
+Combine any number of values and collections into a single array. Each collection is added item by item; any other value is added as one item.
+
+To read a property from every item in a collection, use [eachOf()](./eachOf).
 
 ---
 
@@ -30,7 +32,7 @@ Extract a specific property from all items in a collection, returning a new arra
 ## Signature
 
 ```
-collect(collection, propertyName)
+collect(value1, value2, ...)
 ```
 
 ---
@@ -39,8 +41,7 @@ collect(collection, propertyName)
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `collection` | Array/Collection | Yes | The collection of objects |
-| `propertyName` | String | Yes | Name of the property to extract |
+| `value1, value2, ...` | Any | Yes (at least one) | Values or collections to combine |
 
 ---
 
@@ -48,204 +49,71 @@ collect(collection, propertyName)
 
 **Type:** Array
 
-An array containing the values of the specified property from each item.
+A new array with the items of every collection, and every other value, in order.
 
 ---
 
 ## Examples
 
-### Extract Property Values
-
-
-{% raw %}
-```handlebars
-<p>Product names: {{join(collect(model.products, 'name'), ', ')}}</p>
-```
-{% endraw %}
-
+### Combining Two Lists
 
 **Data:**
 ```csharp
-builder.WithData("model", new {
-    products = new[] {
-        new { name = "Widget A", price = 15.50 },
-        new { name = "Widget B", price = 22.00 },
-        new { name = "Widget C", price = 8.75 }
-    }
+builder.WithData("model", new
+{
+    staff = new[] { "Ann", "Bob" },
+    contractors = new[] { "Cy", "Di" }
 });
 ```
 
-**Output:**
-```html
-<p>Product names: Widget A, Widget B, Widget C</p>
-```
-
-### Calculate Total from Property
-
-
+**Template:**
 {% raw %}
-```handlebars
-<p>Total price: ${{sum(collect(model.items, 'price'))}}</p>
-<p>Average price: ${{round(average(collect(model.items, 'price')), 2)}}</p>
+```html
+<p>Everyone: {{join(', ', collect(model.staff, model.contractors))}}</p>
+<p>Headcount: {{count(collect(model.staff, model.contractors))}}</p>
 ```
 {% endraw %}
 
-
-**Data:**
-```csharp
-builder.WithData("model", new {
-    items = new[] {
-        new { name = "Item A", price = 10.00, quantity = 2 },
-        new { name = "Item B", price = 15.50, quantity = 1 },
-        new { name = "Item C", price = 8.25, quantity = 3 }
-    }
-});
-```
-
 **Output:**
 ```html
-<p>Total price: $33.75</p>
-<p>Average price: $11.25</p>
+<p>Everyone: Ann, Bob, Cy, Di</p>
+<p>Headcount: 4</p>
 ```
 
-### Extract IDs for Display
-
+### Adding Single Values
 
 {% raw %}
-```handlebars
-<p>Order IDs: {{join(collect(model.orders, 'id'), ', ')}}</p>
-<p>Total orders: {{count(collect(model.orders, 'id'))}}</p>
+```html
+<p>{{join(', ', collect('Manager', model.staff, 'Visitor'))}}</p>
 ```
 {% endraw %}
 
-
-**Data:**
-```csharp
-builder.WithData("model", new {
-    orders = new[] {
-        new { id = "ORD001", customer = "Alice", total = 150.00 },
-        new { id = "ORD002", customer = "Bob", total = 200.00 },
-        new { id = "ORD003", customer = "Charlie", total = 175.50 }
-    }
-});
-```
-
 **Output:**
 ```html
-<p>Order IDs: ORD001, ORD002, ORD003</p>
-<p>Total orders: 3</p>
+<p>Manager, Ann, Bob, Visitor</p>
 ```
 
-### Statistical Analysis
-
+### Totals Across Lists
 
 {% raw %}
-```handlebars
-<h3>Sales Performance</h3>
-<p>Total sales: ${{sum(collect(model.sales, 'amount'))}}</p>
-<p>Average sale: ${{round(average(collect(model.sales, 'amount')), 2)}}</p>
-<p>Highest sale: ${{max(collect(model.sales, 'amount'))}}</p>
-<p>Lowest sale: ${{min(collect(model.sales, 'amount'))}}</p>
+```html
+<p>All costs: {{sum(collect(model.fixedCosts, model.variableCosts))}}</p>
 ```
 {% endraw %}
-
-
-**Data:**
-```csharp
-builder.WithData("model", new {
-    sales = new[] {
-        new { date = "2024-03-01", amount = 1250.00 },
-        new { date = "2024-03-02", amount = 1580.50 },
-        new { date = "2024-03-03", amount = 1420.00 },
-        new { date = "2024-03-04", amount = 1890.25 }
-    }
-});
-```
-
-**Output:**
-```html
-<h3>Sales Performance</h3>
-<p>Total sales: $6140.75</p>
-<p>Average sale: $1535.19</p>
-<p>Highest sale: $1890.25</p>
-<p>Lowest sale: $1250</p>
-```
-
-### Nested Property Collection
-
-
-{% raw %}
-```handlebars
-{{#each model.teams}}
-  <h4>{{this.name}}</h4>
-  <p>Members: {{join(collect(this.members, 'name'), ', ')}}</p>
-  <p>Total experience: {{sum(collect(this.members, 'yearsExperience'))}} years</p>
-{{/each}}
-```
-{% endraw %}
-
-
-**Data:**
-```csharp
-builder.WithData("model", new {
-    teams = new[] {
-        new {
-            name = "Development",
-            members = new[] {
-                new { name = "Alice", yearsExperience = 5 },
-                new { name = "Bob", yearsExperience = 3 }
-            }
-        },
-        new {
-            name = "Design",
-            members = new[] {
-                new { name = "Charlie", yearsExperience = 7 },
-                new { name = "Diana", yearsExperience = 4 }
-            }
-        }
-    }
-});
-```
-
-**Output:**
-```html
-<h4>Development</h4>
-<p>Members: Alice, Bob</p>
-<p>Total experience: 8 years</p>
-<h4>Design</h4>
-<p>Members: Charlie, Diana</p>
-<p>Total experience: 11 years</p>
-```
 
 ---
 
 ## Notes
 
-- Returns empty array if collection is null or empty
-- Property must exist on all items (or be null)
-- Case-sensitive property names
-- Does not modify original collection
-- Essential for aggregation operations on object collections
-- Useful for:
-  - Extracting values for calculations
-  - Creating comma-separated lists
-  - Statistical operations on properties
-  - Data transformation pipelines
-- Often combined with:
-  - `sum()` - total property values
-  - `average()` - average property values
-  - `min()`/`max()` - find extremes
-  - `join()` - create delimited string
-  - `count()` - count extracted values
-- Alternative specific functions exist: `sumOf()`, `averageOf()`, `minOf()`, `maxOf()`
+- Collections are flattened one level - their items are added, not the collection itself
+- The order of the parameters is kept
+- Use [eachOf()](./eachOf) to extract a property from each item
 
 ---
 
 ## See Also
 
-- [sumOf Function](./sumOf.md)
-- [averageOf Function](./averageOf.md)
-- [join Function](./join.md)
-- [#each Helper](../helpers/each.md)
-
----
+- [eachOf Function](./eachOf)
+- [join Function](./join)
+- [count Function](./count)
+- [sum Function](./sum)

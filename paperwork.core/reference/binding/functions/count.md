@@ -82,8 +82,8 @@ builder.WithData("model", new {
 ```handlebars
 <h3>Order Summary</h3>
 <p>Number of items: {{count(model.orderItems)}}</p>
-<p>Total cost: ${{sum(collect(model.orderItems, 'price'))}}</p>
-<p>Average price: ${{round(sum(collect(model.orderItems, 'price')) / count(model.orderItems), 2)}}</p>
+<p>Total cost: ${{sum(eachOf(model.orderItems, 'price'))}}</p>
+<p>Average price: ${{round(sum(eachOf(model.orderItems, 'price')) / count(model.orderItems), 2)}}</p>
 ```
 {% endraw %}
 

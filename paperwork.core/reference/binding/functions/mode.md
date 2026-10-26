@@ -110,7 +110,7 @@ builder.WithData("model", new {
 
 {% raw %}
 ```handlebars
-<p>Most ordered product: {{mode(collect(model.orders, 'productId'))}}</p>
+<p>Most ordered product: {{mode(eachOf(model.orders, 'productId'))}}</p>
 ```
 {% endraw %}
 
@@ -140,8 +140,8 @@ builder.WithData("model", new {
 ```handlebars
 <h3>Survey Results</h3>
 <p>Responses collected: {{count(model.responses)}}</p>
-<p>Most popular choice: {{mode(collect(model.responses, 'choice'))}}</p>
-{{#with mode(collect(model.responses, 'choice'))}}
+<p>Most popular choice: {{mode(eachOf(model.responses, 'choice'))}}</p>
+{{#with mode(eachOf(model.responses, 'choice'))}}
   <p>{{countOf(model.responses, 'choice', this)}} people chose this option</p>
 {{/with}}
 ```
@@ -175,7 +175,7 @@ builder.WithData("model", new {
 
 {% raw %}
 ```handlebars
-<p>Most common status: {{mode(collect(model.tasks, 'status'))}}</p>
+<p>Most common status: {{mode(eachOf(model.tasks, 'status'))}}</p>
 ```
 {% endraw %}
 
@@ -213,7 +213,7 @@ builder.WithData("model", new {
   - Identifying common patterns
   - Customer preference analysis
   - Quality control (most common defect)
-- For property-based mode, use with `collect()`: `mode(collect(items, 'property'))`
+- For property-based mode, use with `eachOf()`: `mode(eachOf(items, 'property'))`
 - Different from mean and median:
   - Mean: arithmetic average
   - Median: middle value

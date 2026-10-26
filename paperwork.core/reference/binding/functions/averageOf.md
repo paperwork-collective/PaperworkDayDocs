@@ -198,7 +198,7 @@ builder.WithData("model", new {
 
 - Returns null for empty or null collections
 - Property must exist on all items and be numeric
-- More concise than `average(collect(collection, 'property'))`
+- More concise than `average(eachOf(collection, 'property'))`
 - Result is a decimal (use `round()` for formatting)
 - Case-sensitive property names
 - Useful for:

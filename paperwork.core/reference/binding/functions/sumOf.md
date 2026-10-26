@@ -210,7 +210,7 @@ builder.WithData("model", new {
 
 - Returns 0 for empty or null collections
 - Property must exist on all items and be numeric
-- More concise than `sum(collect(collection, 'property'))`
+- More concise than `sum(eachOf(collection, 'property'))`
 - Non-numeric property values will cause an error
 - Case-sensitive property names
 - Useful for:

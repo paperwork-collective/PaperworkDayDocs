@@ -116,9 +116,9 @@ builder.WithData("model", new {
 {% raw %}
 ```handlebars
 <h3>API Performance Summary</h3>
-<p>Average response time: {{round(average(collect(model.requests, 'responseTime')), 0)}}ms</p>
-<p>Fastest: {{min(collect(model.requests, 'responseTime'))}}ms</p>
-<p>Slowest: {{max(collect(model.requests, 'responseTime'))}}ms</p>
+<p>Average response time: {{round(average(eachOf(model.requests, 'responseTime')), 0)}}ms</p>
+<p>Fastest: {{min(eachOf(model.requests, 'responseTime'))}}ms</p>
+<p>Slowest: {{max(eachOf(model.requests, 'responseTime'))}}ms</p>
 ```
 {% endraw %}
 
@@ -149,9 +149,9 @@ builder.WithData("model", new {
 {% raw %}
 ```handlebars
 <h3>Product Pricing</h3>
-<p>Average price: ${{round(average(collect(model.products, 'price')), 2)}}</p>
-<p>Total inventory value: ${{sum(collect(model.products, 'price'))}}</p>
-<p>Price range: ${{min(collect(model.products, 'price'))}} - ${{max(collect(model.products, 'price'))}}</p>
+<p>Average price: ${{round(average(eachOf(model.products, 'price')), 2)}}</p>
+<p>Total inventory value: ${{sum(eachOf(model.products, 'price'))}}</p>
+<p>Price range: ${{min(eachOf(model.products, 'price'))}} - ${{max(eachOf(model.products, 'price'))}}</p>
 ```
 {% endraw %}
 
@@ -184,7 +184,7 @@ builder.WithData("model", new {
 - All items must be numeric
 - Result is a decimal (use `round()` for formatting)
 - Formula: sum of all values divided by count
-- For averaging a property across objects, use with `collect()`: `average(collect(items, 'price'))`
+- For averaging a property across objects, use with `eachOf()`: `average(eachOf(items, 'price'))`
 - For averaging property values, use `averageOf()` as shorthand
 - Useful for:
   - Grade calculations

@@ -80,7 +80,7 @@ builder.WithData("model", new {
 
 {% raw %}
 ```handlebars
-<p>Price range: ${{min(collect(model.products, 'price'))}} - ${{max(collect(model.products, 'price'))}}</p>
+<p>Price range: ${{min(eachOf(model.products, 'price'))}} - ${{max(eachOf(model.products, 'price'))}}</p>
 ```
 {% endraw %}
 
@@ -108,9 +108,9 @@ builder.WithData("model", new {
 {% raw %}
 ```handlebars
 <h3>Sales Analysis</h3>
-<p>Peak daily sales: ${{max(collect(model.dailySales, 'amount'))}}</p>
-<p>Average daily sales: ${{round(average(collect(model.dailySales, 'amount')), 2)}}</p>
-<p>Total weekly sales: ${{sum(collect(model.dailySales, 'amount'))}}</p>
+<p>Peak daily sales: ${{max(eachOf(model.dailySales, 'amount'))}}</p>
+<p>Average daily sales: ${{round(average(eachOf(model.dailySales, 'amount')), 2)}}</p>
+<p>Total weekly sales: ${{sum(eachOf(model.dailySales, 'amount'))}}</p>
 ```
 {% endraw %}
 
@@ -173,7 +173,7 @@ builder.WithData("model", new {
 - Returns null for empty or null collections
 - All items must be numeric
 - Supports both integers and decimals
-- For finding maximum of a property across objects, use with `collect()`: `max(collect(items, 'price'))`
+- For finding maximum of a property across objects, use with `eachOf()`: `max(eachOf(items, 'price'))`
 - For finding maximum property value, use `maxOf()` as shorthand
 - Useful for:
   - Price ranges

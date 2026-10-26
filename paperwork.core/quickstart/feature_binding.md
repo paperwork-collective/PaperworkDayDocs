@@ -255,7 +255,8 @@ Available automatically in specific contexts.
 | [minOf](/paperwork.core/reference/binding/functions/minOf) | `minOf(array, 'prop')` | Minimum of a property |
 | [max](/paperwork.core/reference/binding/functions/max) | `max(array)` | Maximum value |
 | [maxOf](/paperwork.core/reference/binding/functions/maxOf) | `maxOf(array, 'prop')` | Maximum of a property |
-| [collect](/paperwork.core/reference/binding/functions/collect) | `collect(expr, array)` | Map an expression over an array |
+| [eachOf](/paperwork.core/reference/binding/functions/eachOf) | `eachOf(array, 'property')` | Read a property from every item |
+| [collect](/paperwork.core/reference/binding/functions/collect) | `collect(value, ...)` | Combine values and arrays into one array |
 | [each](/paperwork.core/reference/binding/functions/count) | `each(array)` | Iterate over array (returns array) |
 | [firstWhere](/paperwork.core/reference/binding/functions/firstWhere) | `firstWhere(array, condition)` | First matching element |
 | [selectWhere](/paperwork.core/reference/binding/functions/selectWhere) | `selectWhere(array, condition)` | Filter array by condition |

@@ -260,7 +260,8 @@ Built-in functions available in `{% raw %}{{expression}}{% endraw %}` bindings.
 | **minOf** | `minOf(array, 'property')` | Find minimum property value |
 | **max** | `max(array)` | Find maximum value |
 | **maxOf** | `maxOf(array, 'property')` | Find maximum property value |
-| **collect** | `collect(expression, array)` | Map expression over array |
+| **eachOf** | `eachOf(array, 'property')` | Read a property from every item |
+| **collect** | `collect(value, ...)` | Combine values and arrays into one array |
 | **each** | `each(array)` | Iterate over array (returns array) |
 | **eachOf** | `eachOf(array, 'property')` | Extract property from each element |
 | **firstWhere** | `firstWhere(array, condition)` | Find first matching element |

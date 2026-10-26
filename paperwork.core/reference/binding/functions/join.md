@@ -172,7 +172,7 @@ builder.WithData("model", new {
 - Non-string array elements are converted to strings
 - Empty arrays return empty string
 - Null elements are treated as empty strings
-- For collection of objects, use with `collect()` to extract property first
+- For collection of objects, use with `eachOf()` to extract a property first
 - Alternative to manually iterating with `{% raw %}{{#each}}{% endraw %}`
 
 ---

@@ -197,7 +197,7 @@ builder.WithData("model", new {
 
 - Returns null for empty or null collections
 - Property must exist on all items and be numeric
-- More concise than `max(collect(collection, 'property'))`
+- More concise than `max(eachOf(collection, 'property'))`
 - Case-sensitive property names
 - Useful for:
   - Finding highest prices

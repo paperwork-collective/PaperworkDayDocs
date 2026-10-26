@@ -179,7 +179,7 @@ Aggregate and manipulate collections.
 | [minOf](./minOf) | Minimum property value | `{% raw %}{{minOf(model.items, 'price')}}{% endraw %}` |
 | [max](./max) | Maximum value | `{% raw %}{{max(model.numbers)}}{% endraw %}` |
 | [maxOf](./maxOf) | Maximum property value | `{% raw %}{{maxOf(model.items, 'price')}}{% endraw %}` |
-| [collect](./collect) | Extract property values | `{% raw %}{{collect(model.items, 'name')}}{% endraw %}` |
+| [collect](./collect) | Extract property values | `{% raw %}{{eachOf(model.items, 'name')}}{% endraw %}` |
 | [each](./each) | Iterate with function | `{% raw %}{{each(model.items, 'transform')}}{% endraw %}` |
 | [eachOf](./eachOf) | Iterate property with function | `{% raw %}{{eachOf(model.items, 'prop', 'fn')}}{% endraw %}` |
 | [firstWhere](./firstWhere) | Find first matching item | `{% raw %}{{firstWhere(model.items, 'isActive')}}{% endraw %}` |

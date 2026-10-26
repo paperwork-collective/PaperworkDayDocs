@@ -150,9 +150,9 @@ builder.WithData("model", new {
 {% raw %}
 ```handlebars
 <h3>API Response Times</h3>
-<p>Average: {{average(collect(model.requests, 'responseTime'))}}s</p>
-<p>Min: {{min(collect(model.requests, 'responseTime'))}}s</p>
-<p>Max: {{max(collect(model.requests, 'responseTime'))}}s</p>
+<p>Average: {{average(eachOf(model.requests, 'responseTime'))}}s</p>
+<p>Min: {{min(eachOf(model.requests, 'responseTime'))}}s</p>
+<p>Max: {{max(eachOf(model.requests, 'responseTime'))}}s</p>
 ```
 {% endraw %}
 

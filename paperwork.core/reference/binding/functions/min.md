@@ -80,7 +80,7 @@ builder.WithData("model", new {
 
 {% raw %}
 ```handlebars
-<p>Price range: ${{min(collect(model.products, 'price'))}} - ${{max(collect(model.products, 'price'))}}</p>
+<p>Price range: ${{min(eachOf(model.products, 'price'))}} - ${{max(eachOf(model.products, 'price'))}}</p>
 ```
 {% endraw %}
 
@@ -167,7 +167,7 @@ builder.WithData("model", new {
 - Returns null for empty or null collections
 - All items must be numeric
 - Supports both integers and decimals
-- For finding minimum of a property across objects, use with `collect()`: `min(collect(items, 'price'))`
+- For finding minimum of a property across objects, use with `eachOf()`: `min(eachOf(items, 'price'))`
 - For finding minimum property value, use `minOf()` as shorthand
 - Useful for:
   - Price ranges
