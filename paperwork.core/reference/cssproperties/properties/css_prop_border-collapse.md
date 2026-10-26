@@ -74,7 +74,7 @@ The border that remains is drawn inside the edge of its own cell, rather than ce
 
 ## Notes
 
-- Set on the table. It is not inherited by nested tables.
+- Set on the table (`table { border-collapse: collapse }`). It is inherited, as in a browser, so it can also be set on a container, and applies to any tables inside, including nested tables.
 - When the borders are collapsed, [border-spacing](css_prop_border-spacing) is ignored.
 - The value can be set from data, for example {% raw %}`border-collapse: {{model.borders}}`{% endraw %}.
 - Added in Paperwork.Core 9.8. In earlier versions the property is ignored, and the borders are always separate.

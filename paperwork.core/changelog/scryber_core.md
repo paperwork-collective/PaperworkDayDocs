@@ -28,6 +28,14 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
+### 9.8.0-beta.4 - not yet released
+
+#### Fixes
+
+- **`visibility: collapse` on table rows** - a collapsed row, or a group of rows (`thead`, `tbody`, `tfoot`), is removed from the table with its space, as with `display: none`. It was treated as `hidden`, which kept the space. Collapse on any other element is still the same as hidden, and on a column it is hidden.
+- **`border-collapse` and `border-spacing` are inherited** - as in css, they can be set on a container (or the body) and apply to the tables inside, including nested tables. They were only read from the table itself.
+- **`cellspacing` attribute on a table** - supported, a number is in pixels. A css `border-spacing` overrides it.
+
 ### 9.8.0-beta.3 - 26 October 2026
 
 #### New Features

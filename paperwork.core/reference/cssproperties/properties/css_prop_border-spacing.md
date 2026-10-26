@@ -64,7 +64,9 @@ The default is `0`.
 
 ## Notes
 
-- Set on the table. Only applies when [border-collapse](css_prop_border-collapse) is `separate` (the default).
+- Set on the table (`table { border-spacing: 4pt }`), or on a container, as it is inherited like in a browser. It has no effect when set on a cell (`td`) or a row.
+- Only applies when [border-collapse](css_prop_border-collapse) is `separate` (the default). Many style sheets set `table { border-collapse: collapse }`, which turns the spacing off.
+- The html `cellspacing` attribute on the table is also supported (a number is in pixels), and any css `border-spacing` overrides it. From 9.8.0-beta.4.
 - The space is made as margins on each cell. Between cells it is the spacing value, and at the edges of the table the spacing is also added, as it is in a browser.
 - The table is the same width. The cells are narrower by the spacing.
 - Unlike a browser, the default is `0` and not a small spacing.

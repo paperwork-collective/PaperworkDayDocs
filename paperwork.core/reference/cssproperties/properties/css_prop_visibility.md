@@ -32,7 +32,7 @@ The `visibility` property sets whether an element is drawn. A hidden element sti
 ```css
 visibility: visible;
 visibility: hidden;
-visibility: collapse;
+visibility: collapse;   /* a table row is removed */
 ```
 
 ---
@@ -41,7 +41,7 @@ visibility: collapse;
 
 - **visible** - The element is drawn. This is the default.
 - **hidden** - The element is not drawn, but keeps its space in the layout.
-- **collapse** - Treated as `hidden`.
+- **collapse** - On a table row, or a group of rows (`thead`, `tbody`, `tfoot`), the rows are removed from the table and take up no space, as with `display: none`. On anything else it is the same as `hidden`.
 
 ---
 
@@ -67,7 +67,8 @@ visibility: collapse;
 - Hidden images are laid out at their size and not drawn.
 - To remove an element and its space use [display](css_prop_display) with `none`.
 - The value can be set from data, for example {% raw %}`visibility: {{model.visibility}}`{% endraw %}.
-- Added in Paperwork.Core 9.8. In earlier versions the property is ignored.
+- `collapse` on a table column or column group (`col`, `colgroup`) is treated as `hidden`, and does not remove the column.
+- Added in Paperwork.Core 9.8. In earlier versions the property is ignored. Removing table rows with `collapse` is from 9.8.0-beta.4.
 
 ---
 
