@@ -144,6 +144,7 @@ The following properties are supported to alter the position and size appearance
 | <a href='/reference/cssproperties/properties/css_prop_z-index.html' >z-index</a>   | Sets the stacking order of a positioned element — higher values appear in front of lower ones. |
 | <a href='/reference/cssproperties/properties/css_prop_width.html' >width</a>  | Specifies the width taken up for the 'boxed' element. |
 | <a href='/reference/cssproperties/properties/css_prop_height.html' >height</a> |  Specifies the height taken up for the 'boxed' element.  |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_box-sizing.html' >box-sizing</a>   | Sets whether the width and height of a box include the padding (the default) or are the content only (content-box). |
 | <a href='/reference/cssproperties/properties/css_prop_min-width.html' >min-width</a>   | Specifies the minimim width for the 'boxed' element.   |
 | <a href='/reference/cssproperties/properties/css_prop_min-height.html' >min-height</a>   | Specifies the minimim height for the 'boxed' element. |
 | <a href='/reference/cssproperties/properties/css_prop_max-width.html' >max-width</a>   | Specifies the maximum width the 'boxed' element is allowed consume on the page |
@@ -272,7 +273,8 @@ The following properties control the way any text within the element will be out
 | <a href='properties/line-height.html' >line-height</a>   | Specifies the leading of a line which can either be a relative or an absolute value.  |
 | <a href='properties/text-decoration.html' >text-decoration</a>   | Specifies any decoration on the text - A line above, below or in the middle of the characters is supported. |
 | <a href='properties/text-decoration.html' >text-decoration-line</a>   | As per text-decoration - Specifies any decoration on the text - A line above, below or in the middle of the characters is supported. |
-| <a href='properties/text-transform.html' >text-transform</a>   | Changes the case of the text - none, uppercase, lowercase or capitalize. Inherited. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-indent.html' >text-indent</a>   | Indents the first line of a block of text by a length or a percentage of the width. Inherited. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-transform.html' >text-transform</a>   | Changes the case of the text - none, uppercase, lowercase or capitalize. Inherited. |
 | <a href='properties/letter-spacing.html' >letter-spacing</a>   | Defines an adjustment to the space applied between letters on a word, phrase or run of text. O is the standard value. |
 | <a href='properties/hyphens.html' >hyphens</a>   | Sets the model for hypenation, auto or none. NOTE: The library default is none, the manual option is considered equivalent to none. |
 | <a href='properties/hyphenate-limit-chars.html' >hyphenate-limit-chars</a>   | Specifies upt to 3 values representing the minimum word length to hyphenate and then the minimum left and or right length of characters, allowed before or after a hyphen. |

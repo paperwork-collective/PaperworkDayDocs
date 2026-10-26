@@ -28,6 +28,24 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
+### 9.8.0-beta.2 - not yet released
+
+#### New Features
+
+- **`keys()` function** - the keys of a dictionary, or the names of the properties of an object or JSON object, as an array that can be counted, sorted and enumerated. See [keys](/paperwork.core/reference/binding/functions/keys).
+- **`text-indent`** - indents the first line of a block of text. Inherited. See [text-indent](/paperwork.core/reference/cssproperties/properties/css_prop_text-indent).
+- **`box-sizing`** - `content-box` makes `width` and `height` the content only, adding the padding and border. The default (as `border-box`) includes the padding in the width, and is unchanged. See [box-sizing](/paperwork.core/reference/cssproperties/properties/css_prop_box-sizing).
+
+#### Fixes
+
+- **Quoted property names in collection functions** - `sortBy`, `sumOf`, `averageOf`, `minOf`, `maxOf`, `countOf`, `eachOf`, `selectWhere` and `firstWhere` accept a quoted name (`'price'`, `'owner.city'`) as well as `.price`. A quoted name was previously treated as a constant.
+- **Properties named `e`, `pi`, `true`, `false` and `null`** - a name directly after `.` or `../` is always a property, so `model.e` and `model.pi` work. A bare `e` or `pi` is still the constant.
+- **`join()` accepts `join(collection, separator)`** as well as `join(separator, item, item...)`. The collection first order is the one documented.
+
+### Scryber.Core.Mvc 9.8.0-beta.1
+
+- **Package dependency fixed** - Scryber.Core.Mvc 9.6.0.14-beta to 9.8.0-beta listed a dependency on `Scryber.Common`, which is not a package (it is included in Scryber.Core), so the package could not be restored from nuget.org. Version 9.8.0-beta.1 depends only on `Scryber.Core`. Use this version or later.
+
 ### 9.8.0-beta - 25 October 2026
 
 New loop variables and dictionary iteration, the `text-transform` property, and a number of binding, parsing and font fixes.
