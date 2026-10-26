@@ -21,8 +21,8 @@ Status of each, as checked on 9.8.0-beta: none of these have any effect today (n
 
 ## Block 3 - Text flow
 
-- [ ] `word-break`, `overflow-wrap`, `word-wrap` - map onto the existing wrap modes (`WordWrap` word / character). Small.
-- [ ] `text-overflow: ellipsis` - needs `overflow: hidden` and no wrap; truncate the last visible line. Medium.
+- [x] `word-break`, `overflow-wrap`, `word-wrap` - break-all fills lines (no hyphen); others accepted (long words already break). Tests in TextFlow_Tests.
+- [x] `text-overflow: ellipsis` / clip / string - nowrap + overflow hidden or clip. Single value only. Tests in TextFlow_Tests.
 
 ## Block 4 - Shorthands and noise reduction
 

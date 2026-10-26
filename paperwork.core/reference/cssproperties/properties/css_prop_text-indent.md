@@ -44,7 +44,7 @@ text-indent: 10%;
 - **percentage** - A percentage of the width of the containing block: `10%`.
 - `0` - No indent. This is the default.
 
-Negative values are not recommended, as the text would start outside the block.
+A negative value is a hanging indent. The first line starts outside the left edge of the block, and the following lines (including any after a `<br />`) start at the edge. Make sure there is space, such as padding or a margin, for the first line to hang into.
 
 ---
 

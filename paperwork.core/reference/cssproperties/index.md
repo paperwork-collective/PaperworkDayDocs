@@ -294,6 +294,10 @@ The following properties control the way any text within the element will be out
 | <a href='properties/hyphens.html' >hyphens</a>   | Sets the model for hypenation, auto or none. NOTE: The library default is none, the manual option is considered equivalent to none. |
 | <a href='properties/hyphenate-limit-chars.html' >hyphenate-limit-chars</a>   | Specifies upt to 3 values representing the minimum word length to hyphenate and then the minimum left and or right length of characters, allowed before or after a hyphen. |
 | <a href='properties/hyphenate-character.html' >hyphenate-character</a>   | Specifies the character to use for a hyphen. Default is '-' |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_word-break.html' >word-break</a>   | Sets whether words can be broken at any character (break-all) to fill a line. Inherited. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_overflow-wrap.html' >overflow-wrap</a>   | Accepted for compatibility - words longer than a line are always broken. Inherited. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_word-wrap.html' >word-wrap</a>   | The older name for overflow-wrap. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-overflow.html' >text-overflow</a>   | Replaces the end of clipped, non-wrapping text with an ellipsis or a string. Inherited. |
 | <a href='properties/word-spacing.html' >word-spacing</a>   | Defines an adjustment to the space applied between words on a phrase or run of text. O is the standard value. |
 | <a href='properties/white-space.html' >white-space</a>   | Specifies if white space (tags, returns, spaces, etc.) should be preserved in the output document. |
 

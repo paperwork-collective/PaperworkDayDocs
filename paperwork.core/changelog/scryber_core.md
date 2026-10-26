@@ -28,6 +28,18 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
+### 9.8.0-beta.5 - not yet released
+
+#### New css properties
+
+- **`word-break`** - `break-all` fills each line, breaking a word at any character with no hyphen. `normal`, `keep-all` and `break-word` are accepted (a word longer than a line is already broken). Inherited.
+- **`overflow-wrap` and `word-wrap`** - accepted for compatibility with existing stylesheets. They do not change the layout, as long words are always broken.
+- **`text-overflow`** - `ellipsis`, `clip` or a quoted string. The end of text that does not wrap (`white-space: nowrap`) in a block with `overflow: hidden` (or `clip`) is replaced so it fits. Inherited.
+
+#### Fixes
+
+- **Negative `text-indent`** - a negative indent now hangs the first line only. The next line was staying out at the negative position, and so was any text after a `<br />`. Following lines now start at the edge of the content.
+
 ### 9.8.0-beta.4 - 26 October 2026
 
 #### Fixes
