@@ -62,6 +62,7 @@ The text is shortened to fit in the 80pt, ending with the ellipsis.
 ## Notes
 
 - The text must not wrap (`white-space: nowrap`), and the block must have `overflow` set to `hidden` or `clip`. Otherwise the property has no effect, as in a browser.
+- With `overflow: hidden`, non-wrapping text is cut back to the last whole word that fits (see [overflow](css_prop_overflow)), so `text-overflow: clip` makes no further difference. Use `overflow: clip` to clip at the edge of the box, in the middle of a word.
 - Text that fits is not changed.
 - If the text is split across several spans or inline elements, only the run that crosses the edge is shortened.
 - The value can be set from data, for example {% raw %}`text-overflow: {{model.overflow}}`{% endraw %}.

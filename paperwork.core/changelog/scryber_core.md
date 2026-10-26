@@ -28,6 +28,12 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
+### 9.8.0-beta.6 - not yet released
+
+#### Changes
+
+- **`overflow: hidden` on text that does not wrap** - text with `white-space: nowrap` in a block with `overflow: hidden` is cut back to the last whole word that fits, the same as lines that overflow vertically are removed. If the first word is wider than the box, it is cut at the last character that fits. Before this the text ran past the edge of the box. `overflow: clip` is still a clipping rectangle at the edge, and `text-overflow: ellipsis` still cuts at the character.
+
 ### 9.8.0-beta.5 - 26 October 2026
 
 #### New css properties
