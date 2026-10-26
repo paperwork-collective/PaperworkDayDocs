@@ -45,7 +45,10 @@ The overflow property determines what happens when content is too large to fit w
 Content is not clipped and may render outside the element's box. Overflow content is visible and may overlap other elements.
 
 ### hidden
-Overflow content is clipped and not visible. Content that extends beyond the element's boundaries is cut off without any indication.
+Overflow content is not shown. Lines and floats that do not fit in the height of the element are removed, and text that does not wrap (`white-space: nowrap`) is cut back to the last whole word that fits the width, or the last character if the first word is too wide. Nothing is cut off mid-word otherwise. Use `text-overflow: ellipsis` to show an ellipsis at the end of the text.
+
+### clip
+The content is laid out as normal, and a clipping rectangle at the edge of the box hides anything outside it, even in the middle of a word or a line.
 
 ### scroll
 Overflow content is clipped, but scrolling mechanisms are provided (in interactive contexts). For PDF generation, this typically means content is clipped similar to hidden.
@@ -77,7 +80,7 @@ The `overflow` property can be applied to:
 - Use overflow to create fixed-size content areas with controlled dimensions
 - Overflow applies to both the content and padding areas
 - Child elements with positioning may still extend beyond overflow boundaries
-- Text truncation and ellipsis are not automatic; hidden text is simply clipped
+- An ellipsis is not automatic - use [text-overflow](css_prop_text-overflow)
 - Overflow behavior can differ between horizontal and vertical directions (use overflow-x and overflow-y)
 
 ---
