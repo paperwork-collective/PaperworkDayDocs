@@ -30,7 +30,10 @@ Sort a collection by a specific property in ascending order.
 ## Signature
 
 ```
+sortBy(collection)
+sortBy(collection, direction)
 sortBy(collection, propertyName)
+sortBy(collection, propertyName, direction)
 ```
 
 ---
@@ -40,7 +43,8 @@ sortBy(collection, propertyName)
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `collection` | Array/Collection | Yes | The collection to sort |
-| `propertyName` | String | Yes | Name of the property to sort by |
+| `propertyName` | String | No | Name of the property to sort by, such as `'name'` or `'owner.city'` (or `.name`). Without it the values themselves are sorted. |
+| `direction` | String | No | `'asc'` (default) or `'desc'` |
 
 ---
 
@@ -48,7 +52,9 @@ sortBy(collection, propertyName)
 
 **Type:** Array
 
-A new sorted array with items ordered by the specified property in ascending order.
+A new sorted array with items ordered by the specified property (or by their own value), ascending unless `'desc'` is given. Items with the same value keep the order they had in the original collection.
+
+To sort plain values, such as the result of [keys](./keys), numbers or text, leave out the property name: {% raw %}`sortBy(keys(model.prices))`{% endraw %} or {% raw %}`sortBy(model.names, 'desc')`{% endraw %}.
 
 ---
 

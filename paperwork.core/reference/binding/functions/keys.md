@@ -81,11 +81,11 @@ builder.WithData("model", new {
 
 ### Sort the keys
 
-Use `.` to sort the keys themselves, and `'desc'` as the third parameter for descending order.
+Sort the keys themselves with `sortBy(keys(...))`, and add `'desc'` for descending order.
 
 {% raw %}
 ```handlebars
-{{#each sortBy(keys(model.prices), .)}}
+{{#each sortBy(keys(model.prices))}}
   <p>{{this}}: {{model.prices[this]}}</p>
 {{/each}}
 ```

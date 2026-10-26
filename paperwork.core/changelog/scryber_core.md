@@ -28,6 +28,14 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
+### 9.8.0-beta.3 - not yet released
+
+#### Fixes
+
+- **Inline images with a margin** - an inline `<img>` (or other drawn component) with a margin was drawn at its width and height plus the margins, starting at the edge of the margin. It is now drawn at its own size, inside the margin, as a `display: block` image is. The border was already in the right place.
+- **`sortBy` of plain values** - `sortBy(values)` and `sortBy(values, 'desc')` sort the values themselves (such as the result of `keys()`), without a property name.
+- **`sortBy` with duplicate values** - items with the same sort value caused an error. They are now all kept, in their original order.
+
 ### 9.8.0-beta.2 - 26 October 2026
 
 #### New Features
