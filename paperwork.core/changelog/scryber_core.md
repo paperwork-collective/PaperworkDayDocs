@@ -28,6 +28,13 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
+### 9.8.0-beta.7 - not yet released
+
+#### Fixes
+
+- **Flex items that are the width of their content** - an item without a `width`, `flex-basis` or `flex-grow` had no width, so next to a growing item (such as `flex: 1`) it disappeared, or only kept its margin. These items are now measured by laying them out before the row, and the row uses the width of their content, as in a browser. Counters, `::before` and `::after` content, names and outlines are not changed by the measuring, and it never adds a page.
+- **A row of only content width items** is now packed at the start of the row, as in a browser, rather than split into equal columns. Use `justify-content` (e.g. `space-between`) to spread them, or `flex: 1` on each item for equal columns.
+
 ### 9.8.0-beta.6 - 27 October 2026
 
 #### New css properties
