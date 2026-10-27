@@ -43,7 +43,7 @@ selector {
 
 | Value | Description |
 |-------|-------------|
-| `stretch` | Items stretched to fill the container's cross dimension (default) |
+| `stretch` | Items stretched to fill the container's cross dimension (default). In a row the items are the height of the row (the `height` of the container, or the tallest item), unless the item has its own `height` |
 | `flex-start` | Items aligned to the start of the cross axis |
 | `flex-end` | Items aligned to the end of the cross axis |
 | `center` | Items centred on the cross axis |

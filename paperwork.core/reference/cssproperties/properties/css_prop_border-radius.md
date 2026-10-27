@@ -78,7 +78,8 @@ The `border-radius` property can be applied to:
 - Border radius creates curved corners by defining the radius of the curve
 - Works with or without visible borders
 - Affects the element's background and content clipping
-- Percentage values are relative to the element's dimensions
+- A percentage is of the width of the element (or of its container, if the element has no width)
+- As in css, the radii are reduced if they are too large for a side, so a radius can never be larger than the box
 - Large radius values create more pronounced curves
 - A 50% radius on square elements creates perfect circles
 - Border radius can be combined with borders, backgrounds, and padding

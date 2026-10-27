@@ -36,6 +36,13 @@ parent_url: /paperwork.core/
 - **`inset`, `inset-block` and `inset-inline`** (with `-start` and `-end`) - shorthands for `top`, `right`, `bottom` and `left`, with the same one to four values as `margin`. `auto` leaves a side unset.
 - **Accepted and ignored** - `cursor`, `pointer-events`, `will-change`, `scroll-behavior`, `user-select`, `transition` and `animation` are read without a warning and have no effect, so a stylesheet shared with a web page can be used as it is.
 
+#### Fixes
+
+- **Flex row items stretch** - with the default `align-items: stretch`, the items in a flex row are now the height of the row, so a fixed column, or a `flex: 1` column, with a background or border fills the row. The height is the `height` of the container, or the tallest item. The container height is applied before the items are laid out, so anything inside an item that is positioned from the bottom is placed correctly. An item with its own `height`, or an `align-self` (or `align-items`) other than `stretch`, is not stretched. Before this, every item was only the height of its content.
+- **Inline flex items (`span`)** - the children of a flex container are blocks, so a `span` (or other inline element) now has its width and margins, fills its column when it grows, stacks in a column, and is centred by `align-items`. They stayed inline, so a width was ignored, and a column of spans ran together on one line. Absolutely positioned children are not flex items and are not changed.
+- **Percentage `border-radius`** - a percentage was a percentage of the container, so `border-radius: 50%` on a small circle drew a star shape. It is now a percentage of the width of the element (or the container, if it has no width), and, as in css, the radii are reduced so they are never larger than a side. A `50%` radius on a square is a circle.
+- **`counter-increment` on table rows** - counters on a `tr` were not updated, so a counter used in the cells of the row stayed at 0. A row is counted once, and repeated header rows are not counted again. Counters on cells already worked.
+
 #### Changes
 
 - **`overflow: hidden` on text that does not wrap** - text with `white-space: nowrap` in a block with `overflow: hidden` is cut back to the last whole word that fits, the same as lines that overflow vertically are removed. If the first word is wider than the box, it is cut at the last character that fits. Before this the text ran past the edge of the box. `overflow: clip` is still a clipping rectangle at the edge, and `text-overflow: ellipsis` still cuts at the character.

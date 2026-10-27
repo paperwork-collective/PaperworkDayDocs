@@ -81,6 +81,7 @@ The `counter-increment` property applies to:
 - Can create complex hierarchical numbering systems
 - Increment is cumulative across sibling elements
 - Useful for lists, chapters, figures, tables, equations, and line numbers
+- Can be used on a table row (`tr`) as well as on blocks and cells. A row is counted once, and the rows that repeat at the top of each page are not counted again
 
 ---
 
