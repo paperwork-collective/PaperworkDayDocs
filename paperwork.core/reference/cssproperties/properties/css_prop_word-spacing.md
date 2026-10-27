@@ -78,7 +78,7 @@ word-spacing: -1pt;
 - Affects justified text alignment by providing additional space for justification
 - Useful for improving readability in narrow columns
 - Can be combined with letter-spacing for comprehensive text spacing control
-- Relative units (em, rem) scale with font size
+- Relative units scale with font size. `em` is of the font size of the element itself (before Paperwork.Core 9.8 it was of the inherited font size)
 - Very large positive values can make text difficult to read
 - Does not affect single-word lines or the last word in a line
 

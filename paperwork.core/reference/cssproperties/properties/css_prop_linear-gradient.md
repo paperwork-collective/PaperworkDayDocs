@@ -57,7 +57,7 @@ Specifies the gradient line direction:
 ### Color Stops
 Define colors and optional positions along the gradient:
 - `color` - CSS color value (name, hex, rgb, rgba, hsl, hsla)
-- `color position` - Color at specific position (%, px, em, etc.)
+- `color position` - Color at a position along the gradient, as a percentage, or a length such as `112pt` or `20mm`. Two colors at the same position change color without a fade (a hard stop), for example `linear-gradient(90deg, gold 112pt, navy 112pt)` is solid gold for the first 112pt, then navy. A position before the one preceding it is at that position, as in a browser.
 
 ### Examples
 
@@ -111,7 +111,8 @@ The `linear-gradient()` function can be applied to:
 - Gradients reduce PDF file size compared to image backgrounds
 - Direction keywords can be combined (e.g., `to bottom right`)
 - Angles are measured clockwise from the vertical axis
-- Color stops can use any CSS color format
+- Color stops can use any CSS color format, and can be css variables, e.g. `var(--accent) 112pt`
+- Lengths for color stops are supported in a `linear-gradient` from Paperwork.Core 9.8. `em` and other relative lengths are not supported for a stop, and a length in a `radial-gradient` is ignored
 - RGBA colors enable transparent gradient effects
 - Gradients can be combined with `background-size` for tiling
 - Performance is excellent as gradients are vector-based

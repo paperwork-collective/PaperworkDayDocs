@@ -70,6 +70,7 @@ The color can be before or after the lengths. More than one shadow can be separa
 - `inset` shadows are accepted, but are not drawn.
 - Applies to block elements (div, p, table, td and so on) and to images (inline or block). Inline text and spans are not given a shadow. Images from 9.8.0-beta.4.
 - The value can be set from data, for example {% raw %}`box-shadow: {{model.shadow}}`{% endraw %}.
+- Any part of the value can be a css variable, for example `box-shadow: 9pt 9pt 0 var(--accent)`, and the whole value can be one, `box-shadow: var(--shadow)`.
 - Added in Paperwork.Core 9.8.
 
 ---

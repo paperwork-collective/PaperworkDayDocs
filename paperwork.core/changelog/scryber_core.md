@@ -28,6 +28,20 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
+### 9.8.0-beta.8 - 27 October 2026
+
+#### Fixes
+
+- **Gradient color stops as lengths** - a stop such as `var(--accent) 112pt` was ignored, so `linear-gradient(90deg, var(--accent) 112pt, var(--navy) 112pt)` was a smooth fade across the whole width. Lengths are now a position along the gradient line, so two colors at the same position are a hard stop. A stop of `rgb(...)` with a position also lost its color, and is fixed.
+- **`box-shadow` with a variable** - a shadow with a `var()` in it, such as `box-shadow: 9pt 9pt 0 var(--accent)`, was not drawn. Any part of the value can now be a variable.
+- **Images in a flex header** - an image with only a height (e.g. a logo), in a flex `header` or `continuation-header`, was missing on the first page the header was used, as its size was not known until it had been drawn once.
+- **`letter-spacing` and `word-spacing` in `em`** - were a size of the inherited font, rather than the font of the element, so `font-size: 172pt; letter-spacing: -.04em` was almost no change.
+- **`display: inline-flex`** (and `inline-grid` and `inline-table`) - was not recognised, so the whole `display` was ignored. The element now sits on the line as an inline block, with its contents laid out as a flex container, so `align-items` and `justify-content` centre its content. As a flex item it is a flex container.
+
+#### Changes
+
+- **A word that is longer than the line is not broken** - as in a browser, a single word that is too long for a line (e.g. a large number in a narrow column) is kept whole, and overflows the line (to the left when it is right aligned). Before this it was broken at a character, onto 2 or more lines. Use `overflow-wrap: break-word` (or `word-wrap: break-word`) to break long words, for example long codes or urls in a narrow table cell. With `hyphens: auto` long words are still hyphenated.
+
 ### 9.8.0-beta.7 - 27 October 2026
 
 #### Fixes

@@ -40,13 +40,15 @@ word-wrap: break-word;
 
 ## Values
 
-- `normal`, `break-word` and `anywhere` - All accepted.
+- `normal` - The default. A word that is longer than a whole line is kept whole, on a line of its own, and overflows the line (to the left if the text is right aligned), as in a browser.
+- `break-word` and `anywhere` - A word that is longer than a whole line is broken at the character where it reaches the end of the line.
 
 ---
 
 ## Notes
 
-- Scryber always breaks a word that is longer than a whole line, which is the behaviour these values ask for in a browser. So the property is accepted for compatibility with existing stylesheets and does not change the layout.
+- Before Paperwork.Core 9.8 (9.8.0-beta.7 and earlier), a word that was too long was always broken. For long codes or urls in a narrow column, such as a table cell, add `overflow-wrap: break-word` to keep that behaviour.
+- With `hyphens: auto`, a long word is hyphenated rather than overflowing.
 - To fill every line by breaking at any character, use [word-break](css_prop_word-break) `break-all`.
 - Added in Paperwork.Core 9.8.
 

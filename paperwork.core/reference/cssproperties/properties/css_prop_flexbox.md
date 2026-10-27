@@ -73,7 +73,7 @@ These properties are set on **flex items** (direct children of the flex containe
 | Value | Support |
 |-------|---------|
 | `flex` | **Supported** |
-| `inline-flex` | Not supported |
+| `inline-flex` | Partial - sits on the line as an inline block, with its contents laid out as a flex container (from Paperwork.Core 9.8) |
 
 ---
 

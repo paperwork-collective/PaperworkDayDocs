@@ -186,7 +186,7 @@ See the [Flexbox Layout](/paperwork.core/reference/cssproperties/properties/css_
 | Property | Support | Notes |
 |----------|---------|-------|
 | [`display: flex`](/paperwork.core/reference/cssproperties/properties/css_prop_flexbox) | **Partial** | Container and item properties supported; see [Flexbox Layout](/paperwork.core/reference/cssproperties/properties/css_prop_flexbox) |
-| `display: inline-flex` | **No** | |
+| `display: inline-flex` | **Partial** | An inline block with flex contents |
 | `flex-direction` | **Supported** | `row`, `row-reverse`, `column`, `column-reverse` |
 | `flex-wrap` | **Supported** | `nowrap`, `wrap`, `wrap-reverse` |
 | `flex` | **Supported** | Shorthand for flex-grow, flex-shrink, flex-basis |

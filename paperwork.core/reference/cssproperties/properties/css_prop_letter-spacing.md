@@ -78,7 +78,7 @@ letter-spacing: -0.5pt;
 - Very large positive values can make text difficult to read
 - Small positive values (0.5pt-2pt) can improve readability of uppercase text
 - Commonly used for headings, logos, and emphasis
-- Relative units (em, rem) scale with font size
+- Relative units scale with font size. `em` is of the font size of the element itself, so `font-size: 72pt; letter-spacing: -.04em` is `-2.88pt` (before Paperwork.Core 9.8 it was of the inherited font size)
 - Affects all characters including spaces
 - Does not affect word boundaries (use word-spacing for that)
 

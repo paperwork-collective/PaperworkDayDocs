@@ -53,7 +53,9 @@ The display property determines the element's box model and how it interacts wit
 | `table-row` | **Partial** | Table row box; does not add anonymous parent wrappers |
 | `table-cell` | **Partial** | Table cell box; enables vertical alignment; does not add anonymous parent wrappers |
 | `list-item` | **Supported** | Block box with an associated list marker (bullet or number) |
-| `inline-flex` | **No** | |
+| `inline-flex` | **Partial** | Sits on the line like `inline-block`, with its contents laid out as a flex container. As the child of a flex container it is a flex container |
+| `inline-grid` | **Partial** | As `inline-flex`, with the contents laid out as a grid |
+| `inline-table` | **Partial** | As `inline-flex`, with the contents laid out as a table |
 
 > **Anonymous parent wrappers**: Standard browsers automatically insert anonymous `table`, `table-row`, or flex-container boxes when required parent elements are missing. Scryber does not. Elements using `table-cell`, `table-row`, `grid`, or `flex` values must have their required parent elements explicitly present in the markup.
 

@@ -38,9 +38,10 @@ word-break: break-all;
 
 ## Values
 
-- `normal` - The default. Lines break between words, and a single word that is too long for a line is broken so it does not overflow.
+- `normal` - The default. Lines break between words. A single word that is too long for a line is kept whole and overflows, unless [overflow-wrap](css_prop_overflow-wrap) is `break-word` or `anywhere`.
 - `break-all` - Lines are filled completely, and a word is broken at any character where it reaches the end of the line. No hyphen is added, even if `hyphens` is set.
-- `keep-all` and `break-word` - Accepted, and the same as `normal`.
+- `keep-all` - Accepted, and the same as `normal`.
+- `break-word` - The older form of `overflow-wrap: anywhere`, so a word that is too long for a line is broken.
 
 ---
 
@@ -58,7 +59,7 @@ The first line is filled with the start of the long word, rather than the word m
 
 ## Notes
 
-- Scryber already breaks a word that is longer than the whole line, so `normal` is safe for long codes and urls. Use `break-all` to fill every line, for example in a narrow table cell of identifiers.
+- For long codes and urls, use `overflow-wrap: break-word` to break only the words that are too long, or `break-all` to fill every line, for example in a narrow table cell of identifiers.
 - It has no effect with `white-space: nowrap` or `pre`.
 - The value can be set from data, for example {% raw %}`word-break: {{model.breaking}}`{% endraw %}.
 - Added in Paperwork.Core 9.8.
