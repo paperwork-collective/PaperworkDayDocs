@@ -508,3 +508,60 @@ html { scroll-padding-top: $pw-header-h + 24px; }
 
 // product sections with no content yet
 .site-nav .nav-list-link.is-soon { color: $pw-muted; &::after { content: "Soon"; margin-left: 8px; padding: 1px 6px; font: 500 10px/1.4 $pw-font-body; letter-spacing: 1px; text-transform: uppercase; border: 1px solid $pw-border; color: $pw-muted; } }
+
+// ── product switcher ─────────────────────────────────────────────────────────
+
+.pw-switch { margin: 0 16px 14px; }
+.pw-switch-btn {
+  position: relative;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 3px;
+  width: 100%; min-height: 54px;
+  padding: 9px 44px 9px 14px;
+  text-align: left;
+  color: $pw-text;
+  background: $pw-surface;
+  border: 1px solid $pw-border;
+  border-left: 4px solid $pw-accent-bar;
+  cursor: pointer;
+  &::after { content: ""; position: absolute; right: 16px; top: 50%; width: 7px; height: 7px; margin-top: -6px; border: solid $pw-muted; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); transition: transform 0.12s; }
+  &:hover { background: $pw-hover; }
+  &:focus-visible { outline: 2px solid $pw-accent-bar; outline-offset: 2px; }
+}
+.pw-switch.is-open .pw-switch-btn::after { transform: rotate(-135deg); margin-top: -2px; }
+.pw-switch-kicker { font: 500 10px/1 $pw-font-body; letter-spacing: 1.4px; text-transform: uppercase; color: $pw-accent; }
+.pw-switch-current { font: 600 17px/1.15 $pw-font-head; letter-spacing: 0.2px; }
+.pw-switch-menu {
+  margin: 4px 0 0; padding: 0; list-style: none;
+  background: $pw-surface; border: 1px solid $pw-border; box-shadow: $pw-shadow;
+  &[hidden] { display: none; }
+  li { margin: 0; padding: 0; }
+  li::before { content: none; }
+  a {
+    display: flex; flex-direction: column; gap: 1px;
+    padding: 9px 14px; min-height: 44px; box-sizing: border-box; justify-content: center;
+    color: $pw-text; text-decoration: none; background-image: none;
+    &:hover { background: $pw-hover; color: $pw-text; }
+    &[aria-current] { background: $pw-accent-tint; box-shadow: inset 4px 0 0 $pw-accent-bar; .pw-switch-name { color: $pw-accent; } }
+  }
+}
+.pw-switch-name { font-size: 14px; font-weight: 600; }
+.pw-switch-note { font-size: 12px; color: $pw-muted; }
+
+// with the switcher in place only the current product's pages are listed, with no label above them
+.site-nav.pw-switched {
+  > .nav-list > .nav-list-item.pw-product-item { display: none; }
+  > .nav-list > .nav-list-item.pw-product-item.is-current { display: block; }
+  > .nav-list > .nav-list-item.is-current > .nav-list-link {
+    padding: 8px 20px; min-height: 0; color: $pw-text; font-size: 14px; font-weight: 400; letter-spacing: 0; text-transform: none;
+    &.active { color: $pw-accent; font-weight: 600; }
+    &:hover { text-decoration: none; background: $pw-hover !important; }
+  }
+  // Home: no section to list, so the products themselves are the list
+  &.pw-at-home > .nav-list > .nav-list-item.pw-product-item { display: block; }
+  &.pw-at-home > .nav-list > .nav-list-item.pw-product-item > .nav-list-link {
+    display: block; padding: 8px 20px; min-height: 0; color: $pw-text; font-size: 14px; font-weight: 400; letter-spacing: 0; text-transform: none;
+    &:hover { text-decoration: none; background: $pw-hover !important; }
+  }
+  &.pw-at-home > .nav-list > .nav-list-item.pw-product-item > .nav-list { display: none; }
+  &.pw-at-home > .nav-list > .nav-list-item.is-current { display: none; }
+}

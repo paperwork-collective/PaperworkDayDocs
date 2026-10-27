@@ -246,7 +246,8 @@
     var content = doc.getElementById('main-content');
     if (!content || content.querySelector('.pw-prevnext') || doc.querySelector('.is-wide')) return;
     var here = location.pathname.replace(/index\.html$/, '');
-    var links = Array.prototype.slice.call(doc.querySelectorAll('.site-nav a.nav-list-link')).filter(function (a) { return !a.classList.contains('is-soon'); });
+    var scope = doc.querySelector('.site-nav > .nav-list > .nav-list-item.is-current') || doc.querySelector('.site-nav');
+    var links = Array.prototype.slice.call(scope.querySelectorAll('a.nav-list-link')).filter(function (a) { return !a.classList.contains('is-soon'); });
     var at = -1;
     for (var i = 0; i < links.length; i++) { if (links[i].pathname.replace(/index\.html$/, '') === here) { at = i; break; } }
     if (at < 0) return;
@@ -361,12 +362,87 @@
     new MutationObserver(function () { enhanceResults(box); }).observe(box, { childList: true, subtree: true });
   }
 
+
+  // ── product switcher: one drop-down of the top-level sections, and only the current section's pages below it ──
+  var PRODUCT_NOTES = { 'Home': 'Start here', 'Paperwork.Core': 'Core library', 'Paperwork.View': 'Online viewer', 'Paperwork.Design': 'Designer', 'Paperwork.CLI': 'Command line', 'Paperwork.Skill': 'AI skills', 'Paperwork.Reference': 'Template reference' };
+  function nameOf0(a) { return a.textContent.replace(/\s+/g, ' ').trim(); }
+  function buildSwitcher() {
+    var nav = doc.getElementById('site-nav');
+    var root = nav && nav.querySelector(':scope > .nav-list');
+    if (!root) return;
+    var items = Array.prototype.slice.call(root.children).filter(function (li) { return li.querySelector(':scope > .nav-list-link'); });
+    if (items.length < 2) return;
+
+    var current = null;
+    // the section whose address the page sits under (the longest match, so Reference wins over Core)
+    var here = location.pathname.replace(/index\.html$/, '');
+    var best = 0;
+    items.slice(1).forEach(function (li) {
+      var href = li.querySelector(':scope > .nav-list-link').getAttribute('href') || '';
+      if (href.length > 1 && here.indexOf(href) === 0 && href.length > best) { best = href.length; current = li; }
+    });
+    var home = items[0];
+    var atHome = !current || current === home;
+    if (!current) current = home;
+
+    items.forEach(function (li) {
+      li.classList.add('pw-product-item');
+      if (li === current) li.classList.add('is-current');
+    });
+    if (!atHome) {
+      var own = current.querySelector(':scope > .nav-list-link');
+      own.setAttribute('data-pw-title', nameOf0(own));
+      own.textContent = 'Overview';
+    }
+    nav.classList.add('pw-switched');
+    if (atHome) nav.classList.add('pw-at-home');
+
+    function nameOf(li) { var a = li.querySelector(':scope > .nav-list-link'); return a.getAttribute('data-pw-title') || nameOf0(a); }
+
+    var box = doc.createElement('div');
+    box.className = 'pw-switch';
+    var btn = doc.createElement('button');
+    btn.type = 'button';
+    btn.className = 'pw-switch-btn';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', 'pw-switch-menu');
+    var kick = doc.createElement('span'); kick.className = 'pw-switch-kicker'; kick.textContent = 'Product';
+    var cur = doc.createElement('span'); cur.className = 'pw-switch-current'; cur.textContent = nameOf(current);
+    btn.appendChild(kick); btn.appendChild(cur);
+    var menu = doc.createElement('ul');
+    menu.id = 'pw-switch-menu';
+    menu.className = 'pw-switch-menu';
+    menu.hidden = true;
+    items.forEach(function (li) {
+      var link = li.querySelector(':scope > .nav-list-link');
+      var row = doc.createElement('li');
+      var a = doc.createElement('a');
+      a.setAttribute('href', link.getAttribute('href'));
+      var n = nameOf(li);
+      var t = doc.createElement('span'); t.className = 'pw-switch-name'; t.textContent = n;
+      a.appendChild(t);
+      if (PRODUCT_NOTES[n]) { var d = doc.createElement('span'); d.className = 'pw-switch-note'; d.textContent = PRODUCT_NOTES[n]; a.appendChild(d); }
+      if (li === current) a.setAttribute('aria-current', 'true');
+      row.appendChild(a);
+      menu.appendChild(row);
+    });
+    box.appendChild(btn); box.appendChild(menu);
+    nav.insertBefore(box, nav.firstChild);
+
+    function close() { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); box.classList.remove('is-open'); }
+    function open() { menu.hidden = false; btn.setAttribute('aria-expanded', 'true'); box.classList.add('is-open'); }
+    btn.addEventListener('click', function () { if (menu.hidden) open(); else close(); });
+    doc.addEventListener('click', function (e) { if (!box.contains(e.target)) close(); });
+    box.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) { close(); btn.focus(); } });
+  }
+
   function ready() {
     bindTheme();
     bindSearchKey();
     hideLegacyToc();
     wrapTables();
     markSoon();
+    buildSwitcher();
     buildToc();
     enhanceCode();
     markSupport();
