@@ -177,7 +177,7 @@ selector { flex-basis: auto | <length>; }   /* default: auto */
 ## Notes
 
 - An item without a `width`, a `flex-basis` or a `flex-grow` is the width of its content, as in a browser. Scryber measures the content by laying the item out before the row, and then lays the row out with that width. Content longer than the row wraps, so the item is never wider than the row.
-- A row of only content width items is packed at the start of the row (use `justify-content` to spread them). From 9.8, these were equal columns before.
+- A row of only content width items is packed at the start of the row (use `justify-content` to spread them). Before 9.8.0-beta.7 they were split into equal columns.
 - An item that grows, such as `flex: 1`, takes the space that is left after the items with a width and the content width items.
 - Counters, `::before` and `::after` content, and links to an item are not affected by the measuring - they come from the final layout.
 
