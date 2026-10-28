@@ -28,6 +28,16 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
+### 9.8.0-beta.9 - 28 October 2026
+
+#### Fixes
+
+- **A gradient that cannot be drawn no longer stops the document** - a gradient that could not be read, such as a stop with 2 positions (`transparent 0 10.5pt`), had no colors, and the whole document failed with *No boundaries were provided*. The gradient is now not drawn, the `background-color` is shown, and a warning is added to the trace log.
+- **`transparent` in a gradient** - failed the document with *Cannot convert colorspace None to RGB*. A PDF gradient cannot be transparent, so the color is now drawn as black, with a warning in the trace log.
+- **Line height in the `font` shorthand and the language of the machine** - in `font: 10.5pt/1.65 sans-serif` the line height was read in the language of the machine or browser. Where `.` separates thousands (e.g. Dutch or German) `1.65` became 165, and the document could fail with *Cannot fit all repeating rows*. It is now always read as a css number.
+- **Numbers in text values used in expressions** - a number held as text, such as a json or field value of `"1.5"`, was read in the language of the machine or browser when used in a calculation (`{{model.v * 2}}`), a function (`round()`, `sqrt()`, `double()`, `addDays()` and the rest) or a comparison (`model.v == 1.5`). In Dutch or German `"1.5"` became 15. It is now always read the same way as a number written in the expression. Numbers and dates written out as text, e.g. `{{string(1.5, 'N2')}}`, still use the language of the machine or browser.
+- **Decimal values in `transform`, svg `transform` and `orient`, and `<picture>` sizes** - were also read in the language of the machine or browser, so `rotate(12.5deg)` was 125 degrees in Dutch. They are now always read as css numbers.
+
 ### 9.8.0-beta.8 - 27 October 2026
 
 #### Fixes

@@ -128,7 +128,8 @@ The `radial-gradient()` function can be applied to:
 - Circle gradients ignore width/height aspect ratio
 - Ellipse gradients adapt to container dimensions
 - Position values can use percentages or absolute units
-- RGBA colors enable transparent gradient effects
+- A PDF gradient cannot be transparent. The alpha of an `rgba()` or `hsla()` stop is ignored, and a `transparent` stop is drawn as black (with a warning in the trace log) - use the color of the background instead, e.g. `linear-gradient(#1B3350, #2A4A70)`
+- A gradient that cannot be read (for example a stop with 2 positions, `red 10pt 20pt`), or that has less than 2 colors, is not drawn. The `background-color` is shown instead, and a warning is added to the trace log
 - Gradients can be combined with `background-size` for complex effects
 - Performance is excellent as gradients are vector-based
 - Multiple gradients can be layered using comma-separated values
@@ -139,12 +140,12 @@ The `radial-gradient()` function can be applied to:
 ## Color Values
 
 Supported CSS color formats for gradient stops:
-- Named colors: `red`, `blue`, `gold`, `transparent`, etc.
+- Named colors: `red`, `blue`, `gold`, etc. (`transparent` is drawn as black)
 - Hexadecimal: `#FF0000`, `#F00` (shorthand)
 - RGB: `rgb(255, 0, 0)`
-- RGBA: `rgba(255, 0, 0, 0.5)` (with transparency)
+- RGBA: `rgba(255, 0, 0, 0.5)` (the alpha is ignored)
 - HSL: `hsl(0, 100%, 50%)`
-- HSLA: `hsla(0, 100%, 50%, 0.5)` (with transparency)
+- HSLA: `hsla(0, 100%, 50%, 0.5)` (the alpha is ignored)
 
 ---
 
