@@ -37,14 +37,14 @@ Keeping it all in one file means a template can be designed once, in the Designe
 
 | Property | Required | Description |
 |---|---|---|
-| `schemaVers` | Yes | The version of the file format. It must be the text `"1.1"`. |
-| `meta` | No | The [meta data](/paperwork.core/template-config/meta.html) about the template: its title, description, author and publishing details. |
-| `template` | Yes | The template itself, which holds everything below. |
-| `template.mainLayout` | No | The name of the [layout](/paperwork.core/template-config/layouts.html) that is the document. Defaults to `main`. |
-| `template.layouts` | Yes | One or more [layouts](/paperwork.core/template-config/layouts.html): the HTML. |
-| `template.styles` | No | The [styles](/paperwork.core/template-config/styles.html): CSS added to the document. |
-| `template.data` | No | The named [data](/paperwork.core/template-config/data.html) sources that the template binds to. |
-| `template.fields` | No | The [fields](/paperwork.core/template-config/fields.html): single values that can be supplied each time. |
+| `schemaVers` | Required | The version of the file format. It must be the text `"1.1"`. |
+| `meta` | Optional | The [meta data](/paperwork.core/template-config/meta.html) about the template: its title, description, author and publishing details. |
+| `template` | Required | The template itself, which holds everything below. |
+| `template.mainLayout` | Optional | The name of the [layout](/paperwork.core/template-config/layouts.html) that is the document. Defaults to `main`. |
+| `template.layouts` | Required | One or more [layouts](/paperwork.core/template-config/layouts.html): the HTML. |
+| `template.styles` | Optional | The [styles](/paperwork.core/template-config/styles.html): CSS added to the document. |
+| `template.data` | Optional | The named [data](/paperwork.core/template-config/data.html) sources that the template binds to. |
+| `template.fields` | Optional | The [fields](/paperwork.core/template-config/fields.html): single values that can be supplied each time. |
 
 {: .note }
 > The list of data sources is called `data` in the file. In the viewer's JavaScript options it is called `datas`, and the builder methods are `WithData`.
