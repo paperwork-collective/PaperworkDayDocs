@@ -435,7 +435,7 @@ app.MapGet("/hello", async (IPaperworkFactory factory) =>
 
 This has been a quick dive into the capabilities of the core engine. There is still a lot that is possible!
 
-- The [Factory and Builder](/paperwork.core/quickstart/factory_builder) - every option for setting up the factory and building documents
+- The [Factory](/paperwork.core/quickstart/factory.html) and the [Document Builder](/paperwork.core/quickstart/builder.html) - every option for setting up the factory and building documents
 
 - [Data binding functions](/paperwork.core/learning/02-data-binding/) and the [reference](/paperwork.core/reference/binding) listing
 

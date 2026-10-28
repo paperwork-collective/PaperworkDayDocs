@@ -364,7 +364,7 @@
 
 
   // ── product switcher: one drop-down of the top-level sections, and only the current section's pages below it ──
-  var PRODUCT_NOTES = { 'Home': 'Start here', 'Paperwork.Core': 'Core library', 'Paperwork.View': 'Online viewer', 'Paperwork.Design': 'Designer', 'Paperwork.CLI': 'Command line', 'Paperwork.Skill': 'AI skills', 'Paperwork.Reference': 'Template reference' };
+  var PRODUCT_NOTES = { 'Home': 'Start here', 'Paperwork.Core': 'Core library', 'Paperwork.View': 'Online viewer', 'Paperwork.Design': 'Template designer', 'Paperwork.CLI': 'Command line', 'Paperwork.Skill': 'AI skills', 'Paperwork.Reference': 'Template reference' };
   function nameOf0(a) { return a.textContent.replace(/\s+/g, ' ').trim(); }
   function buildSwitcher() {
     var nav = doc.getElementById('site-nav');
@@ -406,7 +406,7 @@
     btn.className = 'pw-switch-btn';
     btn.setAttribute('aria-expanded', 'false');
     btn.setAttribute('aria-controls', 'pw-switch-menu');
-    var kick = doc.createElement('span'); kick.className = 'pw-switch-kicker'; kick.textContent = 'Product';
+    var kick = doc.createElement('span'); kick.className = 'pw-switch-kicker'; kick.textContent = 'Solutions';
     var cur = doc.createElement('span'); cur.className = 'pw-switch-current'; cur.textContent = nameOf(current);
     btn.appendChild(kick); btn.appendChild(cur);
     var menu = doc.createElement('ul');

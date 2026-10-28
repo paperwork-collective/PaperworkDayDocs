@@ -132,7 +132,7 @@ foreach (var entry in log)
 ## Prerequisites
 
 - **Complete [Getting Started](/paperwork.core/learning/01-getting-started/)**
-- **Read [The Factory and the Document Builder](/paperwork.core/quickstart/factory_builder)**
+- **Read [The Factory](/paperwork.core/quickstart/factory.html) and [The Document Builder](/paperwork.core/quickstart/builder.html)**
 
 ## Key Concepts
 
