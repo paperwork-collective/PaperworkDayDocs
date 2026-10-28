@@ -73,7 +73,8 @@ The `counter-increment` property applies to:
 - Increment occurs when the element is rendered
 - Can increment by negative values to decrement
 - Increment value of 0 effectively disables incrementing for that counter
-- Counters must be initialized with `counter-reset` before incrementing
+- Counters must be initialized with `counter-reset` on the element or a containing element before incrementing. If the counter is not found it is not counted, and a warning is added to the trace log
+- Works on any element, including `display: grid` and `display: table` elements
 - Multiple elements can increment the same counter
 - Increment happens after `counter-reset` on the same element
 - Essential for automatic sequential numbering in documents

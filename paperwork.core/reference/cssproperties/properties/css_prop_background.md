@@ -56,20 +56,21 @@ The background property can set `background-color`, `background-image`, `backgro
 - `repeat-x` - Repeat horizontally only
 - `repeat-y` - Repeat vertically only
 - `no-repeat` - Display image once
-- `space` - Repeat with spacing to fill area
-- `round` - Repeat and scale to fit
 
 ### Position Values
-- Keywords: `top`, `bottom`, `left`, `right`, `center`
-- Percentages: `0%` to `100%`
-- Length units: `10pt`, `20px`, etc.
-- Combinations: `center top`, `right 10pt bottom 20pt`
+- Length units: `10pt 20pt`, `20px`, etc. - the first is the horizontal position, the second the vertical
+- `left` and `top` - the start (the default)
+
+`right`, `bottom`, `center` and percentages are accepted, so the rest of the background is still set, but the image stays at the start.
 
 ### Size Values
 - `auto` - Original image size (default)
 - `cover` - Scale to cover entire area
 - `contain` - Scale to fit within area
-- Length values: `100pt 50pt`, `50% 25%`
+- Length values: `100pt 50pt`, or `100pt auto` to keep the proportions
+
+### Other Values
+- `scroll`, `fixed` and `local` (background-attachment), and `border-box`, `padding-box`, `content-box` and `text` (background-origin and background-clip) are accepted and ignored, as they have no meaning on a PDF page.
 
 ### Gradient Functions
 
@@ -78,7 +79,7 @@ The `background` shorthand also supports CSS gradient functions as alternatives 
 - **[linear-gradient](/paperwork.core/reference/cssproperties/properties/css_prop_linear-gradient)** - Creates linear color transitions with directional control
 - **[radial-gradient](/paperwork.core/reference/cssproperties/properties/css_prop_radial-gradient)** - Creates radial color transitions from a center point
 
-Gradients can be used directly in the shorthand like `background: linear-gradient(90deg, red, blue)` and support transparency, data binding, and multiple color stops for professional visual effects.
+Gradients can be used directly in the shorthand like `background: linear-gradient(90deg, red, blue)` and support data binding and multiple color stops. A gradient cannot be transparent - `transparent` is drawn as black.
 
 ---
 
@@ -99,7 +100,9 @@ The `background` property can be applied to:
 
 - When using both position and size, separate them with a slash: `center / cover`
 - Values can be specified in any order except size (which must follow position)
-- Omitted values reset to their initial defaults
+- Omitted values reset to their initial defaults, so `background: none` removes a background color or image set by another rule
+- If any part of the value cannot be read, the whole declaration is ignored (as css) and a warning is added to the trace log
+- Only one background layer is supported - comma separated layers are not
 - Background images are rendered on top of background colors
 - The shorthand is more efficient than setting individual properties
 - For complex backgrounds, consider using individual properties for clarity

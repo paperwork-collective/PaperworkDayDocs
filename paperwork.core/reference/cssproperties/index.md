@@ -170,6 +170,7 @@ The following properties are supported to alter the position and size appearance
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_outline-width.html' >outline-width</a>   | Sets the thickness of the outline. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_outline-offset.html' >outline-offset</a>   | Sets the space between the border and the outline. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_box-sizing.html' >box-sizing</a>   | Sets whether the width and height of a box include the padding (the default) or are the content only (content-box). |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_box-decoration-break.html' >box-decoration-break</a>   | Sets whether a block split across pages has the full border on each part (clone, the default) or is cut at the break (slice). |
 | <a href='/reference/cssproperties/properties/css_prop_min-width.html' >min-width</a>   | Specifies the minimim width for the 'boxed' element.   |
 | <a href='/reference/cssproperties/properties/css_prop_min-height.html' >min-height</a>   | Specifies the minimim height for the 'boxed' element. |
 | <a href='/reference/cssproperties/properties/css_prop_max-width.html' >max-width</a>   | Specifies the maximum width the 'boxed' element is allowed consume on the page |

@@ -28,6 +28,21 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
+### 9.8.0-beta.10 - 28 October 2026
+
+#### Fixes
+
+- **Flex items with block content are the width of their content** - an item without a width that held a block (a `div`), a flex column or a flex row was measured as the full width of the row. So `justify-content` had no space to share, and items overlapped, wrapped or ran off the page (e.g. a footer's contact details past the page edge, or a `FIG 1.1` tag broken onto 2 lines next to another flex item). Blocks inside an item are now the width of their content when it is measured, and an empty item has no width.
+- **`justify-content` with a margin or a gap** - the margins of the flex container itself were not taken from the space, and the gaps between the items were counted as free space, so the last item was not on the right edge, or went past it.
+- **`position: absolute` with a `left` and a `right` but no `width`** - is now stretched between them (as css), rather than being the width of its content. A `max-width` still limits it.
+- **`counter-increment` on a `display: grid` or `display: table` element** - was not counted, so every `counter()` after it showed the reset value (e.g. *FIG 1.0* for every item).
+
+#### New
+
+- **`box-decoration-break`** - a block split across pages has the full border on each part, as before (`clone`, the default). `box-decoration-break: slice` (or `-webkit-box-decoration-break`) cuts the border at the break instead, with no bottom border where the block continues and no top border on the continuation, as in a browser.
+- **A warning for a counter that is not found** - a `counter-increment` for a counter that has no `counter-reset` on the element or a containing element is not counted, and now adds a warning to the trace log naming the counter and the element.
+- **The `background` shorthand** - now sets all the background values, so any that are not given go back to their defaults (as css). `background: none` removes a background color or image from another rule, and a color is drawn under an image. Position and size (`center / cover`, `10pt 20pt / 100pt auto`) are read, and `scroll`, `fixed`, `border-box`, `padding-box` and `content-box` are accepted and ignored. If any part cannot be read, the whole declaration is ignored, as in a browser, rather than half applied.
+
 ### 9.8.0-beta.9 - 28 October 2026
 
 #### Fixes
