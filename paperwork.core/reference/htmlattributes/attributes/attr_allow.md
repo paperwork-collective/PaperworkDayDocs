@@ -163,6 +163,7 @@ Without `data-passthrough any`, the parent's data stack (including `model`) is c
 
 **`<embed>`**:
 - Does **not** support `allow`
+- Needs a `src`, and only a `src`: `data-content` is not supported on `<embed>` (it is loaded at parse time, before binding)
 - Always inherits parent styles and data
 - No content cleaning — images, links, navigation, nested frames, forms, and inline styles are all kept as-is
 - Use `<iframe>` instead when you need any isolation

@@ -187,7 +187,7 @@ Scryber supports genuine content inclusion via `<iframe>` and `<embed>` — exte
 </html>
 ```
 
-`<iframe>` and `<embed>` behave similarly, with one key difference: `<embed>` always inherits the parent's styles and data with no isolation, while `<iframe>` isolates most of what it pulls in by default and lets you open specific doors with the `allow` attribute. Use `<embed>` for your own trusted fragments (headers, footers, reusable snippets) and `<iframe>` when the content might be third-party, or when you need to keep the parent's styles or data from bleeding into it.
+`<iframe>` and `<embed>` behave similarly, with one key difference: `<embed>` always inherits the parent's styles and data with no isolation, while `<iframe>` isolates most of what it pulls in by default and lets you open specific doors with the `allow` attribute. `<embed>` is always loaded from its `src` (it must have one, and it cannot use `data-content`; use an `<iframe>` to bind content). Use `<embed>` for your own trusted fragments (headers, footers, reusable snippets) and `<iframe>` when the content might be third-party, or when you need to keep the parent's styles or data from bleeding into it.
 
 ### Controlling What Comes In: the allow Attribute
 

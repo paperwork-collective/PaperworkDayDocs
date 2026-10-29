@@ -116,7 +116,10 @@ The `data-content` attribute is supported on the following elements:
 - `<iframe>` - Inline frames with content permissions enforcement (HTMLiFrame)
 
 ### General Support
-- All `VisualComponent` descendants - Any visual element that inherits from VisualComponent, including `<div>`, `<span>`, `<embed>`, and most other HTML elements
+- All `VisualComponent` descendants - Any visual element that inherits from VisualComponent, including `<div>`, `<span>`, and most other HTML elements
+
+### Not supported
+- `<embed>` - An embed is loaded at parse time from its `src`, before data binding runs. It must have a `src`, and `data-content`, `data-content-type` and `data-content-action` cannot be used on it (an `<embed>` with no `src` is rejected). Use an `<iframe>` or `<div>` to bind content.
 
 ### Implementation Details
 

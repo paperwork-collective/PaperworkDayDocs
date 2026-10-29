@@ -35,7 +35,7 @@ The `<iframe>` and `<embed>` elements enable embedded content that:
 - Support remote content loading from URLs or local file paths
 - Parse and render external content within the current document context
 - Support styling through CSS and inline styles
-- Allow dynamic content sources through data binding
+- Allow dynamic content sources through data binding (the `src` value on an `<embed>`, or `data-content` on an `<iframe>`)
 - Support visibility control and conditional rendering
 - Enable document composition from multiple sources
 - Can be nested within any container element
@@ -70,11 +70,11 @@ The `<iframe>` and `<embed>` elements enable embedded content that:
 
 | Attribute | Type | Description |
 |-----------|------|-------------|
-| `src` | string | Source URL or file path for the external content to load and parse. Mutually exclusive with `data-content` in practice — if both are used, `src` loads first and `data-content` binds additional content afterwards. |
+| `src` | string | Source URL or file path for the external content to load and parse. **Required on `<embed>`**, which can only be loaded from a `src`. On `<iframe>` it is optional where `data-content` is used instead. |
 | `allow` | string | **(iframe only)** Content permissions policy controlling what is kept from the embedded content and what passes through from the parent. See [Content Permissions](#content-permissions-allow) below. |
-| `data-content` | string | Dynamically bound content, parsed and inserted the same way as `src`-loaded content, including full `allow` policy enforcement. See [data-content attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_content.html). |
-| `data-content-type` | string | MIME type used to parse `data-content` (e.g. `text/html`, `application/xhtml+xml`, `text/markdown`). Defaults to the document's default content type. |
-| `data-content-action` | string | `append` (default), `prepend`, or `replace` — how `data-content` is inserted relative to existing children. |
+| `data-content` | string | **(iframe only)** Dynamically bound content, parsed and inserted the same way as `src`-loaded content, including full `allow` policy enforcement. See [data-content attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_content.html). |
+| `data-content-type` | string | **(iframe only)** MIME type used to parse `data-content` (e.g. `text/html`, `application/xhtml+xml`, `text/markdown`). Defaults to the document's default content type. |
+| `data-content-action` | string | **(iframe only)** `append` (default), `prepend`, or `replace` — how `data-content` is inserted relative to existing children. |
 | `data-passthrough` | boolean | *Legacy, obsolete.* Sets both `data-passthrough` and `style-passthrough` in `allow` together. Retained for templates written before `allow` existed. See the [migration note](/paperwork.core/reference/htmlattributes/attributes/attr_data_passthrough.html). |
 
 ### CSS Style Support
@@ -132,8 +132,28 @@ Both elements function similarly with one key difference:
 - Extends `VisualComponent` directly
 - Always inherits parent styles and data; no `allow` support, no content cleaning
 - Simpler component model
+- Content comes only from `src` (required): `data-content`, `data-content-type` and `data-content-action` are not supported
 - Typically used for smaller, trusted content fragments
 - Best for reusable snippets and partials from your own templates
+
+### Embed requires a src
+
+An `<embed>` is loaded when the template is parsed, before any data binding happens, so its content can only come from the `src` attribute. It has no way to take bound content.
+
+- `<embed>` **must** have a `src`, and `src` is the **only** way to give it content.
+- `data-content`, `data-content-type` and `data-content-action` are **not supported** on `<embed>`. An `<embed>` with no `src` (for example one that only has `data-content`) is rejected when the document is parsed.
+- To bind markup directly into the document, use an `<iframe>` or another element such as a `<div>` with `data-content`.
+
+```html
+<!-- Correct: content comes from src -->
+<embed src="footer.html" />
+
+<!-- Wrong: no src, rejected at parse time -->
+<embed data-content="{{model.footerHtml}}" data-content-type="text/html" />
+
+<!-- Use an iframe (or a div) to bind content -->
+<iframe data-content="{{model.footerHtml}}" data-content-type="text/html"></iframe>
+```
 
 ### External Content Sources
 

@@ -80,7 +80,7 @@ A quick-reference chart showing which HTML elements are supported in Scryber tem
 | Element | Tag | Support | Notes |
 |---------|-----|---------|-------|
 | [iFrame](/paperwork.core/reference/htmltags/elements/html_iframe_embed_element) | `<iframe>` | **Supported** | Includes external referenced or bound content with control over supported types and styles |
-| [Embed](/paperwork.core/reference/htmltags/elements/html_iframe_embed_element) | `<embed>` | **Supported** | Directly includes external or dynamic content, great for injecting your own snippets or sources. |
+| [Embed](/paperwork.core/reference/htmltags/elements/html_iframe_embed_element) | `<embed>` | **Supported** | Directly includes external content from a required `src`, great for injecting your own snippets. Use an iframe for bound `data-content`. |
 | [Object](/paperwork.core/reference/htmltags/elements/html_object_element) | `<object>` | **Supported** | Attaches external files within the template; linkable via anchor |
 
 ## Block Content
