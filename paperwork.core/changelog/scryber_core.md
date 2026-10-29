@@ -28,6 +28,12 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
+### 9.8.0-beta.12 - 29 October 2026
+
+#### Fixes
+
+- **Secured documents in the browser** - a document with restrictions or a password failed in Blazor WebAssembly with `Could not create the encrypter information`, as the browser has no MD5, and the PDF security handler needs it to make the encryption keys. The handler now uses its own MD5 on every platform, so the same documents are made in the browser, on a server and on the desktop.
+
 ### 9.8.0-beta.11 - 29 October 2026
 
 #### Fixes
