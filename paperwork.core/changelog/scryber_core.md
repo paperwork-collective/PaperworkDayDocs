@@ -28,6 +28,14 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
+### 9.8.0-beta.11 - 29 October 2026
+
+#### Fixes
+
+- **Allowing modifications no longer also allows high quality printing** - with 128bit encryption, `modifications` (document assembly) in `print-restrictions`, or `AllowDocumentAssembly` in code, also turned on high quality printing, and cleared one of the permission bits that must always be set.
+- **Allowing forms no longer also allows annotations** - `forms` (`AllowFormFilling`) also let the reader add comments and annotations. Each allowed permission now sets only its own permission.
+- **Passwords longer than 32 characters** - a document password longer than 32 characters failed the document. Only the first 32 characters are used, as in the PDF specification, and a password with characters outside Latin-1 (e.g. Cyrillic or Chinese) is a clear error rather than a password nobody could type.
+
 ### 9.8.0-beta.10 - 28 October 2026
 
 #### Fixes

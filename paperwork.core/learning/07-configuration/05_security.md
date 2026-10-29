@@ -117,6 +117,8 @@ doc.RenderOptions.PasswordProvider = new DocumentPasswordProvider(ownerPassword,
 
 The passwords can also be given as `SecureString` values.
 
+Only the first 32 characters of a password are used, as in the PDF specification, and a password can only use the characters of Latin-1 (letters, digits, punctuation and accented Western European letters). Any other character is an error when the document is generated.
+
 ---
 
 ## Permissions in Code
