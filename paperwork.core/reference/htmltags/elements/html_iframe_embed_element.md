@@ -237,6 +237,35 @@ Every permission is enforced identically whether the content is loaded via `src`
 
 Full grammar, per-type defaults, and further examples: [allow attribute reference](/paperwork.core/reference/htmlattributes/attributes/attr_allow.html).
 
+### Default Permissions for an iframe
+
+With no `allow` attribute, an `<iframe>` is isolated. It keeps the content that is safe to show and drops anything that could change the look or data of the parent document.
+
+| Kept (allowed) | Removed or blocked (denied) |
+|----------------|-----------------------------|
+| `style="..."` attributes on the embedded elements (`inline-styles`) | The parent's CSS does not reach the embedded content (`style-passthrough`) |
+| `<img>` images (`inner-images`) | `<style>` blocks inside the embedded content (`inner-style`) |
+| `<a href>` links and their targets (`inner-navigation`) | `<link rel="stylesheet">` inside the embedded content (`inner-link`) |
+| | The parent's `model` and parameters, so `{{model.x}}` is empty inside (`data-passthrough`) |
+| | The embedded `<html>` and `<body>` tags: only the body content is kept (`outer-html`) |
+| | Nested `<iframe>`, `<embed>` and `<object>` (`inner-frames`) |
+| | `<form>`, `<input>`, `<select>` and `<button>` (`inner-forms`) |
+
+The same defaults apply to content loaded from `src` and content bound with `data-content`.
+
+In practice this means an embedded page shows its own text, images and links with its own inline styles, but it will not pick up the parent's fonts and colours, and it cannot see the parent's data. Open up only what you need:
+
+```html
+<!-- Apply the parent's styles and let the content see the parent's model -->
+<iframe src="section.html"
+        allow="style-passthrough any; data-passthrough any"></iframe>
+
+<!-- Keep the embedded document's own <style> blocks too -->
+<iframe src="section.html" allow="inner-style any"></iframe>
+```
+
+An `<embed>` has none of this isolation: it always uses the parent's styles and data, and keeps everything. Use an `<iframe>` for content you do not fully control.
+
 ### Remote Content Loading
 
 When using remote URLs, consider:
