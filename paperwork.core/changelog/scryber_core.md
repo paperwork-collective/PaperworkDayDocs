@@ -28,6 +28,17 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
+### Next release - not yet released
+
+#### Breaking Changes
+
+- **A css `transform` no longer changes the layout** - a transformed element was taken out of the flow as `position: absolute`, and the space it used was resized to its transformed bounds, so the content after it moved up or across. The transform was also drawn around a centre worked out from the wrong place, so a rotated element (e.g. a `rotate(-90deg)` label in a table header) was drawn away from where it should be, or off the page. As in a browser, a transformed element now keeps its place and its space, and is drawn transformed around the centre of its own border box. Documents that allowed for the old position, or for the space being taken away, will need those adjustments removed.
+- **Relative, absolute and fixed elements with a transform** - a `position: relative` element is moved by its `left` and `top`, then transformed around its moved centre. An `absolute` or `fixed` element stays `absolute` or `fixed`, and is transformed around its own centre.
+
+#### New
+
+- **`transform-origin`** - sets the point an element is transformed around, with the keywords `left`, `center`, `right`, `top` and `bottom`, lengths (`10pt 20pt`) and percentages (`25% 75%`). Percentages are of the element's own border box, as css. The default is `center` (`50% 50%`).
+
 ### 9.8.0-beta.12 - 29 October 2026
 
 #### Fixes
