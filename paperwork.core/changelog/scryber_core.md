@@ -34,6 +34,12 @@ parent_url: /paperwork.core/
 
 - **A css `transform` no longer changes the layout** - a transformed element was taken out of the flow as `position: absolute`, and the space it used was resized to its transformed bounds, so the content after it moved up or across. The transform was also drawn around a centre worked out from the wrong place, so a rotated element (e.g. a `rotate(-90deg)` label in a table header) was drawn away from where it should be, or off the page. As in a browser, a transformed element now keeps its place and its space, and is drawn transformed around the centre of its own border box. Documents that allowed for the old position, or for the space being taken away, will need those adjustments removed.
 - **Relative, absolute and fixed elements with a transform** - a `position: relative` element is moved by its `left` and `top`, then transformed around its moved centre. An `absolute` or `fixed` element stays `absolute` or `fixed`, and is transformed around its own centre.
+- **`translate()` percentages are of the element's own box** - as css, so `translate(-50%, -50%)` moves an element back by half its own width and height, and centres it on its position (e.g. a watermark at `top: 50%; left: 50%`). They were a percentage of the containing block, so a centred element was moved a long way off, often off the page.
+- **A `translate()` after another operation moves along the transformed axes** - as css, each operation in a `transform` is within the ones before it. So `rotate(90deg) translate(50pt, 0)` moves 50pt down the page, and `scale(2) translate(10pt, 0)` moves 20pt. A translate was always along the page axes before, whatever came first. A translate at the start of the list is not changed. This is the same for the svg `transform` attribute (e.g. `transform="rotate(30) translate(50, 0)"`), as in the svg specification.
+
+#### Fixes
+
+- **Transforms in a shared style** - a `transform` with more than one operation (e.g. `rotate(10deg) translate(50%, 0)`) in a class changed the class's own values when it was used, so the next element with the class could be transformed with the values of the one before.
 
 #### New
 
