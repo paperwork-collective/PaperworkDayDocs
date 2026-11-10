@@ -28,6 +28,12 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
+### Next release - not yet released
+
+#### Fixes
+
+- **Mixed vertical alignment on a line** - an image or inline block with `vertical-align: baseline` after one with another alignment on the same line (e.g. a tall image with `vertical-align: top`, then a small one on the baseline) moved the text of the whole line down to the bottom of the space made by the taller image. The text now stays where it would be without the taller image, as in a browser, and the top aligned image hangs below it. A baseline image taller than the text still moves the baseline down.
+
 ### 9.9.0 - 9 November 2026
 
 #### Breaking Changes
