@@ -5,6 +5,7 @@ title: Paperwork.Design
 nav_order: 3
 has_children: true
 has_toc: false
+description: "The Paperwork template designer: build or import a document template, preview it with your data, then publish it or export it to share."
 ---
 # Paperwork.Design
 {: .no_toc }

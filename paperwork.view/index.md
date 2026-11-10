@@ -5,6 +5,7 @@ title: Paperwork.View
 nav_order: 2
 has_children: true
 has_toc: false
+description: "The free Paperwork online viewer: open, fill in and download documents from your published templates, or embed the viewer in your own site."
 ---
 # Paperwork.View
 {: .no_toc }

@@ -5,6 +5,7 @@ title: Paperwork.CLI
 nav_order: 4
 has_children: true
 has_toc: false
+description: "The Paperwork command line: generate documents from published or downloaded templates in scripts, scheduled jobs and pipelines."
 ---
 # Paperwork.CLI
 {: .no_toc }

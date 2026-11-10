@@ -4,6 +4,7 @@ title: Style guide
 nav_exclude: true
 search_exclude: true
 has_toc: false
+sitemap: false
 ---
 
 # Style guide

@@ -57,7 +57,17 @@
     <script src="https://paperwork.vu/er.js" ></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   
-    {% seo %}
+    {%- comment -%} A page can set seo_title to use a different title in search and share cards than in the nav. {%- endcomment %}
+    {% if page.seo_title %}
+      {% capture pw_seo %}{% seo %}{% endcapture %}
+      {% assign pw_old_meta = 'content="' | append: page.title | append: '"' %}
+      {% assign pw_new_meta = 'content="' | append: page.seo_title | append: '"' %}
+      {% assign pw_old_title = '<title>' | append: page.title | append: ' | ' | append: site.title | append: '</title>' %}
+      {% assign pw_new_title = '<title>' | append: page.seo_title | append: '</title>' %}
+      {{ pw_seo | replace: pw_old_meta, pw_new_meta | replace: pw_old_title, pw_new_title }}
+    {% else %}
+      {% seo %}
+    {% endif %}
   
     {% include head_custom.html %}
   

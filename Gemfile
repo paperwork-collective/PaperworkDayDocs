@@ -5,3 +5,7 @@ gem "jekyll", "~> 4.4.1" # installed by `gem jekyll`
 
 gem "just-the-docs" # pinned to the current release
 # gem "just-the-docs"        # always download the latest release
+
+group :jekyll_plugins do
+  gem "jekyll-sitemap"
+end

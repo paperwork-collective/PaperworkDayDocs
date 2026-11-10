@@ -3,6 +3,7 @@ layout: null
 title: Factory and Builder
 nav_exclude: true
 search_exclude: true
+sitemap: false
 ---
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">

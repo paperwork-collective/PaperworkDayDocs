@@ -5,6 +5,7 @@ title: Overview
 nav_exclude: true
 has_children: false
 has_toc: false
+description: "How Paperwork fits together: design a template, publish it, then view, generate and automate documents from the browser, your .NET code, the command line or your AI."
 ---
 
 # How it all fits together

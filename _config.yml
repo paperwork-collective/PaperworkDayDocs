@@ -1,9 +1,16 @@
 title: Paperwork
-description: The documentation for Paperwork library and the core, open source, Scryber PDF creation library for dotnet.
+description: "Help for Paperwork: design document templates once, publish them, and create documents in the browser, from the command line, in your own .NET code, or with your AI."
 theme: just-the-docs
 color_scheme: paperwork-dark
 
 url: https://paperwork.help
+
+twitter:
+  card: summary_large_image
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
 aux_links:
   "Design ↗": https://paperwork.design
@@ -35,6 +42,29 @@ callouts:
   warning:
     title: Warning
     color: red
+
+defaults:
+  - scope: { path: "" }
+    values:
+      image: { path: /assets/images/share-home.png, width: 1200, height: 630 }
+  - scope: { path: "overview.md" }
+    values:
+      image: { path: /assets/images/share-overview.png, width: 1200, height: 630 }
+  - scope: { path: "paperwork.design" }
+    values:
+      image: { path: /assets/images/share-design.png, width: 1200, height: 630 }
+  - scope: { path: "paperwork.view" }
+    values:
+      image: { path: /assets/images/share-view.png, width: 1200, height: 630 }
+  - scope: { path: "paperwork.core" }
+    values:
+      image: { path: /assets/images/share-core.png, width: 1200, height: 630 }
+  - scope: { path: "paperwork.cli" }
+    values:
+      image: { path: /assets/images/share-cli.png, width: 1200, height: 630 }
+  - scope: { path: "paperwork.skill" }
+    values:
+      image: { path: /assets/images/share-skill.png, width: 1200, height: 630 }
 
 ga_tracking: G-C7R7SHJGSR
 ga_tracking_anonymize_ip: true # Use GDPR compliant Google Analytics settings (true/nil by default)

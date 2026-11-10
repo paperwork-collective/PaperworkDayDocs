@@ -1,0 +1,6 @@
+---
+sitemap: false
+---
+User-agent: *
+Allow: /
+Sitemap: https://paperwork.help/sitemap.xml
