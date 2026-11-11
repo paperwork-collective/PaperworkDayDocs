@@ -4,14 +4,15 @@ render_with_liquid: false
 title: Viewer options
 parent: Paperwork.View
 parent_url: /paperwork.view/
-nav_order: 4
+nav_order: 7
 has_children: false
 has_toc: false
+description: "Every Paperwork Viewer option: toolbar preset, zoom, side panel, actions, theme and library, as attributes, pw.init options or link parameters."
 ---
 # Viewer options
 {: .no_toc }
 
-These options work the same way however you start the viewer: as `data-pw-*` attributes, as `pw.init` options, or as query string parameters on a link.
+Reference for every option. These options work the same way however you start the viewer: as `data-pw-*` attributes, as `pw.init` options, or as query string parameters on a link.
 
 ## ui
 

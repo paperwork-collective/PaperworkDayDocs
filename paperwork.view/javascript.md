@@ -4,19 +4,33 @@ render_with_liquid: false
 title: Embed with JavaScript
 parent: Paperwork.View
 parent_url: /paperwork.view/
-nav_order: 3
+nav_order: 4
 has_children: false
 has_toc: false
+description: "Drive the Paperwork Viewer from your own JavaScript: place a viewer, choose the template or content at run time, and get the PDF back."
 ---
 # Embed with JavaScript
 {: .no_toc }
 
-Use the `pw` object when you need to choose the template at run time, send your own content or data, or get the PDF back. It is created by the same embed library:
+## What you'll do
+
+Use the `pw` object to place a viewer, choose the template at run time, send your own content or data, or get the PDF back into your code.
+
+## Before you start
+
+- A web page you can edit and a published template, or your own content to send.
+- If you want the viewer started by HTML attributes, see [Embed with HTML](/paperwork.view/embedding.html). Add `data-pw-js-init` to an element to start the viewer without a template.
+
+## Steps
+
+**1. Load the library and make a container.** The `pw` object is created by the same embed library:
 
 ```html
 <script src="https://paperwork.vu/er.js"></script>
 <div id="viewer" style="height: 520px"></div>
 ```
+
+**2. Use the functions you need.** Each is described below.
 
 ## pw.init
 
@@ -108,3 +122,13 @@ If another library already uses the name `pw`, call `noConflict` to hand it back
 ```javascript
 var paperwork = pw.noConflict();
 ```
+
+## Check it worked
+
+Open the page with the browser console open. Add `?pwdebug` to the address to see the viewer's progress. The viewer should appear and show the template or content you passed to `pw.show`.
+
+## Next
+
+- [Show your own content](/paperwork.view/send-content.html), for the `layouts`, `styles`, `datas` and `fields` that `pw.show` takes.
+- [Viewer options](/paperwork.view/options.html).
+- [Troubleshooting](/paperwork.view/troubleshooting.html).

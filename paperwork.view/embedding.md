@@ -4,14 +4,26 @@ render_with_liquid: false
 title: Embed with HTML
 parent: Paperwork.View
 parent_url: /paperwork.view/
-nav_order: 2
+nav_order: 3
 has_children: false
 has_toc: false
+description: "Put the Paperwork Viewer on a web page with data-pw attributes and one script, with no JavaScript of your own."
 ---
 # Embed with HTML
 {: .no_toc }
 
-The simplest embed needs no JavaScript of your own. Load the embed library, then describe each viewer with `data-pw-*` attributes on an empty element.
+## What you'll do
+
+Put the Viewer on a web page with one script and an empty element described by `data-pw-*` attributes. You do not write any JavaScript.
+
+## Before you start
+
+- A published template and its id. The id is `{owner}:{name}`, as in `richard-prod:invoice-example`.
+- A web page you can edit. A public template needs nothing else. A template in a private collection needs the visitor to sign in.
+
+## Steps
+
+**1. Load the embed library and describe the viewer.**
 
 ```html
 <script src="https://paperwork.vu/er.js"></script>
@@ -23,9 +35,11 @@ The simplest embed needs no JavaScript of your own. Load the embed library, then
      data-pw-height="520px"></div>
 ```
 
-When the page loads, the library finds every element with `data-pw-container` and places the viewer inside it. A viewer is only started when its element scrolls into view, so a page with several of them stays quick, including on a phone.
+**2. Open the page.** When it loads, the library finds every element with `data-pw-container` and places the viewer inside it. A viewer is only started when its element scrolls into view, so a page with several of them stays quick, including on a phone.
 
 ## The attributes
+
+These are the attributes you can set on the element.
 
 | Attribute | Description |
 |---|---|
@@ -46,6 +60,10 @@ When the page loads, the library finds every element with `data-pw-container` an
 
 The options are explained further in [Viewer options](/paperwork.view/options.html).
 
+## Check it worked
+
+Open the page. A viewer should appear where the element is and show the template. If the element stays empty, see [Troubleshooting](/paperwork.view/troubleshooting.html).
+
 ## Several viewers
 
 Give each viewer its own name:
@@ -54,3 +72,9 @@ Give each viewer its own name:
 <div data-pw-container="summary" data-pw-template="acme:summary" data-pw-ui="Minimal"></div>
 <div data-pw-container="detail"  data-pw-template="acme:detail"  data-pw-ui="Default"></div>
 ```
+
+## Next
+
+- [Embed with JavaScript](/paperwork.view/javascript.html), to choose the template or the data from your own code.
+- [Show your own content](/paperwork.view/send-content.html), to send a layout, styles and data from the page.
+- [Viewer options](/paperwork.view/options.html).
