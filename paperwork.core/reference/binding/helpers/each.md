@@ -186,7 +186,7 @@ The `{% raw %}{{#each}}{% endraw %}` helper compiles to the following Scryber te
 {% endraw %}
 
 
-This uses Scryber's [`ForEach` component](../../components/foreach.html) internally, which provides the iteration and context management.
+This uses Scryber's [`ForEach` component](/paperwork.core/reference/binding/helpers/each.html) internally, which provides the iteration and context management.
 
 ---
 
@@ -206,6 +206,6 @@ This uses Scryber's [`ForEach` component](../../components/foreach.html) interna
 
 - [#with Helper](./with.html)
 - [#if Helper](./if.html)
-- [Template Iteration Guide](../../learning/02-data-binding/03_template_iteration.html)
+- [Template Iteration Guide](/paperwork.core/learning/02-data-binding/03_template_iteration.html)
 
 ---

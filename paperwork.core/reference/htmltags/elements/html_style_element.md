@@ -1211,11 +1211,11 @@ Data binding expressions are evaluated before CSS parsing.
 
 - [link](/paperwork.core/reference/htmltags/elements/html_link_element.html) - Link element for external stylesheets
 - [head](/paperwork.core/reference/htmltags/elements/html_head_element.html) - Head element (container for style elements)
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
-- [CSS Selectors](/paperwork.core/reference/styles/selectors.html) - CSS selector syntax
-- [CSS Properties](/paperwork.core/reference/styles/properties.html) - Supported CSS properties
-- [Style Collection](/paperwork.core/reference/styles/collection.html) - Document style collection
-- [CSS Parser](/paperwork.core/reference/styles/parser.html) - CSS parsing details
-- [Media Queries](/paperwork.core/reference/styles/media.html) - Media query support
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
+- [CSS Selectors](/paperwork.core/reference/cssselectors/index.html) - CSS selector syntax
+- [CSS Properties](/paperwork.core/reference/cssproperties/index.html) - Supported CSS properties
+- [Style Collection](/paperwork.core/learning/03-styling/07_style_organization.html) - Document style collection
+- [CSS Parser](/paperwork.core/learning/03-styling/07_style_organization.html) - CSS parsing details
+- [Media Queries](/paperwork.core/reference/cssselectors/selectors/css_media_rule.html) - Media query support
 
 ---

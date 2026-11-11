@@ -508,12 +508,12 @@ function authenticate(username, password) {
 
 ## See Also
 
-- [figcaption](/paperwork.core/reference/htmltags/elements/html_figcaption_element.html) - Figure caption element
+- [figcaption](/paperwork.core/reference/htmltags/elements/html_figure_element.html) - Figure caption element
 - [img](/paperwork.core/reference/htmltags/elements/html_img_element.html) - Image element
 - [table](/paperwork.core/reference/htmltags/elements/html_table_element.html) - Table element with native caption support
 - [pre](/paperwork.core/reference/htmltags/elements/html_pre_element.html) - Preformatted text for code listings
 - [blockquote](/paperwork.core/reference/htmltags/elements/html_blockquote_element.html) - Block quotation element
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic block container
-- [Panel Component](/paperwork.core/reference/components/panel.html) - Base panel component in Scryber namespace
+- [Panel Component](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Base panel component in Scryber namespace
 
 ---

@@ -707,6 +707,6 @@ The `counter-increment` property automatically works with data-bound elements, i
 - [content](/paperwork.core/reference/cssproperties/properties/css_prop_content) - Generated content with counters
 - [list-style-type](/paperwork.core/reference/cssproperties/properties/css_prop_list-style-type) - List marker style
 - [display](/paperwork.core/reference/cssproperties/properties/css_prop_display) - Element display type
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

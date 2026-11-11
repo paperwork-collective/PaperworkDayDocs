@@ -604,8 +604,8 @@ For charts and graphs:
 - [path element](/paperwork.core/reference/svgelements/elements/svg_path_element.html) - SVG path element for curves and complex shapes
 - [d attribute](/paperwork.core/reference/svgattributes/attributes/svg_attr_d.html) - Path data for complex curves
 - [line element](/paperwork.core/reference/svgelements/elements/svg_line_element.html) - SVG line element for single segments
-- [stroke attributes](/paperwork.core/reference/svgattributes/attributes/svg_attr_stroke.html) - Stroke styling attributes
-- [fill attributes](/paperwork.core/reference/svgattributes/attributes/svg_attr_fill.html) - Fill styling attributes
+- [stroke attributes](/paperwork.core/reference/cssproperties/properties/css_prop_stroke.html) - Stroke styling attributes
+- [fill attributes](/paperwork.core/reference/cssproperties/properties/css_prop_fill.html) - Fill styling attributes
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions guide
 
 ---

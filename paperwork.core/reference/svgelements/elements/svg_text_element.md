@@ -2,7 +2,7 @@
 layout: default
 title: text (SVG)
 parent: SVG Elements
-parent_url: /paperwork.core/reference/svgtags/
+parent_url: /paperwork.core/reference/svgelements/index.html
 grand_parent: Paperwork.Reference
 grand_parent_url: /paperwork.core/reference/
 has_children: false
@@ -651,12 +651,12 @@ Large score with explanatory text:
 
 ## See Also
 
-- [tspan element](/paperwork.core/reference/svgtags/svg_tspan_element.html) - Text span for styled inline text
-- [svg element](/paperwork.core/reference/svgtags/svg.html) - SVG container element
-- [transform attribute](/paperwork.core/reference/svgattributes/attr_transform.html) - Transformation operations
-- [fill attribute](/paperwork.core/reference/svgattributes/attr_fill.html) - Fill colors and patterns
+- [tspan element](/paperwork.core/reference/svgelements/elements/svg_tspan_element.html) - Text span for styled inline text
+- [svg element](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG container element
+- [transform attribute](/paperwork.core/reference/svgattributes/attributes/svg_attr_transform.html) - Transformation operations
+- [fill attribute](/paperwork.core/reference/cssproperties/properties/css_prop_fill.html) - Fill colors and patterns
 - [Data Binding](/paperwork.core/reference/binding/) - Complete data binding guide
-- [SVG Styling](/paperwork.core/reference/svg/styling/) - SVG style reference
-- [Font Reference](/paperwork.core/reference/fonts/) - Font configuration and usage
+- [SVG Styling](/paperwork.core/reference/svgelements/index.html) - SVG style reference
+- [Font Reference](/paperwork.core/learning/05-typography/01_font_basics.html) - Font configuration and usage
 
 ---

@@ -186,9 +186,9 @@ The `<span>` element has the following default behavior:
 ## See Also
 
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Block-level container element
-- [strong](/paperwork.core/reference/htmltags/elements/html_strong_element.html) - Bold text (semantic)
-- [em](/paperwork.core/reference/htmltags/elements/html_em_element.html) - Italic text (semantic)
-- [b](/paperwork.core/reference/htmltags/elements/html_b_element.html) - Bold text (presentational)
-- [i](/paperwork.core/reference/htmltags/elements/html_i_element.html) - Italic text (presentational)
+- [strong](/paperwork.core/reference/htmltags/elements/html_strong_em_element.html) - Bold text (semantic)
+- [em](/paperwork.core/reference/htmltags/elements/html_strong_em_element.html) - Italic text (semantic)
+- [b](/paperwork.core/reference/htmltags/elements/html_strong_em_element.html) - Bold text (presentational)
+- [i](/paperwork.core/reference/htmltags/elements/html_strong_em_element.html) - Italic text (presentational)
 
 ---

@@ -694,7 +694,7 @@ You've completed the Styling & Appearance series! Continue your journey:
 
 1. **[Layout & Positioning](/paperwork.core/learning/04-layout/)** - Master page layout and positioning
 2. **[Typography & Fonts](/paperwork.core/learning/05-typography/)** - Custom fonts and advanced typography
-3. **[Practical Applications](/paperwork.core/learning/08-practical/)** - Build real-world documents
+3. **[Practical Applications](/paperwork.core/learning/index.html)** - Build real-world documents
 
 ---
 

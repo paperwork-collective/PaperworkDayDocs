@@ -496,7 +496,7 @@ Jump to specific topics:
 **Related Series:**
 - [Styling & Appearance](/paperwork.core/learning/03-styling/) - Text styling basics
 - [Content Components](/paperwork.core/learning/06-content/) - Using fonts with content
-- [Practical Applications](/paperwork.core/learning/08-practical/) - Real-world examples
+- [Practical Applications](/paperwork.core/learning/index.html) - Real-world examples
 
 ---
 

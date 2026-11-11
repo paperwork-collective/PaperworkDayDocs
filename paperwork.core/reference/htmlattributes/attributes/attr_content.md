@@ -489,12 +489,12 @@ Or use multiple meta tags with the same property:
 ## See Also
 
 - [meta element](/paperwork.core/reference/htmltags/elements/html_meta_element.html) - The meta HTML element
-- [name attribute](/paperwork.core/reference/htmlattributes/attributes/attr_name.html) - Metadata property name
+- [name attribute](/paperwork.core/reference/htmlattributes/index.html) - Metadata property name
 - [property attribute](/paperwork.core/reference/htmlattributes/attributes/attr_property.html) - Open Graph properties
-- [http-equiv attribute](/paperwork.core/reference/htmlattributes/http-equiv.html) - HTTP header equivalent
-- [Document Properties](/paperwork.core/reference/document/properties.html) - PDF document properties
-- [Document Info](/paperwork.core/reference/document/info.html) - PDF document information
+- [http-equiv attribute](/paperwork.core/reference/htmlattributes/attributes/attr_http_equiv.html) - HTTP header equivalent
+- [Document Properties](/paperwork.core/learning/07-configuration/01_document_properties.html) - PDF document properties
+- [Document Info](/paperwork.core/learning/07-configuration/01_document_properties.html) - PDF document information
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding
-- [Metadata](/paperwork.core/reference/metadata/) - Complete metadata reference
+- [Metadata](/paperwork.core/learning/07-configuration/01_document_properties.html) - Complete metadata reference
 
 ---

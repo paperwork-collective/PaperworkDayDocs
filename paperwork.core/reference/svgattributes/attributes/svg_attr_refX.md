@@ -87,7 +87,7 @@ refX="-2"
 
 The `refX` attribute is supported on:
 
-- **[&lt;marker&gt;](/paperwork.core/reference/svgtags/marker.html)** - Marker definition element
+- **[&lt;marker&gt;](/paperwork.core/reference/svgelements/elements/svg_marker_element.html)** - Marker definition element
 
 ---
 
@@ -670,7 +670,7 @@ Use decimal values for precise positioning:
 ## See Also
 
 - [refY](/paperwork.core/reference/svgattributes/attributes/svg_attr_refY.html) - Marker reference Y position
-- [marker element](/paperwork.core/reference/svgtags/marker.html) - Marker definition element
+- [marker element](/paperwork.core/reference/svgelements/elements/svg_marker_element.html) - Marker definition element
 - [markerWidth](/paperwork.core/reference/svgattributes/attributes/svg_attr_markerWidth.html) - Marker viewport width
 - [markerHeight](/paperwork.core/reference/svgattributes/attributes/svg_attr_markerHeight.html) - Marker viewport height
 - [orient](/paperwork.core/reference/svgattributes/attributes/svg_attr_orient.html) - Marker orientation

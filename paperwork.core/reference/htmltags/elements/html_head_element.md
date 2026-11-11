@@ -648,14 +648,14 @@ The `<head>` element implements `IInvisibleContainer`, which means:
 ## See Also
 
 - [meta](/paperwork.core/reference/htmltags/elements/html_meta_element.html) - Meta element for document metadata
-- [title](/paperwork.core/reference/htmltags/elements/html_title_element.html) - Title element for document title
+- [title](/paperwork.core/reference/htmltags/elements/html_head_element.html) - Title element for document title
 - [link](/paperwork.core/reference/htmltags/elements/html_link_element.html) - Link element for external stylesheets
 - [style](/paperwork.core/reference/htmltags/elements/html_style_element.html) - Style element for embedded CSS
 - [body](/paperwork.core/reference/htmltags/elements/html_body_element.html) - Body element for document content
 - [html](/paperwork.core/reference/htmltags/elements/html_html_element.html) - Root HTML element
-- [Document Component](/paperwork.core/reference/components/document.html) - Base document component
-- [Document Properties](/paperwork.core/reference/document/properties.html) - PDF document properties
-- [Security Settings](/paperwork.core/reference/security/) - PDF security and encryption
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [Document Component](/paperwork.core/reference/htmltags/elements/html_html_element.html) - Base document component
+- [Document Properties](/paperwork.core/learning/07-configuration/01_document_properties.html) - PDF document properties
+- [Security Settings](/paperwork.core/learning/07-configuration/05_security.html) - PDF security and encryption
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 
 ---

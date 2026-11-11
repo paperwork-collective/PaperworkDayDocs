@@ -85,7 +85,7 @@ The `markerUnits` attribute is used to:
 
 The `markerUnits` attribute is supported on:
 
-- **[&lt;marker&gt;](/paperwork.core/reference/svgtags/marker.html)** - Marker element coordinate system
+- **[&lt;marker&gt;](/paperwork.core/reference/svgelements/elements/svg_marker_element.html)** - Marker element coordinate system
 
 ---
 
@@ -814,7 +814,7 @@ Create arrows that scale proportionally with line thickness:
 
 ## See Also
 
-- [marker](/paperwork.core/reference/svgtags/marker.html) - Marker definition element
+- [marker](/paperwork.core/reference/svgelements/elements/svg_marker_element.html) - Marker definition element
 - [markerWidth](/paperwork.core/reference/svgattributes/attributes/svg_attr_markerWidth.html) - Marker viewport width
 - [markerHeight](/paperwork.core/reference/svgattributes/attributes/svg_attr_markerHeight.html) - Marker viewport height
 - [refX](/paperwork.core/reference/svgattributes/attributes/svg_attr_refX.html) - Marker reference X position

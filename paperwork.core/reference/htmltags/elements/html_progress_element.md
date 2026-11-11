@@ -974,7 +974,7 @@ Progress bars are excellent for:
 - [meter](/paperwork.core/reference/htmltags/elements/html_meter_element.html) - Meter/gauge element (for measurements with thresholds)
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic container (can create custom progress indicators)
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
-- [Visual Components](/paperwork.core/reference/components/visual.html) - Base visual component
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
+- [Visual Components](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Base visual component
 
 ---

@@ -249,6 +249,6 @@ Conditions are evaluated in order from top to bottom. Only the first true condit
 - [else Helper](./else.html)
 - [Comparison Operators](../operators/equality.html)
 - [Logical Operators](../operators/and.html)
-- [Conditional Rendering Guide](../../learning/02-data-binding/04_conditional_rendering.html)
+- [Conditional Rendering Guide](/paperwork.core/learning/02-data-binding/04_conditional_rendering.html)
 
 ---

@@ -338,9 +338,9 @@ var pdf = await factory.NewDocument()
 
 You've completed the Document Configuration series! Continue with:
 
-1. **[Practical Applications](/paperwork.core/learning/08-practical/)** - Real-world document examples
+1. **[Practical Applications](/paperwork.core/learning/index.html)** - Real-world document examples
 2. **[The Engine Document](/paperwork.core/configuration/engine-document)** - Configuring documents in code
 
 ---
 
-**Continue learning →** [Practical Applications Series](/paperwork.core/learning/08-practical/)
+**Continue learning →** [Practical Applications Series](/paperwork.core/learning/index.html)

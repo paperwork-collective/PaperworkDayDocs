@@ -187,6 +187,6 @@ Use parentheses to override precedence:
 
 - [Expression Functions](../functions/) - Built-in functions for data manipulation
 - [Handlebars Helpers](../helpers/) - Control flow and context management
-- [Expressions Guide](../../learning/02-data-binding/02_expression_functions.html) - Complete guide to expressions
+- [Expressions Guide](/paperwork.core/learning/02-data-binding/02_expression_functions.html) - Complete guide to expressions
 
 ---

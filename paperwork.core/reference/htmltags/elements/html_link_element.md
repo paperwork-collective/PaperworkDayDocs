@@ -698,12 +698,12 @@ In the Scryber codebase:
 
 - [style](/paperwork.core/reference/htmltags/elements/html_style_element.html) - Style element for embedded CSS
 - [head](/paperwork.core/reference/htmltags/elements/html_head_element.html) - Head element (container for link elements)
-- [base](/paperwork.core/reference/htmltags/elements/html_base_element.html) - Base element for URL resolution
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
-- [CSS Selectors](/paperwork.core/reference/styles/selectors.html) - CSS selector syntax
-- [Style Collection](/paperwork.core/reference/styles/collection.html) - Document style collection
-- [Remote Files](/paperwork.core/reference/remote/) - Remote file loading and caching
-- [Media Queries](/paperwork.core/reference/styles/media.html) - Media query support
-- [Performance](/paperwork.core/reference/performance/) - Performance optimization
+- [base](/paperwork.core/reference/htmltags/elements/html_head_element.html) - Base element for URL resolution
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
+- [CSS Selectors](/paperwork.core/reference/cssselectors/index.html) - CSS selector syntax
+- [Style Collection](/paperwork.core/learning/03-styling/07_style_organization.html) - Document style collection
+- [Remote Files](/paperwork.core/configuration/image-factories.html) - Remote file loading and caching
+- [Media Queries](/paperwork.core/reference/cssselectors/selectors/css_media_rule.html) - Media query support
+- [Performance](/paperwork.core/learning/07-configuration/06_optimization_performance.html) - Performance optimization
 
 ---

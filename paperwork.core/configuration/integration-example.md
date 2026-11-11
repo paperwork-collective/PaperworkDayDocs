@@ -8,6 +8,7 @@ has_toc: false
 nav_order: 11
 grand_parent: Paperwork.Core
 grand_parent_url: /paperwork.core/
+render_with_liquid: false
 ---
 
 # Complete Integration Example
@@ -364,7 +365,7 @@ A registered font is used for the weight and style of the font file itself - reg
 **Templates/Catalog.html:**
 
 ```html
-{% raw %}<?xml version='1.0' encoding='utf-8' ?>
+<?xml version='1.0' encoding='utf-8' ?>
 <html xmlns='http://www.w3.org/1999/xhtml'
       xmlns:prod='http://productcatalog.com/components'>
     <head>
@@ -420,7 +421,7 @@ A registered font is used for the weight and style of the font file itself - reg
 
     </body>
 </html>
-{% endraw %}
+
 ```
 
 Outlets are found in the main content of the template. Components in a header or footer are repeated on every page, and are not assigned to outlets.

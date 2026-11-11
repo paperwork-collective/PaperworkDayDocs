@@ -745,10 +745,10 @@ If the bound collection is empty or null, the template generates no output witho
 ## See Also
 
 - [Data Binding](/paperwork.core/reference/binding/) - Complete guide to data binding expressions
-- [ForEach Component](/paperwork.core/reference/components/foreach.html) - Base ForEach component in Scryber namespace
-- [Data Sources](/paperwork.core/reference/datasources/) - XML, JSON, and database data sources
+- [ForEach Component](/paperwork.core/reference/binding/helpers/each.html) - Base ForEach component in Scryber namespace
+- [Data Sources](/paperwork.core/learning/02-data-binding/01_data_binding_basics.html) - XML, JSON, and database data sources
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic container element
 - [span](/paperwork.core/reference/htmltags/elements/html_span_element.html) - Inline container element
-- [Expressions](/paperwork.core/reference/expressions/) - Expression syntax and functions
+- [Expressions](/paperwork.core/reference/binding/index.html) - Expression syntax and functions
 
 ---

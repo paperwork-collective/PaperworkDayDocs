@@ -1006,7 +1006,7 @@ While not interactive in PDF, meters are excellent for:
 - [progress](/paperwork.core/reference/htmltags/elements/html_progress_element.html) - Progress bar element (for task completion)
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic container (can create custom gauges)
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
-- [Visual Components](/paperwork.core/reference/components/visual.html) - Base visual component
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
+- [Visual Components](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Base visual component
 
 ---

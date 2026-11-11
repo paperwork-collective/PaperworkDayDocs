@@ -450,12 +450,12 @@ The `hyphenate-character` property can be dynamically controlled through data bi
 
 ## See Also
 
-- [hyphens](/paperwork.core/reference/cssproperties/hyphens) - Enable/disable hyphenation
-- [hyphenate-limit-chars](/paperwork.core/reference/cssproperties/hyphenate-limit-chars) - Hyphenation character limits
-- [hyphens-limit-chars-length](/paperwork.core/reference/cssproperties/hyphens-limit-chars-length) - Minimum word length
-- [hyphens-limit-chars-before](/paperwork.core/reference/cssproperties/hyphens-limit-chars-before) - Minimum characters before hyphen
-- [hyphens-limit-chars-after](/paperwork.core/reference/cssproperties/hyphens-limit-chars-after) - Minimum characters after hyphen
-- [text-align](/paperwork.core/reference/cssproperties/text-align) - Text alignment
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [hyphens](/paperwork.core/reference/cssproperties/properties/css_prop_hyphens.html) - Enable/disable hyphenation
+- [hyphenate-limit-chars](/paperwork.core/reference/cssproperties/properties/css_prop_hyphenate-limit-chars.html) - Hyphenation character limits
+- [hyphens-limit-chars-length](/paperwork.core/reference/cssproperties/properties/css_prop_hyphens-limit-chars-length.html) - Minimum word length
+- [hyphens-limit-chars-before](/paperwork.core/reference/cssproperties/properties/css_prop_hyphens-limit-chars-before.html) - Minimum characters before hyphen
+- [hyphens-limit-chars-after](/paperwork.core/reference/cssproperties/properties/css_prop_hyphens-limit-chars-after.html) - Minimum characters after hyphen
+- [text-align](/paperwork.core/reference/cssproperties/properties/css_prop_text-align.html) - Text alignment
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

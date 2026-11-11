@@ -501,12 +501,12 @@ The `y` attribute supports dynamic values using data binding expressions with `{
 
 - [x](/paperwork.core/reference/svgattributes/attributes/svg_attr_x.html) - X coordinate attribute
 - [cy](/paperwork.core/reference/svgattributes/attributes/svg_attr_cy.html) - Center Y coordinate attribute
-- [height](/paperwork.core/reference/svgattributes/attributes/svg_attr_height.html) - Height attribute
+- [height](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - Height attribute
 - [rect](/paperwork.core/reference/svgelements/elements/svg_rect_element.html) - SVG rectangle element
 - [image](/paperwork.core/reference/svgelements/elements/svg_image_element.html) - SVG image element
 - [text](/paperwork.core/reference/svgelements/elements/svg_text_element.html) - SVG text element
 - [svg](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG container element
-- [SVG Transforms](/paperwork.core/reference/svgelements/elements/svg_transforms_element.html) - Transformation operations
+- [SVG Transforms](/paperwork.core/reference/svgattributes/attributes/svg_attr_transform.html) - Transformation operations
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

@@ -78,10 +78,10 @@ marker-end="url(#markerID) none"
 
 The `marker-end` attribute is supported on:
 
-- **[&lt;path&gt;](/paperwork.core/reference/svgtags/path.html)** - At the final point of path data
-- **[&lt;line&gt;](/paperwork.core/reference/svgtags/line.html)** - At the (x2, y2) point
-- **[&lt;polyline&gt;](/paperwork.core/reference/svgtags/polyline.html)** - At the last point
-- **[&lt;polygon&gt;](/paperwork.core/reference/svgtags/polygon.html)** - At the last point (before closing)
+- **[&lt;path&gt;](/paperwork.core/reference/svgelements/elements/svg_path_element.html)** - At the final point of path data
+- **[&lt;line&gt;](/paperwork.core/reference/svgelements/elements/svg_line_element.html)** - At the (x2, y2) point
+- **[&lt;polyline&gt;](/paperwork.core/reference/svgelements/elements/svg_polyline_element.html)** - At the last point
+- **[&lt;polygon&gt;](/paperwork.core/reference/svgelements/elements/svg_polygon_element.html)** - At the last point (before closing)
 
 ---
 
@@ -549,14 +549,14 @@ Show markers based on status:
 
 - [marker-start](/paperwork.core/reference/svgattributes/attributes/svg_attr_marker-start.html) - Marker at path start
 - [marker-mid](/paperwork.core/reference/svgattributes/attributes/svg_attr_marker-mid.html) - Marker at middle vertices
-- [marker element](/paperwork.core/reference/svgtags/marker.html) - Marker definition element
+- [marker element](/paperwork.core/reference/svgelements/elements/svg_marker_element.html) - Marker definition element
 - [markerWidth](/paperwork.core/reference/svgattributes/attributes/svg_attr_markerWidth.html) - Marker viewport width
 - [markerHeight](/paperwork.core/reference/svgattributes/attributes/svg_attr_markerHeight.html) - Marker viewport height
 - [refX](/paperwork.core/reference/svgattributes/attributes/svg_attr_refX.html) - Marker reference X position
 - [refY](/paperwork.core/reference/svgattributes/attributes/svg_attr_refY.html) - Marker reference Y position
 - [orient](/paperwork.core/reference/svgattributes/attributes/svg_attr_orient.html) - Marker orientation
-- [path element](/paperwork.core/reference/svgtags/path.html) - SVG path element
-- [line element](/paperwork.core/reference/svgtags/line.html) - SVG line element
+- [path element](/paperwork.core/reference/svgelements/elements/svg_path_element.html) - SVG path element
+- [line element](/paperwork.core/reference/svgelements/elements/svg_line_element.html) - SVG line element
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

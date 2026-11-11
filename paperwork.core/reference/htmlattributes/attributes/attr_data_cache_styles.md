@@ -1077,11 +1077,11 @@ Optimize only high-volume sections:
 
 ## See Also
 
-- [data-bind attribute](/paperwork.core/reference/htmlattributes/data-bind.html) - Primary template iteration attribute
-- [data-style-identifier attribute](/paperwork.core/reference/htmlattributes/data-style-identifier.html) - Cache identifier
-- [data-bind-max attribute](/paperwork.core/reference/htmlattributes/data-bind-max.html) - Pagination for performance
+- [data-bind attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_bind.html) - Primary template iteration attribute
+- [data-style-identifier attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_style_identifier.html) - Cache identifier
+- [data-bind-max attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_bind_advanced.html) - Pagination for performance
 - [template element](/paperwork.core/reference/htmltags/elements/html_template_element.html) - The template HTML element
-- [Performance Guide](/paperwork.core/reference/performance/) - Complete performance optimization guide
-- [ForEach Component](/paperwork.core/reference/components/foreach.html) - Base component class
+- [Performance Guide](/paperwork.core/learning/07-configuration/06_optimization_performance.html) - Complete performance optimization guide
+- [ForEach Component](/paperwork.core/reference/binding/helpers/each.html) - Base component class
 
 ---

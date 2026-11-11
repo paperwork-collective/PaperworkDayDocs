@@ -423,9 +423,9 @@ Most `http-equiv` directives are **not applicable to PDF generation**:
 - [meta element](/paperwork.core/reference/htmltags/elements/html_meta_element.html) - The meta HTML element
 - [content attribute](/paperwork.core/reference/htmlattributes/attributes/attr_content.html) - Meta content value
 - [charset attribute](/paperwork.core/reference/htmlattributes/attributes/attr_charset.html) - Character encoding
-- [name attribute](/paperwork.core/reference/htmlattributes/attributes/attr_name.html) - Standard metadata name
+- [name attribute](/paperwork.core/reference/htmlattributes/index.html) - Standard metadata name
 - [property attribute](/paperwork.core/reference/htmlattributes/attributes/attr_property.html) - Open Graph properties
-- [Document Properties](/paperwork.core/reference/document/properties.html) - PDF document properties
-- [Character Encoding](/paperwork.core/reference/encoding/) - Character encoding reference
+- [Document Properties](/paperwork.core/learning/07-configuration/01_document_properties.html) - PDF document properties
+- [Character Encoding](/paperwork.core/learning/05-typography/index.html) - Character encoding reference
 
 ---

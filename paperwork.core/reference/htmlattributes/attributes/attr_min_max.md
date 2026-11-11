@@ -1254,10 +1254,10 @@ The range affects visual fill calculation:
 
 - [meter](/paperwork.core/reference/htmltags/elements/html_meter_element.html) - Meter/gauge element
 - [progress](/paperwork.core/reference/htmltags/elements/html_progress_element.html) - Progress bar element
-- [value](/paperwork.core/reference/htmlattributes/attributes/attr_value.html) - Value attribute
+- [value](/paperwork.core/reference/htmlattributes/index.html) - Value attribute
 - [high and low](/paperwork.core/reference/htmlattributes/attributes/attr_high_low.html) - Threshold attributes for meter
 - [optimum](/paperwork.core/reference/htmlattributes/attributes/attr_optimum.html) - Optimal value attribute for meter
-- [Data Binding](/library/binding/) - Dynamic data binding and expressions
-- [CSS Styles](/library/styles/) - Complete CSS styling reference
+- [Data Binding](/paperwork.core/learning/02-data-binding/index.html) - Dynamic data binding and expressions
+- [CSS Styles](/paperwork.core/learning/03-styling/index.html) - Complete CSS styling reference
 
 ---

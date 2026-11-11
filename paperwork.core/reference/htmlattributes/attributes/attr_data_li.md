@@ -868,9 +868,9 @@ Formal specification style:
 - [ol element](/paperwork.core/reference/htmltags/elements/html_ol_element.html) - Ordered list element
 - [ul element](/paperwork.core/reference/htmltags/elements/html_ul_element.html) - Unordered list element
 - [li element](/paperwork.core/reference/htmltags/elements/html_li_element.html) - List item element
-- [Lists Reference](/paperwork.core/reference/components/lists.html) - Complete lists guide
-- [CSS List Styling](/paperwork.core/reference/styles/list-styles.html) - Standard CSS list properties
-- [ListOrdered Component](/paperwork.core/reference/components/listordered.html) - Base list component
-- [List Samples](/samples/lists.html) - List examples and demonstrations
+- [Lists Reference](/paperwork.core/reference/htmltags/elements/html_ul_element.html) - Complete lists guide
+- [CSS List Styling](/paperwork.core/learning/06-content/04_lists.html) - Standard CSS list properties
+- [ListOrdered Component](/paperwork.core/reference/htmltags/elements/html_ol_element.html) - Base list component
+- [List Samples](/paperwork.core/learning/06-content/04_lists.html) - List examples and demonstrations
 
 ---

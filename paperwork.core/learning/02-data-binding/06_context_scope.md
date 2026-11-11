@@ -832,7 +832,7 @@ Now that you master context and scope:
 
 1. **[Formatting Output](07_formatting_output.html)** - Format dates, numbers, and text
 2. **[Advanced Patterns](08_advanced_patterns.html)** - Complex data binding scenarios
-3. **[Practical Applications](/paperwork.core/learning/08-practical/)** - Real-world examples
+3. **[Practical Applications](/paperwork.core/learning/index.html)** - Real-world examples
 
 ---
 

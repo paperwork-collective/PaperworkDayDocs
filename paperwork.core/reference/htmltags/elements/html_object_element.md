@@ -895,13 +895,13 @@ In the Scryber codebase:
 
 ## See Also
 
-- [iframe](/paperwork.core/reference/htmltags/elements/html_iframe_element.html) - Iframe element for embedded HTML content
-- [embed](/paperwork.core/reference/htmltags/elements/html_embed_element.html) - Embed element for embedded HTML content
+- [iframe](/paperwork.core/reference/htmltags/elements/html_iframe_embed_element.html) - Iframe element for embedded HTML content
+- [embed](/paperwork.core/reference/htmltags/elements/html_iframe_embed_element.html) - Embed element for embedded HTML content
 - [img](/paperwork.core/reference/htmltags/elements/html_img_element.html) - Image element
 - [a](/paperwork.core/reference/htmltags/elements/html_a_element.html) - Anchor/link element
-- [IconAttachment Component](/paperwork.core/reference/components/iconattachment.html) - Base attachment component
-- [PDF Attachments](/paperwork.core/reference/pdf/attachments.html) - PDF attachment specifications
+- [IconAttachment Component](/paperwork.core/learning/06-content/07_attachments_embedded.html) - Base attachment component
+- [PDF Attachments](/paperwork.core/learning/06-content/07_attachments_embedded.html) - PDF attachment specifications
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
-- [File Resources](/paperwork.core/reference/resources/files.html) - Working with file resources
+- [File Resources](/paperwork.core/configuration/index.html) - Working with file resources
 
 ---

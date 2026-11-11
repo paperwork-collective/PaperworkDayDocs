@@ -91,7 +91,7 @@ SVG content can be included in a template in three ways:
 |---------|-----|---------|-------|
 | [Group](/paperwork.core/reference/svgelements/elements/svg_g_element) | `<g>` | **Supported** | Container for inner elements; inherits and applies styling; referenceable via `<use>` |
 | [Use Reference](/paperwork.core/reference/svgelements/elements/svg_use_element) | `<use>` | **Supported** | Clones a referenced element (by `href`) and re-renders at desired position |
-| [Symbol](/paperwork.core/reference/svgelements/elements/svg_symbol_element) | `<symbol>` | **Supported** | Hidden container; made visible when referenced by `<use>` |
+| [Symbol](/paperwork.core/reference/svgelements/elements/svg_use_element.html) | `<symbol>` | **Supported** | Hidden container; made visible when referenced by `<use>` |
 | [Anchor Link](/paperwork.core/reference/svgelements/elements/svg_a_element) | `<a>` | **Supported** | Makes inner graphic elements into links |
 
 ---

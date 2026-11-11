@@ -83,7 +83,7 @@ The `fx` attribute is used to:
 
 The `fx` attribute is supported on:
 
-- **[&lt;radialGradient&gt;](/paperwork.core/reference/svgtags/radialGradient.html)** - Defines radial gradient focal point X position
+- **[&lt;radialGradient&gt;](/paperwork.core/reference/svgelements/elements/svg_radialGradient_element.html)** - Defines radial gradient focal point X position
 
 Note: This attribute is NOT used with `<linearGradient>` elements.
 
@@ -550,10 +550,10 @@ Focal point positioning is ideal for:
 - [cx](/paperwork.core/reference/svgattributes/attributes/svg_attr_cx.html) - Radial gradient center X coordinate
 - [cy](/paperwork.core/reference/svgattributes/attributes/svg_attr_cy.html) - Radial gradient center Y coordinate
 - [r](/paperwork.core/reference/svgattributes/attributes/svg_attr_r.html) - Radial gradient radius
-- [fr](/paperwork.core/reference/svgattributes/attributes/svg_attr_fr.html) - Radial gradient focal radius
-- [radialGradient](/paperwork.core/reference/svgtags/radialGradient.html) - Radial gradient definition element
+- [fr](/paperwork.core/reference/svgattributes/index.html) - Radial gradient focal radius
+- [radialGradient](/paperwork.core/reference/svgelements/elements/svg_radialGradient_element.html) - Radial gradient definition element
 - [gradientUnits](/paperwork.core/reference/svgattributes/attributes/svg_attr_gradientUnits.html) - Coordinate system mode
-- [stop](/paperwork.core/reference/svgtags/stop.html) - Gradient color stop element
+- [stop](/paperwork.core/reference/svgelements/elements/svg_stop_element.html) - Gradient color stop element
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

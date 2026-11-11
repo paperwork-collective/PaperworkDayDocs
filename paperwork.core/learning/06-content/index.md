@@ -19,7 +19,7 @@ Master images, SVG graphics, lists, tables, and embedded content to create rich,
 ## Table of Contents
 
 1. [Images](01_images.html) - Formats, sizing, positioning, local/remote, data binding
-2. [SVG Basics](02_svg_basics.html) - SVG overview, inline vs files, sizing
+2. [SVG Basics](/paperwork.core/learning/06-content/02_svg_basics.html) - SVG overview, inline vs files, sizing
 3. [SVG Drawing](03_svg_drawing.html) - Shapes, paths, styling, data binding, charts
 4. [Lists](04_lists.html) - Ordered/unordered lists, styling, nesting, data binding
 5. [Tables - Basics](05_tables_basics.html) - Structure, styling, borders, column widths
@@ -56,7 +56,7 @@ Scryber supports a rich variety of content types:
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
 1. [Images](01_images.html) - Formats, sizing, positioning, local/remote, data binding
-2. [SVG Basics](02_svg_basics.html) - SVG overview, inline vs files, sizing
+2. [SVG Basics](/paperwork.core/learning/06-content/02_svg_basics.html) - SVG overview, inline vs files, sizing
 3. [SVG Drawing](03_svg_drawing.html) - Shapes, paths, styling, data binding, charts
 4. [Lists](04_lists.html) - Ordered/unordered lists, styling, nesting, data binding
 5. [Tables - Basics](05_tables_basics.html) - Structure, styling, borders, column widths
@@ -68,7 +68,7 @@ Scryber supports a rich variety of content types:
             max-width: 100%;
 ### 1. [Images](01_images.html)
         }
-### 2. [SVG Basics](02_svg_basics.html)
+### 2. [SVG Basics](/paperwork.core/learning/06-content/02_svg_basics.html)
         }
 ### 3. [SVG Drawing](03_svg_drawing.html)
         <rect x="100" y="{{calc(200 -  sales.q2)}}"
@@ -628,7 +628,7 @@ Jump to specific topics:
 **Related Series:**
 - [Data Binding](/paperwork.core/learning/02-data-binding/) - Dynamic content
 - [Styling & Appearance](/paperwork.core/learning/03-styling/) - Content styling
-- [Practical Applications](/paperwork.core/learning/08-practical/) - Real-world examples
+- [Practical Applications](/paperwork.core/learning/index.html) - Real-world examples
 
 ---
 

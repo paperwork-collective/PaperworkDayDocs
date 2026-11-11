@@ -1098,10 +1098,10 @@ Production-ready invoice with complete calculations:
 ## See Also
 
 - [var element](/paperwork.core/reference/htmltags/elements/html_var_element.html) - Variable element for computed values
-- [num element](/paperwork.core/reference/htmltags/elements/html_num_element.html) - Number element for formatted display
-- [data-id attribute](/paperwork.core/reference/htmlattributes/data-id.html) - Variable identifier
+- [num element](/paperwork.core/reference/htmltags/elements/html_output_slot_num_elements.html) - Number element for formatted display
+- [data-id attribute](/paperwork.core/reference/htmlattributes/attributes/attr_id.html) - Variable identifier
 - [Data Binding](/paperwork.core/reference/binding/) - Complete data binding guide
-- [Expressions](/paperwork.core/reference/expressions/) - Expression syntax reference
-- [Document Parameters](/paperwork.core/reference/parameters/) - Document-level parameters
+- [Expressions](/paperwork.core/reference/binding/index.html) - Expression syntax reference
+- [Document Parameters](/paperwork.core/learning/02-data-binding/05_variables_params.html) - Document-level parameters
 
 ---

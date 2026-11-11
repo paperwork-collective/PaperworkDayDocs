@@ -687,7 +687,7 @@ Alignment is applied in this order (later overrides earlier):
 - [tr](/paperwork.core/reference/htmltags/elements/html_tr_element.html) - Table row element
 - [cellpadding](/paperwork.core/reference/htmlattributes/attributes/attr_cellpadding_cellspacing.html) - Table spacing attributes
 - [border](/paperwork.core/reference/htmlattributes/attributes/attr_border.html) - Border attribute
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding
 
 ---

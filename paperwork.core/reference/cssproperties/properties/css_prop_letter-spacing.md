@@ -374,11 +374,11 @@ The `letter-spacing` property can be dynamically controlled through data binding
 
 ## See Also
 
-- [word-spacing](/paperwork.core/reference/cssproperties/word-spacing) - Space between words
-- [text-align](/paperwork.core/reference/cssproperties/text-align) - Text alignment
-- [font-size](/paperwork.core/reference/cssproperties/font-size) - Text size
-- [text-transform](/paperwork.core/reference/cssproperties/text-transform) - Text case transformation
-- [line-height](/paperwork.core/reference/cssproperties/line-height) - Line spacing
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [word-spacing](/paperwork.core/reference/cssproperties/properties/css_prop_word-spacing.html) - Space between words
+- [text-align](/paperwork.core/reference/cssproperties/properties/css_prop_text-align.html) - Text alignment
+- [font-size](/paperwork.core/reference/cssproperties/properties/css_prop_font-size.html) - Text size
+- [text-transform](/paperwork.core/reference/cssproperties/properties/css_prop_text-transform.html) - Text case transformation
+- [line-height](/paperwork.core/reference/cssproperties/properties/css_prop_line-height.html) - Line spacing
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

@@ -856,8 +856,8 @@ If you encounter issues with special characters:
 - [meta](/paperwork.core/reference/htmltags/elements/html_meta_element.html) - Meta element for document metadata
 - [lang](/paperwork.core/reference/htmlattributes/attributes/attr_lang.html) - Language attribute for content language
 - [title](/paperwork.core/reference/htmlattributes/attributes/attr_title.html) - Document title element
-- [http-equiv](/paperwork.core/reference/htmlattributes/http-equiv.html) - HTTP equivalent headers
-- [UTF-8 Encoding](/paperwork.core/reference/encoding/utf8.html) - UTF-8 character encoding guide
-- [International Content](/paperwork.core/reference/international/) - Creating multilingual documents
+- [http-equiv](/paperwork.core/reference/htmlattributes/attributes/attr_http_equiv.html) - HTTP equivalent headers
+- [UTF-8 Encoding](/paperwork.core/learning/05-typography/index.html) - UTF-8 character encoding guide
+- [International Content](/paperwork.core/learning/05-typography/index.html) - Creating multilingual documents
 
 ---

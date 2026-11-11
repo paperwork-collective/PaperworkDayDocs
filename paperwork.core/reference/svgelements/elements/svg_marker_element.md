@@ -2,7 +2,7 @@
 layout: default
 title: marker (SVG)
 parent: SVG Elements
-parent_url: /paperwork.core/reference/svgtags/
+parent_url: /paperwork.core/reference/svgelements/index.html
 grand_parent: Paperwork.Reference
 grand_parent_url: /paperwork.core/reference/
 has_children: false
@@ -814,12 +814,12 @@ Multiple marker types in one diagram:
 
 ## See Also
 
-- [path element](/paperwork.core/reference/svgtags/path.html) - Path element for marker application
-- [line element](/paperwork.core/reference/svgtags/line.html) - Line element for marker application
-- [polyline element](/paperwork.core/reference/svgtags/polyline.html) - Polyline element with markers
-- [polygon element](/paperwork.core/reference/svgtags/polygon.html) - Polygon element with markers
-- [defs element](/paperwork.core/reference/svgtags/defs.html) - Definitions container for markers
+- [path element](/paperwork.core/reference/svgelements/elements/svg_path_element.html) - Path element for marker application
+- [line element](/paperwork.core/reference/svgelements/elements/svg_line_element.html) - Line element for marker application
+- [polyline element](/paperwork.core/reference/svgelements/elements/svg_polyline_element.html) - Polyline element with markers
+- [polygon element](/paperwork.core/reference/svgelements/elements/svg_polygon_element.html) - Polygon element with markers
+- [defs element](/paperwork.core/reference/svgelements/elements/svg_defs_element.html) - Definitions container for markers
 - [Data Binding](/paperwork.core/reference/binding/) - Complete data binding guide
-- [SVG Styling](/paperwork.core/reference/svg/styling/) - SVG style reference
+- [SVG Styling](/paperwork.core/reference/svgelements/index.html) - SVG style reference
 
 ---

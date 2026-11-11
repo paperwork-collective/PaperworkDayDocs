@@ -522,6 +522,6 @@ The `stroke-linecap` property can be dynamically set through data binding to cre
 - [stroke-dasharray](/paperwork.core/reference/cssproperties/properties/css_prop_stroke-dasharray) - Define dash pattern
 - [stroke-linejoin](/paperwork.core/reference/cssproperties/properties/css_prop_stroke-linejoin) - Control corner appearance
 - [stroke-opacity](/paperwork.core/reference/cssproperties/properties/css_prop_stroke-opacity) - SVG stroke transparency
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

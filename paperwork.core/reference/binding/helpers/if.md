@@ -227,6 +227,6 @@ This structure allows Scryber to evaluate conditions at databinding time and onl
 - [else Helper](./else.html)
 - [Comparison Operators](../operators/equality.html)
 - [Logical Operators](../operators/and.html)
-- [Conditional Rendering Guide](../../learning/02-data-binding/04_conditional_rendering.html)
+- [Conditional Rendering Guide](/paperwork.core/learning/02-data-binding/04_conditional_rendering.html)
 
 ---

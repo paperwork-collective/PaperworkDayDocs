@@ -466,11 +466,11 @@ ID,Name,Email,Status,Date
 
 ## See Also
 
-- [code](/paperwork.core/reference/htmltags/elements/html_code_element.html) - Inline code element for short code fragments
-- [samp](/paperwork.core/reference/htmltags/elements/html_samp_element.html) - Sample output element
-- [kbd](/paperwork.core/reference/htmltags/elements/html_kbd_element.html) - Keyboard input element
+- [code](/paperwork.core/reference/htmltags/elements/html_code_kbd_samp_elements.html) - Inline code element for short code fragments
+- [samp](/paperwork.core/reference/htmltags/elements/html_code_kbd_samp_elements.html) - Sample output element
+- [kbd](/paperwork.core/reference/htmltags/elements/html_code_kbd_samp_elements.html) - Keyboard input element
 - [var](/paperwork.core/reference/htmltags/elements/html_var_element.html) - Variable element for mathematical or programming variables
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic block container
-- [Panel Component](/paperwork.core/reference/components/panel.html) - Base panel component in Scryber namespace
+- [Panel Component](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Base panel component in Scryber namespace
 
 ---

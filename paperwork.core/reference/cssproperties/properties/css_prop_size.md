@@ -918,10 +918,10 @@ The `size` property within `@page` rules supports data binding, allowing you to 
 
 ## See Also
 
-- [@page rule](/paperwork.core/reference/css_atrules/css_atrule_page) - Define page properties and margins
+- [@page rule](/paperwork.core/reference/cssselectors/selectors/css_page_rule.html) - Define page properties and margins
 - [page](/paperwork.core/reference/cssproperties/properties/css_prop_page) - Specify named page for element
 - [break-before](/paperwork.core/reference/cssproperties/properties/css_prop_break-before) - Control page breaks before elements
 - [break-after](/paperwork.core/reference/cssproperties/properties/css_prop_break-after) - Control page breaks after elements
-- [margin (in @page)](/paperwork.core/reference/css_atrules/css_atrule_page#margins) - Set page margins
+- [margin (in @page)](/paperwork.core/reference/cssselectors/selectors/css_page_rule.html#margins) - Set page margins
 
 ---

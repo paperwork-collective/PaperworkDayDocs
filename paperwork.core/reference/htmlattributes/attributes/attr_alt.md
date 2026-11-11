@@ -772,10 +772,10 @@ For optimal accessibility:
 
 - [img](/paperwork.core/reference/htmltags/elements/html_img_element.html) - Image element (uses alt attribute)
 - [src](/paperwork.core/reference/htmlattributes/attributes/attr_src.html) - Source attribute for image paths
-- [width](/paperwork.core/reference/htmlattributes/attributes/attr_width.html) - Width sizing attribute
-- [height](/paperwork.core/reference/htmlattributes/attributes/attr_height.html) - Height sizing attribute
+- [width](/paperwork.core/reference/htmlattributes/attributes/attr_width_height.html) - Width sizing attribute
+- [height](/paperwork.core/reference/htmlattributes/attributes/attr_width_height.html) - Height sizing attribute
 - [title](/paperwork.core/reference/htmlattributes/attributes/attr_title.html) - Title attribute for additional information
-- [Accessibility](/paperwork.core/reference/accessibility/) - PDF accessibility guidelines
+- [Accessibility](/paperwork.core/reference/index.html) - PDF accessibility guidelines
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic content and attributes
 
 ---

@@ -8,6 +8,7 @@ grand_parent_url: /paperwork.core/reference/binding/
 has_children: false
 has_toc: false
 nav_order: 1
+render_with_liquid: false
 ---
 
 # @index : Item Position
@@ -30,11 +31,11 @@ The zero-based position of the current item in a `{{#each}}` loop.
 
 ## Syntax
 
-{% raw %}
+
 ```
 {{@index}}
 ```
-{% endraw %}
+
 
 ---
 
@@ -50,7 +51,7 @@ builder.WithData("model", new {
 
 **Template:**
 
-{% raw %}
+
 ```html
 {{#each model.items}}
     <p>{{@index + 1}}. {{this.name}}</p>
@@ -59,7 +60,7 @@ builder.WithData("model", new {
     {{/if}}
 {{/each}}
 ```
-{% endraw %}
+
 
 **Output:**
 
@@ -74,7 +75,7 @@ builder.WithData("model", new {
 ## Notes
 
 - `@index` starts at `0`; add `1` for a count that starts at 1.
-- It can be used in any expression in the loop - calculations, conditions and attributes, e.g. {% raw %}`<rect y='{{@index * 30}}' />`{% endraw %}.
+- It can be used in any expression in the loop - calculations, conditions and attributes, e.g. `<rect y='{{@index * 30}}' />`.
 - In a nested loop, `@index` is the position in the innermost loop.
 
 ---

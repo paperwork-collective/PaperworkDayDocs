@@ -1219,8 +1219,8 @@ For PDF generation with Scryber:
 - [link](/paperwork.core/reference/htmltags/elements/html_link_element.html) - Link element for stylesheets
 - [style](/paperwork.core/reference/htmltags/elements/html_style_element.html) - Inline style element
 - [rel](/paperwork.core/reference/htmlattributes/attributes/attr_rel.html) - Relationship attribute for link element
-- [@media](/paperwork.core/reference/css/media.html) - CSS media queries
-- [@page](/paperwork.core/reference/css/page.html) - Page rules for print
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS reference
+- [@media](/paperwork.core/reference/cssselectors/selectors/css_media_rule.html) - CSS media queries
+- [@page](/paperwork.core/reference/cssselectors/selectors/css_page_rule.html) - Page rules for print
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS reference
 
 ---

@@ -208,11 +208,11 @@ In the library codebase:
 
 ## See Also
 
-- [input](/paperwork.core/reference/htmltags/elements/html_input_element.html) - Input field element
+- [input](/paperwork.core/reference/htmltags/index.html) - Input field element
 - [label](/paperwork.core/reference/htmltags/elements/html_label_element.html) - Label element for form fields
-- [form](/paperwork.core/reference/htmltags/elements/html_form_element.html) - Form container element
+- [form](/paperwork.core/reference/htmltags/index.html) - Form container element
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic block container
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding and expressions
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 
 ---

@@ -808,9 +808,9 @@ The `data-template` attribute allows inline content definition, useful for simpl
 
 - [template](/paperwork.core/reference/htmltags/elements/html_template_element.html) - Template element for repeating content
 - [Data Binding](/paperwork.core/reference/binding/) - Complete guide to data binding expressions
-- [Expressions](/paperwork.core/reference/expressions/) - Expression syntax and functions
-- [hidden attribute](/paperwork.core/reference/attributes/hidden.html) - Alternative visibility control
-- [Choose Component](/paperwork.core/reference/components/choose.html) - Multi-condition selection (if/else if/else)
+- [Expressions](/paperwork.core/reference/binding/index.html) - Expression syntax and functions
+- [hidden attribute](/paperwork.core/reference/htmlattributes/attributes/attr_hidden.html) - Alternative visibility control
+- [Choose Component](/paperwork.core/reference/htmltags/elements/html_if_element.html) - Multi-condition selection (if/else if/else)
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic container element
 
 ---

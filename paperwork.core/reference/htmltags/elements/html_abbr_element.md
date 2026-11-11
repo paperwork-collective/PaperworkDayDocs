@@ -270,6 +270,6 @@ abbr.Style.Text.Decoration = TextDecoration.Underline;
 - [CSS Styling](/paperwork.core/reference/cssselectors/)
 - [@title attribute](/paperwork.core/reference/htmlattributes/attributes/attr_title)
 - [@class attribute](/paperwork.core/reference/htmlattributes/attributes/attr_class)
-- [Data Binding](/paperwork.core/reference/learning/binding/)
+- [Data Binding](/paperwork.core/learning/02-data-binding/index.html)
 
 ---

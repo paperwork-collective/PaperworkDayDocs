@@ -286,11 +286,11 @@ The elements are by default output in monospace font
 
 ## See Also
 
-- [del, ins, u, s](html_del_ins_u_s_elements.html) - Text change formatting elements
+- [del, ins, u, s](/paperwork.core/reference/htmltags/elements/html_del_ins_u_s_element.html) - Text change formatting elements
 - [mark, sub, sup](html_mark_sub_sup_elements.html) - Text modification elements
-- [strong, b, em, i](html_strong_em_elements.html) - Bold and italic text elements
-- [span](html_span_elements.html) - Generic inline container
-- [CSS Styles](/paperwork.core/learning/styles/) - Complete CSS styling reference
-- [Data Binding](/paperwork.core/learning/binding/) - Data binding and expressions
+- [strong, b, em, i](/paperwork.core/reference/htmltags/elements/html_strong_em_element.html) - Bold and italic text elements
+- [span](/paperwork.core/reference/htmltags/elements/html_span_element.html) - Generic inline container
+- [CSS Styles](/paperwork.core/learning/03-styling/index.html) - Complete CSS styling reference
+- [Data Binding](/paperwork.core/learning/02-data-binding/index.html) - Data binding and expressions
 
 ---

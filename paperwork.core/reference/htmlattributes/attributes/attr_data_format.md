@@ -756,13 +756,13 @@ Show elapsed time:
 
 ## See Also
 
-- [num element](/paperwork.core/reference/htmltags/elements/html_num_element.html) - Number display element
+- [num element](/paperwork.core/reference/htmltags/elements/html_output_slot_num_elements.html) - Number display element
 - [time element](/paperwork.core/reference/htmltags/elements/html_time_element.html) - Date/time display element
-- [page element](/paperwork.core/reference/htmltags/elements/html_page_element.html) - Page number element
+- [page element](/paperwork.core/reference/htmltags/index.html) - Page number element
 - [.NET Standard Format Strings](https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings) - Microsoft documentation
 - [.NET Custom Format Strings](https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings) - Microsoft documentation
 - [.NET Date/Time Format Strings](https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings) - Microsoft documentation
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding guide
-- [Expressions](/paperwork.core/reference/expressions/) - Expression syntax
+- [Expressions](/paperwork.core/reference/binding/index.html) - Expression syntax
 
 ---

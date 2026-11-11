@@ -535,6 +535,6 @@ The `stop-opacity` property can be dynamically controlled through data binding, 
 - [stroke-opacity](/paperwork.core/reference/cssproperties/properties/css_prop_stroke-opacity) - SVG stroke transparency
 - [opacity](/paperwork.core/reference/cssproperties/properties/css_prop_opacity) - Element transparency
 - [fill](/paperwork.core/reference/cssproperties/properties/css_prop_fill) - SVG fill color property
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

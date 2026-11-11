@@ -83,7 +83,7 @@ The `y2` attribute is used to:
 
 The `y2` attribute is supported on:
 
-- **[&lt;linearGradient&gt;](/paperwork.core/reference/svgtags/linearGradient.html)** - Defines linear gradient end Y position
+- **[&lt;linearGradient&gt;](/paperwork.core/reference/svgelements/elements/svg_linearGradient_element.html)** - Defines linear gradient end Y position
 
 Note: This attribute is NOT used with `<radialGradient>` elements.
 
@@ -607,10 +607,10 @@ Common scenarios where y2 is essential:
 - [x1](/paperwork.core/reference/svgattributes/attributes/svg_attr_x1.html) - Linear gradient start X coordinate
 - [y1](/paperwork.core/reference/svgattributes/attributes/svg_attr_y1.html) - Linear gradient start Y coordinate
 - [x2](/paperwork.core/reference/svgattributes/attributes/svg_attr_x2.html) - Linear gradient end X coordinate
-- [linearGradient](/paperwork.core/reference/svgtags/linearGradient.html) - Linear gradient definition element
+- [linearGradient](/paperwork.core/reference/svgelements/elements/svg_linearGradient_element.html) - Linear gradient definition element
 - [gradientUnits](/paperwork.core/reference/svgattributes/attributes/svg_attr_gradientUnits.html) - Coordinate system mode
 - [spreadMethod](/paperwork.core/reference/svgattributes/attributes/svg_attr_spreadMethod.html) - Gradient spread behavior
-- [stop](/paperwork.core/reference/svgtags/stop.html) - Gradient color stop element
+- [stop](/paperwork.core/reference/svgelements/elements/svg_stop_element.html) - Gradient color stop element
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

@@ -69,5 +69,5 @@ The first line is filled with the start of the long word, rather than the word m
 ## See Also
 
 - [overflow-wrap](css_prop_overflow-wrap)
-- [hyphens](hyphens)
-- [white-space](white-space)
+- [hyphens](/paperwork.core/reference/cssproperties/properties/css_prop_hyphens.html)
+- [white-space](/paperwork.core/reference/cssproperties/properties/css_prop_white-space.html)

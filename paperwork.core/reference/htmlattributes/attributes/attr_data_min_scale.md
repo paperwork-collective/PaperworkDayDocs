@@ -566,8 +566,8 @@ In PDF generation:
 - [src attribute](/paperwork.core/reference/htmlattributes/attributes/attr_src.html) - Image source
 - [alt attribute](/paperwork.core/reference/htmlattributes/attributes/attr_alt.html) - Alternative text
 - [width and height attributes](/paperwork.core/reference/htmlattributes/attributes/attr_width_height.html) - Image dimensions
-- [CSS Sizing](/paperwork.core/reference/styles/sizing.html) - CSS sizing properties
-- [Image Handling](/paperwork.core/reference/images/) - Complete image handling reference
-- [Performance](/paperwork.core/reference/performance/images.html) - Image performance optimization
+- [CSS Sizing](/paperwork.core/learning/03-styling/04_units_measurements.html) - CSS sizing properties
+- [Image Handling](/paperwork.core/learning/06-content/01_images.html) - Complete image handling reference
+- [Performance](/paperwork.core/learning/07-configuration/06_optimization_performance.html) - Image performance optimization
 
 ---

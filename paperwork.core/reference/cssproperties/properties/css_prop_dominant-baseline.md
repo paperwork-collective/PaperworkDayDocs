@@ -650,6 +650,6 @@ The `dominant-baseline` property can be dynamically controlled through data bind
 - [fill](/paperwork.core/reference/cssproperties/properties/css_prop_fill) - SVG fill color property
 - [vertical-align](/paperwork.core/reference/cssproperties/properties/css_prop_vertical-align) - HTML vertical alignment
 - [stroke](/paperwork.core/reference/cssproperties/properties/css_prop_stroke) - SVG stroke color property
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

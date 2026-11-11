@@ -248,7 +248,7 @@ Control how paragraphs break across pages:
 
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic block container
 - [span](/paperwork.core/reference/htmltags/elements/html_span_element.html) - Inline container
-- [h1-h6](/paperwork.core/reference/htmltags/elements/html_heading_element.html) - Heading elements
+- [h1-h6](/paperwork.core/reference/htmltags/elements/html_headings_element.html) - Heading elements
 - [blockquote](/paperwork.core/reference/htmltags/elements/html_blockquote_element.html) - Block quotation
 - [pre](/paperwork.core/reference/htmltags/elements/html_pre_element.html) - Preformatted text
 

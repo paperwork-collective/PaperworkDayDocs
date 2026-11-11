@@ -1107,9 +1107,9 @@ Document with return-to-top navigation:
 - [href attribute](/paperwork.core/reference/htmlattributes/attributes/attr_href.html) - Link destination attribute
 - [id attribute](/paperwork.core/reference/htmlattributes/attributes/attr_id.html) - Element identifier for link targets
 - [title attribute](/paperwork.core/reference/htmlattributes/attributes/attr_title.html) - Bookmark title attribute
-- [PDF Links](/paperwork.core/reference/pdf/links.html) - PDF link and navigation specification
-- [PDF Destinations](/paperwork.core/reference/pdf/destinations.html) - PDF destination types
-- [Document Navigation](/paperwork.core/reference/navigation/) - Navigation patterns and best practices
-- [Internal Links](/paperwork.core/reference/links/internal.html) - Internal document linking
+- [PDF Links](/paperwork.core/reference/htmlattributes/attributes/attr_href.html) - PDF link and navigation specification
+- [PDF Destinations](/paperwork.core/reference/htmlattributes/attributes/attr_href.html) - PDF destination types
+- [Document Navigation](/paperwork.core/reference/binding/navigation/index.html) - Navigation patterns and best practices
+- [Internal Links](/paperwork.core/reference/htmlattributes/attributes/attr_href.html) - Internal document linking
 
 ---

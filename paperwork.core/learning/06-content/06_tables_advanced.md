@@ -871,7 +871,7 @@ tr {
 
 1. **[Attachments & Embedded Content](07_attachments_embedded.html)** - File embedding
 2. **[Content Best Practices](08_content_best_practices.html)** - Optimization
-3. **[Practical Applications](/paperwork.core/learning/08-practical/)** - Real-world examples
+3. **[Practical Applications](/paperwork.core/learning/index.html)** - Real-world examples
 
 ---
 

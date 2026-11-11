@@ -542,8 +542,8 @@ The direction (clockwise vs counter-clockwise) affects:
 - [polyline element](/paperwork.core/reference/svgelements/elements/svg_polyline_element.html) - SVG polyline for straight line segments
 - [polygon element](/paperwork.core/reference/svgelements/elements/svg_polygon_element.html) - SVG polygon for closed shapes
 - [points attribute](/paperwork.core/reference/svgattributes/attributes/svg_attr_points.html) - Points list for polyline and polygon
-- [stroke attributes](/paperwork.core/reference/svgattributes/attributes/svg_attr_stroke.html) - Stroke styling attributes
-- [fill attributes](/paperwork.core/reference/svgattributes/attributes/svg_attr_fill.html) - Fill styling attributes
+- [stroke attributes](/paperwork.core/reference/cssproperties/properties/css_prop_stroke.html) - Stroke styling attributes
+- [fill attributes](/paperwork.core/reference/cssproperties/properties/css_prop_fill.html) - Fill styling attributes
 - [SVG Path Specification](https://www.w3.org/TR/SVG/paths.html) - W3C SVG path data specification
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions guide
 

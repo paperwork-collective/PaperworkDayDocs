@@ -254,6 +254,6 @@ The `:root` selector has a specificity equivalent to a pseudo-class applied to a
 - [Element Selector](/paperwork.core/reference/cssselectors/selectors/css_element_selector)
 - [Universal Selector](/paperwork.core/reference/cssselectors/selectors/css_universal_selector)
 - [CSS Specificity](/paperwork.core/reference/cssselectors/selectors/css_specificity)
-- [html Element](/paperwork.core/reference/htmlelements/html_html_element)
+- [html Element](/paperwork.core/reference/htmltags/elements/html_html_element.html)
 
 ---

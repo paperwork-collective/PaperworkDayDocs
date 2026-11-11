@@ -901,7 +901,7 @@ Now that you've mastered advanced patterns:
 
 1. **[Common Mistakes](09_common_mistakes.html)** - Avoid common errors
 2. **[Styling PDFs](/paperwork.core/learning/03-styling/)** - Advanced styling techniques
-3. **[Practical Applications](/paperwork.core/learning/08-practical/)** - Real-world examples
+3. **[Practical Applications](/paperwork.core/learning/index.html)** - Real-world examples
 
 ---
 

@@ -1160,11 +1160,11 @@ In the Scryber codebase:
 ## See Also
 
 - [label](/paperwork.core/reference/htmltags/elements/html_label_element.html) - Label element for form fields
-- [fieldset](/paperwork.core/reference/htmltags/elements/html_fieldset_element.html) - Fieldset and legend for grouping form elements
-- [form](/paperwork.core/reference/htmltags/elements/html_form_element.html) - Form container element
+- [fieldset](/paperwork.core/reference/htmltags/elements/html_fieldset_legend_element.html) - Fieldset and legend for grouping form elements
+- [form](/paperwork.core/reference/htmltags/index.html) - Form container element
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic block container
 - [span](/paperwork.core/reference/htmltags/elements/html_span_element.html) - Inline container for styling
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding and expressions
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 
 ---

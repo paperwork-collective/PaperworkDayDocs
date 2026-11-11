@@ -933,9 +933,9 @@ Side-by-side comparison with repeating headers:
 ## See Also
 
 - [table element](/paperwork.core/reference/htmltags/elements/html_table_element.html) - The table HTML element
-- [thead element](/paperwork.core/reference/htmltags/elements/html_thead_element.html) - Table header section
-- [tbody element](/paperwork.core/reference/htmltags/elements/html_tbody_element.html) - Table body section
-- [tfoot element](/paperwork.core/reference/htmltags/elements/html_tfoot_element.html) - Table footer section
+- [thead element](/paperwork.core/reference/htmltags/elements/html_table_element.html) - Table header section
+- [tbody element](/paperwork.core/reference/htmltags/elements/html_table_element.html) - Table body section
+- [tfoot element](/paperwork.core/reference/htmltags/elements/html_table_element.html) - Table footer section
 - [Data Binding](/paperwork.core/reference/binding/) - Complete data binding guide
 - [template element](/paperwork.core/reference/htmltags/elements/html_template_element.html) - Template for repeating content
 

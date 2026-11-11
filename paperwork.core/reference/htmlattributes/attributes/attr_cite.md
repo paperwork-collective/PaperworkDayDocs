@@ -868,11 +868,11 @@ The `cite` attribute is optional:
 ## See Also
 
 - [blockquote](/paperwork.core/reference/htmltags/elements/html_blockquote_element.html) - Block quotation element
-- [q](/paperwork.core/reference/htmltags/elements/html_q_element.html) - Inline quotation element
-- [ins](/paperwork.core/reference/htmltags/elements/html_ins_element.html) - Inserted content element
-- [del](/paperwork.core/reference/htmltags/elements/html_del_element.html) - Deleted content element
+- [q](/paperwork.core/reference/htmltags/elements/html_cite_defn_q_elements.html) - Inline quotation element
+- [ins](/paperwork.core/reference/htmltags/elements/html_del_ins_u_s_element.html) - Inserted content element
+- [del](/paperwork.core/reference/htmltags/elements/html_del_ins_u_s_element.html) - Deleted content element
 - [datetime](/paperwork.core/reference/htmlattributes/attributes/attr_datetime.html) - Date/time attribute for ins and del
 - [a](/paperwork.core/reference/htmltags/elements/html_a_element.html) - Anchor element for links
-- [footer](/paperwork.core/reference/htmltags/elements/html_footer_element.html) - Footer element for attribution
+- [footer](/paperwork.core/reference/htmltags/elements/html_header_footer_element.html) - Footer element for attribution
 
 ---

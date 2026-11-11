@@ -531,13 +531,13 @@ In the Scryber codebase:
 ## See Also
 
 - [head](/paperwork.core/reference/htmltags/elements/html_head_element.html) - Head element (container for meta tags)
-- [title](/paperwork.core/reference/htmltags/elements/html_title_element.html) - Title element for document title
+- [title](/paperwork.core/reference/htmltags/elements/html_head_element.html) - Title element for document title
 - [link](/paperwork.core/reference/htmltags/elements/html_link_element.html) - Link element for external stylesheets
-- [Document Component](/paperwork.core/reference/components/document.html) - Base document component
-- [Document Properties](/paperwork.core/reference/document/properties.html) - PDF document properties
-- [Document Info](/paperwork.core/reference/document/info.html) - Document information API
-- [Security Settings](/paperwork.core/reference/security/) - PDF security and encryption
-- [Permissions](/paperwork.core/reference/security/permissions.html) - PDF permission types
-- [Encryption](/paperwork.core/reference/security/encryption.html) - PDF encryption levels
+- [Document Component](/paperwork.core/reference/htmltags/elements/html_html_element.html) - Base document component
+- [Document Properties](/paperwork.core/learning/07-configuration/01_document_properties.html) - PDF document properties
+- [Document Info](/paperwork.core/learning/07-configuration/01_document_properties.html) - Document information API
+- [Security Settings](/paperwork.core/learning/07-configuration/05_security.html) - PDF security and encryption
+- [Permissions](/paperwork.core/learning/07-configuration/05_security.html) - PDF permission types
+- [Encryption](/paperwork.core/learning/07-configuration/05_security.html) - PDF encryption levels
 
 ---

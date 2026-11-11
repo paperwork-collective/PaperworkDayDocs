@@ -764,7 +764,7 @@ Link to documents via QR codes (generate separately):
 ## Next Steps
 
 1. **[Content Best Practices](08_content_best_practices.html)** - Optimization and performance
-2. **[Practical Applications](/paperwork.core/learning/08-practical/)** - Real-world examples
+2. **[Practical Applications](/paperwork.core/learning/index.html)** - Real-world examples
 3. **[Configuration](/paperwork.core/learning/07-configuration/)** - Document settings
 
 ---

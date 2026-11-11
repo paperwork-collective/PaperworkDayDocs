@@ -519,6 +519,6 @@ The `transform` property can be dynamically controlled through data binding, ena
 - [fill](/paperwork.core/reference/cssproperties/properties/css_prop_fill) - SVG fill color property
 - [opacity](/paperwork.core/reference/cssproperties/properties/css_prop_opacity) - Element transparency
 - [position](/paperwork.core/reference/cssproperties/properties/css_prop_position) - Element positioning
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

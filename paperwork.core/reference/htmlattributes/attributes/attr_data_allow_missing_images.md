@@ -1333,12 +1333,12 @@ Don't expose file system details in error messages:
 
 - [img](/paperwork.core/reference/htmltags/elements/html_img_element.html) - Image element (uses data-allow-missing-images attribute)
 - [src](/paperwork.core/reference/htmlattributes/attributes/attr_src.html) - Image source attribute
-- [data-img](/paperwork.core/reference/htmlattributes/data-img.html) - Binary image data attributes
+- [data-img](/paperwork.core/reference/htmlattributes/attributes/attr_data_img.html) - Binary image data attributes
 - [alt](/paperwork.core/reference/htmlattributes/attributes/attr_alt.html) - Alternative text for images
-- [width](/paperwork.core/reference/htmlattributes/attributes/attr_width.html) - Width attribute for sizing
-- [height](/paperwork.core/reference/htmlattributes/attributes/attr_height.html) - Height attribute for sizing
+- [width](/paperwork.core/reference/htmlattributes/attributes/attr_width_height.html) - Width attribute for sizing
+- [height](/paperwork.core/reference/htmlattributes/attributes/attr_width_height.html) - Height attribute for sizing
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic content and attribute values
-- [Error Handling](/paperwork.core/reference/errors/) - Error handling and conformance modes
-- [Logging](/paperwork.core/reference/logging/) - Trace logging configuration
+- [Error Handling](/paperwork.core/learning/07-configuration/03_error_handling_conformance.html) - Error handling and conformance modes
+- [Logging](/paperwork.core/learning/07-configuration/02_logging.html) - Trace logging configuration
 
 ---

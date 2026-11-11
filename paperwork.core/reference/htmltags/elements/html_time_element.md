@@ -981,8 +981,8 @@ The `<time>` element is perfect for:
 - [span](/paperwork.core/reference/htmltags/elements/html_span_element.html) - Inline container element (for wrapping time elements)
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Block container element
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
-- [Date Component](/paperwork.core/reference/components/date.html) - Base date component in Scryber namespace
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
-- [Text Formatting](/paperwork.core/reference/text/formatting.html) - Text formatting and display
+- [Date Component](/paperwork.core/reference/htmltags/elements/html_time_element.html) - Base date component in Scryber namespace
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
+- [Text Formatting](/paperwork.core/learning/03-styling/05_text_styling.html) - Text formatting and display
 
 ---

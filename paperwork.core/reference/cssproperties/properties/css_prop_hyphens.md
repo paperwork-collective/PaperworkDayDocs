@@ -425,13 +425,13 @@ The `hyphens` property can be dynamically controlled through data binding, enabl
 
 ## See Also
 
-- [hyphenate-limit-chars](/paperwork.core/reference/cssproperties/hyphenate-limit-chars) - Control minimum word length for hyphenation
-- [hyphens-limit-chars-length](/paperwork.core/reference/cssproperties/hyphens-limit-chars-length) - Minimum word length
-- [hyphens-limit-chars-before](/paperwork.core/reference/cssproperties/hyphens-limit-chars-before) - Minimum characters before hyphen
-- [hyphens-limit-chars-after](/paperwork.core/reference/cssproperties/hyphens-limit-chars-after) - Minimum characters after hyphen
-- [hyphenate-character](/paperwork.core/reference/cssproperties/hyphenate-character) - Custom hyphen character
-- [text-align](/paperwork.core/reference/cssproperties/text-align) - Text alignment
-- [word-spacing](/paperwork.core/reference/cssproperties/word-spacing) - Space between words
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [hyphenate-limit-chars](/paperwork.core/reference/cssproperties/properties/css_prop_hyphenate-limit-chars.html) - Control minimum word length for hyphenation
+- [hyphens-limit-chars-length](/paperwork.core/reference/cssproperties/properties/css_prop_hyphens-limit-chars-length.html) - Minimum word length
+- [hyphens-limit-chars-before](/paperwork.core/reference/cssproperties/properties/css_prop_hyphens-limit-chars-before.html) - Minimum characters before hyphen
+- [hyphens-limit-chars-after](/paperwork.core/reference/cssproperties/properties/css_prop_hyphens-limit-chars-after.html) - Minimum characters after hyphen
+- [hyphenate-character](/paperwork.core/reference/cssproperties/properties/css_prop_hyphenate-character.html) - Custom hyphen character
+- [text-align](/paperwork.core/reference/cssproperties/properties/css_prop_text-align.html) - Text alignment
+- [word-spacing](/paperwork.core/reference/cssproperties/properties/css_prop_word-spacing.html) - Space between words
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

@@ -927,10 +927,10 @@ The `datetime` attribute is optional for `<time>` elements:
 ## See Also
 
 - [time](/paperwork.core/reference/htmltags/elements/html_time_element.html) - Time element for semantic date/time markup
-- [ins](/paperwork.core/reference/htmltags/elements/html_ins_element.html) - Inserted content element
-- [del](/paperwork.core/reference/htmltags/elements/html_del_element.html) - Deleted content element
+- [ins](/paperwork.core/reference/htmltags/elements/html_del_ins_u_s_element.html) - Inserted content element
+- [del](/paperwork.core/reference/htmltags/elements/html_del_ins_u_s_element.html) - Deleted content element
 - [cite](/paperwork.core/reference/htmlattributes/attributes/attr_cite.html) - Citation source attribute
-- [data-format](/paperwork.core/reference/htmlattributes/data-format.html) - Date formatting in data binding
-- [ISO 8601](/paperwork.core/reference/standards/iso8601.html) - Date/time format standard
+- [data-format](/paperwork.core/reference/htmlattributes/attributes/attr_data_format.html) - Date formatting in data binding
+- [ISO 8601](/paperwork.core/reference/htmlattributes/attributes/attr_datetime.html) - Date/time format standard
 
 ---

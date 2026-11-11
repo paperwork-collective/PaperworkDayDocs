@@ -78,10 +78,10 @@ marker-start="url(#markerID) none"
 
 The `marker-start` attribute is supported on:
 
-- **[&lt;path&gt;](/paperwork.core/reference/svgtags/path.html)** - At the first point of path data
-- **[&lt;line&gt;](/paperwork.core/reference/svgtags/line.html)** - At the (x1, y1) point
-- **[&lt;polyline&gt;](/paperwork.core/reference/svgtags/polyline.html)** - At the first point
-- **[&lt;polygon&gt;](/paperwork.core/reference/svgtags/polygon.html)** - At the first point
+- **[&lt;path&gt;](/paperwork.core/reference/svgelements/elements/svg_path_element.html)** - At the first point of path data
+- **[&lt;line&gt;](/paperwork.core/reference/svgelements/elements/svg_line_element.html)** - At the (x1, y1) point
+- **[&lt;polyline&gt;](/paperwork.core/reference/svgelements/elements/svg_polyline_element.html)** - At the first point
+- **[&lt;polygon&gt;](/paperwork.core/reference/svgelements/elements/svg_polygon_element.html)** - At the first point
 
 ---
 
@@ -539,14 +539,14 @@ Show markers based on conditions:
 
 - [marker-mid](/paperwork.core/reference/svgattributes/attributes/svg_attr_marker-mid.html) - Marker at middle vertices
 - [marker-end](/paperwork.core/reference/svgattributes/attributes/svg_attr_marker-end.html) - Marker at path end
-- [marker element](/paperwork.core/reference/svgtags/marker.html) - Marker definition element
+- [marker element](/paperwork.core/reference/svgelements/elements/svg_marker_element.html) - Marker definition element
 - [markerWidth](/paperwork.core/reference/svgattributes/attributes/svg_attr_markerWidth.html) - Marker viewport width
 - [markerHeight](/paperwork.core/reference/svgattributes/attributes/svg_attr_markerHeight.html) - Marker viewport height
 - [refX](/paperwork.core/reference/svgattributes/attributes/svg_attr_refX.html) - Marker reference X position
 - [refY](/paperwork.core/reference/svgattributes/attributes/svg_attr_refY.html) - Marker reference Y position
 - [orient](/paperwork.core/reference/svgattributes/attributes/svg_attr_orient.html) - Marker orientation
-- [path element](/paperwork.core/reference/svgtags/path.html) - SVG path element
-- [line element](/paperwork.core/reference/svgtags/line.html) - SVG line element
+- [path element](/paperwork.core/reference/svgelements/elements/svg_path_element.html) - SVG path element
+- [line element](/paperwork.core/reference/svgelements/elements/svg_line_element.html) - SVG line element
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

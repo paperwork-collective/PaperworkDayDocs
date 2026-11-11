@@ -1102,6 +1102,6 @@ The `break-before` property supports data binding, allowing you to create sophis
 - [break-inside](/paperwork.core/reference/cssproperties/properties/css_prop_break-inside) - Control breaks within elements
 - [page-break-before](/paperwork.core/reference/cssproperties/properties/css_prop_page-break-before) - Legacy CSS2 property
 - [page](/paperwork.core/reference/cssproperties/properties/css_prop_page) - Specify named page for element
-- [@page rule](/paperwork.core/reference/css_atrules/css_atrule_page) - Define page properties and margins
+- [@page rule](/paperwork.core/reference/cssselectors/selectors/css_page_rule.html) - Define page properties and margins
 
 ---

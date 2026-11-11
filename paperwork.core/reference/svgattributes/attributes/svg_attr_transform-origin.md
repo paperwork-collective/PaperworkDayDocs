@@ -851,10 +851,10 @@ The `transform-origin` attribute is part of the SVG specification. In Scryber, i
 ## See Also
 
 - [transform](/paperwork.core/reference/svgattributes/attributes/svg_attr_transform.html) - Transform operations
-- [g](/paperwork.core/reference/svgtags/g.html) - Group element
-- [svg](/paperwork.core/reference/svgtags/svg.html) - SVG canvas element
+- [g](/paperwork.core/reference/svgelements/elements/svg_g_element.html) - Group element
+- [svg](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG canvas element
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding
-- [SVG Shapes](/paperwork.core/reference/svgtags/shapes.html) - rect, circle, ellipse, line, etc.
+- [SVG Shapes](/paperwork.core/reference/svgelements/index.html) - rect, circle, ellipse, line, etc.
 - [SVG Transformations Guide](https://www.w3.org/TR/SVG2/coords.html#TransformAttribute) - W3C specification
 
 ---

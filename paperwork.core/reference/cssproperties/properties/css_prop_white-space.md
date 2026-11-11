@@ -418,11 +418,11 @@ Response:
 
 ## See Also
 
-- [word-spacing](/paperwork.core/reference/cssproperties/word-spacing) - Space between words
-- [letter-spacing](/paperwork.core/reference/cssproperties/letter-spacing) - Space between characters
-- [text-align](/paperwork.core/reference/cssproperties/text-align) - Text alignment
-- [overflow](/paperwork.core/reference/cssproperties/overflow) - Content overflow handling
-- [line-height](/paperwork.core/reference/cssproperties/line-height) - Line spacing
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [word-spacing](/paperwork.core/reference/cssproperties/properties/css_prop_word-spacing.html) - Space between words
+- [letter-spacing](/paperwork.core/reference/cssproperties/properties/css_prop_letter-spacing.html) - Space between characters
+- [text-align](/paperwork.core/reference/cssproperties/properties/css_prop_text-align.html) - Text alignment
+- [overflow](/paperwork.core/reference/cssproperties/properties/css_prop_overflow.html) - Content overflow handling
+- [line-height](/paperwork.core/reference/cssproperties/properties/css_prop_line-height.html) - Line spacing
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

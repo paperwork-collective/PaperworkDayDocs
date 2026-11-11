@@ -2,7 +2,7 @@
 layout: default
 title: linearGradient
 parent: SVG Elements
-parent_url: /paperwork.core/reference/svgtags/
+parent_url: /paperwork.core/reference/svgelements/index.html
 grand_parent: Paperwork.Reference
 grand_parent_url: /paperwork.core/reference/
 has_children: false
@@ -599,14 +599,14 @@ Generate multiple gradient stops from arrays:
 
 ## See Also
 
-- [radialGradient](/paperwork.core/reference/svgtags/radialGradient.html) - Radial gradient definition element
-- [stop](/paperwork.core/reference/svgtags/stop.html) - Gradient color stop element
-- [svg](/paperwork.core/reference/htmltags/svg.html) - SVG canvas element
-- [rect](/paperwork.core/reference/svgtags/rect.html) - Rectangle element (commonly used with gradients)
-- [path](/paperwork.core/reference/svgtags/path.html) - Path element (supports gradient fills and strokes)
-- [circle](/paperwork.core/reference/svgtags/circle.html) - Circle element (supports gradient fills)
-- [CSS Gradients](/paperwork.core/reference/styles/gradients.html) - CSS gradient properties
-- [SVG Fills](/paperwork.core/reference/svg/fills.html) - SVG fill patterns and gradients
+- [radialGradient](/paperwork.core/reference/svgelements/elements/svg_radialGradient_element.html) - Radial gradient definition element
+- [stop](/paperwork.core/reference/svgelements/elements/svg_stop_element.html) - Gradient color stop element
+- [svg](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG canvas element
+- [rect](/paperwork.core/reference/svgelements/elements/svg_rect_element.html) - Rectangle element (commonly used with gradients)
+- [path](/paperwork.core/reference/svgelements/elements/svg_path_element.html) - Path element (supports gradient fills and strokes)
+- [circle](/paperwork.core/reference/svgelements/elements/svg_circle_element.html) - Circle element (supports gradient fills)
+- [CSS Gradients](/paperwork.core/learning/03-styling/02_colors_backgrounds.html) - CSS gradient properties
+- [SVG Fills](/paperwork.core/reference/svgattributes/index.html) - SVG fill patterns and gradients
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

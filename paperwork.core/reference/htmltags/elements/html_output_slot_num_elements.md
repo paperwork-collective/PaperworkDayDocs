@@ -280,10 +280,10 @@ num {
 ## See Also
 
 - [span](/paperwork.core/reference/htmltags/elements/html_span_element.html) - Generic inline container element
-- [strong](/paperwork.core/reference/htmltags/elements/html_strong_element.html) - Strong emphasis (bold)
-- [em](/paperwork.core/reference/htmltags/elements/html_em_element.html) - Emphasis (italic)
-- [Text Formatting](/paperwork.core/reference/htmltags/elements/html_textformatting_element.html) - Text formatting elements
+- [strong](/paperwork.core/reference/htmltags/elements/html_strong_em_element.html) - Strong emphasis (bold)
+- [em](/paperwork.core/reference/htmltags/elements/html_strong_em_element.html) - Emphasis (italic)
+- [Text Formatting](/paperwork.core/reference/htmltags/elements/html_strong_em_element.html) - Text formatting elements
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding expressions
-- [CSS Styling](/paperwork.core/reference/styles/) - CSS styling reference
+- [CSS Styling](/paperwork.core/reference/cssproperties/index.html) - CSS styling reference
 
 ---

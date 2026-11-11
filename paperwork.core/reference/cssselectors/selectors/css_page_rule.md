@@ -315,8 +315,8 @@ Applies styles to the page container itself, not the content within the page.
 ## See Also
 
 - [@media Rule](/paperwork.core/reference/cssselectors/selectors/css_media_rule)
-- [Page Size Configuration](/guides/page_setup)
+- [Page Size Configuration](/paperwork.core/learning/04-layout/01_page_sizes_orientation.html)
 - [Element Selector](/paperwork.core/reference/cssselectors/selectors/css_element_selector)
-- [PDF Generation Pipeline](/architecture/generation_pipeline)
+- [PDF Generation Pipeline](/paperwork.core/configuration/ARCHITECTURE.html)
 
 ---

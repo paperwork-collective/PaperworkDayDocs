@@ -2,7 +2,7 @@
 layout: default
 title: a (SVG)
 parent: SVG Elements
-parent_url: /paperwork.core/reference/svgtags/
+parent_url: /paperwork.core/reference/svgelements/index.html
 grand_parent: Paperwork.Reference
 grand_parent_url: /paperwork.core/reference/
 has_children: false
@@ -735,13 +735,13 @@ SVG anchors can be defined in `<defs>` and reused:
 
 ## See Also
 
-- [a (HTML)](/paperwork.core/reference/htmltags/a.html) - HTML anchor element
-- [g](/paperwork.core/reference/svgtags/g.html) - Group container (often wrapped in anchors)
-- [svg](/paperwork.core/reference/svgtags/svg.html) - SVG canvas container
-- [use](/paperwork.core/reference/svgtags/use.html) - Reference reusable elements
-- [SVG Shapes](/paperwork.core/reference/svgtags/shapes.html) - rect, circle, ellipse, line, polyline, polygon, path
-- [SVG Transformations](/paperwork.core/reference/svgtags/transforms.html) - Transform operations guide
+- [a (HTML)](/paperwork.core/reference/htmltags/elements/html_a_element.html) - HTML anchor element
+- [g](/paperwork.core/reference/svgelements/elements/svg_g_element.html) - Group container (often wrapped in anchors)
+- [svg](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG canvas container
+- [use](/paperwork.core/reference/svgelements/elements/svg_use_element.html) - Reference reusable elements
+- [SVG Shapes](/paperwork.core/reference/svgelements/index.html) - rect, circle, ellipse, line, polyline, polygon, path
+- [SVG Transformations](/paperwork.core/reference/svgattributes/attributes/svg_attr_transform.html) - Transform operations guide
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
-- [PDF Actions](/paperwork.core/reference/actions/) - PDF-specific navigation actions
+- [PDF Actions](/paperwork.core/reference/index.html) - PDF-specific navigation actions
 
 ---

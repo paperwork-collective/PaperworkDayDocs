@@ -693,7 +693,7 @@ Control how text wraps within cells:
 - [table](/paperwork.core/reference/htmltags/elements/html_table_element.html) - Table element
 - [tr](/paperwork.core/reference/htmltags/elements/html_tr_element.html) - Table row element
 - [thead, tbody, tfoot](/paperwork.core/reference/htmltags/elements/html_table_element.html#table-sections) - Table sections
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding
 - [Template Element](/paperwork.core/reference/htmltags/elements/html_template_element.html) - Template for repeating content
 

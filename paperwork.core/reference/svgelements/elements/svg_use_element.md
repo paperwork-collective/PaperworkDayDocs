@@ -2,7 +2,7 @@
 layout: default
 title: use
 parent: SVG Elements
-parent_url: /paperwork.core/reference/svgtags/
+parent_url: /paperwork.core/reference/svgelements/index.html
 grand_parent: Paperwork.Reference
 grand_parent_url: /paperwork.core/reference/
 has_children: false
@@ -689,13 +689,13 @@ Referenced elements must implement `ICloneable`:
 
 ## See Also
 
-- [defs](/paperwork.core/reference/svgtags/defs.html) - Definitions container for reusable elements
-- [svg](/paperwork.core/reference/svgtags/svg.html) - SVG canvas container
-- [g](/paperwork.core/reference/svgtags/g.html) - Group container for organizing elements
-- [symbol](/paperwork.core/reference/svgtags/symbol.html) - Reusable symbol definition with viewBox
-- [SVG Shapes](/paperwork.core/reference/svgtags/shapes.html) - rect, circle, ellipse, line, polyline, polygon, path
-- [SVG Transformations](/paperwork.core/reference/svgtags/transforms.html) - Transform operations guide
+- [defs](/paperwork.core/reference/svgelements/elements/svg_defs_element.html) - Definitions container for reusable elements
+- [svg](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG canvas container
+- [g](/paperwork.core/reference/svgelements/elements/svg_g_element.html) - Group container for organizing elements
+- [symbol](/paperwork.core/reference/svgelements/elements/svg_use_element.html) - Reusable symbol definition with viewBox
+- [SVG Shapes](/paperwork.core/reference/svgelements/index.html) - rect, circle, ellipse, line, polyline, polygon, path
+- [SVG Transformations](/paperwork.core/reference/svgattributes/attributes/svg_attr_transform.html) - Transform operations guide
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
-- [CSS Styles](/paperwork.core/reference/styles/) - CSS styling reference
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - CSS styling reference
 
 ---

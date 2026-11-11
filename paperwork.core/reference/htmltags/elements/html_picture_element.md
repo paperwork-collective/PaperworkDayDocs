@@ -813,12 +813,12 @@ In the Scryber codebase:
 ## See Also
 
 - [img](/paperwork.core/reference/htmltags/elements/html_img_element.html) - Image element (used within picture)
-- [source](/paperwork.core/reference/htmltags/elements/html_source_element.html) - Source element specification
-- [iframe](/paperwork.core/reference/htmltags/elements/html_iframe_element.html) - Iframe element for embedded content
+- [source](/paperwork.core/reference/htmltags/elements/html_picture_element.html) - Source element specification
+- [iframe](/paperwork.core/reference/htmltags/elements/html_iframe_embed_element.html) - Iframe element for embedded content
 - [object](/paperwork.core/reference/htmltags/elements/html_object_element.html) - Object element for attachments
-- [CSS Media Queries](/paperwork.core/reference/styles/media.html) - Media query support
-- [Image Formats](/paperwork.core/reference/images/formats.html) - Supported image formats
+- [CSS Media Queries](/paperwork.core/reference/cssselectors/selectors/css_media_rule.html) - Media query support
+- [Image Formats](/paperwork.core/learning/06-content/01_images.html) - Supported image formats
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
-- [Responsive Images](/paperwork.core/reference/images/responsive.html) - Responsive image strategies
+- [Responsive Images](/paperwork.core/learning/06-content/01_images.html) - Responsive image strategies
 
 ---

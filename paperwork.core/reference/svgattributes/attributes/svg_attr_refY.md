@@ -87,7 +87,7 @@ refY="-2"
 
 The `refY` attribute is supported on:
 
-- **[&lt;marker&gt;](/paperwork.core/reference/svgtags/marker.html)** - Marker definition element
+- **[&lt;marker&gt;](/paperwork.core/reference/svgelements/elements/svg_marker_element.html)** - Marker definition element
 
 ---
 
@@ -710,7 +710,7 @@ Different `refY` values change vertical positioning:
 ## See Also
 
 - [refX](/paperwork.core/reference/svgattributes/attributes/svg_attr_refX.html) - Marker reference X position
-- [marker element](/paperwork.core/reference/svgtags/marker.html) - Marker definition element
+- [marker element](/paperwork.core/reference/svgelements/elements/svg_marker_element.html) - Marker definition element
 - [markerWidth](/paperwork.core/reference/svgattributes/attributes/svg_attr_markerWidth.html) - Marker viewport width
 - [markerHeight](/paperwork.core/reference/svgattributes/attributes/svg_attr_markerHeight.html) - Marker viewport height
 - [orient](/paperwork.core/reference/svgattributes/attributes/svg_attr_orient.html) - Marker orientation

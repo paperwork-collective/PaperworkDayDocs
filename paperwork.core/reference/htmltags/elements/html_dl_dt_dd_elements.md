@@ -888,7 +888,7 @@ Definition lists handle page breaks naturally:
 - [ol](html_ol_element.html) - Ordered list element
 - [li](html_li_element.html) - List item element
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic block container
-- [CSS Styles](/paperwork.core/learning/styles/) - Complete CSS styling
-- [Data Binding](/paperwork.core/learning/binding/) - Data binding and expressions
+- [CSS Styles](/paperwork.core/learning/03-styling/index.html) - Complete CSS styling
+- [Data Binding](/paperwork.core/learning/02-data-binding/index.html) - Data binding and expressions
 
 ---

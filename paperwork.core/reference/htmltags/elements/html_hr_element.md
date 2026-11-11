@@ -461,8 +461,8 @@ The horizontal rule is rendered as:
 - [br](/paperwork.core/reference/htmltags/elements/html_br_element.html) - Line break element
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Block container element
 - [p](/paperwork.core/reference/htmltags/elements/html_p_element.html) - Paragraph element
-- [Line Component](/paperwork.core/reference/components/line.html) - Base line component in Scryber namespace
-- [Page Breaks](/paperwork.core/reference/layout/pagebreaks.html) - Page breaking guide
-- [Borders and Styling](/paperwork.core/reference/styles/borders.html) - Border styling reference
+- [Line Component](/paperwork.core/reference/svgelements/elements/svg_line_element.html) - Base line component in Scryber namespace
+- [Page Breaks](/paperwork.core/learning/04-layout/03_sections_page_breaks.html) - Page breaking guide
+- [Borders and Styling](/paperwork.core/learning/03-styling/03_borders_spacing.html) - Border styling reference
 
 ---

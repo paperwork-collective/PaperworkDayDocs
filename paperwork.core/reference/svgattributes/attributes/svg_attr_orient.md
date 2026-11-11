@@ -86,7 +86,7 @@ orient="0.25turn"
 
 The `orient` attribute is supported on:
 
-- **[&lt;marker&gt;](/paperwork.core/reference/svgtags/marker.html)** - Marker element orientation
+- **[&lt;marker&gt;](/paperwork.core/reference/svgelements/elements/svg_marker_element.html)** - Marker element orientation
 
 ---
 
@@ -747,7 +747,7 @@ Create clock-like indicators with precise angles:
 
 ## See Also
 
-- [marker](/paperwork.core/reference/svgtags/marker.html) - Marker definition element
+- [marker](/paperwork.core/reference/svgelements/elements/svg_marker_element.html) - Marker definition element
 - [marker-start](/paperwork.core/reference/svgattributes/attributes/svg_attr_marker-start.html) - Start marker attribute
 - [marker-mid](/paperwork.core/reference/svgattributes/attributes/svg_attr_marker-mid.html) - Mid marker attribute
 - [marker-end](/paperwork.core/reference/svgattributes/attributes/svg_attr_marker-end.html) - End marker attribute

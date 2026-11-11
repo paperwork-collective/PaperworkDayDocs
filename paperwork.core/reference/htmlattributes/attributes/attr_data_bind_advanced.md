@@ -1046,11 +1046,11 @@ Handle a very large dataset with pagination and caching:
 
 ## See Also
 
-- [data-bind attribute](/paperwork.core/reference/htmlattributes/data-bind.html) - Primary template iteration attribute
+- [data-bind attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_bind.html) - Primary template iteration attribute
 - [template element](/paperwork.core/reference/htmltags/elements/html_template_element.html) - The template HTML element
-- [data-cache-styles attribute](/paperwork.core/reference/htmlattributes/data-cache-styles.html) - Performance optimization
-- [ForEach Component](/paperwork.core/reference/components/foreach.html) - Base component class
+- [data-cache-styles attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_cache_styles.html) - Performance optimization
+- [ForEach Component](/paperwork.core/reference/binding/helpers/each.html) - Base component class
 - [Data Binding](/paperwork.core/reference/binding/) - Complete data binding guide
-- [Expressions](/paperwork.core/reference/expressions/) - Expression syntax reference
+- [Expressions](/paperwork.core/reference/binding/index.html) - Expression syntax reference
 
 ---

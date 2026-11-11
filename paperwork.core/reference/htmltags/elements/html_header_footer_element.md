@@ -731,10 +731,10 @@ In the Scryber codebase:
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic block container
 - [aside](/paperwork.core/reference/htmltags/elements/html_aside_element.html) - Aside element for tangentially related content
 - [nav](/paperwork.core/reference/htmltags/elements/html_nav_element.html) - Navigation element
-- [Panel Component](/paperwork.core/reference/components/panel.html) - Base panel component
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [Panel Component](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Base panel component
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
-- [Page Headers and Footers](/paperwork.core/reference/page-headers-footers/) - Document-level page headers and footers
-- [Layout](/paperwork.core/reference/layout/) - Layout and positioning guide
+- [Page Headers and Footers](/paperwork.core/learning/04-layout/07_headers_footers.html) - Document-level page headers and footers
+- [Layout](/paperwork.core/learning/04-layout/index.html) - Layout and positioning guide
 
 ---

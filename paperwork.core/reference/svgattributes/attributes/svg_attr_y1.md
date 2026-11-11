@@ -83,7 +83,7 @@ The `y1` attribute is used to:
 
 The `y1` attribute is supported on:
 
-- **[&lt;linearGradient&gt;](/paperwork.core/reference/svgtags/linearGradient.html)** - Defines linear gradient start Y position
+- **[&lt;linearGradient&gt;](/paperwork.core/reference/svgelements/elements/svg_linearGradient_element.html)** - Defines linear gradient start Y position
 
 Note: This attribute is NOT used with `<radialGradient>` elements, which use `cx`/`cy` and `fx`/`fy` instead.
 
@@ -577,10 +577,10 @@ Vertical gradients are commonly used for:
 - [x1](/paperwork.core/reference/svgattributes/attributes/svg_attr_x1.html) - Linear gradient start X coordinate
 - [x2](/paperwork.core/reference/svgattributes/attributes/svg_attr_x2.html) - Linear gradient end X coordinate
 - [y2](/paperwork.core/reference/svgattributes/attributes/svg_attr_y2.html) - Linear gradient end Y coordinate
-- [linearGradient](/paperwork.core/reference/svgtags/linearGradient.html) - Linear gradient definition element
+- [linearGradient](/paperwork.core/reference/svgelements/elements/svg_linearGradient_element.html) - Linear gradient definition element
 - [gradientUnits](/paperwork.core/reference/svgattributes/attributes/svg_attr_gradientUnits.html) - Coordinate system mode
-- [stop](/paperwork.core/reference/svgtags/stop.html) - Gradient color stop element
+- [stop](/paperwork.core/reference/svgelements/elements/svg_stop_element.html) - Gradient color stop element
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
-- [CSS Gradients](/paperwork.core/reference/styles/gradients.html) - CSS gradient properties
+- [CSS Gradients](/paperwork.core/learning/03-styling/02_colors_backgrounds.html) - CSS gradient properties
 
 ---

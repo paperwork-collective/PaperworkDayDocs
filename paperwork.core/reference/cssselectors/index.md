@@ -56,7 +56,7 @@ div.blue{
 }
 ```
 
-For more information on selectors see the <a href='/learning/styles/'>Using Styles</a> articles.
+For more information on selectors see the <a href='/paperwork.core/learning/03-styling/index.html'>Using Styles</a> articles.
 
 ---
 
@@ -171,8 +171,8 @@ Pseudo element are keywords added to a selector to identify particular parts of 
 
 | Name  | Example  | Description |
 |---|---|---|
-| <a href='selectors/css_before_selector.html' >Before Content</a>   | ::before | ::before creates new pseudo element that is the first child of the matched element, often used to add cosmetic content. Also supports <a href='/learning/styles/counters.html' >counters</a>  |
-| <a href='selectors/css_after_selector.html' >After Content</a>   | ::after | ::after in a style selector creates new pseudo element that is the last child of the matched element, often used to add cosmetic content. Also supports <a href='/learning/styles/counters.html' >counters</a>  |
+| <a href='selectors/css_before_selector.html' >Before Content</a>   | ::before | ::before creates new pseudo element that is the first child of the matched element, often used to add cosmetic content. Also supports <a href='/paperwork.core/learning/06-content/04_lists.html' >counters</a>  |
+| <a href='selectors/css_after_selector.html' >After Content</a>   | ::after | ::after in a style selector creates new pseudo element that is the last child of the matched element, often used to add cosmetic content. Also supports <a href='/paperwork.core/learning/06-content/04_lists.html' >counters</a>  |
 
 
 **NOTE:**: There are more to come in the future.

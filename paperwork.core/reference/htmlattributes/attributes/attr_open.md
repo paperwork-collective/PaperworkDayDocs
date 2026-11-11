@@ -1127,10 +1127,10 @@ Common uses for details elements:
 
 ## See Also
 
-- [details](/paperwork.core/reference/htmltags/elements/html_details_element.html) - Details disclosure element
-- [summary](/paperwork.core/reference/htmltags/elements/html_summary_element.html) - Summary element for details
+- [details](/paperwork.core/reference/htmltags/elements/html_details_summary_element.html) - Details disclosure element
+- [summary](/paperwork.core/reference/htmltags/elements/html_details_summary_element.html) - Summary element for details
 - [hidden](/paperwork.core/reference/htmlattributes/attributes/attr_hidden.html) - Hidden attribute for visibility
-- [Collapsible Content](/paperwork.core/reference/techniques/collapsible.html) - Creating collapsible sections
-- [Interactive Elements](/paperwork.core/reference/interactive/) - Interactive HTML elements
+- [Collapsible Content](/paperwork.core/reference/htmltags/elements/html_details_summary_element.html) - Creating collapsible sections
+- [Interactive Elements](/paperwork.core/reference/htmlattributes/attributes/attr_href.html) - Interactive HTML elements
 
 ---

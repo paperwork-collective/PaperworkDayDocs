@@ -631,7 +631,7 @@ You've completed the Typography & Fonts series! Continue your journey:
 
 1. **[Content Components](/paperwork.core/learning/06-content/)** - Images, lists, tables
 2. **[Configuration](/paperwork.core/learning/07-configuration/)** - Document settings
-3. **[Practical Applications](/paperwork.core/learning/08-practical/)** - Real-world documents
+3. **[Practical Applications](/paperwork.core/learning/index.html)** - Real-world documents
 
 ---
 

@@ -562,7 +562,7 @@ public async Task TestPdfFileGeneration()
 ### Check Documentation
 
 1. **[HTML Element Reference](/paperwork.core/reference/htmltags/)** - Supported elements
-2. **[CSS Property Reference](/paperwork.core/reference/css/)** - Supported CSS
+2. **[CSS Property Reference](/paperwork.core/reference/cssproperties/index.html)** - Supported CSS
 
 ### Community Resources
 
@@ -627,7 +627,7 @@ Now that you can troubleshoot issues:
 
 1. **[Data Binding](/paperwork.core/learning/02-data-binding/)** - Make documents dynamic
 2. **[Document Configuration](/paperwork.core/learning/07-configuration/)** - Logging and error handling
-3. **[Practical Applications](/paperwork.core/learning/08-practical/)** - Real-world examples
+3. **[Practical Applications](/paperwork.core/learning/index.html)** - Real-world examples
 
 ---
 

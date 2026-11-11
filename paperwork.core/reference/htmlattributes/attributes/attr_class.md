@@ -1063,7 +1063,7 @@ Use classes to create reusable component patterns:
 
 - [id](/paperwork.core/reference/htmlattributes/attributes/attr_id.html) - Unique identifier attribute
 - [style](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styling attribute
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and dynamic expressions
 - [style element](/paperwork.core/reference/htmltags/elements/html_style_element.html) - Defining CSS styles
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic container element

@@ -534,7 +534,7 @@ Create striped tables using nth-child CSS selectors:
 - [table](/paperwork.core/reference/htmltags/elements/html_table_element.html) - Table element
 - [td](/paperwork.core/reference/htmltags/elements/html_td_element.html) - Table cell elements (td and th)
 - [thead, tbody, tfoot](/paperwork.core/reference/htmltags/elements/html_table_element.html#table-sections) - Table sections
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding
 
 ---

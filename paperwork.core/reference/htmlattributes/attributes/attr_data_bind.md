@@ -849,12 +849,12 @@ Show message when collection is empty:
 ## See Also
 
 - [template element](/paperwork.core/reference/htmltags/elements/html_template_element.html) - The template HTML element
-- [data-bind-start attribute](/paperwork.core/reference/htmlattributes/data-bind-start.html) - Control iteration start index
-- [data-bind-step attribute](/paperwork.core/reference/htmlattributes/data-bind-step.html) - Control iteration step
-- [data-bind-max attribute](/paperwork.core/reference/htmlattributes/data-bind-max.html) - Limit iteration count
-- [data-content attribute](/paperwork.core/reference/htmlattributes/data-content.html) - Inline template content
+- [data-bind-start attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_bind_advanced.html) - Control iteration start index
+- [data-bind-step attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_bind_advanced.html) - Control iteration step
+- [data-bind-max attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_bind_advanced.html) - Limit iteration count
+- [data-content attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_content.html) - Inline template content
 - [Data Binding](/paperwork.core/reference/binding/) - Complete data binding guide
-- [Expressions](/paperwork.core/reference/expressions/) - Expression syntax reference
-- [ForEach Component](/paperwork.core/reference/components/foreach.html) - Base component class
+- [Expressions](/paperwork.core/reference/binding/index.html) - Expression syntax reference
+- [ForEach Component](/paperwork.core/reference/binding/helpers/each.html) - Base component class
 
 ---

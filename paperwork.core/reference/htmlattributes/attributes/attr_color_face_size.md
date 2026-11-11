@@ -749,9 +749,9 @@ The CSS `style` attribute takes precedence over the deprecated attributes when c
 - [span element](/paperwork.core/reference/htmltags/elements/html_span_element.html) - Modern inline container (recommended)
 - [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styling
 - [class attribute](/paperwork.core/reference/htmlattributes/attributes/attr_class.html) - CSS class reference
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
-- [Color Values](/paperwork.core/reference/styles/colors.html) - CSS color reference
-- [Font Properties](/paperwork.core/reference/styles/fonts.html) - CSS font styling
-- [Text Formatting](/paperwork.core/reference/htmltags/text-formatting.html) - Modern text formatting elements
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
+- [Color Values](/paperwork.core/learning/03-styling/02_colors_backgrounds.html) - CSS color reference
+- [Font Properties](/paperwork.core/learning/05-typography/01_font_basics.html) - CSS font styling
+- [Text Formatting](/paperwork.core/reference/htmltags/elements/html_strong_em_element.html) - Modern text formatting elements
 
 ---

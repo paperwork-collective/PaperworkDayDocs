@@ -87,7 +87,7 @@ The `patternContentUnits` attribute is used to:
 
 The `patternContentUnits` attribute is supported on:
 
-- **[&lt;pattern&gt;](/paperwork.core/reference/svgtags/pattern.html)** - Pattern content coordinate system
+- **[&lt;pattern&gt;](/paperwork.core/reference/svgelements/elements/svg_pattern_element.html)** - Pattern content coordinate system
 
 ---
 
@@ -755,11 +755,11 @@ The combination of `patternUnits` and `patternContentUnits` creates four possibl
 
 ## See Also
 
-- [pattern](/paperwork.core/reference/svgtags/pattern.html) - Pattern definition element
+- [pattern](/paperwork.core/reference/svgelements/elements/svg_pattern_element.html) - Pattern definition element
 - [patternUnits](/paperwork.core/reference/svgattributes/attributes/svg_attr_patternUnits.html) - Pattern tile coordinate system
-- [patternTransform](/paperwork.core/reference/svgattributes/attributes/svg_attr_patternTransform.html) - Pattern transformation
+- [patternTransform](/paperwork.core/reference/svgattributes/attributes/svg_attr_transform.html) - Pattern transformation
 - [x](/paperwork.core/reference/svgattributes/attributes/svg_attr_x.html), [y](/paperwork.core/reference/svgattributes/attributes/svg_attr_y.html) - Pattern position
-- [width](/paperwork.core/reference/svgattributes/attributes/svg_attr_width.html), [height](/paperwork.core/reference/svgattributes/attributes/svg_attr_height.html) - Pattern tile dimensions
+- [width](/paperwork.core/reference/svgelements/elements/svg_svg_element.html), [height](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - Pattern tile dimensions
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

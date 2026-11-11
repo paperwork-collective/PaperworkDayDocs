@@ -477,7 +477,7 @@ Lines are efficient shapes for rendering. Use them for grids, axes, and connecto
 - [rect](/paperwork.core/reference/svgelements/elements/svg_rect_element.html) - SVG rectangle element
 - [polygon](/paperwork.core/reference/svgelements/elements/svg_polygon_element.html) - SVG polygon element
 - [svg](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG container element
-- [SVG Markers](/paperwork.core/reference/svgelements/elements/svg_markers_element.html) - Arrowheads and line decorations
+- [SVG Markers](/paperwork.core/reference/svgelements/elements/svg_marker_element.html) - Arrowheads and line decorations
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

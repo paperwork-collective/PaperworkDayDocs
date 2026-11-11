@@ -407,7 +407,7 @@ The `data` attribute works with `data-icon` for visual indicators:
         alt="Service Contract"></object>
 ```
 
-See [data-icon attribute](/paperwork.core/reference/htmlattributes/data-icon.html) for more details.
+See [data-icon attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_icon.html) for more details.
 
 ### Object vs Iframe/Embed
 
@@ -1103,12 +1103,12 @@ Important distinction:
 ## See Also
 
 - [object](/paperwork.core/reference/htmltags/elements/html_object_element.html) - Object element (uses data attribute)
-- [data-icon](/paperwork.core/reference/htmlattributes/data-icon.html) - Display icon for attachments
-- [data-file-data](/paperwork.core/reference/htmlattributes/data-file-data.html) - Binary file data for attachments
+- [data-icon](/paperwork.core/reference/htmlattributes/attributes/attr_data_icon.html) - Display icon for attachments
+- [data-file-data](/paperwork.core/reference/htmlattributes/attributes/attr_data_file.html) - Binary file data for attachments
 - [type](/paperwork.core/reference/htmlattributes/attributes/attr_type.html) - MIME type specification
 - [alt](/paperwork.core/reference/htmlattributes/attributes/attr_alt.html) - Alternative text/description
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic content and attribute values
-- [PDF Attachments](/paperwork.core/reference/pdf/attachments.html) - PDF attachment specifications
-- [File Resources](/paperwork.core/reference/resources/files.html) - Working with file resources
+- [PDF Attachments](/paperwork.core/learning/06-content/07_attachments_embedded.html) - PDF attachment specifications
+- [File Resources](/paperwork.core/configuration/index.html) - Working with file resources
 
 ---

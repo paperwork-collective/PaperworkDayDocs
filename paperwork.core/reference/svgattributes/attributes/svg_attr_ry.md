@@ -479,11 +479,11 @@ The `ry` attribute supports dynamic values using data binding expressions with `
 - [rx](/paperwork.core/reference/svgattributes/attributes/svg_attr_rx.html) - Horizontal radius attribute
 - [r](/paperwork.core/reference/svgattributes/attributes/svg_attr_r.html) - Radius attribute for circles
 - [cy](/paperwork.core/reference/svgattributes/attributes/svg_attr_cy.html) - Center Y coordinate attribute
-- [height](/paperwork.core/reference/svgattributes/attributes/svg_attr_height.html) - Height attribute
+- [height](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - Height attribute
 - [ellipse](/paperwork.core/reference/svgelements/elements/svg_ellipse_element.html) - SVG ellipse element
 - [rect](/paperwork.core/reference/svgelements/elements/svg_rect_element.html) - SVG rectangle element
 - [circle](/paperwork.core/reference/svgelements/elements/svg_circle_element.html) - SVG circle element
-- [SVG Transforms](/paperwork.core/reference/svgelements/elements/svg_transforms_element.html) - Transformation operations
+- [SVG Transforms](/paperwork.core/reference/svgattributes/attributes/svg_attr_transform.html) - Transformation operations
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

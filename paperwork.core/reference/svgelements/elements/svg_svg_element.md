@@ -2,7 +2,7 @@
 layout: default
 title: svg
 parent: SVG Elements
-parent_url: /paperwork.core/reference/svgtags/
+parent_url: /paperwork.core/reference/svgelements/index.html
 grand_parent: Paperwork.Reference
 grand_parent_url: /paperwork.core/reference/
 has_children: false
@@ -599,15 +599,15 @@ SVG content can be generated dynamically using data binding:
 
 ## See Also
 
-- [g](/paperwork.core/reference/svgtags/g.html) - Group container for organizing SVG elements
-- [defs](/paperwork.core/reference/svgtags/defs.html) - Definitions container for reusable elements
-- [use](/paperwork.core/reference/svgtags/use.html) - Reference and reuse defined elements
-- [a](/paperwork.core/reference/svgtags/a.html) - SVG anchor/link element
-- [SVG Shapes](/paperwork.core/reference/svgtags/shapes.html) - rect, circle, ellipse, line, polyline, polygon, path
-- [SVG Text](/paperwork.core/reference/svgtags/text.html) - Text rendering in SVG
-- [Canvas Component](/paperwork.core/reference/components/canvas.html) - Base canvas component
+- [g](/paperwork.core/reference/svgelements/elements/svg_g_element.html) - Group container for organizing SVG elements
+- [defs](/paperwork.core/reference/svgelements/elements/svg_defs_element.html) - Definitions container for reusable elements
+- [use](/paperwork.core/reference/svgelements/elements/svg_use_element.html) - Reference and reuse defined elements
+- [a](/paperwork.core/reference/svgelements/elements/svg_a_element.html) - SVG anchor/link element
+- [SVG Shapes](/paperwork.core/reference/svgelements/index.html) - rect, circle, ellipse, line, polyline, polygon, path
+- [SVG Text](/paperwork.core/reference/svgelements/elements/svg_text_element.html) - Text rendering in SVG
+- [Canvas Component](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Base canvas component
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
-- [Gradients](/paperwork.core/reference/svgtags/gradients.html) - Linear and radial gradients
-- [Patterns](/paperwork.core/reference/svgtags/patterns.html) - Pattern fills
+- [Gradients](/paperwork.core/reference/svgelements/elements/svg_linearGradient_element.html) - Linear and radial gradients
+- [Patterns](/paperwork.core/reference/svgelements/elements/svg_pattern_element.html) - Pattern fills
 
 ---

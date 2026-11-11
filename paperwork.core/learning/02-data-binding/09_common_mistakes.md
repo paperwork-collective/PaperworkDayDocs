@@ -792,7 +792,7 @@ Now that you know how to avoid common mistakes:
 
 1. **[Styling PDFs](/paperwork.core/learning/03-styling/)** - Apply advanced styling
 2. **[Layout Techniques](/paperwork.core/learning/04-layout/)** - Master page layout
-3. **[Practical Applications](/paperwork.core/learning/08-practical/)** - Build real-world documents
+3. **[Practical Applications](/paperwork.core/learning/index.html)** - Build real-world documents
 
 ---
 

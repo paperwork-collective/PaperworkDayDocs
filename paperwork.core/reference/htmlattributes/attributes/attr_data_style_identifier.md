@@ -742,10 +742,10 @@ For maximum performance, combine with:
 ## See Also
 
 - [template element](/paperwork.core/reference/htmltags/elements/html_template_element.html) - Template element for iteration
-- [data-bind attribute](/paperwork.core/reference/htmlattributes/data-bind.html) - Data binding for templates
-- [Performance Optimization](/paperwork.core/reference/performance/) - PDF generation optimization
-- [Style Caching](/paperwork.core/reference/performance/style-caching.html) - Style caching details
+- [data-bind attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_bind.html) - Data binding for templates
+- [Performance Optimization](/paperwork.core/learning/07-configuration/06_optimization_performance.html) - PDF generation optimization
+- [Style Caching](/paperwork.core/reference/htmlattributes/attributes/attr_data_cache_styles.html) - Style caching details
 - [Data Binding](/paperwork.core/reference/binding/) - Complete data binding reference
-- [Large Datasets](/paperwork.core/reference/performance/large-datasets.html) - Handling large datasets
+- [Large Datasets](/paperwork.core/learning/07-configuration/06_optimization_performance.html) - Handling large datasets
 
 ---

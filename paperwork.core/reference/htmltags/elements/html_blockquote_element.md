@@ -462,8 +462,8 @@ bquote.Contents.Add(q);
 ## See Also
 
 - [p](html_p_element.html) - Paragraph element
-- [cite](html_cite_element.html) - Citation element for referencing sources
-- [q](html_q_element.html) - Inline quotation element
+- [cite](/paperwork.core/reference/htmltags/elements/html_cite_defn_q_elements.html) - Citation element for referencing sources
+- [q](/paperwork.core/reference/htmltags/elements/html_cite_defn_q_elements.html) - Inline quotation element
 - [div](html_div_element.html) - Generic block container
 - [footer](html_header_footer_element.html) - Footer element for attribution
 

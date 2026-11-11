@@ -432,8 +432,8 @@ The stroke is drawn centered on the ellipse's outline, extending both inward and
 - [polygon](/paperwork.core/reference/svgelements/elements/svg_polygon_element.html) - SVG polygon element
 - [path](/paperwork.core/reference/svgelements/elements/svg_path_element.html) - SVG path element for complex shapes
 - [svg](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG container element
-- [SVG Gradients](/paperwork.core/reference/svgelements/elements/svg_gradients_element.html) - Linear and radial gradients
-- [SVG Transforms](/paperwork.core/reference/svgelements/elements/svg_transforms_element.html) - Transformation operations
+- [SVG Gradients](/paperwork.core/reference/svgelements/elements/svg_linearGradient_element.html) - Linear and radial gradients
+- [SVG Transforms](/paperwork.core/reference/svgattributes/attributes/svg_attr_transform.html) - Transformation operations
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

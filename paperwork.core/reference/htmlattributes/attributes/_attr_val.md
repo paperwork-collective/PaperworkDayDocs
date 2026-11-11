@@ -576,11 +576,11 @@ An empty or missing `val` attribute results in an empty output:
 
 - [output element](/paperwork.core/reference/htmltags/elements/html_output_element.html) - The output HTML element
 - [form attribute](/paperwork.core/reference/htmlattributes/attributes/attr_form.html) - Associates output with form
-- [for attribute](/paperwork.core/reference/htmlattributes/attributes/attr_for.html) - Associates output with form controls
-- [value attribute](/paperwork.core/reference/htmlattributes/attributes/attr_value.html) - Input value attribute
-- [name attribute](/paperwork.core/reference/htmlattributes/attributes/attr_name.html) - Names form elements
+- [for attribute](/paperwork.core/reference/htmltags/elements/html_label_element.html) - Associates output with form controls
+- [value attribute](/paperwork.core/reference/htmlattributes/index.html) - Input value attribute
+- [name attribute](/paperwork.core/reference/htmlattributes/index.html) - Names form elements
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding
-- [Expressions](/paperwork.core/reference/expressions/) - Expression syntax
+- [Expressions](/paperwork.core/reference/binding/index.html) - Expression syntax
 - [HTML Forms](/paperwork.core/reference/forms/) - Complete form reference
 
 ---

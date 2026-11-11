@@ -992,6 +992,6 @@ You can hide large document sections including all nested content:
 - [style](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styling (including display property)
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding and expressions
 - [template](/paperwork.core/reference/htmltags/elements/html_template_element.html) - Template element for repeating content
-- [Conditional Rendering](/paperwork.core/reference/binding/conditionals.html) - Conditional content patterns
+- [Conditional Rendering](/paperwork.core/reference/binding/helpers/if.html) - Conditional content patterns
 
 ---

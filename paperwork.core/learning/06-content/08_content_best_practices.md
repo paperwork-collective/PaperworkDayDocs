@@ -647,7 +647,7 @@ appendix.html
 You've completed the Content Components series! Continue your journey:
 
 1. **[Configuration](/paperwork.core/learning/07-configuration/)** - Document settings and optimization
-2. **[Practical Applications](/paperwork.core/learning/08-practical/)** - Real-world document examples
+2. **[Practical Applications](/paperwork.core/learning/index.html)** - Real-world document examples
 3. **Review previous series** - Reinforce learning
 
 ---

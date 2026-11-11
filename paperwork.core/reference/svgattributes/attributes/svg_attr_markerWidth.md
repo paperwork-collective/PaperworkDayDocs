@@ -83,7 +83,7 @@ markerWidth="-5"   <!-- Invalid: negative not allowed -->
 
 The `markerWidth` attribute is supported on:
 
-- **[&lt;marker&gt;](/paperwork.core/reference/svgtags/marker.html)** - Marker definition element
+- **[&lt;marker&gt;](/paperwork.core/reference/svgelements/elements/svg_marker_element.html)** - Marker definition element
 
 ---
 
@@ -654,7 +654,7 @@ The `refX` value should coordinate with `markerWidth`:
 ## See Also
 
 - [markerHeight](/paperwork.core/reference/svgattributes/attributes/svg_attr_markerHeight.html) - Marker viewport height
-- [marker element](/paperwork.core/reference/svgtags/marker.html) - Marker definition element
+- [marker element](/paperwork.core/reference/svgelements/elements/svg_marker_element.html) - Marker definition element
 - [refX](/paperwork.core/reference/svgattributes/attributes/svg_attr_refX.html) - Marker reference X position
 - [refY](/paperwork.core/reference/svgattributes/attributes/svg_attr_refY.html) - Marker reference Y position
 - [markerUnits](/paperwork.core/reference/svgattributes/attributes/svg_attr_markerUnits.html) - Marker coordinate system

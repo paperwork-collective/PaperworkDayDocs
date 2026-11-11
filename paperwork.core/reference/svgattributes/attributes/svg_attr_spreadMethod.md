@@ -90,8 +90,8 @@ The `spreadMethod` attribute is used to:
 
 The `spreadMethod` attribute is supported on:
 
-- **[&lt;linearGradient&gt;](/paperwork.core/reference/svgtags/linearGradient.html)** - Linear gradient spread behavior
-- **[&lt;radialGradient&gt;](/paperwork.core/reference/svgtags/radialGradient.html)** - Radial gradient spread behavior
+- **[&lt;linearGradient&gt;](/paperwork.core/reference/svgelements/elements/svg_linearGradient_element.html)** - Linear gradient spread behavior
+- **[&lt;radialGradient&gt;](/paperwork.core/reference/svgelements/elements/svg_radialGradient_element.html)** - Radial gradient spread behavior
 
 ---
 
@@ -603,12 +603,12 @@ For radial gradients, spread methods work concentrically:
 
 ## See Also
 
-- [linearGradient](/paperwork.core/reference/svgtags/linearGradient.html) - Linear gradient definition element
-- [radialGradient](/paperwork.core/reference/svgtags/radialGradient.html) - Radial gradient definition element
+- [linearGradient](/paperwork.core/reference/svgelements/elements/svg_linearGradient_element.html) - Linear gradient definition element
+- [radialGradient](/paperwork.core/reference/svgelements/elements/svg_radialGradient_element.html) - Radial gradient definition element
 - [x1](/paperwork.core/reference/svgattributes/attributes/svg_attr_x1.html), [y1](/paperwork.core/reference/svgattributes/attributes/svg_attr_y1.html), [x2](/paperwork.core/reference/svgattributes/attributes/svg_attr_x2.html), [y2](/paperwork.core/reference/svgattributes/attributes/svg_attr_y2.html) - Linear gradient coordinates
 - [cx](/paperwork.core/reference/svgattributes/attributes/svg_attr_cx.html), [cy](/paperwork.core/reference/svgattributes/attributes/svg_attr_cy.html), [r](/paperwork.core/reference/svgattributes/attributes/svg_attr_r.html) - Radial gradient coordinates
 - [gradientUnits](/paperwork.core/reference/svgattributes/attributes/svg_attr_gradientUnits.html) - Coordinate system mode
-- [stop](/paperwork.core/reference/svgtags/stop.html) - Gradient color stop element
+- [stop](/paperwork.core/reference/svgelements/elements/svg_stop_element.html) - Gradient color stop element
 - [offset](/paperwork.core/reference/svgattributes/attributes/svg_attr_offset.html) - Gradient stop position
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 

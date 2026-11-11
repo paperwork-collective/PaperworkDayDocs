@@ -392,11 +392,11 @@ The `word-spacing` property supports data binding for dynamic control of word sp
 
 ## See Also
 
-- [letter-spacing](/paperwork.core/reference/cssproperties/letter-spacing) - Space between characters
-- [text-align](/paperwork.core/reference/cssproperties/text-align) - Text alignment
-- [line-height](/paperwork.core/reference/cssproperties/line-height) - Line spacing
-- [white-space](/paperwork.core/reference/cssproperties/white-space) - Whitespace handling
-- [font-size](/paperwork.core/reference/cssproperties/font-size) - Text size
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [letter-spacing](/paperwork.core/reference/cssproperties/properties/css_prop_letter-spacing.html) - Space between characters
+- [text-align](/paperwork.core/reference/cssproperties/properties/css_prop_text-align.html) - Text alignment
+- [line-height](/paperwork.core/reference/cssproperties/properties/css_prop_line-height.html) - Line spacing
+- [white-space](/paperwork.core/reference/cssproperties/properties/css_prop_white-space.html) - Whitespace handling
+- [font-size](/paperwork.core/reference/cssproperties/properties/css_prop_font-size.html) - Text size
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

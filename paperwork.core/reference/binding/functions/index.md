@@ -70,7 +70,7 @@ Manipulate and format text.
 
 | Function | Description | Example |
 |----------|-------------|---------|
-| [format](./format) / [string](./string.md) | Format values as strings | `{% raw %}{{format(model.price, 'C2')}}{% endraw %}` |
+| [format](./format) / [string](/paperwork.core/reference/binding/functions/index.html) | Format values as strings | `{% raw %}{{format(model.price, 'C2')}}{% endraw %}` |
 | [concat](./concat) | Concatenate strings | `{% raw %}{{concat(model.first, ' ', model.last)}}{% endraw %}` |
 | [join](./join) | Join array with separator | `{% raw %}{{join(model.items, ', ')}}{% endraw %}` |
 | [substring](./substring) | Extract substring | `{% raw %}{{substring(model.text, 0, 10)}}{% endraw %}` |
@@ -180,7 +180,7 @@ Aggregate and manipulate collections.
 | [max](./max) | Maximum value | `{% raw %}{{max(model.numbers)}}{% endraw %}` |
 | [maxOf](./maxOf) | Maximum property value | `{% raw %}{{maxOf(model.items, 'price')}}{% endraw %}` |
 | [collect](./collect) | Extract property values | `{% raw %}{{eachOf(model.items, 'name')}}{% endraw %}` |
-| [each](./each) | Iterate with function | `{% raw %}{{each(model.items, 'transform')}}{% endraw %}` |
+| [each](/paperwork.core/reference/binding/helpers/each.html) | Iterate with function | `{% raw %}{{each(model.items, 'transform')}}{% endraw %}` |
 | [eachOf](./eachOf) | Iterate property with function | `{% raw %}{{eachOf(model.items, 'prop', 'fn')}}{% endraw %}` |
 | [firstWhere](./firstWhere) | Find first matching item | `{% raw %}{{firstWhere(model.items, 'isActive')}}{% endraw %}` |
 | [selectWhere](./selectWhere) | Filter collection | `{% raw %}{{selectWhere(model.items, 'isActive')}}{% endraw %}` |
@@ -311,6 +311,6 @@ Dynamic CSS calculations.
 
 - [Handlebars Helpers](../helpers/) - Control flow and context management
 - [Binding Operators](../operators/) - Mathematical, comparison, and logical operators
-- [Expressions Guide](../../learning/02-data-binding/02_expression_functions.html) - Complete guide to expressions
+- [Expressions Guide](/paperwork.core/learning/02-data-binding/02_expression_functions.html) - Complete guide to expressions
 
 ---

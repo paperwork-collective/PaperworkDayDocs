@@ -439,7 +439,7 @@ This has been a quick dive into the capabilities of the core engine. There is st
 
 - [Data binding functions](/paperwork.core/learning/02-data-binding/) and the [reference](/paperwork.core/reference/binding) listing
 
-- Dynamic [SVG drawings and charts](/paperwork.core/learning/06-content/02_svg_basics/) and the [reference](/paperwork.core/reference/svgelements) contents.
+- Dynamic [SVG drawings and charts](/paperwork.core/learning/06-content/02_svg_basics.html) and the [reference](/paperwork.core/reference/svgelements) contents.
 
 - [Typography and fonts](/paperwork.core/learning/05-typography/) for using the standard fonts, and including [custom fonts](/paperwork.core/reference/cssselectors/selectors/css_font_face_rule).
 

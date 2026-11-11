@@ -95,12 +95,12 @@ The `href` attribute is used to:
 
 The `href` attribute is supported on:
 
-- **[&lt;use&gt;](/paperwork.core/reference/svgtags/use.html)** - Reference to reusable element
-- **[&lt;image&gt;](/paperwork.core/reference/svgtags/image.html)** - External image reference
-- **[&lt;a&gt;](/paperwork.core/reference/svgtags/a.html)** - Hyperlink reference
-- **[&lt;linearGradient&gt;](/paperwork.core/reference/svgtags/linearGradient.html)** - Reference to another gradient (inheritance)
-- **[&lt;radialGradient&gt;](/paperwork.core/reference/svgtags/radialGradient.html)** - Reference to another gradient (inheritance)
-- **[&lt;pattern&gt;](/paperwork.core/reference/svgtags/pattern.html)** - Reference to another pattern (inheritance)
+- **[&lt;use&gt;](/paperwork.core/reference/svgelements/elements/svg_use_element.html)** - Reference to reusable element
+- **[&lt;image&gt;](/paperwork.core/reference/svgelements/elements/svg_image_element.html)** - External image reference
+- **[&lt;a&gt;](/paperwork.core/reference/svgelements/elements/svg_a_element.html)** - Hyperlink reference
+- **[&lt;linearGradient&gt;](/paperwork.core/reference/svgelements/elements/svg_linearGradient_element.html)** - Reference to another gradient (inheritance)
+- **[&lt;radialGradient&gt;](/paperwork.core/reference/svgelements/elements/svg_radialGradient_element.html)** - Reference to another gradient (inheritance)
+- **[&lt;pattern&gt;](/paperwork.core/reference/svgelements/elements/svg_pattern_element.html)** - Reference to another pattern (inheritance)
 - **fill** and **stroke** attributes - Reference to paint servers via `url(#id)`
 
 ---
@@ -791,15 +791,15 @@ The `<use>` element clones referenced content:
 
 ## See Also
 
-- [use](/paperwork.core/reference/svgtags/use.html) - Use element for referencing
-- [image](/paperwork.core/reference/svgtags/image.html) - Image element
-- [a](/paperwork.core/reference/svgtags/a.html) - Anchor/link element
-- [linearGradient](/paperwork.core/reference/svgtags/linearGradient.html) - Linear gradient element
-- [radialGradient](/paperwork.core/reference/svgtags/radialGradient.html) - Radial gradient element
-- [pattern](/paperwork.core/reference/svgtags/pattern.html) - Pattern element
-- [marker](/paperwork.core/reference/svgtags/marker.html) - Marker element
-- [symbol](/paperwork.core/reference/svgtags/symbol.html) - Symbol element for reuse
-- [defs](/paperwork.core/reference/svgtags/defs.html) - Definitions container
+- [use](/paperwork.core/reference/svgelements/elements/svg_use_element.html) - Use element for referencing
+- [image](/paperwork.core/reference/svgelements/elements/svg_image_element.html) - Image element
+- [a](/paperwork.core/reference/svgelements/elements/svg_a_element.html) - Anchor/link element
+- [linearGradient](/paperwork.core/reference/svgelements/elements/svg_linearGradient_element.html) - Linear gradient element
+- [radialGradient](/paperwork.core/reference/svgelements/elements/svg_radialGradient_element.html) - Radial gradient element
+- [pattern](/paperwork.core/reference/svgelements/elements/svg_pattern_element.html) - Pattern element
+- [marker](/paperwork.core/reference/svgelements/elements/svg_marker_element.html) - Marker element
+- [symbol](/paperwork.core/reference/svgelements/elements/svg_use_element.html) - Symbol element for reuse
+- [defs](/paperwork.core/reference/svgelements/elements/svg_defs_element.html) - Definitions container
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

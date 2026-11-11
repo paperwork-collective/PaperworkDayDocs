@@ -29,7 +29,7 @@ has_toc: false
 
 Brief description of what this helper does.
 
-**Based on:** [Link to underlying Scryber element/component](../../htmltags/element.md)
+**Based on:** [Link to underlying Scryber element/component](/paperwork.core/reference/htmltags/index.html)
 
 ## Syntax
 
@@ -136,7 +136,7 @@ Brief explanation of how it works internally.
 
 ## See Also
 
-- [Related Helper](./related.md)
+- [Related Helper](/paperwork.core/reference/binding/index.html)
 - [Data Binding Basics](../../learning/02-data-binding/01_data_binding_basics.html)
 
 ---

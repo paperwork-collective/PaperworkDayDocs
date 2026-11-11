@@ -253,11 +253,11 @@ The `<continuation-footer>` element can be placed within:
 ## See Also
 
 - [continuation-header](html_continuation-header_element) - The header on continuation pages.
-- [footer](html_footer_element) - Individual page footers
+- [footer](/paperwork.core/reference/htmltags/elements/html_header_footer_element.html) - Individual page footers
 - [body](html_body_element) - The document body element
 - [section](html_section_element) - Section Element
-- [page](html_page_element) - Page number display
-- [Page Management](learning/styles/page_layout) - Page breaks, sections and content flow.
-- [Multi-page Documents](/paperwork.core/learning/styles/page_sizes) - Page sizing, numbering and grouping.
+- [page](/paperwork.core/reference/htmltags/index.html) - Page number display
+- [Page Management](/paperwork.core/learning/04-layout/index.html) - Page breaks, sections and content flow.
+- [Multi-page Documents](/paperwork.core/learning/04-layout/01_page_sizes_orientation.html) - Page sizing, numbering and grouping.
 
 ---

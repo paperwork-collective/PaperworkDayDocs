@@ -389,11 +389,11 @@ For PDF generation with Scryber:
 
 - [img](/paperwork.core/reference/htmltags/elements/html_img_element.html) - Image element
 - [picture](/paperwork.core/reference/htmltags/elements/html_picture_element.html) - Picture element for art direction
-- [source](/paperwork.core/reference/htmltags/elements/html_source_element.html) - Source element for media
+- [source](/paperwork.core/reference/htmltags/elements/html_picture_element.html) - Source element for media
 - [src](/paperwork.core/reference/htmlattributes/attributes/attr_src.html) - Source attribute
 - [alt](/paperwork.core/reference/htmlattributes/attributes/attr_alt.html) - Alternative text attribute
-- [width](/paperwork.core/reference/htmlattributes/attributes/attr_width.html) - Width attribute
-- [height](/paperwork.core/reference/htmlattributes/attributes/attr_height.html) - Height attribute
-- [sizes](/paperwork.core/reference/htmlattributes/attributes/attr_sizes.html) - Sizes attribute for responsive images
+- [width](/paperwork.core/reference/htmlattributes/attributes/attr_width_height.html) - Width attribute
+- [height](/paperwork.core/reference/htmlattributes/attributes/attr_width_height.html) - Height attribute
+- [sizes](/paperwork.core/reference/htmlattributes/attributes/attr_srcset.html) - Sizes attribute for responsive images
 
 ---

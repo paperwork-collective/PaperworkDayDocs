@@ -8,6 +8,7 @@ grand_parent_url: /paperwork.core/reference/binding/
 has_children: false
 has_toc: false
 nav_order: 5
+render_with_liquid: false
 ---
 
 # ../ : Parent Context
@@ -30,17 +31,17 @@ Refers to the enclosing data context - the item one level up from the current `w
 
 ## Syntax
 
-{% raw %}
+
 ```
 {{../property}}
 ```
-{% endraw %}
+
 
 ---
 
 ## Single level only
 
-`../` moves up **one** level. It cannot be chained - `../../` is not supported. To reach a value further up, use its data name from the top, such as {% raw %}`{{model.title}}`{% endraw %}, which is available everywhere.
+`../` moves up **one** level. It cannot be chained - `../../` is not supported. To reach a value further up, use its data name from the top, such as `{{model.title}}`, which is available everywhere.
 
 ---
 
@@ -59,7 +60,7 @@ builder.WithData("model", new {
 
 **Template:**
 
-{% raw %}
+
 ```html
 {{#with model}}
     {{#with groups[0]}}
@@ -73,7 +74,7 @@ builder.WithData("model", new {
     {{/each}}
 {{/each}}
 ```
-{% endraw %}
+
 
 **Output:**
 
@@ -87,9 +88,9 @@ V2 in Vans
 
 ## Notes
 
-- At the outermost `with` block or loop, the enclosing context is the document's data itself, so use the data name directly - {% raw %}`{{model.currency}}`, not `{{../currency}}`{% endraw %}.
+- At the outermost `with` block or loop, the enclosing context is the document's data itself, so use the data name directly - `{{model.currency}}`, not `{{../currency}}`.
 - Data names such as `model` never need `../`.
-- Write the parent's property directly after `../` - {% raw %}`{{../name}}`{% endraw %}. `{% raw %}{{../this.name}}{% endraw %}` gives no value, and `{% raw %}{{../.name}}{% endraw %}` is not valid.
+- Write the parent's property directly after `../` - `{{../name}}`. `{{../this.name}}` gives no value, and `{{../.name}}` is not valid.
 - `../../` gives no value (there is no error).
 - Requires Paperwork.Core 9.8 inside `{{#each}}` loops; earlier versions support `../` inside `{{#with}}` blocks only.
 

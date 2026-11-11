@@ -727,10 +727,10 @@ Scryber's configuration and extension system provides a comprehensive framework 
 
 ### Related Documentation
 
-- **Expression Binding**: Covered separately in [Data Binding Documentation](../learning/binding/)
-- **CSS Parsers**: See [Style System Deep Dive](style-system-deep-dive.md)
-- **Layout Engine**: See [Layout Architecture](layout-architecture.md)
-- **PDF Generation**: See [PDF Writing Pipeline](pdf-writing-pipeline.md)
+- **Expression Binding**: Covered separately in [Data Binding Documentation](/paperwork.core/learning/02-data-binding/index.html)
+- **CSS Parsers**: See [Style System Deep Dive](/paperwork.core/configuration/ARCHITECTURE.html)
+- **Layout Engine**: See [Layout Architecture](/paperwork.core/configuration/ARCHITECTURE.html)
+- **PDF Generation**: See [PDF Writing Pipeline](/paperwork.core/configuration/ARCHITECTURE.html)
 
 ---
 

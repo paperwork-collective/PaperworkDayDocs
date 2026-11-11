@@ -638,11 +638,11 @@ Headings have default `overflow-split: never` behavior, meaning they won't split
 - [p](/paperwork.core/reference/htmltags/elements/html_p_element.html) - Paragraph element
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic block container
 - [span](/paperwork.core/reference/htmltags/elements/html_span_element.html) - Inline text container
-- [strong](/paperwork.core/reference/htmltags/elements/html_strong_element.html) - Bold text emphasis
-- [em](/paperwork.core/reference/htmltags/elements/html_em_element.html) - Italic text emphasis
-- [Heading Component](/paperwork.core/reference/components/heading.html) - Base heading component in Scryber namespace
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [strong](/paperwork.core/reference/htmltags/elements/html_strong_em_element.html) - Bold text emphasis
+- [em](/paperwork.core/reference/htmltags/elements/html_strong_em_element.html) - Italic text emphasis
+- [Heading Component](/paperwork.core/reference/htmltags/elements/html_headings_element.html) - Base heading component in Scryber namespace
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
-- [Document Structure](/paperwork.core/reference/structure/) - Document organization and outlines
+- [Document Structure](/paperwork.core/learning/01-getting-started/05_pages_sections.html) - Document organization and outlines
 
 ---

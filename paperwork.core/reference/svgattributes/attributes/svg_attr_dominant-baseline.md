@@ -90,9 +90,9 @@ The most commonly used values are:
 
 The `dominant-baseline` attribute is supported on:
 
-- **[&lt;text&gt;](/paperwork.core/reference/svgtags/text.html)** - Text element
-- **[&lt;tspan&gt;](/paperwork.core/reference/svgtags/tspan.html)** - Text span element
-- **[&lt;textPath&gt;](/paperwork.core/reference/svgtags/textPath.html)** - Text on path element
+- **[&lt;text&gt;](/paperwork.core/reference/svgelements/elements/svg_text_element.html)** - Text element
+- **[&lt;tspan&gt;](/paperwork.core/reference/svgelements/elements/svg_tspan_element.html)** - Text span element
+- **[&lt;textPath&gt;](/paperwork.core/reference/svgelements/elements/svg_text_element.html)** - Text on path element
 
 ---
 
@@ -859,12 +859,12 @@ The y coordinate refers to different positions based on baseline:
 
 ## See Also
 
-- [text](/paperwork.core/reference/svgtags/text.html) - Text element
-- [tspan](/paperwork.core/reference/svgtags/tspan.html) - Text span element
+- [text](/paperwork.core/reference/svgelements/elements/svg_text_element.html) - Text element
+- [tspan](/paperwork.core/reference/svgelements/elements/svg_tspan_element.html) - Text span element
 - [text-anchor](/paperwork.core/reference/svgattributes/attributes/svg_attr_text-anchor.html) - Horizontal text alignment
 - [x](/paperwork.core/reference/svgattributes/attributes/svg_attr_x.html), [y](/paperwork.core/reference/svgattributes/attributes/svg_attr_y.html) - Text position coordinates
-- [font-size](/paperwork.core/reference/svgattributes/attributes/svg_attr_font-size.html) - Text size
-- [fill](/paperwork.core/reference/svgattributes/attributes/svg_attr_fill.html) - Text color
+- [font-size](/paperwork.core/reference/cssproperties/properties/css_prop_font-size.html) - Text size
+- [fill](/paperwork.core/reference/cssproperties/properties/css_prop_fill.html) - Text color
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

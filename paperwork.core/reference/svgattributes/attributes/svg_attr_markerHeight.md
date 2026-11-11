@@ -83,7 +83,7 @@ markerHeight="-5"   <!-- Invalid: negative not allowed -->
 
 The `markerHeight` attribute is supported on:
 
-- **[&lt;marker&gt;](/paperwork.core/reference/svgtags/marker.html)** - Marker definition element
+- **[&lt;marker&gt;](/paperwork.core/reference/svgelements/elements/svg_marker_element.html)** - Marker definition element
 
 ---
 
@@ -621,7 +621,7 @@ With `markerUnits="strokeWidth"`, the effective height scales:
 ## See Also
 
 - [markerWidth](/paperwork.core/reference/svgattributes/attributes/svg_attr_markerWidth.html) - Marker viewport width
-- [marker element](/paperwork.core/reference/svgtags/marker.html) - Marker definition element
+- [marker element](/paperwork.core/reference/svgelements/elements/svg_marker_element.html) - Marker definition element
 - [refX](/paperwork.core/reference/svgattributes/attributes/svg_attr_refX.html) - Marker reference X position
 - [refY](/paperwork.core/reference/svgattributes/attributes/svg_attr_refY.html) - Marker reference Y position
 - [markerUnits](/paperwork.core/reference/svgattributes/attributes/svg_attr_markerUnits.html) - Marker coordinate system

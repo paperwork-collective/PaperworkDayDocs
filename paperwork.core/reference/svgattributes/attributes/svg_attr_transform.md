@@ -786,10 +786,10 @@ Note that SVG transforms are different from CSS transforms:
 ## See Also
 
 - [transform-origin](/paperwork.core/reference/svgattributes/attributes/svg_attr_transform-origin.html) - Transform origin point
-- [g](/paperwork.core/reference/svgtags/g.html) - Group element for transforming multiple elements
-- [svg](/paperwork.core/reference/svgtags/svg.html) - SVG canvas container
-- [matrix](/paperwork.core/reference/svgattributes/attributes/svg_attr_matrix.html) - Matrix transformation attribute
+- [g](/paperwork.core/reference/svgelements/elements/svg_g_element.html) - Group element for transforming multiple elements
+- [svg](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG canvas container
+- [matrix](/paperwork.core/reference/svgattributes/attributes/svg_attr_transform.html) - Matrix transformation attribute
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding
-- [SVG Shapes](/paperwork.core/reference/svgtags/shapes.html) - rect, circle, ellipse, line, etc.
+- [SVG Shapes](/paperwork.core/reference/svgelements/index.html) - rect, circle, ellipse, line, etc.
 
 ---

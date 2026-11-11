@@ -340,7 +340,7 @@ The `<div>` element uses the `LayoutEnginePanel` layout engine, which:
 - [span](html_span_element.html) - Inline container element
 - [p](html_p_element.html) - Paragraph element (block container with margins)
 - [section](html_section_element.html) - Semantic section element
-- [CSS Styles](/paperwork.core/learning/styles/) - Complete CSS styling reference
-- [Data Binding](/paperwork.core/learning/binding/) - Data binding and expressions
+- [CSS Styles](/paperwork.core/learning/03-styling/index.html) - Complete CSS styling reference
+- [Data Binding](/paperwork.core/learning/02-data-binding/index.html) - Data binding and expressions
 
 ---

@@ -382,6 +382,6 @@ Applies styles conditionally based on media queries.
 - [@page Rule](/paperwork.core/reference/cssselectors/selectors/css_page_rule)
 - [Element Selector](/paperwork.core/reference/cssselectors/selectors/css_element_selector)
 - [Class Selector](/paperwork.core/reference/cssselectors/selectors/css_class_selector)
-- [Responsive Design in Scryber](/guides/responsive_design)
+- [Responsive Design in Scryber](/paperwork.core/learning/04-layout/08_layout_best_practices.html)
 
 ---

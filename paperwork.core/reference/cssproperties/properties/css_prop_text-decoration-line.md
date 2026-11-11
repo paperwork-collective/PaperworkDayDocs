@@ -388,11 +388,11 @@ The `text-decoration-line` property supports data binding for dynamic decoration
 
 ## See Also
 
-- [text-decoration](/paperwork.core/reference/cssproperties/text-decoration) - Shorthand text decoration property
-- [text-decoration-color](/paperwork.core/reference/cssproperties/text-decoration-color) - Decoration line color
-- [text-decoration-style](/paperwork.core/reference/cssproperties/text-decoration-style) - Decoration line style
-- [color](/paperwork.core/reference/cssproperties/color) - Text color
-- [border-bottom](/paperwork.core/reference/cssproperties/border-bottom) - Alternative underline effect
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [text-decoration](/paperwork.core/reference/cssproperties/properties/css_prop_text-decoration.html) - Shorthand text decoration property
+- [text-decoration-color](/paperwork.core/reference/cssproperties/properties/css_prop_text-decoration-color.html) - Decoration line color
+- [text-decoration-style](/paperwork.core/reference/cssproperties/properties/css_prop_text-decoration-style.html) - Decoration line style
+- [color](/paperwork.core/reference/cssproperties/properties/css_prop_color.html) - Text color
+- [border-bottom](/paperwork.core/reference/cssproperties/properties/css_prop_border-bottom.html) - Alternative underline effect
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

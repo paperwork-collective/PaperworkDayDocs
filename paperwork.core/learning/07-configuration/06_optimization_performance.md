@@ -289,7 +289,7 @@ Hundreds of documents at once can run out of memory.
 ## Next Steps
 
 1. **[Production & Deployment](07_production_deployment.html)** - Deploy to production
-2. **[Practical Applications](/paperwork.core/learning/08-practical/)** - Real-world examples
+2. **[Practical Applications](/paperwork.core/learning/index.html)** - Real-world examples
 
 ---
 

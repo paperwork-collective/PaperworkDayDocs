@@ -783,10 +783,10 @@ When `preserveAspectRatio="none"`:
 ## See Also
 
 - [viewBox](/paperwork.core/reference/svgattributes/attributes/svg_attr_viewBox.html) - SVG viewport and coordinate system
-- [svg](/paperwork.core/reference/svgtags/svg.html) - SVG canvas element
-- [width and height](/paperwork.core/reference/htmlattributes/width-height.html) - Viewport dimensions
-- [image](/paperwork.core/reference/svgtags/image.html) - Embedded image element
-- [symbol](/paperwork.core/reference/svgtags/symbol.html) - Symbol definition
+- [svg](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG canvas element
+- [width and height](/paperwork.core/reference/htmlattributes/attributes/attr_width_height.html) - Viewport dimensions
+- [image](/paperwork.core/reference/svgelements/elements/svg_image_element.html) - Embedded image element
+- [symbol](/paperwork.core/reference/svgelements/elements/svg_use_element.html) - Symbol definition
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding
 - [SVG Coordinate Systems](https://www.w3.org/TR/SVG2/coords.html) - W3C specification
 

@@ -876,10 +876,10 @@ For PDF generation:
 
 ## See Also
 
-- [th](/paperwork.core/reference/htmltags/elements/html_th_element.html) - Table header cell element
+- [th](/paperwork.core/reference/htmltags/elements/html_table_element.html) - Table header cell element
 - [table](/paperwork.core/reference/htmltags/elements/html_table_element.html) - Table element
-- [thead](/paperwork.core/reference/htmltags/elements/html_thead_element.html) - Table head element
-- [tbody](/paperwork.core/reference/htmltags/elements/html_tbody_element.html) - Table body element
+- [thead](/paperwork.core/reference/htmltags/elements/html_table_element.html) - Table head element
+- [tbody](/paperwork.core/reference/htmltags/elements/html_table_element.html) - Table body element
 - [colspan](/paperwork.core/reference/htmlattributes/attributes/attr_colspan.html) - Column span attribute
 - [rowspan](/paperwork.core/reference/htmlattributes/attributes/attr_rowspan.html) - Row span attribute
 - [headers](/paperwork.core/reference/htmlattributes/attributes/attr_headers.html) - Headers attribute for complex associations

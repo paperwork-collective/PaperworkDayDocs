@@ -545,6 +545,6 @@ Or using data attributes:
 - [li](/paperwork.core/reference/htmltags/elements/html_li_element.html) - List item element
 - [ol](/paperwork.core/reference/htmltags/elements/html_ol_element.html) - Ordered list
 - [nav](/paperwork.core/reference/htmltags/elements/html_nav_element.html) - Navigation section
-- [CSS List Styling](/paperwork.core/reference/styles/lists.html) - List styling reference
+- [CSS List Styling](/paperwork.core/learning/06-content/04_lists.html) - List styling reference
 
 ---

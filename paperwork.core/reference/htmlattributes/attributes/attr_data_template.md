@@ -873,10 +873,10 @@ Multi-section conditional content:
 ## See Also
 
 - [if element](/paperwork.core/reference/htmltags/elements/html_if_element.html) - Conditional rendering element
-- [data-content attribute](/paperwork.core/reference/htmlattributes/data-content.html) - Synonym for template elements
-- [data-test attribute](/paperwork.core/reference/htmlattributes/data-test.html) - Conditional test expressions
+- [data-content attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_content.html) - Synonym for template elements
+- [data-test attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_test.html) - Conditional test expressions
 - [template element](/paperwork.core/reference/htmltags/elements/html_template_element.html) - Template for repeating content
 - [Data Binding](/paperwork.core/reference/binding/) - Complete data binding guide
-- [Expressions](/paperwork.core/reference/expressions/) - Expression syntax reference
+- [Expressions](/paperwork.core/reference/binding/index.html) - Expression syntax reference
 
 ---

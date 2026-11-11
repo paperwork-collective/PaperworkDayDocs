@@ -2,7 +2,7 @@
 layout: default
 title: stop
 parent: SVG Elements
-parent_url: /paperwork.core/reference/svgtags/
+parent_url: /paperwork.core/reference/svgelements/index.html
 grand_parent: Paperwork.Reference
 grand_parent_url: /paperwork.core/reference/
 has_children: false
@@ -637,13 +637,13 @@ Create color scales from data ranges:
 
 ## See Also
 
-- [linearGradient](/paperwork.core/reference/svgtags/linearGradient.html) - Linear gradient container element
-- [radialGradient](/paperwork.core/reference/svgtags/radialGradient.html) - Radial gradient container element
-- [svg](/paperwork.core/reference/htmltags/svg.html) - SVG canvas element
-- [defs](/paperwork.core/reference/svgtags/defs.html) - Definitions container for reusable elements
-- [CSS Colors](/paperwork.core/reference/styles/colors.html) - Color value formats and specifications
-- [CSS Opacity](/paperwork.core/reference/styles/opacity.html) - Transparency properties
+- [linearGradient](/paperwork.core/reference/svgelements/elements/svg_linearGradient_element.html) - Linear gradient container element
+- [radialGradient](/paperwork.core/reference/svgelements/elements/svg_radialGradient_element.html) - Radial gradient container element
+- [svg](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG canvas element
+- [defs](/paperwork.core/reference/svgelements/elements/svg_defs_element.html) - Definitions container for reusable elements
+- [CSS Colors](/paperwork.core/learning/03-styling/02_colors_backgrounds.html) - Color value formats and specifications
+- [CSS Opacity](/paperwork.core/reference/cssproperties/properties/css_prop_opacity.html) - Transparency properties
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
-- [SVG Fills](/paperwork.core/reference/svg/fills.html) - SVG fill patterns and gradients
+- [SVG Fills](/paperwork.core/reference/svgattributes/index.html) - SVG fill patterns and gradients
 
 ---

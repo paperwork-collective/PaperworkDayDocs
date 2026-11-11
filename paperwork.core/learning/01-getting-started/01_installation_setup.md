@@ -309,7 +309,7 @@ Now that Paperwork.Core is installed and configured:
 
 - **[NuGet Package](https://www.nuget.org/packages/Paperwork.Core/)** - Official package
 - **[Scryber engine on GitHub](https://github.com/richard-scryber/scryber.core)** - Source code and issues for the open-source layout and rendering engine
-- **[API Documentation](/api/)** - Complete API reference
+- **[API Documentation](/paperwork.core/configuration/index.html)** - Complete API reference
 
 ---
 

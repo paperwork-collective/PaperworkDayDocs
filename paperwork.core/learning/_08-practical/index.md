@@ -543,9 +543,9 @@ Ready to build real documents? Start with the example that best matches your nee
 ## Additional Resources
 
 - **[HTML Element Reference](/paperwork.core/reference/htmltags/)** - All supported elements
-- **[CSS Property Reference](/paperwork.core/reference/css/)** - All supported properties
-- **[Data Binding Reference](/paperwork.core/reference/data-binding/)** - Expression syntax
-- **[Code Examples Repository](/examples/)** - More examples
+- **[CSS Property Reference](/paperwork.core/reference/cssproperties/index.html)** - All supported properties
+- **[Data Binding Reference](/paperwork.core/reference/binding/index.html)** - Expression syntax
+- **[Code Examples Repository](/paperwork.core/learning/index.html)** - More examples
 
 ---
 

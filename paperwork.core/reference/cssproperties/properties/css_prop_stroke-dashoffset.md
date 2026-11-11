@@ -598,6 +598,6 @@ The `stroke-dashoffset` property can be dynamically bound to data values, enabli
 - [stroke-width](/paperwork.core/reference/cssproperties/properties/css_prop_stroke-width) - Control stroke thickness
 - [stroke-linecap](/paperwork.core/reference/cssproperties/properties/css_prop_stroke-linecap) - Control dash end appearance
 - [stroke-opacity](/paperwork.core/reference/cssproperties/properties/css_prop_stroke-opacity) - SVG stroke transparency
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

@@ -582,11 +582,11 @@ In Scryber PDF generation:
 
 - [meta element](/paperwork.core/reference/htmltags/elements/html_meta_element.html) - The meta HTML element
 - [content attribute](/paperwork.core/reference/htmlattributes/attributes/attr_content.html) - Meta content value
-- [name attribute](/paperwork.core/reference/htmlattributes/attributes/attr_name.html) - Standard metadata name
-- [http-equiv attribute](/paperwork.core/reference/htmlattributes/http-equiv.html) - HTTP header equivalent
+- [name attribute](/paperwork.core/reference/htmlattributes/index.html) - Standard metadata name
+- [http-equiv attribute](/paperwork.core/reference/htmlattributes/attributes/attr_http_equiv.html) - HTTP header equivalent
 - [Open Graph Protocol](https://ogp.me/) - Open Graph specification
 - [Dublin Core](https://dublincore.org/) - Dublin Core metadata initiative
-- [Document Properties](/paperwork.core/reference/document/properties.html) - PDF document properties
+- [Document Properties](/paperwork.core/learning/07-configuration/01_document_properties.html) - PDF document properties
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding
 
 ---

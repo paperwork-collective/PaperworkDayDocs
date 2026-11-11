@@ -499,7 +499,7 @@ Now that you can create basic documents:
 ## Additional Resources
 
 - **[HTML Element Reference](/paperwork.core/reference/htmltags/)** - All supported HTML elements
-- **[Code Examples](/examples/)** - More complete examples
+- **[Code Examples](/paperwork.core/learning/index.html)** - More complete examples
 
 ---
 

@@ -240,8 +240,8 @@ Each article in this series is designed to be:
 
 - **[API Reference](/paperwork.core/reference/)** - Complete API documentation
 - **[HTML Element Reference](/paperwork.core/reference/htmltags/)** - Supported HTML elements
-- **[CSS Property Reference](/paperwork.core/reference/css/)** - Supported CSS properties
-- **[Code Examples](/examples/)** - Complete working examples
+- **[CSS Property Reference](/paperwork.core/reference/cssproperties/index.html)** - Supported CSS properties
+- **[Code Examples](/paperwork.core/learning/index.html)** - Complete working examples
 
 ## Next Steps
 

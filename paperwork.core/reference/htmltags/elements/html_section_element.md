@@ -637,13 +637,13 @@ The `<section>` element has the following default behavior:
 
 - [article](/paperwork.core/reference/htmltags/elements/html_article_element.html) - Article element for self-contained content
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic block container without semantic meaning
-- [header](/paperwork.core/reference/htmltags/elements/html_header_element.html) - Header element for introductory content
-- [footer](/paperwork.core/reference/htmltags/elements/html_footer_element.html) - Footer element for closing content
+- [header](/paperwork.core/reference/htmltags/elements/html_header_footer_element.html) - Header element for introductory content
+- [footer](/paperwork.core/reference/htmltags/elements/html_header_footer_element.html) - Footer element for closing content
 - [aside](/paperwork.core/reference/htmltags/elements/html_aside_element.html) - Aside element for tangentially related content
 - [nav](/paperwork.core/reference/htmltags/elements/html_nav_element.html) - Navigation element for navigation links
-- [Panel Component](/paperwork.core/reference/components/panel.html) - Base panel component in Scryber namespace
-- [PDF Bookmarks](/paperwork.core/reference/bookmarks/) - Creating document outlines and bookmarks
-- [Document Structure](/paperwork.core/reference/structure/) - Structuring PDF documents
-- [Page Breaking](/paperwork.core/reference/pagebreaking/) - Controlling page breaks in PDFs
+- [Panel Component](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Base panel component in Scryber namespace
+- [PDF Bookmarks](/paperwork.core/learning/07-configuration/01_document_properties.html) - Creating document outlines and bookmarks
+- [Document Structure](/paperwork.core/learning/01-getting-started/05_pages_sections.html) - Structuring PDF documents
+- [Page Breaking](/paperwork.core/learning/04-layout/03_sections_page_breaks.html) - Controlling page breaks in PDFs
 
 ---

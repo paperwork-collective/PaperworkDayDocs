@@ -256,11 +256,11 @@ q {
 
 ## See Also
 
-- [span](html_span_elelemts.html) - Generic inline container element
+- [span](/paperwork.core/reference/htmltags/elements/html_span_element.html) - Generic inline container element
 - [output, slot, num](html_output_slot_num_elements.html) - Strong emphasis (bold)
 - [var](html_var_element.html) - For storing or outputting document parameters.
-- [Text Formatting](/library/templates/text.html) - Text formatting
-- [Data Binding](/library/binding/) - Data binding expressions
-- [CSS Styling](/library/styles/) - CSS styling reference
+- [Text Formatting](/paperwork.core/learning/03-styling/05_text_styling.html) - Text formatting
+- [Data Binding](/paperwork.core/learning/02-data-binding/index.html) - Data binding expressions
+- [CSS Styling](/paperwork.core/learning/03-styling/index.html) - CSS styling reference
 
 ---

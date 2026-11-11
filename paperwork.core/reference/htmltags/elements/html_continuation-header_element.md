@@ -544,11 +544,11 @@ The `<continuation-header>` element can be placed within:
 ## See Also
 
 - [continuation-footer](html_continuation-footer_element) - The footer on continuation pages
-- [header](html_header_element) - Individual page headers.
+- [header](/paperwork.core/reference/htmltags/elements/html_header_footer_element.html) - Individual page headers.
 - [body](html_body_element) - The document body element.
 - [section](html_section_element) - Section element.
-- [page](html_page_element) - Page number display.
-- [Page Management](learning/styles/page_layout) - Page breaks, sections and content flow.
-- [Multi-page Documents](/paperwork.core/learning/styles/page_sizes) - Page sizing, numbering and grouping.
+- [page](/paperwork.core/reference/htmltags/index.html) - Page number display.
+- [Page Management](/paperwork.core/learning/04-layout/index.html) - Page breaks, sections and content flow.
+- [Multi-page Documents](/paperwork.core/learning/04-layout/01_page_sizes_orientation.html) - Page sizing, numbering and grouping.
 
 ---

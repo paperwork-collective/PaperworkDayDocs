@@ -89,7 +89,7 @@ The `offset` attribute is used to:
 
 The `offset` attribute is supported on:
 
-- **[&lt;stop&gt;](/paperwork.core/reference/svgtags/stop.html)** - Gradient color stop element
+- **[&lt;stop&gt;](/paperwork.core/reference/svgelements/elements/svg_stop_element.html)** - Gradient color stop element
 
 Used within:
 - `<linearGradient>` - Linear gradient definitions
@@ -567,13 +567,13 @@ Stops outside 0%-100% work with spreadMethod:
 
 ## See Also
 
-- [stop](/paperwork.core/reference/svgtags/stop.html) - Gradient color stop element
-- [stop-color](/paperwork.core/reference/svgattributes/attributes/svg_attr_stop-color.html) - Color value at stop position
-- [stop-opacity](/paperwork.core/reference/svgattributes/attributes/svg_attr_stop-opacity.html) - Opacity at stop position
-- [linearGradient](/paperwork.core/reference/svgtags/linearGradient.html) - Linear gradient definition element
-- [radialGradient](/paperwork.core/reference/svgtags/radialGradient.html) - Radial gradient definition element
+- [stop](/paperwork.core/reference/svgelements/elements/svg_stop_element.html) - Gradient color stop element
+- [stop-color](/paperwork.core/reference/cssproperties/properties/css_prop_stop-color.html) - Color value at stop position
+- [stop-opacity](/paperwork.core/reference/cssproperties/properties/css_prop_stop-opacity.html) - Opacity at stop position
+- [linearGradient](/paperwork.core/reference/svgelements/elements/svg_linearGradient_element.html) - Linear gradient definition element
+- [radialGradient](/paperwork.core/reference/svgelements/elements/svg_radialGradient_element.html) - Radial gradient definition element
 - [spreadMethod](/paperwork.core/reference/svgattributes/attributes/svg_attr_spreadMethod.html) - Gradient spread behavior
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
-- [CSS Gradients](/paperwork.core/reference/styles/gradients.html) - CSS gradient properties
+- [CSS Gradients](/paperwork.core/learning/03-styling/02_colors_backgrounds.html) - CSS gradient properties
 
 ---

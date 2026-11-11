@@ -243,6 +243,6 @@ builder.WithData("model", new {
 - [else if Helper](./elseif.html)
 - [#each Helper](./each.html)
 - [#with Helper](./with.html)
-- [Conditional Rendering Guide](../../learning/02-data-binding/04_conditional_rendering.html)
+- [Conditional Rendering Guide](/paperwork.core/learning/02-data-binding/04_conditional_rendering.html)
 
 ---

@@ -729,8 +729,8 @@ For consistent results, always provide explicit `title` attributes on elements y
 - [a](/paperwork.core/reference/htmltags/elements/html_a_element.html) - Anchor element for linking to bookmarked sections
 - [href](/paperwork.core/reference/htmlattributes/attributes/attr_href.html) - Link reference attribute
 - [h1-h6](/paperwork.core/reference/htmltags/elements/html_headings_element.html) - Heading elements (primary use for bookmarks)
-- [PDF Bookmarks](/paperwork.core/reference/document/bookmarks.html) - Document outline and navigation
-- [Document Structure](/paperwork.core/reference/document/structure.html) - Organizing PDF documents
+- [PDF Bookmarks](/paperwork.core/learning/07-configuration/01_document_properties.html) - Document outline and navigation
+- [Document Structure](/paperwork.core/learning/01-getting-started/05_pages_sections.html) - Organizing PDF documents
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic content and attributes
 
 ---

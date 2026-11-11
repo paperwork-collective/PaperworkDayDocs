@@ -795,7 +795,7 @@ Now that you understand CSS basics:
 
 1. **[Pages & Sections](05_pages_sections.html)** - Structure multi-page documents
 2. **[Styling & Appearance](/paperwork.core/learning/03-styling/)** - Deep dive into styling
-3. **[CSS Property Reference](/paperwork.core/reference/css/)** - All supported properties
+3. **[CSS Property Reference](/paperwork.core/reference/cssproperties/index.html)** - All supported properties
 
 ---
 

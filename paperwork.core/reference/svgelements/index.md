@@ -28,7 +28,7 @@ nav_order: 6
 
 Drawing vector content within a document is supported by the library using the well-known <code>svg</code> elements from the XML based markup. Although the library only supports part of the SVG specification, a significant proportion, of the static SVG capabilities are available, and most referenced svg images and sources should work without modification as long as they do not rely on filters or animations.
 
-The svg elements can be included inline with the template, or as an <a href='/reference/htmltags/tags/embed.html'>embedded</a> set of content. Or also as a referenced <a href='/reference/htmltags/tags/img.html'>image</a> source. However, only inline or embedded content will get the full binding capability, so drawings can show dynamic values, or styles. Data will not be passed down to svg images.
+The svg elements can be included inline with the template, or as an <a href='/paperwork.core/reference/htmltags/elements/html_iframe_embed_element.html'>embedded</a> set of content. Or also as a referenced <a href='/paperwork.core/reference/htmltags/elements/html_img_element.html'>image</a> source. However, only inline or embedded content will get the full binding capability, so drawings can show dynamic values, or styles. Data will not be passed down to svg images.
 
 ```html
    <html xmlns='http://www.w3.org/1999/xhtml'>
@@ -87,7 +87,7 @@ SVG supports a range of animation elements and attributes, however these are **n
 
 If the library encounters an element it does not understand then, by default, it will skip over the element and all its inner content, moving down to the next sibling (or the end of the document).
 
-If the <a href='/learning/templates/conformancemode.html'>conformance mode</a> is set to <code>strict</code>, then an error will be raised so that any offending content can be tracked if there is an issue.
+If the <a href='/paperwork.core/learning/07-configuration/03_error_handling_conformance.html'>conformance mode</a> is set to <code>strict</code>, then an error will be raised so that any offending content can be tracked if there is an issue.
 
 ---
 
@@ -115,7 +115,7 @@ The document level elements sit within an svg definition and hold reference info
 
 | Element  | Tag  | Description |
 |---|---|---|
-| <a href='elements/svg_style_element.html' >Styles Declarations</a>   | <code>&lt;style&gt;</code> | This defines CSS style declarations that will be used by the graphic contents, and only the graphic contents to alter the way elements look in the final output document. **NOTE**: If this is an inline or embedded svg, then styles defined higher up in the outer document will also be used where appropriate.  |
+| <a href='/paperwork.core/reference/svgelements/index.html' >Styles Declarations</a>   | <code>&lt;style&gt;</code> | This defines CSS style declarations that will be used by the graphic contents, and only the graphic contents to alter the way elements look in the final output document. **NOTE**: If this is an inline or embedded svg, then styles defined higher up in the outer document will also be used where appropriate.  |
 | <a href='elements/svg_defs_element.html' >Shape Definitions</a>   | <code>&lt;defs&gt;</code> | The <code>defs</code> must be a single child of the <code>svg</code> element, and contains the symbols and patterns for other graphic elements to use in the final output. |
 
 
@@ -146,7 +146,7 @@ All structural elements have no specific visual appearance, but contain other el
 |---|---|---|
 | <a href='elements/svg_g_element.html' >Group</a>   | <code>&lt;g&gt;</code> | A container for other, inner, graphic and structural elements that will inherit any applied styling, and can also be referenced elsewhere with the <code>use</code> element  |
 | <a href='elements/svg_use_element.html' >Graphic Use Reference</a>   | <code>&lt;use&gt;</code> | Clones an existing graphic element (identified from the href attribute) and re-renders the elements based on the shared attributes. |
-| <a href='elements/svg_symbol_element.html' >Symbol Definition</a>   | <code>&lt;symbol&gt;</code> | A symbol is a container for other, inner, graphic and structural elements that by default will not be output, but the <code>use</code> of the symbol will make the content visible on the output where required. |
+| <a href='/paperwork.core/reference/svgelements/elements/svg_use_element.html' >Symbol Definition</a>   | <code>&lt;symbol&gt;</code> | A symbol is a container for other, inner, graphic and structural elements that by default will not be output, but the <code>use</code> of the symbol will make the content visible on the output where required. |
 | <a href='elements/svg_a_element.html' >Anchor Link</a>   | <code>&lt;a&gt;</code> | A container for other, inner, graphic and structural elements that will become interactive elements in. the final output document to take the reader to a desired destination. |
 
 
@@ -182,8 +182,8 @@ The meta-data elements allow the inclusion of additional information about the g
 
 | Element  | Tag  | Description |
 |---|---|---|
-| <a href='elements/svg_title_element.html' >Title</a>   | <code>&lt;title&gt;</code> | Defines the short descriptive title about the outer parent element. This will also be shown in the document outline for visual (graphic) elements.
-| <a href='elements/svg_desc_element.html' >Description</a>   | <code>&lt;desc&gt;</code> | Defines the longer description about the outer parent element. This will not be shown.
+| <a href='/paperwork.core/reference/svgelements/index.html' >Title</a>   | <code>&lt;title&gt;</code> | Defines the short descriptive title about the outer parent element. This will also be shown in the document outline for visual (graphic) elements.
+| <a href='/paperwork.core/reference/svgelements/index.html' >Description</a>   | <code>&lt;desc&gt;</code> | Defines the longer description about the outer parent element. This will not be shown.
 
 
 

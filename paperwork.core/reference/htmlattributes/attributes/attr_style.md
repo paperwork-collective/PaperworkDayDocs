@@ -36,7 +36,7 @@ The `style` attribute applies CSS styles directly to an element:
 - Useful for unique, one-off styling or dynamic values
 - Supports data binding for dynamic style values
 - For maintainable, reusable styles, use CSS classes instead
-- Refer to the **[CSS Styles documentation](/paperwork.core/reference/styles/)** for comprehensive styling capabilities
+- Refer to the **[CSS Styles documentation](/paperwork.core/reference/cssproperties/index.html)** for comprehensive styling capabilities
 
 
 
@@ -160,7 +160,7 @@ The notation of choice is up to you, however - calc and var tend to show less te
 
 ### Comprehensive CSS Support
 
-Scryber provides extensive CSS styling capabilities beyond inline styles. For detailed information about all supported CSS properties and advanced styling features, please refer to the **[CSS Styles Documentation](/paperwork.core/reference/styles/)**.
+Scryber provides extensive CSS styling capabilities beyond inline styles. For detailed information about all supported CSS properties and advanced styling features, please refer to the **[CSS Styles Documentation](/paperwork.core/reference/cssproperties/index.html)**.
 
 The CSS Styles section covers:
 - **Typography**: fonts, sizes, weights, text decoration, spacing
@@ -855,7 +855,7 @@ Apply multiple CSS properties by separating them with semicolons:
 
 - [class](/paperwork.core/reference/htmlattributes/attributes/attr_class.html) - CSS class attribute for reusable styles
 - [id](/paperwork.core/reference/htmlattributes/attributes/attr_id.html) - Unique identifier attribute
-- [CSS Styles](/paperwork.core/reference/styles/) - **Comprehensive CSS styling documentation**
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - **Comprehensive CSS styling documentation**
 - [style element](/paperwork.core/reference/htmltags/elements/html_style_element.html) - Defining CSS stylesheets
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding in attributes
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic container element

@@ -485,6 +485,6 @@ The `stroke-dasharray` property can be dynamically controlled through data bindi
 - [stroke-dashoffset](/paperwork.core/reference/cssproperties/properties/css_prop_stroke-dashoffset) - Offset dash pattern for animation
 - [stroke-linecap](/paperwork.core/reference/cssproperties/properties/css_prop_stroke-linecap) - Control dash end appearance
 - [stroke-opacity](/paperwork.core/reference/cssproperties/properties/css_prop_stroke-opacity) - SVG stroke transparency
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

@@ -596,7 +596,7 @@ Create a showcase featuring:
 
 1. **[Typography Best Practices](08_typography_best_practices.html)** - Professional patterns
 2. **[Content Components](/paperwork.core/learning/06-content/)** - Images, lists, tables
-3. **[Practical Applications](/paperwork.core/learning/08-practical/)** - Real-world documents
+3. **[Practical Applications](/paperwork.core/learning/index.html)** - Real-world documents
 
 ---
 

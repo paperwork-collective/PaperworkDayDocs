@@ -2,7 +2,7 @@
 layout: default
 title: pattern (SVG)
 parent: SVG Elements
-parent_url: /paperwork.core/reference/svgtags/
+parent_url: /paperwork.core/reference/svgelements/index.html
 grand_parent: Paperwork.Reference
 grand_parent_url: /paperwork.core/reference/
 has_children: false
@@ -789,14 +789,14 @@ Side-by-side pattern comparisons:
 
 ## See Also
 
-- [defs element](/paperwork.core/reference/svgtags/defs.html) - Definitions container for patterns
-- [linearGradient element](/paperwork.core/reference/svgtags/linearGradient.html) - Linear gradient fills
-- [radialGradient element](/paperwork.core/reference/svgtags/radialGradient.html) - Radial gradient fills
-- [fill attribute](/paperwork.core/reference/svgattributes/attr_fill.html) - Fill colors and patterns
-- [rect element](/paperwork.core/reference/svgtags/rect.html) - Rectangle shape
-- [circle element](/paperwork.core/reference/svgtags/circle.html) - Circle shape
-- [path element](/paperwork.core/reference/svgtags/path.html) - Path shape
+- [defs element](/paperwork.core/reference/svgelements/elements/svg_defs_element.html) - Definitions container for patterns
+- [linearGradient element](/paperwork.core/reference/svgelements/elements/svg_linearGradient_element.html) - Linear gradient fills
+- [radialGradient element](/paperwork.core/reference/svgelements/elements/svg_radialGradient_element.html) - Radial gradient fills
+- [fill attribute](/paperwork.core/reference/cssproperties/properties/css_prop_fill.html) - Fill colors and patterns
+- [rect element](/paperwork.core/reference/svgelements/elements/svg_rect_element.html) - Rectangle shape
+- [circle element](/paperwork.core/reference/svgelements/elements/svg_circle_element.html) - Circle shape
+- [path element](/paperwork.core/reference/svgelements/elements/svg_path_element.html) - Path shape
 - [Data Binding](/paperwork.core/reference/binding/) - Complete data binding guide
-- [SVG Styling](/paperwork.core/reference/svg/styling/) - SVG style reference
+- [SVG Styling](/paperwork.core/reference/svgelements/index.html) - SVG style reference
 
 ---

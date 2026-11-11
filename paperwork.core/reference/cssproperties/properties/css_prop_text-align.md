@@ -383,11 +383,11 @@ The `text-align` property can be dynamically set using data binding expressions,
 
 ## See Also
 
-- [vertical-align](/paperwork.core/reference/cssproperties/vertical-align) - Vertical alignment of inline elements
-- [text-indent](/paperwork.core/reference/cssproperties/text-indent) - First-line indentation
-- [direction](/paperwork.core/reference/cssproperties/direction) - Text directionality
-- [word-spacing](/paperwork.core/reference/cssproperties/word-spacing) - Space between words
-- [letter-spacing](/paperwork.core/reference/cssproperties/letter-spacing) - Space between characters
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [vertical-align](/paperwork.core/reference/cssproperties/properties/css_prop_vertical-align.html) - Vertical alignment of inline elements
+- [text-indent](/paperwork.core/reference/cssproperties/properties/css_prop_text-indent.html) - First-line indentation
+- [direction](/paperwork.core/reference/cssproperties/index.html) - Text directionality
+- [word-spacing](/paperwork.core/reference/cssproperties/properties/css_prop_word-spacing.html) - Space between words
+- [letter-spacing](/paperwork.core/reference/cssproperties/properties/css_prop_letter-spacing.html) - Space between characters
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

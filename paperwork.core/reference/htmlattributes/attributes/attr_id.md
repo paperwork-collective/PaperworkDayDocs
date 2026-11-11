@@ -716,8 +716,8 @@ This creates a navigable bookmark in the PDF outline panel that links to the ele
 - [title](/paperwork.core/reference/htmlattributes/attributes/attr_title.html) - Title attribute for bookmarks and tooltips
 - [a](/paperwork.core/reference/htmltags/elements/html_a_element.html) - Anchor element for creating links to IDs
 - [href](/paperwork.core/reference/htmlattributes/attributes/attr_href.html) - Hyperlink reference attribute
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and dynamic expressions
-- [PDF Bookmarks](/paperwork.core/reference/document/bookmarks.html) - Document outline and bookmarks
+- [PDF Bookmarks](/paperwork.core/learning/07-configuration/01_document_properties.html) - Document outline and bookmarks
 
 ---

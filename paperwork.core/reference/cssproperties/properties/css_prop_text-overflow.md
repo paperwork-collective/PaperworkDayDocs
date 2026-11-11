@@ -73,5 +73,5 @@ The text is shortened to fit in the 80pt, ending with the ellipsis.
 ## See Also
 
 - [overflow](css_prop_overflow)
-- [white-space](white-space)
+- [white-space](/paperwork.core/reference/cssproperties/properties/css_prop_white-space.html)
 - [word-break](css_prop_word-break)

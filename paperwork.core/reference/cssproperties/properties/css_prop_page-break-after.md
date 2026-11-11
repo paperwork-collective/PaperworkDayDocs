@@ -933,6 +933,6 @@ The `page-break-after` property supports data binding, enabling dynamic control 
 - [break-after](/paperwork.core/reference/cssproperties/properties/css_prop_break-after) - Modern alternative with more options
 - [break-before](/paperwork.core/reference/cssproperties/properties/css_prop_break-before) - Modern page and column break control
 - [page](/paperwork.core/reference/cssproperties/properties/css_prop_page) - Specify named page for element
-- [@page rule](/paperwork.core/reference/css_atrules/css_atrule_page) - Define page properties and margins
+- [@page rule](/paperwork.core/reference/cssselectors/selectors/css_page_rule.html) - Define page properties and margins
 
 ---

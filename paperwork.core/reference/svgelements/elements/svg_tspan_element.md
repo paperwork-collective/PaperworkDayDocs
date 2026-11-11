@@ -2,7 +2,7 @@
 layout: default
 title: tspan (SVG)
 parent: SVG Elements
-parent_url: /paperwork.core/reference/svgtags/
+parent_url: /paperwork.core/reference/svgelements/index.html
 grand_parent: Paperwork.Reference
 grand_parent_url: /paperwork.core/reference/
 has_children: false
@@ -652,11 +652,11 @@ Multi-component label with various styling:
 
 ## See Also
 
-- [text element](/paperwork.core/reference/svgtags/svg_text_element.html) - Parent SVG text element
-- [svg element](/paperwork.core/reference/svgtags/svg.html) - SVG container element
-- [fill attribute](/paperwork.core/reference/svgattributes/attr_fill.html) - Fill colors and patterns
+- [text element](/paperwork.core/reference/svgelements/elements/svg_text_element.html) - Parent SVG text element
+- [svg element](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG container element
+- [fill attribute](/paperwork.core/reference/cssproperties/properties/css_prop_fill.html) - Fill colors and patterns
 - [Data Binding](/paperwork.core/reference/binding/) - Complete data binding guide
-- [SVG Styling](/paperwork.core/reference/svg/styling/) - SVG style reference
-- [Font Reference](/paperwork.core/reference/fonts/) - Font configuration and usage
+- [SVG Styling](/paperwork.core/reference/svgelements/index.html) - SVG style reference
+- [Font Reference](/paperwork.core/learning/05-typography/01_font_basics.html) - Font configuration and usage
 
 ---

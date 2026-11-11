@@ -438,7 +438,7 @@ Already familiar with basics? Jump to:
 **Related Series:**
 - [Getting Started](/paperwork.core/learning/01-getting-started/) - Prerequisites
 - [Content Components](/paperwork.core/learning/06-content/) - Dynamic tables and images
-- [Practical Applications](/paperwork.core/learning/08-practical/) - Real-world examples
+- [Practical Applications](/paperwork.core/learning/index.html) - Real-world examples
 
 ---
 

@@ -163,8 +163,8 @@ Creates this bookmark structure:
 
 - [title attribute](/paperwork.core/reference/htmlattributes/attributes/attr_title.html) - Title tooltip attribute
 - [id attribute](/paperwork.core/reference/htmlattributes/attributes/attr_id.html) - Element identifier
-- [PDF Outlines](/articles/outlines.html) - PDF outline structure
-- [Document Navigation](/articles/navigation.html) - PDF navigation features
+- [PDF Outlines](/paperwork.core/learning/07-configuration/01_document_properties.html) - PDF outline structure
+- [Document Navigation](/paperwork.core/learning/07-configuration/01_document_properties.html) - PDF navigation features
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding
 
 ---

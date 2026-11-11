@@ -577,12 +577,12 @@ In the Scryber codebase:
 ## See Also
 
 - [span](/paperwork.core/reference/htmltags/elements/html_span_element.html) - Generic inline container
-- [u](/paperwork.core/reference/htmltags/elements/html_u_element.html) - Underlined text
-- [mark](/paperwork.core/reference/htmltags/elements/html_mark_element.html) - Highlighted/marked text
-- [code](/paperwork.core/reference/htmltags/elements/html_code_element.html) - Code/monospace text
-- [small](/paperwork.core/reference/htmltags/elements/html_small_element.html) - Smaller text
-- [del](/paperwork.core/reference/htmltags/elements/html_del_element.html) - Deleted/strikethrough text
-- [ins](/paperwork.core/reference/htmltags/elements/html_ins_element.html) - Inserted/underlined text
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [u](/paperwork.core/reference/htmltags/elements/html_del_ins_u_s_element.html) - Underlined text
+- [mark](/paperwork.core/reference/htmltags/elements/html_mark_sub_sup_elements.html) - Highlighted/marked text
+- [code](/paperwork.core/reference/htmltags/elements/html_code_kbd_samp_elements.html) - Code/monospace text
+- [small](/paperwork.core/reference/htmltags/elements/html_big_element.html) - Smaller text
+- [del](/paperwork.core/reference/htmltags/elements/html_del_ins_u_s_element.html) - Deleted/strikethrough text
+- [ins](/paperwork.core/reference/htmltags/elements/html_del_ins_u_s_element.html) - Inserted/underlined text
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 
 ---

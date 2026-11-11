@@ -424,11 +424,11 @@ addr.StyleClass = "postal-address";
 ## See Also
 
 - [p](html_p_element.html) - Paragraph element for general content
-- [footer](html_footer_element.html) - Footer element often containing address information
+- [footer](/paperwork.core/reference/htmltags/elements/html_header_footer_element.html) - Footer element often containing address information
 - [article](html_article_element.html) - Article element that can contain author address
 - [a](html_a_element.html) - Anchor element for email and phone links
 - [br](html_br_element.html) - Line break element for formatting addresses
 - [div](html_div_element.html) - Generic block container
-- [Fonts and Typefaces](/paperwork.core/learning/styles/fonts.html) - Using fonts and typefaces in the library
+- [Fonts and Typefaces](/paperwork.core/learning/05-typography/01_font_basics.html) - Using fonts and typefaces in the library
 
 ---

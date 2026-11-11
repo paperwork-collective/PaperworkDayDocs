@@ -578,7 +578,7 @@ Now that you understand HTML-to-PDF conversion:
 ## Additional Resources
 
 - **[HTML Element Reference](/paperwork.core/reference/htmltags/)** - All supported elements
-- **[CSS Property Reference](/paperwork.core/reference/css/)** - All supported CSS properties
+- **[CSS Property Reference](/paperwork.core/reference/cssproperties/index.html)** - All supported CSS properties
 - **[Troubleshooting](08_troubleshooting.html)** - Common HTML issues
 
 ---

@@ -1072,13 +1072,13 @@ Names can contain letters, numbers, hyphens, and underscores:
 
 ## See Also
 
-- [input](/paperwork.core/reference/htmltags/elements/html_input_element.html) - Input field element
+- [input](/paperwork.core/reference/htmltags/index.html) - Input field element
 - [type](/paperwork.core/reference/htmlattributes/attributes/attr_type.html) - Input type attribute
-- [value](/paperwork.core/reference/htmlattributes/attributes/attr_value.html) - Value attribute for form fields
-- [for](/paperwork.core/reference/htmlattributes/attributes/attr_for.html) - Label for attribute
+- [value](/paperwork.core/reference/htmlattributes/index.html) - Value attribute for form fields
+- [for](/paperwork.core/reference/htmltags/elements/html_label_element.html) - Label for attribute
 - [label](/paperwork.core/reference/htmltags/elements/html_label_element.html) - Label element for form fields
-- [fieldset](/paperwork.core/reference/htmltags/elements/html_fieldset_element.html) - Fieldset and legend for grouping
+- [fieldset](/paperwork.core/reference/htmltags/elements/html_fieldset_legend_element.html) - Fieldset and legend for grouping
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding and expressions
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 
 ---

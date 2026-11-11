@@ -358,10 +358,10 @@ The `vertical-align` property can be dynamically controlled through data binding
 
 ## See Also
 
-- [text-align](/paperwork.core/reference/cssproperties/text-align) - Horizontal text alignment
-- [line-height](/paperwork.core/reference/cssproperties/line-height) - Line spacing
-- [font-size](/paperwork.core/reference/cssproperties/font-size) - Text size
-- [padding](/paperwork.core/reference/cssproperties/padding) - Element padding
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [text-align](/paperwork.core/reference/cssproperties/properties/css_prop_text-align.html) - Horizontal text alignment
+- [line-height](/paperwork.core/reference/cssproperties/properties/css_prop_line-height.html) - Line spacing
+- [font-size](/paperwork.core/reference/cssproperties/properties/css_prop_font-size.html) - Text size
+- [padding](/paperwork.core/reference/cssproperties/properties/css_prop_padding.html) - Element padding
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

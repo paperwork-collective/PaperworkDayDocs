@@ -456,7 +456,7 @@ anchor.Style.Fill.Color = StandardColors.Blue;
 - [img](/paperwork.core/reference/htmltags/elements/html_img_element.html) - Image element (often used within links)
 - [span](/paperwork.core/reference/htmltags/elements/html_span_element.html) - Inline container element
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Block container (can be wrapped in links)
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

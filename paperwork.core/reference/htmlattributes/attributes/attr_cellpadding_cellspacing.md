@@ -963,8 +963,8 @@ You can combine these attributes with CSS for fine control:
 - [td](/paperwork.core/reference/htmltags/elements/html_td_element.html) - Table cell elements (td and th)
 - [tr](/paperwork.core/reference/htmltags/elements/html_tr_element.html) - Table row element
 - [border](/paperwork.core/reference/htmlattributes/attributes/attr_border.html) - Border attribute
-- [align](/paperwork.core/reference/htmlattributes/attributes/attr_align.html) - Alignment attributes
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [align](/paperwork.core/reference/htmlattributes/attributes/attr_align_valign.html) - Alignment attributes
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding
 
 ---

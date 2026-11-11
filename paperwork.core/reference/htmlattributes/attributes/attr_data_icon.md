@@ -1236,12 +1236,12 @@ Icons appear at the object element's location:
 ## See Also
 
 - [object](/paperwork.core/reference/htmltags/elements/html_object_element.html) - Object element (uses data-icon attribute)
-- [data](/paperwork.core/reference/htmlattributes/attributes/attr_data.html) - File source for attachments
-- [data-file-data](/paperwork.core/reference/htmlattributes/data-file-data.html) - Binary file data for attachments
+- [data](/paperwork.core/reference/htmlattributes/index.html) - File source for attachments
+- [data-file-data](/paperwork.core/reference/htmlattributes/attributes/attr_data_file.html) - Binary file data for attachments
 - [type](/paperwork.core/reference/htmlattributes/attributes/attr_type.html) - MIME type specification
 - [alt](/paperwork.core/reference/htmlattributes/attributes/attr_alt.html) - Alternative text/description
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic content and attribute values
-- [PDF Attachments](/paperwork.core/reference/pdf/attachments.html) - PDF attachment specifications
-- [IconAttachment Component](/paperwork.core/reference/components/iconattachment.html) - Base attachment component
+- [PDF Attachments](/paperwork.core/learning/06-content/07_attachments_embedded.html) - PDF attachment specifications
+- [IconAttachment Component](/paperwork.core/learning/06-content/07_attachments_embedded.html) - Base attachment component
 
 ---

@@ -1722,6 +1722,6 @@ The `break-inside` property supports data binding, allowing you to dynamically c
 - [break-after](/paperwork.core/reference/cssproperties/properties/css_prop_break-after) - Control breaks after elements
 - [page-break-inside](/paperwork.core/reference/cssproperties/properties/css_prop_page-break-inside) - Legacy CSS2 property
 - [page](/paperwork.core/reference/cssproperties/properties/css_prop_page) - Specify named page for element
-- [@page rule](/paperwork.core/reference/css_atrules/css_atrule_page) - Define page properties and margins
+- [@page rule](/paperwork.core/reference/cssselectors/selectors/css_page_rule.html) - Define page properties and margins
 
 ---

@@ -455,7 +455,7 @@ At least 2 points are required for a visible polyline. A single point produces n
 - [path](/paperwork.core/reference/svgelements/elements/svg_path_element.html) - SVG path element for curves and complex shapes
 - [rect](/paperwork.core/reference/svgelements/elements/svg_rect_element.html) - SVG rectangle element
 - [svg](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG container element
-- [SVG Markers](/paperwork.core/reference/svgelements/elements/svg_markers_element.html) - Arrowheads and line decorations
+- [SVG Markers](/paperwork.core/reference/svgelements/elements/svg_marker_element.html) - Arrowheads and line decorations
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

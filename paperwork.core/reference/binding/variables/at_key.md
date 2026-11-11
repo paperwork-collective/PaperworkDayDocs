@@ -8,6 +8,7 @@ grand_parent_url: /paperwork.core/reference/binding/
 has_children: false
 has_toc: false
 nav_order: 4
+render_with_liquid: false
 ---
 
 # @key : Item Key
@@ -30,12 +31,12 @@ The key (or property name) of the current entry when a `{{#each}}` loop iterates
 
 ## Syntax
 
-{% raw %}
+
 ```
 {{@key}}
 {{#if @key == 'total'}}...{{/if}}
 ```
-{% endraw %}
+
 
 ---
 
@@ -53,13 +54,13 @@ builder.WithData("model", new {
 
 **Template:**
 
-{% raw %}
+
 ```html
 {{#each model.prices}}
     <p>{{@key}}: {{this}}</p>
 {{/each}}
 ```
-{% endraw %}
+
 
 **Output:**
 
@@ -73,7 +74,7 @@ Gizmo: 3.25
 
 Each loop has its own key. When an inner loop ends, `@key` goes back to the key of the outer loop.
 
-{% raw %}
+
 ```html
 {{#each model.regions}}
     <h3>{{@key}}</h3>
@@ -83,7 +84,7 @@ Each loop has its own key. When an inner loop ends, `@key` goes back to the key 
     <p>Finished {{@key}}</p>
 {{/each}}
 ```
-{% endraw %}
+
 
 Here the last `@key` is the region again, not the last key of the inner loop.
 

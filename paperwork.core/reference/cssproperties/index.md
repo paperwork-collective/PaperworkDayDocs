@@ -36,7 +36,7 @@ Within the element style
 
 ```
 
-As part of a referenced style-sheet or <a href='/reference/htmltags/tags/style.html' >style</a> element.
+As part of a referenced style-sheet or <a href='/paperwork.core/reference/htmltags/elements/html_style_element.html' >style</a> element.
 
 ```css
 selector {
@@ -51,7 +51,7 @@ selector {
 
 ### Property Value Keywords
 
-The style property global values (initial, revert, inherit, etc.) are **not** supported by the library, and that property will be ignored. If there has been a value set on that property previously (or with lower precedence) then it will be maintained for the content that would have had the global value set on it. See the <a href='/learning/styles/precedence.html' >CSS Selector Precedence</a> article for more information on ordering and assigning values.
+The style property global values (initial, revert, inherit, etc.) are **not** supported by the library, and that property will be ignored. If there has been a value set on that property previously (or with lower precedence) then it will be maintained for the content that would have had the global value set on it. See the <a href='/paperwork.core/learning/03-styling/01_css_selectors_specificity.html' >CSS Selector Precedence</a> article for more information on ordering and assigning values.
 
 ---
 
@@ -217,22 +217,22 @@ The following properties control the page sizes, columns and breaks within. The 
 
 | Property  | Description |
 |---|---|
-| <a href='properties/column-count.html' >column-count</a>   | Specifies the number of columns within a block |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_column-count.html' >column-count</a>   | Specifies the number of columns within a block |
 | <a href='/reference/cssproperties/properties/css_prop_columns.html' >columns</a>   | Shorthand for setting `column-width` and `column-count` together |
-| <a href='properties/column-gap.html' >column-gap</a>   | Specifies the alley width between columns |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_column-gap.html' >column-gap</a>   | Specifies the alley width between columns |
 | <a href='/reference/cssproperties/properties/css_prop_column-fill.html' >column-fill</a>   | Controls how content is distributed across columns (`balance` or `auto`) |
 | <a href='/reference/cssproperties/properties/css_prop_column-rule.html' >column-rule</a>   | Shorthand for setting width, style, and color of the divider between columns |
 | <a href='/reference/cssproperties/properties/css_prop_column-rule-width.html' >column-rule-width</a>   | Sets the divider line thickness between columns |
 | <a href='/reference/cssproperties/properties/css_prop_column-rule-style.html' >column-rule-style</a>   | Sets the divider line style between columns |
 | <a href='/reference/cssproperties/properties/css_prop_column-rule-color.html' >column-rule-color</a>   | Sets the divider line color between columns |
-| <a href='properties/column-width.html' >column-width</a>   | Specifies ideal column widths for content within an container so they are not smaller than the desired width but fill the container's width  |
-| <a href='properties/break-inside.html' >break-inside</a>   | Setting to avoid, will ensure that the content within is in a single region, column and/or page where possible. |
-| <a href='properties/break-after.html' >break-after</a>   | Setting to always, will ensure that any following content begins on a new region, column and/or page where possible.  |
-| <a href='properties/break-before.html' >break-before</a>   | Setting to always, will ensure that the content begins on a new region, column and/or page where possible. |
-| <a href='properties/page-break-inside.html' >page-break-inside</a>   | Setting to avoid, will ensure that the content within is in a single page where possible. |
-| <a href='properties/page-break-after.html' >page-break-after</a>   | Setting to always, will ensure that any following content begins on a new page where possible. |
-| <a href='properties/page-break-before.html' >page-break-before</a>   | Setting to always, will ensure that the content begins on a new page where possible. |
-| <a href='properties/page.html' >page</a>   | Specifies the name of the page group style from an at-rule, that should be used to define the size and layout af any pages within this section. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_column-width.html' >column-width</a>   | Specifies ideal column widths for content within an container so they are not smaller than the desired width but fill the container's width  |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_break-inside.html' >break-inside</a>   | Setting to avoid, will ensure that the content within is in a single region, column and/or page where possible. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_break-after.html' >break-after</a>   | Setting to always, will ensure that any following content begins on a new region, column and/or page where possible.  |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_break-before.html' >break-before</a>   | Setting to always, will ensure that the content begins on a new region, column and/or page where possible. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_page-break-inside.html' >page-break-inside</a>   | Setting to avoid, will ensure that the content within is in a single page where possible. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_page-break-after.html' >page-break-after</a>   | Setting to always, will ensure that any following content begins on a new page where possible. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_page-break-before.html' >page-break-before</a>   | Setting to always, will ensure that the content begins on a new page where possible. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_page.html' >page</a>   | Specifies the name of the page group style from an at-rule, that should be used to define the size and layout af any pages within this section. |
 
 ---
 
@@ -282,15 +282,15 @@ The following properties control the font that any text will use, including fami
 
 | Property  | Description |
 |---|---|
-| <a href='properties/font.html' >font</a>   | Shorthand property for setting the font family, style, weight and size. |
-| <a href='properties/font-style.html' >font-style</a>   | Specifies the style of the font-face in the family. If the style is not available, then the library will fallback to an available style within the family. |
-| <a href='properties/font-family.html' >font-family</a>   |  Specifies one or more family names to use, in order of preference. The library has built in fonts for the standard 'serif', 'sans-serif' and 'monospace' fonts, and will always be available. |
-| <a href='properties/font-weight.html' >font-weight</a>   | Specifies the numeric weight (100 - 900), or 'normal' or 'bold'. If the actual font-weight is not available, then the library will fallback to the nearest available weight. |
-| <a href='properties/font-size.html' >font-size</a>   | Specifies the numeric size of the text to display when the document is output. This can be an absolute unit or a relative unit or percentage. The absolute (x-large, small etc.) and relative (larger / smaller) are supported. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_font.html' >font</a>   | Shorthand property for setting the font family, style, weight and size. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_font-style.html' >font-style</a>   | Specifies the style of the font-face in the family. If the style is not available, then the library will fallback to an available style within the family. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_font-family.html' >font-family</a>   |  Specifies one or more family names to use, in order of preference. The library has built in fonts for the standard 'serif', 'sans-serif' and 'monospace' fonts, and will always be available. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_font-weight.html' >font-weight</a>   | Specifies the numeric weight (100 - 900), or 'normal' or 'bold'. If the actual font-weight is not available, then the library will fallback to the nearest available weight. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_font-size.html' >font-size</a>   | Specifies the numeric size of the text to display when the document is output. This can be an absolute unit or a relative unit or percentage. The absolute (x-large, small etc.) and relative (larger / smaller) are supported. |
 
-<!-- | <a href='properties/font-display.html' >font-display</a>   |  |
-| <a href='properties/font-stretch.html' >font-stretch</a>   |  | -->
-<!-- | <a href='properties/src.html' >src</a>   |  Used by the font-face at rule | -->
+<!-- | <a href='/paperwork.core/reference/cssselectors/selectors/css_font_face_rule.html' >font-display</a>   |  |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_font-stretch.html' >font-stretch</a>   |  | -->
+<!-- | <a href='/paperwork.core/reference/cssselectors/selectors/css_font_face_rule.html' >src</a>   |  Used by the font-face at rule | -->
 
 --- 
 
@@ -300,27 +300,27 @@ The following properties control the way any text within the element will be out
 
 | Property  | Description |
 |---|---|
-| <a href='properties/text-align.html' >text-align</a>   | Specifies the horizontal alignment of content on a line, or content within a block with a specific width (inc. full width) or a table cell. |
-| <a href='properties/vertical-align.html' >vertical-align</a>   | Specifies the vertical alignment of content on a line, or content within a block with a specific height or a table cell |
-| <a href='properties/line-height.html' >line-height</a>   | Specifies the leading of a line which can either be a relative or an absolute value.  |
-| <a href='properties/text-decoration.html' >text-decoration</a>   | Specifies any decoration on the text - A line above, below or in the middle of the characters is supported. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-align.html' >text-align</a>   | Specifies the horizontal alignment of content on a line, or content within a block with a specific width (inc. full width) or a table cell. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_vertical-align.html' >vertical-align</a>   | Specifies the vertical alignment of content on a line, or content within a block with a specific height or a table cell |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_line-height.html' >line-height</a>   | Specifies the leading of a line which can either be a relative or an absolute value.  |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-decoration.html' >text-decoration</a>   | Specifies any decoration on the text - A line above, below or in the middle of the characters is supported. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-decoration-color.html' >text-decoration-color</a>   | Sets the color of the text decoration lines. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-decoration-style.html' >text-decoration-style</a>   | Sets the style of the text decoration lines - solid, double, dotted, dashed or wavy. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-decoration-thickness.html' >text-decoration-thickness</a>   | Sets the thickness of the text decoration lines. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-shadow.html' >text-shadow</a>   | Draws one or more shadows behind text. Inherited. |
-| <a href='properties/text-decoration.html' >text-decoration-line</a>   | As per text-decoration - Specifies any decoration on the text - A line above, below or in the middle of the characters is supported. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-decoration.html' >text-decoration-line</a>   | As per text-decoration - Specifies any decoration on the text - A line above, below or in the middle of the characters is supported. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-indent.html' >text-indent</a>   | Indents the first line of a block of text by a length or a percentage of the width. Inherited. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-transform.html' >text-transform</a>   | Changes the case of the text - none, uppercase, lowercase or capitalize. Inherited. |
-| <a href='properties/letter-spacing.html' >letter-spacing</a>   | Defines an adjustment to the space applied between letters on a word, phrase or run of text. O is the standard value. |
-| <a href='properties/hyphens.html' >hyphens</a>   | Sets the model for hypenation, auto or none. NOTE: The library default is none, the manual option is considered equivalent to none. |
-| <a href='properties/hyphenate-limit-chars.html' >hyphenate-limit-chars</a>   | Specifies upt to 3 values representing the minimum word length to hyphenate and then the minimum left and or right length of characters, allowed before or after a hyphen. |
-| <a href='properties/hyphenate-character.html' >hyphenate-character</a>   | Specifies the character to use for a hyphen. Default is '-' |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_letter-spacing.html' >letter-spacing</a>   | Defines an adjustment to the space applied between letters on a word, phrase or run of text. O is the standard value. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_hyphens.html' >hyphens</a>   | Sets the model for hypenation, auto or none. NOTE: The library default is none, the manual option is considered equivalent to none. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_hyphenate-limit-chars.html' >hyphenate-limit-chars</a>   | Specifies upt to 3 values representing the minimum word length to hyphenate and then the minimum left and or right length of characters, allowed before or after a hyphen. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_hyphenate-character.html' >hyphenate-character</a>   | Specifies the character to use for a hyphen. Default is '-' |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_word-break.html' >word-break</a>   | Sets whether words can be broken at any character (break-all) to fill a line. Inherited. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_overflow-wrap.html' >overflow-wrap</a>   | Sets whether a word longer than a line is broken (break-word, anywhere) or kept whole and overflows (normal). Inherited. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_word-wrap.html' >word-wrap</a>   | The older name for overflow-wrap. |
 | <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-overflow.html' >text-overflow</a>   | Replaces the end of clipped, non-wrapping text with an ellipsis or a string. Inherited. |
-| <a href='properties/word-spacing.html' >word-spacing</a>   | Defines an adjustment to the space applied between words on a phrase or run of text. O is the standard value. |
-| <a href='properties/white-space.html' >white-space</a>   | Specifies if white space (tags, returns, spaces, etc.) should be preserved in the output document. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_word-spacing.html' >word-spacing</a>   | Defines an adjustment to the space applied between words on a phrase or run of text. O is the standard value. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_white-space.html' >white-space</a>   | Specifies if white space (tags, returns, spaces, etc.) should be preserved in the output document. |
 
 
 ---
@@ -331,11 +331,11 @@ The following properties manage counter values, updating and displaying dynamic 
 
 | Property  | Description |
 |---|---|
-| <a href='properties/content.html' >content</a>   | The content propety is commonly used to add some textual content before (CSS <code>::before</code> selector) or after (CSS <code>::after</code> selector), the element that the style is applied to.  |
-| <a href='properties/counter-reset.html' >counter-reset</a>   | Accepts a space separated list of names of 'counter-identies' and optionally a following number for an initial value to reset to. If not provided, then the default for that counter will be used  |
-| <a href='properties/counter-increment.html' >counter-increment</a>   | Accepts a space separated list of names of 'counter-identites' and optionally a following number for teh value to increment by. If a number is not provided then the counter is incremented by 1 |
-| <a href='properties/list-style.html' >list-style</a>   | Specifies the format of the prefixed value that will be displayed against a list item - e.g. lower-roman, along with options for inside or outside (not currently supported) |
-| <a href='properties/list-style-type.html' >list-style-type</a>   | Expicity specifies the format of the prefixed value that will be displayed against a list item - e.g. lower-roman, or none if no value should be shown. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_content.html' >content</a>   | The content propety is commonly used to add some textual content before (CSS <code>::before</code> selector) or after (CSS <code>::after</code> selector), the element that the style is applied to.  |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_counter-reset.html' >counter-reset</a>   | Accepts a space separated list of names of 'counter-identies' and optionally a following number for an initial value to reset to. If not provided, then the default for that counter will be used  |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_counter-increment.html' >counter-increment</a>   | Accepts a space separated list of names of 'counter-identites' and optionally a following number for teh value to increment by. If a number is not provided then the counter is incremented by 1 |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_list-style.html' >list-style</a>   | Specifies the format of the prefixed value that will be displayed against a list item - e.g. lower-roman, along with options for inside or outside (not currently supported) |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_list-style-type.html' >list-style-type</a>   | Expicity specifies the format of the prefixed value that will be displayed against a list item - e.g. lower-roman, or none if no value should be shown. |
 
 
 

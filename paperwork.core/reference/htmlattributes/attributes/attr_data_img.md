@@ -1289,12 +1289,12 @@ If no factory matches the MIME type, an error is raised.
 
 - [img](/paperwork.core/reference/htmltags/elements/html_img_element.html) - Image element (uses data-img attributes)
 - [src](/paperwork.core/reference/htmlattributes/attributes/attr_src.html) - Standard image source attribute
-- [data-allow-missing-images](/paperwork.core/reference/htmlattributes/data-allow-missing-images.html) - Error handling for missing images
-- [width](/paperwork.core/reference/htmlattributes/attributes/attr_width.html) - Width attribute for sizing
-- [height](/paperwork.core/reference/htmlattributes/attributes/attr_height.html) - Height attribute for sizing
+- [data-allow-missing-images](/paperwork.core/reference/htmlattributes/attributes/attr_data_allow_missing_images.html) - Error handling for missing images
+- [width](/paperwork.core/reference/htmlattributes/attributes/attr_width_height.html) - Width attribute for sizing
+- [height](/paperwork.core/reference/htmlattributes/attributes/attr_width_height.html) - Height attribute for sizing
 - [alt](/paperwork.core/reference/htmlattributes/attributes/attr_alt.html) - Alternative text for images
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic content and attribute values
-- [Image Formats](/paperwork.core/reference/images/) - Supported image formats
-- [ImageData Class](/paperwork.core/reference/api/imagedata.html) - ImageData object reference
+- [Image Formats](/paperwork.core/learning/06-content/01_images.html) - Supported image formats
+- [ImageData Class](/paperwork.core/learning/06-content/01_images.html) - ImageData object reference
 
 ---

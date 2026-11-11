@@ -760,8 +760,8 @@ o8Y2lyY2xlIGN4PSI1IiBjeT0iNSIgcj0iNSIgZmlsbD0icmVkIi8+Cjwvc3ZnPg=="
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Container element (for background images)
 - [figure](/paperwork.core/reference/htmltags/elements/html_figure_element.html) - Figure element with caption
 - [width and height](/paperwork.core/reference/htmlattributes/attributes/attr_width_height.html) - Width and height attribute reference
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
-- [Image Formats](/paperwork.core/reference/images/formats.html) - Supported image formats and optimization
+- [Image Formats](/paperwork.core/learning/06-content/01_images.html) - Supported image formats and optimization
 
 ---

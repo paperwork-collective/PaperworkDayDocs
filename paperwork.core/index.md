@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Paperwork.Core
-nav_order: 1
+nav_order: 4
 has_children: true
 has_toc: false
 description: "The Paperwork.Core library: create documents in your own .NET applications from published templates, exported files or your own HTML, with a fluent builder."

@@ -719,10 +719,10 @@ Generate exam from question database:
 
 ## See Also
 
-- [frame element](/paperwork.core/reference/htmltags/elements/html_frame_element.html) - Frame element reference
-- [frameset element](/paperwork.core/reference/htmltags/elements/html_frameset_element.html) - Frameset container element
-- [Document Assembly](/paperwork.core/reference/assembly/) - Document assembly guide
-- [Modifications](/paperwork.core/reference/modifications/) - Document modification framework
+- [frame element](/paperwork.core/reference/htmltags/elements/html_frameset_frame_element.html) - Frame element reference
+- [frameset element](/paperwork.core/reference/htmltags/elements/html_frameset_frame_element.html) - Frameset container element
+- [Document Assembly](/paperwork.core/configuration/namespace-registration.html) - Document assembly guide
+- [Modifications](/paperwork.core/reference/index.html) - Document modification framework
 - [Hidden Attribute](/paperwork.core/reference/htmlattributes/attributes/attr_hidden.html) - Controlling visibility
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding expressions
 

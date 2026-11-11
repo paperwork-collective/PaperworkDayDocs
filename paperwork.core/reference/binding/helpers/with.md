@@ -214,6 +214,6 @@ For the alias syntax `{% raw %}{{#with object as | alias |}}{% endraw %}`, it cr
 
 - [#each Helper](./each.html)
 - [#if Helper](./if.html)
-- [Context & Scope Guide](../../learning/02-data-binding/06_context_scope.html)
+- [Context & Scope Guide](/paperwork.core/learning/02-data-binding/06_context_scope.html)
 
 ---

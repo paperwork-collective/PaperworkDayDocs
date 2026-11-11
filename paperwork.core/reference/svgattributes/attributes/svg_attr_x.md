@@ -441,12 +441,12 @@ The `x` attribute supports dynamic values using data binding expressions with `{
 
 - [y](/paperwork.core/reference/svgattributes/attributes/svg_attr_y.html) - Y coordinate attribute
 - [cx](/paperwork.core/reference/svgattributes/attributes/svg_attr_cx.html) - Center X coordinate attribute
-- [width](/paperwork.core/reference/svgattributes/attributes/svg_attr_width.html) - Width attribute
+- [width](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - Width attribute
 - [rect](/paperwork.core/reference/svgelements/elements/svg_rect_element.html) - SVG rectangle element
 - [image](/paperwork.core/reference/svgelements/elements/svg_image_element.html) - SVG image element
 - [text](/paperwork.core/reference/svgelements/elements/svg_text_element.html) - SVG text element
 - [svg](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG container element
-- [SVG Transforms](/paperwork.core/reference/svgelements/elements/svg_transforms_element.html) - Transformation operations
+- [SVG Transforms](/paperwork.core/reference/svgattributes/attributes/svg_attr_transform.html) - Transformation operations
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

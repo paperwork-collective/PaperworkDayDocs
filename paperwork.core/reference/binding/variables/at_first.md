@@ -8,6 +8,7 @@ grand_parent_url: /paperwork.core/reference/binding/
 has_children: false
 has_toc: false
 nav_order: 2
+render_with_liquid: false
 ---
 
 # @first : First Item
@@ -30,12 +31,12 @@ nav_order: 2
 
 ## Syntax
 
-{% raw %}
+
 ```
 {{@first}}
 {{#if @first}}...{{/if}}
 ```
-{% endraw %}
+
 
 ---
 
@@ -51,14 +52,14 @@ builder.WithData("model", new {
 
 **Template:**
 
-{% raw %}
+
 ```html
 {{#each model.items}}
     {{#if !@first}}<span>, </span>{{/if}}
     <span>{{this.name}}</span>
 {{/each}}
 ```
-{% endraw %}
+
 
 **Output:**
 
@@ -71,12 +72,12 @@ Widget, Gadget, Gizmo
 ## Notes
 
 - Equivalent to `@index == 0`.
-- Works in output, in `{{#if}}` conditions, in functions such as {% raw %}`{{if(@last, '.', ',')}}`{% endraw %}, and in CSS expressions inside the loop.
+- Works in output, in `{{#if}}` conditions, in functions such as `{{if(@last, '.', ',')}}`, and in CSS expressions inside the loop.
 - With a single item, `@first` and `@last` are both `true`. Outside a loop both are `false`. In nested loops each refers to the innermost loop.
 - Useful for separators, borders and headings that only belong on the first item.
 
 {: .note }
-> `@first` is added in Paperwork.Core 9.8. In earlier versions use {% raw %}`{{#if @index == 0}}`{% endraw %} instead.
+> `@first` is added in Paperwork.Core 9.8. In earlier versions use `{{#if @index == 0}}` instead.
 
 ---
 

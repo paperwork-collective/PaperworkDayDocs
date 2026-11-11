@@ -279,8 +279,8 @@ The library supports the use of the following logical functions.
 
 | Operator  | Example  | Description |
 |---|---|---|
-| <a href='tags/input.html' >Input Control </a>   | <code>&lt;fieldset&gt;</code> |   |
-| <a href='tags/select.html' >Select Control </a>   | <code>&lt;select&gt;</code> |   |
+| <a href='/paperwork.core/reference/htmltags/index.html' >Input Control </a>   | <code>&lt;fieldset&gt;</code> |   |
+| <a href='/paperwork.core/reference/htmltags/index.html' >Select Control </a>   | <code>&lt;select&gt;</code> |   |
 
 --->
 

@@ -1481,11 +1481,11 @@ Test each zone to verify color logic:
 ## See Also
 
 - [meter](/paperwork.core/reference/htmltags/elements/html_meter_element.html) - Meter/gauge element
-- [value](/paperwork.core/reference/htmlattributes/attributes/attr_value.html) - Value attribute
+- [value](/paperwork.core/reference/htmlattributes/index.html) - Value attribute
 - [min and max](/paperwork.core/reference/htmlattributes/attributes/attr_min_max.html) - Range attributes
 - [high and low](/paperwork.core/reference/htmlattributes/attributes/attr_high_low.html) - Threshold attributes
 - [progress](/paperwork.core/reference/htmltags/elements/html_progress_element.html) - Progress bar element (no optimum)
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding and expressions
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 
 ---

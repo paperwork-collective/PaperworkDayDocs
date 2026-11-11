@@ -178,7 +178,7 @@ Configure logging, security, conformance, and optimization for enterprise deploy
 
 ---
 
-### [8. Practical Applications](/paperwork.core/learning/08-practical/) (9 articles)
+### [8. Practical Applications](/paperwork.core/learning/index.html) (9 articles)
 
 **Learn by building!**
 
@@ -197,7 +197,7 @@ Complete, real-world examples you can adapt for your projects.
 **Time investment:** 5-6 hours
 **Prerequisites:** Series 1 completed, others helpful
 
-[Start learning →](/paperwork.core/learning/08-practical/)
+[Start learning →](/paperwork.core/learning/index.html)
 
 ---
 
@@ -209,7 +209,7 @@ Perfect for getting productive quickly:
 
 1. **[Getting Started](/paperwork.core/learning/01-getting-started/)** - Foundation (2-3 hours)
 2. **[Data Binding](/paperwork.core/learning/02-data-binding/)** - Dynamic content (3-4 hours)
-3. **[Practical Applications](/paperwork.core/learning/08-practical/)** - Pick one example (1-2 hours)
+3. **[Practical Applications](/paperwork.core/learning/index.html)** - Pick one example (1-2 hours)
 
 **Result:** Create basic data-driven PDFs
 
@@ -226,7 +226,7 @@ For complete mastery:
 5. **[Typography](/paperwork.core/learning/05-typography/)** - Professional fonts
 6. **[Content](/paperwork.core/learning/06-content/)** - Rich content
 7. **[Configuration](/paperwork.core/learning/07-configuration/)** - Production-ready
-8. **[Practical Applications](/paperwork.core/learning/08-practical/)** - Real-world examples
+8. **[Practical Applications](/paperwork.core/learning/index.html)** - Real-world examples
 
 **Result:** Expert-level PDF generation skills
 
@@ -237,16 +237,16 @@ For complete mastery:
 Jump to what you need:
 
 **Making invoices?**
-→ [Data Binding](/paperwork.core/learning/02-data-binding/) + [Invoice Example](/paperwork.core/learning/08-practical/01_invoice_template.html)
+→ [Data Binding](/paperwork.core/learning/02-data-binding/) + [Invoice Example](/paperwork.core/learning/index.html)
 
 **Creating reports?**
-→ [Content Components](/paperwork.core/learning/06-content/) + [Report Example](/paperwork.core/learning/08-practical/03_report_template.html)
+→ [Content Components](/paperwork.core/learning/06-content/) + [Report Example](/paperwork.core/learning/wwf_tigers_report_template.html)
 
 **Need custom fonts?**
 → [Typography & Fonts](/paperwork.core/learning/05-typography/)
 
 **Building forms?**
-→ [Layout & Positioning](/paperwork.core/learning/04-layout/) + [Form Example](/paperwork.core/learning/08-practical/07_form_template.html)
+→ [Layout & Positioning](/paperwork.core/learning/04-layout/) + [Form Example](/paperwork.core/learning/index.html)
 
 **Production deployment?**
 → [Document Configuration](/paperwork.core/learning/07-configuration/)
@@ -303,18 +303,18 @@ Jump to what you need:
 
 ### Reference Documentation
 - **[HTML Element Reference](/paperwork.core/reference/htmltags/)** - All supported HTML elements
-- **[CSS Property Reference](/paperwork.core/reference/css/)** - All supported CSS properties
-- **[SVG Element Reference](/paperwork.core/reference/svg/)** - SVG elements and attributes
-- **[Data Binding Reference](/paperwork.core/reference/data-binding/)** - Expression syntax guide
+- **[CSS Property Reference](/paperwork.core/reference/cssproperties/index.html)** - All supported CSS properties
+- **[SVG Element Reference](/paperwork.core/reference/svgelements/index.html)** - SVG elements and attributes
+- **[Data Binding Reference](/paperwork.core/reference/binding/index.html)** - Expression syntax guide
 
 ### Examples
-- **[Code Examples](/examples/)** - Complete working examples
-- **[Templates](/examples/templates/)** - Reusable templates
-- **[Snippets](/examples/snippets/)** - Common patterns
+- **[Code Examples](/paperwork.core/learning/index.html)** - Complete working examples
+- **[Templates](/paperwork.core/learning/index.html)** - Reusable templates
+- **[Snippets](/paperwork.core/learning/index.html)** - Common patterns
 
 ### API Documentation
-- **[API Reference](/api/)** - Complete API documentation
-- **[C# Integration](/api/integration/)** - Using Scryber in C#
+- **[API Reference](/paperwork.core/configuration/index.html)** - Complete API documentation
+- **[C# Integration](/paperwork.core/configuration/index.html)** - Using Scryber in C#
 
 ### Community
 - **[GitHub Repository](https://github.com/richard-scryber/scryber.core)** - Source code and issues
@@ -429,4 +429,4 @@ left: 50%;
 
 **Ready to start?** Begin your journey with [Getting Started](/paperwork.core/learning/01-getting-started/) →
 
-**Already know the basics?** Jump to [Data Binding](/paperwork.core/learning/02-data-binding/) or [Practical Applications](/paperwork.core/learning/08-practical/) →
+**Already know the basics?** Jump to [Data Binding](/paperwork.core/learning/02-data-binding/) or [Practical Applications](/paperwork.core/learning/index.html) →

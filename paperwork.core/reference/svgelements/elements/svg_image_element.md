@@ -2,7 +2,7 @@
 layout: default
 title: image (SVG)
 parent: SVG Elements
-parent_url: /paperwork.core/reference/svgtags/
+parent_url: /paperwork.core/reference/svgelements/index.html
 grand_parent: Paperwork.Reference
 grand_parent_url: /paperwork.core/reference/
 has_children: false
@@ -738,12 +738,12 @@ QR code with instructions:
 
 ## See Also
 
-- [svg element](/paperwork.core/reference/svgtags/svg.html) - SVG container element
-- [preserveAspectRatio attribute](/paperwork.core/reference/svgattributes/attr_preserveAspectRatio.html) - Aspect ratio control
-- [transform attribute](/paperwork.core/reference/svgattributes/attr_transform.html) - Transformation operations
-- [clipPath element](/paperwork.core/reference/svgtags/clipPath.html) - Clipping paths for images
+- [svg element](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG container element
+- [preserveAspectRatio attribute](/paperwork.core/reference/svgattributes/attributes/svg_attr_preserveAspectRatio.html) - Aspect ratio control
+- [transform attribute](/paperwork.core/reference/svgattributes/attributes/svg_attr_transform.html) - Transformation operations
+- [clipPath element](/paperwork.core/reference/svgelements/index.html) - Clipping paths for images
 - [Data Binding](/paperwork.core/reference/binding/) - Complete data binding guide
-- [Image Handling](/paperwork.core/reference/images/) - Image loading and processing
-- [PDF Resources](/paperwork.core/reference/resources/) - Resource management in PDFs
+- [Image Handling](/paperwork.core/learning/06-content/01_images.html) - Image loading and processing
+- [PDF Resources](/paperwork.core/configuration/index.html) - Resource management in PDFs
 
 ---

@@ -932,8 +932,8 @@ Links should always have a valid `href` value:
 - [id](/paperwork.core/reference/htmlattributes/attributes/attr_id.html) - Unique identifier (target for internal links)
 - [target](/paperwork.core/reference/htmlattributes/attributes/attr_target.html) - Link target attribute
 - [title](/paperwork.core/reference/htmlattributes/attributes/attr_title.html) - Title attribute for bookmarks
-- [data-fit-to](/paperwork.core/reference/htmlattributes/data-fit-to.html) - Control destination display
-- [PDF Actions](/paperwork.core/reference/actions/) - PDF navigation actions
+- [data-fit-to](/paperwork.core/reference/htmlattributes/attributes/attr_data_fit_to.html) - Control destination display
+- [PDF Actions](/paperwork.core/reference/index.html) - PDF navigation actions
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic link generation
 
 ---

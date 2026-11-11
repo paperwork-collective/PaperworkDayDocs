@@ -3,7 +3,7 @@ layout: default
 title: Multi-Language & Branded Documents
 nav_order: 8
 parent: Practical Applications
-parent_url: /paperwork.core/learning/08-practical/
+parent_url: /paperwork.core/learning/index.html
 grand_parent: Learning Guides
 grand_parent_url: /paperwork.core/learning/
 has_toc: false
@@ -815,7 +815,7 @@ Through this series, you've built complete, production-ready examples:
 ### Additional Resources
 
 - **[Complete Reference](/paperwork.core/reference/)** - API documentation
-- **[Code Examples](/examples/)** - More sample code
+- **[Code Examples](/paperwork.core/learning/index.html)** - More sample code
 - **[GitHub Repository](https://github.com/richard-scryber/scryber.core)** - Source code and issues
 - **[Community Forum](https://github.com/richard-scryber/scryber.core/discussions)** - Ask questions
 

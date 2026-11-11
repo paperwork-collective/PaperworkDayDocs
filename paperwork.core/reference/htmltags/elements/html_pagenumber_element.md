@@ -525,9 +525,9 @@ This displays the page number where the referenced component appears.
 ## See Also
 
 - [section](/paperwork.core/reference/htmltags/elements/html_section_element.html) - Section element for page numbering context
-- [header](/paperwork.core/reference/htmltags/elements/html_header_element.html) - Header element for page headers
-- [footer](/paperwork.core/reference/htmltags/elements/html_footer_element.html) - Footer element for page footers
-- [Page Layout](/paperwork.core/reference/pagelayout/) - Page layout and numbering settings
+- [header](/paperwork.core/reference/htmltags/elements/html_header_footer_element.html) - Header element for page headers
+- [footer](/paperwork.core/reference/htmltags/elements/html_header_footer_element.html) - Footer element for page footers
+- [Page Layout](/paperwork.core/learning/04-layout/index.html) - Page layout and numbering settings
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding expressions
 - [template](/paperwork.core/reference/htmltags/elements/html_template_element.html) - Template element for repeating content
 

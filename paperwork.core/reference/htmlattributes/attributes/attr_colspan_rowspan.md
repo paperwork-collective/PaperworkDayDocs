@@ -964,11 +964,11 @@ When using spanning cells:
 - [table](/paperwork.core/reference/htmltags/elements/html_table_element.html) - Table element
 - [tr](/paperwork.core/reference/htmltags/elements/html_tr_element.html) - Table row element
 - [td](/paperwork.core/reference/htmltags/elements/html_td_element.html) - Table data cell element
-- [th](/paperwork.core/reference/htmltags/elements/html_th_element.html) - Table header cell element
-- [width](/paperwork.core/reference/htmlattributes/attributes/attr_width.html) - Width attribute
-- [height](/paperwork.core/reference/htmlattributes/attributes/attr_height.html) - Height attribute
+- [th](/paperwork.core/reference/htmltags/elements/html_table_element.html) - Table header cell element
+- [width](/paperwork.core/reference/htmlattributes/attributes/attr_width_height.html) - Width attribute
+- [height](/paperwork.core/reference/htmlattributes/attributes/attr_width_height.html) - Height attribute
 - [style](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styling
-- [Tables](/paperwork.core/reference/tables/) - Complete table documentation
+- [Tables](/paperwork.core/learning/04-layout/06_tables.html) - Complete table documentation
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic attribute values
 
 ---

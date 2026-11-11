@@ -230,7 +230,7 @@ builder.WithData("model", new {
 ## See Also
 
 - [var Function](./var.md)
-- [string Function](./string.md)
+- [string Function](/paperwork.core/reference/binding/functions/index.html)
 - [concat Function](./concat.md)
 
 ---

@@ -456,8 +456,8 @@ The gradient position attributes (`x1`, `y1`, `x2`, `y2`) can be dynamically con
 
 - [stop-color](/paperwork.core/reference/cssproperties/properties/css_prop_stop-color) - Gradient stop color
 - [stop-opacity](/paperwork.core/reference/cssproperties/properties/css_prop_stop-opacity) - Gradient stop transparency
-- [spreadMethod](/paperwork.core/reference/cssproperties/properties/css_prop_spreadMethod) - Gradient spread behavior
+- [spreadMethod](/paperwork.core/reference/svgattributes/attributes/svg_attr_spreadMethod.html) - Gradient spread behavior
 - [fill](/paperwork.core/reference/cssproperties/properties/css_prop_fill) - SVG fill color property
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

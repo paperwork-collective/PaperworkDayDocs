@@ -82,8 +82,8 @@ The `gradientUnits` attribute is used to:
 
 The `gradientUnits` attribute is supported on:
 
-- **[&lt;linearGradient&gt;](/paperwork.core/reference/svgtags/linearGradient.html)** - Linear gradient coordinate system
-- **[&lt;radialGradient&gt;](/paperwork.core/reference/svgtags/radialGradient.html)** - Radial gradient coordinate system
+- **[&lt;linearGradient&gt;](/paperwork.core/reference/svgelements/elements/svg_linearGradient_element.html)** - Linear gradient coordinate system
+- **[&lt;radialGradient&gt;](/paperwork.core/reference/svgelements/elements/svg_radialGradient_element.html)** - Radial gradient coordinate system
 
 ---
 
@@ -559,12 +559,12 @@ Use userSpaceOnUse for consistent gradient across shapes:
 
 ## See Also
 
-- [linearGradient](/paperwork.core/reference/svgtags/linearGradient.html) - Linear gradient definition element
-- [radialGradient](/paperwork.core/reference/svgtags/radialGradient.html) - Radial gradient definition element
+- [linearGradient](/paperwork.core/reference/svgelements/elements/svg_linearGradient_element.html) - Linear gradient definition element
+- [radialGradient](/paperwork.core/reference/svgelements/elements/svg_radialGradient_element.html) - Radial gradient definition element
 - [x1](/paperwork.core/reference/svgattributes/attributes/svg_attr_x1.html), [y1](/paperwork.core/reference/svgattributes/attributes/svg_attr_y1.html), [x2](/paperwork.core/reference/svgattributes/attributes/svg_attr_x2.html), [y2](/paperwork.core/reference/svgattributes/attributes/svg_attr_y2.html) - Linear gradient coordinates
 - [cx](/paperwork.core/reference/svgattributes/attributes/svg_attr_cx.html), [cy](/paperwork.core/reference/svgattributes/attributes/svg_attr_cy.html), [r](/paperwork.core/reference/svgattributes/attributes/svg_attr_r.html) - Radial gradient coordinates
 - [fx](/paperwork.core/reference/svgattributes/attributes/svg_attr_fx.html), [fy](/paperwork.core/reference/svgattributes/attributes/svg_attr_fy.html) - Radial gradient focal point
-- [stop](/paperwork.core/reference/svgtags/stop.html) - Gradient color stop element
+- [stop](/paperwork.core/reference/svgelements/elements/svg_stop_element.html) - Gradient color stop element
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

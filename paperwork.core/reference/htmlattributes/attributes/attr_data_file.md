@@ -1216,11 +1216,11 @@ public class VersionedDocument
 ## See Also
 
 - [object element](/paperwork.core/reference/htmltags/elements/html_object_element.html) - Object/attachment element documentation
-- [data attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data.html) - File path/URL attribute
-- [data-icon attribute](/paperwork.core/reference/htmlattributes/data-icon.html) - Attachment icon display
+- [data attribute](/paperwork.core/reference/htmlattributes/index.html) - File path/URL attribute
+- [data-icon attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_icon.html) - Attachment icon display
 - [type attribute](/paperwork.core/reference/htmlattributes/attributes/attr_type.html) - MIME type specification
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
-- [IconAttachment Component](/paperwork.core/reference/components/iconattachment.html) - Base attachment component
-- [PDF Attachments](/paperwork.core/reference/pdf/attachments.html) - PDF attachment specifications
+- [IconAttachment Component](/paperwork.core/learning/06-content/07_attachments_embedded.html) - Base attachment component
+- [PDF Attachments](/paperwork.core/learning/06-content/07_attachments_embedded.html) - PDF attachment specifications
 
 ---

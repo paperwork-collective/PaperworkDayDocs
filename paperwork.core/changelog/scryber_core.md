@@ -5,6 +5,7 @@ nav_order: 4
 has_toc: false
 parent: Paperwork.Core
 parent_url: /paperwork.core/
+render_with_liquid: false
 ---
 
 
@@ -544,7 +545,7 @@ Some TTC and TTF font files do not render glyfs correctly, but working for many 
 
 #### 5.1.0.2-beta
 
-A major update that now fully supports expressions in attributes, css var and clac along with text, using the handlebars notation - {% raw %}{{...}}{% endraw %}
+A major update that now fully supports expressions in attributes, css var and clac along with text, using the handlebars notation - {{...}}
 This includes support for simple mathematical expressions from the document variables as welll as functions such as 'concat', 'if(value, 'true', 'false')' or 'index() + model.property'
 
 #### 5.0.7

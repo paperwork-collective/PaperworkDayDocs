@@ -712,11 +712,11 @@ Values stored in `<var>` elements are available:
 
 ## See Also
 
-- [Data Binding](/paperwork.core/reference/databinding/)
-- [Expressions](/paperwork.core/reference/expressions/)
-- [Repeating Templates](/paperwork.core/reference/databinding/repeating)
-- [Document Parameters](/paperwork.core/reference/document/parameters)
-- [span Element](/paperwork.core/reference/htmlelements/html_span_element)
-- [@data-bind attribute](/paperwork.core/reference/htmlattributes/attr_data_bind)
+- [Data Binding](/paperwork.core/reference/binding/index.html)
+- [Expressions](/paperwork.core/reference/binding/index.html)
+- [Repeating Templates](/paperwork.core/reference/binding/helpers/each.html)
+- [Document Parameters](/paperwork.core/learning/02-data-binding/05_variables_params.html)
+- [span Element](/paperwork.core/reference/htmltags/elements/html_span_element.html)
+- [@data-bind attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_bind.html)
 
 ---

@@ -60,7 +60,7 @@ More information on actual document creation can be found in <a href='/index.htm
 
 ### Unsupported attributes
 
-When re-using existing content, there are a lot of attributes that can be on an html file that are not supported, or relevant to the library. By default these attributes will be skipped over and ignored. However if running in <code>Strict</code> <a href='/learning/templates/conformancemode.html'>conformance mode</a> the library will raise an error each time it encounters an unknown attribute or attribute value.
+When re-using existing content, there are a lot of attributes that can be on an html file that are not supported, or relevant to the library. By default these attributes will be skipped over and ignored. However if running in <code>Strict</code> <a href='/paperwork.core/learning/07-configuration/03_error_handling_conformance.html'>conformance mode</a> the library will raise an error each time it encounters an unknown attribute or attribute value.
 
 ---
 
@@ -90,7 +90,7 @@ The following attributes are supported on all visual elements - the elements tha
 |---|---|---|--|
 | <a href='attributes/attr_id.html' >id</a>   | *All Visual Elements* | Any | Defines an identifier for the element it is contained in, that can be used to refer to elsewhere in the template.   |
 | <a href='attributes/attr_title.html' >title</a>   | *All Visual Elements* | Any | By default adds an entry into the document outline structure with the attribute text value to support navigation to the element. **NOTE**: See the data extension attributes below as some elements override this default behaviour.   |
-| <a href='attributes/attr_style.html' >style</a>   | *All Visual Elements* | Any | Allows a full definition of the visual appearance of the element. Styles and classes are discussed in their own sections as part of <a href='/styling_content.html'>Styling Content</a> and a full reference section on <a href='/reference/cssproperties/'>CSS properties</a>    |
+| <a href='attributes/attr_style.html' >style</a>   | *All Visual Elements* | Any | Allows a full definition of the visual appearance of the element. Styles and classes are discussed in their own sections as part of <a href='/paperwork.core/learning/03-styling/index.html'>Styling Content</a> and a full reference section on <a href='/reference/cssproperties/'>CSS properties</a>    |
 | <a href='attributes/attr_class.html' >class</a>   | *All Visual Elements* | Any | Specifies a set of style class names as <a href='/reference/cssselectors/'>CSS selectors</a> to apply to the element.   |
 | <a href='attributes/attr_hidden.html' >hidden</a>   | *All Visual Elements* | Any | Indicates if this content should be displayed or not. As an xhtml template the value of the attribute should also be 'hidden' e.g. hidden='hidden'.  |
 | `name`   | *All Visual Elements* | Any | Defines an explicit name for the element it is contained in, that can be used to refer to elsewhere in the template.   |
@@ -104,7 +104,7 @@ The following attributes are supported on all visual elements - the elements tha
 ### Global Event Attributes
 
 
-The following event attributes are supported on all visual elements. For more information on document controllers and event handling see the <a href='/learning/binding/codebehind.html'>code behind</a> learning article.
+The following event attributes are supported on all visual elements. For more information on document controllers and event handling see the <a href='/paperwork.core/configuration/document-controllers.html'>code behind</a> learning article.
 
 | Attribute  | Use | Bindable  | Description |
 |---|---|---|---|

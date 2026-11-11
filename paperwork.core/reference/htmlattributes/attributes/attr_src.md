@@ -828,11 +828,11 @@ C3sBL5DSSrxAWlMIHkBQsLCwshFRJLK7OzOvyGaTaKFP+DDzmPn95n1A..."
 ## See Also
 
 - [img](/paperwork.core/reference/htmltags/elements/html_img_element.html) - Image element (uses src attribute)
-- [iframe](/paperwork.core/reference/htmltags/elements/html_iframe_element.html) - Iframe element for embedded content
-- [width](/paperwork.core/reference/htmlattributes/attributes/attr_width.html) - Width attribute for sizing
-- [height](/paperwork.core/reference/htmlattributes/attributes/attr_height.html) - Height attribute for sizing
+- [iframe](/paperwork.core/reference/htmltags/elements/html_iframe_embed_element.html) - Iframe element for embedded content
+- [width](/paperwork.core/reference/htmlattributes/attributes/attr_width_height.html) - Width attribute for sizing
+- [height](/paperwork.core/reference/htmlattributes/attributes/attr_width_height.html) - Height attribute for sizing
 - [alt](/paperwork.core/reference/htmlattributes/attributes/attr_alt.html) - Alternative text for images
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic content and attribute values
-- [Image Formats](/paperwork.core/reference/images/) - Supported image formats and optimization
+- [Image Formats](/paperwork.core/learning/06-content/01_images.html) - Supported image formats and optimization
 
 ---

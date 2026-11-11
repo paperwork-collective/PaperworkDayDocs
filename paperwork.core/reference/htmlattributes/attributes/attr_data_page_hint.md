@@ -1178,12 +1178,12 @@ Test document with and without hints:
 
 ## See Also
 
-- [page element](/paperwork.core/reference/htmltags/elements/html_page_element.html) - Page number element documentation
-- [data-format attribute](/paperwork.core/reference/htmlattributes/data-format.html) - Page number format control
+- [page element](/paperwork.core/reference/htmltags/index.html) - Page number element documentation
+- [data-format attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_format.html) - Page number format control
 - [property attribute](/paperwork.core/reference/htmlattributes/attributes/attr_property.html) - Page property selection
-- [for attribute](/paperwork.core/reference/htmlattributes/attributes/attr_for.html) - Page number component reference
-- [Page Numbering](/paperwork.core/reference/pagenumbering/) - Complete page numbering guide
-- [Document Performance](/paperwork.core/reference/performance/) - Performance optimization techniques
-- [Headers and Footers](/paperwork.core/reference/headers-footers/) - Header and footer implementation
+- [for attribute](/paperwork.core/reference/htmltags/elements/html_label_element.html) - Page number component reference
+- [Page Numbering](/paperwork.core/reference/htmltags/elements/html_pagenumber_element.html) - Complete page numbering guide
+- [Document Performance](/paperwork.core/learning/07-configuration/06_optimization_performance.html) - Performance optimization techniques
+- [Headers and Footers](/paperwork.core/learning/04-layout/07_headers_footers.html) - Header and footer implementation
 
 ---

@@ -3,7 +3,7 @@ layout: default
 title: Data-Driven Report
 nav_order: 5
 parent: Practical Applications
-parent_url: /paperwork.core/learning/08-practical/
+parent_url: /paperwork.core/learning/index.html
 grand_parent: Learning Guides
 grand_parent_url: /paperwork.core/learning/
 has_toc: false

@@ -1038,10 +1038,10 @@ Complex real-world scenario:
 ## See Also
 
 - [if element](/paperwork.core/reference/htmltags/elements/html_if_element.html) - Conditional rendering element
-- [data-template attribute](/paperwork.core/reference/htmlattributes/data-template.html) - Inline template content
+- [data-template attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_template.html) - Inline template content
 - [template element](/paperwork.core/reference/htmltags/elements/html_template_element.html) - Template for repeating content
 - [Data Binding](/paperwork.core/reference/binding/) - Complete data binding guide
-- [Expressions](/paperwork.core/reference/expressions/) - Expression syntax reference
-- [hidden attribute](/paperwork.core/reference/attributes/hidden.html) - Alternative visibility control
+- [Expressions](/paperwork.core/reference/binding/index.html) - Expression syntax reference
+- [hidden attribute](/paperwork.core/reference/htmlattributes/attributes/attr_hidden.html) - Alternative visibility control
 
 ---

@@ -33,7 +33,7 @@ The <a href='' >SVG elements</a> support a range of attributes to control their 
 
 ### Unsupported Attributes
 
-When re-using existing content, there are a lot of attributes that can be on an SVG file that are not supported, or relevant to the library. By default these attributes will be skipped over and ignored. However if running in <code>Strict</code> <a href='/learning/templates/conformancemode.html'>conformance mode</a> the library will raise an error each time it encounters an unknown attribute or attribute value.
+When re-using existing content, there are a lot of attributes that can be on an SVG file that are not supported, or relevant to the library. By default these attributes will be skipped over and ignored. However if running in <code>Strict</code> <a href='/paperwork.core/learning/07-configuration/03_error_handling_conformance.html'>conformance mode</a> the library will raise an error each time it encounters an unknown attribute or attribute value.
 
 ---
 
@@ -54,7 +54,7 @@ By default **All** attributes are *case sensitive*.
 
 ### Binding values to attributes
 
-When included in the document either inline with the rest of the content or <a href='/reference/htmltags/embed.html' >embedded</a> into the content the attributes support binging to dynamic data. As an image the binding will be empty.
+When included in the document either inline with the rest of the content or <a href='/paperwork.core/reference/htmltags/elements/html_iframe_embed_element.html' >embedded</a> into the content the attributes support binging to dynamic data. As an image the binding will be empty.
 
 
 
@@ -104,11 +104,11 @@ The html global attributes are also available on the svg elements.
 
 | Element  | Attribute  |  Description |
 |---|---|---|
-| <a href='attributes/svg_attr_id.html' >Element ID</a>   | <code>id</code> | The unique identifier for this element within the document. This can be used to reference the element from styles other elements inside and outside the svg for non-image content. |
-| <a href='attributes/svg_attr_class.html' >Class name(s)</a>   | <code>class</code> | Zero or more names of css classes that will be used to match against for styling the element. |
-| <a href='attributes/svg_attr_style.html' >Inline style values</a>   | <code>style</code> | The css style attribute for applying visual style to an element directly. See the <a href='/learning/styles/'>Styles</a> for more information.  |
-| <a href='attributes/svg_attr_hidden.html' >Is Hidden</a>   | <code>hidden</code> | This mirrors the library implementation, as it is a fast and easy way to show and hide content dynamically.  |
-| <a href='attributes/svg_attr_title.html' >Outline Title</a>   | <code>title</code> | This mirrors the library implementation of <a href='/reference/htmlattributes/title.html'>outline title attribute</a> and is also available as a <a href='/reference/svgelements/title.html'>title inner element</a>  |
+| <a href='/paperwork.core/reference/svgattributes/index.html' >Element ID</a>   | <code>id</code> | The unique identifier for this element within the document. This can be used to reference the element from styles other elements inside and outside the svg for non-image content. |
+| <a href='/paperwork.core/reference/svgattributes/index.html' >Class name(s)</a>   | <code>class</code> | Zero or more names of css classes that will be used to match against for styling the element. |
+| <a href='/paperwork.core/reference/svgattributes/index.html' >Inline style values</a>   | <code>style</code> | The css style attribute for applying visual style to an element directly. See the <a href='/paperwork.core/learning/03-styling/index.html'>Styles</a> for more information.  |
+| <a href='/paperwork.core/reference/svgattributes/index.html' >Is Hidden</a>   | <code>hidden</code> | This mirrors the library implementation, as it is a fast and easy way to show and hide content dynamically.  |
+| <a href='/paperwork.core/reference/svgattributes/index.html' >Outline Title</a>   | <code>title</code> | This mirrors the library implementation of <a href='/paperwork.core/reference/htmlattributes/attributes/attr_title.html'>outline title attribute</a> and is also available as a <a href='/paperwork.core/reference/svgelements/index.html'>title inner element</a>  |
 | <a href='attributes/svg_attr_href.html' >Href</a>   | <code>href</code> | Specifies the remote location of an image data file, or inline image data, that should be drawn on the SVG canvas.  |
 
 ---
@@ -144,8 +144,8 @@ By default all the svg visual elements are absolutely positioned relative to the
 | <a href='attributes/svg_attr_r.html' >Circle Radius</a>   | <code>r</code> | The radius of a circle element. |
 | <a href='attributes/svg_attr_rx.html' >X Radius</a>   | <code>rx</code> |  The horizontal (x) radius of an ellipse element, and also the corner x radius of a rectangle elements. |
 | <a href='attributes/svg_attr_ry.html' >Y Radius</a>   | <code>ry</code> | The vertical (y) radius of an ellipse element, and also the corner y radius of a rectangle elements.|
-| <a href='attributes/svg_attr_width.html' >Element Width</a>   | <code>width</code> |  The horizontal size of an svg canvas, or elements within a canvas. |
-| <a href='attributes/svg_attr_height.html' >Element Height</a>   | <code>height</code> | The vertical size of an svg canvas, or elements within a canvas. |
+| <a href='/paperwork.core/reference/svgelements/elements/svg_svg_element.html' >Element Width</a>   | <code>width</code> |  The horizontal size of an svg canvas, or elements within a canvas. |
+| <a href='/paperwork.core/reference/svgelements/elements/svg_svg_element.html' >Element Height</a>   | <code>height</code> | The vertical size of an svg canvas, or elements within a canvas. |
 
 
 ---
@@ -156,8 +156,8 @@ The following attributes define the position of points, lines, arcs within compl
 
 | Element  | Attribute | Description |
 |---|---|---|
-| <a href='attributes/d.html' >Path Data</a>   | <code>d</code> |  The vector drawing instructions for a complex path. |
-| <a href='attributes/points.html' >Poly Points</a>   | <code>points</code> | The set of points to draw for a poly-line or polygon. |
+| <a href='/paperwork.core/reference/svgattributes/attributes/svg_attr_d.html' >Path Data</a>   | <code>d</code> |  The vector drawing instructions for a complex path. |
+| <a href='/paperwork.core/reference/svgattributes/attributes/svg_attr_points.html' >Poly Points</a>   | <code>points</code> | The set of points to draw for a poly-line or polygon. |
 
 ---
 
@@ -168,16 +168,16 @@ The following attributes control the visual appearance of elements around the ed
 
 | Element  | Attribute | Description |
 |---|---|---|
-| <a href='attributes/svg_attr_fill.html' >Element Fill</a>   | <code>fill</code> | A known color or a url reference to a defined pattern or gradient to use to flood fill the elements shape. |
-| <a href='attributes/svg_attr_fill-opacity.html' >Element Fill Opacity</a>   | <code>fill-opacity</code> | Defines the visibility of content underneath the elements shape and how transparent the flood fill will be. |
-| <a href='attributes/svg_attr_fill-rule.html' >Element Fill Rule</a>   | <code>fill-rule</code> | Defines how a point within the shape will be considered as 'inside' and hence whether it will be filled. |
-| <a href='attributes/svg_attr_opacity.html' >Element Opacity</a>   | <code>opacity</code> | Specifies the transparency of an complete object or of a group of objects, that is, the degree to which the background behind the element is visible behind. |
-| <a href='attributes/svg_attr_stroke.html' >Element Stroke</a>   | <code>stroke</code> | A known color or a url reference (TBC) to a defined pattern or gradient to use to render an edge around the elements shape or characters. |
-| <a href='attributes/svg_attr_stroke-dasharray.html' >Element Stroke Dash Spacing</a> | <code>stroke-dasharray</code> | A series of numbers defining the repeating dashes and gaps used to render the border of a shape or character |
-| <a href='attributes/svg_attr_stroke-opacity.html' >Element Stroke Opacity</a>   | <code>stroke-opacity</code> | Defines the visibility of the border around the elements shape or characters and how transparent the stroke will be. |
-| <a href='attributes/svg_attr_stroke-width.html' >Element Stroke Width</a>   | <code>stroke-width</code> | Defines the width of the stroke around the elements shape or characters. |
-| <a href='attributes/svg_attr_stroke-linecap.html' >Element Stroke Line Cap</a> | <code>stroke-linecap</code> | Defines the type of ending to be rendered for an open shape or character. |
-| <a href='attributes/svg_attr_stroke-linejoin.html' >Element Stroke Line Join</a> | <code>stroke-linejoin</code> | Defines the type of join to be rendered at corners within a shape or character. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_fill.html' >Element Fill</a>   | <code>fill</code> | A known color or a url reference to a defined pattern or gradient to use to flood fill the elements shape. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_fill-opacity.html' >Element Fill Opacity</a>   | <code>fill-opacity</code> | Defines the visibility of content underneath the elements shape and how transparent the flood fill will be. |
+| <a href='/paperwork.core/reference/svgattributes/index.html' >Element Fill Rule</a>   | <code>fill-rule</code> | Defines how a point within the shape will be considered as 'inside' and hence whether it will be filled. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_opacity.html' >Element Opacity</a>   | <code>opacity</code> | Specifies the transparency of an complete object or of a group of objects, that is, the degree to which the background behind the element is visible behind. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_stroke.html' >Element Stroke</a>   | <code>stroke</code> | A known color or a url reference (TBC) to a defined pattern or gradient to use to render an edge around the elements shape or characters. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_stroke-dasharray.html' >Element Stroke Dash Spacing</a> | <code>stroke-dasharray</code> | A series of numbers defining the repeating dashes and gaps used to render the border of a shape or character |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_stroke-opacity.html' >Element Stroke Opacity</a>   | <code>stroke-opacity</code> | Defines the visibility of the border around the elements shape or characters and how transparent the stroke will be. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_stroke-width.html' >Element Stroke Width</a>   | <code>stroke-width</code> | Defines the width of the stroke around the elements shape or characters. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_stroke-linecap.html' >Element Stroke Line Cap</a> | <code>stroke-linecap</code> | Defines the type of ending to be rendered for an open shape or character. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_stroke-linejoin.html' >Element Stroke Line Join</a> | <code>stroke-linejoin</code> | Defines the type of join to be rendered at corners within a shape or character. |
 
 ---
 
@@ -188,18 +188,18 @@ The following attributes control the way textual content will be shown within th
 | Element  | Attribute | Description |
 |---|---|---|
 | <a href='attributes/svg_attr_dominant-baseline.html' >Dominant Basline</a>   | <code>dominant-baseline</code> | Aligns the characters to the top, middle, bottom, etc. of their point location. |
-| <a href='attributes/svg_attr_dx.html' >Delta (offset) X Position</a>   | <code>dx</code> | Adjusts the x co-ordinate position of a text block or text span, relative to is parent. |
-| <a href='attributes/svg_attr_dy.html' >Delta (offset) Y Position</a>   | <code>dy</code> | Adjusts the y co-ordinate position of a text block or text span, relative to is parent. |
-| <a href='attributes/svg_attr_font-family.html' >Font Family</a>   | <code>font-family</code> | Specifies a font or a priority list of fonts that inner text should be rendered with. |
-| <a href='attributes/svg_attr_font-size.html' >Font Size</a>   | <code>font-size</code> | Specifies the explicit or relative size that inner text should be rendered with. |
-| <a href='attributes/svg_attr_font-style.html' >Font Style</a>   | <code>font-style</code> | Specifies the style - italic or regular, that any inner text should be rendered with. |
-| <a href='attributes/svg_attr_font-weight.html' >Font Weight</a>   | <code>font-weight</code> | Specifies the explicit or relative thickness, that any inner text should be rendered with. |
-| <a href='attributes/svg_attr_lengthAdjust.html' >Length Adjust</a>   | <code>lengthAdjust</code> | Alters the mechanism for how characters in the text are spaced and or stretched. |
-| <a href='attributes/svg_attr_letter-spacing.html' >Letter Spacing</a>   | <code>letter-spacing</code> | Alters the spacing between characters for any inner text. |
+| <a href='/paperwork.core/reference/svgattributes/index.html' >Delta (offset) X Position</a>   | <code>dx</code> | Adjusts the x co-ordinate position of a text block or text span, relative to is parent. |
+| <a href='/paperwork.core/reference/svgattributes/index.html' >Delta (offset) Y Position</a>   | <code>dy</code> | Adjusts the y co-ordinate position of a text block or text span, relative to is parent. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_font-family.html' >Font Family</a>   | <code>font-family</code> | Specifies a font or a priority list of fonts that inner text should be rendered with. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_font-size.html' >Font Size</a>   | <code>font-size</code> | Specifies the explicit or relative size that inner text should be rendered with. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_font-style.html' >Font Style</a>   | <code>font-style</code> | Specifies the style - italic or regular, that any inner text should be rendered with. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_font-weight.html' >Font Weight</a>   | <code>font-weight</code> | Specifies the explicit or relative thickness, that any inner text should be rendered with. |
+| <a href='/paperwork.core/reference/svgattributes/index.html' >Length Adjust</a>   | <code>lengthAdjust</code> | Alters the mechanism for how characters in the text are spaced and or stretched. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_letter-spacing.html' >Letter Spacing</a>   | <code>letter-spacing</code> | Alters the spacing between characters for any inner text. |
 | <a href='attributes/svg_attr_text-anchor.html' >Text Anchor</a>   | <code>text-anchor</code> | Aligns the characters to the start, middle or end of their point location. |
-| <a href='attributes/svg_attr_text-decoration.html' >Text Decoration</a>   | <code>text-decoration</code> | Specifies whether the inner text should be rendered with underlines, strike throughs and/or overlines. |
-| <a href='attributes/svg_attr_textLength.html' >Text Length</a>   | <code>textLength</code> | Specifies the actual width of the space into which the inner text characters should be drawn. |
-| <a href='attributes/svg_attr_word-spacing.html' >Word Spacing</a>   | <code>word-spacing</code> | Alters the relative spacing between the end of one word and the beginning of the next for any inner text, independent of the letter spacing. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_text-decoration.html' >Text Decoration</a>   | <code>text-decoration</code> | Specifies whether the inner text should be rendered with underlines, strike throughs and/or overlines. |
+| <a href='/paperwork.core/reference/svgattributes/index.html' >Text Length</a>   | <code>textLength</code> | Specifies the actual width of the space into which the inner text characters should be drawn. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_word-spacing.html' >Word Spacing</a>   | <code>word-spacing</code> | Alters the relative spacing between the end of one word and the beginning of the next for any inner text, independent of the letter spacing. |
 
 ---
 
@@ -235,8 +235,8 @@ The following attributes control how patterns, linear and radial gradients ar pr
 | <a href='attributes/svg_attr_fx.html' >Radial Gradient Focus X Position</a>   | <code>fx</code> | Adjusts the horizontal (x) co-ordinate position of the focal point of a radial gradient. |
 | <a href='attributes/svg_attr_fy.html' >Radial Gradient Focus Y Position</a>   | <code>fy</code> | Adjusts the vertical (y) co-ordinate position of the focal point of a radial gradient. |
 | <a href='attributes/svg_attr_gradientUnits.html' >Gradient Unit Type</a>   | <code>gradientUnits</code> | Sets the user space or bounding box co-ordinate system for linear and radial gradients. |
-| <a href='attributes/svg_attr_stop-color.html' >Gradient Stop Color</a>   | <code>stop-color</code> | Sets the boundary colour for a specific stop within a linear or radial gradient. |
-| <a href='attributes/svg_attr_stop-opacity.html' >Gradient Stop Opacity</a>   | <code>stop-opacity</code> | Sets the boundary opacity for a specific stop within a linear or radial gradient. **Not currently supported in PDF output**. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_stop-color.html' >Gradient Stop Color</a>   | <code>stop-color</code> | Sets the boundary colour for a specific stop within a linear or radial gradient. |
+| <a href='/paperwork.core/reference/cssproperties/properties/css_prop_stop-opacity.html' >Gradient Stop Opacity</a>   | <code>stop-opacity</code> | Sets the boundary opacity for a specific stop within a linear or radial gradient. **Not currently supported in PDF output**. |
 | <a href='attributes/svg_attr_offset.html' >Gradient Stop Offset</a>   | <code>offset</code> | Sets the boundary offset for a specific stop within a linear or radial gradient. |
 | <a href='attributes/svg_attr_spreadMethod.html' >Gradient Spread Method</a>   | <code>spreadMethod</code> | Specifies the wad a linear or radial gradient should display beyond the boundaries of the definition - pad, reflect or repeat. |
 | <a href='attributes/svg_attr_patternUnits.html' >Pattern Render Units</a>   | <code>patternUnits</code> | Specifies the user or bounding box option for a pattern, for the rendering within the elements that have the pattern applied. |

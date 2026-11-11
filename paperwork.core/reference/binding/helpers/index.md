@@ -142,6 +142,6 @@ These helpers work within block helpers to create conditional branches.
 
 - [Expression Functions](../functions/) - Built-in functions for data manipulation
 - [Binding Operators](../operators/) - Mathematical, comparison, and logical operators
-- [Data Binding Guide](../../learning/02-data-binding/01_data_binding_basics.html) - Complete guide to data binding
+- [Data Binding Guide](/paperwork.core/learning/02-data-binding/01_data_binding_basics.html) - Complete guide to data binding
 
 ---

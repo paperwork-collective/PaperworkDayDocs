@@ -619,6 +619,6 @@ The `content` property can be dynamically populated through data binding with co
 - [counter-increment](/paperwork.core/reference/cssproperties/properties/css_prop_counter-increment) - Increment counters
 - [display](/paperwork.core/reference/cssproperties/properties/css_prop_display) - Element display type
 - [list-style-type](/paperwork.core/reference/cssproperties/properties/css_prop_list-style-type) - List marker style
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

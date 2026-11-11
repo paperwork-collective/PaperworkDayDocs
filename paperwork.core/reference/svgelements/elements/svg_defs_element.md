@@ -2,7 +2,7 @@
 layout: default
 title: defs
 parent: SVG Elements
-parent_url: /paperwork.core/reference/svgtags/
+parent_url: /paperwork.core/reference/svgelements/index.html
 grand_parent: Paperwork.Reference
 grand_parent_url: /paperwork.core/reference/
 has_children: false
@@ -644,15 +644,15 @@ Organize definitions logically:
 
 ## See Also
 
-- [svg](/paperwork.core/reference/svgtags/svg.html) - SVG canvas container
-- [use](/paperwork.core/reference/svgtags/use.html) - Reference and reuse defined elements
-- [g](/paperwork.core/reference/svgtags/g.html) - Group container for organizing elements
-- [symbol](/paperwork.core/reference/svgtags/symbol.html) - Reusable symbol definition
-- [linearGradient](/paperwork.core/reference/svgtags/lineargradient.html) - Linear gradient fill
-- [radialGradient](/paperwork.core/reference/svgtags/radialgradient.html) - Radial gradient fill
-- [pattern](/paperwork.core/reference/svgtags/pattern.html) - Pattern fill definition
-- [marker](/paperwork.core/reference/svgtags/marker.html) - Path marker definition
-- [clipPath](/paperwork.core/reference/svgtags/clippath.html) - Clipping path definition
+- [svg](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG canvas container
+- [use](/paperwork.core/reference/svgelements/elements/svg_use_element.html) - Reference and reuse defined elements
+- [g](/paperwork.core/reference/svgelements/elements/svg_g_element.html) - Group container for organizing elements
+- [symbol](/paperwork.core/reference/svgelements/elements/svg_use_element.html) - Reusable symbol definition
+- [linearGradient](/paperwork.core/reference/svgelements/elements/svg_linearGradient_element.html) - Linear gradient fill
+- [radialGradient](/paperwork.core/reference/svgelements/elements/svg_radialGradient_element.html) - Radial gradient fill
+- [pattern](/paperwork.core/reference/svgelements/elements/svg_pattern_element.html) - Pattern fill definition
+- [marker](/paperwork.core/reference/svgelements/elements/svg_marker_element.html) - Path marker definition
+- [clipPath](/paperwork.core/reference/svgelements/index.html) - Clipping path definition
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

@@ -146,7 +146,7 @@ Priority level in expression evaluation (1 = highest, 10 = lowest): **N**
 
 ## See Also
 
-- [Related Operator](./related.md)
+- [Related Operator](/paperwork.core/reference/binding/index.html)
 - [Operator Precedence](./index.md#operator-precedence)
 
 ---

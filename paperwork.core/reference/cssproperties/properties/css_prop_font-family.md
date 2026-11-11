@@ -263,10 +263,10 @@ Data binding expressions are enclosed in double curly braces `{% raw %}{{}}{% en
 
 ## See Also
 
-- [font](/paperwork.core/reference/cssproperties/font) - Shorthand font property
-- [font-size](/paperwork.core/reference/cssproperties/font-size) - Font size specification
-- [font-style](/paperwork.core/reference/cssproperties/font-style) - Italic and oblique styles
-- [font-weight](/paperwork.core/reference/cssproperties/font-weight) - Font weight values
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [font](/paperwork.core/reference/cssproperties/properties/css_prop_font.html) - Shorthand font property
+- [font-size](/paperwork.core/reference/cssproperties/properties/css_prop_font-size.html) - Font size specification
+- [font-style](/paperwork.core/reference/cssproperties/properties/css_prop_font-style.html) - Italic and oblique styles
+- [font-weight](/paperwork.core/reference/cssproperties/properties/css_prop_font-weight.html) - Font weight values
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

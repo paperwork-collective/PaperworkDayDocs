@@ -533,9 +533,9 @@ Unordered lists can contain nested lists (either `<ul>` or `<ol>`):
 
 - [ol](/paperwork.core/reference/htmltags/elements/html_ol_element.html) - Ordered list element
 - [li](/paperwork.core/reference/htmltags/elements/html_li_element.html) - List item element
-- [dl](/paperwork.core/reference/htmltags/elements/html_dl_element.html) - Definition list element
-- [Lists Reference](/paperwork.core/reference/components/lists.html) - Complete lists documentation
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [dl](/paperwork.core/reference/htmltags/elements/html_dl_dt_dd_elements.html) - Definition list element
+- [Lists Reference](/paperwork.core/reference/htmltags/elements/html_ul_element.html) - Complete lists documentation
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

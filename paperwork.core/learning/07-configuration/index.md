@@ -205,7 +205,7 @@ Jump to specific topics:
 
 **Related Series:**
 - [Getting Started](/paperwork.core/learning/01-getting-started/) - Basic concepts
-- [Practical Applications](/paperwork.core/learning/08-practical/) - Real-world examples
+- [Practical Applications](/paperwork.core/learning/index.html) - Real-world examples
 
 ---
 

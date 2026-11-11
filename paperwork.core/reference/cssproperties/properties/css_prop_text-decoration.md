@@ -410,11 +410,11 @@ The `text-decoration` property can be dynamically controlled using data binding,
 
 ## See Also
 
-- [text-decoration-line](/paperwork.core/reference/cssproperties/text-decoration-line) - Specific decoration line types
-- [text-decoration-color](/paperwork.core/reference/cssproperties/text-decoration-color) - Decoration color
-- [text-decoration-style](/paperwork.core/reference/cssproperties/text-decoration-style) - Decoration line style
-- [color](/paperwork.core/reference/cssproperties/color) - Text color
-- [font-weight](/paperwork.core/reference/cssproperties/font-weight) - Text weight
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [text-decoration-line](/paperwork.core/reference/cssproperties/properties/css_prop_text-decoration-line.html) - Specific decoration line types
+- [text-decoration-color](/paperwork.core/reference/cssproperties/properties/css_prop_text-decoration-color.html) - Decoration color
+- [text-decoration-style](/paperwork.core/reference/cssproperties/properties/css_prop_text-decoration-style.html) - Decoration line style
+- [color](/paperwork.core/reference/cssproperties/properties/css_prop_color.html) - Text color
+- [font-weight](/paperwork.core/reference/cssproperties/properties/css_prop_font-weight.html) - Text weight
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

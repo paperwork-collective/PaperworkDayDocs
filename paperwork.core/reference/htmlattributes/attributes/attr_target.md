@@ -1017,9 +1017,9 @@ Target for form submissions (limited PDF use):
 
 - [a](/paperwork.core/reference/htmltags/elements/html_a_element.html) - Anchor element for hyperlinks
 - [href](/paperwork.core/reference/htmlattributes/attributes/attr_href.html) - Hyperlink reference attribute
-- [base](/paperwork.core/reference/htmltags/elements/html_base_element.html) - Base URL element
+- [base](/paperwork.core/reference/htmltags/elements/html_head_element.html) - Base URL element
 - [rel](/paperwork.core/reference/htmlattributes/attributes/attr_rel.html) - Relationship attribute
-- [area](/paperwork.core/reference/htmltags/elements/html_area_element.html) - Image map area element
-- [form](/paperwork.core/reference/htmltags/elements/html_form_element.html) - Form element
+- [area](/paperwork.core/reference/htmltags/index.html) - Image map area element
+- [form](/paperwork.core/reference/htmltags/index.html) - Form element
 
 ---

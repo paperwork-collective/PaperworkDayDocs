@@ -589,7 +589,7 @@ await factory.NewDocument()
 - [section](html_section_element.html) - Section element for thematic groupings
 - [nav](html_nav_element.html) - Navigation element
 - [blockquote](html_blockquote_element.html) - Block quotation element
-- [CSS Styles](/paperwork.core/learning/styles/) - Complete CSS styling reference
-- [Data Binding](/paperwork.core/learning/binding/) - Data binding and expressions
+- [CSS Styles](/paperwork.core/learning/03-styling/index.html) - Complete CSS styling reference
+- [Data Binding](/paperwork.core/learning/02-data-binding/index.html) - Data binding and expressions
 
 ---

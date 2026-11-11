@@ -82,9 +82,9 @@ The `text-anchor` attribute is used to:
 
 The `text-anchor` attribute is supported on:
 
-- **[&lt;text&gt;](/paperwork.core/reference/svgtags/text.html)** - Text element
-- **[&lt;tspan&gt;](/paperwork.core/reference/svgtags/tspan.html)** - Text span element
-- **[&lt;textPath&gt;](/paperwork.core/reference/svgtags/textPath.html)** - Text on path element
+- **[&lt;text&gt;](/paperwork.core/reference/svgelements/elements/svg_text_element.html)** - Text element
+- **[&lt;tspan&gt;](/paperwork.core/reference/svgelements/elements/svg_tspan_element.html)** - Text span element
+- **[&lt;textPath&gt;](/paperwork.core/reference/svgelements/elements/svg_text_element.html)** - Text on path element
 
 ---
 
@@ -822,12 +822,12 @@ Each line respects text-anchor:
 
 ## See Also
 
-- [text](/paperwork.core/reference/svgtags/text.html) - Text element
-- [tspan](/paperwork.core/reference/svgtags/tspan.html) - Text span element
+- [text](/paperwork.core/reference/svgelements/elements/svg_text_element.html) - Text element
+- [tspan](/paperwork.core/reference/svgelements/elements/svg_tspan_element.html) - Text span element
 - [dominant-baseline](/paperwork.core/reference/svgattributes/attributes/svg_attr_dominant-baseline.html) - Vertical text alignment
 - [x](/paperwork.core/reference/svgattributes/attributes/svg_attr_x.html), [y](/paperwork.core/reference/svgattributes/attributes/svg_attr_y.html) - Text position coordinates
-- [font-size](/paperwork.core/reference/svgattributes/attributes/svg_attr_font-size.html) - Text size
-- [fill](/paperwork.core/reference/svgattributes/attributes/svg_attr_fill.html) - Text color
+- [font-size](/paperwork.core/reference/cssproperties/properties/css_prop_font-size.html) - Text size
+- [fill](/paperwork.core/reference/cssproperties/properties/css_prop_fill.html) - Text color
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 
 ---

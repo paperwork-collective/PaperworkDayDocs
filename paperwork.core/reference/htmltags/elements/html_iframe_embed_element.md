@@ -866,7 +866,7 @@ See the [data-content attribute reference](/paperwork.core/reference/htmlattribu
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Container element
 - [template](/paperwork.core/reference/htmltags/elements/html_template_element.html) - Template element for data binding
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
-- [Document Parser](/paperwork.core/reference/parser/) - HTML/XML parsing in Scryber
-- [Remote Resources](/paperwork.core/reference/resources/) - Loading remote content
+- [Document Parser](/paperwork.core/configuration/index.html) - HTML/XML parsing in Scryber
+- [Remote Resources](/paperwork.core/configuration/index.html) - Loading remote content
 
 ---

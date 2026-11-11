@@ -349,9 +349,9 @@ The `<big>` element may be useful when:
 ## See Also
 
 - [span](html_span_element.html) - Modern inline container (recommended)
-- [small](html_small_element.html) - Small text element (also deprecated)
+- [small](/paperwork.core/reference/htmltags/elements/html_big_element.html) - Small text element (also deprecated)
 - [font](html_font_element.html) - Font styling element (deprecated)
-- [CSS Styles](/paperwork.core/learning/styles/) - Complete CSS styling reference
-- [Text Formatting](/paperwork.core/learning/styles/text.html) - Modern text formatting elements
+- [CSS Styles](/paperwork.core/learning/03-styling/index.html) - Complete CSS styling reference
+- [Text Formatting](/paperwork.core/learning/03-styling/05_text_styling.html) - Modern text formatting elements
 
 ---

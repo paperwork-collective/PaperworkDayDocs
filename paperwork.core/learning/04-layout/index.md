@@ -602,7 +602,7 @@ Jump to specific topics:
 **Related Series:**
 - [Styling & Appearance](/paperwork.core/learning/03-styling/) - Visual design
 - [Content Components](/paperwork.core/learning/06-content/) - Tables, images, SVG
-- [Practical Applications](/paperwork.core/learning/08-practical/) - Real-world examples
+- [Practical Applications](/paperwork.core/learning/index.html) - Real-world examples
 
 ---
 

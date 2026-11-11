@@ -1145,10 +1145,10 @@ BCP 47 supports historical and extinct languages:
 ## See Also
 
 - [charset](/paperwork.core/reference/htmlattributes/attributes/attr_charset.html) - Character encoding attribute
-- [dir](/paperwork.core/reference/htmlattributes/attributes/attr_dir.html) - Text direction attribute (ltr, rtl)
-- [translate](/paperwork.core/reference/htmlattributes/attributes/attr_translate.html) - Translation hint attribute
+- [dir](/paperwork.core/reference/htmlattributes/index.html) - Text direction attribute (ltr, rtl)
+- [translate](/paperwork.core/reference/htmlattributes/index.html) - Translation hint attribute
 - [html](/paperwork.core/reference/htmltags/elements/html_html_element.html) - Root HTML element
-- [Internationalization](/paperwork.core/reference/i18n/) - Creating multilingual PDFs
-- [BCP 47](/paperwork.core/reference/standards/bcp47.html) - Language tag specification
+- [Internationalization](/paperwork.core/learning/05-typography/index.html) - Creating multilingual PDFs
+- [BCP 47](/paperwork.core/reference/htmlattributes/attributes/attr_lang.html) - Language tag specification
 
 ---

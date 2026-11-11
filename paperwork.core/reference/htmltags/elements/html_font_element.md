@@ -172,9 +172,9 @@ The `<font>` element:
 ## See Also
 
 - [span](html_span_element.html) - Modern inline container (recommended)
-- [strong](html_strong_element.html) - Bold text (semantic)
+- [strong](/paperwork.core/reference/htmltags/elements/html_strong_em_element.html) - Bold text (semantic)
 - [em](html_strong_em_element.html) - Italic text (semantic)
-- [CSS Styles](/paperwork.core/learning/styles/) - Complete CSS styling reference
-- [Text Formatting](/paperwork.core/learning/styles/fonts.html) - Modern text formatting elements
+- [CSS Styles](/paperwork.core/learning/03-styling/index.html) - Complete CSS styling reference
+- [Text Formatting](/paperwork.core/learning/05-typography/01_font_basics.html) - Modern text formatting elements
 
 ---

@@ -547,6 +547,6 @@ The `stroke-linejoin` property can be dynamically controlled through data bindin
 - [stroke-linecap](/paperwork.core/reference/cssproperties/properties/css_prop_stroke-linecap) - Control line ending appearance
 - [stroke-dasharray](/paperwork.core/reference/cssproperties/properties/css_prop_stroke-dasharray) - Define dash pattern
 - [stroke-opacity](/paperwork.core/reference/cssproperties/properties/css_prop_stroke-opacity) - SVG stroke transparency
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

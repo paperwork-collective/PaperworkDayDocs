@@ -910,7 +910,7 @@ You've completed the Layout & Positioning series! Continue your journey:
 
 1. **[Typography & Fonts](/paperwork.core/learning/05-typography/)** - Advanced text styling
 2. **[Content Components](/paperwork.core/learning/06-content/)** - Images, lists, and more
-3. **[Practical Applications](/paperwork.core/learning/08-practical/)** - Real-world documents
+3. **[Practical Applications](/paperwork.core/learning/index.html)** - Real-world documents
 
 ---
 

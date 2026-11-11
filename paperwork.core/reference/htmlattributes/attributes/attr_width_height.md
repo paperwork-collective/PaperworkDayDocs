@@ -871,11 +871,11 @@ Display size does not affect file size — the same image data is embedded regar
 - [img](/paperwork.core/reference/htmltags/elements/html_img_element.html) - Image element
 - [table](/paperwork.core/reference/htmltags/elements/html_table_element.html) - Table element
 - [td](/paperwork.core/reference/htmltags/elements/html_td_element.html) - Table cell element
-- [iframe](/paperwork.core/reference/htmltags/elements/html_iframe_element.html) - Iframe element
+- [iframe](/paperwork.core/reference/htmltags/elements/html_iframe_embed_element.html) - Iframe element
 - [src](/paperwork.core/reference/htmlattributes/attributes/attr_src.html) - Source attribute for images
 - [alt](/paperwork.core/reference/htmlattributes/attributes/attr_alt.html) - Alternative text for images
 - [style](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline styling for dimensions
-- [CSS Styles](/paperwork.core/reference/styles/) - Comprehensive styling including sizing
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Comprehensive styling including sizing
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic attribute values
 
 ---

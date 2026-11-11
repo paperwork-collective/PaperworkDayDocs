@@ -650,11 +650,11 @@ In the Scryber codebase:
 
 - [article](/paperwork.core/reference/htmltags/elements/html_article_element.html) - Self-contained composition element
 - [section](/paperwork.core/reference/htmltags/elements/html_section_element.html) - Thematic section element
-- [header](/paperwork.core/reference/htmltags/elements/html_header_element.html) - Header element for introductory content
-- [footer](/paperwork.core/reference/htmltags/elements/html_footer_element.html) - Footer element for closing content
+- [header](/paperwork.core/reference/htmltags/elements/html_header_footer_element.html) - Header element for introductory content
+- [footer](/paperwork.core/reference/htmltags/elements/html_header_footer_element.html) - Footer element for closing content
 - [nav](/paperwork.core/reference/htmltags/elements/html_nav_element.html) - Navigation element
 - [aside](/paperwork.core/reference/htmltags/elements/html_aside_element.html) - Sidebar or tangential content
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic block container
-- [Panel Component](/paperwork.core/reference/components/panel.html) - Base panel component in Scryber namespace
+- [Panel Component](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Base panel component in Scryber namespace
 
 ---

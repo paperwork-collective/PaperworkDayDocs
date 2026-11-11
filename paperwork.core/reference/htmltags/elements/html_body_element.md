@@ -918,13 +918,13 @@ Special expressions available:
 
 - [html](html_html_element.html) - Root HTML element (parent of body)
 - [head](html_head_element.html) - Head element for metadata
-- [header](html_header_element.html) - Header element for page headers
-- [footer](html_footer_element.html) - Footer element for page footers
+- [header](/paperwork.core/reference/htmltags/elements/html_header_footer_element.html) - Header element for page headers
+- [footer](/paperwork.core/reference/htmltags/elements/html_header_footer_element.html) - Footer element for page footers
 - [section](html_section_element.html) - Section element for document sections
 - [div](html_div_element.html) - Generic container element
-- [Page Sizes](/paperwork.core/learning/styles/page_sizes) - Page sizing
-- [Page Layout](/paperwork.core/learning/styles/page_layout) - Page breaks, numbering and sectioning.
-- [Headers and Footers](/learing/header_footer/) - Header and footer details
-- [Data Binding](/paperwork.core/learning/binding/) - Data binding and expressions
+- [Page Sizes](/paperwork.core/learning/04-layout/01_page_sizes_orientation.html) - Page sizing
+- [Page Layout](/paperwork.core/learning/04-layout/index.html) - Page breaks, numbering and sectioning.
+- [Headers and Footers](/paperwork.core/learning/04-layout/07_headers_footers.html) - Header and footer details
+- [Data Binding](/paperwork.core/learning/02-data-binding/index.html) - Data binding and expressions
 
 ---

@@ -902,7 +902,7 @@ For web optimization (limited PDF use):
 - [href](/paperwork.core/reference/htmlattributes/attributes/attr_href.html) - Hyperlink reference attribute
 - [media](/paperwork.core/reference/htmlattributes/attributes/attr_media.html) - Media query attribute
 - [type](/paperwork.core/reference/htmlattributes/attributes/attr_type.html) - MIME type attribute
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 - [a](/paperwork.core/reference/htmltags/elements/html_a_element.html) - Anchor element
 
 ---

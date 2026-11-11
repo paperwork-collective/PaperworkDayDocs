@@ -640,7 +640,7 @@ Control page breaks:
 - [td](/paperwork.core/reference/htmltags/elements/html_td_element.html) - Table cell elements (td and th)
 - [div](/paperwork.core/reference/htmltags/elements/html_div_element.html) - Generic block container
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding
-- [CSS Styles](/paperwork.core/reference/styles/) - Complete CSS styling reference
+- [CSS Styles](/paperwork.core/reference/cssproperties/index.html) - Complete CSS styling reference
 - [Template Element](/paperwork.core/reference/htmltags/elements/html_template_element.html) - Template for repeating content
 
 ---

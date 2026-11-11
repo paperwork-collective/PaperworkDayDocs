@@ -716,13 +716,13 @@ See the [allow attribute reference](/paperwork.core/reference/htmlattributes/att
 ## See Also
 
 - [allow attribute](/paperwork.core/reference/htmlattributes/attributes/attr_allow.html) - Content permissions policy for iframe
-- [data-content-type attribute](/paperwork.core/reference/htmlattributes/data-content-type.html) - Specify content MIME type
-- [data-content-action attribute](/paperwork.core/reference/htmlattributes/data-content-action.html) - Control content insertion
+- [data-content-type attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_content.html) - Specify content MIME type
+- [data-content-action attribute](/paperwork.core/reference/htmlattributes/attributes/attr_data_content.html) - Control content insertion
 - [label element](/paperwork.core/reference/htmltags/elements/html_label_element.html) - Label element reference
 - [template element](/paperwork.core/reference/htmltags/elements/html_template_element.html) - Template element reference
-- [frame element](/paperwork.core/reference/htmltags/elements/html_frame_element.html) - Frame element reference
+- [frame element](/paperwork.core/reference/htmltags/elements/html_frameset_frame_element.html) - Frame element reference
 - [iframe and embed elements](/paperwork.core/reference/htmltags/elements/html_iframe_embed_element.html) - Iframe element reference
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding overview
-- [Expressions](/paperwork.core/reference/expressions/) - Expression syntax guide
+- [Expressions](/paperwork.core/reference/binding/index.html) - Expression syntax guide
 
 ---

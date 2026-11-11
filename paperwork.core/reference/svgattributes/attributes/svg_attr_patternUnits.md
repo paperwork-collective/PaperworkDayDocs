@@ -81,7 +81,7 @@ The `patternUnits` attribute is used to:
 
 The `patternUnits` attribute is supported on:
 
-- **[&lt;pattern&gt;](/paperwork.core/reference/svgtags/pattern.html)** - Pattern element coordinate system
+- **[&lt;pattern&gt;](/paperwork.core/reference/svgelements/elements/svg_pattern_element.html)** - Pattern element coordinate system
 
 ---
 
@@ -711,11 +711,11 @@ Shape 300px wide, pattern width="50" → 6 tiles
 
 ## See Also
 
-- [pattern](/paperwork.core/reference/svgtags/pattern.html) - Pattern definition element
+- [pattern](/paperwork.core/reference/svgelements/elements/svg_pattern_element.html) - Pattern definition element
 - [patternContentUnits](/paperwork.core/reference/svgattributes/attributes/svg_attr_patternContentUnits.html) - Pattern content coordinate system
-- [patternTransform](/paperwork.core/reference/svgattributes/attributes/svg_attr_patternTransform.html) - Pattern transformation
+- [patternTransform](/paperwork.core/reference/svgattributes/attributes/svg_attr_transform.html) - Pattern transformation
 - [x](/paperwork.core/reference/svgattributes/attributes/svg_attr_x.html), [y](/paperwork.core/reference/svgattributes/attributes/svg_attr_y.html) - Pattern position
-- [width](/paperwork.core/reference/svgattributes/attributes/svg_attr_width.html), [height](/paperwork.core/reference/svgattributes/attributes/svg_attr_height.html) - Pattern tile dimensions
+- [width](/paperwork.core/reference/svgelements/elements/svg_svg_element.html), [height](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - Pattern tile dimensions
 - [gradientUnits](/paperwork.core/reference/svgattributes/attributes/svg_attr_gradientUnits.html) - Similar attribute for gradients
 - [Data Binding](/paperwork.core/reference/binding/) - Data binding and expressions
 

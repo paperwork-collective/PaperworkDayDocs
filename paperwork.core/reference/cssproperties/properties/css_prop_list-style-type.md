@@ -629,6 +629,6 @@ Different languages or regions can have culturally appropriate marker styles whi
 - [-pdf-li-inset](/paperwork.core/reference/cssproperties/properties/css_prop_-pdf-li-inset) - Scryber custom: List content inset
 - [-pdf-li-prefix](/paperwork.core/reference/cssproperties/properties/css_prop_-pdf-li-prefix) - Scryber custom: List marker prefix
 - [-pdf-li-postfix](/paperwork.core/reference/cssproperties/properties/css_prop_-pdf-li-postfix) - Scryber custom: List marker postfix
-- [style attribute](/paperwork.core/reference/htmlattributes/style) - Inline CSS styles
+- [style attribute](/paperwork.core/reference/htmlattributes/attributes/attr_style.html) - Inline CSS styles
 
 ---

@@ -469,7 +469,7 @@ await factory.NewDocument()
 
 - [head](/paperwork.core/reference/htmltags/elements/html_head_element.html) - Document head for metadata
 - [body](/paperwork.core/reference/htmltags/elements/html_body_element.html) - Document body for content
-- [frameset](/paperwork.core/reference/htmltags/elements/html_frameset_element.html) - Frameset for PDF merging
+- [frameset](/paperwork.core/reference/htmltags/elements/html_frameset_frame_element.html) - Frameset for PDF merging
 - [meta](/paperwork.core/reference/htmltags/elements/html_meta_element.html) - Metadata elements
 - [style](/paperwork.core/reference/htmltags/elements/html_style_element.html) - Embedded styles
 - [link](/paperwork.core/reference/htmltags/elements/html_link_element.html) - External stylesheets

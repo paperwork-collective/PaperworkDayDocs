@@ -596,8 +596,8 @@ The `<nav>` element has the following default behavior:
 - [a](/paperwork.core/reference/htmltags/elements/html_a_element.html) - Anchor/link element
 - [ul](/paperwork.core/reference/htmltags/elements/html_ul_element.html) - Unordered list element
 - [ol](/paperwork.core/reference/htmltags/elements/html_ol_element.html) - Ordered list element
-- [PDF Bookmarks](/paperwork.core/reference/bookmarks/) - Creating document outlines and bookmarks
-- [Document Structure](/paperwork.core/reference/structure/) - Structuring PDF documents
-- [Links and Navigation](/paperwork.core/reference/links/) - Working with links in PDFs
+- [PDF Bookmarks](/paperwork.core/learning/07-configuration/01_document_properties.html) - Creating document outlines and bookmarks
+- [Document Structure](/paperwork.core/learning/01-getting-started/05_pages_sections.html) - Structuring PDF documents
+- [Links and Navigation](/paperwork.core/reference/htmlattributes/attributes/attr_href.html) - Working with links in PDFs
 
 ---

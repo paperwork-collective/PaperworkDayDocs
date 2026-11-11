@@ -283,7 +283,7 @@ The pseudo-class adds to the base selector's specificity:
 ## See Also
 
 - [:after / ::after Pseudo-class](/paperwork.core/reference/cssselectors/selectors/css_after_selector)
-- [:hover Pseudo-class](/paperwork.core/reference/cssselectors/selectors/css_hover_selector)
+- [:hover Pseudo-class](/paperwork.core/reference/cssselectors/index.html)
 - [Element Selector](/paperwork.core/reference/cssselectors/selectors/css_element_selector)
 - [Class Selector](/paperwork.core/reference/cssselectors/selectors/css_class_selector)
 

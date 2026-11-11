@@ -744,8 +744,8 @@ ViewBox is key to creating responsive, scalable SVG:
 ## See Also
 
 - [preserveAspectRatio](/paperwork.core/reference/svgattributes/attributes/svg_attr_preserveAspectRatio.html) - Aspect ratio control
-- [svg](/paperwork.core/reference/svgtags/svg.html) - SVG canvas element
-- [width and height](/paperwork.core/reference/htmlattributes/width-height.html) - Viewport dimensions
+- [svg](/paperwork.core/reference/svgelements/elements/svg_svg_element.html) - SVG canvas element
+- [width and height](/paperwork.core/reference/htmlattributes/attributes/attr_width_height.html) - Viewport dimensions
 - [transform](/paperwork.core/reference/svgattributes/attributes/svg_attr_transform.html) - Transform attribute
 - [Data Binding](/paperwork.core/reference/binding/) - Dynamic data binding
 - [SVG Coordinate Systems](https://www.w3.org/TR/SVG2/coords.html) - W3C specification

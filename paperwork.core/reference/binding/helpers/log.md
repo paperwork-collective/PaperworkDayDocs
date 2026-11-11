@@ -279,6 +279,6 @@ See [Logging](/paperwork.core/learning/07-configuration/02_logging).
 - [#if Helper](./if.md)
 - [#each Helper](./each.md)
 - [#with Helper](./with.md)
-- [Debugging Templates Guide](../../learning/02-data-binding/07_debugging.html)
+- [Debugging Templates Guide](/paperwork.core/learning/07-configuration/02_logging.html)
 
 ---
