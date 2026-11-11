@@ -13,61 +13,94 @@ description: "Paperwork help: design document templates once, publish them, and 
   <div class="pw-hero-inner">
     <div class="pw-hero-copy">
       <div class="pw-kicker">paperwork.help</div>
-      <h1>One library for your smart business documents</h1>
-      <p class="pw-lead">Design, generate and automate your standard documents with a single source.</p>
+      <h1>One place for your smart business documents</h1>
+      <p class="pw-lead">Design a template once. People, apps, scripts and AI create documents from the same approved version, securely, on any device.</p>
       <p class="pw-actions">
-        <a class="btn btn-primary pw-btn-marks" href="{{ '/overview.html' | relative_url }}">Learn More{% include corners.html %}</a>
-        <a class="btn" href="{{ '/paperwork.core/reference/' | relative_url }}">Browse reference</a>
+        <a class="btn btn-primary pw-btn-marks" href="{{ '/overview.html' | relative_url }}">How it fits together{% include corners.html %}</a>
+        <a class="btn" href="{{ '/paperwork.core/reference/' | relative_url }}">Template reference</a>
       </p>
     </div>
-    <figure class="pw-hero-map">
-      {% include corners.html %}
-      <a class="pw-map-link pw-map-light" href="{{ '/assets/system-map-light.svg' | relative_url }}" target="_blank" rel="noopener" aria-label="Open the system map full size in a new tab">
-        {% include system-map-light.svg %}
-      </a>
-      <a class="pw-map-link pw-map-dark" href="{{ '/assets/system-map-dark.svg' | relative_url }}" target="_blank" rel="noopener" aria-label="Open the system map full size in a new tab">
-        {% include system-map-dark.svg %}
-      </a>
+    <figure class="pw-flow">
+      <div class="pw-map-light">{% include flow-light.svg %}</div>
+      <div class="pw-map-dark">{% include flow-dark.svg %}</div>
     </figure>
   </div>
 </section>
 
+<section class="pw-benefits" aria-label="What Paperwork gives you">
+    <div class="pw-benefit"><h2>Smart templates</h2><p>Change the form, not a copy of the template.</p></div>
+    <div class="pw-benefit"><h2>AI</h2><p>AI-ready, never off-script, and your template keeps it right.</p></div>
+    <div class="pw-benefit"><h2>Access</h2><p>Share with anyone, expose nothing. Publish publicly, just for you, or to a collection.</p></div>
+    <div class="pw-benefit"><h2>Data</h2><p>Connect to the systems you already use.</p></div>
+    <div class="pw-benefit"><h2>Support</h2><p>Your people and your customers matter.</p></div>
+</section>
+
 <section class="pw-home-section">
-  <h2 class="pw-section-title">Solutions</h2>
-  <div class="pw-products">
-    <a class="pw-product" href="{{ '/paperwork.view/' | relative_url }}">{% include corners.html %}
-      <span class="pw-product-kicker">Paperwork.View</span>
-      <span class="pw-product-title">Online Viewer</span>
-      <span class="pw-product-body">For your end users to view, fill in and download documents from your published templates or direct content. Embed it in your site, or link directly.</span>
-    </a>
-    <a class="pw-product" href="{{ '/paperwork.design/' | relative_url }}">{% include corners.html %}
-      <span class="pw-product-kicker">Paperwork.Design</span>
-      <span class="pw-product-title">Template Designer</span>
-      <span class="pw-product-body">A fully featured template builder and designer. Import or create, then publish or export to share. With version control and role management.</span>
-    </a>
-    <a class="pw-product" href="{{ '/paperwork.core/' | relative_url }}">{% include corners.html %}
-      <span class="pw-product-kicker">Paperwork.Core</span>
-      <span class="pw-product-title">Core Library</span>
-      <span class="pw-product-body">Create dynamic documents from your published template data and custom fields within your own coded applications using the new fluent builder.</span>
-    </a>
-    <a class="pw-product" href="{{ '/paperwork.cli/' | relative_url }}">{% include corners.html %}
-      <span class="pw-product-kicker">Paperwork.CLI</span>
-      <span class="pw-product-title">Command Line</span>
-      <span class="pw-product-body">Build and process documents from your published templates and direct content straight from the command line. Use with automation tools and hooks.</span>
-    </a>
-    <a class="pw-product" href="{{ '/paperwork.skill/' | relative_url }}">{% include corners.html %}
-      <span class="pw-product-kicker">Paperwork.Skill</span>
-      <span class="pw-product-title">AI Skills</span>
-      <span class="pw-product-body">Let your AI access your templates, fill in fields, generate documents, and also design templates for you - Let your AI loose, whilst staying in control.</span>
-    </a>
-    <div class="pw-product pw-product-dark">{% include corners.html %}
-      <span class="pw-product-kicker">Paperwork.Reference</span>
-      <span class="pw-product-title">Reference</span>
-      <span class="pw-product-chips">
-        <a class="pw-chip-dark" href="{{ '/paperwork.core/reference/htmltags/' | relative_url }}">HTML Tags</a>
-        <a class="pw-chip-dark" href="{{ '/paperwork.core/reference/cssproperties/' | relative_url }}">CSS</a>
-        <a class="pw-chip-dark" href="{{ '/paperwork.core/reference/binding/' | relative_url }}">Expressions</a>
-      </span>
+  <h2 class="pw-home-title">Which one do I use?</h2>
+
+  <h3 class="pw-group-title">For people</h3>
+  <div class="pw-tiles">
+    <div class="pw-tile">{% include corners.html %}
+      <span class="pw-tile-kicker">Paperwork.Design</span>
+      <a class="pw-tile-link" href="{{ '/paperwork.design/' | relative_url }}">Template Designer</a>
+      <span class="pw-tile-body">You're building or changing a template in HTML and CSS, and deciding who can use it.</span>
+      <span class="pw-tile-tag">Designers and frontend developers</span>
     </div>
+    <div class="pw-tile">{% include corners.html %}
+      <span class="pw-tile-kicker">Paperwork.View</span>
+      <a class="pw-tile-link" href="{{ '/paperwork.view/' | relative_url }}">Embeddable Viewer</a>
+      <span class="pw-tile-body">People fill in forms and download documents, from a link or on your site, on any device.</span>
+      <span class="pw-tile-tag">Everyone</span>
+    </div>
+    <div class="pw-tile">{% include corners.html %}
+      <span class="pw-tile-kicker">Paperwork.Skill</span>
+      <a class="pw-tile-link" href="{{ '/paperwork.skill/' | relative_url }}">AI Skills</a>
+      <span class="pw-tile-body">You want your AI to find a template, fill it in and create the document from your approved version.</span>
+      <span class="pw-tile-tag">Anyone with an AI assistant</span>
+    </div>
+  </div>
+
+  <h3 class="pw-group-title">For code</h3>
+  <div class="pw-tiles">
+    <div class="pw-tile">{% include corners.html %}
+      <span class="pw-tile-kicker">Paperwork.Core</span>
+      <a class="pw-tile-link" href="{{ '/paperwork.core/' | relative_url }}">Core Library</a>
+      <span class="pw-tile-body">Your .NET application creates documents from a published template and your own data.</span>
+      <span class="pw-tile-tag">Developers</span>
+    </div>
+    <div class="pw-tile">{% include corners.html %}
+      <span class="pw-tile-kicker">Paperwork.CLI</span>
+      <a class="pw-tile-link" href="{{ '/paperwork.cli/' | relative_url }}">Command Line</a>
+      <span class="pw-tile-body">Documents are created by a script, a scheduled job or a pipeline.</span>
+      <span class="pw-tile-tag">Developers and IT</span>
+    </div>
+    <div class="pw-tile">{% include corners.html %}
+      <span class="pw-tile-kicker">Scryber.Core</span>
+      <a class="pw-tile-link" href="{{ '/scryber.core/' | relative_url }}">PDF Engine</a>
+      <span class="pw-tile-body">You want the open-source engine underneath it all, to lay out HTML and CSS as PDF yourself.</span>
+      <span class="pw-tile-tag">Developers</span>
+    </div>
+  </div>
+
+  <p class="pw-split">Developers provide any data and the integration. Designers build and publish the templates. Your customers and staff fill in simple forms and create documents. Each works in what they know.</p>
+
+  <div class="pw-ref-bar">
+    <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h7M8 11h7"/></svg>
+    <span class="pw-ref-name"><span class="pw-ref-kicker">Paperwork.Reference</span><span class="pw-ref-title">Template reference</span></span>
+    <span class="pw-ref-chips">
+      <a class="pw-chip-dark" href="{{ '/paperwork.core/reference/htmltags/' | relative_url }}">HTML tags</a>
+      <a class="pw-chip-dark" href="{{ '/paperwork.core/reference/cssproperties/' | relative_url }}">CSS</a>
+      <a class="pw-chip-dark" href="{{ '/paperwork.core/reference/binding/' | relative_url }}">Expressions</a>
+    </span>
+  </div>
+</section>
+
+<section class="pw-start">
+  <h2 class="pw-home-title pw-home-title-sm">Start here</h2>
+  <div class="pw-start-grid">
+    <div class="pw-start-card"><a class="pw-start-link" href="{{ '/overview.html' | relative_url }}">How it fits together &rarr;</a><span>Who does what, from data to template to documents.</span></div>
+    <div class="pw-start-card"><a class="pw-start-link" href="{{ '/roles/' | relative_url }}">Roles and access &rarr;</a><span>Writers, Editors, Publishers and portal admins: who can do what.</span></div>
+    <div class="pw-start-card"><a class="pw-start-link" href="{{ '/security/' | relative_url }}">Security and IT &rarr;</a><span>Where documents are made, where data is held, and what happens when someone leaves.</span></div>
+    <div class="pw-start-card"><a class="pw-start-link" href="https://paperwork.support" target="_blank" rel="noopener">Support &#8599;</a><span>One desk for every request. You'll hear back within two working days.</span></div>
   </div>
 </section>
