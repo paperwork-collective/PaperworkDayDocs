@@ -5,12 +5,12 @@ title: Paperwork.View
 nav_order: 2
 has_children: true
 has_toc: false
-description: "The free Paperwork online viewer: open, fill in and download documents from your published templates, or embed the viewer in your own site."
+description: "The free Paperwork embeddable viewer: open, fill in and download documents from your published templates, or embed the viewer in your own site."
 ---
 # Paperwork.View
 {: .no_toc }
 
-**Online Viewer.** View a template id or HTML content. Embed in any site, or link to it.
+**Embeddable Viewer.** View a template id or HTML content. Embed in any site, or link to it.
 
 The viewer turns a Paperwork template into a document in the browser, with page navigation, zoom and download. Because it runs in the visitor's browser, the document is generated for that visitor, with their data. Use it to preview a template, give people a link to a document, or put a live document inside your own web pages.
 

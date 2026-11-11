@@ -2,7 +2,7 @@
 layout: default
 render_with_liquid: false
 title: Paperwork.CLI
-nav_order: 4
+nav_order: 5
 has_children: true
 has_toc: false
 description: "The Paperwork command line: generate documents from published or downloaded templates in scripts, scheduled jobs and pipelines."

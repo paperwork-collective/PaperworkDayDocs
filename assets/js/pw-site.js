@@ -364,31 +364,66 @@
 
 
   // ── product switcher: one drop-down of the top-level sections, and only the current section's pages below it ──
-  var PRODUCT_NOTES = { 'Home': 'Start here', 'Paperwork.Core': 'Core library', 'Paperwork.View': 'Online viewer', 'Paperwork.Design': 'Template designer', 'Paperwork.CLI': 'Command line', 'Paperwork.Skill': 'AI skills', 'Paperwork.Reference': 'Template reference' };
+  // the drop-down order, by section address; any other top-level page belongs to Home's own tree
+  var PRODUCT_ORDER = ['/paperwork.design/', '/paperwork.view/', '/paperwork.skill/', '/paperwork.core/', '/paperwork.cli/', '/scryber.core/', '/paperwork.core/reference/'];
+  var PRODUCT_NOTES = { 'Home': 'Start here', 'Paperwork.Design': 'Template designer', 'Paperwork.View': 'Embeddable viewer', 'Paperwork.Skill': 'AI skills', 'Paperwork.Core': 'Core library', 'Paperwork.CLI': 'Command line', 'Scryber.Core': 'PDF engine', 'Paperwork.Reference': 'Template reference' };
+  var HOME_LINKS = [{ title: 'Support \u2197', href: 'https://paperwork.support' }];
   function nameOf0(a) { return a.textContent.replace(/\s+/g, ' ').trim(); }
   function buildSwitcher() {
     var nav = doc.getElementById('site-nav');
     var root = nav && nav.querySelector(':scope > .nav-list');
     if (!root) return;
-    var items = Array.prototype.slice.call(root.children).filter(function (li) { return li.querySelector(':scope > .nav-list-link'); });
-    if (items.length < 2) return;
+    var all = Array.prototype.slice.call(root.children).filter(function (li) { return li.querySelector(':scope > .nav-list-link'); });
+    if (all.length < 2) return;
+
+    function hrefOf(li) { return (li.querySelector(':scope > .nav-list-link').getAttribute('href') || '').replace(/index\.html$/, ''); }
+    function productIndex(li) {
+      var h = hrefOf(li);
+      for (var i = 0; i < PRODUCT_ORDER.length; i++) { if (h.length >= PRODUCT_ORDER[i].length && h.slice(-PRODUCT_ORDER[i].length) === PRODUCT_ORDER[i]) return i; }
+      return -1;
+    }
+    var home = all[0];
+    var products = [];
+    var homePages = [];
+    all.slice(1).forEach(function (li) {
+      var i = productIndex(li);
+      if (i >= 0) products[i] = li; else homePages.push(li);
+    });
+    products = products.filter(Boolean);
+    if (!products.length) return;
+    var items = [home].concat(products);
 
     var current = null;
     // the section whose address the page sits under (the longest match, so Reference wins over Core)
     var here = location.pathname.replace(/index\.html$/, '');
     var best = 0;
-    items.slice(1).forEach(function (li) {
-      var href = li.querySelector(':scope > .nav-list-link').getAttribute('href') || '';
-      if (href.length > 1 && here.indexOf(href) === 0 && href.length > best) { best = href.length; current = li; }
+    products.forEach(function (li) {
+      var href = hrefOf(li);
+      var at = href.indexOf('/', 0) === 0 ? href : '/' + href;
+      if (at.length > 1 && here.indexOf(at) === 0 && at.length > best) { best = at.length; current = li; }
     });
-    var home = items[0];
-    var atHome = !current || current === home;
+    var atHome = !current;
     if (!current) current = home;
 
     items.forEach(function (li) {
       li.classList.add('pw-product-item');
       if (li === current) li.classList.add('is-current');
     });
+    homePages.forEach(function (li) { li.classList.add('pw-home-item'); });
+    if (atHome) {
+      HOME_LINKS.forEach(function (l) {
+        var li = doc.createElement('li');
+        li.className = 'nav-list-item pw-home-item pw-home-link';
+        var a = doc.createElement('a');
+        a.className = 'nav-list-link';
+        a.setAttribute('href', l.href);
+        a.setAttribute('target', '_blank');
+        a.setAttribute('rel', 'noopener');
+        a.textContent = l.title;
+        li.appendChild(a);
+        root.appendChild(li);
+      });
+    }
     if (!atHome) {
       var own = current.querySelector(':scope > .nav-list-link');
       own.setAttribute('data-pw-title', nameOf0(own));

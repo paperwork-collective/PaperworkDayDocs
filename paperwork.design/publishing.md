@@ -24,8 +24,10 @@ Choose to publish the version when you check it in. It becomes the new standard 
 | Publish to | Who can use it |
 |---|---|
 | **Public** | Anyone. It is listed in the published templates. |
-| **Personal** | Only people you give the link to. It is not listed. Needs an editor licence. |
+| **Personal** | Only you, signed in. It is not listed. Needs an editor or publisher licence. |
 | **A collection** | Private to the members of the collection. |
+
+Public and Personal are for your own templates in My templates. A collection's template is only ever published to its collection.
 
 Published templates are what the [viewer](/paperwork.view/) shows and what the [CLI](/paperwork.cli/) generates from with `--template`, `--personal` or `--collection`.
 

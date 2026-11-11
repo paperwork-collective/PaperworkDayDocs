@@ -556,12 +556,12 @@ html { scroll-padding-top: $pw-header-h + 24px; }
     &.active { color: $pw-accent; font-weight: 600; }
     &:hover { text-decoration: none; background: $pw-hover !important; }
   }
-  // Home: no section to list, so the products themselves are the list
-  &.pw-at-home > .nav-list > .nav-list-item.pw-product-item { display: block; }
-  &.pw-at-home > .nav-list > .nav-list-item.pw-product-item > .nav-list-link {
+  // Home: its own pages are the list (Home, How it fits together, Support), not the solutions
+  &.pw-at-home > .nav-list > .nav-list-item.pw-home-item,
+  &.pw-at-home > .nav-list > .nav-list-item.pw-product-item.is-current { display: block; }
+  &.pw-at-home > .nav-list > .nav-list-item.pw-home-item > .nav-list-link {
     display: block; padding: 8px 20px; min-height: 0; color: $pw-text; font-size: 14px; font-weight: 400; letter-spacing: 0; text-transform: none;
     &:hover { text-decoration: none; background: $pw-hover !important; }
+    &.active { color: $pw-accent; font-weight: 600; }
   }
-  &.pw-at-home > .nav-list > .nav-list-item.pw-product-item > .nav-list { display: none; }
-  &.pw-at-home > .nav-list > .nav-list-item.is-current { display: none; }
 }

@@ -2,7 +2,7 @@
 layout: default
 render_with_liquid: false
 title: Paperwork.Skill
-nav_order: 5
+nav_order: 3
 has_children: true
 has_toc: false
 description: "The Paperwork skill for AI assistants: let your AI find your templates, fill in fields, generate documents and design new templates."
