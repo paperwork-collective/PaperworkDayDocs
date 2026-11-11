@@ -28,7 +28,7 @@ parent_url: /paperwork.core/
 
 ## Version 9
 
-### Next release - not yet released
+### 9.9.1 - 11 November 2026
 
 #### Fixes
 
