@@ -34,6 +34,10 @@ parent_url: /paperwork.core/
 
 - **Mixed vertical alignment on a line** - an image or inline block with `vertical-align: baseline` after one with another alignment on the same line (e.g. a tall image with `vertical-align: top`, then a small one on the baseline) moved the text of the whole line down to the bottom of the space made by the taller image. The text now stays where it would be without the taller image, as in a browser, and the top aligned image hangs below it. A baseline image taller than the text still moves the baseline down.
 
+#### Changes
+
+- **`date()` reads English month names and AM/PM on any machine** - text given to `date()`, with or without a format, is read in the current culture first, then in the invariant culture. So `date('January 15, 2024', 'MMMM dd, yyyy')` and `date('01/15/2024 02:30:00 PM', 'MM/dd/yyyy hh:mm:ss tt')` now work on a German (or any other) machine or browser, as well as `date('15. Januar 2024', 'dd. MMMM yyyy')`. Text that already reads in the current culture gives the same date as before. Thanks to [Matthias Voigt](https://github.com/Matt-17) for raising this while making the tests pass on German Windows.
+
 ### 9.9.0 - 9 November 2026
 
 #### Breaking Changes
