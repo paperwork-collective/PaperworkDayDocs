@@ -143,15 +143,15 @@ dotnet tool install -g Paperwork.CLI
     <span class="pw-card-body">Render documents inside your own coded applications.</span>
   </a>
   <a class="pw-card" href="/paperwork.view/">
-    <span class="pw-card-kicker">Paperwork.View</span>
-    <span class="pw-card-title">Embeddable Viewer</span>
+    <span class="pw-card-kicker">Paperwork.Viewer</span>
+    <span class="pw-card-title">Paperwork.Viewer</span>
     <span class="pw-card-body">View a template id or HTML content. Embed in any site, or link to it.</span>
   </a>
 </div>
 
 <nav class="pw-prevnext" aria-label="Previous and next">
   <a href="/paperwork.core/"><small>Previous</small><span>&larr; Core Library</span></a>
-  <a href="/paperwork.view/"><small>Next</small><span>Embeddable Viewer &rarr;</span></a>
+  <a href="/paperwork.view/"><small>Next</small><span>Paperwork.Viewer &rarr;</span></a>
 </nav>
 
 ## Details and images

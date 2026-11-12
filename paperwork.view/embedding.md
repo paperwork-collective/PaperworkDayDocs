@@ -2,7 +2,7 @@
 layout: default
 render_with_liquid: false
 title: Embed with HTML
-parent: Paperwork.View
+parent: Paperwork.Viewer
 parent_url: /paperwork.view/
 nav_order: 3
 has_children: false

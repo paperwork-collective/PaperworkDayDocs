@@ -10,9 +10,30 @@ description: "The Paperwork template designer: build or import a document templa
 # Paperwork.Design
 {: .no_toc }
 
-**Designer.** Import, edit visually or in code, then publish.
+**The Designer is where you build document templates and choose who can use them. It's for the people who design templates and the people who run them for a team.**
 
-The Designer is where Paperwork templates are made. A template is HTML and CSS for the layout, JSON for the data, and a set of fields for the values that change each time. The Designer lets you build one visually, edit its source directly, preview the document as you go, and publish it so that people, scripts and other products can use it.
+A template is an HTML and CSS layout, JSON data, and fields for the values that change each time. In the Designer you build one visually or in code, preview it with your data, check each change in as a version, and publish it. Once it's published, people, scripts and AI can all make documents from that one version.
+
+### Who it is for
+
+- Designers and frontend developers who build templates (Editors).
+- The people who decide which templates a team uses, and who can use them (Publishers).
+- Anyone who wants to build templates of their own in My templates (Writers).
+
+### Use it when
+
+- You need to make a template or change one.
+- You want everyone on a team to use the same approved version of a document.
+- You want to bring in a Word document and turn it into a template.
+
+### Use something else when
+
+| If you need... | Use |
+|---|---|
+| To give people a document from a link or on your site | [Paperwork.Viewer](/paperwork.view/) |
+| Documents made by a script, on a schedule, or in a pipeline | [Paperwork.CLI](/paperwork.cli/) |
+| Documents made inside your own .NET application | [Paperwork.Core](/paperwork.core/) |
+| Claude to write a template or make a document for you | [Paperwork.Skill](/paperwork.skill/) |
 
 Open the designer at [paperwork.design](https://paperwork.design/).
 
@@ -24,7 +45,7 @@ Open the designer at [paperwork.design](https://paperwork.design/).
 
 ## Accounts and licences
 
-You can look around and open published templates without an account. Creating your own templates needs you to sign in with a writer account, and publishing one just for yourself needs an editor licence.
+Anyone can open a public template without an account. To build templates you sign in, and every account starts as a Writer. A Writer can publish their own templates to the public library; publishing a template just for yourself, unlisted, needs an Editor licence or above. Publishing to a collection needs a Publisher licence. See [Roles and access](/roles/) for what each licence can do.
 
 ## The template language
 

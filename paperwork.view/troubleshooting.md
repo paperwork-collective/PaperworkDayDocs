@@ -2,7 +2,7 @@
 layout: default
 render_with_liquid: false
 title: Troubleshooting
-parent: Paperwork.View
+parent: Paperwork.Viewer
 parent_url: /paperwork.view/
 nav_order: 8
 has_children: false

@@ -10,7 +10,7 @@ description: "The Paperwork.Core library: create documents in your own .NET appl
 # Paperwork.Core
 {: .no_toc}
 
-**Core Library.** Render documents inside your own coded applications.
+**Paperwork.Core and Scryber.Core make documents inside your own .NET applications. They're for developers who want PDFs from their own code, using the engine that runs all of Paperwork.**
 
 ---
 
@@ -27,7 +27,7 @@ description: "The Paperwork.Core library: create documents in your own .NET appl
 
 # About Paperwork.Core
 
-Paperwork.Core is a .NET library for generating professional PDF documents simply from HTML templates. It includes CSS styling and (handlebar-esque) binding to data, enabling designers and developers to quickly create flexible, dynamic, data-driven documents and reports with ease.
+[Scryber.Core](/scryber.core/) is the engine: give it HTML, CSS and data, and it lays them out as a PDF. It is open source under the LGPL. Paperwork.Core sits on top of it. It reads Paperwork templates, the same files the Designer exports, and adds a fluent builder and dependency injection for .NET. Paperwork.Core is open source under the MIT licence. The Viewer, the CLI and the Designer all run on these two libraries.
 
 ```csharp
 using var factory = PaperworkFactory.Create().Build();
@@ -38,7 +38,19 @@ await factory.NewDocument()
              .SaveAsync("invoice.pdf");
 ```
 
-It is built on the open-source [Scryber](https://github.com/richard-scryber/scryber.core) engine, which does the layout and rendering.
+### Which one to use
+
+| If you want... | Use |
+|---|---|
+| Templates from the Designer, published or exported, in your own code | Paperwork.Core |
+| To lay out your own HTML and CSS as PDF, with no Paperwork templates | [Scryber.Core](/scryber.core/) |
+
+### Use something else when
+
+| If you need... | Use |
+|---|---|
+| Documents from a script or pipeline, without writing code | [Paperwork.CLI](/paperwork.cli/) |
+| Documents in a web page | [Paperwork.Viewer](/paperwork.view/) |
 
 Check out the [Quick Start](/paperwork.core/quickstart/quickstart_core) to jump straight in and get to know some of the capabilities
 

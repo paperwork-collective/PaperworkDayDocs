@@ -88,7 +88,7 @@ Whatever the route, people and tools always use a **published version**. Drafts 
 
 Paperwork splits the document work so each person does what they know:
 
-- **Developers** provide the data and the integration: a feed or API the template reads, or data passed in from the [Core library](/paperwork.core/), the [CLI](/paperwork.cli/) or the [Embeddable Viewer](/paperwork.view/javascript.html). They don't need an Editor licence to create documents from a published template. A public template needs no sign-in. A collection's template needs them signed in as a member of the collection, in any role. A personal template only works for its owner.
+- **Developers** provide the data and the integration: a feed or API the template reads, or data passed in from the [Core library](/paperwork.core/), the [CLI](/paperwork.cli/) or the [Paperwork.Viewer](/paperwork.view/javascript.html). They don't need an Editor licence to create documents from a published template. A public template needs no sign-in. A collection's template needs them signed in as a member of the collection, in any role. A personal template only works for its owner.
 - **Designers and frontend developers** build the template as Editors, and a Publisher shares it.
 
 A change to a document is a new published version, not a code change.

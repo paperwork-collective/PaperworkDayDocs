@@ -10,11 +10,23 @@ description: "The Paperwork command line: generate documents from published or d
 # Paperwork.CLI
 {: .no_toc }
 
-**Command Line.** Build documents from content or a published template.
+**The Paperwork CLI makes documents from the command line. It's for developers and IT teams who want documents from scripts, scheduled jobs and pipelines.**
 
-The `paperwork` command line tool generates PDF documents with the same engine as the rest of Paperwork. Point it at an HTML file, a template config file, or a published template, add your data and field values, and it writes the PDF to a file or to standard output so you can pipe it on.
+The `paperwork` command uses the same engine as the rest of Paperwork. Give it a published template or your own HTML file, add your data and field values, and it writes the PDF to a file or to standard output. It's also the tool the [Paperwork.Skill](/paperwork.skill/) runs to make documents.
 
-It is a good fit for build pipelines, scheduled jobs and scripts, and it is the tool the [Paperwork.Skill](/paperwork.skill/) uses to generate documents for your AI agent.
+### Use it when
+
+- No one needs to open a browser: the document is made by a job, a pipeline or a script.
+- You make the same document for many records, such as a statement for each customer.
+- You want the published version of a template. Public templates need no sign-in; your personal and collection templates need `paperwork login` first.
+
+### Use something else when
+
+| If you need... | Use |
+|---|---|
+| People to open and fill in a document themselves | [Paperwork.Viewer](/paperwork.view/) |
+| Documents made inside your own .NET application, without starting a process | [Paperwork.Core](/paperwork.core/) |
+| To make or change the template | [Paperwork.Design](/paperwork.design/) |
 
 ## Install
 

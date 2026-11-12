@@ -10,7 +10,9 @@ render_with_liquid: false
 # Scryber.Core
 {: .no_toc }
 
-**The PDF engine.** Scryber.Core lays out HTML and CSS as PDF. It is open source under the LGPL, and it sits underneath Paperwork.Core, the command line and the embeddable viewer.
+**The PDF engine.** Scryber.Core lays out HTML and CSS as PDF. It is open source under the LGPL, and it sits underneath Paperwork.Core, the command line and the Viewer.
+
+This page is part of the [Paperwork.Core overview](/paperwork.core/), which covers when to use Scryber.Core and when to use Paperwork.Core.
 
 ## What it does
 

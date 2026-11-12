@@ -28,7 +28,7 @@ Developers provide the data and the integration. Designers and frontend develope
 |---|---|---|
 | **Design** | [Template Designer](/paperwork.design/) | Import or create a template, edit it visually or in code, add fields, data and assets, and preview the document as you go. |
 | **Publish** | [Template Designer](/paperwork.design/publishing.html) | Check in a version and publish it publicly, just for you, or to a [collection](#collections) for your team. It gets an id that every other solution uses. |
-| **View** | [Embeddable Viewer](/paperwork.view/) | Open a published template, or your own content, in the browser. Embed it in a site or link directly, so end users can view, fill in and download. |
+| **View** | [Paperwork.Viewer](/paperwork.view/) | Open a published template, or your own content, in the browser. Embed it in a site or link directly, so end users can view, fill in and download. |
 | **Code** | [Core Library](/paperwork.core/) | Generate documents inside your own .NET applications, from a template configuration and your own data, with the fluent builder. |
 | **Automate** | [Command Line](/paperwork.cli/) | Build documents from published templates or your own files, straight from the command line, in scripts, pipelines and hooks. |
 | **Delegate** | [AI Skills](/paperwork.skill/) | Let your AI find your templates, fill in fields, generate documents and design new templates for you, while you stay in control. |
@@ -147,7 +147,7 @@ You can move between these as a project grows: start with a file, bring it into 
 
 ## Where to go next
 
-- **See it work**: the [Library Quick Start](/paperwork.core/quickstart/quickstart_core) and the [Embeddable Viewer](/paperwork.view/).
+- **See it work**: the [Library Quick Start](/paperwork.core/quickstart/quickstart_core) and the [Paperwork.Viewer](/paperwork.view/).
 - **Design a template**: the [Template Designer](/paperwork.design/).
 - **Share it with your team**: [Roles and access](/roles/).
 - **Understand the file**: [Template Configuration](/paperwork.core/template-config/).

@@ -1,16 +1,16 @@
 ---
 layout: default
 render_with_liquid: false
-title: Paperwork.View
+title: Paperwork.Viewer
 nav_order: 2
 has_children: true
 has_toc: false
 description: "The Paperwork Viewer: open, fill in and download a document from a published template, from a link or inside your own web page, with nothing to install."
 ---
-# Paperwork.View
+# Paperwork.Viewer
 {: .no_toc }
 
-**The Viewer.** Open a published template as a document. Link to it, or embed it in any site.
+**The Viewer turns a published template into a document in someone's web browser, from a link or inside your own web page, for people who need a document without installing anything. Public templates need no account; private ones ask the person to sign in.**
 
 ## What it is
 

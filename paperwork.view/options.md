@@ -2,7 +2,7 @@
 layout: default
 render_with_liquid: false
 title: Viewer options
-parent: Paperwork.View
+parent: Paperwork.Viewer
 parent_url: /paperwork.view/
 nav_order: 7
 has_children: false
