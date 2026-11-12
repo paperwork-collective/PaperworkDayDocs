@@ -123,7 +123,7 @@ The layout can also be given as a string with `WithLayout(html)`, a `Stream`, or
 
 The resultant file should now be able to be opened in any PDF Viewer application or browser, and should look like this.
 
-![Hello World Preview](../assets/sampleImages/HelloWorld1.png)
+![Hello World Preview](/assets/sampleImages/HelloWorld1.png)
 
 
 ---

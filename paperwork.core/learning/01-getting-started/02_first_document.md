@@ -360,9 +360,7 @@ await factory.NewDocument()
     .SaveAsync("invoice.pdf");
 ```
 
-These properties appear in PDF viewers:
-
-![PDF Properties](../../images/pdf-properties.png)
+These properties appear in PDF viewers.
 
 ---
 

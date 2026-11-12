@@ -311,9 +311,7 @@ await factory.NewDocument()
     .SaveAsync("report.pdf");
 ```
 
-These properties appear in PDF viewers:
-
-![PDF Properties Dialog](../../images/pdf-properties.png)
+These properties appear in PDF viewers.
 
 The creation and modification dates are set automatically.
 
