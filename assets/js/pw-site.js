@@ -283,7 +283,7 @@
   }
 
   // ── search results: section label, title, snippet and an arrow, as in the design ──
-  var KICKERS = { 'paperwork.core': 'Paperwork.Core', 'paperwork.view': 'Paperwork.Viewer', 'paperwork.design': 'Paperwork.Design', 'paperwork.cli': 'Paperwork.CLI', 'paperwork.skill': 'Paperwork.Skill' };
+  var KICKERS = { 'paperwork.core': 'Paperwork.Core', 'paperwork.view': 'Paperwork.Viewer', 'paperwork.design': 'Paperwork.Design', 'paperwork.cli': 'Paperwork.CLI', 'paperwork.skill': 'Paperwork.Skill', 'recipes': 'Recipes' };
   var AREAS = { reference: 'Reference', learning: 'Learning', quickstart: 'Quick Start', configuration: 'Configuration', changelog: 'Change Log' };
   var REF = { htmltags: 'HTML Elements', htmlattributes: 'HTML Attributes', cssproperties: 'CSS Properties', cssselectors: 'CSS Selectors', svgelements: 'SVG Elements', svgattributes: 'SVG Attributes', binding: 'Data Binding' };
   var CAP = 8;
@@ -365,8 +365,8 @@
 
   // ── product switcher: one drop-down of the top-level sections, and only the current section's pages below it ──
   // the drop-down order, by section address; any other top-level page belongs to Home's own tree
-  var PRODUCT_ORDER = ['/paperwork.design/', '/paperwork.view/', '/paperwork.skill/', '/paperwork.core/', '/paperwork.cli/', '/scryber.core/', '/paperwork.core/reference/'];
-  var PRODUCT_NOTES = { 'Home': 'Start here', 'Paperwork.Design': 'Template designer', 'Paperwork.Viewer': 'Document viewer', 'Paperwork.Skill': 'AI skills', 'Paperwork.Core': 'Core library', 'Paperwork.CLI': 'Command line', 'Scryber.Core': 'PDF engine', 'Paperwork.Reference': 'Template reference' };
+  var PRODUCT_ORDER = ['/paperwork.design/', '/paperwork.view/', '/paperwork.skill/', '/paperwork.core/', '/paperwork.cli/', '/scryber.core/', '/recipes/', '/paperwork.core/reference/'];
+  var PRODUCT_NOTES = { 'Home': 'Start here', 'Paperwork.Design': 'Template designer', 'Paperwork.Viewer': 'Document viewer', 'Paperwork.Skill': 'AI skills', 'Paperwork.Core': 'Core library', 'Paperwork.CLI': 'Command line', 'Scryber.Core': 'PDF engine', 'Recipes': 'Task by task', 'Paperwork.Reference': 'Template reference' };
   var HOME_LINKS = [{ title: 'Support \u2197', href: 'https://paperwork.support' }];
   function nameOf0(a) { return a.textContent.replace(/\s+/g, ' ').trim(); }
   function buildSwitcher() {
