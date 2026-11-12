@@ -63,6 +63,8 @@ Before fetching, the command checks the template can be had and tells you why if
 | `--style <file>` | A CSS file to include. Repeatable, `--layout` mode only. |
 | `--data <name>=<file>` | A JSON data file. Repeatable, works in every mode. |
 | `--field <key>=<value>` | A field value. Repeatable, works in every mode. Scalar values only. |
+| `--password <password>` | A password needed to open the PDF. It keeps any permissions the template sets, and otherwise allows everything else. This leaves the password in your shell history, so prefer `--password-env`. |
+| `--password-env <name>` | The name of an environment variable that holds the password. Nothing is read unless it is named. |
 | `--output <file>` | The output PDF path. Leave out to write the bytes to standard output. |
 | `--sync` | Render synchronously. Remote content is not waited for, so only use it for documents that use none. |
 

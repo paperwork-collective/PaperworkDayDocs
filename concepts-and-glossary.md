@@ -37,7 +37,7 @@ For the whole picture, see [How it fits together](/overview.html).
 | **Public** | A way to publish a template so anyone can use it. It is listed in the published templates. |
 | **Publish** | To make a version the one that people use. You choose where: public, personal or a collection. |
 | **Publisher** | A licence for people who share templates with a team. Includes everything an Editor can do. |
-| **Reference** | The id of a published template, written `owner:name`. It is what the Viewer and the CLI use to find it. |
+| **Reference** | The id of a published template: `owner:name` for a personal one, `collection:template` for a collection's. It is what the Viewer and the CLI use to find it. |
 | **Style** | The CSS of a template. |
 | **Template** | A layout, styles, data, fields and assets, held together as one file. |
 | **Version** | A saved state of a template, made when you check it in. The published version is the one people use. |

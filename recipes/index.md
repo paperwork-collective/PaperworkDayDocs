@@ -12,7 +12,7 @@ description: "Short, tested how-tos for one job each: password-protect a PDF, st
 
 **Recipes are short how-tos for one job each. They are for people who already make documents and want to do one more thing.**
 
-Every recipe is one task on one page, with a working template you can run. The templates are in [Paperwork.Samples](https://github.com/paperwork-collective/Paperwork.Samples) and use fixed dates, so the output is the same every time. ⚑
+Every recipe is one task on one page, with a working template you can run. The templates are in [Paperwork.Samples](https://github.com/paperwork-collective/Paperwork.Samples) and use fixed dates, so the output is the same every time.
 
 | Recipe | What it does |
 |---|---|

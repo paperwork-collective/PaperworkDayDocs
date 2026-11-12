@@ -16,9 +16,10 @@ A portal is a Paperwork site with its own settings. The Designer, the Viewer and
 
 ## What belongs to a portal
 
-- Templates and collections are kept in a portal. ⚑
-- The portal has a list of **admins**. The admins manage the portal's settings. See [Roles and access](/roles/).
-- The portal has its own library of Blueprints. ⚑
+A portal is identified by the address the Designer is opened at. Templates and collections belong to the portal they were made in, and My templates and collections show only that portal's.
+
+- Each portal has its own public library of Blueprints.
+- The portal has a list of **admins**, who manage the portal's settings. See [Roles and access](/roles/).
 - An exported template file can be imported into another portal. See [Publishing](/paperwork.design/publishing.html).
 
 ## Who runs it
@@ -27,19 +28,32 @@ A portal admin is not a licence. It is a list of people on the portal's settings
 
 A portal admin can:
 
-- manage the portal's settings, including the lists of addresses described below;
+- change the portal's settings, described below;
 - read the generation history of the portal's templates;
-- see deleted templates in the portal. ⚑
+- use the **Waste basket**, which shows every template deleted in that portal in the last 30 days. They can restore one, or delete it for good. If its collection has gone, they can restore it into their own My templates.
 
-Contact requests from the portal go to its admins. ⚑
+"Get in touch" requests from the portal go to its admins. If none are set, they go to Paperwork support.
+
+## Change the portal's settings
+
+Portal admins change the portal's settings in the Designer, under **Portal > Configuration**. The same page holds:
+
+- **Domains**, with an **Allowed** list and a **Blocked** list, one domain per line, with `*` for any;
+- the portal's admins;
+- the asset storage allowances;
+- the support site and email address used in the portal's emails (`support.url` and `support.email`).
+
+The Viewer's matching settings are kept in step.
 
 ## Addresses a document may fetch from
 
-While a document is made, it fetches data, images, fonts and connector data. The portal has an **allow-list** and a **block-list** of addresses. They apply to everything a document fetches and to connectors, in the Designer, the Viewer and the CLI. A template cannot fetch from an address that the portal does not allow.
+While a document is made, it fetches data, images, fonts and connector data. The Allowed and Blocked lists apply to everything a document fetches and to connectors, in the Designer, the Viewer and the CLI. A template cannot fetch from an address that the portal does not allow.
 
 If part of a document is missing, such as a picture, a font or some data, check the template's sources against these lists first. See [Troubleshooting the Viewer](/paperwork.view/troubleshooting.html).
 
-⚑ How a portal admin changes the lists, and whether an organisation can have a portal of its own address: to be confirmed before this page is published.
+## A portal at your own address
+
+A portal at your own address is set up with Paperwork: [contact us](https://paperwork.support).
 
 ## Next
 

@@ -78,7 +78,14 @@ Data you supply replaces the source with the same id in the template. Sources yo
 
 ### Data from a feed
 
-A feed is fetched while the document is made, and only from the addresses the [portal](/portals/) allows. ⚑ A template that reads a feed without CORS support must be owned by an Editor or a Publisher.
+A feed is fetched while the document is made, and only from the addresses the [portal](/portals/) allows.
+
+A feed that does not allow the browser to read it (no CORS) is fetched for the template by Paperwork instead. That needs:
+
+- for a personal template, its owner has an Editor or Publisher licence;
+- for a collection's template, the person making the document is a member of the collection, and the collection has an owner with a Publisher licence.
+
+Adding a connection in the Designer needs an Editor licence or above.
 
 ## Fields or data?
 

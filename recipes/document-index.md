@@ -19,7 +19,7 @@ Make a contents page that lists each section of a document, links to it, and sho
 ## Before you start
 
 - A template, and a way to make documents from it: the [Designer](/paperwork.design/) preview, or the [CLI](/paperwork.cli/).
-- This recipe uses `report.html` and `report.json`: a report with four sections, each with an id, a title and some text. They are in [Paperwork.Samples](https://github.com/paperwork-collective/Paperwork.Samples/tree/main/recipes/document-index). ⚑
+- This recipe uses `report.html` and `report.json`: a report with four sections, each with an id, a title and some text. They are in [Paperwork.Samples](https://github.com/paperwork-collective/Paperwork.Samples/tree/main/recipes/document-index).
 
 ## Steps
 

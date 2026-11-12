@@ -19,7 +19,7 @@ Make a PDF that asks for a password when someone opens it.
 ## Before you start
 
 - The [Paperwork CLI](/paperwork.cli/) installed.
-- A layout to make the PDF from. This recipe uses `statement.html` and `statement.json`: an account statement with a customer name and date as fields and the lines as data. They are in [Paperwork.Samples](https://github.com/paperwork-collective/Paperwork.Samples/tree/main/recipes/password-protect). ⚑
+- A layout to make the PDF from. This recipe uses `statement.html` and `statement.json`: an account statement with a customer name and date as fields and the lines as data. They are in [Paperwork.Samples](https://github.com/paperwork-collective/Paperwork.Samples/tree/main/recipes/password-protect).
 
 The layout, `statement.html`:
 
@@ -91,7 +91,7 @@ The CLI says `Encrypting with a password to open the document` and writes `state
 
 ### In .NET code
 
-With [Paperwork.Core](/paperwork.core/), call `WithUserPassword` on the builder: ⚑ not run for this page
+With [Paperwork.Core](/paperwork.core/), call `WithUserPassword` on the builder:
 
 ```csharp
 await factory.NewDocument()
@@ -109,7 +109,7 @@ Open `statement.pdf` in a PDF reader. It asks for the password, and shows the st
 
 ## Notes
 
-- The password is needed to open the PDF. The PDF is encrypted with 128-bit encryption. ⚑
+- The PDF needs the password to open.
 - Keep the password somewhere your team can find it. Paperwork does not keep it, so a PDF made with a lost password cannot be opened.
 - [Security and IT](/security/) says where documents are made and that a password is never sent to Paperwork.
 

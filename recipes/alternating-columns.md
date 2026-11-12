@@ -19,7 +19,7 @@ Style the odd and even columns of a table differently, so a wide table is easier
 ## Before you start
 
 - A template with a table, and a way to make documents from it: the [Designer](/paperwork.design/) preview, or the [CLI](/paperwork.cli/).
-- This recipe uses `sales.html` and `sales.json`: sales by region for four quarters. They are in [Paperwork.Samples](https://github.com/paperwork-collective/Paperwork.Samples/tree/main/recipes/alternating-columns). ⚑
+- This recipe uses `sales.html` and `sales.json`: sales by region for four quarters. They are in [Paperwork.Samples](https://github.com/paperwork-collective/Paperwork.Samples/tree/main/recipes/alternating-columns).
 
 ## Steps
 
