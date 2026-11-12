@@ -14,7 +14,7 @@ has_toc: false
 
 The `width` and `height` attributes control the dimensions of elements in PDF documents. They are used with images, tables, and table cells.
 
-For **images**, the attributes accept integer pixel values as [intrinsic size hints](#intrinsic-size-hints-span-classlabel-label-greenv97span) — use `style="width:...; height:...;"` for unit-based or percentage sizing. For **tables and cells**, the attributes accept CSS units, percentages, and points as before.
+For **images**, the attributes accept integer pixel values as [intrinsic size hints](#intrinsic-size-hints-v97) — use `style="width:...; height:...;"` for unit-based or percentage sizing. For **tables and cells**, the attributes accept CSS units, percentages, and points as before.
 
 ---
 

@@ -338,7 +338,7 @@ Report issues on [GitHub](https://github.com/richard-scryber/scryber.core/issues
 
 ### Want to Contribute?
 
-Contributions welcome! See [Contributing Guide](https://github.com/richard-scryber/scryber.core/blob/main/CONTRIBUTING.md)
+Contributions are welcome: open an issue or a pull request on [GitHub](https://github.com/richard-scryber/scryber.core).
 
 ---
 

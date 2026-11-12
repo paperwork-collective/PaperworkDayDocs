@@ -19,10 +19,9 @@ This guide covers the top-level structure of Scryber's JSON configuration system
 1. [Configuration Architecture](#configuration-architecture)
 2. [Image Configuration](#image-factory-configuration)
 3. [Font Configuration](#fonts-configuration)
-4. [Parsing Configuration](#parsing-configuration) — Namespaces, Bindings, Parsers
-5. [Output Options](#output-options)
-6. [Tracing Options](#tracing-options)
-7. [Expression Options](#expression-options)
+4. [Namespace Registration](#namespace-registration)
+5. [Advanced Topics](#advanced-topics)
+6. [Summary and Integration](#summary-and-integration)
 
 ---
 
