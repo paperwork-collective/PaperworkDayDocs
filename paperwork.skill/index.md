@@ -10,15 +10,15 @@ description: "The Paperwork skill for AI assistants: let your AI find your templ
 # Paperwork.Skill
 {: .no_toc }
 
-**The Paperwork skill lets Claude Code make documents for you from a request in plain English. It's for people who'd rather ask for a document than build or run one.**
+**The Paperwork skill lets your AI assistant make documents for you from a request in plain English. It works in Claude Code, Cursor, GitHub Copilot in VS Code and Windsurf. It's for people who'd rather ask for a document than build or run one.**
 
-You ask, for example, "make the March invoice for Acme". Claude Code finds or writes the template, fills in the fields, checks it, and runs the [Paperwork.CLI](/paperwork.cli/) to make the PDF. It saves the PDF where you ask. Paperwork doesn't send it anywhere.
+You ask, for example, "make the March invoice for Acme". Your assistant finds or writes the template, fills in the fields, checks it, and runs the [Paperwork.CLI](/paperwork.cli/) to make the PDF. It saves the PDF where you ask. Paperwork doesn't send it anywhere.
 
 ### Use it when
 
 - You want a document now and know what should be in it, but not how the template works.
-- You want Claude to write a first template for you to check.
-- The data is in files, or in tools Claude can already reach.
+- You want your assistant to write a first template for you to check.
+- The data is in files, or in tools your assistant can already reach.
 
 ### Use something else when
 
