@@ -53,22 +53,22 @@ That makes a template portable, which gives you two ways to work.
 
 ### Published
 
-Publish the template, then use its id from anywhere. The examples below all use the same published invoice summary, `richard-prod:invoice-example`. Two of its fields are set in each example: the company's name (`name`) and the month (`invoiceMonth`, 1 to 12). Each field is set by the id it was given in the Designer.
+Publish the template, then use its id from anywhere. The examples below all use the same published invoice summary, `paperwork:invoice-sample`. Two of its fields are set in each example: the company's name (`name`) and the month (`invoiceMonth`, 1 to 12). A third, `companyCode`, is required and uses its default when it is not given. Each field is set by the id it was given in the Designer.
 
 Here it is, live. Use **Fill in** to change the company or the month.
 
-<div class="pdf-container" style="margin-bottom:20px" data-pw-container="overview-invoice" data-pw-template="richard-prod:invoice-example" data-pw-ui="Minimal" data-pw-zoom="FullWidth" data-pw-actions="Download,FillFields,ViewCode" data-pw-height="520px"></div>
+<div class="pdf-container" style="margin-bottom:20px" data-pw-container="overview-invoice" data-pw-template="paperwork:invoice-sample" data-pw-ui="Minimal" data-pw-zoom="FullWidth" data-pw-actions="Download,FillFields,ViewCode" data-pw-height="520px"></div>
 
 **In the Viewer.** Send a link. People open it, check the details, and download the PDF, on any device.
 
 ```text
-https://paperwork.vu/richard-prod/invoice-example?name=Acme&invoiceMonth=3
+https://paperwork.vu/paperwork/invoice-sample?name=Acme&invoiceMonth=3
 ```
 
 **In a frame.** Put the same link in an iframe on a page you already have, such as an intranet or a client portal. Viewer options, such as `ui`, go in the same link.
 
 ```html
-<iframe src="https://paperwork.vu/richard-prod/invoice-example?name=Acme&invoiceMonth=3&ui=Minimal"
+<iframe src="https://paperwork.vu/paperwork/invoice-sample?name=Acme&invoiceMonth=3&ui=Minimal"
         width="100%" height="800" title="Monthly invoice"></iframe>
 ```
 
@@ -80,7 +80,7 @@ https://paperwork.vu/richard-prod/invoice-example?name=Acme&invoiceMonth=3
 <script>
   pw.show({
     name: 'invoice',
-    template: 'richard-prod:invoice-example',
+    template: 'paperwork:invoice-sample',
     fields: { name: 'Acme', invoiceMonth: '3' }
   });
 </script>
@@ -89,7 +89,7 @@ https://paperwork.vu/richard-prod/invoice-example?name=Acme&invoiceMonth=3
 **From the command line.** Make the document in a script, a scheduled job or a pipeline.
 
 ```bash
-paperwork generate --template richard-prod:invoice-example \
+paperwork generate --template paperwork:invoice-sample \
   --field name=Acme --field invoiceMonth=3 \
   --output acme-march.pdf
 ```
@@ -103,7 +103,7 @@ Claude finds the template, fills in the company and the month, and creates the P
 When you publish a new version, every link, frame, page, script and AI that uses the id has it straight away, with nothing to rebuild or redeploy. It is the best fit when the template changes more often than your code.
 
 {: .note }
-> **A template in a collection** works the same way, for the collection's members. They sign in, and you name the collection as well as the template: `collection: 'acme:finance'` with `pw.show`, or `paperwork login` and then `--collection acme:finance --template invoice-example` on the command line. Use a public template for frames on someone else's site, as signing in inside a frame can be blocked by the browser.
+> **A template in a collection** works the same way, for the collection's members. They sign in, and you name the collection as well as the template: `collection: 'acme:finance'` with `pw.show`, or `paperwork login` and then `--collection acme:finance --template invoice` on the command line. Use a public template for frames on someone else's site, as signing in inside a frame can be blocked by the browser.
 
 ### Exported
 

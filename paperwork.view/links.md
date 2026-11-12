@@ -26,13 +26,13 @@ Share a published template as a web address. You will fill its fields from the l
 **1. Make the link.** A published template opens in the Viewer at an address made of its owner and its name:
 
 ```text
-https://paperwork.vu/richard-prod/invoice-example
+https://paperwork.vu/paperwork/invoice-sample
 ```
 
 **2. Fill fields from the link.** Add each field's id and value after a `?`, joined with `&`. The ids are the ones given to the fields in the Designer:
 
 ```text
-https://paperwork.vu/richard-prod/invoice-example?name=Globex&invoiceMonth=3
+https://paperwork.vu/paperwork/invoice-sample?name=Globex&invoiceMonth=3
 ```
 
 {: .note }
@@ -41,7 +41,7 @@ https://paperwork.vu/richard-prod/invoice-example?name=Globex&invoiceMonth=3
 **3. Choose what the visitor sees.** Add the [viewer options](/paperwork.view/options.html) in the same way:
 
 ```text
-https://paperwork.vu/richard-prod/invoice-example?ui=Minimal&zoom=FullWidth
+https://paperwork.vu/paperwork/invoice-sample?ui=Minimal&zoom=FullWidth
 ```
 
 | Parameter | Values |

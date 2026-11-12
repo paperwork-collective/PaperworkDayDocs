@@ -18,7 +18,7 @@ Put the Viewer on a web page with one script and an empty element described by `
 
 ## Before you start
 
-- A published template and its id. The id is `{owner}:{name}`, as in `richard-prod:invoice-example`.
+- A published template and its id. The id is `{owner}:{name}`, as in `paperwork:invoice-sample`.
 - A web page you can edit. A public template needs nothing else. A template in a private collection needs the visitor to sign in.
 
 ## Steps
@@ -29,7 +29,7 @@ Put the Viewer on a web page with one script and an empty element described by `
 <script src="https://paperwork.vu/er.js"></script>
 
 <div data-pw-container="invoice"
-     data-pw-template="richard-prod:invoice-example"
+     data-pw-template="paperwork:invoice-sample"
      data-pw-ui="Minimal"
      data-pw-zoom="FullWidth"
      data-pw-height="520px"></div>
@@ -56,7 +56,7 @@ These are the attributes you can set on the element.
 | `data-pw-js-init` | Start the viewer without showing a template, so your JavaScript can supply one. See [Embed with JavaScript](/paperwork.view/javascript.html). |
 
 {: .note }
-> The id of a template is `{owner}:{name}`, as in `richard-prod:invoice-example`. For a public template, leave `data-pw-collection` out. Passing a collection for a public template asks the visitor to sign in.
+> The id of a template is `{owner}:{name}`, as in `paperwork:invoice-sample`. For a public template, leave `data-pw-collection` out. Passing a collection for a public template asks the visitor to sign in.
 
 The options are explained further in [Viewer options](/paperwork.view/options.html).
 

@@ -34,7 +34,7 @@ You do not need to do anything for this to happen. You only need this page to co
 **1. Add `engine` and a version to the link.**
 
 ```text
-https://paperwork.vu/richard-prod/invoice-example?engine=9.9.0
+https://paperwork.vu/paperwork/invoice-sample?engine=9.9.0
 ```
 
 The version is written as three or four numbers separated by dots, such as `9.9.0`.

@@ -166,7 +166,7 @@ Hidden content that appears when the summary is opened.
 
 ## Live example
 
-{% include example.html id="style-guide" base="html-invoice" file="invoice" template="richard-prod:invoice-example" title="Complete Invoice" %}
+{% include example.html id="style-guide" base="html-invoice" file="invoice" template="paperwork:invoice-sample" title="Complete Invoice" %}
 
 ---
 

@@ -67,7 +67,7 @@ Shows a template, or your own content, in a viewer.
 A published template:
 
 ```javascript
-pw.show({ name: 'invoice', template: 'richard-prod:invoice-example' });
+pw.show({ name: 'invoice', template: 'paperwork:invoice-sample' });
 ```
 
 A template in a private collection:

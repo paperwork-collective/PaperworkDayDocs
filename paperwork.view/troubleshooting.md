@@ -25,7 +25,7 @@ If someone sees a sign-in prompt, a "not available to you" message, missing cont
 - It starts when it scrolls into view, and the first one on a page can take a few seconds. Wait a moment.
 - Check the script is loaded: `https://paperwork.vu/er.js`.
 - Each viewer on a page needs its own `data-pw-container` name.
-- Check the template id is written `owner:name`, for example `richard-prod:invoice-example`.
+- Check the template id is written `owner:name`, for example `paperwork:invoice-sample`.
 
 ## The viewer asks the visitor to sign in
 
