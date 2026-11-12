@@ -53,7 +53,7 @@ If part of a document is missing, such as a picture, a font or some data, check 
 
 ## A portal at your own address
 
-A portal at your own address is set up with Paperwork: [contact us](https://paperwork.support).
+A portal at your own address is set up with Paperwork: [contact us](https://www.paperwork-collective.com/contact).
 
 ## Next
 

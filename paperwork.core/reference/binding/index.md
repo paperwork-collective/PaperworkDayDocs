@@ -33,6 +33,7 @@ This reference covers all data binding features available in Scryber templates, 
 - **15+ Operators** - Mathematical, logical, and comparison operators
 - **90+ Functions** - Organized into 8 categories
 - **Special Variables** - Context-aware variables like @index, this, ..
+- **Template Variables** - Store a value with `<var>` and use it again, as a counter or a running total
 
 ---
 
@@ -85,6 +86,50 @@ Block-level helpers for control flow and iteration in templates.
 | **log** | `{% raw %}{{log "message"}}{% endraw %}` | Output debug messages to trace log |
 
 [→ Detailed Handlebars Helpers Documentation](./helpers/)
+
+---
+
+## Template Variables
+
+A `<var>` element stores a value under a name, so the template can use it again, by that name, anywhere after it. Give it a `data-id` and a `data-value` with a binding expression:
+
+{% raw %}
+```html
+<var data-id="total" data-value="{{sumOf(model.items, .price)}}"></var>
+<p>Total: {{total}}</p>
+```
+{% endraw %}
+
+Setting a `<var>` with the same `data-id` again replaces the value, and the new expression can read the old one. That makes a variable a counter or a running total. Because it is set again each time the template reaches it, a `<var>` inside a loop starts afresh on every pass, which resets a value for each group:
+
+{% raw %}
+```html
+<var data-id="grand" data-value="{{0}}"></var>
+
+{{#each model.groups}}
+    <var data-id="subtotal" data-value="{{0}}"></var>
+    <h3>{{this.name}}</h3>
+
+    {{#each this.items}}
+        <var data-id="subtotal" data-value="{{subtotal + this.price}}"></var>
+        <p>{{this.item}}: {{this.price}} (running {{subtotal}})</p>
+    {{/each}}
+
+    <var data-id="grand" data-value="{{grand + subtotal}}"></var>
+    <p>Subtotal {{subtotal}}</p>
+{{/each}}
+
+<p>Grand total {{grand}}</p>
+```
+{% endraw %}
+
+With two groups of two items, priced 5 and 40, then 100 and 25, the subtotals are 45 and 125 and the grand total is 170.
+
+- A value is set in document order, as the template is bound, so it can only be used after the `<var>` that sets it.
+- A starting value is written as a binding, such as `{% raw %}{{0}}{% endraw %}` or `{% raw %}{{'text'}}{% endraw %}`. A plain `data-value="0"` is not read.
+- A variable is in scope for the rest of the document, including inside loops and `with` blocks, so `../` is not needed to reach it.
+
+[→ The var element](/paperwork.core/reference/htmltags/elements/html_var_element) and [Names](./navigation/names).
 
 ---
 
