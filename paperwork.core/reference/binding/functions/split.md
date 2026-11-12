@@ -178,9 +178,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [join Function](./join.md)
-- [trim Function](./trim.md)
-- [#each Helper](../helpers/each.md)
-- [length Function](./length.md)
+- [join Function](/paperwork.core/reference/binding/functions/join.html)
+- [trim Function](/paperwork.core/reference/binding/functions/trim.html)
+- [#each Helper](/paperwork.core/reference/binding/helpers/each.html)
+- [length Function](/paperwork.core/reference/binding/functions/length.html)
 
 ---

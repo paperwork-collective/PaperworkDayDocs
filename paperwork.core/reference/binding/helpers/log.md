@@ -276,9 +276,9 @@ See [Logging](/paperwork.core/learning/07-configuration/02_logging).
 
 ## See Also
 
-- [#if Helper](./if.md)
-- [#each Helper](./each.md)
-- [#with Helper](./with.md)
+- [#if Helper](/paperwork.core/reference/binding/helpers/if.html)
+- [#each Helper](/paperwork.core/reference/binding/helpers/each.html)
+- [#with Helper](/paperwork.core/reference/binding/helpers/with.html)
 - [Debugging Templates Guide](/paperwork.core/learning/07-configuration/02_logging.html)
 
 ---

@@ -226,8 +226,8 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [isMatch Function](./isMatch.md)
-- [matches Function](./matches.md)
-- [replace Function](./replace.md)
+- [isMatch Function](/paperwork.core/reference/binding/functions/isMatch.html)
+- [matches Function](/paperwork.core/reference/binding/functions/matches.html)
+- [replace Function](/paperwork.core/reference/binding/functions/replace.html)
 
 ---

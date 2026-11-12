@@ -287,10 +287,10 @@ The `??` operator only checks for null/undefined, not empty strings:
 
 ## See Also
 
-- [Equality Operator](./equality.md)
-- [Inequality Operator](./inequality.md)
-- [#if Helper](../helpers/if.md)
-- [#with Helper](../helpers/with.md)
-- [ifError Function](../functions/ifError.md)
+- [Equality Operator](/paperwork.core/reference/binding/operators/equality.html)
+- [Inequality Operator](/paperwork.core/reference/binding/operators/inequality.html)
+- [#if Helper](/paperwork.core/reference/binding/helpers/if.html)
+- [#with Helper](/paperwork.core/reference/binding/helpers/with.html)
+- [ifError Function](/paperwork.core/reference/binding/functions/ifError.html)
 
 ---

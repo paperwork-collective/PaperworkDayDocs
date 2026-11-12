@@ -143,8 +143,8 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [abs Function](./abs.md)
-- [#if Helper](../helpers/if.md)
-- [if Function](./if.md)
+- [abs Function](/paperwork.core/reference/binding/functions/abs.html)
+- [#if Helper](/paperwork.core/reference/binding/helpers/if.html)
+- [if Function](/paperwork.core/reference/binding/functions/if.html)
 
 ---

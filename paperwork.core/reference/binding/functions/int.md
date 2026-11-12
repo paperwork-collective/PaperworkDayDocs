@@ -162,10 +162,10 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [long Function](./long.md)
-- [double Function](./double.md)
-- [decimal Function](./decimal.md)
-- [round Function](./round.md)
-- [truncate Function](./truncate.md)
+- [long Function](/paperwork.core/reference/binding/functions/long.html)
+- [double Function](/paperwork.core/reference/binding/functions/double.html)
+- [decimal Function](/paperwork.core/reference/binding/functions/decimal.html)
+- [round Function](/paperwork.core/reference/binding/functions/round.html)
+- [truncate Function](/paperwork.core/reference/binding/functions/truncate.html)
 
 ---

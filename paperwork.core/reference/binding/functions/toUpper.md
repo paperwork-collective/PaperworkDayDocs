@@ -190,8 +190,8 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [toLower Function](./toLower.md)
-- [substring Function](./substring.md)
-- [concat Function](./concat.md)
+- [toLower Function](/paperwork.core/reference/binding/functions/toLower.html)
+- [substring Function](/paperwork.core/reference/binding/functions/substring.html)
+- [concat Function](/paperwork.core/reference/binding/functions/concat.html)
 
 ---

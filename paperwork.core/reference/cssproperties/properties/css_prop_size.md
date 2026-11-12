@@ -922,6 +922,6 @@ The `size` property within `@page` rules supports data binding, allowing you to 
 - [page](/paperwork.core/reference/cssproperties/properties/css_prop_page) - Specify named page for element
 - [break-before](/paperwork.core/reference/cssproperties/properties/css_prop_break-before) - Control page breaks before elements
 - [break-after](/paperwork.core/reference/cssproperties/properties/css_prop_break-after) - Control page breaks after elements
-- [margin (in @page)](/paperwork.core/reference/cssselectors/selectors/css_page_rule.html#margins) - Set page margins
+- [margin (in @page)](/paperwork.core/reference/cssselectors/selectors/css_page_rule.html#example-2-letter-size-with-custom-margins) - Set page margins
 
 ---

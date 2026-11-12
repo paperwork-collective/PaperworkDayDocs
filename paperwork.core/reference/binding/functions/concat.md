@@ -132,7 +132,7 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [join Function](./join.md)
-- [String Functions](./index.md#string-functions)
+- [join Function](/paperwork.core/reference/binding/functions/join.html)
+- [String Functions](/paperwork.core/reference/binding/functions//#string-functions)
 
 ---

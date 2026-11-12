@@ -176,9 +176,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [yearOf Function](./yearOf.md)
-- [dayOfMonth Function](./dayOfMonth.md)
-- [addMonths Function](./addMonths.md)
-- [format Function](./format.md)
+- [yearOf Function](/paperwork.core/reference/binding/functions/yearOf.html)
+- [dayOfMonth Function](/paperwork.core/reference/binding/functions/dayOfMonth.html)
+- [addMonths Function](/paperwork.core/reference/binding/functions/addMonths.html)
+- [format Function](/paperwork.core/reference/binding/functions/format.html)
 
 ---

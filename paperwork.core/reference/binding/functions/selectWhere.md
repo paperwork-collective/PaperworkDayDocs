@@ -210,9 +210,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [firstWhere Function](./firstWhere.md)
-- [countOf Function](./countOf.md)
-- [sortBy Function](./sortBy.md)
-- [#each Helper](../helpers/each.md)
+- [firstWhere Function](/paperwork.core/reference/binding/functions/firstWhere.html)
+- [countOf Function](/paperwork.core/reference/binding/functions/countOf.html)
+- [sortBy Function](/paperwork.core/reference/binding/functions/sortBy.html)
+- [#each Helper](/paperwork.core/reference/binding/helpers/each.html)
 
 ---

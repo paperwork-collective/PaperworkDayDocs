@@ -208,9 +208,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [count Function](./count.md)
-- [selectWhere Function](./selectWhere.md)
-- [sumOf Function](./sumOf.md)
-- [collect Function](./collect.md)
+- [count Function](/paperwork.core/reference/binding/functions/count.html)
+- [selectWhere Function](/paperwork.core/reference/binding/functions/selectWhere.html)
+- [sumOf Function](/paperwork.core/reference/binding/functions/sumOf.html)
+- [collect Function](/paperwork.core/reference/binding/functions/collect.html)
 
 ---

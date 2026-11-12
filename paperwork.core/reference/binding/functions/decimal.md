@@ -142,9 +142,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [double Function](./double.md)
-- [int Function](./int.md)
-- [format Function](./format.md)
-- [round Function](./round.md)
+- [double Function](/paperwork.core/reference/binding/functions/double.html)
+- [int Function](/paperwork.core/reference/binding/functions/int.html)
+- [format Function](/paperwork.core/reference/binding/functions/format.html)
+- [round Function](/paperwork.core/reference/binding/functions/round.html)
 
 ---

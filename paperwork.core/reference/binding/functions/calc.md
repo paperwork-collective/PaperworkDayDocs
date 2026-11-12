@@ -229,8 +229,8 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [var Function](./var.md)
+- [var Function](/paperwork.core/reference/binding/functions/var.html)
 - [string Function](/paperwork.core/reference/binding/functions/index.html)
-- [concat Function](./concat.md)
+- [concat Function](/paperwork.core/reference/binding/functions/concat.html)
 
 ---

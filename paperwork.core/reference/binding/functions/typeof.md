@@ -180,8 +180,8 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [log Helper](../helpers/log.md)
-- [#if Helper](../helpers/if.md)
-- [Equality Operator](../operators/equality.md)
+- [log Helper](/paperwork.core/reference/binding/helpers/log.html)
+- [#if Helper](/paperwork.core/reference/binding/helpers/if.html)
+- [Equality Operator](/paperwork.core/reference/binding/operators/equality.html)
 
 ---

@@ -176,8 +176,8 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [int Function](./int.md)
-- [#if Helper](../helpers/if.md)
-- [Equality Operator](../operators/equality.md)
+- [int Function](/paperwork.core/reference/binding/functions/int.html)
+- [#if Helper](/paperwork.core/reference/binding/helpers/if.html)
+- [Equality Operator](/paperwork.core/reference/binding/operators/equality.html)
 
 ---

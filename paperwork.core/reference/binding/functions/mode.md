@@ -224,9 +224,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [mean Function](./mean.md)
-- [median Function](./median.md)
-- [countOf Function](./countOf.md)
-- [collect Function](./collect.md)
+- [mean Function](/paperwork.core/reference/binding/functions/mean.html)
+- [median Function](/paperwork.core/reference/binding/functions/median.html)
+- [countOf Function](/paperwork.core/reference/binding/functions/countOf.html)
+- [collect Function](/paperwork.core/reference/binding/functions/collect.html)
 
 ---

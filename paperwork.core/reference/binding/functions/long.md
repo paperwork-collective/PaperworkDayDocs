@@ -134,9 +134,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [int Function](./int.md)
-- [double Function](./double.md)
-- [decimal Function](./decimal.md)
-- [format Function](./format.md)
+- [int Function](/paperwork.core/reference/binding/functions/int.html)
+- [double Function](/paperwork.core/reference/binding/functions/double.html)
+- [decimal Function](/paperwork.core/reference/binding/functions/decimal.html)
+- [format Function](/paperwork.core/reference/binding/functions/format.html)
 
 ---

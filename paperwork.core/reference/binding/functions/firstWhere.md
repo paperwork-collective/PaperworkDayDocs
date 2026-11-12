@@ -211,9 +211,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [selectWhere Function](./selectWhere.md)
-- [countOf Function](./countOf.md)
-- [#with Helper](../helpers/with.md)
-- [collect Function](./collect.md)
+- [selectWhere Function](/paperwork.core/reference/binding/functions/selectWhere.html)
+- [countOf Function](/paperwork.core/reference/binding/functions/countOf.html)
+- [#with Helper](/paperwork.core/reference/binding/helpers/with.html)
+- [collect Function](/paperwork.core/reference/binding/functions/collect.html)
 
 ---

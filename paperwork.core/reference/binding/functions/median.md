@@ -219,10 +219,10 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [mean Function](./mean.md)
-- [average Function](./average.md)
-- [mode Function](./mode.md)
-- [min Function](./min.md)
-- [max Function](./max.md)
+- [mean Function](/paperwork.core/reference/binding/functions/mean.html)
+- [average Function](/paperwork.core/reference/binding/functions/average.html)
+- [mode Function](/paperwork.core/reference/binding/functions/mode.html)
+- [min Function](/paperwork.core/reference/binding/functions/min.html)
+- [max Function](/paperwork.core/reference/binding/functions/max.html)
 
 ---

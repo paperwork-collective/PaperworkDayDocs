@@ -190,9 +190,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [count Function](./count.md)
-- [substring Function](./substring.md)
-- [#each Helper](../helpers/each.md)
-- [Greater Than Operator](../operators/greaterthan.md)
+- [count Function](/paperwork.core/reference/binding/functions/count.html)
+- [substring Function](/paperwork.core/reference/binding/functions/substring.html)
+- [#each Helper](/paperwork.core/reference/binding/helpers/each.html)
+- [Greater Than Operator](/paperwork.core/reference/binding/operators/greaterthan.html)
 
 ---

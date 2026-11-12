@@ -550,6 +550,8 @@ html { scroll-padding-top: $pw-header-h + 24px; }
 // with the switcher in place only the current product's pages are listed, with no label above them
 .site-nav.pw-switched {
   > .nav-list > .nav-list-item.pw-product-item { display: none; }
+  // Home's own pages (Overview, Roles, Security, Support...) show only while in Home
+  > .nav-list > .nav-list-item.pw-home-item { display: none; }
   > .nav-list > .nav-list-item.pw-product-item.is-current { display: block; }
   > .nav-list > .nav-list-item.is-current > .nav-list-link {
     padding: 8px 20px; min-height: 0; color: $pw-text; font-size: 14px; font-weight: 400; letter-spacing: 0; text-transform: none;

@@ -174,9 +174,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [contains Function](./contains.md)
-- [substring Function](./substring.md)
-- [split Function](./split.md)
-- [Greater Than or Equal Operator](../operators/greaterorequal.md)
+- [contains Function](/paperwork.core/reference/binding/functions/contains.html)
+- [substring Function](/paperwork.core/reference/binding/functions/substring.html)
+- [split Function](/paperwork.core/reference/binding/functions/split.html)
+- [Greater Than or Equal Operator](/paperwork.core/reference/binding/operators/greaterorequal.html)
 
 ---

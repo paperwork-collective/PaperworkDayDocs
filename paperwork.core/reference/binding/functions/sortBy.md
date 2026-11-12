@@ -251,9 +251,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [reverse Function](./reverse.md)
-- [selectWhere Function](./selectWhere.md)
-- [collect Function](./collect.md)
-- [#each Helper](../helpers/each.md)
+- [reverse Function](/paperwork.core/reference/binding/functions/reverse.html)
+- [selectWhere Function](/paperwork.core/reference/binding/functions/selectWhere.html)
+- [collect Function](/paperwork.core/reference/binding/functions/collect.html)
+- [#each Helper](/paperwork.core/reference/binding/helpers/each.html)
 
 ---

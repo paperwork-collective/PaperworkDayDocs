@@ -252,7 +252,7 @@ builder.WithData("model", new {
 ## See Also
 
 - [Greater Than Operator](./greaterthan)
-- [Less Than Operator](./lessthan.md)
+- [Less Than Operator](/paperwork.core/reference/binding/operators/lessthan.html)
 - [Less Than or Equal Operator](./lessorequal)
 - [Equality Operator](./equality)
 - [#if Helper](../helpers/if)

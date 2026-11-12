@@ -245,9 +245,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [sumOf Function](./sumOf.md)
-- [averageOf Function](./averageOf.md)
-- [join Function](./join.md)
-- [#each Helper](../helpers/each.md)
+- [sumOf Function](/paperwork.core/reference/binding/functions/sumOf.html)
+- [averageOf Function](/paperwork.core/reference/binding/functions/averageOf.html)
+- [join Function](/paperwork.core/reference/binding/functions/join.html)
+- [#each Helper](/paperwork.core/reference/binding/helpers/each.html)
 
 ---

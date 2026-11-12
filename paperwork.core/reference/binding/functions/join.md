@@ -179,9 +179,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [concat Function](./concat.md)
-- [split Function](./split.md)
-- [collect Function](./collect.md)
-- [#each Helper](../helpers/each.md)
+- [concat Function](/paperwork.core/reference/binding/functions/concat.html)
+- [split Function](/paperwork.core/reference/binding/functions/split.html)
+- [collect Function](/paperwork.core/reference/binding/functions/collect.html)
+- [#each Helper](/paperwork.core/reference/binding/helpers/each.html)
 
 ---

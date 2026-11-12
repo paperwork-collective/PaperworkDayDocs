@@ -164,9 +164,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [ceiling Function](./ceiling.md)
-- [floor Function](./floor.md)
-- [truncate Function](./truncate.md)
-- [format Function](./format.md)
+- [ceiling Function](/paperwork.core/reference/binding/functions/ceiling.html)
+- [floor Function](/paperwork.core/reference/binding/functions/floor.html)
+- [truncate Function](/paperwork.core/reference/binding/functions/truncate.html)
+- [format Function](/paperwork.core/reference/binding/functions/format.html)
 
 ---

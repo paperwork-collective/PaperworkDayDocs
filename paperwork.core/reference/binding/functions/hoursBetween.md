@@ -163,9 +163,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [minutesBetween Function](./minutesBetween.md)
-- [daysBetween Function](./daysBetween.md)
-- [addHours Function](./addHours.md)
-- [format Function](./format.md)
+- [minutesBetween Function](/paperwork.core/reference/binding/functions/minutesBetween.html)
+- [daysBetween Function](/paperwork.core/reference/binding/functions/daysBetween.html)
+- [addHours Function](/paperwork.core/reference/binding/functions/addHours.html)
+- [format Function](/paperwork.core/reference/binding/functions/format.html)
 
 ---

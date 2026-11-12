@@ -199,9 +199,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [length Function](./length.md)
-- [indexOf Function](./indexOf.md)
-- [trim Function](./trim.md)
-- [concat Function](./concat.md)
+- [length Function](/paperwork.core/reference/binding/functions/length.html)
+- [indexOf Function](/paperwork.core/reference/binding/functions/indexOf.html)
+- [trim Function](/paperwork.core/reference/binding/functions/trim.html)
+- [concat Function](/paperwork.core/reference/binding/functions/concat.html)
 
 ---

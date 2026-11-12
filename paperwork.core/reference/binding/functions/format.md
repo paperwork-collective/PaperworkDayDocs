@@ -162,6 +162,6 @@ builder.WithData("model", new { growth = 0.156 });
 ## See Also
 
 - [string Function](/paperwork.core/reference/binding/functions/index.html)
-- [Conversion Functions](./index.md#conversion-functions)
+- [Conversion Functions](/paperwork.core/reference/binding/functions//#conversion-functions)
 
 ---

@@ -150,8 +150,8 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [#if Helper](../helpers/if.md)
-- [Comparison Operators](../operators/equality.md)
-- [Logical Functions](./index.md#logical-functions)
+- [#if Helper](/paperwork.core/reference/binding/helpers/if.html)
+- [Comparison Operators](/paperwork.core/reference/binding/operators/equality.html)
+- [Logical Functions](/paperwork.core/reference/binding/functions//#logical-functions)
 
 ---

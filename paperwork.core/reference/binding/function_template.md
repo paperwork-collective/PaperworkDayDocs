@@ -131,6 +131,6 @@ builder.WithData("model", new {
 ## See Also
 
 - [Related Function](/paperwork.core/reference/binding/index.html)
-- [Function Category Index](./index.md)
+- [Function Category Index](/paperwork.core/reference/binding//)
 
 ---

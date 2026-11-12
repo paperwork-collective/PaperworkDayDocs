@@ -200,9 +200,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [if Function](./if.md)
-- [Null Coalesce Operator](../operators/nullcoalesce.md)
-- [log Helper](../helpers/log.md)
-- [typeof Function](./typeof.md)
+- [if Function](/paperwork.core/reference/binding/functions/if.html)
+- [Null Coalesce Operator](/paperwork.core/reference/binding/operators/nullcoalesce.html)
+- [log Helper](/paperwork.core/reference/binding/helpers/log.html)
+- [typeof Function](/paperwork.core/reference/binding/functions/typeof.html)
 
 ---

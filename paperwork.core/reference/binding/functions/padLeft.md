@@ -178,8 +178,8 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [padRight Function](./padRight.md)
-- [format Function](./format.md)
-- [concat Function](./concat.md)
+- [padRight Function](/paperwork.core/reference/binding/functions/padRight.html)
+- [format Function](/paperwork.core/reference/binding/functions/format.html)
+- [concat Function](/paperwork.core/reference/binding/functions/concat.html)
 
 ---

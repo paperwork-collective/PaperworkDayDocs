@@ -123,7 +123,7 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [sign Function](./sign.md)
-- [Mathematical Functions](./index.md#mathematical-functions)
+- [sign Function](/paperwork.core/reference/binding/functions/sign.html)
+- [Mathematical Functions](/paperwork.core/reference/binding/functions//#mathematical-functions)
 
 ---

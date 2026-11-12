@@ -142,9 +142,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [int Function](./int.md)
-- [floor Function](./floor.md)
-- [ceiling Function](./ceiling.md)
-- [round Function](./round.md)
+- [int Function](/paperwork.core/reference/binding/functions/int.html)
+- [floor Function](/paperwork.core/reference/binding/functions/floor.html)
+- [ceiling Function](/paperwork.core/reference/binding/functions/ceiling.html)
+- [round Function](/paperwork.core/reference/binding/functions/round.html)
 
 ---

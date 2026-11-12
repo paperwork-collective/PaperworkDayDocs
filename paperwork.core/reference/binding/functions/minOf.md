@@ -192,9 +192,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [min Function](./min.md)
-- [maxOf Function](./maxOf.md)
-- [averageOf Function](./averageOf.md)
-- [collect Function](./collect.md)
+- [min Function](/paperwork.core/reference/binding/functions/min.html)
+- [maxOf Function](/paperwork.core/reference/binding/functions/maxOf.html)
+- [averageOf Function](/paperwork.core/reference/binding/functions/averageOf.html)
+- [collect Function](/paperwork.core/reference/binding/functions/collect.html)
 
 ---

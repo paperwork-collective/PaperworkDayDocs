@@ -180,9 +180,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [countOf Function](./countOf.md)
-- [sum Function](./sum.md)
-- [length Function](./length.md)
-- [#each Helper](../helpers/each.md)
+- [countOf Function](/paperwork.core/reference/binding/functions/countOf.html)
+- [sum Function](/paperwork.core/reference/binding/functions/sum.html)
+- [length Function](/paperwork.core/reference/binding/functions/length.html)
+- [#each Helper](/paperwork.core/reference/binding/helpers/each.html)
 
 ---

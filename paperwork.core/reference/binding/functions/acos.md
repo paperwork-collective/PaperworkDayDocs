@@ -107,9 +107,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [cos Function](./cos.md)
-- [asin Function](./asin.md)
-- [atan Function](./atan.md)
-- [deg Function](./deg.md)
+- [cos Function](/paperwork.core/reference/binding/functions/cos.html)
+- [asin Function](/paperwork.core/reference/binding/functions/asin.html)
+- [atan Function](/paperwork.core/reference/binding/functions/atan.html)
+- [deg Function](/paperwork.core/reference/binding/functions/deg.html)
 
 ---

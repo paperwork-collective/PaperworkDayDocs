@@ -236,9 +236,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [contains Function](./contains.md)
-- [if Function](./if.md)
-- [count Function](./count.md)
-- [#if Helper](../helpers/if.md)
+- [contains Function](/paperwork.core/reference/binding/functions/contains.html)
+- [if Function](/paperwork.core/reference/binding/functions/if.html)
+- [count Function](/paperwork.core/reference/binding/functions/count.html)
+- [#if Helper](/paperwork.core/reference/binding/helpers/if.html)
 
 ---

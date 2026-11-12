@@ -142,8 +142,8 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [trim Function](./trim.md)
-- [replace Function](./replace.md)
-- [length Function](./length.md)
+- [trim Function](/paperwork.core/reference/binding/functions/trim.html)
+- [replace Function](/paperwork.core/reference/binding/functions/replace.html)
+- [length Function](/paperwork.core/reference/binding/functions/length.html)
 
 ---

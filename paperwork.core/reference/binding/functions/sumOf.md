@@ -226,9 +226,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [sum Function](./sum.md)
-- [averageOf Function](./averageOf.md)
-- [collect Function](./collect.md)
-- [count Function](./count.md)
+- [sum Function](/paperwork.core/reference/binding/functions/sum.html)
+- [averageOf Function](/paperwork.core/reference/binding/functions/averageOf.html)
+- [collect Function](/paperwork.core/reference/binding/functions/collect.html)
+- [count Function](/paperwork.core/reference/binding/functions/count.html)
 
 ---

@@ -199,9 +199,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [averageOf Function](./averageOf.md)
-- [mean Function](./mean.md)
-- [sum Function](./sum.md)
-- [median Function](./median.md)
+- [averageOf Function](/paperwork.core/reference/binding/functions/averageOf.html)
+- [mean Function](/paperwork.core/reference/binding/functions/mean.html)
+- [sum Function](/paperwork.core/reference/binding/functions/sum.html)
+- [median Function](/paperwork.core/reference/binding/functions/median.html)
 
 ---

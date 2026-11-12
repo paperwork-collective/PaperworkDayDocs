@@ -125,10 +125,10 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [e Function](./e.md)
-- [sin Function](./sin.md)
-- [cos Function](./cos.md)
-- [rad Function](./rad.md)
-- [deg Function](./deg.md)
+- [e Function](/paperwork.core/reference/binding/functions/e.html)
+- [sin Function](/paperwork.core/reference/binding/functions/sin.html)
+- [cos Function](/paperwork.core/reference/binding/functions/cos.html)
+- [rad Function](/paperwork.core/reference/binding/functions/rad.html)
+- [deg Function](/paperwork.core/reference/binding/functions/deg.html)
 
 ---

@@ -182,10 +182,10 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [Addition Operator](./addition.md)
-- [Multiplication Operator](./multiplication.md)
-- [Division Operator](./division.md)
-- [abs Function](../functions/abs.md)
-- [daysBetween Function](../functions/daysBetween.md)
+- [Addition Operator](/paperwork.core/reference/binding/operators/addition.html)
+- [Multiplication Operator](/paperwork.core/reference/binding/operators/multiplication.html)
+- [Division Operator](/paperwork.core/reference/binding/operators/division.html)
+- [abs Function](/paperwork.core/reference/binding/functions/abs.html)
+- [daysBetween Function](/paperwork.core/reference/binding/functions/daysBetween.html)
 
 ---

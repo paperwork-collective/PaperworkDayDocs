@@ -207,9 +207,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [hourOf Function](./hourOf.md)
-- [secondOf Function](./secondOf.md)
-- [addMinutes Function](./addMinutes.md)
-- [format Function](./format.md)
+- [hourOf Function](/paperwork.core/reference/binding/functions/hourOf.html)
+- [secondOf Function](/paperwork.core/reference/binding/functions/secondOf.html)
+- [addMinutes Function](/paperwork.core/reference/binding/functions/addMinutes.html)
+- [format Function](/paperwork.core/reference/binding/functions/format.html)
 
 ---

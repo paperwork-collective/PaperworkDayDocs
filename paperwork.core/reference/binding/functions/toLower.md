@@ -170,8 +170,8 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [toUpper Function](./toUpper.md)
-- [replace Function](./replace.md)
-- [Equality Operator](../operators/equality.md)
+- [toUpper Function](/paperwork.core/reference/binding/functions/toUpper.html)
+- [replace Function](/paperwork.core/reference/binding/functions/replace.html)
+- [Equality Operator](/paperwork.core/reference/binding/operators/equality.html)
 
 ---

@@ -133,9 +133,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [addMonths Function](./addMonths.md)
-- [addYears Function](./addYears.md)
-- [daysBetween Function](./daysBetween.md)
-- [Date & Time Functions](./index.md#date--time-functions)
+- [addMonths Function](/paperwork.core/reference/binding/functions/addMonths.html)
+- [addYears Function](/paperwork.core/reference/binding/functions/addYears.html)
+- [daysBetween Function](/paperwork.core/reference/binding/functions/daysBetween.html)
+- [Date & Time Functions](/paperwork.core/reference/binding/functions//#date--time-functions)
 
 ---

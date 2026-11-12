@@ -250,8 +250,8 @@ builder.WithData("model", new { });
 
 ## See Also
 
-- [calc Function](./calc.md)
-- [concat Function](./concat.md)
-- [if Function](./if.md)
+- [calc Function](/paperwork.core/reference/binding/functions/calc.html)
+- [concat Function](/paperwork.core/reference/binding/functions/concat.html)
+- [if Function](/paperwork.core/reference/binding/functions/if.html)
 
 ---

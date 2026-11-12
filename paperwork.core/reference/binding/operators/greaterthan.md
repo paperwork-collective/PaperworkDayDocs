@@ -207,10 +207,10 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [Greater Than or Equal Operator](./greaterorequal.md)
-- [Less Than Operator](./lessthan.md)
-- [Less Than or Equal Operator](./lessorequal.md)
-- [#if Helper](../helpers/if.md)
-- [Equality Operator](./equality.md)
+- [Greater Than or Equal Operator](/paperwork.core/reference/binding/operators/greaterorequal.html)
+- [Less Than Operator](/paperwork.core/reference/binding/operators/lessthan.html)
+- [Less Than or Equal Operator](/paperwork.core/reference/binding/operators/lessorequal.html)
+- [#if Helper](/paperwork.core/reference/binding/helpers/if.html)
+- [Equality Operator](/paperwork.core/reference/binding/operators/equality.html)
 
 ---

@@ -163,9 +163,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [floor Function](./floor.md)
-- [round Function](./round.md)
-- [truncate Function](./truncate.md)
-- [Division Operator](../operators/division.md)
+- [floor Function](/paperwork.core/reference/binding/functions/floor.html)
+- [round Function](/paperwork.core/reference/binding/functions/round.html)
+- [truncate Function](/paperwork.core/reference/binding/functions/truncate.html)
+- [Division Operator](/paperwork.core/reference/binding/operators/division.html)
 
 ---

@@ -153,9 +153,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [addYears Function](./addYears.md)
-- [addDays Function](./addDays.md)
-- [format Function](./format.md)
-- [Date & Time Functions](./index.md#date--time-functions)
+- [addYears Function](/paperwork.core/reference/binding/functions/addYears.html)
+- [addDays Function](/paperwork.core/reference/binding/functions/addDays.html)
+- [format Function](/paperwork.core/reference/binding/functions/format.html)
+- [Date & Time Functions](/paperwork.core/reference/binding/functions//#date--time-functions)
 
 ---

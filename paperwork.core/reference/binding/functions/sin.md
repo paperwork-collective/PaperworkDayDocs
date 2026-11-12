@@ -127,10 +127,10 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [cos Function](./cos.md)
-- [tan Function](./tan.md)
-- [asin Function](./asin.md)
-- [rad Function](./rad.md)
-- [pi Function](./pi.md)
+- [cos Function](/paperwork.core/reference/binding/functions/cos.html)
+- [tan Function](/paperwork.core/reference/binding/functions/tan.html)
+- [asin Function](/paperwork.core/reference/binding/functions/asin.html)
+- [rad Function](/paperwork.core/reference/binding/functions/rad.html)
+- [pi Function](/paperwork.core/reference/binding/functions/pi.html)
 
 ---

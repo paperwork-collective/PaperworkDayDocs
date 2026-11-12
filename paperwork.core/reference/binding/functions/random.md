@@ -119,8 +119,8 @@ PDF documents are static - random values are calculated during document generati
 
 ## See Also
 
-- [floor Function](./floor.md)
-- [round Function](./round.md)
-- [Multiplication Operator](../operators/multiplication.md)
+- [floor Function](/paperwork.core/reference/binding/functions/floor.html)
+- [round Function](/paperwork.core/reference/binding/functions/round.html)
+- [Multiplication Operator](/paperwork.core/reference/binding/operators/multiplication.html)
 
 ---

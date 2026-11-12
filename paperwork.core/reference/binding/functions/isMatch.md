@@ -194,9 +194,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [matches Function](./matches.md)
-- [swap Function](./swap.md)
-- [contains Function](./contains.md)
-- [#if Helper](../helpers/if.md)
+- [matches Function](/paperwork.core/reference/binding/functions/matches.html)
+- [swap Function](/paperwork.core/reference/binding/functions/swap.html)
+- [contains Function](/paperwork.core/reference/binding/functions/contains.html)
+- [#if Helper](/paperwork.core/reference/binding/helpers/if.html)
 
 ---

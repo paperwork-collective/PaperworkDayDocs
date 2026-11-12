@@ -191,9 +191,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [format Function](./format.md)
-- [addDays Function](./addDays.md)
-- [addMonths Function](./addMonths.md)
-- [daysBetween Function](./daysBetween.md)
+- [format Function](/paperwork.core/reference/binding/functions/format.html)
+- [addDays Function](/paperwork.core/reference/binding/functions/addDays.html)
+- [addMonths Function](/paperwork.core/reference/binding/functions/addMonths.html)
+- [daysBetween Function](/paperwork.core/reference/binding/functions/daysBetween.html)
 
 ---

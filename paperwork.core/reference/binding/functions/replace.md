@@ -172,8 +172,8 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [swap Function](./swap.md)
-- [concat Function](./concat.md)
-- [substring Function](./substring.md)
+- [swap Function](/paperwork.core/reference/binding/functions/swap.html)
+- [concat Function](/paperwork.core/reference/binding/functions/concat.html)
+- [substring Function](/paperwork.core/reference/binding/functions/substring.html)
 
 ---

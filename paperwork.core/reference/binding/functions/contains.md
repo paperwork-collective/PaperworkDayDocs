@@ -176,9 +176,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [indexOf Function](./indexOf.md)
-- [startsWith Function](./startsWith.md)
-- [endsWith Function](./endsWith.md)
-- [toLower Function](./toLower.md)
+- [indexOf Function](/paperwork.core/reference/binding/functions/indexOf.html)
+- [startsWith Function](/paperwork.core/reference/binding/functions/startsWith.html)
+- [endsWith Function](/paperwork.core/reference/binding/functions/endsWith.html)
+- [toLower Function](/paperwork.core/reference/binding/functions/toLower.html)
 
 ---

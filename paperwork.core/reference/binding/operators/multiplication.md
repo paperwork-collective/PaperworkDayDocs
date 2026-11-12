@@ -191,10 +191,10 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [Addition Operator](./addition.md)
-- [Subtraction Operator](./subtraction.md)
-- [Division Operator](./division.md)
-- [Power Operator](./power.md)
-- [pow Function](../functions/pow.md)
+- [Addition Operator](/paperwork.core/reference/binding/operators/addition.html)
+- [Subtraction Operator](/paperwork.core/reference/binding/operators/subtraction.html)
+- [Division Operator](/paperwork.core/reference/binding/operators/division.html)
+- [Power Operator](/paperwork.core/reference/binding/operators/power.html)
+- [pow Function](/paperwork.core/reference/binding/functions/pow.html)
 
 ---

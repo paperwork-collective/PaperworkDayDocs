@@ -134,8 +134,8 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [pow Function](./pow.md)
-- [Power Operator](../operators/power.md)
-- [Multiplication Operator](../operators/multiplication.md)
+- [pow Function](/paperwork.core/reference/binding/functions/pow.html)
+- [Power Operator](/paperwork.core/reference/binding/operators/power.html)
+- [Multiplication Operator](/paperwork.core/reference/binding/operators/multiplication.html)
 
 ---

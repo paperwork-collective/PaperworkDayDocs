@@ -198,9 +198,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [startsWith Function](./startsWith.md)
-- [contains Function](./contains.md)
-- [substring Function](./substring.md)
-- [toLower Function](./toLower.md)
+- [startsWith Function](/paperwork.core/reference/binding/functions/startsWith.html)
+- [contains Function](/paperwork.core/reference/binding/functions/contains.html)
+- [substring Function](/paperwork.core/reference/binding/functions/substring.html)
+- [toLower Function](/paperwork.core/reference/binding/functions/toLower.html)
 
 ---

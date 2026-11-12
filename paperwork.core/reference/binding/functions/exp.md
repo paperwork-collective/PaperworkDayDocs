@@ -137,8 +137,8 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [log Function](./log.md)
-- [pow Function](./pow.md)
-- [e Function](./e.md)
+- [log Function](/paperwork.core/reference/binding/functions/log.html)
+- [pow Function](/paperwork.core/reference/binding/functions/pow.html)
+- [e Function](/paperwork.core/reference/binding/functions/e.html)
 
 ---

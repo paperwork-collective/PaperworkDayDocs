@@ -229,9 +229,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [sortBy Function](./sortBy.md)
-- [selectWhere Function](./selectWhere.md)
-- [#each Helper](../helpers/each.md)
-- [join Function](./join.md)
+- [sortBy Function](/paperwork.core/reference/binding/functions/sortBy.html)
+- [selectWhere Function](/paperwork.core/reference/binding/functions/selectWhere.html)
+- [#each Helper](/paperwork.core/reference/binding/helpers/each.html)
+- [join Function](/paperwork.core/reference/binding/functions/join.html)
 
 ---

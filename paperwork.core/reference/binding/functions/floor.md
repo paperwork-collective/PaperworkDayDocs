@@ -162,9 +162,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [ceiling Function](./ceiling.md)
-- [round Function](./round.md)
-- [truncate Function](./truncate.md)
-- [Division Operator](../operators/division.md)
+- [ceiling Function](/paperwork.core/reference/binding/functions/ceiling.html)
+- [round Function](/paperwork.core/reference/binding/functions/round.html)
+- [truncate Function](/paperwork.core/reference/binding/functions/truncate.html)
+- [Division Operator](/paperwork.core/reference/binding/operators/division.html)
 
 ---

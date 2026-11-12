@@ -153,8 +153,8 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [Power Operator](../operators/power.md)
-- [sqrt Function](./sqrt.md)
-- [exp Function](./exp.md)
+- [Power Operator](/paperwork.core/reference/binding/operators/power.html)
+- [sqrt Function](/paperwork.core/reference/binding/functions/sqrt.html)
+- [exp Function](/paperwork.core/reference/binding/functions/exp.html)
 
 ---

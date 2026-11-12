@@ -117,9 +117,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [tan Function](./tan.md)
-- [asin Function](./asin.md)
-- [acos Function](./acos.md)
-- [deg Function](./deg.md)
+- [tan Function](/paperwork.core/reference/binding/functions/tan.html)
+- [asin Function](/paperwork.core/reference/binding/functions/asin.html)
+- [acos Function](/paperwork.core/reference/binding/functions/acos.html)
+- [deg Function](/paperwork.core/reference/binding/functions/deg.html)
 
 ---

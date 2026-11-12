@@ -197,9 +197,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [Multiplication Operator](./multiplication.md)
-- [pow Function](../functions/pow.md)
-- [sqrt Function](../functions/sqrt.md)
-- [exp Function](../functions/exp.md)
+- [Multiplication Operator](/paperwork.core/reference/binding/operators/multiplication.html)
+- [pow Function](/paperwork.core/reference/binding/functions/pow.html)
+- [sqrt Function](/paperwork.core/reference/binding/functions/sqrt.html)
+- [exp Function](/paperwork.core/reference/binding/functions/exp.html)
 
 ---

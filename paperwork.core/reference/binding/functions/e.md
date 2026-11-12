@@ -123,9 +123,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [exp Function](./exp.md)
-- [log Function](./log.md)
-- [pi Function](./pi.md)
-- [pow Function](./pow.md)
+- [exp Function](/paperwork.core/reference/binding/functions/exp.html)
+- [log Function](/paperwork.core/reference/binding/functions/log.html)
+- [pi Function](/paperwork.core/reference/binding/functions/pi.html)
+- [pow Function](/paperwork.core/reference/binding/functions/pow.html)
 
 ---

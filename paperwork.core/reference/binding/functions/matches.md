@@ -207,9 +207,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [isMatch Function](./isMatch.md)
-- [swap Function](./swap.md)
-- [#each Helper](../helpers/each.md)
-- [length Function](./length.md)
+- [isMatch Function](/paperwork.core/reference/binding/functions/isMatch.html)
+- [swap Function](/paperwork.core/reference/binding/functions/swap.html)
+- [#each Helper](/paperwork.core/reference/binding/helpers/each.html)
+- [length Function](/paperwork.core/reference/binding/functions/length.html)
 
 ---

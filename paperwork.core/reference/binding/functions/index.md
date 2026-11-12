@@ -210,8 +210,8 @@ Dynamic CSS calculations.
 
 | Function | Description | Example |
 |----------|-------------|---------|
-| [calc](./calc.md) | CSS calc expression | `{% raw %}{{calc('100% - 20pt')}}{% endraw %}` |
-| [var](./var.md) | CSS variable reference | `{% raw %}{{var('primary-color')}}{% endraw %}` |
+| [calc](/paperwork.core/reference/binding/functions/calc.html) | CSS calc expression | `{% raw %}{{calc('100% - 20pt')}}{% endraw %}` |
+| [var](/paperwork.core/reference/binding/functions/var.html) | CSS variable reference | `{% raw %}{{var('primary-color')}}{% endraw %}` |
 
 ---
 

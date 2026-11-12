@@ -129,9 +129,9 @@ builder.WithData("model", new {
 
 ## See Also
 
-- [rad Function](./rad.md)
-- [pi Function](./pi.md)
-- [sin Function](./sin.md)
-- [asin Function](./asin.md)
+- [rad Function](/paperwork.core/reference/binding/functions/rad.html)
+- [pi Function](/paperwork.core/reference/binding/functions/pi.html)
+- [sin Function](/paperwork.core/reference/binding/functions/sin.html)
+- [asin Function](/paperwork.core/reference/binding/functions/asin.html)
 
 ---
