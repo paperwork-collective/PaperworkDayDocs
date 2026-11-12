@@ -35,6 +35,20 @@ Published templates are what the [viewer](/paperwork.view/) shows and what the [
 
 A Blueprint is a template that others can import and use as a starting point. Publish your template as one to share it. You can create a new Blueprint, or replace one you published before. Give it a title and a description, and up to ten tags, separated by commas, to help people find it.
 
+## When the engine is newer
+
+The engine is the part of Paperwork that lays out and writes the document. Each template you publish records the engine release it was published on, and the [Viewer](/paperwork.view/engine-version.html) always makes the document on that release. Published links do not change when Paperwork is updated.
+
+The Designer always runs the latest engine. If a template was published on an older one, a notice appears in the editor, on the template's page and in the check-in dialog:
+
+![The Designer notice that a template was designed with an older Paperwork release](/assets/designer-engine-version-notice.png)
+
+*"Designed with Paperwork 9.9.0. The Designer now uses 9.9.1, so check it looks right before you publish. Published links keep using 9.9.0 until you publish again."*
+
+Check that the template still looks right, then publish it again to move it to the new engine. Until you do, anyone using the published links sees it as it was.
+
+The [CLI](/paperwork.cli/) and [Paperwork.Core](/paperwork.core/) are not affected. They use the version you install.
+
 ## Embed and link
 
 Every template has a unique reference you can use in the viewer, the CLI and your own pages. Choose to **embed** the template to see:
