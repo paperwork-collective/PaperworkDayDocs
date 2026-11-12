@@ -15,15 +15,19 @@ Public templates need no account. Your personal templates, and templates in a co
 
 ## login
 
-Sign in with GitHub, using the device flow that `gh` and `gcloud` use, so it works on a machine with no browser.
+Sign in with GitHub, Microsoft or Google. You get the same account (the same user id) as signing in on the web with that provider.
 
 ```bash
-paperwork login [--provider github] [--environment production]
+paperwork login [--provider github|microsoft|google] [--environment production]
 ```
+
+### GitHub (the default)
+
+GitHub uses the device flow that `gh` and `gcloud` use, so it works on a machine with no browser, such as a headless server or a CI job.
 
 1. The CLI prints a web address and a short code.
 2. Open the address in any browser (it does not need to be on the same machine), enter the code and approve.
-3. The CLI waits for the approval, then signs you in to Paperwork. You get the same account as signing in to the Designer with the same GitHub login.
+3. The CLI waits for the approval, then signs you in to Paperwork.
 
 ```text
 To sign in with GitHub, open https://github.com/login/device in a browser
@@ -33,11 +37,22 @@ Waiting for authorization...
 Signed in as uid <your-user-id> (production)
 ```
 
+### Microsoft or Google
+
+```bash
+paperwork login --provider microsoft
+paperwork login --provider google
+```
+
+These open a browser on the computer you run the command on, and the sign-in comes back to a listener on `http://localhost:9005/`. Port 9005 must be free. For a machine with no browser, use GitHub.
+
+Use the provider you have signed in to Paperwork with before. If your email address already signs in another way, the CLI tells you to use that provider first.
+
 The sign-in is remembered in `~/.paperwork/credentials.json`, one entry per environment, readable only by you. The short-lived access token is never stored. A fresh one is requested on every run.
 
 | Option | Description |
 |---|---|
-| `--provider` | `github` is the one that works today. `microsoft` and `google` say they are not yet implemented. |
+| `--provider` | `github` (the default), `microsoft` or `google`. |
 | `--environment` | `production` (default), `staging` or `dev`. Each is signed in separately. |
 
 ## whoami

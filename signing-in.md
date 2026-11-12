@@ -36,10 +36,12 @@ Use the account with the email address your organisation invited. If you are not
 
 **2. Sign in and accept.** The invite is accepted in one of two ways:
 
-- If the account you sign in with has the invited email address, and that address is verified by Microsoft, Google or GitHub, the invite is accepted.
-- If it does not, the invite link carries a one-time code that accepts the invite instead.
+The email address you sign in with must be the address the invite was sent to. A different address is refused, even with the code. Then:
 
-If the email is lost, the invite page has a way to send it again.
+- If that address is verified by Microsoft, Google or GitHub, the invite is accepted.
+- If it is not, the one-time code in the invite link accepts the invite instead.
+
+If the email is lost, the invite page has **Send it again**, up to three times a day.
 
 ## Check it worked
 
