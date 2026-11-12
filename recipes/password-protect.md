@@ -19,7 +19,7 @@ Make a PDF that asks for a password when someone opens it.
 ## Before you start
 
 - The [Paperwork CLI](/paperwork.cli/) installed.
-- A layout to make the PDF from. This recipe uses `statement.html` and `statement.json`: an account statement with a customer name and date as fields and the lines as data. They are in [Paperwork.Samples](https://github.com/paperwork-collective/Paperwork.Samples/tree/main/recipes/password-protect).
+- A layout to make the PDF from. This recipe uses `statement.html` and `statement.json`: an account statement with a customer name and date as fields and the lines as data. They are in [Paperwork.Samples](https://github.com/paperwork-collective/Paperwork.Samples/tree/master/recipes/password-protect).
 
 The layout, `statement.html`:
 
