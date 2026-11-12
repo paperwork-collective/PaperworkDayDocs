@@ -29,6 +29,19 @@ render_with_liquid: false
 
 ## Version 9
 
+### Next release - not yet released
+
+#### New
+
+- **The conditional (`? :`) operator** - expressions can now use `condition ? whenTrue : whenFalse`, e.g. `{{model.count == 1 ? 'item' : 'items'}}`, as well as the `if()` function. It has the lowest precedence of all the operators, a chain reads from the right (`score >= 90 ? 'A' : score >= 70 ? 'B' : 'C'`), and only the chosen value is evaluated. A condition is false when it is null, `false`, zero, an empty string or the text `'false'`; anything else is true.
+- **`===` and `!==`** - the strict equality forms from javascript are read as `==` and `!=`.
+
+#### Fixes
+
+- **Text before a tall inline image** - text that carried on from the line before onto a line with a taller image (or inline block) on the baseline was drawn too high, above the bottom of the image and the text after it. It is now on the same baseline, as in a browser.
+- **Fonts that were not embedded** - a font whose licence flags combine *restricted* with *preview and print* (or *editable*) embedding, as many system fonts do (e.g. Gill Sans on macOS), was not embedded, so the PDF viewer drew another font in its place. The least restrictive flag is now used, as the OpenType specification says. Together with Scryber.Core.OpenType 9.7.5, a font from a font collection (`.ttc`) is now embedded as a valid font of its own.
+- **`<num value>` was drawn as zero** - the `num` element only read `data-value`, so `<num value="{{model.price}}" data-format="C2" />` showed 0. `value` is now the same as `data-value`, as with the html `data`, `meter` and `progress` elements.
+
 ### 9.9.1 - 11 November 2026
 
 #### Fixes
