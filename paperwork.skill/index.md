@@ -56,3 +56,9 @@ Once installed, your agent can:
 Check the CLI works with `paperwork info`, then [install the skill](/paperwork.skill/installing.html).
 
 The skill source is on [GitHub](https://github.com/paperwork-collective/Paperwork.Skill).
+
+## Related pages
+
+- [Concepts and glossary](/concepts/): the pieces of Paperwork, and what each word means.
+- [Data and fields](/data-and-fields/): how a template gets its values and its lists.
+- [Portals](/portals/) and [Signing in](/signing-in/).

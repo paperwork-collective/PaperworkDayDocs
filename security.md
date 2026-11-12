@@ -2,7 +2,7 @@
 layout: default
 render_with_liquid: false
 title: Security and IT
-nav_order: 3
+nav_order: 5
 permalink: /security/
 has_children: false
 has_toc: false

@@ -103,3 +103,9 @@
   .pw-home-section, .pw-start { padding: 48px 20px; }
   .main-content h2.pw-home-title { font-size: 36px; }
 }
+
+// "I want to..." list on the home page: one line per job
+.pw-jobs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0 32px; }
+.pw-jobs li { margin: 0; padding: 16px 0; border-top: 1px solid $pw-border; display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 1.5; color: $pw-muted; }
+.pw-jobs li::before { content: none; }
+.main-content .pw-jobs a { font-size: 19px; font-weight: 600; }

@@ -50,3 +50,9 @@ Anyone can open a public template without an account. To build templates you sig
 ## The template language
 
 Everything you write in a template uses the same HTML, CSS and expression language as the other products. It is documented in [Paperwork.Reference](/paperwork.core/reference/).
+
+## Related pages
+
+- [Concepts and glossary](/concepts/): the pieces of Paperwork, and what each word means.
+- [Data and fields](/data-and-fields/): how a template gets its values and its lists.
+- [Portals](/portals/) and [Signing in](/signing-in/).

@@ -65,3 +65,9 @@ Templates are made and published in [Paperwork.Design](/paperwork.design/). The 
 ## Start here
 
 [Getting started](/paperwork.view/getting-started.html) takes about ten minutes: open a published template from a link, then put it on a page.
+
+## Related pages
+
+- [Concepts and glossary](/concepts/): the pieces of Paperwork, and what each word means.
+- [Data and fields](/data-and-fields/): how a template gets its values and its lists.
+- [Portals](/portals/) and [Signing in](/signing-in/).

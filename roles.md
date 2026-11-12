@@ -2,7 +2,7 @@
 layout: default
 render_with_liquid: false
 title: Roles and access
-nav_order: 2
+nav_order: 4
 permalink: /roles/
 has_children: false
 has_toc: false
