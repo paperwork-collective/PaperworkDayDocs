@@ -103,7 +103,7 @@ Claude finds the template, fills in the company and the month, and creates the P
 When you publish a new version, every link, frame, page, script and AI that uses the id has it straight away, with nothing to rebuild or redeploy. It is the best fit when the template changes more often than your code.
 
 {: .note }
-> **A template in a collection** works the same way, for the collection's members. They sign in, and you name the collection as well as the template: `collection: 'acme:finance'` with `pw.show`, or `paperwork login` and then `--collection acme:finance --template invoice` on the command line. Use a public template for frames on someone else's site, as signing in inside a frame can be blocked by the browser.
+> **A template in a collection** works the same way, for the collection's members. They sign in, and you name the collection as well as the template: `collection: 'acme:finance'` with `pw.show`, or `paperwork login` and then `--collection acme:finance --template acme:invoice` on the command line. Use a public template for frames on someone else's site, as signing in inside a frame can be blocked by the browser.
 
 ### Exported
 
