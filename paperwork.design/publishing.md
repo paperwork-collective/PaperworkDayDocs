@@ -39,11 +39,13 @@ A Blueprint is a template that others can import and use as a starting point. Pu
 
 The engine is the part of Paperwork that lays out and writes the document. Each template you publish records the engine release it was published on, and the [Viewer](/paperwork.view/engine-version.html) always makes the document on that release. Published links do not change when Paperwork is updated.
 
-The Designer always runs the latest engine. If a template was published on an older one, a notice appears in the editor, on the template's page and in the check-in dialog:
+The Designer always runs the latest engine. If a template was published on an older one, the editor shows this notice:
 
 ![The Designer notice that a template was designed with an older Paperwork release](/assets/designer-engine-version-notice.png)
 
 *"Designed with Paperwork 9.9.0. The Designer now uses 9.9.1, so check it looks right before you publish. Published links keep using 9.9.0 until you publish again."*
+
+The template's page and the check-in dialog say the same when you come to publish. The dialog's wording is: "Publishing moves this template from Paperwork {older} to {current}. Published links use {older} until then."
 
 Check that the template still looks right, then publish it again to move it to the new engine. Until you do, anyone using the published links sees it as it was.
 
