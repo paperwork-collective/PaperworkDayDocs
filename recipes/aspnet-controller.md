@@ -21,7 +21,7 @@ Return a PDF from a web request. The caller asks for a company and a month, your
 - The `Paperwork.Core` package.
 - A template exported from [Paperwork.Design](/paperwork.design/). Open the template and choose **Export**. That gives one `.config` file holding the layout, styles, data and fields.
 
-This recipe uses the exported invoice template, `InvoiceAcme.config`. It has the fields `name`, `companyCode` and `invoiceMonth`, and a data source named `model`. Put the file in a `Templates` folder in your project.
+This recipe uses the exported invoice template, `InvoiceAcme.config`. It has the fields `name`, `companyCode` and `invoiceMonth`, and a data source named `model`. Put the file in a `Templates` folder in your project. The code below is also in [Paperwork.Samples](https://github.com/paperwork-collective/Paperwork.Samples/tree/master/recipes/aspnet-controller), as `Program.cs`, `InvoiceController.cs` and `InvoiceModel.cs`.
 
 ## Steps
 
