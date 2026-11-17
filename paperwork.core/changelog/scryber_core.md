@@ -37,6 +37,7 @@ render_with_liquid: false
 
 #### Fixes
 
+- **Gradients on transformed shapes** - a linear or radial gradient on an svg shape with a `transform`, or on a block with a css `transform` such as `rotate(20deg)`, stayed where the shape was before it was transformed. It did not rotate or move with the shape, and clipped it, so a moved svg shape could disappear. The gradient now follows the transformation of its shape.
 - **Large SVG images** - an svg image larger than the space available was drawn at 300 x 150, as its size was read before the svg was laid out. It is now reduced to fit, keeping its ratio, as other images are.
 - **SVG images near the end of a page** - an svg image with only a viewBox, reduced to fit the height left on a page, kept the full width and lost its ratio. It now keeps the ratio of the viewBox.
 
