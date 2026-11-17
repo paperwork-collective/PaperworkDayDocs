@@ -29,7 +29,7 @@ render_with_liquid: false
 
 ## Version 9
 
-### Next release - not yet released
+### 9.10.0 - 17 November 2026
 
 #### New
 
