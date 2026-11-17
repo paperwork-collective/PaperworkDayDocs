@@ -30,7 +30,7 @@ Find and return the first item in a collection where a specific property matches
 ## Signature
 
 ```
-firstWhere(collection, propertyName, value)
+firstWhere(collection, condition)
 ```
 
 ---
@@ -40,8 +40,7 @@ firstWhere(collection, propertyName, value)
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `collection` | Array/Collection | Yes | The collection to search |
-| `propertyName` | String | Yes | Name of the property to check |
-| `value` | Any | Yes | Value to match against |
+| `condition` | Boolean expression | Yes | An expression evaluated for each item, using the dot (.) for the item's properties, such as `.status == 'active'`. An item is included when the result is true. |
 
 ---
 
@@ -49,7 +48,7 @@ firstWhere(collection, propertyName, value)
 
 **Type:** Object or null
 
-The first item where the specified property equals the given value, or null if no match found.
+The first item where the condition is true, or null if no item matches.
 
 ---
 
@@ -60,7 +59,7 @@ The first item where the specified property equals the given value, or null if n
 
 {% raw %}
 ```handlebars
-{{#with firstWhere(model.users, 'id', model.currentUserId)}}
+{{#with firstWhere(model.users, .id == model.currentUserId)}}
   <p>Welcome, {{this.name}}!</p>
   <p>Email: {{this.email}}</p>
 {{/with}}
@@ -91,7 +90,7 @@ builder.WithData("model", new {
 
 {% raw %}
 ```handlebars
-{{#with firstWhere(model.products, 'sku', 'WIDGET-001')}}
+{{#with firstWhere(model.products, .sku == 'WIDGET-001')}}
   <h3>{{this.name}}</h3>
   <p>Price: ${{this.price}}</p>
   <p>Stock: {{this.quantity}} units</p>
@@ -123,7 +122,7 @@ builder.WithData("model", new {
 
 {% raw %}
 ```handlebars
-{{#with firstWhere(model.subscriptions, 'status', 'active')}}
+{{#with firstWhere(model.subscriptions, .status == 'active')}}
   <p>Active plan: {{this.planName}}</p>
   <p>Renews: {{format(this.renewalDate, 'MMMM dd, yyyy')}}</p>
 {{else}}
@@ -156,8 +155,10 @@ builder.WithData("model", new {
 {% raw %}
 ```handlebars
 {{#each model.orderItems}}
-  {{#with firstWhere(../model.products, 'id', this.productId)}}
-    <p>{{this.name}}: ${{this.price}} x {{../this.quantity}} = ${{this.price * ../this.quantity}}</p>
+  <var data-id="orderProductId" data-value="{{this.productId}}" />
+  <var data-id="orderQuantity" data-value="{{this.quantity}}" />
+  {{#with firstWhere(model.products, .id == orderProductId)}}
+    <p>{{this.name}}: ${{this.price}} x {{orderQuantity}} = ${{this.price * orderQuantity}}</p>
   {{/with}}
 {{/each}}
 ```
@@ -191,6 +192,9 @@ builder.WithData("model", new {
 
 ## Notes
 
+- The condition is evaluated for each item, so inside it `.name` reads that item's property
+- To compare with a value from outside, such as an outer loop, store it in a `<var>` first and use the variable in the condition
+- A property name on its own, such as `firstWhere(model.users, 'verified')`, tests that the property is true
 - Returns null if no match is found
 - Only returns the **first** matching item (stops searching after first match)
 - Uses equality comparison (==) for matching

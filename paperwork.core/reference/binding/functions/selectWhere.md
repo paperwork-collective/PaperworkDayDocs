@@ -30,7 +30,7 @@ Filter a collection to return only items where a specific property matches a val
 ## Signature
 
 ```
-selectWhere(collection, propertyName, value)
+selectWhere(collection, condition)
 ```
 
 ---
@@ -40,8 +40,7 @@ selectWhere(collection, propertyName, value)
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `collection` | Array/Collection | Yes | The collection to filter |
-| `propertyName` | String | Yes | Name of the property to check |
-| `value` | Any | Yes | Value to match against |
+| `condition` | Boolean expression | Yes | An expression evaluated for each item, using the dot (.) for the item's properties, such as `.status == 'active'`. An item is included when the result is true. |
 
 ---
 
@@ -49,7 +48,7 @@ selectWhere(collection, propertyName, value)
 
 **Type:** Array
 
-A new array containing only items where the specified property equals the given value.
+A new array containing only the items where the condition is true.
 
 ---
 
@@ -61,7 +60,7 @@ A new array containing only items where the specified property equals the given 
 {% raw %}
 ```handlebars
 <h3>Active Tasks</h3>
-{{#each selectWhere(model.tasks, 'status', 'active')}}
+{{#each selectWhere(model.tasks, .status == 'active')}}
   <p>{{this.name}} - Priority: {{this.priority}}</p>
 {{/each}}
 ```
@@ -93,9 +92,9 @@ builder.WithData("model", new {
 {% raw %}
 ```handlebars
 <h3>Category Sales</h3>
-<p>Electronics: ${{sumOf(selectWhere(model.products, 'category', 'Electronics'), 'sales')}}</p>
-<p>Books: ${{sumOf(selectWhere(model.products, 'category', 'Books'), 'sales')}}</p>
-<p>Clothing: ${{sumOf(selectWhere(model.products, 'category', 'Clothing'), 'sales')}}</p>
+<p>Electronics: ${{sumOf(selectWhere(model.products, .category == 'Electronics'), 'sales')}}</p>
+<p>Books: ${{sumOf(selectWhere(model.products, .category == 'Books'), 'sales')}}</p>
+<p>Clothing: ${{sumOf(selectWhere(model.products, .category == 'Clothing'), 'sales')}}</p>
 ```
 {% endraw %}
 
@@ -126,8 +125,8 @@ builder.WithData("model", new {
 
 {% raw %}
 ```handlebars
-<h3>Verified Users ({{count(selectWhere(model.users, 'verified', true))}})</h3>
-{{#each selectWhere(model.users, 'verified', true)}}
+<h3>Verified Users ({{count(selectWhere(model.users, .verified == true))}})</h3>
+{{#each selectWhere(model.users, .verified == true)}}
   <p>{{this.name}} - {{this.email}}</p>
 {{/each}}
 ```
@@ -158,11 +157,9 @@ builder.WithData("model", new {
 {% raw %}
 ```handlebars
 <h3>High Priority Active Tasks</h3>
-{{#with selectWhere(model.tasks, 'status', 'active') as | activeTasks |}}
-  {{#each selectWhere(activeTasks, 'priority', 'high')}}
-    <p>{{this.name}} - Due: {{format(this.dueDate, 'MMM dd')}}</p>
-  {{/each}}
-{{/with}}
+{{#each selectWhere(selectWhere(model.tasks, .status == 'active'), .priority == 'high')}}
+  <p>{{this.name}} - Due: {{format(this.dueDate, 'MMM dd')}}</p>
+{{/each}}
 ```
 {% endraw %}
 
@@ -191,7 +188,9 @@ builder.WithData("model", new {
 ## Notes
 
 - Returns empty array if no items match
-- Uses equality comparison (==) for matching
+- The condition is evaluated for each item, so inside it `.name` reads that item's property
+- To compare with a value from outside, such as an outer loop, store it in a `<var>` first and use the variable in the condition
+- A property name on its own, such as `selectWhere(model.users, 'verified')`, tests that the property is true
 - Case-sensitive for string comparisons
 - Does not modify original collection
 - Property must exist on items (null properties match null value)

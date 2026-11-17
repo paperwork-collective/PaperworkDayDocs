@@ -196,7 +196,7 @@ builder.WithData("model", new {
 {% raw %}
 ```handlebars
 <h3>Active Tasks (By Priority)</h3>
-{{#each sortBy(selectWhere(model.tasks, 'status', 'active'), 'priority')}}
+{{#each sortBy(selectWhere(model.tasks, .status == 'active'), 'priority')}}
   <p>{{this.name}} - {{this.priority}}</p>
 {{/each}}
 ```

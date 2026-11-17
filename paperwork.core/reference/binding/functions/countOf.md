@@ -30,7 +30,7 @@ Count the number of items in a collection where a specific property matches a va
 ## Signature
 
 ```
-countOf(collection, propertyName, value)
+countOf(collection, condition)
 ```
 
 ---
@@ -40,8 +40,7 @@ countOf(collection, propertyName, value)
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `collection` | Array/Collection | Yes | The collection to search |
-| `propertyName` | String | Yes | Name of the property to check |
-| `value` | Any | Yes | Value to match against |
+| `condition` | Boolean expression | Yes | An expression evaluated for each item, using the dot (.) for the item's properties, such as `.status == 'active'`. An item is included when the result is true. |
 
 ---
 
@@ -49,7 +48,7 @@ countOf(collection, propertyName, value)
 
 **Type:** Number (Integer)
 
-The number of items where the specified property equals the given value.
+The number of items where the condition is true.
 
 ---
 
@@ -61,9 +60,9 @@ The number of items where the specified property equals the given value.
 {% raw %}
 ```handlebars
 <h3>Task Status</h3>
-<p>Active: {{countOf(model.tasks, 'status', 'active')}}</p>
-<p>Completed: {{countOf(model.tasks, 'status', 'completed')}}</p>
-<p>Pending: {{countOf(model.tasks, 'status', 'pending')}}</p>
+<p>Active: {{countOf(model.tasks, .status == 'active')}}</p>
+<p>Completed: {{countOf(model.tasks, .status == 'completed')}}</p>
+<p>Pending: {{countOf(model.tasks, .status == 'pending')}}</p>
 ```
 {% endraw %}
 
@@ -94,8 +93,8 @@ builder.WithData("model", new {
 
 {% raw %}
 ```handlebars
-<p>Verified users: {{countOf(model.users, 'verified', true)}}</p>
-<p>Unverified users: {{countOf(model.users, 'verified', false)}}</p>
+<p>Verified users: {{countOf(model.users, .verified == true)}}</p>
+<p>Unverified users: {{countOf(model.users, .verified == false)}}</p>
 ```
 {% endraw %}
 
@@ -125,7 +124,8 @@ builder.WithData("model", new {
 ```handlebars
 <h3>Inventory Summary</h3>
 {{#each model.categories}}
-  <p>{{this}}: {{countOf(model.products, 'category', this)}} items</p>
+  <var data-id="categoryName" data-value="{{this}}" />
+  <p>{{this}}: {{countOf(model.products, .category == categoryName)}} items</p>
 {{/each}}
 ```
 {% endraw %}
@@ -159,9 +159,9 @@ builder.WithData("model", new {
 {% raw %}
 ```handlebars
 <h3>Priority Distribution</h3>
-<p>High: {{countOf(model.issues, 'priority', 'high')}} ({{round((countOf(model.issues, 'priority', 'high') / count(model.issues)) * 100, 0)}}%)</p>
-<p>Medium: {{countOf(model.issues, 'priority', 'medium')}} ({{round((countOf(model.issues, 'priority', 'medium') / count(model.issues)) * 100, 0)}}%)</p>
-<p>Low: {{countOf(model.issues, 'priority', 'low')}} ({{round((countOf(model.issues, 'priority', 'low') / count(model.issues)) * 100, 0)}}%)</p>
+<p>High: {{countOf(model.issues, .priority == 'high')}} ({{round((countOf(model.issues, .priority == 'high') / count(model.issues)) * 100, 0)}}%)</p>
+<p>Medium: {{countOf(model.issues, .priority == 'medium')}} ({{round((countOf(model.issues, .priority == 'medium') / count(model.issues)) * 100, 0)}}%)</p>
+<p>Low: {{countOf(model.issues, .priority == 'low')}} ({{round((countOf(model.issues, .priority == 'low') / count(model.issues)) * 100, 0)}}%)</p>
 ```
 {% endraw %}
 
@@ -191,7 +191,9 @@ builder.WithData("model", new {
 
 ## Notes
 
-- Uses equality comparison (==) to match values
+- The condition is evaluated for each item, so inside it `.name` reads that item's property
+- To compare with a value from outside, such as an outer loop, store it in a `<var>` first and use the variable in the condition
+- A property name on its own, such as `countOf(model.users, 'verified')`, tests that the property is true
 - Case-sensitive for string comparisons
 - Returns 0 if no items match
 - Property must exist on all items (or be null)

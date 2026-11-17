@@ -138,7 +138,7 @@ builder.WithData("model", new {
 
 {% raw %}
 ```handlebars
-<p>Progress: {{count(selectWhere(model.tasks, 'completed', true))}} of {{count(model.tasks)}} tasks completed</p>
+<p>Progress: {{count(selectWhere(model.tasks, .completed == true))}} of {{count(model.tasks)}} tasks completed</p>
 ```
 {% endraw %}
 
