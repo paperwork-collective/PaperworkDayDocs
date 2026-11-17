@@ -172,6 +172,7 @@ Operators used within `{% raw %}{{expression}}{% endraw %}` bindings.
 | Operator | Example | Description |
 |----------|---------|-------------|
 | `??` | `{% raw %}{{a ?? b}}{% endraw %}` | Null coalescing - returns b if a is null |
+| `? :` | `{% raw %}{{a ? b : c}}{% endraw %}` | Conditional - returns b if a is true, otherwise c |
 | `.` | `{% raw %}{{model.property}}{% endraw %}` | Property access |
 | `[]` | `{% raw %}{{array[0]}}{% endraw %}` | Array/indexer access |
 | `..` | `{% raw %}{{../parent}}{% endraw %}` | Navigate to parent context |

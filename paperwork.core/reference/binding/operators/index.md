@@ -73,6 +73,16 @@ Handle null or undefined values with fallback.
 
 ---
 
+## Conditional Operator
+
+Choose one of two values.
+
+| Operator | Description | Precedence | Example |
+|----------|-------------|------------|---------|
+| [? :](./ternary) | Conditional (ternary) | lowest | `{% raw %}{{model.count == 1 ? 'item' : 'items'}}{% endraw %}` |
+
+---
+
 ## Operator Precedence
 
 Operators are evaluated in order of precedence (1 = highest, 10 = lowest):
@@ -87,6 +97,7 @@ Operators are evaluated in order of precedence (1 = highest, 10 = lowest):
 8. Null coalescing `??`
 9. Logical AND `&&`
 10. Logical OR `||`
+11. Conditional `? :` (lowest)
 
 Use parentheses to override precedence:
 

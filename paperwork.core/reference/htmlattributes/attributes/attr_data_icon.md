@@ -614,7 +614,7 @@ Icons appear at the object element's location:
         <object data="{{.file}}"
                 type="{{.type}}"
                 data-icon="{{.priority == 'high' ? 'Pushpin' :
-                           .type.includes('sheet') ? 'Graph' :
+                           contains(.type, 'sheet') ? 'Graph' :
                            'Paperclip'}}"
                 alt="{{.name}}"
                 style="vertical-align: middle; margin-right: 5pt;"></object>
