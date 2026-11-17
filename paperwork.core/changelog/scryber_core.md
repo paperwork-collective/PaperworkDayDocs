@@ -37,6 +37,7 @@ render_with_liquid: false
 
 #### Fixes
 
+- **SVG presentation attributes** - a `style` attribute on a gradient `<stop>` (e.g. `style="stop-color: red"`) stopped the whole document from parsing. The `stroke-dashoffset` attribute was only read from css, and a `<rect>` did not read its `stroke-opacity` or `stroke-linejoin` attributes. They are now read as attributes on svg shapes, as well as in css.
 - **`mode()` of text** - `mode()` only took numbers, so the mode of text values (e.g. `mode(model.choices)` of 'A', 'B', 'A') raised an error. Text is now compared as text, and numbers (or text that is a number) as numbers.
 - **Empty strings in conditions** - an empty string with `&&`, `||`, `!` or the `if()` function raised an error (e.g. `'' && true`). These now use the same rules as the `? :` operator: null, `false`, 0, `''` and `'false'` are false, and other values are true.
 - **`string()` of a collection** - gave the name of its type (`System.Object[]`). It is now its items in square brackets, e.g. `[1, 2, 3]`.
