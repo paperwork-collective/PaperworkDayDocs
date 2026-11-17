@@ -46,7 +46,7 @@ secondsBetween(startDateTime, endDateTime)
 
 ## Returns
 
-**Type:** Number (Integer)
+**Type:** Number
 
 The number of seconds between the two datetimes. Positive if endDateTime is after startDateTime, negative if before.
 
@@ -181,7 +181,7 @@ builder.WithData("model", new {
 
 ## Notes
 
-- Returns integer number of seconds (fractional seconds are truncated)
+- Returns the total seconds, including any fraction. For example 4.5 seconds is 4 seconds and 500 milliseconds. Use `floor()` for whole seconds, such as `floor(secondsBetween(a, b))`
 - Positive result: endDateTime is after startDateTime
 - Negative result: endDateTime is before startDateTime
 - Includes both date and time components

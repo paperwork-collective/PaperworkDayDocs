@@ -46,7 +46,7 @@ daysBetween(startDate, endDate)
 
 ## Returns
 
-**Type:** Number (Integer)
+**Type:** Number
 
 The number of days between the two dates. Positive if endDate is after startDate, negative if before.
 
@@ -145,12 +145,10 @@ builder.WithData("model", new {
 
 ## Notes
 
-- Returns integer number of days (fractional days are truncated)
+- Returns the total days, including any fraction. For example 2.5 days is 2 days and 12 hours. Use `floor()` for whole days, such as `floor(daysBetween(a, b))`
 - Positive result: endDate is after startDate
 - Negative result: endDate is before startDate
-- Time component is ignored (only date part is used)
 - For hour-level precision, use `hoursBetween()`
-- For fractional days, calculate using `hoursBetween() / 24`
 
 ---
 

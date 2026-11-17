@@ -46,7 +46,7 @@ minutesBetween(startDateTime, endDateTime)
 
 ## Returns
 
-**Type:** Number (Integer)
+**Type:** Number
 
 The number of minutes between the two datetimes. Positive if endDateTime is after startDateTime, negative if before.
 
@@ -157,13 +157,12 @@ builder.WithData("model", new {
 
 ## Notes
 
-- Returns integer number of minutes (fractional minutes are truncated)
+- Returns the total minutes, including any fraction. For example 90.5 minutes is 90 minutes and 30 seconds. Use `floor()` for whole minutes, such as `floor(minutesBetween(a, b))`
 - Positive result: endDateTime is after startDateTime
 - Negative result: endDateTime is before startDateTime
 - Includes both date and time components
 - For second-level precision, use `secondsBetween()`
 - For hour-level precision, use `hoursBetween()`
-- For fractional minutes, calculate using `secondsBetween() / 60`
 
 ---
 

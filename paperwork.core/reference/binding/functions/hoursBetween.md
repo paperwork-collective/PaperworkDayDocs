@@ -46,7 +46,7 @@ hoursBetween(startDateTime, endDateTime)
 
 ## Returns
 
-**Type:** Number (Integer)
+**Type:** Number
 
 The number of hours between the two datetimes. Positive if endDateTime is after startDateTime, negative if before.
 
@@ -151,13 +151,12 @@ builder.WithData("model", new {
 
 ## Notes
 
-- Returns integer number of hours (fractional hours are truncated)
+- Returns the total hours, including any fraction. For example 54.5 hours is 54 hours and 30 minutes. Use `floor()` for whole hours, such as `floor(hoursBetween(a, b))`
 - Positive result: endDateTime is after startDateTime
 - Negative result: endDateTime is before startDateTime
 - Includes both date and time components
 - For minute-level precision, use `minutesBetween()`
 - For day-level precision, use `daysBetween()`
-- For fractional hours, calculate using `minutesBetween() / 60`
 
 ---
 
