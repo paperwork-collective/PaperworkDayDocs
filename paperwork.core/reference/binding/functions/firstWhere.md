@@ -194,7 +194,7 @@ builder.WithData("model", new {
 
 - The condition is evaluated for each item, so inside it `.name` reads that item's property
 - To compare with a value from outside, such as an outer loop, store it in a `<var>` first and use the variable in the condition
-- A property name on its own, such as `firstWhere(model.users, 'verified')`, tests that the property is true
+- A property name on its own, such as `firstWhere(model.users, .verified)`, tests that the property is true
 - Returns null if no match is found
 - Only returns the **first** matching item (stops searching after first match)
 - Uses equality comparison (==) for matching

@@ -190,7 +190,7 @@ builder.WithData("model", new {
 - Returns empty array if no items match
 - The condition is evaluated for each item, so inside it `.name` reads that item's property
 - To compare with a value from outside, such as an outer loop, store it in a `<var>` first and use the variable in the condition
-- A property name on its own, such as `selectWhere(model.users, 'verified')`, tests that the property is true
+- A property name on its own, such as `selectWhere(model.users, .verified)`, tests that the property is true
 - Case-sensitive for string comparisons
 - Does not modify original collection
 - Property must exist on items (null properties match null value)
