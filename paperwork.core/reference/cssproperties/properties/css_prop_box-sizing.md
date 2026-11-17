@@ -16,6 +16,11 @@ The `box-sizing` property sets whether the `width` and `height` of an element in
 
 ---
 
+{: .important }
+> **This is the opposite of a browser.** In a browser, `width: 200pt; padding: 10pt; border: 5pt solid` makes a box 230pt wide. In Paperwork.Core the same box is **200pt** wide, because the width includes the padding and border. Nothing is reported when a template written for a browser is run here, but every box with padding and an explicit width is smaller than it was in the browser. To get the browser's sizing back, set `box-sizing: content-box`, or `* { box-sizing: content-box; }` for the whole document.
+
+---
+
 <details class='top-toc' markdown="block">
   <summary>
     On this page

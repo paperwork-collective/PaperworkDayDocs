@@ -182,7 +182,7 @@ The following properties are supported to alter the position and size appearance
 
 ### Element Spacing
 
-The following properties manage the spacing in and around elements. The border rectangle is the boundary between the margins and padding and is where a border around the element would be shown if one is specified. The content rectangle is where the flowing children of the element (if any) are going to be positioned. **NOTE**: By default, and by design, the library does not collapse any margin spacing, nor does it allocate space for the width of a border.
+The following properties manage the spacing in and around elements. The border rectangle is the boundary between the margins and padding and is where a border around the element would be shown if one is specified. The content rectangle is where the flowing children of the element (if any) are going to be positioned. **NOTE**: By default, and by design, the library does not collapse any margin spacing, nor does it allocate space for the width of a border. Also by default, a `width` includes the padding and border, which is the opposite of a browser. See [box-sizing](/paperwork.core/reference/cssproperties/properties/css_prop_box-sizing.html).
 
 | Property  | Description |
 |---|---|
