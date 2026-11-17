@@ -29,6 +29,17 @@ render_with_liquid: false
 
 ## Version 9
 
+### Next release - not yet released
+
+#### Breaking changes
+
+- **SVG images with a percentage size** - an svg used as an image (`<img src="image.svg" />`) with a percentage `width` or `height` on its `<svg>` root, such as `width="100%" viewBox="0 0 24 24"`, is now sized as a browser sizes it. A percentage is not a size of its own, so the image fills the width available with the ratio of the viewBox, or uses the other (absolute) dimension with that ratio. It was sized as the percentage of the viewBox, so a 24 x 24 icon with `width="100%" height="100%"` drew at 24 x 24 and now fills the width. Give the `img` a width or height in css to size it.
+
+#### Fixes
+
+- **Large SVG images** - an svg image larger than the space available was drawn at 300 x 150, as its size was read before the svg was laid out. It is now reduced to fit, keeping its ratio, as other images are.
+- **SVG images near the end of a page** - an svg image with only a viewBox, reduced to fit the height left on a page, kept the full width and lost its ratio. It now keeps the ratio of the viewBox.
+
 ### 9.10.0 - 17 November 2026
 
 #### New
