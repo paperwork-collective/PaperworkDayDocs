@@ -37,6 +37,10 @@ render_with_liquid: false
 
 #### Fixes
 
+- **`mode()` of text** - `mode()` only took numbers, so the mode of text values (e.g. `mode(model.choices)` of 'A', 'B', 'A') raised an error. Text is now compared as text, and numbers (or text that is a number) as numbers.
+- **Empty strings in conditions** - an empty string with `&&`, `||`, `!` or the `if()` function raised an error (e.g. `'' && true`). These now use the same rules as the `? :` operator: null, `false`, 0, `''` and `'false'` are false, and other values are true.
+- **`string()` of a collection** - gave the name of its type (`System.Object[]`). It is now its items in square brackets, e.g. `[1, 2, 3]`.
+- **`integer()` and `long()` of text with a fraction** - `integer('10.6')`, as json values often are, raised an error. The text is now read as a number and rounded as a number is, so it is 11.
 - **Gradients on transformed shapes** - a linear or radial gradient on an svg shape with a `transform`, or on a block with a css `transform` such as `rotate(20deg)`, stayed where the shape was before it was transformed. It did not rotate or move with the shape, and clipped it, so a moved svg shape could disappear. The gradient now follows the transformation of its shape.
 - **Large SVG images** - an svg image larger than the space available was drawn at 300 x 150, as its size was read before the svg was laid out. It is now reduced to fit, keeping its ratio, as other images are.
 - **SVG images near the end of a page** - an svg image with only a viewBox, reduced to fit the height left on a page, kept the full width and lost its ratio. It now keeps the ratio of the viewBox.
