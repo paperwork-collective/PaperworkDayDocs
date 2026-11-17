@@ -16,6 +16,11 @@ The `stop-color` property specifies the color value at a gradient stop within SV
 
 ---
 
+{: .note }
+> Set `stop-color` as an attribute on the `<stop>`. In Scryber.Core 9.9.1 a `style` attribute on a stop is an error that stops the whole document from loading.
+
+---
+
 <details class='top-toc' markdown="block">
   <summary>
     On this page
