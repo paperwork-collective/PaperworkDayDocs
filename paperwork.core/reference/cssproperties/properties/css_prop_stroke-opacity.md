@@ -16,6 +16,11 @@ The `stroke-opacity` property controls the transparency of SVG shape strokes ind
 
 ---
 
+{: .note }
+> In Scryber.Core 9.9.1, `stroke-opacity` set in a style or CSS works on every SVG shape. As a plain attribute it works on `circle`, `ellipse`, `line` and `path`, but has no effect on a `rect`.
+
+---
+
 <details class='top-toc' markdown="block">
   <summary>
     On this page

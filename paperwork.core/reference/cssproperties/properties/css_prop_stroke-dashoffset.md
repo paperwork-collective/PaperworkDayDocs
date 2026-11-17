@@ -16,6 +16,11 @@ The `stroke-dashoffset` property specifies the distance into the dash pattern to
 
 ---
 
+{: .note }
+> In Scryber.Core 9.9.1, `stroke-dashoffset` works in a style or CSS but not as a plain attribute, and is not applied to a `path`.
+
+---
+
 <details class='top-toc' markdown="block">
   <summary>
     On this page

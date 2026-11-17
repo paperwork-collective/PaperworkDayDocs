@@ -16,6 +16,11 @@ The `opacity` property controls the transparency level of an entire element, inc
 
 ---
 
+{: .note }
+> On an SVG shape in Scryber.Core 9.9.1, `opacity` works in a style or CSS but has no effect as a plain attribute. Use `fill-opacity` or `stroke-opacity` as attributes.
+
+---
+
 <details class='top-toc' markdown="block">
   <summary>
     On this page
