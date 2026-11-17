@@ -78,7 +78,6 @@ While `<menu>` is an unordered list, it supports the same numbering control attr
 
 **List Styling**:
 - `list-style-type`: Marker type (though default is `none`)
-- `list-style-position`: `inside` or `outside`
 - `-pdf-li-style`, `-pdf-li-inset`, `-pdf-li-align`, `-pdf-li-prefix`, `-pdf-li-postfix`
 
 **Box Model**:

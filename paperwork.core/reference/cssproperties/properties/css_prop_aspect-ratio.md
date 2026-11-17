@@ -112,16 +112,7 @@ For SVG images that have no `viewBox` and no declared `width`/`height`, `aspect-
 
 ### Block elements
 
-`aspect-ratio` also works on block elements. Combined with a single explicit dimension it keeps boxes proportional:
-
-```css
-.thumbnail-box {
-    width: 150pt;
-    aspect-ratio: 4 / 3;   /* height = 112.5pt */
-    background-color: #f3f4f6;
-    border: 1pt solid #e5e7eb;
-}
-```
+`aspect-ratio` is applied to images and SVG images only. It has no effect on a `div` or other block element, so a block needs its `height` set directly.
 
 ---
 

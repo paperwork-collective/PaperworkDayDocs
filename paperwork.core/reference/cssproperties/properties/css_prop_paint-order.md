@@ -16,6 +16,11 @@ The `paint-order` property specifies the order in which fill, stroke, and marker
 
 ---
 
+{: .note }
+> In Scryber.Core 9.9.1 this property is recognised but not applied. Fill is always painted first, then the stroke.
+
+---
+
 <details class='top-toc' markdown="block">
   <summary>
     On this page

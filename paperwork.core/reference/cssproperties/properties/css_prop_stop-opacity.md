@@ -16,6 +16,11 @@ The `stop-opacity` property specifies the opacity (transparency) value at a grad
 
 ---
 
+{: .note }
+> In Scryber.Core 9.9.1 this property is recognised but not applied. Use `stop-color` for the colour at a stop, and `opacity` or `fill-opacity` on the shape for transparency.
+
+---
+
 <details class='top-toc' markdown="block">
   <summary>
     On this page

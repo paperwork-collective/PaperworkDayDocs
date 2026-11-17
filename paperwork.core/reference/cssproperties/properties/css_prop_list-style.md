@@ -50,7 +50,7 @@ list-style: <list-style-type> || <list-style-position> || <list-style-image>;
 ### Common Values
 
 - **list-style-type**: `disc`, `circle`, `square`, `decimal`, `lower-alpha`, `upper-alpha`, `lower-roman`, `upper-roman`, `none`
-- **list-style-position**: `inside`, `outside` (default)
+- **list-style-position**: recognised, but not applied. The marker is always outside the list item
 - **list-style-image**: `url()` or `none` (default)
 
 ### Examples of Combined Values
