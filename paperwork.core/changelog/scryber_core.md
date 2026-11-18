@@ -35,12 +35,17 @@ render_with_liquid: false
 
 - **SVG images with a percentage size** - an svg used as an image (`<img src="image.svg" />`) with a percentage `width` or `height` on its `<svg>` root, such as `width="100%" viewBox="0 0 24 24"`, is now sized as a browser sizes it. A percentage is not a size of its own, so the image fills the width available with the ratio of the viewBox, or uses the other (absolute) dimension with that ratio. It was sized as the percentage of the viewBox, so a 24 x 24 icon with `width="100%" height="100%"` drew at 24 x 24 and now fills the width. Give the `img` a width or height in css to size it.
 
+#### Changes
+
+- **Shrink to fit** - an absolute, fixed, floating or inline-block element without a `width` is now the width of its content when that content is blocks, such as a `div` or `p`, as in a browser. It filled the space to the right of the page. The blocks inside fill the width of the widest one. Content wider than the space available (text that wraps) fills the space, limited by any `max-width` - this includes text on its own, which was the width of its widest line. So an inline-block whose text wraps now fills the line and moves to a line of its own, as in a browser. Give the element a `width` to set it.
+
 #### New
 
 - **`paint-order` on svg shapes** - `paint-order: stroke` (as a css property or an attribute) draws the stroke before the fill, so the fill covers the inner half of a wide stroke, as in a browser. It was only used by html blocks.
 
 #### Fixes
 
+- **A space at the end of a line** - a space that did not fit at the end of a line, such as the one after an inline-block that fills the line, was carried to the start of the next line and indented its text. It is now dropped, as in a browser.
 - **Patterns on transformed shapes** - a `<pattern>` fill on an svg shape with a `transform` stayed where the shape was before it was transformed. The tiles now move, turn and scale with the shape, as gradients do.
 - **SVG presentation attributes** - a `style` attribute on a gradient `<stop>` (e.g. `style="stop-color: red"`) stopped the whole document from parsing. The `stroke-dashoffset` and `opacity` attributes were only read from css, and a `<rect>` did not read its `stroke-opacity` or `stroke-linejoin` attributes. They are now read as attributes on svg shapes, as well as in css (`opacity` is the opacity of the fill, as the css property).
 - **`mode()` of text** - `mode()` only took numbers, so the mode of text values (e.g. `mode(model.choices)` of 'A', 'B', 'A') raised an error. Text is now compared as text, and numbers (or text that is a number) as numbers.
