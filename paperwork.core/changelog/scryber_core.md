@@ -35,8 +35,13 @@ render_with_liquid: false
 
 - **SVG images with a percentage size** - an svg used as an image (`<img src="image.svg" />`) with a percentage `width` or `height` on its `<svg>` root, such as `width="100%" viewBox="0 0 24 24"`, is now sized as a browser sizes it. A percentage is not a size of its own, so the image fills the width available with the ratio of the viewBox, or uses the other (absolute) dimension with that ratio. It was sized as the percentage of the viewBox, so a 24 x 24 icon with `width="100%" height="100%"` drew at 24 x 24 and now fills the width. Give the `img` a width or height in css to size it.
 
+#### New
+
+- **`paint-order` on svg shapes** - `paint-order: stroke` (as a css property or an attribute) draws the stroke before the fill, so the fill covers the inner half of a wide stroke, as in a browser. It was only used by html blocks.
+
 #### Fixes
 
+- **Patterns on transformed shapes** - a `<pattern>` fill on an svg shape with a `transform` stayed where the shape was before it was transformed. The tiles now move, turn and scale with the shape, as gradients do.
 - **SVG presentation attributes** - a `style` attribute on a gradient `<stop>` (e.g. `style="stop-color: red"`) stopped the whole document from parsing. The `stroke-dashoffset` and `opacity` attributes were only read from css, and a `<rect>` did not read its `stroke-opacity` or `stroke-linejoin` attributes. They are now read as attributes on svg shapes, as well as in css (`opacity` is the opacity of the fill, as the css property).
 - **`mode()` of text** - `mode()` only took numbers, so the mode of text values (e.g. `mode(model.choices)` of 'A', 'B', 'A') raised an error. Text is now compared as text, and numbers (or text that is a number) as numbers.
 - **Empty strings in conditions** - an empty string with `&&`, `||`, `!` or the `if()` function raised an error (e.g. `'' && true`). These now use the same rules as the `? :` operator: null, `false`, 0, `''` and `'false'` are false, and other values are true.
