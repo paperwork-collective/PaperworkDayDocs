@@ -33,6 +33,7 @@ render_with_liquid: false
 
 #### Breaking changes
 
+- **List indent** - lists are now indented as in a browser. The indent is the `padding-left` of the `<ul>` or `<ol>` (30pt, the browser's 40px, by default), and the marker sits in that padding just before the text. Items were indented 40pt on top of any padding of the list, so lists move 10pt to the left. `padding-left: 0` now hangs the markers outside the list, and `padding-left: 15pt` is a 15pt indent (it was 55pt). `-pdf-li-inset` is now how far the marker box reaches back from the text, not an extra indent - use `padding-left` to make room for wide markers. A `<dd>` is indented 30pt (40px) rather than 40pt.
 - **SVG images with a percentage size** - an svg used as an image (`<img src="image.svg" />`) with a percentage `width` or `height` on its `<svg>` root, such as `width="100%" viewBox="0 0 24 24"`, is now sized as a browser sizes it. A percentage is not a size of its own, so the image fills the width available with the ratio of the viewBox, or uses the other (absolute) dimension with that ratio. It was sized as the percentage of the viewBox, so a 24 x 24 icon with `width="100%" height="100%"` drew at 24 x 24 and now fills the width. Give the `img` a width or height in css to size it.
 
 #### Changes
