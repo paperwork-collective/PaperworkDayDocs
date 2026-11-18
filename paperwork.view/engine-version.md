@@ -25,7 +25,7 @@ The engine is the part of Paperwork that lays out and writes the document. A new
 - Publishing the template again from a newer Designer moves it to the newer engine. The check-in dialog says so: "Publishing moves this template from Paperwork {old} to {new}. Published links use {old} until then."
 - A template published before engines were recorded is made on the Viewer's current engine.
 - The Designer always runs the latest engine, and tells you in the editor when a template was published on an older one. See [Publish and share](/paperwork.design/publishing.html#when-the-engine-is-newer).
-- The [CLI](/paperwork.cli/) and [Paperwork.Core](/paperwork.core/) are not affected. They use the version you install.
+- The [CLI](/paperwork.cli/) and [Paperwork.Core](/paperwork.core/) are not affected. They use the version you install, and that version number is the engine version. After upgrading either, check your templates; the [engine changelog](/paperwork.core/changelog/scryber_core.html) lists what changed in each release.
 
 You do not need to do anything for this to happen. You only need this page to compare a template on another release.
 
