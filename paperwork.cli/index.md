@@ -44,7 +44,9 @@ paperwork info
 
 ### The version is the engine version
 
-The CLI, [Paperwork.Core](/paperwork.core/) and Scryber.Core share one version number. `Paperwork.CLI 9.9.1` makes your documents with engine 9.9.1, so the version you install is the engine you get.
+The CLI's version follows the engine's, as do the versions of [Paperwork.Core](/paperwork.core/) and Scryber.Core. `Paperwork.CLI 9.9.1` makes your documents with engine 9.9.1, so the version you install tells you the engine you get.
+
+The CLI can carry a fourth number for a fix to the CLI alone. `9.9.1.1` is the first CLI revision of engine 9.9.1. To find it in the changelog, read the first three numbers.
 
 A new engine release can change how a template is laid out, for example how an SVG image with a percentage size is drawn. So when you upgrade the CLI, for instance in a pipeline, make a document from your templates and check it looks as you expect. The [engine changelog](/paperwork.core/changelog/scryber_core.html) lists what changed in each release. The templates shipped as samples are checked against the version they ship with.
 
