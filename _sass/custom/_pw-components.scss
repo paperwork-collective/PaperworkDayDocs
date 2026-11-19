@@ -271,3 +271,9 @@ blockquote.highlight {
 .search-result-section::before { content: "\203A"; margin-right: 6px; color: $pw-muted; }
 
 .pw-search-keys { position: sticky; bottom: 0; }
+
+// Screenshot placeholder: swap for the image once the screenshot is captured
+.pw-shot { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 16px 0 20px; padding: 18px 20px; border: 2px dashed $pw-border; color: $pw-muted; font-size: 14px; line-height: 1.5; }
+.pw-shot-id { font-weight: 700; letter-spacing: 0.04em; }
+.pw-shot-what { flex: 1 1 320px; }
+.pw-shot-file { flex: 1 0 100%; font-size: 12px; }

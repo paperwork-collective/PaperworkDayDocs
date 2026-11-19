@@ -34,6 +34,8 @@ https://paperwork.vu/paperwork/invoice-sample
 
 The Viewer opens an invoice, made in your browser. The company shown is the template's default.
 
+<div class="pw-shot"><span class="pw-shot-id">V39</span><span class="pw-shot-what">The invoice-sample template open in the Viewer, with the default company.</span><span class="pw-shot-file">assets/images/viewer/v39-invoice-sample.png</span></div>
+
 ## 2. Fill a field from the link
 
 Add the field values to the address, after a `?`, and join them with `&`:
@@ -42,7 +44,11 @@ Add the field values to the address, after a `?`, and join them with `&`:
 https://paperwork.vu/paperwork/invoice-sample?name=Globex&invoiceMonth=3
 ```
 
-The same invoice opens for Globex, for March. You can also choose **Fill in** in the toolbar and type the values, then **Download** to save the PDF.
+The same invoice opens for Globex, for March.
+
+<div class="pw-shot"><span class="pw-shot-id">V16</span><span class="pw-shot-what">The invoice open for Globex and March, with the link in the address bar.</span><span class="pw-shot-file">assets/images/viewer/v16-link-with-values.png</span></div>
+
+You can also choose **Fill in** in the toolbar and type the values, then **Download** to save the PDF.
 
 ## 3. Put it on a page
 
@@ -59,6 +65,8 @@ Add this to a page, where you want the document to appear:
 Here it is, working:
 
 <div class="pdf-container" style="margin-bottom:20px" data-pw-container="gs-invoice" data-pw-template="paperwork:invoice-sample" data-pw-ui="Minimal" data-pw-zoom="FullWidth" data-pw-height="520px"></div>
+
+<div class="pw-shot"><span class="pw-shot-id">V12</span><span class="pw-shot-what">A web page with the invoice open inside it, between a heading and some text.</span><span class="pw-shot-file">assets/images/viewer/v12-embed-on-page.png</span></div>
 
 ## Check it worked
 

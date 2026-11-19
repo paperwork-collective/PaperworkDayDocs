@@ -4,7 +4,7 @@ render_with_liquid: false
 title: Embed with JavaScript
 parent: Paperwork.Viewer
 parent_url: /paperwork.view/
-nav_order: 4
+nav_order: 6
 has_children: false
 has_toc: false
 description: "Drive the Paperwork Viewer from your own JavaScript: place a viewer, choose the template or content at run time, and get the PDF back."
@@ -31,6 +31,8 @@ Use the `pw` object to place a viewer, choose the template at run time, send you
 ```
 
 **2. Use the functions you need.** Each is described below.
+
+<div class="pw-shot"><span class="pw-shot-id">V37</span><span class="pw-shot-what">A page with its own buttons that choose a template and fill in values, and the viewer showing the result.</span><span class="pw-shot-file">assets/images/viewer/v37-javascript-page.png</span></div>
 
 ## pw.init
 

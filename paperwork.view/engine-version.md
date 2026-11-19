@@ -4,7 +4,7 @@ render_with_liquid: false
 title: Choose the engine version
 parent: Paperwork.Viewer
 parent_url: /paperwork.view/
-nav_order: 6
+nav_order: 8
 has_children: false
 has_toc: false
 description: "A published Paperwork template keeps running on the engine release it was published with. How to see it on another release with the engine parameter."
@@ -38,6 +38,10 @@ https://paperwork.vu/paperwork/invoice-sample?engine=9.9.0
 ```
 
 The version is written as three or four numbers separated by dots, such as `9.9.0`.
+
+<div class="pw-shot"><span class="pw-shot-id">V38</span><span class="pw-shot-what">The same template opened with the default engine and with the engine parameter set to an earlier version.</span><span class="pw-shot-file">assets/images/viewer/v38-engine-param.png</span></div>
+
+<div class="pw-shot"><span class="pw-shot-id">V15</span><span class="pw-shot-what">The note shown when the engine a template was published on is not available.</span><span class="pw-shot-file">assets/images/viewer/v15-engine-unavailable.png</span></div>
 
 ## Check it worked
 

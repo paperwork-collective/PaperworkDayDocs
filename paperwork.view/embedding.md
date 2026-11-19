@@ -4,7 +4,7 @@ render_with_liquid: false
 title: Embed with HTML
 parent: Paperwork.Viewer
 parent_url: /paperwork.view/
-nav_order: 3
+nav_order: 5
 has_children: false
 has_toc: false
 description: "Put the Paperwork Viewer on a web page with data-pw attributes and one script, with no JavaScript of your own."
@@ -36,6 +36,10 @@ Put the Viewer on a web page with one script and an empty element described by `
 ```
 
 **2. Open the page.** When it loads, the library finds every element with `data-pw-container` and places the viewer inside it. A viewer is only started when its element scrolls into view, so a page with several of them stays quick, including on a phone.
+
+<div class="pw-shot"><span class="pw-shot-id">V29</span><span class="pw-shot-what">An intranet page with a document open in it, between a heading and some text.</span><span class="pw-shot-file">assets/images/viewer/v29-intranet-embed.png</span></div>
+
+<div class="pw-shot"><span class="pw-shot-id">V30</span><span class="pw-shot-what">A page with two viewers, each with its own name, one below the other.</span><span class="pw-shot-file">assets/images/viewer/v30-two-viewers.png</span></div>
 
 ## The attributes
 

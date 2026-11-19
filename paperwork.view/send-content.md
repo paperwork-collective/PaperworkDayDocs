@@ -4,7 +4,7 @@ render_with_liquid: false
 title: Show your own content
 parent: Paperwork.Viewer
 parent_url: /paperwork.view/
-nav_order: 5
+nav_order: 7
 has_children: false
 has_toc: false
 description: "Send your own HTML layout, CSS styles, JSON data and field values to the Paperwork Viewer from a web page, without publishing a template."
@@ -59,6 +59,8 @@ pw.show({
   layouts: [{ name: 'main', content: '<html><body><h1>Hello</h1></body></html>', format: 'html' }]
 });
 ```
+
+<div class="pw-shot"><span class="pw-shot-id">V36</span><span class="pw-shot-what">A viewer showing a document made from HTML, CSS and JSON sent from the page.</span><span class="pw-shot-file">assets/images/viewer/v36-own-content.png</span></div>
 
 ## Check it worked
 

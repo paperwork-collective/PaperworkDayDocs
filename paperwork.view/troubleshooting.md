@@ -4,7 +4,7 @@ render_with_liquid: false
 title: Troubleshooting
 parent: Paperwork.Viewer
 parent_url: /paperwork.view/
-nav_order: 8
+nav_order: 10
 has_children: false
 has_toc: false
 description: "Fixes for the common problems building a Paperwork Viewer link or embed: an empty viewer, a sign-in prompt, ignored field values and a blocked domain."
@@ -27,11 +27,15 @@ If someone sees a sign-in prompt, a "not available to you" message, missing cont
 - Each viewer on a page needs its own `data-pw-container` name.
 - Check the template id is written `owner:name`, for example `paperwork:invoice-sample`.
 
+<div class="pw-shot"><span class="pw-shot-id">V35</span><span class="pw-shot-what">An embedded viewer that is empty because its script did not load, with the console open.</span><span class="pw-shot-file">assets/images/viewer/v35-empty-embed.png</span></div>
+
 ## The viewer asks the visitor to sign in
 
 - A template in a collection needs the visitor to sign in as a member, and the embed needs `data-pw-collection`.
 - A personal template opens only for the person who published it, signed in.
 - Passing a collection for a public template also asks the visitor to sign in. For a public template, leave the collection out.
+
+<div class="pw-shot"><span class="pw-shot-id">V20</span><span class="pw-shot-what">The sign-in choices shown when a viewer needs a signed-in visitor.</span><span class="pw-shot-file">assets/images/viewer/v20-collection-sign-in.png</span></div>
 
 ## A value in the link is ignored
 
@@ -41,6 +45,8 @@ If someone sees a sign-in prompt, a "not available to you" message, missing cont
 ## A message says the current host domain is not supported
 
 The Viewer itself is running at an address that is not a Paperwork portal. This is not about the site that embeds the Viewer: nothing restricts which sites can embed or link a template. Open the Viewer from its normal address, `https://paperwork.vu/`, or the address your portal gave you.
+
+<div class="pw-shot"><span class="pw-shot-id">V34</span><span class="pw-shot-what">The message that the current host domain is not supported.</span><span class="pw-shot-file">assets/images/viewer/v34-host-domain.png</span></div>
 
 ## Part of the document is missing: a picture, a font or data
 
