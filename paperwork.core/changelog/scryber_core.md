@@ -42,6 +42,7 @@ render_with_liquid: false
 
 #### New
 
+- **List markers** - `list-style-type: disc`, `circle` and `square` are now drawn as a browser draws them: a filled circle, a hollow circle and a filled square, in the colour of the text and sized from the font. Without a `list-style-type`, a bulleted list uses a disc, a list nested in another list uses a circle, and deeper lists use a square, as in a browser. Before, the bullet was a small character that was the same at every depth, and `circle` and `square` were drawn as that character.
 - **`paint-order` on svg shapes** - `paint-order: stroke` (as a css property or an attribute) draws the stroke before the fill, so the fill covers the inner half of a wide stroke, as in a browser. It was only used by html blocks.
 
 #### Fixes
