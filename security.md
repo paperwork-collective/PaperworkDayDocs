@@ -39,10 +39,9 @@ If a PDF is password-protected, it is encrypted on the device as well, and the p
 The CLI and the Core library work the same way on your own machines and servers: they read the published template and create the document locally.
 
 {: .note }
-> **The exceptions.** A few optional connectors pass requests through a Paperwork function in London, because the services they call don't accept requests straight from a browser. They relay the data without storing it.
+> **The exceptions.** A few optional features pass requests through a Paperwork function in London, because the services they call don't accept requests straight from a browser. They relay the data without storing it.
 >
 > - **Remote data without CORS**: fetches a data feed for a template. It only calls the domains your portal allows, and only for templates owned by an Editor or Publisher. We log the address called, the user and the template, not the data.
-> - **Jira**: reads issues for a template that uses Jira data.
 > - **Maps**: creates a map image. We log the user and the map's centre.
 >
 > A template only uses these if its author turned them on.
@@ -54,7 +53,7 @@ The CLI and the Core library work the same way on your own machines and servers:
 | Database: templates, collections, profiles and licences | Belgium and the Netherlands (Google Cloud multi-region eur3: europe-west1 and europe-west4, with europe-north1 in Finland as the witness) |
 | File storage: assets and published templates | Frankfurt (Google Cloud europe-west3) |
 | Sign-in records: email address and sign-in provider (Microsoft, Google or GitHub). Paperwork doesn't use passwords. | **United States.** Sign-in uses Firebase Authentication, a Google service that runs only from US data centres. It can't be moved to Europe. |
-| Functions: licences, connectors, maps, link previews | London (Google Cloud europe-west2) |
+| Functions: licences, the data relay, maps, link previews | London (Google Cloud europe-west2) |
 | Background tasks: emails, invitations and licence changes | Belgium (Google Cloud europe-west1) |
 | Payment notifications from Stripe | United States (Google Cloud us-central1) |
 | Website hosting | Firebase Hosting, served from Google's global network |
@@ -118,7 +117,6 @@ Disabling their work Microsoft or Google account stops them signing in with it. 
 | Microsoft 365 | Sending email from Paperwork | When we email you |
 | Google Analytics | Site usage, with your consent | If you accept analytics cookies |
 | Microsoft, Google, GitHub | Sign-in | If you sign in with that account |
-| Atlassian | Jira data | Only if a template uses Jira |
 | Google Maps | Map images | Only if a template uses maps |
 | Zoho | Support tickets at paperwork.support | When you raise a ticket |
 
@@ -136,4 +134,4 @@ Two things still come from Paperwork when you do: any assets the template uses (
 
 For security questions, a completed questionnaire, or to report a vulnerability, contact [security@paperwork-collective.com](mailto:security@paperwork-collective.com). For everything else, use [paperwork.support](https://paperwork.support).
 
-Last updated: 11 November 2026.
+Last updated: 19 November 2026.
