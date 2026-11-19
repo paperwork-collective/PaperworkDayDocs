@@ -29,7 +29,7 @@ render_with_liquid: false
 
 ## Version 9
 
-### Next release - not yet released
+### 9.11.0-beta.1 - 19 November 2026 (beta)
 
 #### Breaking changes
 
