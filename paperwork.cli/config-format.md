@@ -14,7 +14,7 @@ has_toc: false
 `generate --config` and `validate` read a JSON file in the same shape Paperwork stores for published templates: a `schemaVers` and a `template`, wrapped together.
 
 {: .warning }
-> The file used to be a flat top-level object. A file written for that older format no longer works: its `template` is missing, so it fails validation.
+> **Changed in version 9.7.4.2 (1 October 2026).** The file used to be a flat top-level object. A file written for that older format no longer works: its `template` is missing, so it fails validation.
 
 ## Structure
 

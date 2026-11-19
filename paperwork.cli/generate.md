@@ -42,7 +42,7 @@ paperwork generate --config report.json --output report.pdf
 Fetch a published template by id. The layouts, styles, data and field defaults come from the stored template, and `--data` and `--field` can override individual values.
 
 ```bash
-paperwork generate --template 929mMaxCcf5Nr3UT1DZg --output report.pdf
+paperwork generate --template my-id:my-template --output report.pdf
 ```
 
 By default this fetches a template from the public library. Add `--personal` for one of your own personal templates, or `--collection` for a template published in a collection. Both need you to [sign in](/paperwork.cli/sign-in.html) first.

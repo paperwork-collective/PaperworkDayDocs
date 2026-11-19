@@ -144,6 +144,6 @@ This covers advanced library topics that allow developers to enhance the current
 
 ## Related pages
 
-- [Concepts and glossary](/concepts/): the pieces of Paperwork, and what each word means.
+- [Glossary](/glossary/): the pieces of Paperwork, and what each word means.
 - [Data and fields](/data-and-fields/): how a template gets its values and its lists.
 - [Portals](/portals/) and [Signing in](/signing-in/).

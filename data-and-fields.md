@@ -95,5 +95,5 @@ Adding a connection in the Designer needs an Editor licence or above.
 ## Next
 
 - [Edit and preview](/paperwork.design/editing.html): defining fields and data in the Designer.
-- [Concepts and glossary](/concepts/).
+- [Glossary](/glossary/).
 - [Reference: expressions](/paperwork.core/reference/binding/), for the `{{ }}` language.

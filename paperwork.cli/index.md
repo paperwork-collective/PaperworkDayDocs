@@ -78,7 +78,7 @@ paperwork generate \
 Generate from a template published in [Paperwork.Design](/paperwork.design/):
 
 ```bash
-paperwork generate --template 929mMaxCcf5Nr3UT1DZg --output report.pdf
+paperwork generate --template my-id:my-template --output report.pdf
 ```
 
 Leave out `--output` to write the PDF bytes to standard output:
@@ -103,6 +103,6 @@ The source and issue tracker are on [GitHub](https://github.com/paperwork-collec
 
 ## Related pages
 
-- [Concepts and glossary](/concepts/): the pieces of Paperwork, and what each word means.
+- [Glossary](/glossary/): the pieces of Paperwork, and what each word means.
 - [Data and fields](/data-and-fields/): how a template gets its values and its lists.
 - [Portals](/portals/) and [Signing in](/signing-in/).

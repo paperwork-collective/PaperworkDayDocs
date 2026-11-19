@@ -77,7 +77,7 @@ paperwork generate \
 ## From a published template
 
 ```bash
-paperwork generate --template 929mMaxCcf5Nr3UT1DZg --output report.pdf
+paperwork generate --template my-id:my-template --output report.pdf
 ```
 
 Replace one of its data sources, or set its fields, for this run:

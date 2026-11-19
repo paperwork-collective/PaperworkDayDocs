@@ -59,4 +59,4 @@ A portal at your own address is set up with Paperwork: [contact us](https://www.
 
 - [Roles and access](/roles/): what each role can do.
 - [Security and IT](/security/): where documents are made and where data is held.
-- [Concepts and glossary](/concepts/).
+- [Glossary](/glossary/).
