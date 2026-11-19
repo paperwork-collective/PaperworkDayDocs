@@ -64,7 +64,6 @@ In the Designer, a data source is one of these:
 |---|---|
 | **Editable content** | JSON kept in the template, or provided when the document is made. |
 | **Open data feed** | The address of a feed, loaded when the document is made. |
-| **Atlassian Jira** | Data from Jira, for people signed in to it. |
 
 ### Supply data
 

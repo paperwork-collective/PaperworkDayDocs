@@ -45,7 +45,6 @@ Add a data source when the template needs more than single values, such as a lis
 |---|---|
 | **Editable content** | JSON kept in the template, or provided when the document is generated. |
 | **Open data feed** | The address of a feed, loaded when the document is generated. |
-| **Atlassian Jira** | Data from Jira, for people signed in to it. |
 
 ## Assets
 
