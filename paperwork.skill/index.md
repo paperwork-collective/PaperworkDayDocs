@@ -35,6 +35,7 @@ Once installed, your agent can:
 - **Author reusable templates**: scaffold an HTML layout, CSS styles and a template config for any document type: reports, invoices, certificates, letters or statements.
 - **Bind fields and data**: wire single values (dates, names, titles) and JSON data (tables, line items, records) into the template with `{{ }}` expressions.
 - **Generate PDFs on demand**: run a template with new data and field values.
+- **Use published templates**: make a document from a template in the public library, your own, or your team's collection. See [Use published templates](/paperwork.skill/published-templates.html).
 - **Route the output**: save it to a folder, pipe it to an upload command, or both.
 
 ## Things you can ask
