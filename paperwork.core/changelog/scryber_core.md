@@ -29,6 +29,17 @@ render_with_liquid: false
 
 ## Version 9
 
+### 9.11.0-beta.2 - 20 November 2026 (beta)
+
+#### Changes
+
+- **A whole html document in `data-content`** - a complete document (with `<html>` and `<body>`) can only be bound into an `<iframe>`. Bound into any other element, such as a `<div>`, it now gives a clear error that names the element and says to use an iframe. In strict conformance this is an exception; in lax it is an error in the trace log, and the content is left out. Before, it failed later with "No Current group on the stack to unregister".
+
+#### Fixes
+
+- **A complete document in an iframe** - a document bound into an `<iframe>` with `data-content` or `src` was only unwrapped when nothing else was parsed with it. A doctype on its own line, or any text outside `<html>`, left the document whole inside the page, and generation failed with "No Current group on the stack to unregister". The iframe now takes the document wherever it is, and drops anything around it ([#179](https://github.com/richard-scryber/scryber.core/issues/179)).
+- **Scryber.Core.OpenType** is 9.11.0-beta.2, with a readme on NuGet.
+
 ### 9.11.0-beta.1 - 19 November 2026 (beta)
 
 #### Breaking changes
