@@ -83,6 +83,7 @@ List the published templates that `generate` can use. Give exactly one of `--per
 paperwork list --personal
 paperwork list --public --owner j-smith
 paperwork list --private --collection acme:reports
+paperwork list --public --owner j-smith --portal paperwork.design
 ```
 
 | Option | Description |
@@ -92,10 +93,11 @@ paperwork list --private --collection acme:reports
 | `--owner <id>` | With `--public`: the owner's user id, the part of a template id before the colon. |
 | `--private` | The templates published in a collection. Needs `--collection` and `login` as a member. |
 | `--collection <id>` | With `--private`: the collection's id, for example `acme:reports`. |
+| `--portal <host>` | The portal to list from, for example `paperwork.design`. It defaults to the main portal of the environment, the same one `generate` uses. |
 | `--environment <name>` | `production` (default), `staging` or `dev`. |
 | `--json` | Write a JSON array (`id`, `title`, `description`, `version`, `published`) instead of a table. |
 
-Only published templates are listed, and the summary says how many unpublished ones were left out. The table goes to standard output and the heading and summary to standard error, so the table can be piped.
+Only published templates are listed, and `--public` lists only those published to the public library, not ones published for the owner's own use. Templates belong to a portal, so one published on one portal is not listed from another. Use `--portal` to list from a different one. The summary says how many unpublished ones were left out. The table goes to standard output and the heading and summary to standard error, so the table can be piped.
 
 ```text
 Templates in the collection 'acme:reports' - Acme reports (production)
