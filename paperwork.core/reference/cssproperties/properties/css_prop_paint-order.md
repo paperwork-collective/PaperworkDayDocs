@@ -96,7 +96,8 @@ The `paint-order` property applies to SVG elements including:
 - Most commonly used to achieve stroke effects on text
 - `paint-order: stroke fill` creates text with visible stroke outlines
 - Particularly useful for creating outlined text effects
-- Does not affect HTML elements, only SVG elements
+- On an HTML block it sets the order of the box's fill (shadow and background), stroke (border) and markers, so `paint-order: stroke` draws the border underneath the background
+- On SVG shapes (`rect`, `circle`, `path` and so on) it works as an attribute or in CSS from 9.11.0, as it already did on SVG text. With the stroke first, the fill covers the inner half of the stroke
 - Markers refer to SVG marker elements (arrowheads, bullets, etc.)
 - If only one or two values are specified, the remaining are painted in default order
 - Essential for creating legible text on complex backgrounds

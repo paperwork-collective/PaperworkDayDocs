@@ -12,7 +12,7 @@ has_toc: false
 # int() : Convert to Integer
 {: .no_toc }
 
-Convert a value to a 32-bit integer. Truncates decimal values.
+Convert a value to a 32-bit integer. A number with a fraction is rounded to the nearest whole number. To drop the fraction instead, use `truncate()`.
 
 ---
 
@@ -76,12 +76,12 @@ builder.WithData("model", new {
 <p>Value: 42</p>
 ```
 
-### Truncate Decimal
+### Round a Decimal
 
 
 {% raw %}
 ```handlebars
-<p>Truncated: {{int(model.decimalValue)}}</p>
+<p>Rounded: {{int(model.decimalValue)}}</p>
 ```
 {% endraw %}
 
@@ -95,7 +95,7 @@ builder.WithData("model", new {
 
 **Output:**
 ```html
-<p>Truncated: 19</p>
+<p>Rounded: 20</p>
 ```
 
 ### Calculate Whole Units
@@ -150,10 +150,12 @@ builder.WithData("model", new {
 
 ## Notes
 
-- Truncates decimal places (does not round)
+- Rounds to the nearest whole number, with an exact half going to the even number: `int(10.4)` is 10, `int(10.6)` is 11, `int(10.5)` is 10 and `int(11.5)` is 12
+- Text such as `'42'` is read as that number. Text with a fraction, such as `'10.6'`, is read as a number with a dot as the decimal point (whatever the culture) and then rounded, so it gives 11. Before 9.11.0 it raised an error
+- Hex (`'0x1F'`) and binary (`'0b101'`) text are converted from that base
 - Handles string-to-integer conversion
 - Throws exception if value cannot be converted
-- For rounding instead of truncating, use `round()` function
+- To drop the fraction rather than round, use the `truncate()` function
 - Range: -2,147,483,648 to 2,147,483,647
 - For larger values, use `long()` function
 - Alias `integer()` provides same functionality

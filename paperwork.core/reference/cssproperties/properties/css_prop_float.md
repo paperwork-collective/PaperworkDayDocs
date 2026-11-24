@@ -861,6 +861,7 @@ Data model:
 
 ## See Also
 
+- [width](/paperwork.core/reference/cssproperties/properties/css_prop_width) - With no width, a floated, absolutely positioned or inline-block element is the width of its content (from 9.11.0)
 - [position](/paperwork.core/reference/cssproperties/properties/css_prop_position) - Set positioning method
 - [top](/paperwork.core/reference/cssproperties/properties/css_prop_top) - Set top offset for positioned elements
 - [left](/paperwork.core/reference/cssproperties/properties/css_prop_left) - Set left offset for positioned elements

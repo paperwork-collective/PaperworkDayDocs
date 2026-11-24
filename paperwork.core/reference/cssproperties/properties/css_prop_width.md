@@ -51,7 +51,7 @@ The width property accepts a single value that determines the element's width. B
 - Percentage: `50%`, `75%`, `100%` (relative to parent width)
 
 ### Special Values
-- `auto` - Browser/renderer calculates width automatically (default)
+- `auto` - Calculated automatically (default). A normal block fills the available width. From 9.11.0, an absolute, fixed, floating or inline-block element with no width, whose content is blocks, is the width of that content (shrink-to-fit), up to the available width. If its text wraps, it fills the available width, limited by `max-width`, so a wrapped inline-block moves onto its own line. A table inside keeps its column widths
 
 ---
 

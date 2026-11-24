@@ -1170,6 +1170,7 @@ The display property works seamlessly with data binding to create dynamic, condi
 
 ## See Also
 
+- [width](/paperwork.core/reference/cssproperties/properties/css_prop_width) - With no width, a floated, absolutely positioned or inline-block element is the width of its content (from 9.11.0)
 - [Flexbox Layout](/paperwork.core/reference/cssproperties/properties/css_prop_flexbox) - Full flex container and item property reference
 - [CSS Grid Layout](/paperwork.core/reference/cssproperties/properties/css_prop_grid) - Full grid container and item property reference
 - [grid-template-columns](/paperwork.core/reference/cssproperties/properties/css_prop_grid-template-columns) - Define grid column tracks

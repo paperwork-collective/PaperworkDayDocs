@@ -123,7 +123,7 @@ builder.WithData("model", new {
 
 ## Notes
 
-- Truncates decimal places (does not round)
+- Rounds to the nearest whole number, with an exact half going to the even number, in the same way as `int()`. Text with a fraction, such as `'10.6'`, is read with a dot as the decimal point and rounded (from 9.11.0; before that it raised an error). To drop the fraction, use `truncate()`
 - Handles string-to-long conversion
 - Throws exception if value cannot be converted
 - Range: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807

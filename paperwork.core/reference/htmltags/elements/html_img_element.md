@@ -197,6 +197,8 @@ When `<img>` references an SVG file, the layout engine selects a sizing strategy
 <img src="diagram.svg" style="width: 300pt; min-height: 200pt; aspect-ratio: 3 / 2;" />
 ```
 
+If the `<svg>` root of an SVG image has a percentage `width` or `height` (for example `width="100%"` with a `viewBox`), the image fills the available width at the `viewBox`'s ratio, or takes the other, absolute, dimension. Give the `<img>` a width or height to control the size. Before 9.11.0 the percentage was taken of the `viewBox`.
+
 **The old 300×150 clipping bug:** Prior to v9.7, SVG images with no `viewBox` and no declared dimensions were always clipped to 300×150 px (the CSS UA default) regardless of how large the `<img>` box was. This is now fixed — the engine uses the current page size as the internal canvas, so content renders in the full allocated space.
 
 ---
