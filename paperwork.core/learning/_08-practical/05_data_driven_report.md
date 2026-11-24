@@ -840,7 +840,7 @@ public class DataDrivenReportGenerator
 
         // Configure for performance
         doc.RenderOptions.Compression = PDFCompressionType.FlateDecode;
-        doc.RenderOptions.FontSubsetting = true;
+        doc.RenderOptions.SubsetEmbeddedFonts = true;
 
         // Generate
         var output = new MemoryStream();

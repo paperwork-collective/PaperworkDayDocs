@@ -142,7 +142,7 @@ An `<embed>` is loaded when the template is parsed, before any data binding happ
 
 - `<embed>` **must** have a `src`, and `src` is the **only** way to give it content.
 - `data-content`, `data-content-type` and `data-content-action` are **not supported** on `<embed>`. An `<embed>` with no `src` (for example one that only has `data-content`) is rejected when the document is parsed.
-- To bind markup directly into the document, use an `<iframe>` or another element such as a `<div>` with `data-content`.
+- To bind markup directly into the document, use an `<iframe>` or another element such as a `<div>` with `data-content`. A `<div>` is for fragments only. A complete HTML document (one with `<html>`) in a `<div>` raises an error that names the element and tells you to use an `<iframe>`. From 9.11.0, an `<iframe>` takes a complete document wherever it sits in the content, and drops anything around it.
 
 ```html
 <!-- Correct: content comes from src -->

@@ -44,7 +44,7 @@ Scryber's font system supports **custom TrueType/OpenType fonts** loaded from th
               ↓
 ┌──────────────────────────────────────────────────────┘
 │ PDF Embedding                                         │
-│  Subset glyphs, embed font data in PDF              │
+│  Embed font data in PDF (subset, if turned on)      │
 └──────────────────────────────────────────────────────┘
 ```
 
@@ -378,18 +378,51 @@ await factory.NewDocument()
 
 ## Font Subsetting
 
-Scryber automatically **subsets fonts** to include only used glyphs, reducing PDF file size:
+An embedded TrueType font can be reduced to only the glyphs the document actually
+uses, which makes a big difference to file size: Segoe UI regular and bold together
+go from about 2MB to under 100KB in a short document.
 
-```html
-<!-- Only glyphs for "Hello World" are embedded, not entire font -->
-<span>Hello World</span>
+**It is off by default.** Turn it on for every document in configuration:
+
+```json
+{
+  "Scryber": {
+    "Fonts": {
+      "SubsetEmbeddedFonts": true
+    }
+  }
+}
 ```
 
+Or for one document:
+
+```csharp
+doc.RenderOptions.SubsetEmbeddedFonts = true;
+```
+
+Or in an HTML template, with a `meta` tag in the `head` (use `content="false"` to turn it off):
+
+```html
+<head>
+    <meta name="font-subset" content="true" />
+</head>
+```
+
+An XML-format template can set the `font-subset="true"` render-options attribute. The `meta` tag is applied when the document is data-bound, so it overrides both the configuration and a value set in code.
+
+The text itself is unchanged, so it can still be selected, copied and searched in
+the finished PDF.
+
+**What is not subset.** A font with CFF (PostScript) outlines, and a font whose
+licence does not permit subsetting, are embedded in full instead, with a warning in
+the trace log. Nothing fails; the file is simply the size it would have been.
+
+Requires Scryber.Core.OpenType 9.11.0 or later. Added in 9.11.0.
+
 **Benefits:**
-- Smaller PDF files
+- Much smaller PDF files
 - Faster loading
 - Reduced memory usage
-- License-friendly (only distributing used glyphs)
 
 ## Font Metrics
 
@@ -417,12 +450,12 @@ Font metrics are extracted from TTF files:
 ### Performance
 - Fonts are loaded lazily - registration is fast
 - Font files are cached in memory
-- Subsetting happens per-document
+- Subsetting, when turned on, happens per-document
 - System fonts are indexed on first use
 
 ### License Compliance
 - Verify font licenses allow PDF embedding
-- Consider font subsetting in licensing
+- Check whether the licence permits subsetting before turning it on
 - Document font sources and licenses
 - Use fonts with permissive licenses
 
@@ -449,7 +482,7 @@ Font metrics are extracted from TTF files:
 
 ### Font not embedded in PDF
 - Check font license allows embedding
-- Verify subsetting is working
+- Check the trace log if a font was embedded in full rather than subset
 - Inspect PDF with Adobe Acrobat
 - Check for errors in Scryber logs
 

@@ -134,7 +134,7 @@ The list item layout structure:
 |               • |    10pt   | Item text and content
 ```
 
-- **Marker Area**: Width set by `data-li-inset` or parent list setting (default 30pt)
+- **Marker Area**: How far the marker box reaches back from the text, set by `data-li-inset` or the parent list setting (default 30pt, or 2.5em if larger). It does not move the text: the indent is the list's `padding-left`
 - **Alley**: Fixed 10pt gap between marker and content
 - **Content Area**: Remaining space for item content
 
@@ -250,6 +250,8 @@ By default, list items can break across pages/columns:
 ```
 
 ### Custom Inset per Item
+
+From 9.11.0 a wider inset gives the marker more room but does not move the text. Give the list enough `padding-left` for the widest marker.
 
 ```html
 <ol>

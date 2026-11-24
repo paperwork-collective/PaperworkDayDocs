@@ -71,7 +71,7 @@ These attributes provide advanced list control not available in standard HTML:
 | `data-li-concat` | boolean | When true, concatenates nested list numbers with parent list numbers (e.g., "1.a"). Default is true for ordered lists. |
 | `data-li-postfix` | string | Text to append after each number (default: "."). Example: ")" for "1)". |
 | `data-li-prefix` | string | Text to prepend before each number (e.g., "# " for "# 1."). |
-| `data-li-inset` | unit | Width of the number area from the left margin (default: 30pt). |
+| `data-li-inset` | unit | Width of the number area from the left margin (default: 30pt). The text starts at the list's `padding-left`, which is 30pt (40px) by default. |
 | `data-li-align` | alignment | Horizontal alignment of the number: `left`, `center`, or `right` (default: right). |
 | `data-li-style` | style | Override the numbering style (see list-style-type values). |
 
@@ -121,7 +121,7 @@ The `<ol>` element has the following default behavior:
 2. **Period Postfix**: Adds a period after each number by default (e.g., "1.")
 3. **Concatenation Enabled**: Nested lists concatenate numbers by default (e.g., "1.1", "1.2")
 4. **Block Display**: Displays as a block-level element
-5. **Indentation**: List items are indented with a 30pt inset for numbers
+5. **Indentation**: The list is indented by its `padding-left` (30pt by default), and the number sits in that space, a little before the text. Set `padding-left` to change it. Before 9.11.0 items were indented on top of any padding, so a default list is now 10pt further left
 6. **Right-Aligned Numbers**: Numbers align to the right of the number area by default
 7. **Natural Flow**: Content flows across pages and columns when space is limited
 

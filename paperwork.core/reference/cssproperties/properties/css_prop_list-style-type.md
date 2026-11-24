@@ -46,6 +46,9 @@ The list-style-type property accepts keyword values that determine the appearanc
 - **disc** - Filled circle bullet (default for `<ul>`)
 - **circle** - Hollow circle bullet
 - **square** - Filled square bullet
+
+From 9.11.0, `disc`, `circle` and `square` are drawn as shapes in the colour of the text, 0.31em in size and sitting just above the baseline, so they look the same in any font. With no `list-style-type`, the marker depends on depth: `disc` at the top level, `circle` in a nested list, and `square` below that.
+
 - **none** - No marker
 
 ### Ordered List Markers

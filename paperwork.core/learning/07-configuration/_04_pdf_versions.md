@@ -250,7 +250,7 @@ public class ArchiveReportGenerator
         doc.RenderOptions.SecurityOptions = null;
 
         // Font embedding (required for PDF/A)
-        doc.RenderOptions.FontSubsetting = false;  // Embed full fonts
+        doc.RenderOptions.SubsetEmbeddedFonts = false;  // Embed full fonts
 
         // Bind data
         doc.Params["report"] = data;
@@ -303,7 +303,7 @@ public class PrintBrochureGenerator
         doc.RenderOptions.SecurityOptions = null;
 
         // Embed all fonts (required for PDF/X)
-        doc.RenderOptions.FontSubsetting = false;
+        doc.RenderOptions.SubsetEmbeddedFonts = false;
 
         // Bind data
         doc.Params["brochure"] = data;
@@ -470,7 +470,7 @@ doc.RenderOptions.Conformance = PDFConformance.PDFA1B;
 ```csharp
 // PDF/A requires full font embedding
 doc.RenderOptions.Conformance = PDFConformance.PDFA2B;
-doc.RenderOptions.FontSubsetting = true;  // ❌ Subsetting not ideal
+doc.RenderOptions.SubsetEmbeddedFonts = true;  // ❌ Subsetting not ideal
 ```
 
 ✅ **Solution:**
@@ -478,7 +478,7 @@ doc.RenderOptions.FontSubsetting = true;  // ❌ Subsetting not ideal
 ```csharp
 // Embed complete fonts for PDF/A
 doc.RenderOptions.Conformance = PDFConformance.PDFA2B;
-doc.RenderOptions.FontSubsetting = false;  // ✅ Full embedding
+doc.RenderOptions.SubsetEmbeddedFonts = false;  // ✅ Full embedding
 ```
 
 ---

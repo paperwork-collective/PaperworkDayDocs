@@ -12,7 +12,7 @@ has_toc: false
 # -pdf-li-inset : List Item Inset Property (Scryber Custom)
 {: .no_toc }
 
-The `-pdf-li-inset` property is a Scryber-specific extension that controls the horizontal distance (inset) between the list marker and the list item content. This property allows precise control over the spacing between bullets/numbers and their associated text, enabling professional document layouts with optimal readability.
+The `-pdf-li-inset` property is a Scryber-specific extension that sets how far the list marker's box reaches back from the list item's text. Use it when the markers are wider than usual, such as long numbers like `10.2.4.`, so they have room. It does not move the text. The indent of the list itself is the `padding-left` of the `ul` or `ol`.
 
 ---
 
@@ -35,7 +35,7 @@ selector {
 }
 ```
 
-The value specifies the amount of space between the list marker and the content text.
+The value is the width of the marker box, measured back from the start of the text. Markers are right-aligned within it, with a small gap (0.3em) before the text.
 
 ---
 
@@ -49,7 +49,7 @@ The value specifies the amount of space between the list marker and the content 
 
 ### Default Value
 
-The default inset varies based on the list style and font size, typically around 8-10pt.
+The default is the larger of 30pt and 2.5em. The marker box is the inset minus the 0.3em gap.
 
 ---
 
@@ -67,11 +67,12 @@ When applied to list containers, the inset is inherited by all child list items.
 ## Notes
 
 - This is a Scryber-specific property designed for advanced PDF list formatting
-- The inset controls spacing between the marker and content, not the overall list indentation
+- **Changed in 9.11.0.** The inset no longer adds an indent. The text starts where the list's `padding-left` puts it (30pt by default). A larger inset gives the marker more room, so if it is wider than the list's padding the marker reaches beyond the list's left edge. Increase `padding-left` on the list to make room for wide markers
+- The examples below that describe the inset as the "spacing between the marker and the text" were written for earlier versions. Set `padding-left` as well to space the text as described
 - Proper inset values improve readability by providing adequate visual separation
 - Too small values can make text appear cramped; too large values waste space
 - The property works with all list-style-type values
-- Can be combined with padding-left to control overall list positioning
+- Combine with `padding-left` on the list to control the overall indent
 - Different inset values can be applied to nested lists for visual hierarchy
 - Inset affects only horizontal spacing, not vertical line spacing
 - Consider font size when setting inset values for proportional layouts

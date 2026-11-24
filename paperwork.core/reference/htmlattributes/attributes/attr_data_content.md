@@ -241,6 +241,10 @@ For `<template>` elements:
 - Creates parsable template generator
 - Useful for dynamic template definition
 
+### Complete documents
+
+Bind a complete HTML document (one with `<html>`) into an `<iframe>`, not into a `<div>` or other element. In an `<iframe>`, from 9.11.0, the document is taken wherever it sits in the content, and anything around it is dropped. In any other element it raises an error that names the element and says to use an `<iframe>`: a `PDFDataException` in strict mode, or an error in the trace log and the content left out in lax mode. Fragments of markup in a `<div>` work as before.
+
 ### Frame-Specific Behavior
 
 For `<frame>` elements:

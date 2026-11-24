@@ -323,7 +323,7 @@ public class MultiLanguageDocumentGenerator
 
         // Configure
         doc.RenderOptions.Compression = PDFCompressionType.FlateDecode;
-        doc.RenderOptions.FontSubsetting = true;
+        doc.RenderOptions.SubsetEmbeddedFonts = true;
 
         // Generate
         doc.SaveAsPDF(output);

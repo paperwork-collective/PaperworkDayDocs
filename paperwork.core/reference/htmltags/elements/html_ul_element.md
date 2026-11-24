@@ -69,7 +69,7 @@ These attributes provide advanced list control not available in standard HTML:
 | `data-li-concat` | boolean | When true, concatenates nested list numbers with parent list numbers (e.g., "1.a"). |
 | `data-li-postfix` | string | Text to append after each list marker (e.g., "." for "• ."). |
 | `data-li-prefix` | string | Text to prepend before each list marker (e.g., "# " for "# •"). |
-| `data-li-inset` | unit | Width of the marker area from the left margin (default: 30pt). |
+| `data-li-inset` | unit | Width of the marker area from the left margin (default: 30pt). The text starts at the list's `padding-left`, which is 30pt (40px) by default. |
 | `data-li-align` | alignment | Horizontal alignment of the marker: `left`, `center`, or `right` (default: right). |
 | `data-li-style` | style | Override the numbering style (see list-style-type values). |
 
@@ -117,7 +117,7 @@ The `<ul>` element has the following default behavior:
 
 1. **Bullet Markers**: Uses disc (•) bullets by default
 2. **Block Display**: Displays as a block-level element
-3. **Indentation**: List items are indented with a 30pt inset for markers
+3. **Indentation**: The list is indented by its `padding-left` (30pt by default), and the marker sits in that space, a little before the text. Set `padding-left` to change it, or `padding-left: 0` to hang the markers outside the list. Before 9.11.0 items were indented on top of any padding, so a default list is now 10pt further left
 4. **Right-Aligned Markers**: Markers align to the right of the marker area by default
 5. **Natural Flow**: Content flows across pages and columns when space is limited
 

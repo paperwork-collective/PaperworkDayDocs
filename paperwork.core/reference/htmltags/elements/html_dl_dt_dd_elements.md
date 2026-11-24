@@ -95,7 +95,7 @@ The `<dl>` element must contain the following child elements:
 | Element | Description |
 |---------|-------------|
 | `<dt>` | Definition term - the term being defined. Displayed in **bold** by default. |
-| `<dd>` | Definition description - the description/definition of the term. Indented by default (40pt left margin). |
+| `<dd>` | Definition description - the description/definition of the term. Indented by default (30pt left margin; it was 40pt before 9.11.0). |
 
 ---
 
@@ -109,7 +109,7 @@ The `<dl>` element has the following default behavior:
 2. **No Special Styling**: The `<dl>` container itself has minimal default styling
 3. **Child Styling**:
    - `<dt>` elements are **bold** by default
-   - `<dd>` elements have a 40pt left margin for indentation
+   - `<dd>` elements have a 30pt left margin for indentation
 4. **Natural Flow**: Content flows across pages and columns when space is limited
 
 ### Class Hierarchy
@@ -117,7 +117,7 @@ The `<dl>` element has the following default behavior:
 In the Scryber codebase:
 - `HTMLListDefinition` extends `ListDefinition` extends `Panel` extends `VisualComponent`
 - `HTMLListDefinitionTerm` (`<dt>`) extends `ListDefinitionTerm` - bold by default
-- `HTMLListDefinitionItem` (`<dd>`) extends `ListDefinitionItem` - 40pt left margin by default
+- `HTMLListDefinitionItem` (`<dd>`) extends `ListDefinitionItem` - 30pt left margin by default
 - Implements standard HTML definition list behavior with PDF rendering
 
 ### Structure Patterns
