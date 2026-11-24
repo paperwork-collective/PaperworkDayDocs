@@ -50,7 +50,7 @@ The Viewer itself is running at an address that is not a Paperwork portal. This 
 
 ## Part of the document is missing: a picture, a font or data
 
-While a document is made, it fetches data, images, fonts and connector data. The portal has allow and block lists for the addresses it may fetch from. If an address is blocked, that item does not load and the document is made without it.
+While a document is made, it fetches data, images, fonts and other data. The portal has allow and block lists for the addresses it may fetch from. If an address is blocked, that item does not load and the document is made without it.
 
 Check the addresses of the template's data, image and font sources against the portal's lists, and ask the portal's admin to allow the ones you need. See [Portals](/paperwork.design/).
 
