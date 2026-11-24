@@ -14,7 +14,7 @@ description: "Why an existing template may look different after the move to engi
 
 ## A document may look different
 
-From [DATE TO SET ON GO-LIVE], documents are made by a newer version of the engine (9.11.0, up from 9.9.1). You haven't changed your templates, but some documents may look different. The changes make the output match what a web browser does, so this is the engine catching up and not your template breaking.
+From 24 November 2026, documents are made by a newer version of the engine (9.11.0, up from 9.9.1). You haven't changed your templates, but some documents may look different. The changes make the output match what a web browser does, so this is the engine catching up and not your template breaking.
 
 Open your important templates in **Preview** and compare them with a document you made before. The two changes most likely to show are below.
 
@@ -46,6 +46,7 @@ If a document now has the wrong page size or margins, check the `@page` rule in 
 
 - **Pictures.** When you fill in a document, a picture field can let you choose a picture, upload one and edit it. Uploading and editing need you to be signed in. Pictures you upload or edit are saved to your own Shared Assets, and count towards your own storage. Upload appears only on a picture field where the template's designer has turned it on, and Edit only for a file that can be edited.
 - **Maps.** Map fields can be edited in the form.
+- **Drafts on your desk.** When you are signed in, the Viewer shows **Drafts on your desk**, where you can keep a document you have started and carry on later. A saved draft is named after the document's own title, not the template's. Drafts are held on your own device, not on our servers, so they are there on the device and browser where you saved them. Clearing your browser's data can remove them.
 
 ## More detail
 
