@@ -14,7 +14,7 @@ description: "Why an existing template may look different after the move to engi
 
 ## A document may look different
 
-The Designer and Viewer now make documents with engine 9.11.0, up from 9.9.1. You haven't changed your templates, but some documents may look different. The changes make the output match what a web browser does, so this is the engine catching up and not your template breaking.
+From [DATE TO SET ON GO-LIVE], documents are made by a newer version of the engine (9.11.0, up from 9.9.1). You haven't changed your templates, but some documents may look different. The changes make the output match what a web browser does, so this is the engine catching up and not your template breaking.
 
 Open your important templates in **Preview** and compare them with a document you made before. The two changes most likely to show are below.
 
@@ -39,13 +39,13 @@ If a document now has the wrong page size or margins, check the `@page` rule in 
 
 - **SVG images sized in percent.** An SVG used as an image whose own `width` is `100%` now fills the width available, at the picture's shape, instead of its small natural size. Give the image a width or height to control it.
 - **Elements with no width.** An absolutely positioned, fixed, floated or inline-block element with no width is now as wide as its content, not stretched across the page.
-- **Fonts.** Some fonts that could not be embedded before, such as Gill Sans on macOS, are now embedded, so text in those fonts looks as you chose it and not in a replacement font.
+- **Fonts.** Some system fonts, Gill Sans on macOS for example, could not be embedded before, so the PDF reader showed another font instead. They now embed properly, so text in those fonts looks as you chose it.
 - **Numbers shown with `<num value>`.** A `<num>` element using `value` used to show 0. It now shows the value. If you added a workaround, remove it, or the number may appear twice.
 
 ## New in the Viewer
 
-- When you fill in a document, you can choose, upload and edit a picture for a picture field. You need to be signed in, and the picture is kept in your own storage.
-- Map fields can be edited in the form.
+- **Pictures.** When you fill in a document, a picture field can let you choose a picture, upload one and edit it. Uploading and editing need you to be signed in. Pictures you upload or edit are saved to your own Shared Assets, and count towards your own storage. Upload appears only on a picture field where the template's designer has turned it on, and Edit only for a file that can be edited.
+- **Maps.** Map fields can be edited in the form.
 
 ## More detail
 
