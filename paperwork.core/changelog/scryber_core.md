@@ -29,18 +29,7 @@ render_with_liquid: false
 
 ## Version 9
 
-### 9.11.0-beta.2 - 20 November 2026 (beta)
-
-#### Changes
-
-- **A whole html document in `data-content`** - a complete document (with `<html>` and `<body>`) can only be bound into an `<iframe>`. Bound into any other element, such as a `<div>`, it now gives a clear error that names the element and says to use an iframe. In strict conformance this is an exception; in lax it is an error in the trace log, and the content is left out. Before, it failed later with "No Current group on the stack to unregister".
-
-#### Fixes
-
-- **A complete document in an iframe** - a document bound into an `<iframe>` with `data-content` or `src` was only unwrapped when nothing else was parsed with it. A doctype on its own line, or any text outside `<html>`, left the document whole inside the page, and generation failed with "No Current group on the stack to unregister". The iframe now takes the document wherever it is, and drops anything around it ([#179](https://github.com/richard-scryber/scryber.core/issues/179)).
-- **Scryber.Core.OpenType** is 9.11.0-beta.2, with a readme on NuGet.
-
-### 9.11.0-beta.1 - 19 November 2026 (beta)
+### 9.11.0 - 24 November 2026
 
 #### Breaking changes
 
@@ -50,15 +39,18 @@ render_with_liquid: false
 #### Changes
 
 - **Shrink to fit** - an absolute, fixed, floating or inline-block element without a `width` is now the width of its content when that content is blocks, such as a `div` or `p`, as in a browser. It filled the space to the right of the page. The blocks inside fill the width of the widest one. Content wider than the space available (text that wraps) fills the space, limited by any `max-width` - this includes text on its own, which was the width of its widest line. So an inline-block whose text wraps now fills the line and moves to a line of its own, as in a browser. Give the element a `width` to set it.
+- **A whole html document in `data-content`** - a complete document (with `<html>` and `<body>`) can only be bound into an `<iframe>`. Bound into any other element, such as a `<div>`, it now gives a clear error that names the element and says to use an iframe. In strict conformance this is an exception; in lax it is an error in the trace log, and the content is left out. Before, it failed later with "No Current group on the stack to unregister".
 
 #### New
 
-- **Font subsetting** - embedded TrueType fonts can now include only the glyphs used in the document, so a short document with a large font is much smaller - Segoe UI regular and bold go from about 2MB to under 100KB. It is off by default. Set `Scryber:Fonts:SubsetEmbeddedFonts` to `true` in the configuration, or `doc.RenderOptions.SubsetEmbeddedFonts = true` for a document, or add `<meta name="font-subset" content="true" />` to the head of a template. The text is unchanged, so it can still be selected and searched. A font with CFF outlines, or whose licence does not allow subsetting, is embedded in full with a warning in the trace log. Requires Scryber.Core.OpenType 9.11.0-beta.1 ([#202](https://github.com/richard-scryber/scryber.core/issues/202)).
+- **Font subsetting** - embedded TrueType fonts can now include only the glyphs used in the document, so a short document with a large font is much smaller - Segoe UI regular and bold go from about 2MB to under 100KB. It is off by default. Set `Scryber:Fonts:SubsetEmbeddedFonts` to `true` in the configuration, or `doc.RenderOptions.SubsetEmbeddedFonts = true` for a document, or add `<meta name="font-subset" content="true" />` to the head of a template. The text is unchanged, so it can still be selected and searched. A font with CFF outlines, or whose licence does not allow subsetting, is embedded in full with a warning in the trace log. Requires Scryber.Core.OpenType 9.11.0 ([#202](https://github.com/richard-scryber/scryber.core/issues/202)).
 - **List markers** - `list-style-type: disc`, `circle` and `square` are now drawn as a browser draws them: a filled circle, a hollow circle and a filled square, in the colour of the text and sized from the font. Without a `list-style-type`, a bulleted list uses a disc, a list nested in another list uses a circle, and deeper lists use a square, as in a browser. Before, the bullet was a small character that was the same at every depth, and `circle` and `square` were drawn as that character.
 - **`paint-order` on svg shapes** - `paint-order: stroke` (as a css property or an attribute) draws the stroke before the fill, so the fill covers the inner half of a wide stroke, as in a browser. It was only used by html blocks.
+- **Scryber.Core.OpenType 9.11.0** - the font library moves to 9.11.0 with Scryber.Core. It has the font subsetter, and a readme on NuGet.
 
 #### Fixes
 
+- **A complete document in an iframe** - a document bound into an `<iframe>` with `data-content` or `src` was only unwrapped when nothing else was parsed with it. A doctype on its own line, or any text outside `<html>`, left the document whole inside the page, and generation failed with "No Current group on the stack to unregister". The iframe now takes the document wherever it is, and drops anything around it ([#179](https://github.com/richard-scryber/scryber.core/issues/179)).
 - **A space at the end of a line** - a space that did not fit at the end of a line, such as the one after an inline-block that fills the line, was carried to the start of the next line and indented its text. It is now dropped, as in a browser.
 - **Patterns on transformed shapes** - a `<pattern>` fill on an svg shape with a `transform` stayed where the shape was before it was transformed. The tiles now move, turn and scale with the shape, as gradients do.
 - **SVG presentation attributes** - a `style` attribute on a gradient `<stop>` (e.g. `style="stop-color: red"`) stopped the whole document from parsing. The `stroke-dashoffset` and `opacity` attributes were only read from css, and a `<rect>` did not read its `stroke-opacity` or `stroke-linejoin` attributes. They are now read as attributes on svg shapes, as well as in css (`opacity` is the opacity of the fill, as the css property).
