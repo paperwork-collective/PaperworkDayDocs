@@ -142,7 +142,8 @@ builder.WithData("model", new {
 <p>Responses collected: {{count(model.responses)}}</p>
 <p>Most popular choice: {{mode(eachOf(model.responses, 'choice'))}}</p>
 {{#with mode(eachOf(model.responses, 'choice'))}}
-  <p>{{countOf(model.responses, 'choice', this)}} people chose this option</p>
+  <var data-id="popular" data-value="{{this}}" />
+  <p>{{countOf(model.responses, .choice == popular)}} people chose this option</p>
 {{/with}}
 ```
 {% endraw %}

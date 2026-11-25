@@ -49,6 +49,9 @@ sum(collection)
 
 The sum of all numeric values in the collection. Returns 0 for empty or null collections.
 
+{: .note }
+`sum()` adds up a list of plain numbers. To total a property of each item in a list, such as `.price`, use [sumOf()](/paperwork.core/reference/binding/functions/sumOf.html): `sumOf(model.items, .price)`. A call such as `sum(model.items, .price)` does not total the property.
+
 ---
 
 ## Examples
@@ -179,7 +182,7 @@ builder.WithData("model", new {
 - Returns 0 for empty or null collections
 - All items in collection must be numeric
 - Non-numeric values will cause an error (use `ifError()` for safety)
-- For summing a property across objects, use with `eachOf()`: `sum(eachOf(items, 'price'))`
+- For summing a property across objects, use `sumOf(items, .price)`, or `sum(eachOf(items, 'price'))`
 - For conditional sums, combine with `selectWhere()` first
 - Supports integers and decimals
 - Useful for:

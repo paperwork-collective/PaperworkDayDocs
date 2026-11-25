@@ -128,6 +128,12 @@ Perform calculations and mathematical operations.
 
 Work with dates and timestamps.
 
+**Working with dates.** Dates in JSON data and in field values are text, so start with `date()`.
+
+- **Between two dates:** `daysBetween(date(a), date(b))`, and `hoursBetween`, `minutesBetween` and `secondsBetween`.
+- **Move a date:** `addDays(date(a), 14)`, and `addMonths`, `addYears` and the other `add` functions. There is no `dateadd()`.
+- **A part of a date:** `yearOf`, `monthOf`, `dayOfMonth`, `dayOfWeek` and `dayOfYear`.
+
 | Function | Description | Example |
 |----------|-------------|---------|
 | [addDays](./addDays) | Add days to date | `{% raw %}{{addDays(model.date, 7)}}{% endraw %}` |
@@ -168,6 +174,8 @@ Control flow and conditional logic within expressions.
 ## Collection Functions
 
 Aggregate and manipulate collections.
+
+Functions that read a property of each item, such as `sumOf`, `averageOf`, `minOf`, `maxOf`, `eachOf` and `sortBy`, take the property as `.price` or as text, `'price'`. Both read the same property. `sum()` and `average()` work on a list of plain numbers; use `sumOf()` and `averageOf()` to total or average a property.
 
 | Function | Description | Example |
 |----------|-------------|---------|

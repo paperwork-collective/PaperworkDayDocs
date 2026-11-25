@@ -603,7 +603,7 @@ Calculate summary statistics:
 ```html
 <!-- Hidden variables for calculations -->
 <var data-id="totalOrders" data-value="{{count(model.orders)}}"></var>
-<var data-id="totalRevenue" data-value="{{sum(model.orders, .amount)}}"></var>
+<var data-id="totalRevenue" data-value="{{sumOf(model.orders, .amount)}}"></var>
 <var data-id="avgOrderValue" data-value="{{totalRevenue / totalOrders}}"></var>
 
 <div style="background-color: #e7f3ff; padding: 20pt; margin: 20pt 0;">
@@ -888,8 +888,8 @@ Compute grade statistics:
 
 {% raw %}
 ```html
-<var data-id="totalPoints" data-value="{{sum(model.assignments, .pointsEarned)}}"></var>
-<var data-id="possiblePoints" data-value="{{sum(model.assignments, .pointsPossible)}}"></var>
+<var data-id="totalPoints" data-value="{{sumOf(model.assignments, .pointsEarned)}}"></var>
+<var data-id="possiblePoints" data-value="{{sumOf(model.assignments, .pointsPossible)}}"></var>
 <var data-id="percentage" data-value="{{(totalPoints / possiblePoints) * 100}}"></var>
 <var data-id="letterGrade"
      data-value="{{if(percentage &gt;= 90, 'A', if(percentage &gt;= 80, 'B', if(percentage &gt;= 70, 'C', if(percentage &gt;= 60, 'D', 'F'))))}}"></var>
@@ -958,7 +958,7 @@ Production-ready invoice with complete calculations:
 <var data-id="companyAddress" data-value="{{'123 Business Street'}}"></var>
 
 <!-- Invoice Calculations -->
-<var data-id="itemsSubtotal" data-value="{{sum(model.lineItems, .lineTotal)}}"></var>
+<var data-id="itemsSubtotal" data-value="{{sumOf(model.lineItems, .lineTotal)}}"></var>
 <var data-id="discountPercent" data-value="{{if(model.customerType == 'VIP', 0.10, 0)}}"></var>
 <var data-id="discountAmount" data-value="{{itemsSubtotal * discountPercent}}"></var>
 <var data-id="subtotalAfterDiscount" data-value="{{itemsSubtotal - discountAmount}}"></var>

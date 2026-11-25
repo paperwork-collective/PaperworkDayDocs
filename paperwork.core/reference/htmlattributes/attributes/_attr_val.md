@@ -355,7 +355,7 @@ An empty or missing `val` attribute results in an empty output:
 </template>
 
 <div style="font-weight: bold; margin-top: 15pt; padding-top: 10pt; border-top: 2pt solid black;">
-    Grand Total: <output val="${{sum(model.items, .qty * .price)}}" />
+    Grand Total: <output val="${{sumOf(model.items, .qty * .price)}}" />
 </div>
 ```
 {% endraw %}

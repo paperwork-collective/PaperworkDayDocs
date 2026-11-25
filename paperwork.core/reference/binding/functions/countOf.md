@@ -194,6 +194,7 @@ builder.WithData("model", new {
 - The condition is evaluated for each item, so inside it `.name` reads that item's property
 - To compare with a value from outside, such as an outer loop, store it in a `<var>` first and use the variable in the condition
 - A property name on its own, such as `countOf(model.users, .verified)`, tests that the property is true
+- A property can also be written as text, such as `'verified'`, the same as `.verified`
 - Case-sensitive for string comparisons
 - Returns 0 if no items match
 - Property must exist on all items (or be null)

@@ -155,6 +155,7 @@ builder.WithData("model", new { growth = 0.156 });
 - If `format` parameter is omitted, uses default `.ToString()` conversion
 - Format strings are culture-sensitive
 - Invalid format strings may throw exceptions
+- A date held as text, from JSON data or a field, is not formatted as a date. Wrap it in `date()` first: `format(date($fields.date), 'd MMMM yyyy')`
 - Use with `??` operator for safety: `{% raw %}{{format(value ?? 0, 'C2')}}{% endraw %}`
 
 ---

@@ -183,6 +183,7 @@ builder.WithData("model", new {
 - Automatically detects common date formats
 - Throws exception if string cannot be parsed as date
 - Use with date manipulation functions (addDays, addMonths, etc.)
+- Dates in JSON data and in field values (`$fields`) are text. Use `date()` before `format()` or any date function, for example `format(date($fields.deliveryDate), 'd MMMM yyyy')`
 - Always store dates as DateTime in model when possible
 - For formatting output, use `format()` function
 - Time zone handling depends on input format

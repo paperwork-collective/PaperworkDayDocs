@@ -219,7 +219,8 @@ builder.WithData("model", new {
   - Time tracking summaries
   - Inventory calculations
   - Performance metrics
-- For summing simple numeric arrays, use `sum()` instead
+- The property can be written `.price` or `'price'`, both read the same property of each item
+- For summing simple numeric arrays, use `sum()` instead. `sum()` does not take a property
 - For conditional sums, filter with `selectWhere()` first
 
 ---

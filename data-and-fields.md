@@ -23,6 +23,9 @@ A field has a value that a person can type, a link can carry, or a script can su
 <p>{{format(date($fields.date), 'dd MMMM yyyy')}}</p>
 ```
 
+{: .note }
+A field's value is text, even for a date. Use `date()` to convert it before you format it or work with it. Without it, the text is shown as it was entered, for example `2026-11-12`. To work out days between dates or move a date, see [Working with dates](/paperwork.core/reference/binding/functions/#date--time-functions).
+
 In the Designer, open **Manage fields** to define them:
 
 | Setting | What it is |
