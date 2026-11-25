@@ -128,7 +128,7 @@ Perform calculations and mathematical operations.
 
 Work with dates and timestamps.
 
-**Working with dates.** Dates in JSON data and in field values are text, so start with `date()`.
+**Working with dates.** Dates in JSON data and in field values are text. Use `date()` to convert one before you `format()` it. The between functions read text dates themselves.
 
 - **Between two dates:** `daysBetween(date(a), date(b))`, and `hoursBetween`, `minutesBetween` and `secondsBetween`.
 - **Move a date:** `addDays(date(a), 14)`, and `addMonths`, `addYears` and the other `add` functions. There is no `dateadd()`.
