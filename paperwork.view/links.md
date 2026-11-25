@@ -80,7 +80,7 @@ When a link to a public template is shared in a chat or a social post, the previ
 
 See [Publish and share](/paperwork.design/publishing.html).
 
-<div class="pw-shot"><span class="pw-shot-id">V13</span><span class="pw-shot-what">A link to a public template pasted into a chat, showing the template name and its first page as the preview.</span><span class="pw-shot-file">assets/images/viewer/v13-share-card.png</span></div>
+![A link to a template pasted into a chat, showing the template name and its first page as the preview.](/assets/images/viewer/v13-share-card.png){: .pw-img }
 
 ## Check it worked
 

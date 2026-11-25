@@ -277,3 +277,6 @@ blockquote.highlight {
 .pw-shot-id { font-weight: 700; letter-spacing: 0.04em; }
 .pw-shot-what { flex: 1 1 320px; }
 .pw-shot-file { flex: 1 0 100%; font-size: 12px; }
+
+// A captured screenshot in a page
+img.pw-img { display: block; max-width: 100%; height: auto; margin: 16px 0 20px; border: 1px solid $pw-border; border-radius: 6px; }
